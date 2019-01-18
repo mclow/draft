@@ -1755,7 +1755,7 @@ the indicated semantics.
 \tcode{*r}          &
   unspecified       &
                             &
-  \requires \tcode{r} is dereferenceable.  \\ \rowsep
+  \changed{\requires}{\expects} \tcode{r} is dereferenceable.  \\ \rowsep
 
 \tcode{++r}         &
   \tcode{X\&}       &
@@ -1821,23 +1821,23 @@ has property
 \tcode{a != b}                  &
  contextually convertible to \tcode{bool}    &
  \tcode{!(a == b)}                              &
- \requires \orange{a}{b} is in the domain of \tcode{==}. \\ \rowsep
+ \changed{\requires}{\expects} \orange{a}{b} is in the domain of \tcode{==}. \\ \rowsep
 
 \tcode{*a}                      &
  \tcode{reference}, convertible to \tcode{T}       &
                                 &
- \requires \tcode{a} is dereferenceable.\br
+ \changed{\requires}{\expects} \tcode{a} is dereferenceable.\br
  The expression\br \tcode{(void)*a, *a} is equivalent to \tcode{*a}.\br
  If \tcode{a == b} and \orange{a}{b} is in the domain of \tcode{==}
  then \tcode{*a} is equivalent to \tcode{*b}.  \\ \rowsep
 \tcode{a->m}                    &
                                 &
  \tcode{(*a).m}                                &
- \requires \tcode{a} is dereferenceable. \\ \rowsep
+ \changed{\requires}{\expects} \tcode{a} is dereferenceable. \\ \rowsep
 \tcode{++r}                     &
  \tcode{X\&}                    &
                                 &
- \requires \tcode{r} is dereferenceable.\br
+ \changed{\requires}{\expects} \tcode{r} is dereferenceable.\br
  \ensures \tcode{r} is dereferenceable or \tcode{r} is past-the-end;\br
  any copies of the previous value of \tcode{r} are no longer
  required to be dereferenceable nor to be in the domain of \tcode{==}.    \\ \rowsep
@@ -2039,7 +2039,7 @@ the following expressions are valid as shown in \tref{iterator.bidirectional.req
 \tcode{\dcr r}      &
  \tcode{X\&}        &
                     &
- \requires there exists \tcode{s} such that \tcode{r == ++s}.\br
+ \changed{\requires}{\expects} there exists \tcode{s} such that \tcode{r == ++s}.\br
  \ensures \tcode{r} is dereferenceable.\br
  \tcode{\dcr(++r) == r}.\br
  \tcode{\dcr r == \dcr s} implies \tcode{r == s}.\br
@@ -2102,7 +2102,7 @@ the following expressions are valid as shown in \tref{iterator.random.access.req
 \tcode{r -= n}      &
  \tcode{X\&}        &
  \tcode{return r += -n;}    &
- \requires the absolute value of \tcode{n} is in the range of
+ \changed{\requires}{\expects} the absolute value of \tcode{n} is in the range of
  representable values of \tcode{difference_type}.   \\ \rowsep
 
 \tcode{a - n}       &
@@ -2113,7 +2113,7 @@ the following expressions are valid as shown in \tref{iterator.random.access.req
 \tcode{b - a}       &
  \tcode{difference_type}   &
  \tcode{return n}   &
- \requires there exists a value \tcode{n} of type \tcode{difference_type} such that \tcode{a + n == b}.\br
+ \changed{\requires}{\expects} there exists a value \tcode{n} of type \tcode{difference_type} such that \tcode{a + n == b}.\br
  \tcode{b == a + (b - a)}.  \\ \rowsep
 
 \tcode{a[n]}        &
@@ -4084,13 +4084,13 @@ template<class U> constexpr move_iterator(const move_iterator<U>& u);
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{\pnum \expects \tcode{U} shall be convertible to \tcode{Iterator}.}
+
 \pnum
 \effects Constructs a \tcode{move_iterator}, initializing
 \tcode{current} with \tcode{u.base()}.
 
-\pnum
-\requires \tcode{U} shall be convertible to
-\tcode{Iterator}.
+\removed{\pnum \requires \tcode{U} shall be convertible to \tcode{Iterator}.}
 \end{itemdescr}
 
 \indexlibrarymember{operator=}{move_iterator}%
@@ -4099,13 +4099,13 @@ template<class U> constexpr move_iterator& operator=(const move_iterator<U>& u);
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{\pnum \expects \tcode{U} shall be convertible to \tcode{Iterator}.}
+
 \pnum
 \effects Assigns \tcode{u.base()} to
 \tcode{current}.
 
-\pnum
-\requires \tcode{U} shall be convertible to
-\tcode{Iterator}.
+\removed{\pnum \requires \tcode{U} shall be convertible to \tcode{Iterator}.}
 \end{itemdescr}
 
 \rSec3[move.iter.op.conv]{Conversion}
@@ -5830,7 +5830,7 @@ istream_iterator& operator++();
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{in_stream != 0}.
+\changed{\requires}{\expects} \tcode{in_stream != 0}.
 
 \pnum
 \effects
@@ -5848,7 +5848,7 @@ istream_iterator operator++(int);
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{in_stream != 0}.
+\changed{\requires}{\expects} \tcode{in_stream != 0}.
 
 \pnum
 \effects
@@ -6376,7 +6376,7 @@ ostreambuf_iterator(ostream_type& s) noexcept;
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{s.rdbuf()}
 shall not be a null pointer.
 
@@ -6393,7 +6393,7 @@ ostreambuf_iterator(streambuf_type* s) noexcept;
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{s}
 shall not be a null pointer.
 
