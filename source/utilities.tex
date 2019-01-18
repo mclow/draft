@@ -186,7 +186,7 @@ template<class T>
 
 \begin{itemdescr}
 \pnum
-\remarks This function
+\begin{removedblock}\remarks This function
 is a designated customization point\iref{namespace.std} and
 shall not participate in overload resolution
 unless \tcode{is_move_constructible_v<T>} is \tcode{true} and
@@ -196,12 +196,16 @@ The expression inside \tcode{noexcept} is equivalent to:
 \begin{codeblock}
 is_nothrow_move_constructible_v<T> && is_nothrow_move_assignable_v<T>
 \end{codeblock}
+\end{removedblock}
+
+\added{\constraints \tcode{is_move_constructible_v<T>} is \tcode{true} and
+\tcode{is_move_assignable_v<T>} is \tcode{true}.}
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 Type
 \tcode{T}
-shall be
+\changed{shall be}{is}
 \oldconcept{MoveConstructible} (\tref{moveconstructible})
 and
 \oldconcept{MoveAssignable} (\tref{moveassignable}).
@@ -209,6 +213,15 @@ and
 \pnum
 \effects
 Exchanges values stored in two locations.
+
+\begin{addedblock}\remarks This function
+is a designated customization point\iref{namespace.std}.
+The expression inside \tcode{noexcept} is equivalent to:
+
+\begin{codeblock}
+is_nothrow_move_constructible_v<T> && is_nothrow_move_assignable_v<T>
+\end{codeblock}
+\end{addedblock}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{swap}}%
@@ -219,13 +232,13 @@ template<class T, size_t N>
 
 \begin{itemdescr}
 \pnum
-\remarks
+\changed{\remarks
 This function shall not participate in overload resolution
-unless \tcode{is_swappable_v<T>} is \tcode{true}.
+unless}{\constraints} \tcode{is_swappable_v<T>} is \tcode{true}.
 
 \pnum
-\requires
-\tcode{a[i]} shall be swappable with\iref{swappable.requirements} \tcode{b[i]}
+\changed{\requires}{\expects}
+\tcode{a[i]} \changed{shall be}{is} swappable with\iref{swappable.requirements} \tcode{b[i]}
 for all \tcode{i} in the range \range{0}{N}.
 
 \pnum
@@ -272,10 +285,12 @@ template<class T> constexpr T&& forward(remove_reference_t<T>&& t) noexcept;
 
 \begin{itemdescr}
 \pnum
+\added{\mandates The second form shall not be instantiated with an lvalue reference type.}
+
 \returns \tcode{static_cast<T\&\&>(t)}.
 
 \pnum
-\remarks If the second form is instantiated with an lvalue reference type, the program is ill-formed.
+\removed{\remarks If the second form is instantiated with an lvalue reference type, the program is ill-formed.}
 
 \pnum
 \begin{example}
@@ -386,7 +401,9 @@ template<class T> add_rvalue_reference_t<T> declval() noexcept;    // as unevalu
 
 \begin{itemdescr}
 \pnum
-\remarks If this function is odr-used\iref{basic.def.odr}, the program is ill-formed.
+\removed{\remarks If this function is odr-used\iref{basic.def.odr}, the program is ill-formed.}
+
+\added{\mandates This function shall not be odr-used\iref{basic.def.odr}.}
 
 \pnum
 \remarks The template parameter \tcode{T} of \tcode{declval} may be an incomplete type.
@@ -429,7 +446,7 @@ namespace std {
 \end{codeblock}
 
 \pnum
-\tcode{T} shall be an integer type.
+\added{\mandates} \tcode{T} \changed{shall be}{is} an integer type.
 
 \rSec2[intseq.make]{Alias template \tcode{make_integer_sequence}}
 
@@ -441,7 +458,8 @@ template<class T, T N>
 
 \begin{itemdescr}
 \pnum
-If \tcode{N} is negative the program is ill-formed. The alias template
+\removed{If \tcode{N} is negative the program is ill-formed.}
+\added{\mandates \tcode{N >= 0}.} The alias template
 \tcode{make_integer_sequence} denotes a specialization of
 \tcode{integer_sequence} with \tcode{N} template non-type arguments.
 The type \tcode{make_integer_sequence<T, N>} denotes the type
@@ -528,16 +546,18 @@ constexpr explicit(@\seebelow@) pair();
 
 \begin{itemdescr}
 \pnum
+\added{\constraints \tcode{is_default_constructible_v<first_type>} is \tcode{true} and
+\tcode{is_default_constructible_v<second_type>} is \tcode{true}.}
+
 \effects
 Value-initializes \tcode{first} and \tcode{second}.
 
-\pnum
 \remarks
-This constructor shall not participate in overload resolution unless
+\begin{removedblock} This constructor shall not participate in overload resolution unless
 \tcode{is_default_construct\-ible_v<first_type>} is \tcode{true} and
 \tcode{is_default_constructible_v<second_type>} is \tcode{true}.
 \begin{note} This behavior can be implemented by a constructor template
-with default template arguments. \end{note}
+with default template arguments. \end{note}\end{removedblock}
 The expression inside \tcode{explicit} evaluates to \tcode{true}
 if and only if either \tcode{first_type} or
 \tcode{second_type} is not implicitly default-constructible.
@@ -553,13 +573,16 @@ constexpr explicit(@\seebelow@) pair(const T1& x, const T2& y);
 
 \begin{itemdescr}
 \pnum
+\added{\constraints \tcode{is_copy_construct\-ible_v<first_type>} is \tcode{true} and
+\tcode{is_copy_constructible_v<second_type>} is \tcode{true}.}
+
 \effects
 Initializes \tcode{first} with \tcode{x} and \tcode{second} with \tcode{y}.
 
 \pnum
-\remarks This constructor shall not participate in overload resolution
+\remarks \removed{This constructor shall not participate in overload resolution
 unless \tcode{is_copy_construct\-ible_v<first_type>} is \tcode{true} and
-\tcode{is_copy_constructible_v<second_type>} is \tcode{true}.
+\tcode{is_copy_constructible_v<second_type>} is \tcode{true}.}
 The expression inside \tcode{explicit} is equivalent to:
 \begin{codeblock}
 !is_convertible_v<const first_type&, first_type> ||
@@ -574,6 +597,9 @@ template<class U1, class U2> constexpr explicit(@\seebelow@) pair(U1&& x, U2&& y
 
 \begin{itemdescr}
 \pnum
+\added{\constraints \tcode{is_constructible_v<first_type, U1\&\&>} is \tcode{true} and
+\tcode{is_constructible_v<second_type, U2\&\&>} is \tcode{true}.}
+
 \effects
 Initializes \tcode{first} with
 \tcode{std::forward<U1>(x)} and \tcode{second}
@@ -581,9 +607,9 @@ with \tcode{std::forward<U2>(y)}.
 
 \pnum
 \remarks
-This constructor shall not participate in overload resolution unless
+\removed{This constructor shall not participate in overload resolution unless
 \tcode{is_constructible_v<first_type, U1\&\&>} is \tcode{true} and
-\tcode{is_constructible_v<second_type, U2\&\&>} is \tcode{true}.
+\tcode{is_constructible_v<second_type, U2\&\&>} is \tcode{true}.}
 The expression inside \tcode{explicit} is equivalent to:
 \begin{codeblock}
 !is_convertible_v<U1, first_type> || !is_convertible_v<U2, second_type>
@@ -597,13 +623,16 @@ template<class U1, class U2> constexpr explicit(@\seebelow@) pair(const pair<U1,
 
 \begin{itemdescr}
 \pnum
+\added{\constraints \tcode{is_constructible_v<first_type, const U1\&>} is \tcode{true} and
+\tcode{is_constructible_v<second_type, const U2\&>} is \tcode{true}.}
+
 \effects
 Initializes members from the corresponding members of the argument.
 
 \pnum
-\remarks This constructor shall not participate in overload resolution unless
+\remarks \removed{This constructor shall not participate in overload resolution unless
 \tcode{is_constructible_v<first_type, const U1\&>} is \tcode{true} and
-\tcode{is_constructible_v<second_type, const U2\&>} is \tcode{true}.
+\tcode{is_constructible_v<second_type, const U2\&>} is \tcode{true}.}
 The expression inside explicit is equivalent to:
 \begin{codeblock}
 !is_convertible_v<const U1&, first_type> || !is_convertible_v<const U2&, second_type>
@@ -617,6 +646,9 @@ template<class U1, class U2> constexpr explicit(@\seebelow@) pair(pair<U1, U2>&&
 
 \begin{itemdescr}
 \pnum
+\added{\constraints \tcode{is_constructible_v<first_type, U1\&\&>} is \tcode{true} and
+\tcode{is_constructible_v<second_type, U2\&\&>} is \tcode{true}.}
+
 \effects
 Initializes \tcode{first} with
 \tcode{std::forward<U1>(p.first)}
@@ -624,9 +656,9 @@ and \tcode{second} with
 \tcode{std::forward<U2>(\brk{}p.second)}.
 
 \pnum
-\remarks This constructor shall not participate in overload resolution unless
+\remarks \removed{This constructor shall not participate in overload resolution unless
 \tcode{is_constructible_v<first_type, U1\&\&>} is \tcode{true} and
-\tcode{is_constructible_v<second_type, U2\&\&>} is \tcode{true}.
+\tcode{is_constructible_v<second_type, U2\&\&>} is \tcode{true}.}
 The expression inside explicit is equivalent to:
 \begin{codeblock}
 !is_convertible_v<U1, first_type> || !is_convertible_v<U2, second_type>
@@ -642,7 +674,10 @@ template<class... Args1, class... Args2>
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{is_constructible_v<first_type, Args1\&\&...>} is \tcode{true}
+\ednote{The original Requires: clause does not include neither "shall not participate" nor "defined
+as deleted". However, a using Mandates: makes more sense. here. Does it correctly gets the intent?}
+
+\changed{\requires}{\mandates} \tcode{is_constructible_v<first_type, Args1\&\&...>} is \tcode{true}
 and \tcode{is_constructible_v<sec\-ond_type, Args2\&\&...>} is \tcode{true}.
 
 \pnum
@@ -663,12 +698,15 @@ constexpr pair& operator=(const pair& p);
 
 \begin{itemdescr}
 \pnum
+\added{\mandates \tcode{is_copy_assignable_v<first_type>} is \tcode{true}
+and \tcode{is_copy_assignable_v<second_type>} is \tcode{true}.}
+
 \effects Assigns \tcode{p.first} to \tcode{first} and \tcode{p.second} to \tcode{second}.
 
 \pnum
-\remarks This operator shall be defined as deleted unless
+\removed{\remarks This operator shall be defined as deleted unless
 \tcode{is_copy_assignable_v<first_type>} is \tcode{true}
-and \tcode{is_copy_assignable_v<second_type>} is \tcode{true}.
+and \tcode{is_copy_assignable_v<second_type>} is \tcode{true}.}
 
 \pnum
 \returns \tcode{*this}.
@@ -681,12 +719,15 @@ template<class U1, class U2> constexpr pair& operator=(const pair<U1, U2>& p);
 
 \begin{itemdescr}
 \pnum
+\added{\constraints \tcode{is_assignable_v<first_type\&, const U1\&>} is \tcode{true}
+and \tcode{is_assignable_v<second_type\&, const U2\&>} is \tcode{true}.}
+
 \effects Assigns \tcode{p.first} to \tcode{first} and \tcode{p.second} to \tcode{second}.
 
 \pnum
-\remarks This operator shall not participate in overload resolution unless
+\removed{\remarks This operator shall not participate in overload resolution unless
 \tcode{is_assignable_v<first_type\&, const U1\&>} is \tcode{true}
-and \tcode{is_assignable_v<second_type\&, const U2\&>} is \tcode{true}.
+and \tcode{is_assignable_v<second_type\&, const U2\&>} is \tcode{true}.}
 
 \pnum
 \returns \tcode{*this}.
@@ -699,12 +740,15 @@ constexpr pair& operator=(pair&& p) noexcept(@\seebelow@);
 
 \begin{itemdescr}
 \pnum
+\added{\constraints \tcode{is_move_assignable_v<first_type>} is \tcode{true}
+and \tcode{is_move_assignable_v<second_type>} is \tcode{true}.}
+
 \effects
 Assigns to \tcode{first} with \tcode{std::forward<first_type>(p.first)}
 and to \tcode{second} with\\ \tcode{std::forward<second_type>(p.second)}.
 
 \pnum
-\remarks This operator shall not participate in overload resolution unless
+\begin{removedblock}\remarks This operator shall not participate in overload resolution unless
 \tcode{is_move_assignable_v<first_type>} is \tcode{true}
 and \tcode{is_move_assignable_v<second_type>} is \tcode{true}.
 
@@ -712,10 +756,15 @@ and \tcode{is_move_assignable_v<second_type>} is \tcode{true}.
 \remarks The expression inside \tcode{noexcept} is equivalent to:
 \begin{codeblock}
 is_nothrow_move_assignable_v<T1> && is_nothrow_move_assignable_v<T2>
-\end{codeblock}
+\end{codeblock}\end{removedblock}
 
 \pnum
 \returns \tcode{*this}.
+
+\begin{addedblock}\remarks The expression inside \tcode{noexcept} is equivalent to:
+\begin{codeblock}
+is_nothrow_move_assignable_v<T1> && is_nothrow_move_assignable_v<T2>
+\end{codeblock}\end{addedblock}
 \end{itemdescr}
 
 \indexlibrarymember{operator=}{pair}%
@@ -725,14 +774,17 @@ template<class U1, class U2> constexpr pair& operator=(pair<U1, U2>&& p);
 
 \begin{itemdescr}
 \pnum
+\added{\constraints \tcode{is_assignable_v<first_type\&, U1\&\&>} is \tcode{true}
+and \tcode{is_assignable_v<second_type\&, U2\&\&>} is \tcode{true}.}
+
 \effects
 Assigns to \tcode{first} with \tcode{std::forward<U1>(p.first)}
 and to \tcode{second} with\\ \tcode{std::forward<U2>(p.second)}.
 
 \pnum
-\remarks This operator shall not participate in overload resolution unless
+\removed{\remarks This operator shall not participate in overload resolution unless
 \tcode{is_assignable_v<first_type\&, U1\&\&>} is \tcode{true}
-and \tcode{is_assignable_v<second_type\&, U2\&\&>} is \tcode{true}.
+and \tcode{is_assignable_v<second_type\&, U2\&\&>} is \tcode{true}.}
 
 \pnum
 \returns \tcode{*this}.
@@ -745,9 +797,9 @@ constexpr void swap(pair& p) noexcept(@\seebelow@);
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{first} shall be swappable with\iref{swappable.requirements}
-\tcode{p.first} and \tcode{second} shall be swappable with \tcode{p.second}.
+\changed{\requires}{\expects}
+\tcode{first} \changed{shall be}{is} swappable with\iref{swappable.requirements}
+\tcode{p.first} and \tcode{second} \changed{shall be}{is} swappable with \tcode{p.second}.
 
 \pnum
 \effects Swaps
@@ -840,13 +892,16 @@ template<class T1, class T2>
 
 \begin{itemdescr}
 \pnum
+\added{\constraints \tcode{is_swappable_v<T1>} is \tcode{true} and
+\tcode{is_swappable_v<T2>} is \tcode{true}.}
+
 \effects As if by \tcode{x.swap(y)}.
 
 \pnum
-\remarks
+\removed{\remarks
 This function shall not participate in overload resolution unless
 \tcode{is_swappable_v<T1>} is \tcode{true} and
-\tcode{is_swappable_v<T2>} is \tcode{true}.
+\tcode{is_swappable_v<T2>} is \tcode{true}.}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{make_pair}}%
@@ -890,7 +945,7 @@ tuple_element<I, pair<T1, T2>>::type
 \end{itemdecl}
 \begin{itemdescr}
 \pnum
-\requires \tcode{I < 2}. The program is ill-formed if \tcode{I} is out of bounds.
+\changed{\requires}{\mandates} \tcode{I < 2}. \removed{The program is ill-formed if \tcode{I} is out of bounds.}
 
 \pnum
 \textit{Value:} The type \tcode{T1} if \tcode{I == 0}, otherwise the type \tcode{T2}.
@@ -910,9 +965,11 @@ template<size_t I, class T1, class T2>
 \begin{itemdescr}
 
 \pnum
+\added{\mandates \tcode{I < 2}.}
+
 \returns If \tcode{I == 0} returns a reference to \tcode{p.first};
-if \tcode{I == 1} returns a reference to \tcode{p.second};
-otherwise the program is ill-formed.
+if \tcode{I == 1} returns a reference to \tcode{p.second}\removed{;
+otherwise the program is ill-formed}.
 \end{itemdescr}
 
 \indexlibrarymember{get}{pair}%
@@ -928,7 +985,7 @@ template<class T1, class T2>
 \end{itemdecl}
 \begin{itemdescr}
 \pnum
-\requires \tcode{T1} and \tcode{T2} are distinct types. Otherwise, the program is ill-formed.
+\changed{\requires}{\mandates} \tcode{T1} and \tcode{T2} are distinct types. \removed{Otherwise, the program is ill-formed.}
 
 \pnum
 \returns A reference to \tcode{p.first}.
@@ -948,7 +1005,7 @@ template<class T2, class T1>
 \begin{itemdescr}
 
 \pnum
-\requires \tcode{T1} and \tcode{T2} are distinct types. Otherwise, the program is ill-formed.
+\changed{\requires}{\mandates} \tcode{T1} and \tcode{T2} are distinct types. \removed{Otherwise, the program is ill-formed.}
 
 \pnum
 \returns A reference to \tcode{p.second}.
