@@ -4216,6 +4216,11 @@ constexpr variant() noexcept(@\seebelow@);
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints \tcode{is_default_constructible_v<$\tcode{T}_0$>} is \tcode{true}.
+}
+
 \pnum
 \effects
 Constructs a \tcode{variant} holding a value-initialized value of type $\tcode{T}_0$.
@@ -4235,8 +4240,10 @@ value-initialization of the alternative type $\tcode{T}_0$ would satisfy the
 requirements for a constexpr function.
 The expression inside \tcode{noexcept} is equivalent to
 \tcode{is_nothrow_default_constructible_v<$\tcode{T}_0$>}.
+\removed{
 This function shall not participate in overload resolution unless
 \tcode{is_default_constructible_v<$\tcode{T}_0$>} is \tcode{true}.
+}
 \begin{note} See also class \tcode{monostate}. \end{note}
 \end{itemdescr}
 
@@ -4271,6 +4278,11 @@ constexpr variant(variant&& w) noexcept(@\seebelow@);
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints \tcode{is_move_constructible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
+}
+
 \pnum
 \effects
 If \tcode{w} holds a value, initializes the \tcode{variant} to hold the same
@@ -4286,8 +4298,10 @@ Any exception thrown by move-constructing any $\tcode{T}_i$ for all $i$.
 \remarks
 The expression inside \tcode{noexcept} is equivalent to the logical AND of
 \tcode{is_nothrow_move_constructible_v<$\tcode{T}_i$>} for all $i$.
+\removed{
 This function shall not participate in overload resolution unless
 \tcode{is_move_constructible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
+}
 If \tcode{is_trivially_move_constructible_v<$\tcode{T}_i$>}
 is \tcode{true} for all $i$, this constructor is trivial.
 \end{itemdescr}
@@ -4310,6 +4324,31 @@ resolution for the expression \tcode{\placeholdernc{FUN}(std::forward<T>(\brk{}t
 the alternative $\tcode{T}_j$ which is the type of the contained value after
 construction.
 
+\begin{addedblock}
+\pnum
+\constraints
+\begin{itemize}
+\item
+  \tcode{sizeof...(Types)} is nonzero,
+
+\item
+  \tcode{is_same_v<remove_cvref_t<T>, variant>} is \tcode{false},
+
+\item
+  \tcode{remove_cvref_t<T>} is neither a specialization
+  of \tcode{in_place_type_t} nor a specialization
+  of \tcode{in_place_index_t},
+
+\item
+  \tcode{is_constructible_v<$\tcode{T}_j$, T>} is \tcode{true}, and
+
+\item
+  the expression \tcode{\placeholdernc{FUN}(}\brk\tcode{std::forward<T>(t))}
+  (with \tcode{\placeholdernc{FUN}} being the above-mentioned set of
+  imaginary functions) is well-formed.
+\end{itemize}
+\end{addedblock}
+
 \pnum
 \effects
 Initializes \tcode{*this} to hold the alternative type $\tcode{T}_j$ and
@@ -4324,6 +4363,7 @@ with \tcode{std::forward<T>(t)}.
 \throws
 Any exception thrown by the initialization of the selected alternative $\tcode{T}_j$.
 
+\begin{removedblock}
 \pnum
 \remarks
 This function shall not participate in overload resolution unless
@@ -4347,6 +4387,7 @@ This function shall not participate in overload resolution unless
   (with \tcode{\placeholdernc{FUN}} being the above-mentioned set of
   imaginary functions) is well-formed.
 \end{itemize}
+\end{removedblock}
 
 \pnum
 \begin{note}
@@ -4369,6 +4410,12 @@ template<class T, class... Args> constexpr explicit variant(in_place_type_t<T>, 
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints there is exactly one occurrence of \tcode{T} in 
+\tcode{Types...} and \tcode{is_constructible_v<T, Args...>} is \tcode{true}.
+}
+
 \pnum
 \effects
 Initializes the contained value as if direct-non-list-initializing
@@ -4385,9 +4432,11 @@ Any exception thrown by calling the selected constructor of \tcode{T}.
 
 \pnum
 \remarks
+\removed{
 This function shall not participate in overload resolution unless there is
 exactly one occurrence of \tcode{T} in \tcode{Types...} and
 \tcode{is_constructible_v<T, Args...>} is \tcode{true}.
+}
 If \tcode{T}'s selected constructor is a constexpr constructor, this
 constructor shall be a constexpr constructor.
 \end{itemdescr}
@@ -4399,6 +4448,12 @@ template<class T, class U, class... Args>
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints there is exactly one occurrence of \tcode{T} in \tcode{Types...} and
+\tcode{is_constructible_v<T, initializer_list<U>\&, Args...>} is \tcode{true}.
+}
+
 \pnum
 \effects
 Initializes the contained value as if direct-non-list-initializing
@@ -4415,9 +4470,11 @@ Any exception thrown by calling the selected constructor of \tcode{T}.
 
 \pnum
 \remarks
+\removed{
 This function shall not participate in overload resolution unless there is
 exactly one occurrence of \tcode{T} in \tcode{Types...} and
 \tcode{is_constructible_v<T, initializer_list<U>\&, Args...>} is \tcode{true}.
+}
 If \tcode{T}'s selected constructor is a constexpr constructor, this
 constructor shall be a constexpr constructor.
 \end{itemdescr}
@@ -4428,6 +4485,17 @@ template<size_t I, class... Args> constexpr explicit variant(in_place_index_t<I>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\constraints
+\begin{itemize}
+\item
+\tcode{I} is less than \tcode{sizeof...(Types)} and
+\item
+\tcode{is_constructible_v<$\tcode{T}_I$, Args...>} is \tcode{true}.
+\end{itemize}
+\end{addedblock}
+
 \pnum
 \effects
 Initializes the contained value as if direct-non-list-initializing
@@ -4444,6 +4512,7 @@ Any exception thrown by calling the selected constructor of $\tcode{T}_I$.
 
 \pnum
 \remarks
+\begin{removedblock}
 This function shall not participate in overload resolution unless
 \begin{itemize}
 \item
@@ -4451,6 +4520,7 @@ This function shall not participate in overload resolution unless
 \item
 \tcode{is_constructible_v<$\tcode{T}_I$, Args...>} is \tcode{true}.
 \end{itemize}
+\end{removedblock}
 If $\tcode{T}_I$'s selected constructor is a constexpr constructor, this
 constructor shall be a constexpr constructor.
 \end{itemdescr}
@@ -4462,6 +4532,17 @@ template<size_t I, class U, class... Args>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\constraints
+\begin{itemize}
+\item
+\tcode{I} is less than \tcode{sizeof...(Types)} and
+\item
+\tcode{is_constructible_v<$\tcode{T}_I$, initializer_list<U>\&, Args...>} is \tcode{true}.
+\end{itemize}
+\end{addedblock}
+
 \pnum
 \effects
 Initializes the contained value as if direct-non-list-initializing
@@ -4474,6 +4555,7 @@ with the arguments \tcode{il, std::forward<Args>(args)...}.
 
 \pnum
 \remarks
+\begin{removedblock}
 This function shall not participate in overload resolution unless
 \begin{itemize}
 \item
@@ -4481,6 +4563,7 @@ This function shall not participate in overload resolution unless
 \item
 \tcode{is_constructible_v<$\tcode{T}_I$, initializer_list<U>\&, Args...>} is \tcode{true}.
 \end{itemize}
+\end{removedblock}
 If $\tcode{T}_I$'s selected constructor is a constexpr constructor, this
 constructor shall be a constexpr constructor.
 \end{itemdescr}
@@ -4562,6 +4645,12 @@ constexpr variant& operator=(variant&& rhs) noexcept(@\seebelow@);
 \pnum
 Let $j$ be \tcode{rhs.index()}.
 
+\added{%
+\pnum
+\constraints \tcode{is_move_constructible_v<$\tcode{T}_i$> \&\&}
+\tcode{is_move_assignable_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
+}
+
 \pnum
 \effects
 \begin{itemize}
@@ -4582,10 +4671,12 @@ Otherwise, equivalent to \tcode{emplace<$j$>(get<$j$>(std::move(rhs)))}.
 
 \pnum
 \remarks
+\removed{
 This function shall not participate in overload resolution unless
 \tcode{is_move_constructible_v<$\tcode{T}_i$> \&\&}
 \tcode{is_move_assignable_v<$\tcode{T}_i$>} is
 \tcode{true} for all $i$.
+}
 If \tcode{is_trivially_move_constructible_v<$\tcode{T}_i$> \&\&}
 \tcode{is_trivially_move_assignable_v<$\tcode{T}_i$> \&\&}
 \tcode{is_trivially_destructible_v<$\tcode{T}_i$>}
@@ -4619,6 +4710,24 @@ resolution for the expression \tcode{\placeholdernc{FUN}(std::forward<T>(\brk{}t
 the alternative $\tcode{T}_j$ which is the type of the contained value after
 assignment.
 
+\begin{addedblock}
+\pnum
+\constraints
+\begin{itemize}
+\item
+  \tcode{is_same_v<remove_cvref_t<T>, variant>} is \tcode{false},
+
+\item
+  \tcode{is_assignable_v<$\tcode{T}_j$\&, T> \&\& is_constructible_v<$\tcode{T}_j$, T>}
+  is \tcode{true}, and
+
+\item
+  the expression \tcode{\placeholdernc{FUN}(std::forward<T>(t))}
+  (with \tcode{\placeholdernc{FUN}} being the above-mentioned set
+  of imaginary functions) is well-formed.
+\end{itemize}
+\end{addedblock}
+
 \pnum
 \effects
 \begin{itemize}
@@ -4641,6 +4750,7 @@ selected by the imaginary function overload resolution described above.
 \pnum
 \returns \tcode{*this}.
 
+\begin{removedblock}
 \pnum
 \remarks
 This function shall not participate in overload resolution unless
@@ -4657,6 +4767,7 @@ This function shall not participate in overload resolution unless
   (with \tcode{\placeholdernc{FUN}} being the above-mentioned set
   of imaginary functions) is well-formed.
 \end{itemize}
+\end{removedblock}
 
 \pnum
 \begin{note}
@@ -4693,15 +4804,23 @@ template<class T, class... Args> T& emplace(Args&&... args);
 \pnum
 Let $I$ be the zero-based index of \tcode{T} in \tcode{Types...}.
 
+\added{%
+\pnum
+\constraints \tcode{is_constructible_v<T, Args...>} is \tcode{true},
+and \tcode{T} occurs exactly once in \tcode{Types...}.
+}
+
 \pnum
 \effects
 Equivalent to: \tcode{return emplace<$I$>(std::forward<Args>(args)...);}
 
+\removed{%
 \pnum
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_constructible_v<T, Args...>} is \tcode{true}, and \tcode{T} occurs
 exactly once in \tcode{Types...}.
+}
 \end{itemdescr}
 
 \indexlibrarymember{emplace}{variant}%
@@ -4713,15 +4832,23 @@ template<class T, class U, class... Args> T& emplace(initializer_list<U> il, Arg
 \pnum
 Let $I$ be the zero-based index of \tcode{T} in \tcode{Types...}.
 
+\added{%
+\pnum
+\constraints \tcode{is_constructible_v<T, initializer_list<U>\&, Args...>} is
+\tcode{true}, and \tcode{T} occurs exactly once in \tcode{Types...}.
+}
+
 \pnum
 \effects
 Equivalent to: \tcode{return emplace<$I$>(il, std::forward<Args>(args)...);}
 
+\removed{%
 \pnum
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_constructible_v<T, initializer_list<U>\&, Args...>} is \tcode{true},
 and \tcode{T} occurs exactly once in \tcode{Types...}.
+}
 \end{itemdescr}
 
 \indexlibrarymember{emplace}{variant}%
@@ -4734,6 +4861,11 @@ template<size_t I, class... Args>
 \pnum
 \requires
 \tcode{I < sizeof...(Types)}.
+
+\added{%
+\pnum
+\constraints \tcode{is_constructible_v<$\tcode{T}_I$, Args...>} is \tcode{true}.
+}
 
 \pnum
 \effects
@@ -4757,8 +4889,10 @@ Any exception thrown during the initialization of the contained value.
 
 \pnum
 \remarks
+\removed{%
 This function shall not participate in overload resolution unless
 \tcode{is_constructible_v<$\tcode{T}_I$, Args...>} is \tcode{true}.
+}
 If an exception is thrown during the initialization of the contained value,
 the \tcode{variant} might not hold a value.
 \end{itemdescr}
@@ -4773,6 +4907,11 @@ template<size_t I, class U, class... Args>
 \pnum
 \requires
 \tcode{I < sizeof...(Types)}.
+
+\added{%
+\pnum
+\constraints \tcode{is_constructible_v<$\tcode{T}_I$, initializer_list<U>\&, Args...>} is \tcode{true}.
+}
 
 \pnum
 \effects
@@ -4796,8 +4935,10 @@ Any exception thrown during the initialization of the contained value.
 
 \pnum
 \remarks
+\removed{%
 This function shall not participate in overload resolution unless
 \tcode{is_constructible_v<$\tcode{T}_I$, initializer_list<U>\&, Args...>} is \tcode{true}.
+}
 If an exception is thrown during the initialization of the contained value,
 the \tcode{variant} might not hold a value.
 \end{itemdescr}
@@ -5288,13 +5429,19 @@ template<class... Types>
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints \tcode{is_move_constructible_v<$\tcode{T}_i$> \&\& is_swappable_v<$\tcode{T}_i$>}
+is \tcode{true} for all $i$.
+}
+
 \pnum
 \effects Equivalent to \tcode{v.swap(w)}.
 
 \pnum
-\remarks This function shall not participate in overload resolution
+\remarks \removed{This function shall not participate in overload resolution
 unless \tcode{is_move_constructible_v<$\tcode{T}_i$> \&\& is_swappable_v<$\tcode{T}_i$>}
-is \tcode{true} for all $i$.
+is \tcode{true} for all $i$.}
 The expression inside \tcode{noexcept} is equivalent to \tcode{noexcept(v.swap(w))}.
 \end{itemdescr}
 
@@ -5313,6 +5460,7 @@ public:
 Objects of type \tcode{bad_variant_access} are thrown to report invalid
 accesses to the value of a \tcode{variant} object.
 
+\begin{removedblock}
 \indexlibrary{\idxcode{bad_variant_access}!constructor}%
 \begin{itemdecl}
 bad_variant_access() noexcept;
@@ -5322,6 +5470,7 @@ bad_variant_access() noexcept;
 \pnum
 Constructs a \tcode{bad_variant_access} object.
 \end{itemdescr}
+\end{removedblock}
 
 \indexlibrarymember{what}{bad_variant_access}%
 \begin{itemdecl}
