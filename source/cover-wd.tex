@@ -2,16 +2,16 @@
 %%--------------------------------------------------
 %% Title page for the C++ Standard
 
-
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
           \textbf{Document Number:} & {\larger\docno}             \\
           \textbf{Date:}            & \reldate                    \\
-          \textbf{Revises:}         & \prevdocno                  \\
-          \textbf{Reply to:}        & Richard Smith               \\
-                                    & Google Inc                  \\
-                                    & cxxeditor@gmail.com
+          \textbf{Reply to:}        & Marshall Clow               \\
+                                    & CppAlliance                 \\
+                                    & mclow.lists@gmail.com       \\
+                                    & Alberto Barbati             \\
+                                    & ganesh@barbati.net          \\
           \end{tabular}
 }
 \newlength{\hdwidth}
@@ -22,10 +22,66 @@
 \vspace{2.5cm}
 \begin{center}
 \textbf{\Huge
-Working Draft, Standard for Programming Language \Cpp{}}
+Mandating the Standard Library:\\Clause 19 - Utilities library}
 \end{center}
+
+\vspace{1.0cm}
+With the adoption of P0788R3, we have a new way of specifying requirements for the
+library clauses of the standard. This is one of a series of papers reformulating the
+requirements into the new format. This effort was strongly influenced by the informational
+paper P1369R0.
+
+As a drive-by fix, a couple of places that said "The constructor of Foo constructs an object of class Foo" have been removed.
+
+\vspace{1.0cm}
+The entire clause is reproduced here, but the changes are confined to a few sections:
+
+\begin{multicols}{2}
+\begin{itemize}
+\item{container.requirements.general  \ref{container.requirements.general}}
+\item{sequence.reqmts      \ref{sequence.reqmts}}
+\item{container.node.cons       \ref{container.node.cons}}
+\item{container.node.observers   \ref{container.node.observers}}
+\item{container.node.modifiers              \ref{container.node.modifiers}}
+\item{associative.reqmts          \ref{associative.reqmts}}
+\item{unord.req            \ref{unord.req}}
+
+\item{array.cons               \ref{array.cons}}
+\item{array.special             \ref{array.special}}
+\item{array.tuple              \ref{array.tuple}}
+\item{deque.cons          \ref{deque.cons}}
+\item{deque.capacity            \ref{deque.capacity}}
+\item{forwardlist.cons          \ref{forwardlist.cons}}
+\item{forwardlist.modifiers  \ref{forwardlist.modifiers}}
+\item{forwardlist.ops   \ref{forwardlist.ops}}
+\item{list.cons   \ref{list.cons}}
+\item{list.capacity   \ref{list.capacity}}
+\item{list.ops   \ref{list.ops}}
+\item{vector.cons   \ref{vector.cons}}
+\item{vector.capacity   \ref{vector.capacity}}
+
+\item{map.modifiers   \ref{map.modifiers}}
+\item{multimap.modifiers   \ref{multimap.modifiers}}
+\item{unord.map.modifiers  \ref{unord.map.modifiers}}
+\item{unord.multimap.modifiers  \ref{unord.multimap.modifiers}}
+
+\item{queue.special  \ref{queue.special}}
+\item{priqueue.cons  \ref{priqueue.cons}}
+\item{priqueue.special  \ref{priqueue.special}}
+\item{stack.special  \ref{stack.special}}
+\item{span.cons  \ref{span.cons}}
+
+\item{span.sub  \ref{span.sub}}
+\item{span.elem  \ref{span.elem}}
+\item{span.objectrep  \ref{span.objectrep}}
+\end{itemize}
+\end{multicols}
+
 \vfill
-\textbf{Note: this is an early draft. It's known to be incomplet and
-  incorrekt, and it has lots of
-  b\kern-1.2pta\kern1ptd\hspace{1.5em}for\kern-3ptmat\kern0.6ptti\raise0.15ex\hbox{n}g.}
+Help for the editors: The changes here can be viewed as latex sources with the following commands
+\begin{verbatim}
+git clone git@github.com:mclow/mandate.git
+cd mandate
+git diff master..chapter21 utilities.tex
+\end{verbatim}
 \newpage
