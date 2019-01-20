@@ -5706,16 +5706,25 @@ Let \tcode{VT} be \tcode{decay_t<T>}.
 \requires
 \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
 
+\added{%
+\pnum
+\constraints \tcode{VT} is not the same type as \tcode{any},
+\tcode{VT} is not a specialization of \tcode{in_place_type_t},
+and \tcode{is_copy_constructible_v<VT>} is \tcode{true}.
+}
+
 \pnum
 \effects
 Constructs an object of type \tcode{any} that contains an object of type \tcode{VT} direct-initialized with \tcode{std::forward<T>(value)}.
 
+\removed{%
 \pnum
 \remarks
 This constructor shall not participate in overload resolution unless
 \tcode{VT} is not the same type as \tcode{any},
 \tcode{VT} is not a specialization of \tcode{in_place_type_t},
 and \tcode{is_copy_constructible_v<VT>} is \tcode{true}.
+}
 
 \pnum
 \throws
@@ -5735,6 +5744,12 @@ Let \tcode{VT} be \tcode{decay_t<T>}.
 \pnum
 \requires \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
 
+\added{%
+\pnum
+\constraints \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
+\tcode{is_constructible_v<VT, Args...>} is \tcode{true}.
+}
+
 \pnum
 \effects Initializes the contained value as if direct-non-list-initializing an object of
 type \tcode{VT} with the arguments \tcode{std::forward<Args>(args)...}.
@@ -5745,11 +5760,13 @@ type \tcode{VT} with the arguments \tcode{std::forward<Args>(args)...}.
 \pnum
 \throws Any exception thrown by the selected constructor of \tcode{VT}.
 
+\removed{%
 \pnum
 \remarks
 This constructor shall not participate in overload resolution unless
 \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, Args...>} is \tcode{true}.
+}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{any}!constructor}%
@@ -5765,6 +5782,12 @@ Let \tcode{VT} be \tcode{decay_t<T>}.
 \pnum
 \requires \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
 
+\added{%
+\pnum
+\constraints \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
+\tcode{is_constructible_v<VT, initializer_list<U>\&, Args...>} is \tcode{true}.
+}
+
 \pnum
 \effects Initializes the contained value as if direct-non-list-initializing an object of
 type \tcode{VT} with the arguments \tcode{il, std::forward<Args>(args)...}.
@@ -5775,11 +5798,13 @@ type \tcode{VT} with the arguments \tcode{il, std::forward<Args>(args)...}.
 \pnum
 \throws Any exception thrown by the selected constructor of \tcode{VT}.
 
+\removed{%
 \pnum
 \remarks
 This constructor shall not participate in overload resolution unless
 \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, initializer_list<U>\&, Args...>} is \tcode{true}.
+}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{any}!destructor}
@@ -5849,6 +5874,12 @@ Let \tcode{VT} be \tcode{decay_t<T>}.
 \requires
 \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
 
+\added{%
+\pnum
+\constraints \tcode{VT} is not the same type as \tcode{any} and
+\tcode{is_copy_constructible_v<VT>} is \tcode{true}.
+}
+
 \pnum
 \effects
 Constructs an object \tcode{tmp} of type \tcode{any} that contains an object of type \tcode{VT} direct-initialized with \tcode{std::forward<T>(rhs)}, and \tcode{tmp.swap(*this)}.
@@ -5858,11 +5889,13 @@ No effects if an exception is thrown.
 \returns
 \tcode{*this}.
 
+\removed{%
 \pnum
 \remarks
 This operator shall not participate in overload resolution unless
 \tcode{VT} is not the same type as \tcode{any} and
 \tcode{is_copy_constructible_v<VT>} is \tcode{true}.
+}
 
 \pnum
 \throws
@@ -5885,6 +5918,12 @@ Let \tcode{VT} be \tcode{decay_t<T>}.
 \requires
 \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
 
+\added{%
+\pnum
+\constraints \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
+\tcode{is_constructible_v<VT, Args...>} is \tcode{true}.
+}
+
 \pnum
 \effects Calls \tcode{reset()}.
 Then initializes the contained value as if direct-non-list-initializing
@@ -5904,9 +5943,11 @@ A reference to the new contained value.
 \remarks If an exception is thrown during the call to \tcode{VT}'s constructor,
 \tcode{*this} does not contain a value, and any previously contained value
 has been destroyed.
+\removed{%
 This function shall not participate in overload resolution unless
 \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, Args...>} is \tcode{true}.
+}
 \end{itemdescr}
 
 \indexlibrarymember{emplace}{any}%
@@ -5922,6 +5963,12 @@ Let \tcode{VT} be \tcode{decay_t<T>}.
 \pnum
 \requires
 \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
+
+\added{%
+\pnum
+\constraints \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
+\tcode{is_constructible_v<VT, initializer_list<U>\&, Args...>} is \tcode{true}.
+}
 
 \pnum
 \effects Calls \tcode{reset()}. Then initializes the contained value
@@ -5942,9 +5989,11 @@ A reference to the new contained value.
 \remarks If an exception is thrown during the call to \tcode{VT}'s constructor,
 \tcode{*this} does not contain a value, and any previously contained value
 has been destroyed.
+\removed{%
 The function shall not participate in overload resolution unless
 \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, initializer_list<U>\&, Args...>} is \tcode{true}.
+}
 \end{itemdescr}
 
 \indexlibrarymember{reset}{any}%
