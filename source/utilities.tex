@@ -1254,15 +1254,22 @@ constexpr explicit(@\seebelow@) tuple();
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints{\tcode{is_default_construct\-ible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$}
+}
+
 \pnum
 \effects Value-initializes each element.
 
 \pnum
 \remarks
+\begin{removedblock}
 This constructor shall not participate in overload resolution unless
 \tcode{is_default_construct\-ible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
 \begin{note} This behavior can be implemented by a constructor template
 with default template arguments. \end{note}
+\end{removedblock}
 The expression inside \tcode{explicit} evaluates to \tcode{true}
 if and only if $\tcode{T}_i$ is not implicitly
 default-constructible for at least one $i$.
@@ -1276,14 +1283,19 @@ constexpr explicit(@\seebelow@) tuple(const Types&...);
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints \tcode{sizeof...(Types) >= 1} and \tcode{is_copy_constructible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
+}
+
 \pnum
 \effects Initializes each element with the value of the
 corresponding parameter.
 
 \pnum
-\remarks This constructor shall not participate in overload resolution unless
+\remarks \removed{This constructor shall not participate in overload resolution unless
 \tcode{sizeof...(Types) >= 1} and \tcode{is_copy_constructible_v<$\tcode{T}_i$>}
-is \tcode{true} for all $i$.
+is \tcode{true} for all $i$.}
 The expression inside \tcode{explicit} is equivalent to:
 \begin{codeblock}
 !conjunction_v<is_convertible<const Types&, Types>...>
@@ -1296,15 +1308,22 @@ template<class... UTypes> constexpr explicit(@\seebelow@) tuple(UTypes&&... u);
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints{\tcode{sizeof...(Types)} \tcode{==} \tcode{sizeof...(UTypes)} and
+\tcode{sizeof...(Types) >= 1} and \tcode{is_constructible_v<$\tcode{T}_i$, $\tcode{U}_i$\&\&>}
+is \tcode{true} for all $i$}
+}
+
 \pnum
 \effects Initializes the elements in the tuple with the
 corresponding value in \tcode{std::forward<UTypes>(u)}.
 
 \pnum
-\remarks This constructor shall not participate in overload resolution unless
+\remarks \removed{This constructor shall not participate in overload resolution unless
 \tcode{sizeof...(Types)} \tcode{==} \tcode{sizeof...(UTypes)} and
 \tcode{sizeof...(Types) >= 1} and \tcode{is_constructible_v<$\tcode{T}_i$, $\tcode{U}_i$\&\&>}
-is \tcode{true} for all $i$.
+is \tcode{true} for all $i$.}
 The expression inside \tcode{explicit} is equivalent to:
 \begin{codeblock}
 !conjunction_v<is_convertible<UTypes, Types>...>
@@ -1345,12 +1364,9 @@ template<class... UTypes> constexpr explicit(@\seebelow@) tuple(const tuple<UTyp
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
 \pnum
-\effects Initializes each element of \tcode{*this}
-with the corresponding element of \tcode{u}.
-
-\pnum
-\remarks This constructor shall not participate in overload resolution unless
+\constraints
 \begin{itemize}
 \item
 \tcode{sizeof...(Types)} \tcode{==} \tcode{sizeof...(UTypes)} and
@@ -1362,6 +1378,28 @@ either
 (when \tcode{Types...} expands to \tcode{T} and \tcode{UTypes...} expands to \tcode{U})
 \tcode{is_convertible_v<const tuple<U>\&, T>}, \tcode{is_constructible_v<T, const tuple<U>\&>}, and \tcode{is_same_v<T, U>} are all \tcode{false}.
 \end{itemize}
+\end{addedblock}
+
+\pnum
+\effects Initializes each element of \tcode{*this}
+with the corresponding element of \tcode{u}.
+
+\pnum
+\remarks
+\begin{removedblock}
+This constructor shall not participate in overload resolution unless
+\begin{itemize}
+\item
+\tcode{sizeof...(Types)} \tcode{==} \tcode{sizeof...(UTypes)} and
+\item
+\tcode{is_constructible_v<$\tcode{T}_i$, const $\tcode{U}_i$\&>} is \tcode{true} for all $i$, and
+\item
+either
+\tcode{sizeof...(Types) != 1}, or
+(when \tcode{Types...} expands to \tcode{T} and \tcode{UTypes...} expands to \tcode{U})
+\tcode{is_convertible_v<const tuple<U>\&, T>}, \tcode{is_constructible_v<T, const tuple<U>\&>}, and \tcode{is_same_v<T, U>} are all \tcode{false}.
+\end{itemize}
+\end{removedblock}
 The expression inside \tcode{explicit} is equivalent to:
 \begin{codeblock}
 !conjunction_v<is_convertible<const UTypes&, Types>...>
@@ -1374,14 +1412,9 @@ template<class... UTypes> constexpr explicit(@\seebelow@) tuple(tuple<UTypes...>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
 \pnum
-\effects For all $i$,
-initializes the $i^\text{th}$ element of \tcode{*this} with
-\tcode{std::forward<$\tcode{U}_i$>(get<$i$>(u))}.
-
-\pnum
-\remarks This constructor shall not participate in overload resolution unless
-
+\constraints
 \begin{itemize}
 \item
 \tcode{sizeof...(Types)} \tcode{==} \tcode{sizeof...(UTypes)}, and
@@ -1394,6 +1427,30 @@ either
 \tcode{is_convertible_v<tuple<U>, T>}, \tcode{is_constructible_v<T, tuple<U>>},
 and \tcode{is_same_v<T, U>} are all \tcode{false}.
 \end{itemize}
+\end{addedblock}
+
+\pnum
+\effects For all $i$,
+initializes the $i^\text{th}$ element of \tcode{*this} with
+\tcode{std::forward<$\tcode{U}_i$>(get<$i$>(u))}.
+
+\pnum
+\remarks
+\begin{removedblock}
+This constructor shall not participate in overload resolution unless
+\begin{itemize}
+\item
+\tcode{sizeof...(Types)} \tcode{==} \tcode{sizeof...(UTypes)}, and
+\item
+\tcode{is_constructible_v<$\tcode{T}_i$, $\tcode{U}_i$\&\&>} is \tcode{true} for all $i$, and
+\item
+either
+\tcode{sizeof...(Types) != 1}, or
+(when \tcode{Types...} expands to \tcode{T} and \tcode{UTypes...} expands to \tcode{U})
+\tcode{is_convertible_v<tuple<U>, T>}, \tcode{is_constructible_v<T, tuple<U>>},
+and \tcode{is_same_v<T, U>} are all \tcode{false}.
+\end{itemize}
+\end{removedblock}
 The expression inside \tcode{explicit} is equivalent to:
 \begin{codeblock}
 !conjunction_v<is_convertible<UTypes, Types>...>
@@ -1407,15 +1464,24 @@ template<class U1, class U2> constexpr explicit(@\seebelow@) tuple(const pair<U1
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints \tcode{sizeof...(Types) == 2},
+\tcode{is_constructible_v<$\tcode{T}_0$, const U1\&>} is \tcode{true} and
+\tcode{is_constructible_v<$\tcode{T}_1$, const U2\&>} is \tcode{true}.
+}
+
 \pnum
 \effects Initializes the first element with \tcode{u.first} and the
 second element with \tcode{u.second}.
 
+\removed{
 \pnum
 \remarks This constructor shall not participate in overload resolution unless
 \tcode{sizeof...(Types) == 2},
 \tcode{is_constructible_v<$\tcode{T}_0$, const U1\&>} is \tcode{true} and
 \tcode{is_constructible_v<$\tcode{T}_1$, const U2\&>} is \tcode{true}.
+}
 
 \pnum
 The expression inside \tcode{explicit} is equivalent to:
@@ -1431,16 +1497,25 @@ template<class U1, class U2> constexpr explicit(@\seebelow@) tuple(pair<U1, U2>&
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints \tcode{sizeof...(Types) == 2},
+\tcode{is_constructible_v<$\tcode{T}_0$, U1\&\&>} is \tcode{true} and
+\tcode{is_constructible_v<$\tcode{T}_1$, U2\&\&>} is \tcode{true}.
+}
+
 \pnum
 \effects Initializes the first element with
 \tcode{std::forward<U1>(u.first)} and the
 second element with \tcode{std::forward<U2>(u.second)}.
 
+\removed{
 \pnum
 \remarks This constructor shall not participate in overload resolution unless
 \tcode{sizeof...(Types) == 2},
 \tcode{is_constructible_v<$\tcode{T}_0$, U1\&\&>} is \tcode{true} and
 \tcode{is_constructible_v<$\tcode{T}_1$, U2\&\&>} is \tcode{true}.
+}
 
 \pnum
 The expression inside \tcode{explicit} is equivalent to:
@@ -1521,13 +1596,20 @@ constexpr tuple& operator=(tuple&& u) noexcept(@\seebelow@);
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints \tcode{is_move_assignable_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
+}
+
 \pnum
 \effects For all $i$, assigns \tcode{std::forward<$\tcode{T}_i$>(get<$i$>(u))} to
 \tcode{get<$i$>(*this)}.
 
+\removed{
 \pnum
 \remarks This operator shall not participate in overload resolution unless
 \tcode{is_move_assignable_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
+}
 
 \pnum
 \remarks The expression inside \tcode{noexcept} is equivalent to the logical \textsc{and} of the
@@ -1548,14 +1630,22 @@ template<class... UTypes> constexpr tuple& operator=(const tuple<UTypes...>& u);
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints \tcode{sizeof...(Types) == sizeof...(UTypes)} and
+\tcode{is_assignable_v<$\tcode{T}_i$\&, const $\tcode{U}_i$\&>} is \tcode{true} for all $i$.
+}
+
 \pnum
 \effects Assigns each element of \tcode{u} to the corresponding element
 of \tcode{*this}.
 
+\removed{
 \pnum
 \remarks This operator shall not participate in overload resolution unless
 \tcode{sizeof...(Types) == sizeof...(UTypes)} and
 \tcode{is_assignable_v<$\tcode{T}_i$\&, const $\tcode{U}_i$\&>} is \tcode{true} for all $i$.
+}
 
 \pnum
 \returns \tcode{*this}.
@@ -1567,14 +1657,22 @@ template<class... UTypes> constexpr tuple& operator=(tuple<UTypes...>&& u);
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints \tcode{is_assignable_v<$\tcode{T}_i$\&, $\tcode{U}_i$\&\&> == true}
+for all $i$ and \tcode{sizeof...(Types) == sizeof...(UTypes)}.
+}
+
 \pnum
 \effects For all $i$, assigns \tcode{std::forward<$\tcode{U}_i$>(get<$i$>(u))} to
 \tcode{get<$i$>(*this)}.
 
+\removed{
 \pnum
 \remarks This operator shall not participate in overload resolution unless
 \tcode{is_assignable_v<$\tcode{T}_i$\&, $\tcode{U}_i$\&\&> == true} for all $i$ and
 \tcode{sizeof...(Types) == sizeof...(UTypes)}.
+}
 
 \pnum
 \returns \tcode{*this}.
@@ -1587,16 +1685,26 @@ template<class U1, class U2> constexpr tuple& operator=(const pair<U1, U2>& u);
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints \tcode{sizeof...(Types) == 2} and
+\tcode{is_assignable_v<$\tcode{T}_0$\&, const U1\&>} is \tcode{true} for the first type $\tcode{T}_0$ in
+\tcode{Types} and \tcode{is_assignable_v<$\tcode{T}_1$\&, const U2\&>} is \tcode{true} for the
+second type $\tcode{T}_1$ in \tcode{Types}.
+}
+
 \pnum
 \effects  Assigns \tcode{u.first} to the first element of \tcode{*this}
 and \tcode{u.second} to the second element of \tcode{*this}.
 
+\removed{
 \pnum
 \remarks This operator shall not participate in overload resolution unless
 \tcode{sizeof...(Types) == 2} and
 \tcode{is_assignable_v<$\tcode{T}_0$\&, const U1\&>} is \tcode{true} for the first type $\tcode{T}_0$ in
 \tcode{Types} and \tcode{is_assignable_v<$\tcode{T}_1$\&, const U2\&>} is \tcode{true} for the
 second type $\tcode{T}_1$ in \tcode{Types}.
+}
 
 \pnum
 \returns \tcode{*this}.
@@ -1609,11 +1717,20 @@ template<class U1, class U2> constexpr tuple& operator=(pair<U1, U2>&& u);
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints \tcode{sizeof...(Types) == 2} and
+\tcode{is_assignable_v<$\tcode{T}_0$\&, U1\&\&>} is \tcode{true} for the first type $\tcode{T}_0$ in
+\tcode{Types} and \tcode{is_assignable_v<$\tcode{T}_1$\&, U2\&\&>} is \tcode{true} for the second
+type $\tcode{T}_1$ in \tcode{Types}.
+}
+
 \pnum
 \effects Assigns \tcode{std::forward<U1>(u.first)} to the first
 element of \tcode{*this} and\\ \tcode{std::forward<U2>(u.second)} to the
 second element of \tcode{*this}.
 
+\removed{
 \pnum
 \remarks
 This operator shall not participate in overload resolution unless
@@ -1621,6 +1738,7 @@ This operator shall not participate in overload resolution unless
 \tcode{is_assignable_v<$\tcode{T}_0$\&, U1\&\&>} is \tcode{true} for the first type $\tcode{T}_0$ in
 \tcode{Types} and \tcode{is_assignable_v<$\tcode{T}_1$\&, U2\&\&>} is \tcode{true} for the second
 type $\tcode{T}_1$ in \tcode{Types}.
+}
 
 \pnum
 \returns \tcode{*this}.
@@ -2156,10 +2274,16 @@ template<class... Types>
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
 \pnum
-\remarks This function shall not participate in overload resolution
-unless \tcode{is_swappable_v<$\tcode{T}_i$>} is \tcode{true}
+\constraints \tcode{is_swappable_v<$\tcode{T}_i$>} is \tcode{true}
 for all $i$, where $0 \leq i < \tcode{sizeof...(Types)}$.
+}
+
+\pnum
+\remarks \removed{This function shall not participate in overload resolution
+unless \tcode{is_swappable_v<$\tcode{T}_i$>} is \tcode{true}
+for all $i$, where $0 \leq i < \tcode{sizeof...(Types)}$.}
 The expression inside \tcode{noexcept} is equivalent to:
 
 \begin{codeblock}
