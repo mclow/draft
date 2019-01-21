@@ -9409,13 +9409,20 @@ template<class U> default_delete(const default_delete<U>& other) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints \tcode{U*} is implicitly convertible to \tcode{T*}
+}
+
 \pnum
 \effects Constructs a \tcode{default_delete} object
 from another \tcode{default_delete<U>} object.
 
+\removed{%
 \pnum
 \remarks This constructor shall not participate in overload resolution unless
 \tcode{U*} is implicitly convertible to \tcode{T*}.
+}
 \end{itemdescr}
 
 \indexlibrarymember{operator()}{default_delete}%
@@ -9449,14 +9456,21 @@ template<class U> default_delete(const default_delete<U[]>& other) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints \tcode{U(*)[]} is convertible to \tcode{T(*)[]}.
+}
+
 \pnum
 \effects
 Constructs a \tcode{default_delete} object from another \tcode{default_delete<U[]>} object.
 
+\removed{%
 \pnum
 \remarks
 This constructor shall not participate in overload resolution unless \tcode{U(*)[]} is
 convertible to \tcode{T(*)[]}.
+}
 \end{itemdescr}
 
 \indexlibrarymember{operator()}{default_delete}%
@@ -9465,14 +9479,21 @@ template<class U> void operator()(U* ptr) const;
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\constraints \tcode{U(*)[]} is convertible to \tcode{T(*)[]}.
+}
+
 \pnum
 \effects
 Calls \tcode{delete[]} on \tcode{ptr}.
 
 \pnum
 \remarks If \tcode{U} is an incomplete type, the program is ill-formed.
+\removed{%
 This function shall not participate in overload resolution
 unless \tcode{U(*)[]} is convertible to \tcode{T(*)[]}.
+}
 \end{itemdescr}
 
 \rSec3[unique.ptr.single]{\tcode{unique_ptr} for single objects}
@@ -9569,6 +9590,12 @@ constexpr unique_ptr(nullptr_t) noexcept;
 satisfy the \oldconcept{DefaultConstructible} requirements (\tref{defaultconstructible}),
 and that construction shall not throw an exception.
 
+\added{%
+\pnum
+\constraints \tcode{is_pointer_v<deleter_type>} is \tcode{false} and 
+\tcode{is_default_constructible_v<deleter_type>} is \tcode{true}.
+}
+
 \pnum
 \effects Constructs a \tcode{unique_ptr} object that owns
 nothing, value-initializing the stored pointer and the stored deleter.
@@ -9577,10 +9604,12 @@ nothing, value-initializing the stored pointer and the stored deleter.
 \ensures \tcode{get() == nullptr}. \tcode{get_deleter()}
 returns a reference to the stored deleter.
 
+\removed{%
 \pnum
 \remarks If \tcode{is_pointer_v<deleter_type>} is \tcode{true} or
 \tcode{is_default_constructible_v<deleter_type>} is \tcode{false},
 this constructor shall not participate in overload resolution.
+}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{unique_ptr}!constructor}%
@@ -9594,6 +9623,12 @@ explicit unique_ptr(pointer p) noexcept;
 satisfy the \oldconcept{DefaultConstructible} requirements (\tref{defaultconstructible}),
 and that construction shall not throw an exception.
 
+\added{%
+\pnum
+\constraints \tcode{is_pointer_v<deleter_type>} is \tcode{false} and
+\tcode{is_default_constructible_v<deleter_type>} is \tcode{true}.
+}
+
 \pnum
 \effects Constructs a \tcode{unique_ptr} which owns
 \tcode{p}, initializing the stored pointer with \tcode{p} and
@@ -9604,9 +9639,9 @@ value-initializing the stored deleter.
 returns a reference to the stored deleter.
 
 \pnum
-\remarks If \tcode{is_pointer_v<deleter_type>} is \tcode{true} or
+\remarks \removed{If \tcode{is_pointer_v<deleter_type>} is \tcode{true} or
 \tcode{is_default_constructible_v<deleter_type>} is \tcode{false},
-this constructor shall not participate in overload resolution.
+this constructor shall not participate in overload resolution.}
 If class template argument deduction\iref{over.match.class.deduct}
 would select the function template corresponding to this constructor,
 then the program is ill-formed.
@@ -9627,6 +9662,11 @@ For the second constructor, if \tcode{D} is not a reference type,
 \tcode{D} shall satisfy the \oldconcept{MoveConstructible} requirements and
 such construction shall not exit via an exception.
 
+\added{%
+\pnum
+\constraints \tcode{is_constructible_v<D, decltype(d)>} is \tcode{true}.
+}
+
 \pnum
 \effects Constructs a \tcode{unique_ptr} object which owns \tcode{p}, initializing
 the stored pointer with \tcode{p} and initializing the deleter
@@ -9635,8 +9675,10 @@ from \tcode{std::forward<decltype(d)>(d)}.
 \pnum
 \remarks If \tcode{D} is a reference type,
 the second constructor is defined as deleted.
+\removed{%
 These constructors shall not participate in overload resolution
 unless \tcode{is_constructible_v<D, decltype(d)>} is \tcode{true}.
+}
 
 \pnum
 \ensures \tcode{get() == p}.
@@ -9707,7 +9749,7 @@ Otherwise, \tcode{E} is a reference type and construction of the deleter from an
 lvalue of type \tcode{E} shall be well-formed and shall not throw an exception.
 
 \pnum
-\remarks This constructor shall not participate in overload resolution unless:
+\changed{\remarks This constructor shall not participate in overload resolution unless:}{\constraints}
 
 \begin{itemize}
 \item \tcode{unique_ptr<U, E>::pointer} is implicitly convertible to \tcode{pointer},
@@ -9791,7 +9833,7 @@ Otherwise, \tcode{E} is a reference type and assignment of the deleter from an l
 of type \tcode{E} shall be well-formed and shall not throw an exception.
 
 \pnum
-\remarks This operator shall not participate in overload resolution unless:
+\changed{\remarks This constructor shall not participate in overload resolution unless:}{\constraints}
 
 \begin{itemize}
 \item \tcode{unique_ptr<U, E>::pointer} is implicitly convertible to \tcode{pointer}, and
@@ -10034,12 +10076,19 @@ template<class U> explicit unique_ptr(U p) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
 \pnum
 This constructor behaves the same as
 the constructor in the primary template that
 takes a single parameter of type \tcode{pointer}
+}
+
+\pnum
+\changed{This constructor behaves the same as
+the constructor in the primary template that
+takes a single parameter of type \tcode{pointer}
 except that it additionally
-shall not participate in overload resolution unless
+shall not participate in overload resolution unless}{\constraints}
 
 \begin{itemize}
 \item \tcode{U} is the same type as \tcode{pointer}, or
