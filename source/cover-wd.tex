@@ -5,7 +5,7 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & {\larger\docno}             \\
+          \textbf{Document Number:} & P1463R0                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
                                     & CppAlliance                 \\
@@ -17,17 +17,26 @@
 \hfill\begin{minipage}{\hdwidth}\hd\end{minipage}
 \endgroup
 
-\vspace{2.5cm}
+\vspace{1.5cm}
 \begin{center}
 \textbf{\Huge
 Mandating the Standard Library:\\Clause 21 - Containers library}
 \end{center}
 
-\vspace{1.0cm}
+\vspace{2.5cm}
 With the adoption of P0788R3, we have a new way of specifying requirements for the
 library clauses of the standard. This is one of a series of papers reformulating the
 requirements into the new format. This effort was strongly influenced by the informational
 paper P1369R0.
+
+The changes in this series of papers fall into four broad categories.
+\begin{itemize}
+\item{Change "participate in overload resolution" wording into "Constraints" elements}
+\item{Change "Requires" elements into either "Mandates" or "Expects", depending (mostly) on whether or not they can be checked at compile time.}
+\item{Drive-by fixes (hopefully very few)}
+\end{itemize}
+
+This paper covers Clause 21 (Containers)
 
 As a drive-by fix, (Thanks Tim!) a few places that said "\tcode{...::propagate_on_container_move_assignment} is true" now say "\tcode{...::propagate_on_container_move_assignment::value} is true"
 
@@ -37,40 +46,40 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \begin{multicols}{2}
 \begin{itemize}
 \item{container.requirements.general  \ref{container.requirements.general}}
-\item{sequence.reqmts      \ref{sequence.reqmts}}
-\item{container.node.cons       \ref{container.node.cons}}
-\item{container.node.observers   \ref{container.node.observers}}
-\item{container.node.modifiers              \ref{container.node.modifiers}}
-\item{associative.reqmts          \ref{associative.reqmts}}
-\item{unord.req            \ref{unord.req}}
+\item{sequence.reqmts                 \ref{sequence.reqmts}}
+\item{container.node.cons             \ref{container.node.cons}}
+\item{container.node.observers        \ref{container.node.observers}}
+\item{container.node.modifiers        \ref{container.node.modifiers}}
+\item{associative.reqmts              \ref{associative.reqmts}}
+\item{unord.req                       \ref{unord.req}}
 
-\item{array.cons               \ref{array.cons}}
-\item{array.special             \ref{array.special}}
-\item{array.tuple              \ref{array.tuple}}
-\item{deque.cons          \ref{deque.cons}}
-\item{deque.capacity            \ref{deque.capacity}}
-\item{forwardlist.cons          \ref{forwardlist.cons}}
+\item{array.cons             \ref{array.cons}}
+\item{array.special          \ref{array.special}}
+\item{array.tuple            \ref{array.tuple}}
+\item{deque.cons             \ref{deque.cons}}
+\item{deque.capacity         \ref{deque.capacity}}
+\item{forwardlist.cons       \ref{forwardlist.cons}}
 \item{forwardlist.modifiers  \ref{forwardlist.modifiers}}
-\item{forwardlist.ops   \ref{forwardlist.ops}}
-\item{list.cons   \ref{list.cons}}
-\item{list.capacity   \ref{list.capacity}}
-\item{list.ops   \ref{list.ops}}
-\item{vector.cons   \ref{vector.cons}}
-\item{vector.capacity   \ref{vector.capacity}}
+\item{forwardlist.ops        \ref{forwardlist.ops}}
+\item{list.cons              \ref{list.cons}}
+\item{list.capacity          \ref{list.capacity}}
+\item{list.ops               \ref{list.ops}}
+\item{vector.cons            \ref{vector.cons}}
+\item{vector.capacity        \ref{vector.capacity}}
 
-\item{map.modifiers   \ref{map.modifiers}}
-\item{multimap.modifiers   \ref{multimap.modifiers}}
-\item{unord.map.modifiers  \ref{unord.map.modifiers}}
-\item{unord.multimap.modifiers  \ref{unord.multimap.modifiers}}
+\item{map.modifiers            \ref{map.modifiers}}
+\item{multimap.modifiers       \ref{multimap.modifiers}}
+\item{unord.map.modifiers      \ref{unord.map.modifiers}}
+\item{unord.multimap.modifiers \ref{unord.multimap.modifiers}}
 
-\item{queue.special  \ref{queue.special}}
-\item{priqueue.cons  \ref{priqueue.cons}}
+\item{queue.special     \ref{queue.special}}
+\item{priqueue.cons     \ref{priqueue.cons}}
 \item{priqueue.special  \ref{priqueue.special}}
-\item{stack.special  \ref{stack.special}}
-\item{span.cons  \ref{span.cons}}
+\item{stack.special     \ref{stack.special}}
+\item{span.cons         \ref{span.cons}}
 
-\item{span.sub  \ref{span.sub}}
-\item{span.elem  \ref{span.elem}}
+\item{span.sub        \ref{span.sub}}
+\item{span.elem       \ref{span.elem}}
 \item{span.objectrep  \ref{span.objectrep}}
 \end{itemize}
 \end{multicols}
