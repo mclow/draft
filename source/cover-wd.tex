@@ -6,7 +6,7 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & {\larger\docno}             \\
+          \textbf{Document Number:} & P1458R0                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
                                     & CppAlliance                 \\
@@ -28,6 +28,15 @@ With the adoption of P0788R3, we have a new way of specifying requirements for t
 library clauses of the standard. This is one of a series of papers reformulating the
 requirements into the new format. This effort was strongly influenced by the informational
 paper P1369R0.
+
+The changes in this series of papers fall into four broad categories.
+\begin{itemize}
+\item{Change "participate in overload resolution" wording into "Constraints" elements}
+\item{Change "Requires" elements into either "Mandates" or "Expects", depending (mostly) on whether or not they can be checked at compile time.}
+\item{Drive-by fixes (hopefully very few)}
+\end{itemize}
+
+This paper covers Clause 16 (Language Support)
 
 As a drive-by fix, I have removed a bunch of empty descriptions of the form: "Effects: Constructs an object of class \tcode{Foo}."
 
