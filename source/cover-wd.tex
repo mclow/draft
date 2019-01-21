@@ -6,7 +6,7 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & {\larger\docno}             \\
+          \textbf{Document Number:} & P1464R0                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
                                     & CppAlliance                 \\
@@ -29,17 +29,28 @@ library clauses of the standard. This is one of a series of papers reformulating
 requirements into the new format. This effort was strongly influenced by the informational
 paper P1369R0.
 
+The changes in this series of papers fall into four broad categories.
+\begin{itemize}
+\item{Change "participate in overload resolution" wording into "Constraints" elements}
+\item{Change "Requires" elements into either "Mandates" or "Expects", depending (mostly) on whether or not they can be checked at compile time.}
+\item{Drive-by fixes (hopefully very few)}
+\end{itemize}
+
+This paper covers Clause 22 (Iterators). Because the iterator requirements have been recently re-worked to use concepts (as part of the adoption of Ranges), large portions of this clause required few (or no) changes.
+
 As a drive-by fix, I have removed a bunch of empty descriptions of the form: "Effects: Constructs an object of class \tcode{Foo}."
 
 The entire clause is reproduced here, but the changes are confined to a few sections:
 
 \begin{itemize}
-\item{iterator.iterators       \ref{iterator.iterators}}
-\item{bidirectional.iterators  \ref{bidirectional.iterators}}
-\item{random.access.iterators  \ref{random.access.iterators}}
-\item{move.iter.cons           \ref{move.iter.cons}}
-\item{istream.iterator.ops     \ref{istream.iterator.ops}}
-\item{ostreambuf.iter.cons     \ref{ostreambuf.iter.cons}}
+\item{iterator.iterators        \ref{iterator.iterators}}
+\item{bidirectional.iterators   \ref{bidirectional.iterators}}
+\item{random.access.iterators   \ref{random.access.iterators}}
+\item{move.iter.cons            \ref{move.iter.cons}}
+\item{istream.iterator.cons     \ref{istream.iterator.cons}}
+\item{istream.iterator.ops      \ref{istream.iterator.ops}}
+\item{ostream.iterator.cons.des \ref{ostream.iterator.cons.des}}
+\item{ostreambuf.iter.cons      \ref{ostreambuf.iter.cons}}
 \end{itemize}
 
 \vfill

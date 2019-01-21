@@ -5777,8 +5777,8 @@ istream_iterator(const istream_iterator& x) = default;
 
 \begin{itemdescr}
 \pnum
-\effects
-Constructs a copy of \tcode{x}.
+\changed{\effects
+Constructs a copy of \tcode{x}.}{\remarks}
 If \tcode{is_trivially_copy_constructible_v<T>} is \tcode{true},
 then this constructor is a trivial copy constructor.
 
@@ -5988,6 +5988,7 @@ Initializes \tcode{out_stream} with \tcode{addressof(s)} and
 \end{itemdescr}
 
 
+\begin{removedblock}
 \indexlibrary{\idxcode{ostream_iterator}!constructor}%
 \begin{itemdecl}
 ostream_iterator(const ostream_iterator& x);
@@ -5998,7 +5999,9 @@ ostream_iterator(const ostream_iterator& x);
 \effects
 Constructs a copy of \tcode{x}.
 \end{itemdescr}
+\end{removedblock}
 
+\begin{removedblock}
 \indexlibrary{\idxcode{ostream_iterator}!destructor}%
 \begin{itemdecl}
 ~ostream_iterator();
@@ -6009,6 +6012,7 @@ Constructs a copy of \tcode{x}.
 \effects
 The iterator is destroyed.
 \end{itemdescr}
+\end{removedblock}
 
 \rSec3[ostream.iterator.ops]{Operations}
 
