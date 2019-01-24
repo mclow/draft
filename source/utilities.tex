@@ -674,10 +674,7 @@ template<class... Args1, class... Args2>
 
 \begin{itemdescr}
 \pnum
-\ednote{The original Requires: clause does not include neither "shall not participate" nor "defined
-as deleted". However, a using Mandates: makes more sense. here. Does it correctly gets the intent?}
-
-\changed{\requires}{\mandates} \tcode{is_constructible_v<first_type, Args1\&\&...>} is \tcode{true}
+\changed{\requires}{\expects} \tcode{is_constructible_v<first_type, Args1\&\&...>} is \tcode{true}
 and \tcode{is_constructible_v<sec\-ond_type, Args2\&\&...>} is \tcode{true}.
 
 \pnum
