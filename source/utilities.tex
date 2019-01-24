@@ -285,7 +285,7 @@ template<class T> constexpr T&& forward(remove_reference_t<T>&& t) noexcept;
 
 \begin{itemdescr}
 \pnum
-\added{\mandates The second form shall not be instantiated with an lvalue reference type.}
+\added{\mandates In the second form, \tcode{is_lvalue_reference_v<T>} is \tcode{false}.}
 
 \returns \tcode{static_cast<T\&\&>(t)}.
 
