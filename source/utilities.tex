@@ -1270,8 +1270,10 @@ with default template arguments. \end{note}
 The expression inside \tcode{explicit} evaluates to \tcode{true}
 if and only if $\tcode{T}_i$ is not implicitly
 default-constructible for at least one $i$.
+\begin{removedblock}
 \begin{note} This behavior can be implemented with a trait that checks whether
 a \tcode{const $\tcode{T}_i$\&} can be initialized with \tcode{\{\}}. \end{note}
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{tuple}!constructor}%
@@ -1334,7 +1336,7 @@ tuple(const tuple& u) = default;
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{is_copy_constructible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
+\changed{\requires}{\expects} \tcode{is_copy_constructible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
 
 \pnum
 \effects Initializes each element of \tcode{*this} with the
@@ -1348,7 +1350,7 @@ tuple(tuple&& u) = default;
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{is_move_constructible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
+\changed{\requires}{\expects} \tcode{is_move_constructible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
 
 \pnum
 \effects For all $i$, initializes the $i^\text{th}$ element of \tcode{*this} with
@@ -1551,7 +1553,7 @@ template<class Alloc, class U1, class U2>
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{Alloc} shall satisfy the
+\changed{\requires}{\expects} \tcode{Alloc} shall satisfy the
 \oldconcept{Allocator} requirements (\tref{utilities.allocator.requirements}).
 
 \pnum
@@ -1575,13 +1577,20 @@ constexpr tuple& operator=(const tuple& u);
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\mandates \tcode{is_copy_assignable_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
+}
+
 \pnum
 \effects Assigns each element of \tcode{u} to the corresponding
 element of \tcode{*this}.
 
+\removed{%
 \pnum
 \remarks This operator shall be defined as deleted unless
 \tcode{is_copy_assignable_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
+}
 
 \pnum
 \returns \tcode{*this}.
@@ -1750,7 +1759,7 @@ constexpr void swap(tuple& rhs) noexcept(@\seebelow@);
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 Each element in \tcode{*this} shall be swappable with\iref{swappable.requirements}
 the corresponding element in \tcode{rhs}.
 
@@ -1859,7 +1868,7 @@ parameter in the function parameter pack \tcode{tpls}, where all indexing is
 zero-based.
 
 \pnum
-\requires For all $i$, $\tcode{U}_i$ shall be the type
+\changed{\requires}{\expects} For all $i$, $\tcode{U}_i$ shall be the type
 $\cv_i$ \tcode{tuple<$\tcode{Args}_i$...>}, where $\cv_i$ is the (possibly empty) $i^\text{th}$
 \grammarterm{cv-qualifier-seq} and $\tcode{Args}_i$ is the template parameter pack representing the element
 types in $\tcode{U}_i$. Let $\tcode{A}_{ik}$ be the ${k}^\text{th}$ type in $\tcode{Args}_i$. For all
@@ -1957,7 +1966,7 @@ template<class T> struct tuple_size;
 
 \begin{itemdescr}
 \pnum
-\remarks All specializations of \tcode{tuple_size} shall satisfy the
+\changed{\remarks}{\expects} All specializations of \tcode{tuple_size} shall satisfy the
 \oldconcept{UnaryTypeTrait} requirements\iref{meta.rqmts} with a
 base characteristic of \tcode{integral_constant<size_t, N>}
 for some \tcode{N}.
@@ -1980,8 +1989,8 @@ template<size_t I, class... Types>
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{I < sizeof...(Types)}.
-The program is ill-formed if \tcode{I} is out of bounds.
+\changed{\requires}{\mandates} \tcode{I < sizeof...(Types)}.
+\removed{The program is ill-formed if \tcode{I} is out of bounds.}
 
 \pnum
 \ctype \tcode{TI} is the
@@ -2076,8 +2085,8 @@ template<size_t I, class... Types>
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{I < sizeof...(Types)}.
-The program is ill-formed if \tcode{I} is out of bounds.
+\changed{\requires}{\mandates} \tcode{I < sizeof...(Types)}.
+\removed{The program is ill-formed if \tcode{I} is out of bounds.}
 
 \pnum
 \returns  A reference to the $\tcode{I}^\text{th}$ element of \tcode{t}, where
@@ -2117,8 +2126,8 @@ template<class T, class... Types>
 
 \begin{itemdescr}
 \pnum
-\requires The type \tcode{T} occurs exactly once in \tcode{Types...}.
-Otherwise, the program is ill-formed.
+\changed{\requires}{\mandates} The type \tcode{T} occurs exactly once in \tcode{Types...}.
+\removed{Otherwise, the program is ill-formed.}
 
 \pnum
 \returns A reference to the element of \tcode{t} corresponding to the type
@@ -2152,7 +2161,7 @@ template<class... TTypes, class... UTypes>
 
 \begin{itemdescr}
 \pnum
-\requires  For all \tcode{i},
+\changed{\requires}{\expects} For all \tcode{i},
 where \tcode{0 <= i} and
 \tcode{i < sizeof...(TTypes)}, \tcode{get<i>(t) == get<i>(u)} is a valid expression
 returning a type that is convertible to \tcode{bool}.
@@ -2188,7 +2197,7 @@ template<class... TTypes, class... UTypes>
 
 \begin{itemdescr}
 \pnum
-\requires  For all \tcode{i},
+\changed{\requires}{\expects} For all \tcode{i},
 where \tcode{0 <= i} and
 \tcode{i < sizeof...(TTypes)}, both \tcode{get<i>(t) < get<i>(u)}
 and \tcode{get<i>(u) < get<i>(t)}
@@ -2253,7 +2262,7 @@ template<class... Types, class Alloc>
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{Alloc} shall satisfy the \oldconcept{Allocator}
+\changed{\requires}{\expects} \tcode{Alloc} shall satisfy the \oldconcept{Allocator}
 requirements (\tref{utilities.allocator.requirements}).
 
 \pnum
@@ -2495,6 +2504,11 @@ constexpr optional(const optional& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\mandates
+\tcode{is_copy_constructible_v<T>} is \tcode{true}.}
+
 \pnum
 \effects
 If \tcode{rhs} contains a value, initializes the contained value as if
@@ -2510,10 +2524,10 @@ Any exception thrown by the selected constructor of \tcode{T}.
 
 \pnum
 \remarks
-This constructor shall be defined as deleted unless
-\tcode{is_copy_constructible_v<T>} is \tcode{true}.
+\removed{This constructor shall be defined as deleted unless
+\tcode{is_copy_constructible_v<T>} is \tcode{true}.}
 If \tcode{is_trivially_copy_constructible_v<T>} is \tcode{true},
-this constructor is trivial..
+this constructor is trivial.\removed{.}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{optional}!constructor}%
@@ -2800,13 +2814,21 @@ optional<T>& operator=(nullopt_t) noexcept;
 \effects
 If \tcode{*this} contains a value, calls \tcode{val->T::\~T()} to destroy the contained value; otherwise no effect.
 
+\added{%
+\pnum
+\ensures
+\tcode{*this} does not contain a value.
+}
+
 \pnum
 \returns
 \tcode{*this}.
 
+\removed{%
 \pnum
 \ensures
 \tcode{*this} does not contain a value.
+}
 \end{itemdescr}
 
 \indexlibrarymember{operator=}{optional}%
@@ -2815,6 +2837,13 @@ constexpr optional<T>& operator=(const optional& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\mandates
+\tcode{is_copy_constructible_v<T>} is \tcode{true} and
+\tcode{is_copy_assignable_v<T>} is \tcode{true}.
+}
+
 \pnum
 \effects
 See \tref{optional.assign.copy}.
@@ -2832,13 +2861,21 @@ destroys the contained value by calling \tcode{val->T::\~T()} &
 no effect \\
 \end{lib2dtab2}
 
+\added{%
+\pnum
+\ensures
+\tcode{bool(rhs) == bool(*this)}.
+}
+
 \pnum
 \returns
 \tcode{*this}.
 
+\removed{%
 \pnum
 \ensures
 \tcode{bool(rhs) == bool(*this)}.
+}
 
 \pnum
 \remarks
@@ -2846,9 +2883,9 @@ If any exception is thrown, the result of the expression \tcode{bool(*this)} rem
 If an exception is thrown during the call to \tcode{T}'s copy constructor, no effect.
 If an exception is thrown during the call to \tcode{T}'s copy assignment,
 the state of its contained value is as defined by the exception safety guarantee of \tcode{T}'s copy assignment.
-This operator shall be defined as deleted unless
+\removed{This operator shall be defined as deleted unless
 \tcode{is_copy_constructible_v<T>} is \tcode{true} and
-\tcode{is_copy_assignable_v<T>} is \tcode{true}.
+\tcode{is_copy_assignable_v<T>} is \tcode{true}.}
 If \tcode{is_trivially_copy_constructible_v<T> \&\&}
 \tcode{is_trivially_copy_assignable_v<T> \&\&}
 \tcode{is_trivially_destructible_v<T>} is \tcode{true},
@@ -2885,13 +2922,21 @@ destroys the contained value by calling \tcode{val->T::\~T()} &
 no effect \\
 \end{lib2dtab2}
 
+\added{%
+\pnum
+\ensures
+\tcode{bool(rhs) == bool(*this)}.
+}
+
 \pnum
 \returns
 \tcode{*this}.
 
+\removed{%
 \pnum
 \ensures
 \tcode{bool(rhs) == bool(*this)}.
+}
 
 \pnum
 \remarks
@@ -2935,13 +2980,21 @@ template<class U = T> optional<T>& operator=(U&& v);
 \effects
 If \tcode{*this} contains a value, assigns \tcode{std::forward<U>(v)} to the contained value; otherwise initializes the contained value as if direct-non-list-initializing object of type \tcode{T} with \tcode{std::forward<U>(v)}.
 
+\added{%
+\pnum
+\ensures
+\tcode{*this} contains a value.
+}
+
 \pnum
 \returns
 \tcode{*this}.
 
+\removed{%
 \pnum
 \ensures
 \tcode{*this} contains a value.
+}
 
 \pnum
 \remarks
@@ -3000,13 +3053,21 @@ destroys the contained value by calling \tcode{val->T::\~T()} &
 no effect \\
 \end{lib2dtab2}
 
+\added{%
+\pnum
+\ensures
+\tcode{bool(rhs) == bool(*this)}.
+}
+
 \pnum
 \returns
 \tcode{*this}.
 
+\removed{%
 \pnum
 \ensures
 \tcode{bool(rhs) == bool(*this)}.
+}
 
 \pnum
 \remarks
@@ -3083,13 +3144,21 @@ destroys the contained value by calling \tcode{val->T::\~T()} &
 no effect \\
 \end{lib2dtab2}
 
+\added{%
+\pnum
+\ensures
+\tcode{bool(rhs) == bool(*this)}.
+}
+
 \pnum
 \returns
 \tcode{*this}.
 
+\removed{%
 \pnum
 \ensures
 \tcode{bool(rhs) == bool(*this)}.
+}
 
 \pnum
 \remarks
@@ -3129,7 +3198,7 @@ template<class... Args> T& emplace(Args&&... args);
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{is_constructible_v<T, Args\&\&...>} is \tcode{true}.
 
 \pnum
@@ -3195,7 +3264,7 @@ void swap(optional& rhs) noexcept(@\seebelow@);
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 Lvalues of type \tcode{T} shall be swappable and \tcode{is_move_constructible_v<T>} is \tcode{true}.
 
 \pnum
@@ -3248,7 +3317,7 @@ constexpr T* operator->();
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{*this} contains a value.
 
 \pnum
@@ -3272,7 +3341,7 @@ constexpr T& operator*() &;
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{*this} contains a value.
 
 \pnum
@@ -3296,7 +3365,7 @@ constexpr const T&& operator*() const&&;
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{*this} contains a value.
 
 \pnum
@@ -3369,6 +3438,12 @@ template<class U> constexpr T value_or(U&& v) const&;
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\mandates
+\tcode{is_copy_constructible_v<T> \&\& is_convertible_v<U\&\&, T>} is \tcode{false}.
+}
+
 \pnum
 \effects
 Equivalent to:
@@ -3376,10 +3451,12 @@ Equivalent to:
 return bool(*this) ? **this : static_cast<T>(std::forward<U>(v));
 \end{codeblock}
 
+\removed{%
 \pnum
 \remarks
 If \tcode{is_copy_constructible_v<T> \&\& is_convertible_v<U\&\&, T>} is \tcode{false},
 the program is ill-formed.
+}
 \end{itemdescr}
 
 \indexlibrarymember{value_or}{optional}%
@@ -3388,6 +3465,12 @@ template<class U> constexpr T value_or(U&& v) &&;
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\mandates
+\tcode{is_move_constructible_v<T> \&\& is_convertible_v<U\&\&, T>} is \tcode{false}.
+}
+
 \pnum
 \effects
 Equivalent to:
@@ -3395,10 +3478,12 @@ Equivalent to:
 return bool(*this) ? std::move(**this) : static_cast<T>(std::forward<U>(v));
 \end{codeblock}
 
+\removed{%
 \pnum
 \remarks
 If \tcode{is_move_constructible_v<T> \&\& is_convertible_v<U\&\&, T>} is \tcode{false},
 the program is ill-formed.
+}
 \end{itemdescr}
 
 \rSec3[optional.mod]{Modifiers}
@@ -3477,7 +3562,7 @@ template<class T, class U> constexpr bool operator==(const optional<T>& x, const
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{*x == *y} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 \begin{note} \tcode{T} need not be \oldconcept{EqualityComparable}. \end{note}
@@ -3500,7 +3585,7 @@ template<class T, class U> constexpr bool operator!=(const optional<T>& x, const
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{*x != *y} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 
@@ -3524,7 +3609,7 @@ template<class T, class U> constexpr bool operator<(const optional<T>& x, const 
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{*x < *y} shall be well-formed
 and its result shall be convertible to \tcode{bool}.
 
@@ -3548,7 +3633,7 @@ template<class T, class U> constexpr bool operator>(const optional<T>& x, const 
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{*x > *y} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 
@@ -3572,7 +3657,7 @@ template<class T, class U> constexpr bool operator<=(const optional<T>& x, const
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{*x <= *y} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 
@@ -3596,7 +3681,7 @@ template<class T, class U> constexpr bool operator>=(const optional<T>& x, const
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{*x >= *y} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 
@@ -3736,7 +3821,7 @@ template<class T, class U> constexpr bool operator==(const optional<T>& x, const
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{*x == v} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 \begin{note}
@@ -3755,7 +3840,7 @@ template<class T, class U> constexpr bool operator==(const T& v, const optional<
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{v == *x} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 
@@ -3771,7 +3856,7 @@ template<class T, class U> constexpr bool operator!=(const optional<T>& x, const
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{*x != v} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 
@@ -3787,7 +3872,7 @@ template<class T, class U> constexpr bool operator!=(const T& v, const optional<
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{v != *x} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 
@@ -3803,7 +3888,7 @@ template<class T, class U> constexpr bool operator<(const optional<T>& x, const 
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{*x < v} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 
@@ -3819,7 +3904,7 @@ template<class T, class U> constexpr bool operator<(const T& v, const optional<U
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{v < *x} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 
@@ -3835,7 +3920,7 @@ template<class T, class U> constexpr bool operator>(const optional<T>& x, const 
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{*x > v} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 
@@ -3851,7 +3936,7 @@ template<class T, class U> constexpr bool operator>(const T& v, const optional<U
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{v > *x} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 
@@ -3867,7 +3952,7 @@ template<class T, class U> constexpr bool operator<=(const optional<T>& x, const
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{*x <= v} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 
@@ -3883,7 +3968,7 @@ template<class T, class U> constexpr bool operator<=(const T& v, const optional<
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{v <= *x} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 
@@ -3899,7 +3984,7 @@ template<class T, class U> constexpr bool operator>=(const optional<T>& x, const
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{*x >= v} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 
@@ -3915,7 +4000,7 @@ template<class T, class U> constexpr bool operator>=(const T& v, const optional<
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{v >= *x} shall be well-formed and
 its result shall be convertible to \tcode{bool}.
 
