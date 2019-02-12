@@ -5801,15 +5801,23 @@ template<class T>
 \pnum
 Let \tcode{VT} be \tcode{decay_t<T>}.
 
+\removed{%
 \pnum
 \requires
 \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
+}
 
 \added{%
 \pnum
 \constraints \tcode{VT} is not the same type as \tcode{any},
 \tcode{VT} is not a specialization of \tcode{in_place_type_t},
 and \tcode{is_copy_constructible_v<VT>} is \tcode{true}.
+}
+
+\added{%
+\pnum
+\expects
+\tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
 }
 
 \pnum
@@ -5840,13 +5848,20 @@ template<class T, class... Args>
 \pnum
 Let \tcode{VT} be \tcode{decay_t<T>}.
 
+\removed{%
 \pnum
 \requires \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
+}
 
 \added{%
 \pnum
 \constraints \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, Args...>} is \tcode{true}.
+}
+
+\added{%
+\pnum
+\expects \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
 }
 
 \pnum
@@ -5878,13 +5893,20 @@ template<class T, class U, class... Args>
 \pnum
 Let \tcode{VT} be \tcode{decay_t<T>}.
 
+\removed{%
 \pnum
 \requires \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
+}
 
 \added{%
 \pnum
 \constraints \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, initializer_list<U>\&, Args...>} is \tcode{true}.
+}
+
+\added{%
+\pnum
+\expects \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
 }
 
 \pnum
@@ -5969,14 +5991,22 @@ template<class T>
 \pnum
 Let \tcode{VT} be \tcode{decay_t<T>}.
 
+\removed{%
 \pnum
 \requires
 \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
+}
 
 \added{%
 \pnum
 \constraints \tcode{VT} is not the same type as \tcode{any} and
 \tcode{is_copy_constructible_v<VT>} is \tcode{true}.
+}
+
+\added{%
+\pnum
+\expects
+\tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
 }
 
 \pnum
@@ -6013,14 +6043,22 @@ template<class T, class... Args>
 \pnum
 Let \tcode{VT} be \tcode{decay_t<T>}.
 
+\removed{%
 \pnum
 \requires
 \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
+}
 
 \added{%
 \pnum
 \constraints \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, Args...>} is \tcode{true}.
+}
+
+\added{%
+\pnum
+\expects
+\tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
 }
 
 \pnum
@@ -6059,14 +6097,22 @@ template<class T, class U, class... Args>
 \pnum
 Let \tcode{VT} be \tcode{decay_t<T>}.
 
+\removed{%
 \pnum
 \requires
 \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
+}
 
 \added{%
 \pnum
 \constraints \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, initializer_list<U>\&, Args...>} is \tcode{true}.
+}
+
+\added{%
+\pnum
+\expects
+\tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
 }
 
 \pnum
@@ -6204,11 +6250,11 @@ template<class T>
 Let \tcode{U} be the type \tcode{remove_cvref_t<T>}.
 
 \pnum
-\requires
+\changed{\requires}{\mandates}
 For the first overload, \tcode{is_constructible_v<T, const U\&>} is \tcode{true}.
 For the second overload, \tcode{is_constructible_v<T, U\&>} is \tcode{true}.
 For the third overload, \tcode{is_constructible_v<T, U>} is \tcode{true}.
-Otherwise the program is ill-formed.
+\removed{Otherwise the program is ill-formed.}
 
 \pnum
 \returns
