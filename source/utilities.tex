@@ -4335,6 +4335,11 @@ constexpr variant(const variant& w);
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\mandates \tcode{is_copy_constructible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
+}
+
 \pnum
 \effects
 If \tcode{w} holds a value, initializes the \tcode{variant} to hold the same
@@ -4348,8 +4353,8 @@ Any exception thrown by direct-initializing any $\tcode{T}_i$ for all $i$.
 
 \pnum
 \remarks
-This constructor shall be defined as deleted unless
-\tcode{is_copy_constructible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
+\removed{This constructor shall be defined as deleted unless
+\tcode{is_copy_constructible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.}
 If \tcode{is_trivially_copy_constructible_v<$\tcode{T}_i$>}
 is \tcode{true} for all $i$, this constructor is trivial.
 \end{itemdescr}
@@ -4472,6 +4477,7 @@ This function shall not participate in overload resolution unless
 \end{removedblock}
 
 \pnum
+\added{\remarks}
 \begin{note}
 \begin{codeblock}
 variant<string, string> v("abc");
@@ -4680,6 +4686,14 @@ constexpr variant& operator=(const variant& rhs);
 \pnum
 Let $j$ be \tcode{rhs.index()}.
 
+\added{%
+\pnum
+\mandates This operator shall be defined as deleted unless
+\tcode{is_copy_constructible_v<$\tcode{T}_i$> \&\&}
+\tcode{is_copy_assignable_v<$\tcode{T}_i$>}
+is \tcode{true} for all $i$.
+}
+
 \pnum
 \effects
 \begin{itemize}
@@ -4708,10 +4722,10 @@ Otherwise, equivalent to \tcode{operator=(variant(rhs))}.
 
 \pnum
 \remarks
-This operator shall be defined as deleted unless
+\removed{This operator shall be defined as deleted unless
 \tcode{is_copy_constructible_v<$\tcode{T}_i$> \&\&}
 \tcode{is_copy_assignable_v<$\tcode{T}_i$>}
-is \tcode{true} for all $i$.
+is \tcode{true} for all $i$.}
 If \tcode{is_trivially_copy_constructible_v<$\tcode{T}_i$> \&\&}
 \tcode{is_trivially_copy_assignable_v<$\tcode{T}_i$> \&\&}
 \tcode{is_trivially_destructible_v<$\tcode{T}_i$>}
@@ -4852,6 +4866,7 @@ This function shall not participate in overload resolution unless
 \end{removedblock}
 
 \pnum
+\added{\remarks}
 \begin{note}
 \begin{codeblock}
 variant<string, string> v;
@@ -5117,7 +5132,7 @@ template<class T> struct variant_size;
 
 \begin{itemdescr}
 \pnum
-\remarks
+\changed{\remarks}{\expects}
 All specializations of \tcode{variant_size} shall satisfy the
 \oldconcept{UnaryTypeTrait} requirements\iref{meta.rqmts}
 with a base characteristic of \tcode{integral_constant<size_t, N>} for some \tcode{N}.
@@ -5132,6 +5147,7 @@ template<class T> class variant_size<const volatile T>;
 
 \begin{itemdescr}
 \pnum
+\added{\expects}
 Let \tcode{VS} denote \tcode{variant_size<T>} of the cv-unqualified
 type \tcode{T}. Then each of the three templates shall satisfy the
 \oldconcept{UnaryTypeTrait} requirements\iref{meta.rqmts} with a
@@ -5154,6 +5170,7 @@ template<size_t I, class T> class variant_alternative<I, const volatile T>;
 
 \begin{itemdescr}
 \pnum
+\added{\expects}
 Let \tcode{VA} denote \tcode{variant_alternative<I, T>} of the
 cv-unqualified type \tcode{T}. Then each of the three templates shall
 meet the \oldconcept{TransformationTrait} requirements\iref{meta.rqmts} with a
@@ -5172,8 +5189,8 @@ variant_alternative<I, variant<Types...>>::type
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{I < sizeof...(Types)}.
-The program is ill-formed if \tcode{I} is out of bounds.
+\changed{\requires}{\mandates} \tcode{I < sizeof...(Types)}.
+\removed{The program is ill-formed if \tcode{I} is out of bounds.}
 
 \pnum
 \textit{Value:} The type $\tcode{T}_I$.
@@ -5190,9 +5207,9 @@ template<class T, class... Types>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\mandates}
 The type \tcode{T} occurs exactly once in \tcode{Types...}.
-Otherwise, the program is ill-formed.
+\removed{Otherwise, the program is ill-formed.}
 
 \pnum
 \returns
@@ -5213,9 +5230,9 @@ template<size_t I, class... Types>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\mandates}
 \tcode{I < sizeof...(Types)}.
-Otherwise, the program is ill-formed.
+\removed{Otherwise, the program is ill-formed.}
 
 \pnum
 \effects
@@ -5233,9 +5250,9 @@ template<class T, class... Types> constexpr const T&& get(const variant<Types...
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\mandates}
 The type \tcode{T} occurs exactly once in \tcode{Types...}.
-Otherwise, the program is ill-formed.
+\removed{Otherwise, the program is ill-formed.}
 
 \pnum
 \effects
@@ -5256,9 +5273,9 @@ template<size_t I, class... Types>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\mandates}
 \tcode{I < sizeof...(Types)}.
-Otherwise, the program is ill-formed.
+\removed{Otherwise, the program is ill-formed.}
 
 \pnum
 \returns
@@ -5279,9 +5296,9 @@ template<class T, class... Types>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\mandates}
 The type \tcode{T} occurs exactly once in \tcode{Types...}.
-Otherwise, the program is ill-formed.
+\removed{Otherwise, the program is ill-formed.}
 
 \pnum
 \effects
@@ -5299,7 +5316,7 @@ template<class... Types>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{get<$i$>(v) == get<$i$>(w)} is a valid expression returning a type that is
 convertible to \tcode{bool}, for all $i$.
 
@@ -5318,7 +5335,7 @@ template<class... Types>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{get<$i$>(v) != get<$i$>(w)} is a valid expression returning a type that is
 convertible to \tcode{bool}, for all $i$.
 
@@ -5337,7 +5354,7 @@ template<class... Types>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{get<$i$>(v) < get<$i$>(w)} is a valid expression returning a type that is
 convertible to \tcode{bool}, for all $i$.
 
@@ -5358,7 +5375,7 @@ template<class... Types>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{get<$i$>(v) > get<$i$>(w)} is a valid expression returning a type that is
 convertible to \tcode{bool}, for all $i$.
 
@@ -5379,7 +5396,7 @@ template<class... Types>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{get<$i$>(v) <= get<$i$>(w)} is a valid expression returning a type that is
 convertible to \tcode{bool}, for all $i$.
 
@@ -5400,7 +5417,7 @@ template<class... Types>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{get<$i$>(v) >= get<$i$>(w)} is a valid expression returning a type that is
 convertible to \tcode{bool}, for all $i$.
 
@@ -5441,10 +5458,10 @@ for the first form and
 for the second form.
 
 \pnum
-\requires
+\changed{\requires}{\mandates}
 For each valid pack \tcode{m}, $e(\tcode{m})$ shall be a valid expression.
-All such expressions shall be of the same type and value category;
-otherwise, the program is ill-formed.
+All such expressions shall be of the same type and value category\removed{;
+otherwise, the program is ill-formed}.
 
 \pnum
 \returns $e(\tcode{m})$, where \tcode{m} is the pack for which
