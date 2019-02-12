@@ -6534,6 +6534,7 @@ template<class charT, class traits, class Allocator>
 \end{itemdecl}
 
 \begin{itemdescr}
+\removed{%
 \pnum
 \throws
 \tcode{out_of_range}
@@ -6541,6 +6542,7 @@ if
 \tcode{pos > str.size()}
 or \tcode{invalid_argument} if an invalid character is found (see below).%
 \indexlibrary{\idxcode{out_of_range}}
+}
 
 \pnum
 \effects
@@ -6549,6 +6551,7 @@ Determines the effective length
 \tcode{n} and
 \tcode{str.size() - pos}.
 
+\removed{%
 The function then throws%
 \indexlibrary{\idxcode{invalid_argument}}
 \tcode{invalid_argument}
@@ -6556,8 +6559,9 @@ if any of the \tcode{rlen}
 characters in \tcode{str} beginning at position \tcode{pos} is
 other than \tcode{zero} or \tcode{one}. The function uses \tcode{traits::eq()}
 to compare the character values.
+}
 
-Otherwise, the function constructs an object of class
+\changed{Otherwise, t}{T}he function constructs an object of class
 \tcode{bitset<N>},
 initializing the first \tcode{M} bit
 positions to values determined from the corresponding characters in the string
@@ -6575,6 +6579,21 @@ Subsequent decreasing character positions correspond to increasing bit positions
 
 \pnum
 If \tcode{M < N}, remaining bit positions are initialized to zero.
+
+\added{%
+\pnum
+\throws
+\tcode{out_of_range}
+if
+\tcode{pos > str.size()}
+or \tcode{invalid_argument} if any of the \tcode{rlen}
+characters in \tcode{str} beginning at position \tcode{pos} is
+other than \tcode{zero} or \tcode{one}. The function uses \tcode{traits::eq()}
+to compare the character values.%
+\indexlibrary{\idxcode{out_of_range}}%
+\indexlibrary{\idxcode{invalid_argument}}%
+}
+
 \end{itemdescr}
 
 \indexlibrary{\idxcode{bitset}!constructor}%
@@ -6726,11 +6745,13 @@ bitset<N>& set(size_t pos, bool val = true);
 \end{itemdecl}
 
 \begin{itemdescr}
+\removed{%
 \pnum
 \throws
 \tcode{out_of_range}
 if \tcode{pos} does not correspond to a valid bit position.%
 \indexlibrary{\idxcode{out_of_range}}
+}
 
 \pnum
 \effects
@@ -6741,6 +6762,14 @@ If \tcode{val} is \tcode{true}, the stored value is one, otherwise it is zero.
 \pnum
 \returns
 \tcode{*this}.
+
+\added{%
+\pnum
+\throws
+\tcode{out_of_range}
+if \tcode{pos} does not correspond to a valid bit position.%
+\indexlibrary{\idxcode{out_of_range}}
+}
 \end{itemdescr}
 
 \indexlibrarymember{reset}{bitset}%
@@ -6765,11 +6794,13 @@ bitset<N>& reset(size_t pos);
 \end{itemdecl}
 
 \begin{itemdescr}
+\removed{%
 \pnum
 \throws
 \tcode{out_of_range}
 if \tcode{pos} does not correspond to a valid bit position.
 \indexlibrary{\idxcode{out_of_range}}%
+}
 
 \pnum
 \effects
@@ -6779,6 +6810,14 @@ Resets the bit at position \tcode{pos} in
 \pnum
 \returns
 \tcode{*this}.
+
+\added{%
+\pnum
+\throws
+\tcode{out_of_range}
+if \tcode{pos} does not correspond to a valid bit position.
+\indexlibrary{\idxcode{out_of_range}}%
+}
 \end{itemdescr}
 
 \indexlibrarymember{operator\~{}}{bitset}%
@@ -6821,11 +6860,13 @@ bitset<N>& flip(size_t pos);
 \end{itemdecl}
 
 \begin{itemdescr}
+\removed{%
 \pnum
 \throws
 \tcode{out_of_range}
 if \tcode{pos} does not correspond to a valid bit position.%
 \indexlibrary{\idxcode{out_of_range}}
+}
 
 \pnum
 \effects
@@ -6835,6 +6876,14 @@ Toggles the bit at position \tcode{pos} in
 \pnum
 \returns
 \tcode{*this}.
+
+\added{%
+\pnum
+\throws
+\tcode{out_of_range}
+if \tcode{pos} does not correspond to a valid bit position.%
+\indexlibrary{\idxcode{out_of_range}}
+}
 \end{itemdescr}
 
 \indexlibrarymember{to_ulong}{bitset}%
@@ -6843,6 +6892,7 @@ unsigned long to_ulong() const;
 \end{itemdecl}
 
 \begin{itemdescr}
+\removed{%
 \pnum
 \throws
 \tcode{overflow_error}%
@@ -6851,10 +6901,22 @@ if the integral value \tcode{x} corresponding to the bits in
 \tcode{*this}
 cannot be represented as type
 \tcode{unsigned long}.
+}
 
 \pnum
 \returns
 \tcode{x}.
+
+\added{%
+\pnum
+\throws
+\tcode{overflow_error}%
+\indexlibrary{\idxcode{overflow_error}}
+if the integral value \tcode{x} corresponding to the bits in
+\tcode{*this}
+cannot be represented as type
+\tcode{unsigned long}.
+}
 \end{itemdescr}
 
 \indexlibrarymember{to_ullong}{bitset}%
@@ -6863,6 +6925,7 @@ unsigned long long to_ullong() const;
 \end{itemdecl}
 
 \begin{itemdescr}
+\removed{%
 \pnum
 \indexlibrary{\idxcode{overflow_error}}%
 \throws
@@ -6871,10 +6934,22 @@ if the integral value \tcode{x} corresponding to the bits in
 \tcode{*this}
 cannot be represented as type
 \tcode{unsigned long long}.
+}
 
 \pnum
 \returns
 \tcode{x}.
+
+\added{%
+\pnum
+\indexlibrary{\idxcode{overflow_error}}%
+\throws
+\tcode{overflow_error}
+if the integral value \tcode{x} corresponding to the bits in
+\tcode{*this}
+cannot be represented as type
+\tcode{unsigned long long}.
+}
 \end{itemdescr}
 
 \indexlibrarymember{to_string}{bitset}%
@@ -6959,11 +7034,13 @@ bool test(size_t pos) const;
 \end{itemdecl}
 
 \begin{itemdescr}
+\removed{%
 \pnum
 \throws
 \tcode{out_of_range}
 if \tcode{pos} does not correspond to a valid bit position.%
 \indexlibrary{\idxcode{out_of_range}}
+}
 
 \pnum
 \returns
@@ -6972,6 +7049,14 @@ if the bit at position \tcode{pos}
 in
 \tcode{*this}
 has the value one.
+
+\added{%
+\pnum
+\throws
+\tcode{out_of_range}
+if \tcode{pos} does not correspond to a valid bit position.%
+\indexlibrary{\idxcode{out_of_range}}
+}
 \end{itemdescr}
 
 \indexlibrarymember{all}{bitset}%
@@ -7034,7 +7119,7 @@ constexpr bool operator[](size_t pos) const;
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{pos} shall be valid.
 
 \pnum
@@ -7053,7 +7138,7 @@ bitset<N>::reference operator[](size_t pos);
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{pos} shall be valid.
 
 \pnum
