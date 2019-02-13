@@ -7838,16 +7838,34 @@ static constexpr pointer pointer_traits<T*>::pointer_to(@\seebelow@ r) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{%
+\pnum
+\mandates For the first member function, \tcode{Ptr::pointer_to(r)} is well-formed.
+}
+
+\added{%
+\pnum
+\expects For the first member function, \tcode{Ptr::pointer_to(r)} returns a pointer to \tcode{r} through which
+indirection is valid.
+}
+
+\added{%
+\pnum
+\returns The first member function returns \tcode{Ptr::pointer_to(r)}. The second member function returns \tcode{addressof(r)}.
+}
+
 \pnum
 \remarks If \tcode{element_type} is \cv{}~\tcode{void}, the type of
 \tcode{r} is unspecified; otherwise, it is \tcode{element_type\&}.
 
+\removed{%
 \pnum
 \returns The first member function returns a pointer to \tcode{r}
 obtained by calling \tcode{Ptr::pointer_to(r)} through which
 indirection is valid; an instantiation of this function is
 ill-formed if \tcode{Ptr} does not have a matching \tcode{pointer_to} static member
 function. The second member function returns \tcode{addressof(r)}.
+}
 \end{itemdescr}
 
 \rSec3[pointer.traits.optmem]{Optional members}
@@ -7898,7 +7916,7 @@ template<class T> constexpr T* to_address(T* p) noexcept;
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{T} is not a function type. Otherwise the program is ill-formed.
+\changed{\requires}{\mandates} \tcode{T} is not a function type. \removed{Otherwise the program is ill-formed.}
 
 \pnum
 \returns \tcode{p}.
@@ -7919,7 +7937,7 @@ void declare_reachable(void* p);
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{p} shall be a safely-derived
+\changed{\requires}{\expects} \tcode{p} shall be a safely-derived
 pointer\iref{basic.stc.dynamic.safety} or a null pointer value.
 
 \pnum
@@ -7938,7 +7956,7 @@ template<class T> T* undeclare_reachable(T* p);
 
 \begin{itemdescr}
 \pnum
-\requires If \tcode{p} is not null, the complete object referenced by \tcode{p}
+\changed{\requires}{\expects} If \tcode{p} is not null, the complete object referenced by \tcode{p}
 shall have been previously declared reachable, and shall be
 live\iref{basic.life} from the time of the call until the last
 \tcode{undeclare_reachable(p)} call on the object.
@@ -7961,7 +7979,7 @@ void declare_no_pointers(char* p, size_t n);
 
 \begin{itemdescr}
 \pnum
-\requires No bytes in the specified range
+\changed{\requires}{\expects} No bytes in the specified range
 are currently registered with
 \tcode{declare_no_pointers()}. If the specified range is in an allocated object,
 then it shall be entirely within a single allocated object. The object shall be
@@ -7994,7 +8012,7 @@ void undeclare_no_pointers(char* p, size_t n);
 
 \begin{itemdescr}
 \pnum
-\requires The same range shall previously have been passed to
+\changed{\requires}{\expects} The same range shall previously have been passed to
 \tcode{declare_no_pointers()}.
 
 \pnum
@@ -8034,6 +8052,18 @@ void* align(size_t alignment, size_t size, void*& ptr, size_t& space);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\expects
+
+\begin{itemize}
+\item \tcode{alignment} is a power of two
+
+\item \tcode{ptr} represents the address of contiguous storage of at least
+\tcode{space} bytes
+\end{itemize}
+\end{addedblock}
+
 \pnum
 \effects If it is possible to fit \tcode{size} bytes
 of storage aligned by \tcode{alignment} into the buffer pointed to by
@@ -8042,6 +8072,7 @@ of storage aligned by \tcode{alignment} into the buffer pointed to by
 and decreases \tcode{space} by the number of bytes used for alignment.
 Otherwise, the function does nothing.
 
+\begin{removedblock}
 \pnum
 \requires
 
@@ -8051,6 +8082,7 @@ Otherwise, the function does nothing.
 \item \tcode{ptr} shall represent the address of contiguous storage of at least
 \tcode{space} bytes
 \end{itemize}
+\end{removedblock}
 
 \pnum
 \returns A null pointer if the requested aligned buffer
@@ -8736,7 +8768,7 @@ void deallocate(T* p, size_t n);
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{p} shall be a pointer value obtained from \tcode{allocate()}.
 \tcode{n} shall equal the value passed as the first argument
 to the invocation of allocate which returned \tcode{p}.
