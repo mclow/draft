@@ -6,7 +6,7 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & P1458R0                     \\
+          \textbf{Document Number:} & D1458R1                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
                                     & CppAlliance                 \\
@@ -42,6 +42,7 @@ As a drive-by fix, I have removed a bunch of empty descriptions of the form: "Ef
 
 The entire clause is reproduced here, but the changes are confined to a few sections:
 
+\begin{multicols}{2}
 \begin{itemize}
 \item{support.types.byteops  \ref{support.types.byteops}}
 \item{new.delete.single      \ref{new.delete.single}}
@@ -57,6 +58,13 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \item{propagation            \ref{propagation}}
 \item{except.nested          \ref{except.nested}}
 \item{support.initlist.cons  \ref{support.initlist.cons}}
+\end{itemize}
+\end{multicols}
+
+Changes from R0:
+\begin{itemize}
+\item{Reworked some of the "Expects" elements to use "is" instead of "shall".}
+\item{Added a "Mandates" to ptr.launder \ref{ptr.launder}}
 \end{itemize}
 
 \vfill
