@@ -4084,7 +4084,7 @@ template<class U> constexpr move_iterator(const move_iterator<U>& u);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{\pnum \expects \tcode{U} shall be convertible to \tcode{Iterator}.}
+\added{\pnum \mandates \tcode{U} is convertible to \tcode{Iterator}.}
 
 \pnum
 \effects Constructs a \tcode{move_iterator}, initializing
@@ -4099,7 +4099,7 @@ template<class U> constexpr move_iterator& operator=(const move_iterator<U>& u);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{\pnum \expects \tcode{U} shall be convertible to \tcode{Iterator}.}
+\added{\pnum \mandates \tcode{U} is convertible to \tcode{Iterator}.}
 
 \pnum
 \effects Assigns \tcode{u.base()} to
