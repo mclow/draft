@@ -697,7 +697,7 @@ linear													\\ \rowsep
   \oldconcept{MoveAssignable}. \ednote{Add linebreak here.}\br
   All existing elements of \tcode{a}
   are either move assigned to or destroyed.\br
-  \ensures \tcode{a} shall be equal to the value that \tcode{rv} had before
+  \ensures \tcode{a} \changed{shall be}{is} equal to the value that \tcode{rv} had before
   this assignment.      &
   linear                \\ \rowsep
 
@@ -829,23 +829,23 @@ The complexities of the expressions are sequence dependent.
 \tcode{X(n, t)}\br
 \tcode{X u(n, t);}   &
                 &
- \changed{\requires}{\expects}\ \tcode{T} shall be
+ \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is}
  \oldconcept{CopyInsertable} into \tcode{X}.\br
  \ensures \tcode{distance(begin(), end()) == n}\br
- Constructs a sequence container with \tcode{n} copies of \tcode{t}  \\ \rowsep
+ \added{\effects} Constructs a sequence container with \tcode{n} copies of \tcode{t}  \\ \rowsep
 
 \tcode{X(i, j)}\br
 \tcode{X u(i, j);}   &
                     &
- \changed{\requires}{\expects}\ \tcode{T} shall be \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{*i}.
+ \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{*i}.
  For \tcode{vector}, if the iterator does
  not meet the \oldconcept{\-Forward\-Iterator} requirements\iref{forward.iterators}, \tcode{T}
- shall also be
+ \changed {shall also be}{is also}
  \oldconcept{MoveInsertable} into \tcode{X}.\ednote{Add linebreak here.}\br
  Each iterator in the range \range{i}{j} \changed{shall be}{is} dereferenced exactly once.\br
  \ensures \tcode{distance(begin(), end()) ==}
  \tcode{distance(i, j)}\br
- Constructs a sequence container equal to the range \tcode{[i, j)}    \\ \rowsep
+ \added{\effects} Constructs a sequence container equal to the range \tcode{[i, j)}    \\ \rowsep
 
 \tcode{X(il)}      &
                     &
@@ -856,7 +856,7 @@ The complexities of the expressions are sequence dependent.
   \changed{\requires}{\expects}\ \tcode{T} is
   \oldconcept{CopyInsertable} into \tcode{X}
   and \oldconcept{CopyAssignable}. \ednote{Add linebreak here.}\br
-  Assigns the range \range{il.begin()}{il.end()} into \tcode{a}. All existing
+  \added{\effects} Assigns the range \range{il.begin()}{il.end()} into \tcode{a}. All existing
   elements of \tcode{a} are either assigned to or destroyed.\br
   \returns\ \tcode{*this}.
   \\ \rowsep
@@ -875,34 +875,34 @@ The complexities of the expressions are sequence dependent.
 
 \tcode{a.insert(p,t)}   &
  \tcode{iterator}       &
- \changed{\requires}{\expects}\ \tcode{T} shall be
+ \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is}
  \oldconcept{CopyInsertable} into \tcode{X}. For \tcode{vector} and \tcode{deque},
- \tcode{T} shall also be \oldconcept{CopyAssignable}.\br
+ \tcode{T} \changed {shall also be}{is also} \oldconcept{CopyAssignable}.\br
  \effects\ Inserts a copy of \tcode{t} before \tcode{p}. \\ \rowsep
 
 \tcode{a.insert(p,rv)}   &
  \tcode{iterator}       &
- \changed{\requires}{\expects}\ \tcode{T} shall be
+ \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is}
  \oldconcept{MoveInsertable} into \tcode{X}. For \tcode{vector} and \tcode{deque},
-  \tcode{T} shall also be \oldconcept{MoveAssignable}.\br
+  \tcode{T} \changed {shall also be}{is also} \oldconcept{MoveAssignable}.\br
  \effects\ Inserts a copy of \tcode{rv} before \tcode{p}. \\ \rowsep
 
 \tcode{a.insert(p,n,t)}     &
  \tcode{iterator}               &
- \changed{\requires}{\expects}\ \tcode{T} shall be
+ \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is}
  \oldconcept{CopyInsertable} into \tcode{X}
  and \oldconcept{CopyAssignable}.\br
- Inserts \tcode{n} copies of \tcode{t} before \tcode{p}. \\ \rowsep
+ \added{\effects} Inserts \tcode{n} copies of \tcode{t} before \tcode{p}. \\ \rowsep
 
 \tcode{a.insert(p,i,j)}    &
  \tcode{iterator}           &
- \changed{\requires}{\expects}\ \tcode{T} shall be \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{*i}.
- For \tcode{vector} and \tcode{deque}, \tcode{T} shall also be
+ \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{*i}.
+ For \tcode{vector} and \tcode{deque}, \tcode{T} \changed {shall also be}{is also}
  \oldconcept{MoveInsertable} into \tcode{X}, \oldconcept{MoveConstructible}, \oldconcept{MoveAssignable},
  and swappable\iref{swappable.requirements}. \added{\tcode{i} and \tcode{j} are not iterators into \tcode{a}.}\ednote{Add linebreak here.}\br
  Each iterator in the range \range{i}{j} \changed{shall be}{is} dereferenced exactly once.\br
  \removed{\requires \tcode{i} and \tcode{j} are not iterators into \tcode{a}.}\br
- Inserts copies of elements in \tcode{[i, j)} before \tcode{p}  \\ \rowsep
+ \added{\effects} Inserts copies of elements in \tcode{[i, j)} before \tcode{p}  \\ \rowsep
 
 \tcode{a.insert(p, il)}  &
   \tcode{iterator}            &
@@ -911,13 +911,13 @@ The complexities of the expressions are sequence dependent.
 \tcode{a.erase(q)}  &
  \tcode{iterator}   &
  \changed{\requires}{\expects}\ For \tcode{vector} and \tcode{deque},
- \tcode{T} shall be \oldconcept{MoveAssignable}.\br
+ \tcode{T} \changed{shall be}{is} \oldconcept{MoveAssignable}.\br
  \effects\ Erases the element pointed to by \tcode{q}. \\ \rowsep
 
 \tcode{a.erase(q1,q2)}  &
  \tcode{iterator}   &
  \changed{\requires}{\expects}\ For \tcode{vector} and \tcode{deque},
- \tcode{T} shall be \oldconcept{MoveAssignable}.\br
+ \tcode{T} \changed{shall be}{is} \oldconcept{MoveAssignable}.\br
  \effects\ Erases the elements in the range \tcode{[q1, q2)}.  \\ \rowsep
 
 \tcode{a.clear()}   &
@@ -929,10 +929,10 @@ The complexities of the expressions are sequence dependent.
 
 \tcode{a.assign(i,j)}   &
  \tcode{void}           &
- \changed{\requires}{\expects}\ \tcode{T} shall be \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{*i}
+ \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{*i}
  and assignable from \tcode{*i}. For \tcode{vector}, if the iterator does not
  meet the forward iterator requirements\iref{forward.iterators}, \tcode{T}
- shall also be
+ \changed {shall also be}{is also}
  \oldconcept{MoveInsertable} into \tcode{X}. \added{\tcode{i} and \tcode{j} are not iterators into \tcode{a}.}\ednote{Add linebreak here.}\br
  Each iterator in the range \range{i}{j} \changed{shall be}{is} dereferenced exactly once.\br
  \removed{\requires \tcode{i}, \tcode{j} are not iterators into \tcode{a}.}\br
@@ -948,7 +948,7 @@ The complexities of the expressions are sequence dependent.
 
 \tcode{a.assign(n,t)}   &
  \tcode{void}           &
- \changed{\requires}{\expects}\ \tcode{T} shall be
+ \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is}
  \oldconcept{CopyInsertable} into \tcode{X}
  and \oldconcept{CopyAssignable}. \ednote{Remove line break here.}
  \removed{\requires} \tcode{t} is not a reference into \tcode{a}.\br
@@ -1090,7 +1090,7 @@ time.
 \tcode{a.emplace_\-front(args)}      &
  \tcode{reference}                &
  Prepends an object of type \tcode{T} constructed with \tcode{std::forward<\brk{}Args\brk{}>(\brk{}args)...}.\br
- \changed{\requires}{\expects}\ \tcode{T} shall be \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}.\br
+ \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}.\br
  \returns{} \tcode{a.front()}.  &
  \tcode{deque},
  \tcode{forward_list},
@@ -1100,8 +1100,8 @@ time.
 \tcode{a.emplace_\-back(args)}      &
  \tcode{reference}                &
  Appends an object of type \tcode{T} constructed with \tcode{std::forward<\brk{}Args\brk{}>(\brk{}args)...}.\br
- \changed{\requires}{\expects}\ \tcode{T} shall be \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}. For \tcode{vector}, \tcode{T}
- shall also be
+ \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}. For \tcode{vector}, \tcode{T}
+ \changed {shall also be}{is also}
  \oldconcept{MoveInsertable} into \tcode{X}.\br
  \returns{} \tcode{a.back()}.  &
  \tcode{deque},
@@ -1112,7 +1112,7 @@ time.
 \tcode{a.push_front(t)} &
   \tcode{void}          &
   Prepends a copy of \tcode{t}.\br
-  \changed{\requires}{\expects}\ \tcode{T} shall be
+  \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is}
   \oldconcept{CopyInsertable} into \tcode{X}.
     &
   \tcode{deque},
@@ -1123,7 +1123,7 @@ time.
 \tcode{a.push_front(rv)} &
   \tcode{void}          &
   Prepends a copy of \tcode{rv}.\br
-  \changed{\requires}{\expects}\ \tcode{T} shall be
+  \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is}
   \oldconcept{MoveInsertable} into \tcode{X}.
     &
   \tcode{deque},
@@ -1134,7 +1134,7 @@ time.
 \tcode{a.push_back(t)} &
   \tcode{void}          &
   Appends a copy of \tcode{t}.\br
-  \changed{\requires}{\expects}\ \tcode{T} shall be
+  \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is}
   \oldconcept{CopyInsertable} into \tcode{X}.
     &
   \tcode{basic_string},
@@ -1146,7 +1146,7 @@ time.
 \tcode{a.push_back(rv)} &
   \tcode{void}          &
   Appends a copy of \tcode{rv}.\br
-  \changed{\requires}{\expects}\ \tcode{T} shall be
+  \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is}
   \oldconcept{MoveInsertable} into \tcode{X}.
     &
   \tcode{basic_string},
@@ -1158,7 +1158,7 @@ time.
 \tcode{a.pop_front()}      &
  \tcode{void}               &
  Destroys the first element.\br
- \changed{\requires}{\expects}\ \tcode{a.empty()} shall be \tcode{false}. &
+ \changed{\requires}{\expects}\ \tcode{a.empty()} \changed{shall be}{is} \tcode{false}. &
  \tcode{deque},
  \tcode{forward_list},
  \tcode{list}
@@ -1167,7 +1167,7 @@ time.
 \tcode{a.pop_back()}       &
  \tcode{void}               &
  Destroys the last element.\br
- \changed{\requires}{\expects}\ \tcode{a.empty()} shall be \tcode{false}. &
+ \changed{\requires}{\expects}\ \tcode{a.empty()} \changed{shall be}{is} \tcode{false}. &
  \tcode{basic_string},
  \tcode{deque},
  \tcode{list},
@@ -1763,7 +1763,7 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 \indexordmem{emplace}%
 \tcode{a_uniq.\brk{}emplace(\brk{}args)} &
  \tcode{pair<\brk{}iterator, bool>} &
-  \changed{\requires}{\expects}\ \tcode{value_type} shall be \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}.\br
+  \changed{\requires}{\expects}\ \tcode{value_type} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}.\br
   \effects\ Inserts a \tcode{value_type} object \tcode{t} constructed with
   \tcode{std::forward<\brk{}Args\brk{}>(\brk{}args)...} if and only if there is no
   element in the container with key equivalent to the key of \tcode{t}.
@@ -1775,7 +1775,7 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 
 \tcode{a_eq.\brk{}emplace(\brk{}args)}  &
  \tcode{iterator}    &
- \changed{\requires}{\expects}\ \tcode{value_type} shall be \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}.\br
+ \changed{\requires}{\expects}\ \tcode{value_type} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}.\br
  \effects\ Inserts a \tcode{value_type} object \tcode{t} constructed with
  \tcode{std::forward<\brk{}Args\brk{}>(\brk{}args)...} and returns the iterator pointing
  to the newly inserted element.
@@ -1797,8 +1797,8 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 \indexordmem{insert}%
 \tcode{a_uniq.\brk{}insert(\brk{}t)}      &
   \tcode{pair<\brk{}iterator, bool>}   &
-  \changed{\requires}{\expects}\ If \tcode{t} is a non-const rvalue, \tcode{value_type} shall be
-  \oldconcept{MoveInsertable} into \tcode{X}; otherwise, \tcode{value_type} shall be
+  \changed{\requires}{\expects}\ If \tcode{t} is a non-const rvalue, \tcode{value_type} \changed{shall be}{is}
+  \oldconcept{MoveInsertable} into \tcode{X}; otherwise, \tcode{value_type} \changed{shall be}{is}
   \oldconcept{CopyInsertable} into \tcode{X}.\br
   \effects\ Inserts \tcode{t} if and only if there is no element in the container
   with key equivalent to the key of \tcode{t}. The \tcode{bool} component of
@@ -1810,8 +1810,8 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 
 \tcode{a_eq.\brk{}insert(\brk{}t)}        &
   \tcode{iterator}               &
-  \changed{\requires}{\expects}\ If \tcode{t} is a non-const rvalue, \tcode{value_type} shall be
-  \oldconcept{MoveInsertable} into \tcode{X}; otherwise, \tcode{value_type} shall be
+  \changed{\requires}{\expects}\ If \tcode{t} is a non-const rvalue, \tcode{value_type} \changed{shall be}{is}
+  \oldconcept{MoveInsertable} into \tcode{X}; otherwise, \tcode{value_type} \changed{shall be}{is}
   \oldconcept{CopyInsertable} into \tcode{X}.\br
   \effects\ Inserts \tcode{t} and returns the iterator pointing
   to the newly inserted element.
@@ -1822,8 +1822,8 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 
 \tcode{a.\brk{}insert(\brk{}p, t)}                         &
   \tcode{iterator}               &
-  \changed{\requires}{\expects}\ If \tcode{t} is a non-const rvalue, \tcode{value_type} shall be
-  \oldconcept{MoveInsertable} into \tcode{X}; otherwise, \tcode{value_type} shall be
+  \changed{\requires}{\expects}\ If \tcode{t} is a non-const rvalue, \tcode{value_type} \changed{shall be}{is}
+  \oldconcept{MoveInsertable} into \tcode{X}; otherwise, \tcode{value_type} \changed{shall be}{is}
   \oldconcept{CopyInsertable} into \tcode{X}.\br
   \effects\ Inserts \tcode{t} if and only if there is no element with key
   equivalent to the key of \tcode{t} in containers with unique keys;
@@ -1836,9 +1836,9 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 
 \tcode{a.\brk{}insert(\brk{}i, j)}          &
   \tcode{void}                   &
-  \changed{\requires}{\expects}\ \tcode{value_type} shall be \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{*i}. \ednote{Remove line break here.}
+  \changed{\requires}{\expects}\ \tcode{value_type} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{*i}. \ednote{Remove line break here.}
   \removed{\requires} \tcode{i}\changed{,}{ and} \tcode{j} are not iterators into \tcode{a}. \ednote{Add line break here.}\br
-  inserts each element from the range \range{i}{j} if and only if there
+  \added{\effects} inserts each element from the range \range{i}{j} if and only if there
   is no element with key equivalent to the key of that element in containers
   with unique keys; always inserts that element in containers with equivalent keys.  &
   $N \log (\tcode{a.size()} + N)$, where $N$ has the value \tcode{distance(i, j)} \\ \rowsep
@@ -2345,7 +2345,7 @@ In \tref{HashRequirements}:
 \indexunordmem{hasher}%
 \tcode{X::hasher}
 &   \tcode{Hash}
-&   \tcode{Hash} shall be a unary function object type such that the expression
+&   \added{\expects} \tcode{Hash} \changed{shall be}{is} a unary function object type such that the expression
     \tcode{hf(k)} has type \tcode{size_t}.%
 &   compile time
 \\ \rowsep
@@ -2356,7 +2356,7 @@ In \tref{HashRequirements}:
     is valid and denotes a type\iref{temp.deduct};
     otherwise, \tcode{Pred}.
 &   \changed{\requires}{\expects}\ \tcode{Pred} \changed{is}{meets the} \oldconcept{CopyConstructible} \added{requirements}.\br
-    \tcode{Pred} shall be a binary predicate that takes two arguments
+    \tcode{Pred} \changed{shall be}{is} a binary predicate that takes two arguments
     of type \tcode{Key}.  \tcode{Pred} is an equivalence relation.%
 &   compile time
 \\ \rowsep
@@ -2543,7 +2543,7 @@ and \oldconcept{CopyAssignable}.\br
 \indexunordmem{emplace}%
 \tcode{a_uniq.} \tcode{emplace(args)} &
   \tcode{pair<iterator,} \tcode{bool>} &
-  \changed{\requires}{\expects}\ \tcode{value_type} shall be \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}.\br
+  \changed{\requires}{\expects}\ \tcode{value_type} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}.\br
   \effects\ Inserts a \tcode{value_type} object \tcode{t} constructed with
   \tcode{std::forward<\brk{}Args\brk{}>(\brk{}args)...} if and only if there is no
   element in the container with key equivalent to the key of \tcode{t}.
@@ -2556,7 +2556,7 @@ and \oldconcept{CopyAssignable}.\br
 
 \tcode{a_eq.}\tcode{emplace(args)}  &
   \tcode{iterator}    &
-  \changed{\requires}{\expects}\ \tcode{value_type} shall be \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}.\br
+  \changed{\requires}{\expects}\ \tcode{value_type} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}.\br
   \effects\ Inserts a \tcode{value_type} object \tcode{t} constructed with
   \tcode{std::forward<\brk{}Args>(\brk{}args)...} and returns the iterator pointing
   to the newly inserted element.    &
@@ -2566,7 +2566,7 @@ and \oldconcept{CopyAssignable}.\br
 \indexunordmem{emplace_hint}%
 \tcode{a.emplace_hint(p, args)}  &
   \tcode{iterator}    &
-  \changed{\requires}{\expects}\ \tcode{value_type} shall be \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}.\br
+  \changed{\requires}{\expects}\ \tcode{value_type} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}.\br
   \effects\ Equivalent to \tcode{a.emplace(} \tcode{std::forward<\brk{}Args>(\brk{}args)...)}.
   Return value is an iterator pointing to the element with the key equivalent
   to the newly inserted element. The \tcode{const_iterator} \tcode{p}
@@ -2579,7 +2579,7 @@ and \oldconcept{CopyAssignable}.\br
 \tcode{a_uniq.insert(t)}
 &   \tcode{pair<iterator, bool>}
 &   \changed{\requires}{\expects}\ If \tcode{t} is a non-const rvalue, \tcode{value_type} shall be
-    \oldconcept{MoveInsertable} into \tcode{X}; otherwise, \tcode{value_type} shall be
+    \oldconcept{MoveInsertable} into \tcode{X}; otherwise, \tcode{value_type} \changed{shall be}{is}
     \oldconcept{CopyInsertable} into \tcode{X}.\br
     \effects\ Inserts \tcode{t} if and only if there is no element in the container
     with key equivalent to the key of \tcode{t}.  The \tcode{bool}
@@ -2591,8 +2591,8 @@ and \oldconcept{CopyAssignable}.\br
 %
 \tcode{a_eq.insert(t)}
 &   \tcode{iterator}
-&   \changed{\requires}{\expects}\ If \tcode{t} is a non-const rvalue, \tcode{value_type} shall be
-    \oldconcept{MoveInsertable} into \tcode{X}; otherwise, \tcode{value_type} shall be
+&   \changed{\requires}{\expects}\ If \tcode{t} is a non-const rvalue, \tcode{value_type} \changed{shall be}{is}
+    \oldconcept{MoveInsertable} into \tcode{X}; otherwise, \tcode{value_type} \changed{shall be}{is}
     \oldconcept{CopyInsertable} into \tcode{X}.\br
     \effects\ Inserts \tcode{t}, and returns an iterator pointing to the newly
     inserted element.
@@ -2601,8 +2601,8 @@ and \oldconcept{CopyAssignable}.\br
 %
 \tcode{a.insert(p, t)}
 &   \tcode{iterator}
-&   \changed{\requires}{\expects}\ If \tcode{t} is a non-const rvalue, \tcode{value_type} shall be
-    \oldconcept{MoveInsertable} into \tcode{X}; otherwise, \tcode{value_type} shall be
+&   \changed{\requires}{\expects}\ If \tcode{t} is a non-const rvalue, \tcode{value_type} \changed{shall be}{is}
+    \oldconcept{MoveInsertable} into \tcode{X}; otherwise, \tcode{value_type} \changed{shall be}{is}
     \oldconcept{CopyInsertable} into \tcode{X}.\br
     \effects Equivalent to \tcode{a.insert(t)}.  Return value is an iterator pointing
 to the element with the key equivalent to that of \tcode{t}.  The
@@ -2613,7 +2613,7 @@ start.  Implementations are permitted to ignore the hint.%
 %
 \tcode{a.insert(i, j)}
 &   \tcode{void}
-&   \changed{\requires}{\expects}\ \tcode{value_type} shall be \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{*i}. \ednote{Remove line break here.}
+&   \changed{\requires}{\expects}\ \tcode{value_type} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{*i}. \ednote{Remove line break here.}
     \removed{\requires} \tcode{i} and \tcode{j} are not iterators in \tcode{a}.\br
     \effects Equivalent to \tcode{a.insert(t)} for each element in \tcode{[i,j)}.%
 &   Average case \bigoh{N}, where $N$ is \tcode{distance(i, j)}.
@@ -2828,14 +2828,14 @@ the number of elements erased.
   \changed{\requires}{\expects} \tcode{b.bucket_count() > 0}.\br
     Returns the index of the bucket in which elements with keys equivalent
     to \tcode{k} would be found, if any such element existed.
-    \ensures the return value shall be in the range \tcode{[0, b.bucket_count())}.%
+    \ensures the return value \changed{shall be}{is} in the range \tcode{[0, b.bucket_count())}.%
 & Constant
 \\ \rowsep
 %
 \indexunordmem{bucket_size}%
 \tcode{b.bucket_size(n)}
 &   \tcode{size_type}
-&   \changed{\requires}{\expects} \tcode{n} shall be in the range \tcode{[0, b.bucket_count())}.\ednote{Add line break here} \br
+&   \changed{\requires}{\expects} \tcode{n} \changed{shall be}{is} in the range \tcode{[0, b.bucket_count())}.\ednote{Add line break here} \br
     Returns the number of elements in the $\tcode{n}^\text{th}$ bucket.%
 &   \bigoh{\tcode{b.bucket_}\-\tcode{size(n)}}
 \\ \rowsep
@@ -2844,7 +2844,7 @@ the number of elements erased.
 \tcode{b.begin(n)}
 &   \tcode{local_iterator}; \br
     \tcode{const_local_iterator} for const \tcode{b}.
-&   \changed{\requires}{\expects} \tcode{n} shall be in the range \tcode{[0, b.bucket_count())}.\ednote{Add line break here} \br
+&   \changed{\requires}{\expects} \tcode{n} \changed{shall be}{is} in the range \tcode{[0, b.bucket_count())}.\ednote{Add line break here} \br
     \tcode{b.begin(n)} returns an iterator referring to the
     first element in the bucket. If the bucket is empty, then
     \tcode{b.begin(n) == b.end(n)}.%
@@ -2855,7 +2855,7 @@ the number of elements erased.
 \tcode{b.end(n)}
 &   \tcode{local_iterator}; \br
     \tcode{const_local_iterator} for const \tcode{b}.
-&   \changed{\requires}{\expects} \tcode{n} shall be in the range \tcode{[0, b.bucket_count())}.\ednote{Add line break here} \br
+&   \changed{\requires}{\expects} \tcode{n} \changed{shall be}{is} in the range \tcode{[0, b.bucket_count())}.\ednote{Add line break here} \br
     \tcode{b.end(n)} returns an iterator which is the past-the-end
     value for the bucket.%
 &   Constant
@@ -2864,7 +2864,7 @@ the number of elements erased.
 \indexunordmem{cbegin}%
 \tcode{b.cbegin(n)}
 &   \tcode{const_local_iterator}
-&   \changed{\requires}{\expects} \tcode{n} shall be in the range \tcode{[0, b.bucket_count())}.\ednote{Add line break here} \br
+&   \changed{\requires}{\expects} \tcode{n} \changed{shall be}{is} in the range \tcode{[0, b.bucket_count())}.\ednote{Add line break here} \br
     \tcode{b.cbegin(n)} returns an iterator referring to the
     first element in the bucket. If the bucket is empty, then
     \tcode{b.cbegin(n) == b.cend(n)}.%
@@ -2874,7 +2874,7 @@ the number of elements erased.
 \indexunordmem{cend}%
 \tcode{b.cend(n)}
 &   \tcode{const_local_iterator}
-&   \changed{\requires}{\expects} \tcode{n} shall be in the range \tcode{[0, b.bucket_count())}.\ednote{Add line break here} \br
+&   \changed{\requires}{\expects} \tcode{n} \changed{shall be}{is} in the range \tcode{[0, b.bucket_count())}.\ednote{Add line break here} \br
     \tcode{b.cend(n)} returns an iterator which is the past-the-end
     value for the bucket.%
 &   Constant
@@ -2899,7 +2899,7 @@ the number of elements erased.
 %
 \tcode{a.max_load_factor(z)}
 &   \tcode{void}
-&   \changed{\requires}{\expects} \tcode{z} shall be positive.
+&   \changed{\requires}{\expects} \tcode{z} \changed{shall be}{is} positive.
     May change the container's maximum load factor, using \tcode{z} as a hint.%
 & Constant
 \\ \rowsep
@@ -3397,7 +3397,7 @@ template<class T, class... U>
 \begin{itemdescr}
 
 \pnum
-\changed{\requires}{\mandates} \tcode{(is_same_v<T, U> \&\& ...)} \changed{is}{shall be} \tcode{true}. \removed{Otherwise the program is ill-formed.}
+\changed{\requires}{\mandates} \tcode{(is_same_v<T, U> \&\& ...)} is \tcode{true}. \removed{Otherwise the program is ill-formed.}
 
 \end{itemdescr}
 
@@ -3721,7 +3721,7 @@ explicit deque(size_type n, const Allocator& = Allocator());
 \tcode{n} default-inserted elements using the specified allocator.
 
 \pnum
-\changed{\requires}{\expects} \tcode{T} shall be \oldconcept{DefaultInsertable} into \tcode{*this}.
+\changed{\requires}{\expects} \tcode{T} \changed{shall be}{is} \oldconcept{DefaultInsertable} into \tcode{*this}.
 
 \pnum
 \complexity Linear in \tcode{n}.
@@ -3741,7 +3741,7 @@ with \tcode{n} copies of \tcode{value},
 using the specified allocator.
 
 \pnum
-\changed{\requires}{\expects} \tcode{T} shall be \oldconcept{CopyInsertable} into \tcode{*this}.
+\changed{\requires}{\expects} \tcode{T} \changed{shall be}{is} \oldconcept{CopyInsertable} into \tcode{*this}.
 
 \pnum
 \complexity
@@ -3781,7 +3781,7 @@ from the sequence. Otherwise,
 appends \tcode{sz - size()} default-inserted elements to the sequence.
 
 \pnum
-\changed{\requires}{\expects} \tcode{T} shall be \oldconcept{MoveInsertable} and \oldconcept{DefaultInsertable} into \tcode{*this}.
+\changed{\requires}{\expects} \tcode{T} \changed{shall be}{is} \oldconcept{MoveInsertable} and \oldconcept{DefaultInsertable} into \tcode{*this}.
 \end{itemdescr}
 
 \indexlibrary{\idxcode{resize}!\idxcode{deque}}%
@@ -3796,7 +3796,7 @@ from the sequence. Otherwise,
 appends \tcode{sz - size()} copies of \tcode{c} to the sequence.
 
 \pnum
-\changed{\requires}{\expects} \tcode{T} shall be
+\changed{\requires}{\expects} \tcode{T} \changed{shall be}{is}
 \oldconcept{CopyInsertable} into \tcode{*this}.
 \end{itemdescr}
 
@@ -3807,7 +3807,7 @@ void shrink_to_fit();
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} \tcode{T} shall be \oldconcept{MoveInsertable} into \tcode{*this}.
+\changed{\requires}{\expects} \tcode{T} \changed{shall be}{is} \oldconcept{MoveInsertable} into \tcode{*this}.
 
 \pnum
 \effects \tcode{shrink_to_fit} is a non-binding request to reduce memory use
@@ -4123,7 +4123,7 @@ explicit forward_list(size_type n, const Allocator& = Allocator());
 default-inserted elements using the specified allocator.
 
 \pnum
-\changed{\requires}{\expects} \tcode{T} shall be \oldconcept{DefaultInsertable} into \tcode{*this}.
+\changed{\requires}{\expects} \tcode{T} \changed{shall be}{is} \oldconcept{DefaultInsertable} into \tcode{*this}.
 
 \pnum
 \complexity Linear in \tcode{n}.
@@ -4139,7 +4139,7 @@ forward_list(size_type n, const T& value, const Allocator& = Allocator());
 \effects Constructs a \tcode{forward_list} object with \tcode{n} copies of \tcode{value} using the specified allocator.
 
 \pnum
-\changed{\requires}{\expects} \tcode{T} shall be \oldconcept{CopyInsertable} into \tcode{*this}.
+\changed{\requires}{\expects} \tcode{T} \changed{shall be}{is} \oldconcept{CopyInsertable} into \tcode{*this}.
 
 \pnum
 \complexity Linear in \tcode{n}.
@@ -4376,7 +4376,7 @@ void resize(size_type sz);
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} shall be \oldconcept{DefaultInsertable} into \tcode{*this}.
+\expects \tcode{T} \changed{shall be}{is} \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 
 \pnum
@@ -4386,7 +4386,7 @@ elements at the end of the list.
 
 \removed{%
 \pnum
-\requires \tcode{T} shall be \oldconcept{DefaultInsertable} into \tcode{*this}.
+\requires \tcode{T} \changed{shall be}{is} \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 \end{itemdescr}
 
@@ -4397,7 +4397,7 @@ void resize(size_type sz, const value_type& c);
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} shall be \oldconcept{CopyInsertable} into \tcode{*this}.
+\expects \tcode{T} \changed{shall be}{is} \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 
 \pnum
@@ -4407,7 +4407,7 @@ copies of \tcode{c} at the end of the list.
 
 \removed{%
 \pnum
-\requires \tcode{T} shall be \oldconcept{CopyInsertable} into \tcode{*this}.
+\requires \tcode{T} \changed{shall be}{is} \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 \end{itemdescr}
 
@@ -4595,8 +4595,8 @@ refer to their elements, but they now behave as iterators into \tcode{*this}, no
 \tcode{x}.
 
 \pnum
-\remarks Stable\iref{algorithm.stable}. The behavior is undefined if
-\tcode{get_allocator() != x.get_allocator()}.
+\remarks Stable\iref{algorithm.stable}. \removed{The behavior is undefined if
+\tcode{get_allocator() != x.get_allocator()}.}
 
 \pnum
 \complexity At most \tcode{distance(begin(),
@@ -4859,7 +4859,7 @@ explicit list(size_type n, const Allocator& = Allocator());
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} shall be
+\expects \tcode{T} \changed{shall be}{is}
 \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 
@@ -4869,7 +4869,7 @@ explicit list(size_type n, const Allocator& = Allocator());
 
 \removed{%
 \pnum
-\requires \tcode{T} shall be
+\requires \tcode{T} \changed{shall be}{is}
 \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 
@@ -4887,7 +4887,7 @@ list(size_type n, const T& value, const Allocator& = Allocator());
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} shall be
+\expects \tcode{T} \changed{shall be}{is}
 \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 
@@ -4903,7 +4903,7 @@ using the specified allocator.
 
 \removed{%
 \pnum
-\requires \tcode{T} shall be
+\requires \tcode{T} \changed{shall be}{is}
 \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 
@@ -4943,7 +4943,7 @@ void resize(size_type sz);
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} shall be
+\expects \tcode{T} \changed{shall be}{is}
 \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 
@@ -4962,7 +4962,7 @@ erase(it, end());
 
 \removed{%
 \pnum
-\requires \tcode{T} shall be
+\requires \tcode{T} \changed{shall be}{is}
 \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 \end{itemdescr}
@@ -4975,7 +4975,7 @@ void resize(size_type sz, const T& c);
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} shall be \oldconcept{CopyInsertable} into \tcode{*this}.
+\expects \tcode{T} \changed{shall be}{is} \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 
 \pnum
@@ -4995,7 +4995,7 @@ else
 
 \removed{%
 \pnum
-\requires \tcode{T} shall be \oldconcept{CopyInsertable} into \tcode{*this}.
+\requires \tcode{T} \changed{shall be}{is} \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 \end{itemdescr}
 
@@ -5297,7 +5297,7 @@ template<class Compare> void merge(list&& x, Compare comp);
 Both the list and the argument list
 shall be sorted with respect to
 the comparator \tcode{operator<} (for the first two overloads) or
-\tcode{comp} (for the last two overloads). \added{\tcode{get_allocator() == x.get_allocator()}}.
+\tcode{comp} (for the last two overloads)\changed{.}{, and \tcode{get_allocator() == x.get_allocator()}}.
 
 \pnum
 \effects
@@ -5569,7 +5569,7 @@ explicit vector(size_type n, const Allocator& = Allocator());
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} shall be \oldconcept{DefaultInsertable} into \tcode{*this}.
+\expects \tcode{T} \changed{shall be}{is} \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 
 \pnum
@@ -5578,7 +5578,7 @@ default-inserted elements using the specified allocator.
 
 \removed{%
 \pnum
-\requires \tcode{T} shall be \oldconcept{DefaultInsertable} into \tcode{*this}.
+\requires \tcode{T} \changed{shall be}{is} \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 
 \pnum
@@ -5594,7 +5594,7 @@ vector(size_type n, const T& value,
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} shall be
+\expects \tcode{T} \changed{shall be}{is}
 \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 
@@ -5604,7 +5604,7 @@ copies of \tcode{value}, using the specified allocator.
 
 \removed{%
 \pnum
-\requires \tcode{T} shall be
+\requires \tcode{T} \changed{shall be}{is}
 \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 
@@ -5669,7 +5669,7 @@ void reserve(size_type n);
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} \tcode{T} shall be \oldconcept{MoveInsertable} into \tcode{*this}.
+\changed{\requires}{\expects} \tcode{T} \changed{shall be}{is} \oldconcept{MoveInsertable} into \tcode{*this}.
 
 \pnum
 \effects
@@ -5720,7 +5720,7 @@ void shrink_to_fit();
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} \tcode{T} shall be \oldconcept{MoveInsertable} into \tcode{*this}.
+\changed{\requires}{\expects} \tcode{T} \changed{shall be}{is} \oldconcept{MoveInsertable} into \tcode{*this}.
 
 \pnum
 \effects \tcode{shrink_to_fit} is a non-binding request to reduce
@@ -5770,7 +5770,7 @@ void resize(size_type sz);
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} shall be
+\expects \tcode{T} \changed{shall be}{is}
 \oldconcept{MoveInsertable} and \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 
@@ -5798,7 +5798,7 @@ void resize(size_type sz, const T& c);
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} shall be
+\expects \tcode{T} \changed{shall be}{is}
 \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 
@@ -6672,7 +6672,7 @@ template<class... Args>
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{value_type} shall be \oldconcept{EmplaceConstructible} into \tcode{map}
+\tcode{value_type} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{map}
 from \tcode{piecewise_construct}, \tcode{for\-ward_as_tuple(k)},
 \tcode{forward_as_tuple(std::forward<Args>(args)...)}.
 
@@ -6710,7 +6710,7 @@ template<class... Args>
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{value_type} shall be \oldconcept{EmplaceConstructible} into \tcode{map}
+\tcode{value_type} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{map}
 from \tcode{piecewise_construct}, \tcode{for\-ward_as_tuple(std::move(k))},
 \tcode{forward_as_tuple(std::forward<Args>(args)...)}.
 
@@ -6748,10 +6748,10 @@ template<class M>
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\mandates}
-\tcode{is_assignable_v<mapped_type\&, M\&\&>} shall be \tcode{true}.
+\tcode{is_assignable_v<mapped_type\&, M\&\&>} \changed{shall be}{is} \tcode{true}.
 
 \added{\pnum \expects}
-\tcode{value_type} shall be \oldconcept{Emplace\-Constructible} into \tcode{map}
+\tcode{value_type} \changed{shall be}{is} \oldconcept{Emplace\-Constructible} into \tcode{map}
 from \tcode{k}, \tcode{forward<M>(obj)}.
 
 \pnum
@@ -6787,10 +6787,10 @@ template<class M>
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\mandates}
-\tcode{is_assignable_v<mapped_type\&, M\&\&>} shall be \tcode{true}.
+\tcode{is_assignable_v<mapped_type\&, M\&\&>} \changed{shall be}{is} \tcode{true}.
 
 \added{\pnum \expects}
-\tcode{value_type} shall be \oldconcept{Emplace\-Constructible} into \tcode{map}
+\tcode{value_type} \changed{shall be}{is} \oldconcept{Emplace\-Constructible} into \tcode{map}
 from \tcode{move(k)}, \tcode{forward<M>(obj)}.
 
 \pnum
@@ -8311,7 +8311,7 @@ template<class... Args>
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{value_type} shall be \oldconcept{EmplaceConstructible} into \tcode{unordered_map}
+\tcode{value_type} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{unordered_map}
 from \tcode{piecewise_con\-struct}, \tcode{forward_as_tuple(k)},
 \tcode{forward_as_tuple(std::forward<Args>(args)...)}.
 
@@ -8349,7 +8349,7 @@ template<class... Args>
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{value_type} shall be \oldconcept{EmplaceConstructible} into \tcode{unordered_map}
+\tcode{value_type} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{unordered_map}
 from \tcode{piecewise_con\-struct}, \tcode{forward_as_tuple(std::move(k))},
 \tcode{forward_as_tuple(std::forward<Args>(args)...)}.
 
@@ -8387,10 +8387,10 @@ template<class M>
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\mandates}
-\tcode{is_assignable_v<mapped_type\&, M\&\&>} shall be \tcode{true}.
+\tcode{is_assignable_v<mapped_type\&, M\&\&>} \changed{shall be}{is} \tcode{true}.
 
 \added{\pnum \expects}
-\tcode{value_type} shall be \oldconcept{Emplace\-Constructible} into \tcode{unordered_map}
+\tcode{value_type} \changed{shall be}{is} \oldconcept{Emplace\-Constructible} into \tcode{unordered_map}
 from \tcode{k}, \tcode{std::forward<M>(obj)}.
 
 \pnum
@@ -8426,10 +8426,10 @@ template<class M>
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\mandates}
-\tcode{is_assignable_v<mapped_type\&, M\&\&>} shall be \tcode{true}.
+\tcode{is_assignable_v<mapped_type\&, M\&\&>} \changed{shall be}{is} \tcode{true}.
 
 \added{\pnum \expects}
-\tcode{value_type} shall be \oldconcept{Emplace\-Constructible} into \tcode{unordered_map}
+\tcode{value_type} \changed{shall be}{is} \oldconcept{Emplace\-Constructible} into \tcode{unordered_map}
 from \tcode{std::move(k)}, \tcode{std::forward<M>(obj)}.
 
 \pnum
@@ -10577,9 +10577,9 @@ constexpr span(pointer ptr, index_type count);
 \end{itemdecl}
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} \range{ptr}{ptr + count} shall be a valid range.
+\changed{\requires}{\expects} \range{ptr}{ptr + count} \changed{shall be}{is} a valid range.
 If \tcode{extent} is not equal to \tcode{dynamic_extent},
-then \tcode{count} shall be equal to \tcode{extent}.
+then \tcode{count} \changed{shall be}{is} equal to \tcode{extent}.
 
 \pnum
 \effects
@@ -10601,7 +10601,7 @@ constexpr span(pointer first, pointer last);
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\range{first}{last} shall be a valid range.
+\range{first}{last} \changed{shall be}{is} a valid range.
 If \tcode{extent} is not equal to \tcode{dynamic_extent},
 then \tcode{last - first} shall be equal to \tcode{extent}.
 
@@ -10659,12 +10659,6 @@ template<class Container> constexpr span(Container& cont);
 template<class Container> constexpr span(const Container& cont);
 \end{itemdecl}
 \begin{itemdescr}
-\pnum
-\changed{\requires}{\expects}
-\range{data(cont)}{data(cont) + size(cont)} shall be a valid range.
-If \tcode{extent} is not equal to \tcode{dynamic_extent},
-then \tcode{size(cont)} shall be equal to \tcode{extent}.
-
 \begin{addedblock}
 \pnum
 \constraints
@@ -10676,6 +10670,12 @@ then \tcode{size(cont)} shall be equal to \tcode{extent}.
 \item \tcode{remove_pointer_t<decltype(data(cont))>(*)[]} is convertible to \tcode{ElementType(*)[]}.
 \end{itemize}
 \end{addedblock}
+
+\pnum
+\changed{\requires}{\expects}
+\range{data(cont)}{data(cont) + size(cont)} \changed{shall be}{is} a valid range.
+If \tcode{extent} is not equal to \tcode{dynamic_extent},
+then \tcode{size(cont)} shall be equal to \tcode{extent}.
 
 \pnum
 \effects
