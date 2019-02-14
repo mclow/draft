@@ -1402,7 +1402,7 @@ template<class ErrorConditionEnum>
 \begin{itemdescr}
 \removed{\pnum \effects Constructs an object of type \tcode{error_condition}.}
 
-\added{\pnum \constraints \tcode{is_error_code_enum_v<ErrorCodeEnum>} is \tcode{true}.}
+\added{\pnum \constraints \tcode{is_error_condition_enum_v<ErrorCodeEnum>} is \tcode{true}.}
 
 \pnum
 \ensures \tcode{*this == make_error_condition(e)}.
@@ -1431,7 +1431,7 @@ template<class ErrorConditionEnum>
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{\pnum \constraints \tcode{is_error_code_enum_v<ErrorCodeEnum>} is \tcode{true}.}
+\added{\pnum \constraints \tcode{is_error_condition_enum_v<ErrorCodeEnum>} is \tcode{true}.}
 
 \pnum
 \ensures \tcode{*this == make_error_condition(e)}.
