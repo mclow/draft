@@ -2265,8 +2265,9 @@ replacing both deallocation functions when replacing the allocation function.
 
 \pnum
 \changed{\requires}{\expects}
-\tcode{ptr} shall be a null pointer or
-its value shall represent the address of
+\tcode{ptr} \changed{shall be a null pointer or
+its value shall represent}{is a null pointer or
+its value represents} the address of
 a block of memory allocated by
 an earlier call to a (possibly replaced)
 \tcode{operator new(std::size_t)}
@@ -2278,7 +2279,7 @@ which has not been invalidated by an intervening call to
 \pnum
 \changed{\requires}{\expects}
 If an implementation has strict pointer safety\iref{basic.stc.dynamic.safety}
-then \tcode{ptr} shall be a safely-derived pointer.
+then \tcode{ptr} \changed{shall be}{is} a safely-derived pointer.
 
 \pnum
 \changed{\requires}{\expects}
@@ -2355,8 +2356,9 @@ placement version of the \grammarterm{new-expression} throws an exception.
 
 \pnum
 \changed{\requires}{\expects}
-\tcode{ptr} shall be a null pointer or
-its value shall represent the address of
+\tcode{ptr} \changed{shall be a null pointer or
+its value shall represent}{is a null pointer or
+its value represents} the address of
 a block of memory allocated by
 an earlier call to a (possibly replaced)
 \tcode{operator new(std::size_t)}
@@ -2368,7 +2370,7 @@ which has not been invalidated by an intervening call to
 \pnum
 \changed{\requires}{\expects}
 If an implementation has strict pointer safety\iref{basic.stc.dynamic.safety}
-then \tcode{ptr} shall be a safely-derived pointer.
+then \tcode{ptr} \changed{shall be}{is} a safely-derived pointer.
 
 \pnum
 \changed{\requires}{\expects}
@@ -2520,8 +2522,9 @@ replacing both deallocation functions when replacing the allocation function.
 
 \pnum
 \changed{\requires}{\expects}
-\tcode{ptr} shall be a null pointer or
-its value shall represent the address of
+\tcode{ptr} \changed{shall be a null pointer or
+its value shall represent}{is a null pointer or
+its value represents} the address of
 a block of memory allocated by
 an earlier call to a (possibly replaced)
 \tcode{operator new[](std::size_t)}
@@ -2533,7 +2536,7 @@ which has not been invalidated by an intervening call to
 \pnum
 \changed{\requires}{\expects}
 If an implementation has strict pointer safety\iref{basic.stc.dynamic.safety}
-then \tcode{ptr} shall be a safely-derived pointer.
+then \tcode{ptr} \changed{shall be}{is} a safely-derived pointer.
 
 \pnum
 \changed{\requires}{\expects}
@@ -2591,8 +2594,9 @@ placement version of the array \grammarterm{new-expression} throws an exception.
 
 \pnum
 \changed{\requires}{\expects}
-\tcode{ptr} shall be a null pointer or
-its value shall represent the address of
+\tcode{ptr} \changed{shall be a null pointer or
+its value shall represent}{is a null pointer or
+its value represents} the address of
 a block of memory allocated by
 an earlier call to a (possibly replaced)
 \tcode{operator new[](std::size_t)}
@@ -2604,7 +2608,7 @@ which has not been invalidated by an intervening call to
 \pnum
 \changed{\requires}{\expects}
 If an implementation has strict pointer safety\iref{basic.stc.dynamic.safety}
-then \tcode{ptr} shall be a safely-derived pointer.
+then \tcode{ptr} \changed{shall be}{is} a safely-derived pointer.
 
 \pnum
 \changed{\requires}{\expects}
@@ -2683,7 +2687,7 @@ Intentionally performs no action.
 \pnum
 \changed{\requires}{\expects}
 If an implementation has strict pointer safety\iref{basic.stc.dynamic.safety}
-then \tcode{ptr} shall be a safely-derived pointer.
+then \tcode{ptr} \changed{shall be}{is} a safely-derived pointer.
 
 \pnum
 \remarks
@@ -2706,7 +2710,7 @@ Intentionally performs no action.
 \pnum
 \changed{\requires}{\expects}
 If an implementation has strict pointer safety\iref{basic.stc.dynamic.safety}
-then \tcode{ptr} shall be a safely-derived pointer.
+then \tcode{ptr} \changed{shall be}{is} a safely-derived pointer.
 
 \pnum
 \remarks
@@ -2930,6 +2934,8 @@ template<class T> [[nodiscard]] constexpr T* launder(T* p) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
+\added{\pnum \mandates \tcode{!is_function_v<T> \&\& !is_void_v<T>}}
+
 \pnum
 \changed{\requires}{\expects}
 \tcode{p} represents the address \placeholder{A} of a byte in memory.
@@ -2956,8 +2962,8 @@ if it is within the storage occupied by
 \placeholder{Y},
 an object that is pointer-interconvertible with \placeholder{Y}, or
 the immediately-enclosing array object if \placeholder{Y} is an array element.
-The program is ill-formed if \tcode{T} is a function type
-or \cv{}~\tcode{void}.
+\removed{The program is ill-formed if \tcode{T} is a function type
+or \cv{}~\tcode{void}.}
 
 \pnum
 \begin{note}
@@ -3784,7 +3790,7 @@ recursion.\end{note}
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{p} shall not be a null pointer.
+\tcode{p} \changed{shall not be}{is not} a null pointer.
 
 \pnum
 \throws The exception object to which \tcode{p} refers.
@@ -3885,7 +3891,7 @@ Let \tcode{U} be \tcode{decay_t<T>}.
 
 \pnum 
 \changed{\requires}{\expects}
-\tcode{U} shall \changed{be}{meet the} \oldconcept{CopyConstructible} \added{requirements}.
+\tcode{U} \changed{shall be}{meets} \oldconcept{CopyConstructible} \added{requirements}.
 
 \pnum
 \throws
