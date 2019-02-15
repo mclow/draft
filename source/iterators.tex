@@ -3301,7 +3301,7 @@ template<class Iterator1, class Iterator2>
 \begin{itemdescr}
 \pnum
 \constraints
-The expression \tcode{x.current == y.current} shall be valid and
+\removed{The expression} \tcode{x.current == y.current} \changed{shall be valid}{is well-formed} and
 convertible to \tcode{bool}.
 
 \pnum
@@ -3320,7 +3320,7 @@ template<class Iterator1, class Iterator2>
 \begin{itemdescr}
 \pnum
 \constraints
-The expression \tcode{x.current != y.current} shall be valid and
+\removed{The expression} \tcode{x.current != y.current} \changed{shall be valid}{is well-formed} and
 convertible to \tcode{bool}.
 
 \pnum
@@ -3339,7 +3339,7 @@ template<class Iterator1, class Iterator2>
 \begin{itemdescr}
 \pnum
 \constraints
-The expression \tcode{x.current > y.current} shall be valid and
+\removed{The expression} \tcode{x.current > y.current} \changed{shall be valid}{is well-formed} and
 convertible to \tcode{bool}.
 
 \pnum
@@ -3358,7 +3358,7 @@ template<class Iterator1, class Iterator2>
 \begin{itemdescr}
 \pnum
 \constraints
-The expression \tcode{x.current < y.current} shall be valid and
+\removed{The expression} \tcode{x.current < y.current} \changed{shall be valid}{is well-formed} and
 convertible to \tcode{bool}.
 
 \pnum
@@ -3377,7 +3377,7 @@ template<class Iterator1, class Iterator2>
 \begin{itemdescr}
 \pnum
 \constraints
-The expression \tcode{x.current >= y.current} shall be valid and
+\removed{The expression} \tcode{x.current >= y.current} \changed{shall be valid}{is well-formed} and
 convertible to \tcode{bool}.
 
 \pnum
@@ -3396,7 +3396,7 @@ template<class Iterator1, class Iterator2>
 \begin{itemdescr}
 \pnum
 \constraints
-The expression \tcode{x.current <= y.current} shall be valid and
+\removed{The expression} \tcode{x.current <= y.current} \changed{shall be valid}{is well-formed} and
 convertible to \tcode{bool}.
 
 \pnum
@@ -4277,7 +4277,7 @@ template<Sentinel<Iterator> S>
 \begin{itemdescr}
 \pnum
 \constraints
-The expression \tcode{x.base() == y.base()} shall be valid and
+\removed{The expression} \tcode{x.base() == y.base()} \changed{shall be valid}{is well-formed} and
 convertible to \tcode{bool}.
 
 \pnum
@@ -4300,7 +4300,7 @@ template<Sentinel<Iterator> S>
 \begin{itemdescr}
 \pnum
 \constraints
-The expression \tcode{x.base() == y.base()} shall be valid and
+\removed{The expression} \tcode{x.base() == y.base()} \changed{shall be valid}{is well-formed} and
 convertible to \tcode{bool}.
 
 \pnum
@@ -4316,7 +4316,7 @@ constexpr bool operator<(const move_iterator<Iterator1>& x, const move_iterator<
 \begin{itemdescr}
 \pnum
 \constraints
-The expression \tcode{x.base() < y.base()} shall be valid and
+\removed{The expression} \tcode{x.base() < y.base()} \changed{shall be valid}{is well-formed} and
 convertible to \tcode{bool}.
 
 \pnum
@@ -4332,7 +4332,7 @@ constexpr bool operator>(const move_iterator<Iterator1>& x, const move_iterator<
 \begin{itemdescr}
 \pnum
 \constraints
-The expression \tcode{y.base() < x.base()} shall be valid and
+\removed{The expression} \tcode{y.base() < x.base()} \changed{shall be valid}{is well-formed} and
 convertible to \tcode{bool}.
 
 \pnum
@@ -4348,7 +4348,7 @@ constexpr bool operator<=(const move_iterator<Iterator1>& x, const move_iterator
 \begin{itemdescr}
 \pnum
 \constraints
-The expression \tcode{y.base() < x.base()} shall be valid and
+\removed{The expression} \tcode{y.base() < x.base()} \changed{shall be valid}{is well-formed} and
 convertible to \tcode{bool}.
 
 \pnum
@@ -4364,7 +4364,7 @@ constexpr bool operator>=(const move_iterator<Iterator1>& x, const move_iterator
 \begin{itemdescr}
 \pnum
 \constraints
-The expression \tcode{x.base() < y.base()} shall be valid and
+\removed{The expression} \tcode{x.base() < y.base()} \changed{shall be valid}{is well-formed} and
 convertible to \tcode{bool}.
 
 \pnum
@@ -4402,7 +4402,7 @@ template<class Iterator>
 \begin{itemdescr}
 \pnum
 \constraints
-The expression \tcode{x + n} shall be valid and have type \tcode{Iterator}.
+\removed{The expression} \tcode{x + n} \changed{shall be valid}{is well-formed} and have type \tcode{Iterator}.
 
 \pnum
 \returns \tcode{x + n}.
@@ -6382,7 +6382,7 @@ ostreambuf_iterator(ostream_type& s) noexcept;
 \pnum
 \changed{\requires}{\expects}
 \tcode{s.rdbuf()}
-shall not be a null pointer.
+\changed{shall not be}{is not} a null pointer.
 
 \pnum
 \effects
@@ -6399,7 +6399,7 @@ ostreambuf_iterator(streambuf_type* s) noexcept;
 \pnum
 \changed{\requires}{\expects}
 \tcode{s}
-shall not be a null pointer.
+\changed{shall not be}{is not} a null pointer.
 
 \pnum
 \effects
