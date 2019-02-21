@@ -2934,7 +2934,7 @@ template<class T> [[nodiscard]] constexpr T* launder(T* p) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{\pnum \mandates \tcode{!is_function_v<T> \&\& !is_void_v<T>}}
+\added{\pnum \mandates \tcode{!is_function_v<T> \&\& !is_void_v<T>} is \tcode{true}.}
 
 \pnum
 \changed{\requires}{\expects}
@@ -3891,7 +3891,7 @@ Let \tcode{U} be \tcode{decay_t<T>}.
 
 \pnum 
 \changed{\requires}{\expects}
-\tcode{U} \changed{shall be}{meets} \oldconcept{CopyConstructible} \added{requirements}.
+\tcode{U} \changed{shall be}{meets the} \oldconcept{CopyConstructible} \added{requirements}.
 
 \pnum
 \throws
