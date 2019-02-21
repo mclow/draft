@@ -4402,7 +4402,7 @@ template<class Iterator>
 \begin{itemdescr}
 \pnum
 \constraints
-\removed{The expression} \tcode{x + n} \changed{shall be valid}{is well-formed} and have type \tcode{Iterator}.
+\removed{The expression} \tcode{x + n} \changed{shall be valid}{is well-formed} and \changed{have}{has} type \tcode{Iterator}.
 
 \pnum
 \returns \tcode{x + n}.
@@ -5776,14 +5776,22 @@ istream_iterator(const istream_iterator& x) = default;
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
-\changed{\effects
-Constructs a copy of \tcode{x}.}{\remarks}
+\effects Constructs a copy of \tcode{x}.
 If \tcode{is_trivially_copy_constructible_v<T>} is \tcode{true},
 then this constructor is a trivial copy constructor.
+\end{removedblock}
 
 \pnum
 \ensures \tcode{in_stream == x.in_stream}.
+
+\begin{addedblock}
+\pnum
+\remarks
+If \tcode{is_trivially_copy_constructible_v<T>} is \tcode{true},
+then this constructor is a trivial copy constructor.
+\end{addedblock}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{istream_iterator}!destructor}%
@@ -5830,7 +5838,7 @@ istream_iterator& operator++();
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} \tcode{in_stream != 0}.
+\changed{\requires}{\expects} \tcode{in_stream != 0}\added{ is \tcode{true}}.
 
 \pnum
 \effects
@@ -5848,7 +5856,7 @@ istream_iterator operator++(int);
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} \tcode{in_stream != 0}.
+\changed{\requires}{\expects} \tcode{in_stream != 0}\added{ is \tcode{true}}.
 
 \pnum
 \effects
