@@ -1318,13 +1318,7 @@ template<class charT, class traits>
 \begin{itemdescr}
 \pnum
 \effects
-As if by: \tcode{os << ec.category().name() << ':' << ec.value();}
-
-\added{%
-\pnum
-\returns
-\tcode{os}.
-}
+\changed{As if by}{Equivalent to}: \added{return }\tcode{os << ec.category().name() << ':' << ec.value();}
 \end{itemdescr}
 
 
