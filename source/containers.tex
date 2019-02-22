@@ -186,7 +186,7 @@ denotes a non-const rvalue of type \tcode{X}.
 \tcode{a.\~X()}    &
  \tcode{void}               &
                             &
- the destructor is applied to every element of \tcode{a}; any memory obtained is deallocated. &
+ \added{\effects}\changed{the destructor is applied to}{destroys} every element of \tcode{a}; any memory obtained is deallocated. &
  linear                     \\ \rowsep
 
 \tcode{a.begin()}           &
@@ -230,7 +230,7 @@ denotes a non-const rvalue of type \tcode{X}.
 \tcode{a.swap(b)}          &
  \tcode{void}               &
                             &
- exchanges the contents of \tcode{a} and \tcode{b}          &
+ \added{\effects}exchanges the contents of \tcode{a} and \tcode{b} &
  (Note A)                   \\ \rowsep
 
 \tcode{swap(a, b)}          &
@@ -695,7 +695,7 @@ linear													\\ \rowsep
   \tcode{false}, \tcode{T} is
   \oldconcept{MoveInsertable} into \tcode{X} and
   \oldconcept{MoveAssignable}. \ednote{Add linebreak here.}\br
-  All existing elements of \tcode{a}
+  \added{\effects}All existing elements of \tcode{a}
   are either move assigned to or destroyed.\br
   \ensures \tcode{a} \changed{shall be}{is} equal to the value that \tcode{rv} had before
   this assignment.      &
@@ -703,7 +703,7 @@ linear													\\ \rowsep
 
 \tcode{a.swap(b)}       &
   \tcode{void}          &
-  exchanges the contents of \tcode{a} and \tcode{b} &
+  \added{\effects}exchanges the contents of \tcode{a} and \tcode{b} &
   constant      \\ \rowsep
 
 \end{libreqtab4a}
@@ -899,10 +899,12 @@ The complexities of the expressions are sequence dependent.
  \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{*i}.
  For \tcode{vector} and \tcode{deque}, \tcode{T} \changed {shall also be}{is also}
  \oldconcept{MoveInsertable} into \tcode{X}, \oldconcept{MoveConstructible}, \oldconcept{MoveAssignable},
- and swappable\iref{swappable.requirements}. \added{\tcode{i} and \tcode{j} are not iterators into \tcode{a}.}\ednote{Add linebreak here.}\br
- Each iterator in the range \range{i}{j} \changed{shall be}{is} dereferenced exactly once.\br
+ and swappable\iref{swappable.requirements}. \added{Neither \tcode{i} nor \tcode{j} are iterators into \tcode{a}.}
+ \removed{Each iterator in the range \range{i}{j} shall be dereferenced exactly once.\br}
+
  \removed{\requires \tcode{i} and \tcode{j} are not iterators into \tcode{a}.}\br
- \added{\effects} Inserts copies of elements in \tcode{[i, j)} before \tcode{p}  \\ \rowsep
+ \added{\effects} Inserts copies of elements in \tcode{[i, j)} before \tcode{p} 
+ \added{. Each iterator in the range \range{i}{j} is dereferenced exactly once.\br}  \\ \rowsep
 
 \tcode{a.insert(p, il)}  &
   \tcode{iterator}            &
@@ -922,9 +924,9 @@ The complexities of the expressions are sequence dependent.
 
 \tcode{a.clear()}   &
  \tcode{void}       &
- Destroys all elements in \tcode{a}. Invalidates all references, pointers, and
+ \added{\effects}Destroys all elements in \tcode{a}. Invalidates all references, pointers, and
  iterators referring to the elements of \tcode{a} and may invalidate the past-the-end iterator.\br
- \ensures \tcode{a.empty()} returns \tcode{true}.\br
+ \ensures \tcode{a.empty()} \changed{returns}{is} \tcode{true}.\br
  \complexity Linear.      \\ \rowsep
 
 \tcode{a.assign(i,j)}   &
@@ -933,14 +935,15 @@ The complexities of the expressions are sequence dependent.
  and assignable from \tcode{*i}. For \tcode{vector}, if the iterator does not
  meet the forward iterator requirements\iref{forward.iterators}, \tcode{T}
  \changed {shall also be}{is also}
- \oldconcept{MoveInsertable} into \tcode{X}. \added{\tcode{i} and \tcode{j} are not iterators into \tcode{a}.}\ednote{Add linebreak here.}\br
- Each iterator in the range \range{i}{j} \changed{shall be}{is} dereferenced exactly once.\br
+ \oldconcept{MoveInsertable} into \tcode{X}. \added{Neither \tcode{i} nor \tcode{j} are iterators into \tcode{a}.}
+ \removed{Each iterator in the range \range{i}{j} shall be dereferenced exactly once.\br}
  \removed{\requires \tcode{i}, \tcode{j} are not iterators into \tcode{a}.}\br
- Replaces elements in \tcode{a} with a copy of \tcode{[i, j)}.\br
+ \added{\effects}Replaces elements in \tcode{a} with a copy of \tcode{[i, j)}.\ednote{Remove linebreak here.}\br
  Invalidates all references, pointers and iterators
  referring to the elements of \tcode{a}.
  For \tcode{vector} and \tcode{deque},
- also invalidates the past-the-end iterator.  \\ \rowsep
+ also invalidates the past-the-end iterator.
+ \added{Each iterator in the range \range{i}{j} is dereferenced exactly once.}  \\ \rowsep
 
 \tcode{a.assign(il)}    &
   \tcode{void}          &
@@ -952,7 +955,7 @@ The complexities of the expressions are sequence dependent.
  \oldconcept{CopyInsertable} into \tcode{X}
  and \oldconcept{CopyAssignable}. \ednote{Remove line break here.}
  \removed{\requires} \tcode{t} is not a reference into \tcode{a}.\br
- Replaces elements in \tcode{a} with \tcode{n} copies of \tcode{t}.\br
+ \added{\effects}Replaces elements in \tcode{a} with \tcode{n} copies of \tcode{t}.\ednote{Remove linebreak here.}\br
  Invalidates all references, pointers and iterators
  referring to the elements of \tcode{a}.
  For \tcode{vector} and \tcode{deque},
@@ -1089,7 +1092,7 @@ time.
 
 \tcode{a.emplace_\-front(args)}      &
  \tcode{reference}                &
- Prepends an object of type \tcode{T} constructed with \tcode{std::forward<\brk{}Args\brk{}>(\brk{}args)...}.\br
+ \added{\effects}Prepends an object of type \tcode{T} constructed with \tcode{std::forward<\brk{}Args\brk{}>(\brk{}args)...}.\br
  \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}.\br
  \returns{} \tcode{a.front()}.  &
  \tcode{deque},
@@ -1099,7 +1102,7 @@ time.
 
 \tcode{a.emplace_\-back(args)}      &
  \tcode{reference}                &
- Appends an object of type \tcode{T} constructed with \tcode{std::forward<\brk{}Args\brk{}>(\brk{}args)...}.\br
+ \added{\effects}Appends an object of type \tcode{T} constructed with \tcode{std::forward<\brk{}Args\brk{}>(\brk{}args)...}.\br
  \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{args}. For \tcode{vector}, \tcode{T}
  \changed {shall also be}{is also}
  \oldconcept{MoveInsertable} into \tcode{X}.\br
@@ -1111,7 +1114,7 @@ time.
 
 \tcode{a.push_front(t)} &
   \tcode{void}          &
-  Prepends a copy of \tcode{t}.\br
+  \added{\effects}Prepends a copy of \tcode{t}.\br
   \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is}
   \oldconcept{CopyInsertable} into \tcode{X}.
     &
@@ -1122,7 +1125,7 @@ time.
 
 \tcode{a.push_front(rv)} &
   \tcode{void}          &
-  Prepends a copy of \tcode{rv}.\br
+  \added{\effects}Prepends a copy of \tcode{rv}.\br
   \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is}
   \oldconcept{MoveInsertable} into \tcode{X}.
     &
@@ -1133,7 +1136,7 @@ time.
 
 \tcode{a.push_back(t)} &
   \tcode{void}          &
-  Appends a copy of \tcode{t}.\br
+  \added{\effects}Appends a copy of \tcode{t}.\br
   \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is}
   \oldconcept{CopyInsertable} into \tcode{X}.
     &
@@ -1145,7 +1148,7 @@ time.
 
 \tcode{a.push_back(rv)} &
   \tcode{void}          &
-  Appends a copy of \tcode{rv}.\br
+  \added{\effects}Appends a copy of \tcode{rv}.\br
   \changed{\requires}{\expects}\ \tcode{T} \changed{shall be}{is}
   \oldconcept{MoveInsertable} into \tcode{X}.
     &
@@ -1157,7 +1160,7 @@ time.
 
 \tcode{a.pop_front()}      &
  \tcode{void}               &
- Destroys the first element.\br
+ \added{\effects}Destroys the first element.\br
  \changed{\requires}{\expects}\ \tcode{a.empty()} \changed{shall be}{is} \tcode{false}. &
  \tcode{deque},
  \tcode{forward_list},
@@ -1166,7 +1169,7 @@ time.
 
 \tcode{a.pop_back()}       &
  \tcode{void}               &
- Destroys the last element.\br
+ \added{\effects}Destroys the last element.\br
  \changed{\requires}{\expects}\ \tcode{a.empty()} \changed{shall be}{is} \tcode{false}. &
  \tcode{basic_string},
  \tcode{deque},
@@ -1751,13 +1754,13 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 \indexordmem{key_comp}%
 \tcode{b.key_comp()}       &
  \tcode{X::key_compare}    &
- returns the comparison object out of which \tcode{b} was constructed. &
+ \changed{returns}{\returns} the comparison object out of which \tcode{b} was constructed. &
  constant                   \\ \rowsep
 
 \indexordmem{value_comp}%
 \tcode{b.value_comp()}     &
  \tcode{X::value_compare}  &
- returns an object of \tcode{value_compare} constructed out of the comparison object &
+ \changed{returns}{\returns} an object of \tcode{value_compare} constructed out of the comparison object &
  constant                   \\ \rowsep
 
 \indexordmem{emplace}%
@@ -1837,7 +1840,7 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 \tcode{a.\brk{}insert(\brk{}i, j)}          &
   \tcode{void}                   &
   \changed{\requires}{\expects}\ \tcode{value_type} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{*i}. \ednote{Remove line break here.}
-  \removed{\requires} \tcode{i}\changed{,}{ and} \tcode{j} are not iterators into \tcode{a}. \ednote{Add line break here.}\br
+  \changed{\requires \tcode{i}, \tcode{j} are not iterators into \tcode{a}}{Neither \tcode{i} nor \tcode{j} are iterators into \tcode{a}.}.
   \added{\effects} inserts each element from the range \range{i}{j} if and only if there
   is no element with key equivalent to the key of that element in containers
   with unique keys; always inserts that element in containers with equivalent keys.  &
@@ -1894,22 +1897,22 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 \indexordmem{extract}%
 \tcode{a.\brk{}extract(\brk{}k)}              &
  \tcode{node_type}             &
- removes the first element in the container with key equivalent to \tcode{k}.
- Returns a \tcode{node_type} owning the element if found, otherwise an empty
+ \added{\effects}removes the first element in the container with key equivalent to \tcode{k}.
+ \changed{Returns}{\returns} a \tcode{node_type} owning the element if found, otherwise an empty
  \tcode{node_type}. &
  $\log (\tcode{a.size()})$       \\ \rowsep
 
 \tcode{a.\brk{}extract(\brk{}q)}              &
  \tcode{node_type}             &
- removes the element pointed to by \tcode{q}.
- Returns a \tcode{node_type} owning that element. &
+ \added{\effects}removes the element pointed to by \tcode{q}.
+ \changed{Returns}{\returns} a \tcode{node_type} owning that element. &
  amortized constant       \\ \rowsep
 
 \indexordmem{merge}%
 \tcode{a.merge(a2)}              &
  \tcode{void}             &
  \changed{\requires}{\expects} \tcode{a.get_allocator() == a2.get_allocator()}.\br
- Attempts to extract each element in \tcode{a2} and insert it into \tcode{a}
+ \added{\effects}Attempts to extract each element in \tcode{a2} and insert it into \tcode{a}
  using the comparison object of \tcode{a}. In containers with unique keys,
  if there is an element in \tcode{a} with key equivalent to the key of an
  element from \tcode{a2}, then that element is not extracted from \tcode{a2}.\br
@@ -1923,20 +1926,20 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 \indexordmem{erase}%
 \tcode{a.erase(k)}              &
  \tcode{size_type}             &
- erases all elements in the container with key equivalent to
- \tcode{k}. returns the number of erased elements.  &
+ \added{\effects} erases all elements in the container with key equivalent to
+ \tcode{k}. \changed{Returns}{\returns} the number of erased elements.  &
  $\log (\tcode{a.size()}) + \tcode{a.count(k)}$       \\ \rowsep
 
 \tcode{a.erase(q)}              &
  \tcode{iterator}               &
- erases the element pointed to by \tcode{q}. Returns an iterator pointing to
+ \added{\effects} erases the element pointed to by \tcode{q}. \changed{Returns}{\returns} an iterator pointing to
  the element immediately following \tcode{q} prior to the element being erased.
  If no such element exists, returns \tcode{a.end()}.     &
  amortized constant             \\ \rowsep
 
 \tcode{a.erase(r)}              &
  \tcode{iterator}               &
- erases the element pointed to by \tcode{r}. Returns an iterator pointing to
+ \added{\effects} erases the element pointed to by \tcode{r}. \changed{Returns}{\returns} an iterator pointing to
  the element immediately following \tcode{r} prior to the element being erased.
  If no such element exists, returns \tcode{a.end()}.     &
  amortized constant             \\ \rowsep
@@ -1944,7 +1947,7 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 \tcode{a.erase(}\br
  \tcode{q1, q2)}  &
  \tcode{iterator}        &
- erases all the elements in the range \range{q1}{q2}. Returns an iterator pointing to
+ \added{\effects} erases all the elements in the range \range{q1}{q2}. \changed{Returns}{\returns} an iterator pointing to
  the element pointed to by \tcode{q2} prior to any elements being erased. If no such element
  exists, \tcode{a.end()} is returned.  &
  $\log(\tcode{a.size()}) + N$, where $N$ has the value \tcode{distance(q1, q2)}.    \\ \rowsep
@@ -1952,21 +1955,21 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 \indexordmem{clear}%
 \tcode{a.clear()}       &
  \tcode{void}           &
- \tcode{a.erase(a.begin(),a.end())}\br
- \ensures \tcode{a.empty()} returns \tcode{true}.  &
+ \changed{equivalent to}{\effects Equivalent to:} \tcode{a.erase(a.begin(),a.end())}\ednote{Remove line break here.}
+ \ensures \tcode{a.empty()} \changed{returns}{is} \tcode{true}.  &
  linear in \tcode{a.size()}.  \\ \rowsep
 
 \indexordmem{find}%
 \tcode{b.find(k)}       &
  \tcode{iterator}; \tcode{const_iterator} for constant \tcode{b}.  &
- returns an iterator pointing to an element with the key equivalent
+ \changed{Returns}{\returns} an iterator pointing to an element with the key equivalent
  to \tcode{k}, or \tcode{b.end()} if such an element is not found    &
  logarithmic            \\ \rowsep
 
 \tcode{a_tran.}\br
  \tcode{find(ke)}       &
  \tcode{iterator}; \tcode{const_iterator} for constant \tcode{a_tran}.  &
- returns an iterator pointing to an element with key \tcode{r} such that
+ \changed{Returns}{\returns} an iterator pointing to an element with key \tcode{r} such that
  \tcode{!c(r, ke) \&\& !c(ke, r)}, or \tcode{a_tran.end()} if such an element
  is not found    &
  logarithmic            \\ \rowsep
@@ -1974,13 +1977,13 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 \indexordmem{count}%
 \tcode{b.count(k)}        &
  \tcode{size_type}        &
- returns the number of elements with key equivalent to \tcode{k}    &
+ \changed{Returns}{\returns} the number of elements with key equivalent to \tcode{k}    &
  $\log (\tcode{b.size()}) + \tcode{b.count(k)}$   \\ \rowsep
 
 \tcode{a_tran.}\br
  \tcode{count(ke)}        &
  \tcode{size_type}        &
- returns the number of elements with key \tcode{r} such that
+ \changed{Returns}{\returns} the number of elements with key \tcode{r} such that
  \tcode{!c(r, ke) \&\& !c(ke, r)}    &
  $\log (\tcode{a_tran.size()}) + \tcode{a_tran.count(ke)}$   \\ \rowsep
 
@@ -1988,19 +1991,19 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 \tcode{b.}\br
  \tcode{contains(k)}  &
  \tcode{bool}         &
- equivalent to \tcode{b.find(k) != b.end()}  &
+ \changed{equivalent to}{\effects Equivalent to: \tcode{return }} \tcode{b.find(k) != b.end()}  &
  logarithmic            \\ \rowsep
 
 \tcode{a_tran.}\br
  \tcode{con\-tains(ke)} &
  \tcode{bool}         &
- equivalent to \tcode{a_tran.find(ke) != a_tran.end()}  &
+ \changed{equivalent to}{\effects Equivalent to: \tcode{return }} \tcode{a_tran.find(ke) != a_tran.end()}  &
  logarithmic            \\ \rowsep
 
 \indexordmem{lower_bound}%
 \tcode{b.lower_bound(k)}   &
  \tcode{iterator}; \tcode{const_iterator} for constant \tcode{b}.  &
- returns an iterator pointing to the first element with
+ \changed{Returns}{\returns} an iterator pointing to the first element with
  key not less than \tcode{k},
  or \tcode{b.end()} if such an element is not found.   &
  logarithmic            \\ \rowsep
@@ -2008,7 +2011,7 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 \tcode{a_tran.}\br
  \tcode{lower_bound(kl)}   &
  \tcode{iterator}; \tcode{const_iterator} for constant \tcode{a_tran}.  &
- returns an iterator pointing to the first element with
+ \changed{Returns}{\returns} an iterator pointing to the first element with
  key \tcode{r} such that \tcode{!c(r, kl)},
  or \tcode{a_tran.end()} if such an element is not found.   &
  logarithmic            \\ \rowsep
@@ -2016,7 +2019,7 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 \indexordmem{upper_bound}%
 \tcode{b.upper_bound(k)}       &
  \tcode{iterator}; \tcode{const_iterator} for constant \tcode{b}.  &
- returns an iterator pointing to the first element with
+ \changed{Returns}{\returns} an iterator pointing to the first element with
  key greater than \tcode{k},
  or \tcode{b.end()} if such an element is not found.   &
  logarithmic                    \\ \rowsep
@@ -2024,7 +2027,7 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 \tcode{a_tran.}\br
  \tcode{upper_bound(ku)}       &
  \tcode{iterator}; \tcode{const_iterator} for constant \tcode{a_tran}.  &
- returns an iterator pointing to the first element with
+ \changed{Returns}{\returns} an iterator pointing to the first element with
  key \tcode{r} such that \tcode{c(ku, r)},
  or \tcode{a_tran.end()} if such an element is not found.   &
  logarithmic                    \\ \rowsep
@@ -2033,14 +2036,14 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 \tcode{b.equal_range(k)}       &
  \tcode{pair<\brk{}iterator, iterator>};
  \tcode{pair<\brk{}const_iterator, const_iterator>} for constant \tcode{b}.     &
- equivalent to \tcode{make_pair(b.lower_bound(k), b.upper_bound(k))}.    &
+ \changed{equivalent to}{\effects Equivalent to: \tcode{return }} \tcode{make_pair(b.lower_bound(k), b.upper_bound(k))}.    &
  logarithmic                    \\ \rowsep
 
 \tcode{a_tran.}\br
  \tcode{equal_range(ke)}       &
  \tcode{pair<\brk{}iterator, iterator>};
  \tcode{pair<\brk{}const_iterator, const_iterator>} for constant \tcode{a_tran}.     &
- equivalent to \tcode{make_pair(}\br
+ \changed{equivalent to}{\effects Equivalent to: \tcode{return }} \tcode{make_pair(}\br
  \tcode{a_tran.lower_bound(ke), a_tran.upper_bound(ke))}.    &
  logarithmic                    \\
 \end{libreqtab4b}
@@ -2528,14 +2531,14 @@ and \oldconcept{CopyAssignable}.\br
 \indexunordmem{hash_function}%
 \tcode{b.hash_function()}
 &   \tcode{hasher}
-&   Returns \tcode{b}'s hash function.%
+&   \changed{Returns}{\returns} \tcode{b}'s hash function.%
 &   constant
 \\ \rowsep
 %
 \indexunordmem{key_eq}%
 \tcode{b.key_eq()}
 &   \tcode{key_equal}
-&   Returns \tcode{b}'s key equality predicate.%
+&   \changed{Returns}{\returns} \tcode{b}'s key equality predicate.%
 &   constant
 \\ \rowsep
 %
@@ -2614,7 +2617,7 @@ start.  Implementations are permitted to ignore the hint.%
 \tcode{a.insert(i, j)}
 &   \tcode{void}
 &   \changed{\requires}{\expects}\ \tcode{value_type} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{*i}. \ednote{Remove line break here.}
-    \removed{\requires} \tcode{i} and \tcode{j} are not iterators in \tcode{a}.\br
+    \changed{\requires \tcode{i}, \tcode{j} are not iterators into \tcode{a}}{Neither \tcode{i} nor \tcode{j} are iterators into \tcode{a}.}.\br
     \effects Equivalent to \tcode{a.insert(t)} for each element in \tcode{[i,j)}.%
 &   Average case \bigoh{N}, where $N$ is \tcode{distance(i, j)}.
     Worst case \bigoh{N(\tcode{a.size()}\brk{}+\brk{}1)}.
@@ -2672,15 +2675,15 @@ start.  Implementations are permitted to ignore the hint.%
 \indexunordmem{extract}%
 \tcode{a.extract(k)}              &
  \tcode{node_type}             &
- Removes an element in the container with key equivalent to \tcode{k}.
- Returns a \tcode{node_type} owning the element if found, otherwise an empty
+ \added{\effects}Removes an element in the container with key equivalent to \tcode{k}.
+ \changed{Returns}{\returns} a \tcode{node_type} owning the element if found, otherwise an empty
  \tcode{node_type}. &
  Average case \bigoh{1}, worst case \bigoh{\tcode{a.size()}}.  \\ \rowsep
 %
 \tcode{a.extract(q)}              &
  \tcode{node_type}             &
- Removes the element pointed to by \tcode{q}.
- Returns a \tcode{node_type} owning that element. &
+ \added{\effects}Removes the element pointed to by \tcode{q}.
+ \changed{Returns}{\returns} a \tcode{node_type} owning that element. &
  Average case \bigoh{1}, worst case \bigoh{\tcode{a.size()}}.  \\ \rowsep
 %
 \indexunordmem{merge}%
@@ -2703,7 +2706,7 @@ start.  Implementations are permitted to ignore the hint.%
 \indexunordmem{erase}%
 \tcode{a.erase(k)}
 &   \tcode{size_type}
-&   Erases all elements with key equivalent to \tcode{k}.  Returns
+&   \added{\effects}Erases all elements with key equivalent to \tcode{k}.  \changed{Returns}{\returns}
 the number of elements erased.
 &   Average case \bigoh{\tcode{a.count(k)}}.  Worst case
     \bigoh{\tcode{a.size()}}.
@@ -2711,21 +2714,21 @@ the number of elements erased.
 %
 \tcode{a.erase(q)}
 &   \tcode{iterator}
-&   Erases the element pointed to by \tcode{q}. Returns the
+&   \added{\effects}Erases the element pointed to by \tcode{q}. \changed{Returns}{\returns} the
     iterator immediately following \tcode{q} prior to the erasure.
 &   Average case \bigoh{1}, worst case \bigoh{\tcode{a.size()}}.
 \\ \rowsep
 %
 \tcode{a.erase(r)}
 &   \tcode{iterator}
-&   Erases the element pointed to by \tcode{r}. Returns the
+&   \added{\effects}Erases the element pointed to by \tcode{r}. \changed{Returns}{\returns} the
     iterator immediately following \tcode{r} prior to the erasure.
 &   Average case \bigoh{1}, worst case \bigoh{\tcode{a.size()}}.
 \\ \rowsep
 %
 \tcode{a.erase(q1, q2)}
 &   \tcode{iterator}
-&   Erases all elements in the range \tcode{[q1, q2)}. Returns
+&   \added{\effects}Erases all elements in the range \tcode{[q1, q2)}. \changed{Returns}{\returns}
     the iterator immediately following the erased elements prior to the
     erasure.%
 &   Average case linear in \tcode{distance(q1, q2)},
@@ -2735,22 +2738,22 @@ the number of elements erased.
 \indexunordmem{clear}%
 \tcode{a.clear()}
 & \tcode{void}
-& Erases all elements in the container.
-   \ensures \tcode{a.empty()} returns \tcode{true}%
+& \added{\effects}Erases all elements in the container.
+   \ensures \tcode{a.empty()} \changed{returns}{is} \tcode{true}%
 & Linear in \tcode{a.size()}.
 \\ \rowsep
 %
 \indexunordmem{find}%
 \tcode{b.find(k)}
 &   \tcode{iterator}; \br \tcode{const_iterator} for const \tcode{b}.
-&   Returns an iterator pointing to an element with key equivalent to
+&   \changed{Returns}{\returns} an iterator pointing to an element with key equivalent to
     \tcode{k}, or \tcode{b.end()} if no such element exists.%
 &   Average case \bigoh{1}, worst case \bigoh{\tcode{b.size()}}.
 \\ \rowsep
 %
 \tcode{a_tran.find(ke)}
 &   \tcode{iterator}; \br \tcode{const_iterator} for const \tcode{a_tran}.
-&   Returns an iterator pointing to an element with key equivalent to
+&   \changed{Returns}{\returns} an iterator pointing to an element with key equivalent to
     \tcode{ke}, or \tcode{a_tran.end()} if no such element exists.%
 &   Average case \bigoh{1},
     worst case \bigoh{\tcode{a_tran.}\br{}\tcode{size()}}. % avoid wverfull
@@ -2759,7 +2762,7 @@ the number of elements erased.
 \indexunordmem{count}%
 \tcode{b.count(k)}
 &   \tcode{size_type}
-&   Returns the number of elements with key equivalent to \tcode{k}.%
+&   \changed{Returns}{\returns} the number of elements with key equivalent to \tcode{k}.%
 &   Average case \bigoh{\tcode{b.count(k)}}, worst case \bigoh{\tcode{b.size()}}.
 \\ \rowsep
 %
@@ -2789,7 +2792,7 @@ the number of elements erased.
 \tcode{b.equal_range(k)}
 &   \tcode{pair<iterator, iterator>}; \br
     \tcode{pair<const_iterator, const_iterator>} for const \tcode{b}.
-&   Returns a range containing all elements with keys equivalent to
+&   \changed{Returns}{\returns} a range containing all elements with keys equivalent to
     \tcode{k}.  Returns \tcode{make_pair(b.end(), b.end())} if
     no such elements exist.%
 &   Average case \bigoh{\tcode{b.count(k)}}.  Worst case
@@ -2799,7 +2802,7 @@ the number of elements erased.
 \tcode{a_tran.equal_range(ke)}
 &   \tcode{pair<iterator, iterator>}; \br
     \tcode{pair<const_iterator, const_iterator>} for const \tcode{a_tran}.
-&   Returns a range containing all elements with keys equivalent to
+&   \changed{Returns}{\returns} a range containing all elements with keys equivalent to
     \tcode{ke}.  Returns \tcode{make_pair(a_tran.end(), a_tran.end())} if
     no such elements exist.%
 &   Average case
@@ -2809,14 +2812,14 @@ the number of elements erased.
 \indexunordmem{bucket_count}%
 \tcode{b.bucket_count()}
 &   \tcode{size_type}
-&   Returns the number of buckets that \tcode{b} contains.%
+&   \changed{Returns}{\returns} the number of buckets that \tcode{b} contains.%
 &   Constant
 \\ \rowsep
 %
 \indexunordmem{max_bucket_count}%
 \tcode{b.max_bucket_count()}
 &   \tcode{size_type}
-&   Returns an upper bound on the number of buckets that \tcode{b} might
+&   \changed{Returns}{\returns} an upper bound on the number of buckets that \tcode{b} might
     ever contain.%
 &   Constant
 \\ \rowsep
@@ -2826,7 +2829,7 @@ the number of elements erased.
 & \tcode{size_type}
 &
   \changed{\requires}{\expects} \tcode{b.bucket_count() > 0}.\br
-    Returns the index of the bucket in which elements with keys equivalent
+    \changed{Returns}{\returns} the index of the bucket in which elements with keys equivalent
     to \tcode{k} would be found, if any such element existed.
     \ensures the return value \changed{shall be}{is} in the range \tcode{[0, b.bucket_count())}.%
 & Constant
@@ -2836,7 +2839,7 @@ the number of elements erased.
 \tcode{b.bucket_size(n)}
 &   \tcode{size_type}
 &   \changed{\requires}{\expects} \tcode{n} \changed{shall be}{is} in the range \tcode{[0, b.bucket_count())}.\ednote{Add line break here} \br
-    Returns the number of elements in the $\tcode{n}^\text{th}$ bucket.%
+    \changed{Returns}{\returns} the number of elements in the $\tcode{n}^\text{th}$ bucket.%
 &   \bigoh{\tcode{b.bucket_}\-\tcode{size(n)}}
 \\ \rowsep
 %
@@ -2883,14 +2886,14 @@ the number of elements erased.
 \indexunordmem{load_factor}%
 \tcode{b.load_factor()}
 &   \tcode{float}
-&   Returns the average number of elements per bucket.%
+&   \changed{Returns}{\returns} the average number of elements per bucket.%
 &   Constant
 \\ \rowsep
 %
 \indexunordmem{max_load_factor}%
 \tcode{b.max_load_factor()}
 &   \tcode{float}
-&   Returns a positive number that the container attempts to keep the load factor
+&   \changed{Returns}{\returns} a positive number that the container attempts to keep the load factor
     less than or equal to. The container automatically increases the
     number of buckets as necessary to keep the load factor below this
     number.%
@@ -3775,13 +3778,20 @@ void resize(size_type sz);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\expects \tcode{T} is \oldconcept{MoveInsertable} and \oldconcept{DefaultInsertable} into \tcode{*this}.
+\end{addedblock}
+
 \pnum
 \effects If \tcode{sz < size()}, erases the last \tcode{size() - sz} elements
 from the sequence. Otherwise,
 appends \tcode{sz - size()} default-inserted elements to the sequence.
 
+\begin{removedblock}
 \pnum
-\changed{\requires}{\expects} \tcode{T} \changed{shall be}{is} \oldconcept{MoveInsertable} and \oldconcept{DefaultInsertable} into \tcode{*this}.
+\requires \tcode{T} shall be \oldconcept{MoveInsertable} and \oldconcept{DefaultInsertable} into \tcode{*this}.
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{resize}!\idxcode{deque}}%
@@ -3790,14 +3800,20 @@ void resize(size_type sz, const T& c);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\expects \tcode{T} is \oldconcept{CopyInsertable} into \tcode{*this}.
+\end{addedblock}
+
 \pnum
 \effects If \tcode{sz < size()}, erases the last \tcode{size() - sz} elements
 from the sequence. Otherwise,
 appends \tcode{sz - size()} copies of \tcode{c} to the sequence.
 
+\begin{removedblock}
 \pnum
-\changed{\requires}{\expects} \tcode{T} \changed{shall be}{is}
-\oldconcept{CopyInsertable} into \tcode{*this}.
+\requires \tcode{T} shall be \oldconcept{CopyInsertable} into \tcode{*this}.
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrarymember{shrink_to_fit}{deque}%
@@ -4118,12 +4134,19 @@ explicit forward_list(size_type n, const Allocator& = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\expects \tcode{T} is \oldconcept{DefaultInsertable} into \tcode{*this}.
+\end{addedblock}
+
 \pnum
 \effects Constructs a \tcode{forward_list} object with \tcode{n}
 default-inserted elements using the specified allocator.
 
+\begin{removedblock}
 \pnum
-\changed{\requires}{\expects} \tcode{T} \changed{shall be}{is} \oldconcept{DefaultInsertable} into \tcode{*this}.
+\requires \tcode{T} shall be \oldconcept{DefaultInsertable} into \tcode{*this}.
+\end{removedblock}
 
 \pnum
 \complexity Linear in \tcode{n}.
@@ -4135,11 +4158,18 @@ forward_list(size_type n, const T& value, const Allocator& = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\expects \tcode{T} is \oldconcept{CopyInsertable} into \tcode{*this}.
+\end{addedblock}
+
 \pnum
 \effects Constructs a \tcode{forward_list} object with \tcode{n} copies of \tcode{value} using the specified allocator.
 
+\begin{removedblock}
 \pnum
-\changed{\requires}{\expects} \tcode{T} \changed{shall be}{is} \oldconcept{CopyInsertable} into \tcode{*this}.
+\requires \tcode{T} shall be \oldconcept{CopyInsertable} into \tcode{*this}.
+\end{removedblock}
 
 \pnum
 \complexity Linear in \tcode{n}.
@@ -4376,7 +4406,7 @@ void resize(size_type sz);
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} \changed{shall be}{is} \oldconcept{DefaultInsertable} into \tcode{*this}.
+\expects \tcode{T} is \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 
 \pnum
@@ -4386,7 +4416,7 @@ elements at the end of the list.
 
 \removed{%
 \pnum
-\requires \tcode{T} \changed{shall be}{is} \oldconcept{DefaultInsertable} into \tcode{*this}.
+\requires \tcode{T} shall be \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 \end{itemdescr}
 
@@ -4397,7 +4427,7 @@ void resize(size_type sz, const value_type& c);
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} \changed{shall be}{is} \oldconcept{CopyInsertable} into \tcode{*this}.
+\expects \tcode{T} is \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 
 \pnum
@@ -4407,7 +4437,7 @@ copies of \tcode{c} at the end of the list.
 
 \removed{%
 \pnum
-\requires \tcode{T} \changed{shall be}{is} \oldconcept{CopyInsertable} into \tcode{*this}.
+\requires \tcode{T} shall be \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 \end{itemdescr}
 
@@ -4859,7 +4889,7 @@ explicit list(size_type n, const Allocator& = Allocator());
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} \changed{shall be}{is}
+\expects \tcode{T} is
 \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 
@@ -4869,7 +4899,7 @@ explicit list(size_type n, const Allocator& = Allocator());
 
 \removed{%
 \pnum
-\requires \tcode{T} \changed{shall be}{is}
+\requires \tcode{T} shall be
 \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 
@@ -4887,7 +4917,7 @@ list(size_type n, const T& value, const Allocator& = Allocator());
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} \changed{shall be}{is}
+\expects \tcode{T} is
 \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 
@@ -4903,7 +4933,7 @@ using the specified allocator.
 
 \removed{%
 \pnum
-\requires \tcode{T} \changed{shall be}{is}
+\requires \tcode{T} shall be
 \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 
@@ -4943,7 +4973,7 @@ void resize(size_type sz);
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} \changed{shall be}{is}
+\expects \tcode{T} is
 \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 
@@ -4962,7 +4992,7 @@ erase(it, end());
 
 \removed{%
 \pnum
-\requires \tcode{T} \changed{shall be}{is}
+\requires \tcode{T} shall be
 \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 \end{itemdescr}
@@ -4975,7 +5005,7 @@ void resize(size_type sz, const T& c);
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} \changed{shall be}{is} \oldconcept{CopyInsertable} into \tcode{*this}.
+\expects \tcode{T} is \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 
 \pnum
@@ -4995,7 +5025,7 @@ else
 
 \removed{%
 \pnum
-\requires \tcode{T} \changed{shall be}{is} \oldconcept{CopyInsertable} into \tcode{*this}.
+\requires \tcode{T} shall be \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 \end{itemdescr}
 
@@ -5569,7 +5599,7 @@ explicit vector(size_type n, const Allocator& = Allocator());
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} \changed{shall be}{is} \oldconcept{DefaultInsertable} into \tcode{*this}.
+\expects \tcode{T} is \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 
 \pnum
@@ -5578,7 +5608,7 @@ default-inserted elements using the specified allocator.
 
 \removed{%
 \pnum
-\requires \tcode{T} \changed{shall be}{is} \oldconcept{DefaultInsertable} into \tcode{*this}.
+\requires \tcode{T} shall be \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 
 \pnum
@@ -5594,7 +5624,7 @@ vector(size_type n, const T& value,
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} \changed{shall be}{is}
+\expects \tcode{T} is
 \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 
@@ -5604,7 +5634,7 @@ copies of \tcode{value}, using the specified allocator.
 
 \removed{%
 \pnum
-\requires \tcode{T} \changed{shall be}{is}
+\requires \tcode{T} shall be
 \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 
@@ -5770,7 +5800,7 @@ void resize(size_type sz);
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} \changed{shall be}{is}
+\expects \tcode{T} is
 \oldconcept{MoveInsertable} and \oldconcept{DefaultInsertable} into \tcode{*this}.
 }
 
@@ -5798,7 +5828,7 @@ void resize(size_type sz, const T& c);
 \begin{itemdescr}
 \added{%
 \pnum
-\expects \tcode{T} \changed{shall be}{is}
+\expects \tcode{T} is
 \oldconcept{CopyInsertable} into \tcode{*this}.
 }
 
@@ -9946,7 +9976,7 @@ priority_queue(const Compare& x, Container&& y);
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{x} shall define a strict weak ordering\iref{alg.sorting}.
+\tcode{x} \changed{shall define}{defines} a strict weak ordering\iref{alg.sorting}.
 
 \pnum
 \effects
@@ -9971,7 +10001,7 @@ template<class InputIterator>
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{x} shall define a strict weak ordering\iref{alg.sorting}.
+\tcode{x} \changed{shall define}{defines} a strict weak ordering\iref{alg.sorting}.
 
 \pnum
 \effects
@@ -10767,7 +10797,7 @@ template<ptrdiff_t Count> constexpr span<element_type, Count> first() const;
 \begin{itemdescr}
 \pnum
 \removed{\requires}\added{\expects}
-\tcode{0 <= Count \&\& Count <= size()}.
+\tcode{0 <= Count \&\& Count <= size()}\added{ is \tcode{true}}.
 
 \pnum
 \effects
@@ -10781,7 +10811,7 @@ template<ptrdiff_t Count> constexpr span<element_type, Count> last() const;
 \begin{itemdescr}
 \pnum
 \removed{\requires}\added{\expects}
-\tcode{0 <= Count \&\& Count <= size()}.
+\tcode{0 <= Count \&\& Count <= size()}\added{ is \tcode{true}}.
 
 \pnum
 \effects
@@ -10800,6 +10830,7 @@ template<ptrdiff_t Offset, ptrdiff_t Count = dynamic_extent>
 (0 <= Offset && Offset <= size())
 && (Count == dynamic_extent || Count >= 0 && Offset + Count <= size())
 \end{codeblock}
+\added{ is \tcode{true}.}
 
 \pnum
 \effects
@@ -10826,7 +10857,7 @@ constexpr span<element_type, dynamic_extent> first(index_type count) const;
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{0 <= count \&\& count <= size()}.
+\tcode{0 <= count \&\& count <= size()}\added{ is \tcode{true}}.
 
 \pnum
 \effects
@@ -10840,7 +10871,7 @@ constexpr span<element_type, dynamic_extent> last(index_type count) const;
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{0 <= count 0 \&\& count <= size()}.
+\tcode{0 <= count 0 \&\& count <= size()}\added{ is \tcode{true}}.
 
 \pnum
 \effects
@@ -10859,6 +10890,7 @@ constexpr span<element_type, dynamic_extent> subspan(
 (0 <= offset && offset <= size())
 && (count == dynamic_extent || count >= 0 && offset + count <= size())
 \end{codeblock}
+\added{ is \tcode{true}.}
 
 \pnum
 \effects
@@ -10911,7 +10943,7 @@ constexpr reference operator()(index_type idx) const;
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{0 <= idx \&\& idx < size()}.
+\tcode{0 <= idx \&\& idx < size()}\added{ is \tcode{true}}.
 
 \pnum
 \effects
