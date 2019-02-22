@@ -841,11 +841,12 @@ The complexities of the expressions are sequence dependent.
  For \tcode{vector}, if the iterator does
  not meet the \oldconcept{\-Forward\-Iterator} requirements\iref{forward.iterators}, \tcode{T}
  \changed {shall also be}{is also}
- \oldconcept{MoveInsertable} into \tcode{X}.\ednote{Add linebreak here.}\br
- Each iterator in the range \range{i}{j} \changed{shall be}{is} dereferenced exactly once.\br
+ \oldconcept{MoveInsertable} into \tcode{X}.
+ \removed{Each iterator in the range \range{i}{j} shall be dereferenced exactly once.\br}
  \ensures \tcode{distance(begin(), end()) ==}
  \tcode{distance(i, j)}\br
- \added{\effects} Constructs a sequence container equal to the range \tcode{[i, j)}    \\ \rowsep
+ \added{\effects} Constructs a sequence container equal to the range \tcode{[i, j)}  
+ \added{Each iterator in the range \range{i}{j} is dereferenced exactly once.}  \\ \rowsep
 
 \tcode{X(il)}      &
                     &
@@ -925,7 +926,7 @@ The complexities of the expressions are sequence dependent.
 \tcode{a.clear()}   &
  \tcode{void}       &
  \added{\effects}Destroys all elements in \tcode{a}. Invalidates all references, pointers, and
- iterators referring to the elements of \tcode{a} and may invalidate the past-the-end iterator.\br
+ iterators referring to the elements of \tcode{a} and may invalidate the past-the-end iterator. \ednote{Add linebreak here.}\br
  \ensures \tcode{a.empty()} \changed{returns}{is} \tcode{true}.\br
  \complexity Linear.      \\ \rowsep
 
@@ -1840,7 +1841,7 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
 \tcode{a.\brk{}insert(\brk{}i, j)}          &
   \tcode{void}                   &
   \changed{\requires}{\expects}\ \tcode{value_type} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{*i}. \ednote{Remove line break here.}
-  \changed{\requires \tcode{i}, \tcode{j} are not iterators into \tcode{a}}{Neither \tcode{i} nor \tcode{j} are iterators into \tcode{a}.}.
+  \changed{\requires \tcode{i}, \tcode{j} are not iterators into \tcode{a}}{Neither \tcode{i} nor \tcode{j} are iterators into \tcode{a}}.\br
   \added{\effects} inserts each element from the range \range{i}{j} if and only if there
   is no element with key equivalent to the key of that element in containers
   with unique keys; always inserts that element in containers with equivalent keys.  &
@@ -2581,7 +2582,7 @@ and \oldconcept{CopyAssignable}.\br
 \indexunordmem{insert}%
 \tcode{a_uniq.insert(t)}
 &   \tcode{pair<iterator, bool>}
-&   \changed{\requires}{\expects}\ If \tcode{t} is a non-const rvalue, \tcode{value_type} shall be
+&   \changed{\requires}{\expects}\ If \tcode{t} is a non-const rvalue, \tcode{value_type} \changed{shall be}{is}
     \oldconcept{MoveInsertable} into \tcode{X}; otherwise, \tcode{value_type} \changed{shall be}{is}
     \oldconcept{CopyInsertable} into \tcode{X}.\br
     \effects\ Inserts \tcode{t} if and only if there is no element in the container
@@ -2617,7 +2618,7 @@ start.  Implementations are permitted to ignore the hint.%
 \tcode{a.insert(i, j)}
 &   \tcode{void}
 &   \changed{\requires}{\expects}\ \tcode{value_type} \changed{shall be}{is} \oldconcept{EmplaceConstructible} into \tcode{X} from \tcode{*i}. \ednote{Remove line break here.}
-    \changed{\requires \tcode{i}, \tcode{j} are not iterators into \tcode{a}}{Neither \tcode{i} nor \tcode{j} are iterators into \tcode{a}.}.\br
+    \changed{\requires \tcode{i}, \tcode{j} are not iterators into \tcode{a}}{Neither \tcode{i} nor \tcode{j} are iterators into \tcode{a}}.\br
     \effects Equivalent to \tcode{a.insert(t)} for each element in \tcode{[i,j)}.%
 &   Average case \bigoh{N}, where $N$ is \tcode{distance(i, j)}.
     Worst case \bigoh{N(\tcode{a.size()}\brk{}+\brk{}1)}.
@@ -2768,7 +2769,7 @@ the number of elements erased.
 %
 \tcode{a_tran.count(ke)}
 &   \tcode{size_type}
-&   Returns the number of elements with key equivalent to \tcode{ke}.%
+&   \changed{Returns}{\returns} the number of elements with key equivalent to \tcode{ke}.%
 &   Average case
     \bigoh{\tcode{a_tran.}\br{}\tcode{count(ke)}}, % avoid overfull
     worst case \bigoh{\tcode{a_tran.}\br{}\tcode{size()}}. % avoid overfull
@@ -2848,7 +2849,7 @@ the number of elements erased.
 &   \tcode{local_iterator}; \br
     \tcode{const_local_iterator} for const \tcode{b}.
 &   \changed{\requires}{\expects} \tcode{n} \changed{shall be}{is} in the range \tcode{[0, b.bucket_count())}.\ednote{Add line break here} \br
-    \tcode{b.begin(n)} returns an iterator referring to the
+    \changed{\tcode{b.begin(n)} returns}{\returns} an iterator referring to the
     first element in the bucket. If the bucket is empty, then
     \tcode{b.begin(n) == b.end(n)}.%
 &   Constant
@@ -2859,7 +2860,7 @@ the number of elements erased.
 &   \tcode{local_iterator}; \br
     \tcode{const_local_iterator} for const \tcode{b}.
 &   \changed{\requires}{\expects} \tcode{n} \changed{shall be}{is} in the range \tcode{[0, b.bucket_count())}.\ednote{Add line break here} \br
-    \tcode{b.end(n)} returns an iterator which is the past-the-end
+    \changed{\tcode{b.end(n)} returns}{\returns} an iterator which is the past-the-end
     value for the bucket.%
 &   Constant
 \\ \rowsep
@@ -2868,7 +2869,7 @@ the number of elements erased.
 \tcode{b.cbegin(n)}
 &   \tcode{const_local_iterator}
 &   \changed{\requires}{\expects} \tcode{n} \changed{shall be}{is} in the range \tcode{[0, b.bucket_count())}.\ednote{Add line break here} \br
-    \tcode{b.cbegin(n)} returns an iterator referring to the
+    \changed{\tcode{b.cbegin(n)} returns}{\returns} an iterator referring to the
     first element in the bucket. If the bucket is empty, then
     \tcode{b.cbegin(n) == b.cend(n)}.%
 &   Constant
@@ -2878,7 +2879,7 @@ the number of elements erased.
 \tcode{b.cend(n)}
 &   \tcode{const_local_iterator}
 &   \changed{\requires}{\expects} \tcode{n} \changed{shall be}{is} in the range \tcode{[0, b.bucket_count())}.\ednote{Add line break here} \br
-    \tcode{b.cend(n)} returns an iterator which is the past-the-end
+    \changed{\tcode{b.cend(n)} returns}{\returns} an iterator which is the past-the-end
     value for the bucket.%
 &   Constant
 \\ \rowsep
@@ -3515,7 +3516,7 @@ tuple_element<I, array<T, N>>::type
 \begin{itemdescr}
 \added{%
 \pnum
-\mandates \tcode{I < N}.
+\mandates \tcode{I < N} is \tcode{true}.
 }
 
 \removed{%
@@ -3542,7 +3543,7 @@ template<size_t I, class T, size_t N>
 \begin{itemdescr}
 \added{%
 \pnum
-\mandates \tcode{I < N}.
+\mandates \tcode{I < N} is \tcode{true}.
 }
 
 \removed{%
@@ -4316,7 +4317,7 @@ template<class InputIterator>
 \pnum
 \changed{\requires}{\expects} \tcode{position} is \tcode{before_begin()} or is a dereferenceable
 iterator in the range \range{begin()}{end()}.
-\tcode{first} and \tcode{last} are not iterators in \tcode{*this}.
+\added{Neither} \tcode{first} \changed{and}{nor} \tcode{last} are \removed{not} iterators in \tcode{*this}.
 
 \pnum
 \effects Inserts copies of elements in \range{first}{last} after \tcode{position}.
@@ -4475,8 +4476,8 @@ void splice_after(const_iterator position, forward_list&& x);
 \pnum
 \changed{\requires}{\expects} \tcode{position} is \tcode{before_begin()} or is a dereferenceable
 iterator in the range \range{begin()}{end()}.
-\tcode{get_allocator() == x.get_allocator()}.
-\tcode{addressof(x) != this}.
+\tcode{get_allocator() == x.get_allocator()} \added{is \tcode{true}}.
+\tcode{addressof(x) != this} \added{is \tcode{true}}.
 
 \pnum
 \effects Inserts the contents of \tcode{x} after
@@ -4503,7 +4504,7 @@ void splice_after(const_iterator position, forward_list&& x, const_iterator i);
 \changed{\requires}{\expects} \tcode{position} is \tcode{before_begin()} or is a dereferenceable
 iterator in the range \range{begin()}{end()}.
 The iterator following \tcode{i} is a dereferenceable iterator in \tcode{x}.
-\tcode{get_allocator() == x.get_allocator()}.
+\tcode{get_allocator() == x.get_allocator()} \added{is \tcode{true}}.
 
 \pnum
 \effects Inserts the element following \tcode{i} into \tcode{*this}, following
@@ -4534,7 +4535,7 @@ void splice_after(const_iterator position, forward_list&& x,
 dereferenceable iterator in the range \range{begin()}{end()}. \orange{first}{last} is a
 valid range in \tcode{x}, and all iterators in the range \orange{first}{last} are
 dereferenceable. \tcode{position} is not an iterator in the range \orange{first}{last}.
-\tcode{get_allocator() == x.get_allocator()}.
+\tcode{get_allocator() == x.get_allocator()} \added{is \tcode{true}}.
 
 \pnum
 \effects Inserts elements in the range \orange{first}{last} after \tcode{position} and
@@ -5122,7 +5123,7 @@ void splice(const_iterator position, list&& x);
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{addressof(x) != this}.
+\tcode{addressof(x) != this} \added{is \tcode{true}}.
 
 \pnum
 \effects
@@ -5327,7 +5328,7 @@ template<class Compare> void merge(list&& x, Compare comp);
 Both the list and the argument list
 shall be sorted with respect to
 the comparator \tcode{operator<} (for the first two overloads) or
-\tcode{comp} (for the last two overloads)\changed{.}{, and \tcode{get_allocator() == x.get_allocator()}}.
+\tcode{comp} (for the last two overloads)\changed{.}{, and \tcode{get_allocator() == x.get_allocator()}} \added{is \tcode{true}}.
 
 \pnum
 \effects
