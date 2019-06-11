@@ -36,7 +36,7 @@ The changes in this series of papers fall into four broad categories.
 \item{Drive-by fixes (hopefully very few)}
 \end{itemize}
 
-This paper covers Clause 25 (Algorithms). 
+This paper covers Clause 25 (Algorithms), and is based on N4810.
 
 The entire clause is reproduced here, but the changes are confined to a few sections:
 
@@ -98,7 +98,13 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 
 Drive-by fixes:
 \begin{itemize}
-\item{All of the \*_n algorithms now treat their \tcode{Size} parameter the same way.}
+\item{All of the \*_n algorithms now treat their \tcode{Size} parameter the same way. This also resolves LWG\#3213.}
+\end{itemize}
+
+Open questions:
+\begin{itemize}
+\item{There's a mix of "shall meet" ConceptX and "shall be" ConceptY. I changed them to "meets" and "is". Is this a distinction we should be drawing?.}
+\item{alg.unique \ref{alg.unique} P7.2.3 is kind of a mess. Not quite sure how to "de-shall" it.}
 \end{itemize}
 
 
