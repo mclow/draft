@@ -1329,6 +1329,16 @@ template<typename To, typename From>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\constraints
+\begin{itemize}
+\item \tcode{sizeof(To) == sizeof(From)} is \tcode{true};
+\item \tcode{is_trivially_copyable_v<To>} is \tcode{true}; and
+\item \tcode{is_trivially_copyable_v<From>} is \tcode{true}.
+\end{itemize}
+\end{addedblock}
+
 \pnum
 \returns
 An object of type \tcode{To}.
@@ -1339,6 +1349,7 @@ If there is no value of type \tcode{To} corresponding to the
 value representation produced, the behavior is undefined.
 If there are multiple such values, which value is produced is unspecified.
 
+\begin{removedblock}
 \pnum
 \remarks
 This function shall not participate in overload resolution unless:
@@ -1347,6 +1358,7 @@ This function shall not participate in overload resolution unless:
 \item \tcode{is_trivially_copyable_v<To>} is \tcode{true}; and
 \item \tcode{is_trivially_copyable_v<From>} is \tcode{true}.
 \end{itemize}
+\end{removedblock}
 This function shall be \tcode{constexpr} if and only if
 \tcode{To}, \tcode{From}, and the types of all subobjects
 of \tcode{To} and \tcode{From} are types \tcode{T} such that:
@@ -1368,15 +1380,23 @@ template<class T>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\constraints
+\tcode{T} is an unsigned integer type\iref{basic.fundamental}.
+\end{addedblock}
+
 \pnum
 \returns
 \tcode{true} if \tcode{x} is an integral power of two;
 \tcode{false} otherwise.
 
+\begin{removedblock}
 \pnum
 \remarks
 This function shall not participate in overload resolution
 unless \tcode{T} is an unsigned integer type\iref{basic.fundamental}.
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{ceil2}}%
@@ -1386,6 +1406,12 @@ template<class T>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\constraints
+\tcode{T} is an unsigned integer type\iref{basic.fundamental}.
+\end{addedblock}
+
 \pnum
 \returns
 The minimal value \tcode{y} such that
@@ -1393,10 +1419,12 @@ The minimal value \tcode{y} such that
 if \tcode{y} is not representable as a value of type \tcode{T},
 the result is an unspecified value.
 
+\begin{removedblock}
 \pnum
 \remarks
 This function shall not participate in overload resolution
 unless \tcode{T} is an unsigned integer type\iref{basic.fundamental}.
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{floor2}}%
@@ -1406,16 +1434,24 @@ template<class T>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\constraints
+\tcode{T} is an unsigned integer type\iref{basic.fundamental}.
+\end{addedblock}
+
 \pnum
 \returns
 If \tcode{x == 0}, \tcode{0};
 otherwise the maximal value \tcode{y}
 such that \tcode{ispow2(y)} is \tcode{true} and \tcode{y <= x}.
 
+\begin{removedblock}
 \pnum
 \remarks
 This function shall not participate in overload resolution
 unless \tcode{T} is an unsigned integer type\iref{basic.fundamental}.
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{log2p1}}%
@@ -1425,16 +1461,24 @@ template<class T>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\constraints
+\tcode{T} is an unsigned integer type\iref{basic.fundamental}.
+\end{addedblock}
+
 \pnum
 \returns
 If \tcode{x == 0}, \tcode{0};
 otherwise one plus the base-2 logarithm of \tcode{x},
 with any fractional part discarded.
 
+\begin{removedblock}
 \pnum
 \remarks
 This function shall not participate in overload resolution
 unless \tcode{T} is an unsigned integer type\iref{basic.fundamental}.
+\end{removedblock}
 \end{itemdescr}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
