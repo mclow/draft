@@ -2999,7 +2999,7 @@ template<class InputIterator, class Function>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{Function} shall satisfy
 the \oldconcept{MoveConstructible} requirements (\tref{moveconstructible}).
 \begin{note}
@@ -3040,7 +3040,7 @@ template<class ExecutionPolicy, class ForwardIterator, class Function>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{Function} shall satisfy the \oldconcept{CopyConstructible} requirements.
 
 \pnum
@@ -3120,7 +3120,7 @@ template<class InputIterator, class Size, class Function>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{Function} shall satisfy the \oldconcept{MoveConstructible} requirements
 \begin{note}
 \tcode{Function} need not meet
@@ -3128,7 +3128,7 @@ the requirements of \oldconcept{CopyConstructible}.
 \end{note}
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{n >= 0}.
 
 \pnum
@@ -3157,18 +3157,30 @@ template<class ExecutionPolicy, class ForwardIterator, class Size, class Functio
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
 \pnum
-\requires
+Let $N$ be $\max(0, \tcode{n})$.
+
+\pnum
+\mandates
+The type \tcode{Size} shall be convertible
+to an integral type~(\ref{conv.integral}, \ref{class.conv}).
+\end{addedblock}
+
+\pnum
+\changed{\requires}{\expects}
 \tcode{Function} shall satisfy the \oldconcept{CopyConstructible} requirements.
 
+\begin{removedblock}
 \pnum
 \requires
 \tcode{n >= 0}.
+\end{removedblock}
 
 \pnum
 \effects
 Applies \tcode{f} to the result of dereferencing
-every iterator in the range \range{first}{first + n}.
+every iterator in the range \range{first}{first + \changed{n}{N}}.
 \begin{note}
 If the type of \tcode{first} satisfies the requirements of a mutable iterator,
 \tcode{f} may apply non-constant functions through the dereferenced iterator.
@@ -3176,7 +3188,7 @@ If the type of \tcode{first} satisfies the requirements of a mutable iterator,
 
 \pnum
 \returns
-\tcode{first + n}.
+\tcode{first + \changed{n}{N}}
 
 \pnum
 \remarks
@@ -3780,11 +3792,23 @@ template<class ForwardIterator1, class ForwardIterator2,
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \requires
 \tcode{ForwardIterator1} and \tcode{ForwardIterator2} shall have
 the same value type.
 The comparison function shall be an equivalence relation.
+\end{removedblock}
+
+\begin{addedblock}
+\pnum
+\mandates
+\tcode{ForwardIterator1} and \tcode{ForwardIterator2} shall have the same value type.
+
+\pnum
+\expects
+The comparison function shall be an equivalence relation.
+\end{addedblock}
 
 \pnum
 \remarks
@@ -3975,15 +3999,20 @@ template<class ExecutionPolicy, class ForwardIterator, class Size, class T,
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
 \pnum
-\requires
+Let $N$ be $\max(0, \tcode{count})$.
+\end{addedblock}
+
+\pnum
+\changed{\requires}{\mandates}
 The type \tcode{Size}
 shall be convertible to integral type~(\ref{conv.integral}, \ref{class.conv}).
 
 \pnum
 \returns
-The first iterator \tcode{i} in the range \range{first}{last-count}
-such that for every non-negative integer \tcode{n} less than \tcode{count}
+The first iterator \tcode{i} in the range \range{first}{last-\changed{count}{N}}
+such that for every non-negative integer \tcode{n} less than \tcode{\changed{count}{N}}
 the following corresponding conditions hold:
 \tcode{*(i + n) == value, pred(*(i + n),value) != false}.
 Returns \tcode{last} if no such iterator is found.
@@ -4065,7 +4094,7 @@ template<InputRange R, WeaklyIncrementable O>
 Let $N$ be \tcode{last - first}.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{result} shall not be in the range \range{first}{last}.
 
 \pnum
@@ -4100,7 +4129,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The ranges \range{first}{last} and \range{result}{result + (last - first)}
 shall not overlap.
 
@@ -4138,27 +4167,34 @@ template<InputIterator I, WeaklyIncrementable O>
 
 \begin{itemdescr}
 \pnum
-Let $M$ be $\max(\tcode{n}, 0)$.
+Let \changed{$M$ be $\max(\tcode{n}, 0)$}{$N$ be $\max(0, \tcode{n})$}.
+
+\begin{addedblock}
+\pnum
+\mandates
+The type \tcode{Size} shall be convertible
+to an integral type~(\ref{conv.integral}, \ref{class.conv}).
+\end{addedblock}
 
 \pnum
 \effects
-For each non-negative integer $i < M$,
+For each non-negative integer \changed{$i < M$}{$i < N$},
 performs \tcode{*(result + i) = *(first + i)}.
 
 \pnum
 \returns
 \begin{itemize}
 \item
-  \tcode{result + $M$}
+  \tcode{result + \changed{$M$}{$N$}}
   for the overloads in namespace \tcode{std}, or
 \item
-  \tcode{\{first + $M$, result + $M$\}}
+  \tcode{\{first + \changed{$M$}{$N$}, result + \changed{$M$}{$N$}\}}
   for the overload in namespace \tcode{ranges}.
 \end{itemize}
 
 \pnum
 \complexity
-Exactly $M$ assignments.
+Exactly \changed{$M$}{$N$} assignments.
 \end{itemdescr}
 
 \indexlibrary{\idxcode{copy_if}}%
@@ -4199,7 +4235,7 @@ and $N$ be the number of iterators \tcode{i} in the range \range{first}{last}
 for which the condition $E$ holds.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The ranges \range{first}{last} and \range{result}{result + (last - first)}
 shall not overlap.
 \begin{note}
@@ -4259,7 +4295,7 @@ template<BidirectionalRange R, BidirectionalIterator I>
 Let $N$ be \tcode{last - first}.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{result} shall not be in the range \brange{first}{last}.
 
 \pnum
@@ -4320,7 +4356,7 @@ Let $E$ be
 Let $N$ be \tcode{last - first}.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{result} shall not be in the range \range{first}{last}.
 
 \pnum
@@ -4359,7 +4395,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
 Let $N$ be \tcode{last - first}.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The ranges \range{first}{last} and \range{result}{result + $N$}
 shall not overlap.
 
@@ -4410,7 +4446,7 @@ Let $E$ be
 Let $N$ be \tcode{last - first}.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{result} shall not be in the range \brange{first}{last}.
 
 \pnum
@@ -4474,7 +4510,7 @@ Let:
 \end{itemize}
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The two ranges \range{first1}{last1} and \range{first2}{last2}
 shall not overlap.
 For the overloads in namespace \tcode{std},
@@ -4517,7 +4553,7 @@ template<class ForwardIterator1, class ForwardIterator2>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{a} and \tcode{b} shall be dereferenceable. \tcode{*a} shall be
 swappable with\iref{swappable.requirements} \tcode{*b}.
 
@@ -4614,7 +4650,7 @@ Let:
 \end{itemize}
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{op} and \tcode{binary_op} shall not invalidate iterators or subranges, nor
 modify elements in the ranges
 \begin{itemize}
@@ -4707,7 +4743,7 @@ Let $E$ be
 \end{itemize}
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The expression \tcode{*first = new_value} shall be valid.
 
 \pnum
@@ -4799,7 +4835,7 @@ Let $E$ be
 \end{itemize}
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The results of the expressions \tcode{*first} and \tcode{new_value}
 shall be writable\iref{iterator.requirements.general}
 to the \tcode{result} output iterator.
@@ -4861,12 +4897,26 @@ template<class T, OutputIterator<const T&> O>
 Let $N$ be $\max(0, \tcode{n})$ for the \tcode{fill_n} algorithms, and
 \tcode{last - first} for the \tcode{fill} algorithms.
 
+\begin{removedblock}
 \pnum
-\requires
+\expects
 The expression \tcode{value}
 shall be writable\iref{iterator.requirements.general} to the output iterator.
 The type \tcode{Size} shall be convertible
 to an integral type~(\ref{conv.integral}, \ref{class.conv}).
+\end{removedblock}
+
+\begin{addedblock}
+\pnum
+\mandates
+The type \tcode{Size} shall be convertible
+to an integral type~(\ref{conv.integral}, \ref{class.conv}).
+
+\pnum
+\requires
+The expression \tcode{value}
+shall be writable\iref{iterator.requirements.general} to the output iterator.
+\end{addedblock}
 
 \pnum
 \effects
@@ -4918,7 +4968,7 @@ Let $N$ be $\max(0, \tcode{n})$ for the \tcode{generate_n} algorithms, and
 \tcode{last - first} for the \tcode{generate} algorithms.
 
 \pnum
-\requires
+\changed{\requires}{\mandates}
 \tcode{Size} shall be convertible
 to an integral type~(\ref{conv.integral}, \ref{class.conv}).
 
@@ -4986,7 +5036,7 @@ Let $E$ be
 \end{itemize}
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 For the algorithms in namespace \tcode{std},
 the type of \tcode{*first}
 shall meet the \oldconcept{MoveAssignable} requirements (\tref{moveassignable}).
@@ -5082,7 +5132,7 @@ Let $N$ be the number of elements in \range{first}{last}
 for which $E$ is \tcode{false}.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The ranges \range{first}{last} and \range{result}{result + (last - first)}
 shall not overlap. The expression \tcode{*result = *first} shall be valid.
 \begin{note}
@@ -5158,7 +5208,7 @@ let $E$ be
 \end{itemize}
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 For the overloads in namepace \tcode{std},
 \tcode{pred} shall be an equivalence relation and
 the type of \tcode{*first} shall meet
@@ -5240,7 +5290,7 @@ let $E$ be
 \end{itemize}
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 \begin{itemize}
 \item
   The ranges \range{first}{last} and \range{result}{result+(last-first)}
@@ -5315,7 +5365,7 @@ template<BidirectionalRange R>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 For the overloads in namespace \tcode{std},
 \tcode{BidirectionalIterator} shall meet
 the \oldconcept{Value\-Swappable} requirements\iref{swappable.requirements}.
@@ -5363,7 +5413,7 @@ template<BidirectionalRange R, WeaklyIncrementable O>
 Let $N$ be \tcode{last - first}.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The ranges \range{first}{last} and \range{result}{result + $N$}
 shall not overlap.
 
@@ -5406,7 +5456,7 @@ template<Permutable I, Sentinel<I> S>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \range{first}{middle} and \range{middle}{last} shall be valid ranges.
 For the overloads in namespace \tcode{std},
 \tcode{ForwardIterator} shall meet
@@ -5476,7 +5526,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
 Let $N$ be \tcode{last - first}.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 \range{first}{middle} and \range{middle}{last} shall be valid ranges.
 The ranges \range{first}{last} and \range{result}{result + $N$}
 shall not overlap.
@@ -5531,7 +5581,7 @@ template<class PopulationIterator, class SampleIterator,
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \begin{itemize}
 \item
   \tcode{PopulationIterator} shall satisfy
@@ -5609,7 +5659,7 @@ template<RandomAccessRange R, class Gen>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 For the overload in namespace \tcode{std}:
 \begin{itemize}
 \item
@@ -5657,7 +5707,7 @@ template<class ExecutionPolicy, class ForwardIterator>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The type of \tcode{*first} shall satisfy
 the \oldconcept{MoveAssignable} requirements.
 
@@ -5696,7 +5746,7 @@ template<class ExecutionPolicy, class ForwardIterator>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The type of \tcode{*first} shall satisfy
 the \oldconcept{MoveAssignable} requirements.
 \tcode{ForwardIterator} shall meet
@@ -5846,7 +5896,7 @@ and \tcode{proj} be \tcode{identity\{\}}
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 For the overloads in namespace \tcode{std},
 \tcode{RandomAccessIterator} shall meet
 the \oldconcept{Value\-Swappable} requirements\iref{swappable.requirements} and
@@ -5904,7 +5954,7 @@ and \tcode{proj} be \tcode{identity\{\}}
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 For the overloads in namespace \tcode{std},
 \tcode{RandomAccessIterator} shall meet
 the \oldconcept{Value\-Swappable} requirements\iref{swappable.requirements} and
@@ -5973,7 +6023,7 @@ and \tcode{proj} be \tcode{identity\{\}}
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 \range{first}{middle} and \range{middle}{last} shall be valid ranges.
 For the overloads in namespace \tcode{std},
 \tcode{RandomAccessIterator} shall meet
@@ -6076,7 +6126,7 @@ Let \tcode{comp} be \tcode{less\{\}}, and
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 For the overloads in namespace \tcode{std},
 \tcode{RandomAccessIterator} shall meet
 the \oldconcept{Value\-Swappable} requirements\iref{swappable.requirements},
@@ -6277,7 +6327,7 @@ and \tcode{proj} be \tcode{identity\{\}}
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 \range{first}{nth} and \range{nth}{last} shall be valid ranges.
 For the overloads in namespace \tcode{std},
 \tcode{RandomAccessIterator} shall meet
@@ -6370,7 +6420,7 @@ Let \tcode{comp} be \tcode{less\{\}} and
 for overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The elements \tcode{e} of \range{first}{last}
 shall be partitioned with respect to the expression
 \tcode{bool(invoke(comp, invoke(proj, e), value))}.
@@ -6417,7 +6467,7 @@ Let \tcode{comp} be \tcode{less\{\}} and
 for overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The elements \tcode{e} of \range{first}{last}
 shall be partitioned with respect to the expression
 \tcode{!bool(invoke(comp, value, invoke(proj, e)))}.
@@ -6466,7 +6516,7 @@ Let \tcode{comp} be \tcode{less\{\}} and
 for overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The elements \tcode{e} of \range{first}{last}
 shall be partitioned with respect to the expressions
 \tcode{bool(invoke(comp, invoke(proj, e), value))} and
@@ -6530,7 +6580,7 @@ Let \tcode{comp} be \tcode{less\{\}} and
 for overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The elements \tcode{e} of \range{first}{last}
 shall be partitioned with respect to the expressions
 \tcode{bool(invoke(comp, invoke(proj, e), value))} and
@@ -6615,7 +6665,7 @@ for the overloads with no parameter named \tcode{proj}
 and let $E(x)$ be \tcode{bool(invoke(\brk{}pred, invoke(proj, $x$)))}.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 For the overloads in namespace \tcode{std},
 \tcode{ForwardIterator} shall meet
 the \oldconcept{ValueSwappable} requirements\iref{swappable.requirements}.
@@ -6676,7 +6726,7 @@ Let \tcode{proj} be \tcode{identity\{\}}
 for the overloads with no parameter named \tcode{proj}
 and let $E(x)$ be \tcode{bool(invoke(\brk{}pred, invoke(proj, $x$)))}.
 
-\requires
+\changed{\requires}{\expects}
 For the overloads in namespace \tcode{std},
 \tcode{BidirectionalIterator} shall meet
 the \oldconcept{Value\-Swappable} requirements\iref{swappable.requirements} and
@@ -6748,7 +6798,7 @@ for the overloads with no parameter named \tcode{proj} and
 let $E(x)$ be \tcode{bool(invoke(\brk{}pred, invoke(proj, $x$)))}.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The input range and output ranges shall not overlap.
 For the overloads in namespace \tcode{std},
 the expression \tcode{*first}
@@ -6804,7 +6854,7 @@ for the overloads with no parameter named \tcode{proj}
 and let $E(x)$ be \tcode{bool(invoke(\brk{}pred, invoke(proj, $x$)))}.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The elements \tcode{e} of \range{first}{last}
 shall be partitioned with respect to $E(\tcode{e})$.
 
@@ -6877,7 +6927,7 @@ Let \tcode{comp} be \tcode{less\{\}},
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The ranges \range{first1}{last1} and \range{first2}{last2}
 shall be sorted with respect to \tcode{comp} and \tcode{proj1} or \tcode{proj2},
 respectively.
@@ -6957,7 +7007,7 @@ and \tcode{proj} be \tcode{identity\{\}}
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 \range{first}{middle} and \range{middle}{last} shall be valid ranges
 sorted with respect to \tcode{comp} and \tcode{proj}.
 For the overloads in namespace \tcode{std},
@@ -7066,7 +7116,7 @@ Let \tcode{comp} be \tcode{less\{\}},
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The ranges \range{first1}{last1} and \range{first2}{last2} shall be sorted
 with respect to \tcode{comp} and \tcode{proj1} or \tcode{proj2}, respectively.
 
@@ -7140,7 +7190,7 @@ and \tcode{proj1} and \tcode{proj2} be \tcode{identity\{\}}
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The ranges \range{first1}{last1} and \range{first2}{last2} shall be sorted
 with respect to \tcode{comp} and \tcode{proj1} or \tcode{proj2}, respectively.
 The resulting range shall not overlap with either of the original ranges.
@@ -7235,7 +7285,7 @@ and \tcode{proj1} and \tcode{proj2} be \tcode{identity\{\}}
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The ranges \range{first1}{last1} and \range{first2}{last2} shall be sorted
 with respect to \tcode{comp} and \tcode{proj1} or \tcode{proj2}, respectively.
 The resulting range shall not overlap with either of the original ranges.
@@ -7328,7 +7378,7 @@ and \tcode{proj1} and \tcode{proj2} be \tcode{identity\{\}}
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The ranges \range{first1}{last1} and \range{first2}{last2} shall be sorted
 with respect to \tcode{comp} and \tcode{proj1} or \tcode{proj2}, respectively.
 The resulting range shall not overlap with either of the original ranges.
@@ -7423,7 +7473,7 @@ and \tcode{proj1} and \tcode{proj2} be \tcode{identity\{\}}
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The resulting range shall not overlap with either of the original ranges.
 The ranges \range{first1}{last1} and \range{first2}{last2} shall be sorted
 with respect to \tcode{comp} and \tcode{proj1} or \tcode{proj2}, respectively.
@@ -7525,7 +7575,7 @@ and \tcode{proj} be \tcode{identity\{\}}
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The range \range{first}{last - 1}
 shall be a valid heap with respect to \tcode{comp} and \tcode{proj}.
 For the overloads in namespace \tcode{std},
@@ -7576,7 +7626,7 @@ and \tcode{proj} be \tcode{identity\{\}}
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The range \range{first}{last}
 shall be a valid non-empty heap with respect to \tcode{comp} and \tcode{proj}.
 For the overloads in namespace \tcode{std},
@@ -7634,7 +7684,7 @@ and \tcode{proj} be \tcode{identity\{\}}
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 For the overloads in namespace \tcode{std},
 the type of \tcode{*first} shall meet
 the \oldconcept{Move\-Constructible} (\tref{moveconstructible}) and
@@ -7683,7 +7733,7 @@ and \tcode{proj} be \tcode{identity\{\}}
 for the overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The range \range{first}{last} shall be
 a valid heap with respect to \tcode{comp} and \tcode{proj}.
 For the overloads in namespace \tcode{std},
@@ -7848,7 +7898,7 @@ template<class T, class Proj = identity,
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 For the first form, type \tcode{T} shall be
 \oldconcept{LessThanComparable} (\tref{lessthancomparable}).
 
@@ -7887,7 +7937,7 @@ template<InputRange R, class Proj = identity,
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{ranges::distance(r) > 0}.
 For the overloads in namespace \tcode{std},
 \tcode{T} shall be \oldconcept{Copy\-Constructible}.
@@ -7925,7 +7975,7 @@ template<class T, class Proj = identity,
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 For the first form, type \tcode{T} shall be
 \oldconcept{LessThanComparable} (\tref{lessthancomparable}).
 
@@ -7964,7 +8014,7 @@ template<InputRange R, class Proj = identity,
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{ranges::distance(r) > 0}.
 For the overloads in namespace \tcode{std},
 \tcode{T} shall be \oldconcept{Copy\-Constructible}.
@@ -8004,7 +8054,7 @@ template<class T, class Proj = identity,
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 For the first form, type \tcode{T} shall be
 \oldconcept{LessThanComparable} (\tref{lessthancomparable}).
 
@@ -8044,7 +8094,7 @@ template<InputRange R, class Proj = identity,
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{ranges::distance(r) > 0}.
 For the overloads in namespace \tcode{std},
 \tcode{T} shall be \oldconcept{Copy\-Constructible}.
@@ -8224,7 +8274,7 @@ template<class T, class Compare>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The value of \tcode{lo} shall be no greater than \tcode{hi}.
 For the first form, type \tcode{T}
 shall be \oldconcept{LessThan\-Comparable} (\tref{lessthancomparable}).
@@ -8377,7 +8427,7 @@ template<class InputIterator1, class InputIterator2, class Cmp>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{Cmp} shall be a function object type
 whose return type is a comparison category type.
 
@@ -8447,7 +8497,7 @@ and \tcode{proj} be \tcode{identity\{\}}
 for overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 For the overloads in namespace \tcode{std},
 \tcode{BidirectionalIterator} shall meet
 the \oldconcept{Value\-Swappable} requirements\iref{swappable.requirements}.
@@ -8500,7 +8550,7 @@ and \tcode{proj} be \tcode{identity\{\}}
 for overloads with no parameters by those names.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 For the overloads in namespace \tcode{std},
 \tcode{BidirectionalIterator} shall meet
 the \oldconcept{Value\-Swappable} requirements\iref{swappable.requirements}.
@@ -8803,7 +8853,7 @@ template<class InputIterator, class T, class BinaryOperation>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{T} shall satisfy
 the \oldconcept{CopyConstructible} (\tref{copyconstructible})
 and \oldconcept{CopyAssignable} (\tref{copyassignable}) requirements.
@@ -8905,7 +8955,7 @@ template<class ExecutionPolicy, class ForwardIterator, class T, class BinaryOper
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \begin{itemize}
 \item
   \tcode{T} shall be \oldconcept{MoveConstructible} (\tref{moveconstructible}).
@@ -8954,7 +9004,7 @@ template<class InputIterator1, class InputIterator2, class T,
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{T} shall satisfy
 the \oldconcept{CopyConstructible} (\tref{copyconstructible})
 and \oldconcept{CopyAssignable} (\tref{copyassignable}) requirements.
@@ -9036,7 +9086,7 @@ template<class ExecutionPolicy,
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \begin{itemize}
 \item
   \tcode{T} shall be \oldconcept{MoveConstructible} (\tref{moveconstructible}).
@@ -9084,7 +9134,7 @@ template<class ExecutionPolicy,
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \begin{itemize}
 \item
   \tcode{T} shall be \oldconcept{MoveConstructible} (\tref{moveconstructible}).
@@ -9136,7 +9186,7 @@ template<class InputIterator, class OutputIterator, class BinaryOperation>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{InputIterator}'s value type shall be constructible
 from the type of \tcode{*first}.
 The result of the
@@ -9222,7 +9272,7 @@ template<class ExecutionPolicy,
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \begin{itemize}
 \item
   \tcode{T} shall be \oldconcept{MoveConstructible} (\tref{moveconstructible}).
@@ -9324,7 +9374,7 @@ template<class ExecutionPolicy,
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \begin{itemize}
 \item
   If \tcode{init} is provided,
@@ -9400,7 +9450,7 @@ template<class ExecutionPolicy,
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \begin{itemize}
 \item
   \tcode{T} shall be \oldconcept{MoveConstructible} (\tref{moveconstructible}).
@@ -9487,7 +9537,7 @@ template<class ExecutionPolicy,
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \begin{itemize}
 \item
   If \tcode{init} is provided, \tcode{T} shall be
@@ -9580,7 +9630,7 @@ let \tcode{binary_op} be an lvalue
 that denotes an object of type \tcode{minus<>}.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 \begin{itemize}
 \item
   For the overloads with no \tcode{ExecutionPolicy},
@@ -9649,7 +9699,7 @@ template<class ForwardIterator, class T>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\mandates}
 \tcode{T} shall be convertible to \tcode{ForwardIterator}'s value type.
 The expression \tcode{++val}, where \tcode{val} has type \tcode{T},
 shall be well-formed.
@@ -9676,7 +9726,7 @@ template<class M, class N>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 $|\tcode{m}|$ and $|\tcode{n}|$
 shall be representable as a value of \tcode{common_type_t<M, N>}.
 \begin{note}
@@ -9710,7 +9760,7 @@ template<class M, class N>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 $|\tcode{m}|$ and $|\tcode{n}|$
 shall be representable as a value of \tcode{common_type_t<M, N>}.
 The least common multiple of $|\tcode{m}|$ and $|\tcode{n}|$
