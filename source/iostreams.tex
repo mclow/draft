@@ -1447,7 +1447,7 @@ long& iword(int idx);
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{idx} is a value obtained by a call to \tcode{xalloc}.
 
 \pnum
@@ -1497,7 +1497,7 @@ void*& pword(int idx);
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{idx} is a value obtained by a call to \tcode{xalloc}.
 
 \pnum
@@ -1570,10 +1570,10 @@ registration.
 Functions registered while a callback function is active are not called until the next event.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 The function
 \tcode{fn}
-shall not throw exceptions.
+\changed{shall}{does} not throw exceptions.
 
 \pnum
 \remarks
@@ -1948,8 +1948,8 @@ basic_ostream<charT, traits>* tie(basic_ostream<charT, traits>* tiestr);
 
 \begin{itemdescr}
 \pnum
-\requires
-If \tcode{tiestr} is not null, \tcode{tiestr} shall not be reachable by
+\changed{\requires}{\expects}
+If \tcode{tiestr} is not null, \tcode{tiestr} \changed{shall not be}{is not} reachable by
 traversing the linked list of tied stream objects starting from
 \tcode{tiestr->tie()}.
 
@@ -2187,7 +2187,7 @@ void set_rdbuf(basic_streambuf<charT, traits>* sb);
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{sb != nullptr}.
+\changed{\requires}{\expects} \tcode{sb != nullptr}.
 
 \pnum
 \effects Associates the \tcode{basic_streambuf} object
@@ -5608,6 +5608,11 @@ template<class charT, class traits, class T>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\constraints The expression \tcode{is >> std::forward<T>(x)} is well-formed.
+\end{addedblock}
+
 \pnum
 \effects Equivalent to:
 \begin{codeblock}
@@ -5615,9 +5620,11 @@ is >> std::forward<T>(x);
 return is;
 \end{codeblock}
 
+\begin{removedblock}
 \pnum
 \remarks This function shall not participate in overload resolution
 unless the expression \tcode{is >> std::forward<T>(x)} is well-formed.
+\end{removedblock}
 \end{itemdescr}
 
 \rSec3[iostreamclass]{Class template \tcode{basic_iostream}}
@@ -6487,8 +6494,8 @@ template<class traits>
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{s} shall not be a null pointer.
+\changed{\requires}{\expects}
+\tcode{s} \changed{shall not be}{is not} a null pointer.
 
 \pnum
 \effects
@@ -6778,15 +6785,22 @@ template<class charT, class traits, class T>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\constraints The expression \tcode{os << x} is well-formed.
+\end{addedblock}
+
 \pnum
 \effects As if by: \tcode{os << x;}
 
 \pnum
 \returns \tcode{os}.
 
+\begin{removedblock}
 \pnum
 \remarks This function shall not participate in overload resolution
 unless the expression \tcode{os << x} is well-formed.
+\end{removedblock}
 \end{itemdescr}
 
 
@@ -7067,7 +7081,7 @@ template<class moneyT> @\unspec@ get_money(moneyT& mon, bool intl = false);
 
 \begin{itemdescr}
 \pnum
-\requires The type \tcode{moneyT} shall be either \tcode{long double} or a
+\changed{\requires}{\mandates} The type \tcode{moneyT} \changed{shall be}{is} either \tcode{long double} or a
 specialization of the \tcode{basic_string} template\iref{strings}.
 
 \pnum
@@ -7107,7 +7121,7 @@ template<class moneyT> @\unspec@ put_money(const moneyT& mon, bool intl = false)
 
 \begin{itemdescr}
 \pnum
-\requires The type \tcode{moneyT} shall be either \tcode{long double} or a
+\changed{\requires}{\mandates} The type \tcode{moneyT} \changed{shall be}{is} either \tcode{long double} or a
 specialization of the \tcode{basic_string} template\iref{strings}.
 
 \pnum
@@ -7143,8 +7157,8 @@ template<class charT> @\unspec@ get_time(struct tm* tmb, const charT* fmt);
 
 \begin{itemdescr}
 \pnum
-\requires The argument \tcode{tmb} shall be a valid pointer to an object of type \tcode{struct tm}.
-The argument \tcode{fmt} shall be a valid pointer to an array of objects of type \tcode{charT} with \tcode{char_traits<charT>::length(fmt)} elements.
+\changed{\requires}{\expects} The argument \tcode{tmb} \changed{shall be}{is} a valid pointer to an object of type \tcode{struct tm}.
+The argument \tcode{fmt} \changed{shall be}{is} a valid pointer to an array of objects of type \tcode{charT} with \tcode{char_traits<charT>::length(fmt)} elements.
 
 \pnum
 \returns An object of unspecified type such that if \tcode{in} is an object of type
@@ -7180,8 +7194,8 @@ template<class charT> @\unspec@ put_time(const struct tm* tmb, const charT* fmt)
 
 \begin{itemdescr}
 \pnum
-\requires The argument \tcode{tmb} shall be a valid pointer to an object of type
-\tcode{struct tm}, and the argument \tcode{fmt} shall be a valid pointer to an
+\changed{\requires}{\expects} The argument \tcode{tmb} \changed{shall be}{is} a valid pointer to an object of type
+\tcode{struct tm}, and the argument \tcode{fmt} \changed{shall be}{is} a valid pointer to an
 array of objects of type \tcode{charT} with
 \tcode{char_traits<charT>::length(\brk{}fmt)} elements.
 
@@ -9267,7 +9281,7 @@ void imbue(const locale& loc) override;
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 If the file is not positioned at its beginning and the encoding of the current
 locale as determined by
 \tcode{a_codecvt.encoding()}
@@ -10279,7 +10293,7 @@ void swap(basic_syncbuf& other) noexcept;
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 Either
 \tcode{allocator_traits<Allocator>::propagate_on_container_swap::value}
 is \tcode{true}
@@ -11694,7 +11708,7 @@ template<class InputIterator>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\mandates}
 The value type of \tcode{Source} and \tcode{InputIterator} is
 \tcode{char}.
 
@@ -14480,7 +14494,7 @@ void copy(const path& from, const path& to, copy_options options,
 
 \begin{itemdescr}
 \pnum
-\requires At most one element from each option group\iref{fs.enum.copy.opts}
+\changed{\requires}{\expects} At most one element from each option group\iref{fs.enum.copy.opts}
   is set in \tcode{options}.
 
 \pnum
@@ -14654,7 +14668,7 @@ bool copy_file(const path& from, const path& to, copy_options options,
 
 \begin{itemdescr}
 \pnum
-\requires At most one element from each
+\changed{\requires}{\expects} At most one element from each
   option group\iref{fs.enum.copy.opts} is set
   in \tcode{options}.
 
@@ -15405,7 +15419,7 @@ void permissions(const path& p, perms prms, perm_options opts, error_code& ec);
 
 \begin{itemdescr}
 \pnum
-  \requires Exactly one of the \tcode{perm_options} constants
+  \changed{\requires}{\expects} Exactly one of the \tcode{perm_options} constants
   \tcode{replace}, \tcode{add}, or \tcode{remove} is present in \tcode{opts}.
 
 \pnum
