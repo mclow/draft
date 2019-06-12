@@ -998,7 +998,7 @@ regex_error(regex_constants::error_type ecode);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects  Constructs an object of class \tcode{regex_error}.
+\removed{\pnum\effects  Constructs an object of class \tcode{regex_error}.}
 
 \pnum\ensures  \tcode{ecode == code()}.
 \end{itemdescr}
@@ -1052,7 +1052,7 @@ namespace std {
 \indextext{requirements!regular expression traits}%
 \indextext{\idxcode{regex_traits}!specializations}%
 The specializations \tcode{regex_traits<char>} and
-\tcode{regex_traits<wchar_t>} shall be valid and shall satisfy the
+\tcode{regex_traits<wchar_t>} \changed{shall be}{are} valid and shall satisfy the
 requirements for a regular expression traits class\iref{re.req}.
 
 \indexlibrarymember{regex_traits}{char_class_type}%
@@ -1415,8 +1415,9 @@ basic_regex();
 
 \begin{itemdescr}
 \pnum
-\effects  Constructs an object of class \tcode{basic_regex} that
-does not match any character sequence.
+\removed{\effects  Constructs an object of class \tcode{basic_regex} that
+does not match any character sequence.}
+\added{\ensures \tcode{*this} does not match any character sequence.}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{basic_regex}!constructor}%
@@ -1426,17 +1427,21 @@ explicit basic_regex(const charT* p, flag_type f = regex_constants::ECMAScript);
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} \tcode{p} \changed{shall not be}{is not} a null pointer.
+\removed{\requires \tcode{p} shall not be a null pointer.}
+\added{\expects \range{p}{p+char_traits<charT>::length(p)} is a valid range.}
 
 \pnum
-\throws  \tcode{regex_error} if \tcode{p} is not a valid regular expression.
+\throws  \tcode{regex_error} if 
+\changed{\tcode{p}}{\range{p}{p+char_traits<charT>::length(p)}} is not a valid regular expression.
 
 \pnum
-\effects  Constructs an object of class \tcode{basic_regex}; the object's
+\effects  \removed{Constructs an object of class \tcode{basic_regex};} the object's
 internal finite state machine is constructed from the regular
-expression contained in the array of \tcode{charT} of length
+expression contained in the \changed{array of \tcode{charT} of length
 \tcode{char_traits<charT>::\brk{}length(p)} whose first element is
-designated by \tcode{p}, and interpreted according to the flags \tcode{f}.
+designated by \tcode{p}}{sequence of characters 
+\range{p}{p+char_traits<charT>::\brk{}length(p)}}, and 
+interpreted according to the flags \tcode{f}.
 
 \pnum\ensures
 \tcode{flags()} returns \tcode{f}.
@@ -1451,13 +1456,14 @@ basic_regex(const charT* p, size_t len, flag_type f = regex_constants::ECMAScrip
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} \tcode{p} \changed{shall not be}{is not} a null pointer.
+\removed{\requires \tcode{p} shall not be a null pointer.}
+\added{\expects \range{p}{p+len} is a valid range.}
 
 \pnum
-\throws  \tcode{regex_error} if \tcode{p} is not a valid regular expression.
+\throws  \tcode{regex_error} if \changed{\tcode{p}}{\range{p}{p+len}} is not a valid regular expression.
 
 \pnum
-\effects  Constructs an object of class \tcode{basic_regex}; the object's
+\effects  \removed{Constructs an object of class \tcode{basic_regex};} the object's
 internal finite state machine is constructed from the regular
 expression contained in the sequence of characters \range{p}{p+len}, and
 interpreted according the flags specified in \tcode{f}.
@@ -1474,9 +1480,11 @@ basic_regex(const basic_regex& e);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects  Constructs an object of class \tcode{basic_regex} as a copy of
 the object \tcode{e}.
+\end{removedblock}
 
 \pnum\ensures
 \tcode{flags()} and \tcode{mark_count()} return
@@ -1489,8 +1497,10 @@ basic_regex(basic_regex&& e) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects  Move constructs an object of class \tcode{basic_regex} from \tcode{e}.
+\end{removedblock}
 
 \pnum
 \ensures \tcode{flags()} and \tcode{mark_count()} return the values that
@@ -1510,7 +1520,7 @@ template<class ST, class SA>
 \throws  \tcode{regex_error} if \tcode{s} is not a valid regular expression.
 
 \pnum
-\effects  Constructs an object of class \tcode{basic_regex}; the object's
+\effects  \removed{Constructs an object of class \tcode{basic_regex};} the object's
 internal finite state machine is constructed from the regular
 expression contained in the string \tcode{s}, and interpreted according to the
 flags specified in \tcode{f}.
@@ -1534,7 +1544,7 @@ template<class ForwardIterator>
 valid regular expression.
 
 \pnum
-\effects  Constructs an object of class \tcode{basic_regex}; the object's
+\effects  \removed{Constructs an object of class \tcode{basic_regex};} the object's
 internal finite state machine is constructed from the regular
 expression contained in the sequence of characters \range{first}{last}, and
 interpreted according to the flags specified in \tcode{f}.
@@ -2545,8 +2555,10 @@ explicit match_results(const Allocator& a);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects  Constructs an object of class \tcode{match_results}.
+\end{removedblock}
 
 \pnum
 \ensures

@@ -42,9 +42,11 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 
 %\begin{multicols}{3}
 \begin{itemize}
+\item{re.badexp}			\ref{re.badexp}
 \item{re.traits}			\ref{re.traits}
 \item{re.regex.construct}	\ref{re.regex.construct}
 \item{re.regex.assign}		\ref{re.regex.assign}
+\item{re.results.const}		\ref{re.results.const}
 \item{re.results.acc}		\ref{re.results.acc}
 \item{re.results.form}		\ref{re.results.form}
 \item{re.alg.match}			\ref{re.alg.match}
@@ -52,11 +54,11 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \end{itemize}
 %\end{multicols}
 
-%Drive-by fixes:
-%\begin{itemize}
-%\item{All of the \*_n algorithms now treat their \tcode{Size} parameter the same way. This also resolves LWG\#3213.}
-%\item{As I was "de-shalling" all the Requirements, I applied the guidance at https://github.com/cplusplus/draft/wiki/Specification-Style-Guidelines\#requirements-expressed-by-concepts. }
-%\end{itemize}
+Drive-by fixes:
+\begin{itemize}
+\item{"De-shalled" re.traits/1 (\ref{re.traits}).}
+\item{reworded a bunch of constructor details in re.badexp (\ref{re.badexp}),  re.regex.construct (\ref{re.regex.construct}), and re.results.const (\ref{re.results.const}).}
+\end{itemize}
 
 %Open questions:
 %\begin{itemize}
