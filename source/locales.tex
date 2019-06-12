@@ -439,7 +439,7 @@ In declarations of facets, a template parameter with name
 or
 \tcode{OutputIterator}
 indicates the set of
-all possible specializations on parameters that satisfy the
+all possible specializations on parameters that \changed{satisfy}{meet} the
 \oldconcept{InputIterator} requirements or \oldconcept{OutputIterator}
 requirements, respectively\iref{iterator.requirements}.
 A template parameter with name
@@ -447,7 +447,7 @@ A template parameter with name
 represents the set
 of types containing \tcode{char}, \tcode{wchar_t}, and any other
 \impldef{set of character types that iostreams templates can be instantiated for}
-character types that satisfy
+character types that \changed{satisfy}{meet}
 the requirements for a character on which any of the iostream
 components can be instantiated.
 A template parameter with name
@@ -581,8 +581,10 @@ locale() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 Default constructor: a snapshot of the current global locale.
+\end{removedblock}
 
 \pnum
 \effects
@@ -1629,7 +1631,7 @@ explicit ctype(const mask* tbl = nullptr, bool del = false, size_t refs = 0);
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{tbl} either \changed{0}{nullptr} or an array of at least
+\tcode{tbl} \added{is} either \changed{0}{nullptr} or \added{a pointer to} an array of at least
 \tcode{table_size}
 elements.
 
