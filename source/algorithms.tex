@@ -7919,8 +7919,8 @@ template<class T, class Proj = identity,
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-For the first form, type \tcode{T} \changed{shall be}{is}
-\oldconcept{LessThanComparable} (\tref{lessthancomparable}).
+For the first form, type \tcode{T} \changed{shall be}{meets the}
+\oldconcept{LessThanComparable} \added{requirements} (\tref{lessthancomparable}).
 
 \pnum
 \returns
@@ -7960,8 +7960,11 @@ template<InputRange R, class Proj = identity,
 \changed{\requires}{\expects}
 \tcode{ranges::distance(r) > 0}.
 For the overloads in namespace \tcode{std},
-\tcode{T} \changed{shall be}{is} \oldconcept{Copy\-Constructible}.
-For the first form, type \tcode{T} \changed{shall be}{is} \oldconcept{LessThanComparable}.
+\tcode{T} \changed{shall be}{meets the} \oldconcept{Copy\-Constructible} \added{requirements}.
+For the first form, type \tcode{T} \changed{shall be}{meets the} \oldconcept{LessThanComparable}
+\begin{addedblock}
+requirements (\tref{lessthancomparable}).
+\end{addedblock}
 
 \pnum
 \returns
@@ -7996,8 +7999,8 @@ template<class T, class Proj = identity,
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-For the first form, type \tcode{T} \changed{shall be}{is}
-\oldconcept{LessThanComparable} (\tref{lessthancomparable}).
+For the first form, type \tcode{T} \changed{shall be}{meets the}
+\oldconcept{LessThanComparable} \added{requirements} (\tref{lessthancomparable}).
 
 \pnum
 \returns
@@ -8038,7 +8041,10 @@ template<InputRange R, class Proj = identity,
 \tcode{ranges::distance(r) > 0}.
 For the overloads in namespace \tcode{std},
 \tcode{T} \changed{shall be}{is} \oldconcept{Copy\-Constructible}.
-For the first form, type \tcode{T} \changed{shall be}{is} \oldconcept{LessThanComparable}.
+For the first form, type \tcode{T} \changed{shall be}{meets the} \oldconcept{LessThanComparable}
+\begin{addedblock}
+requirements (\tref{lessthancomparable}).
+\end{addedblock}
 
 \pnum
 \returns
@@ -8075,8 +8081,8 @@ template<class T, class Proj = identity,
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-For the first form, type \tcode{T} \changed{shall be}{is}
-\oldconcept{LessThanComparable} (\tref{lessthancomparable}).
+For the first form, type \tcode{T} \changed{shall be}{meets the}
+\oldconcept{LessThanComparable} \added {requirements} (\tref{lessthancomparable}).
 
 \pnum
 \returns
@@ -8118,7 +8124,10 @@ template<InputRange R, class Proj = identity,
 \tcode{ranges::distance(r) > 0}.
 For the overloads in namespace \tcode{std},
 \tcode{T} \changed{shall be}{is} \oldconcept{Copy\-Constructible}.
-For the first form, type \tcode{T} \changed{shall be}{is} \oldconcept{LessThanComparable}.
+For the first form, type \tcode{T} \changed{shall be}{meets the} \oldconcept{LessThanComparable}
+\begin{addedblock}
+requirements (\tref{lessthancomparable}).
+\end{addedblock}
 
 \pnum
 \returns
@@ -8297,7 +8306,8 @@ template<class T, class Compare>
 \changed{\requires}{\expects}
 The value of \tcode{lo} \changed{shall be}{is} no greater than \tcode{hi}.
 For the first form, type \tcode{T}
-\changed{shall be}{is} \oldconcept{LessThan\-Comparable} (\tref{lessthancomparable}).
+\changed{shall be}{meets the} \oldconcept{LessThan\-Comparable}
+\added{requirements} (\tref{lessthancomparable}).
 
 \pnum
 \returns
