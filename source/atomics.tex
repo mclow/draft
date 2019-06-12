@@ -9,25 +9,17 @@ provided via operations on atomic objects.
 
 \pnum
 The following subclauses describe atomics requirements and components for types
-and operations, as summarized below.
+and operations, as summarized in \tref{atomics.lib.summary}.
 
 \begin{libsumtab}{Atomics library summary}{tab:atomics.lib.summary}
-\ref{atomics.alias} & Type aliases &
-  \\ \rowsep
-\ref{atomics.order} & Order and consistency   &
-  \\ \rowsep
-\ref{atomics.lockfree}  & Lock-free property   &
-  \\ \rowsep
-\ref{atomics.ref.generic} & Class template \tcode{atomic_ref} & \tcode{<atomic>}
-  \\ \rowsep
-\ref{atomics.types.generic} & Class template \tcode{atomic}   & \tcode{<atomic>}
-  \\ \rowsep
-\ref{atomics.nonmembers}  & Non-member functions & \tcode{<atomic>}
-  \\ \rowsep
-\ref{atomics.flag}  & Flag type and operations   & \tcode{<atomic>}
-  \\ \rowsep
-\ref{atomics.fences}  & Fences   & \tcode{<atomic>}
-  \\ \rowsep
+\ref{atomics.alias} & Type aliases  & \tcode{<atomic>} \\
+\ref{atomics.order} & Order and consistency   &  \\
+\ref{atomics.lockfree}  & Lock-free property   &  \\
+\ref{atomics.ref.generic} & Class template \tcode{atomic_ref} &  \\
+\ref{atomics.types.generic} & Class template \tcode{atomic}   &  \\
+\ref{atomics.nonmembers}  & Non-member functions &  \\
+\ref{atomics.flag}  & Flag type and operations   &  \\
+\ref{atomics.fences}  & Fences   &  \\
 \end{libsumtab}
 
 \rSec1[atomics.syn]{Header \tcode{<atomic>} synopsis}
@@ -1350,8 +1342,18 @@ namespace std {
 
 \indexlibrary{\idxcode{atomic}}%
 \pnum
-The template argument for
-\tcode{T} shall be trivially copyable\iref{basic.types}. \begin{note} Type arguments that are
+The template argument for \tcode{T} shall meet the
+\oldconcept{CopyConstructible} and \oldconcept{CopyAssignable} requirements.
+The program is ill-formed if any of
+\begin{itemize}
+\item \tcode{is_trivially_copyable_v<T>},
+\item \tcode{is_copy_constructible_v<T>},
+\item \tcode{is_move_constructible_v<T>},
+\item \tcode{is_copy_assignable_v<T>}, or
+\item \tcode{is_move_assignable_v<T>}
+\end{itemize}
+is \tcode{false}.
+\begin{note} Type arguments that are
 not also statically initializable may be difficult to use. \end{note}
 
 \pnum
@@ -1651,7 +1653,7 @@ do {
 \end{example}
 \begin{example} Because the expected value is updated only on failure,
 code releasing the memory containing the \tcode{expected} value on success will work.
-E.g. list head insertion will act atomically and would not introduce a
+For example, list head insertion will act atomically and would not introduce a
 data race in the following code:
 \begin{codeblock}
 do {
@@ -1715,7 +1717,7 @@ bool zap() {
 \begin{note}
 For a union with bits that participate in the value representation
 of some members but not others, compare-and-exchange might always fail.
-This is because such padding bits have an indeteminate value when they
+This is because such padding bits have an indeterminate value when they
 do not participate in the value representation of the active member.
 As a consequence, the following code is not guaranteed to ever succeed:
 \begin{codeblock}

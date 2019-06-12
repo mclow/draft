@@ -26,15 +26,14 @@ as summarized in \tref{iostreams.lib.summary}.
 \ref{iostream.objects}        & Standard iostream objects   & \tcode{<iostream>}   \\ \rowsep
 \ref{iostreams.base}          & Iostreams base classes      & \tcode{<ios>}        \\ \rowsep
 \ref{stream.buffers}          & Stream buffers              & \tcode{<streambuf>}  \\ \rowsep
-\ref{iostream.format}         & Formatting and manipulators & \tcode{<istream>}    \\
-                              &                             & \tcode{<ostream>}    \\
-                              &                             & \tcode{<iomanip>}    \\ \rowsep
+\ref{iostream.format}         & Formatting and manipulators &
+  \tcode{<iomanip>}, \tcode{<istream>}, \tcode{<ostream>}   \\ \rowsep
 \ref{string.streams}          & String streams              & \tcode{<sstream>}    \\ \rowsep
 \ref{file.streams}            & File streams                & \tcode{<fstream>}    \\ \rowsep
 \ref{syncstream}              & Synchronized output streams & \tcode{<syncstream>} \\ \rowsep
 \ref{filesystems}             & File systems                & \tcode{<filesystem>} \\ \rowsep
-\ref{c.files}                 & C library files             & \tcode{<cstdio>}     \\
-                              &                             & \tcode{<cinttypes>}  \\
+\ref{c.files}                 & C library files             &
+  \tcode{<cstdio>}, \tcode{<cinttypes>}  \\
 \end{libsumtab}
 
 \pnum
@@ -169,12 +168,12 @@ library call \textit{b} such that this does not result in a data race, then
 \indexlibrary{\idxcode{u32streampos}}%
 \begin{codeblock}
 namespace std {
-  template<class charT> class char_traits;
-  template<> class char_traits<char>;
-  template<> class char_traits<char8_t>;
-  template<> class char_traits<char16_t>;
-  template<> class char_traits<char32_t>;
-  template<> class char_traits<wchar_t>;
+  template<class charT> struct char_traits;
+  template<> struct char_traits<char>;
+  template<> struct char_traits<char8_t>;
+  template<> struct char_traits<char16_t>;
+  template<> struct char_traits<char32_t>;
+  template<> struct char_traits<wchar_t>;
 
   template<class T> class allocator;
 
@@ -748,7 +747,7 @@ namespace std {
   public:
     class failure; // see below
 
-    // \ref{ios::fmtflags}, \tcode{fmtflags}
+    // \ref{ios.fmtflags}, \tcode{fmtflags}
     using fmtflags = @\textit{T1}@;
     static constexpr fmtflags boolalpha = @\unspec@;
     static constexpr fmtflags dec = @\unspec@;
@@ -769,14 +768,14 @@ namespace std {
     static constexpr fmtflags basefield = @\seebelow@;
     static constexpr fmtflags floatfield = @\seebelow@;
 
-    // \ref{ios::iostate}, \tcode{iostate}
+    // \ref{ios.iostate}, \tcode{iostate}
     using iostate = @\textit{T2}@;
     static constexpr iostate badbit = @\unspec@;
     static constexpr iostate eofbit = @\unspec@;
     static constexpr iostate failbit = @\unspec@;
     static constexpr iostate goodbit = @\seebelow@;
 
-    // \ref{ios::openmode}, \tcode{openmode}
+    // \ref{ios.openmode}, \tcode{openmode}
     using openmode = @\textit{T3}@;
     static constexpr openmode app = @\unspec@;
     static constexpr openmode ate = @\unspec@;
@@ -785,7 +784,7 @@ namespace std {
     static constexpr openmode out = @\unspec@;
     static constexpr openmode trunc = @\unspec@;
 
-    // \ref{ios::seekdir}, \tcode{seekdir}
+    // \ref{ios.seekdir}, \tcode{seekdir}
     using seekdir = @\textit{T4}@;
     static constexpr seekdir beg = @\unspec@;
     static constexpr seekdir cur = @\unspec@;
@@ -889,7 +888,7 @@ arbitrary-length pointer array maintained for the private use of the program.
 
 \rSec3[ios.types]{Types}
 
-\rSec4[ios::failure]{Class \tcode{ios_base::failure}}
+\rSec4[ios.failure]{Class \tcode{ios_base::failure}}
 
 \indexlibrary{\idxcode{ios_base::failure}}%
 \indexlibrary{\idxcode{ios_base}!\idxcode{failure}}%
@@ -952,7 +951,7 @@ Constructs an object of class
 \tcode{failure} by constructing the base class with \tcode{msg} and \tcode{ec}.
 \end{itemdescr}
 
-\rSec4[ios::fmtflags]{Type \tcode{ios_base::fmtflags}}
+\rSec4[ios.fmtflags]{Type \tcode{ios_base::fmtflags}}
 
 \indexlibrarymember{fmtflags}{ios_base}%
 \begin{itemdecl}
@@ -1015,7 +1014,7 @@ also defines the constants indicated in \tref{iostreams.fmtflags.constants}.
 \end{floattable}
 \end{itemdescr}
 
-\rSec4[ios::iostate]{Type \tcode{ios_base::iostate}}
+\rSec4[ios.iostate]{Type \tcode{ios_base::iostate}}
 
 \indexlibrarymember{iostate}{ios_base}%
 \begin{itemdecl}
@@ -1051,7 +1050,7 @@ the value zero.
 \end{itemize}
 \end{itemdescr}
 
-\rSec4[ios::openmode]{Type \tcode{ios_base::openmode}}
+\rSec4[ios.openmode]{Type \tcode{ios_base::openmode}}
 
 \indexlibrarymember{openmode}{ios_base}%
 \begin{itemdecl}
@@ -1081,7 +1080,7 @@ It contains the elements indicated in \tref{iostreams.openmode.effects}.
 \end{libefftab}
 \end{itemdescr}
 
-\rSec4[ios::seekdir]{Type \tcode{ios_base::seekdir}}
+\rSec4[ios.seekdir]{Type \tcode{ios_base::seekdir}}
 
 \indexlibrarymember{seekdir}{ios_base}%
 \begin{itemdecl}
@@ -1105,7 +1104,7 @@ that contains the elements indicated in \tref{iostreams.seekdir.effects}.
 \end{libefftabmean}
 \end{itemdescr}
 
-\rSec4[ios::Init]{Class \tcode{ios_base::Init}}
+\rSec4[ios.init]{Class \tcode{ios_base::Init}}
 
 \indexlibrary{\idxcode{ios_base::Init}}%
 \indexlibrary{\idxcode{ios_base}!\idxcode{Init}}%
@@ -2256,7 +2255,7 @@ otherwise
 If \tcode{((state | (rdbuf() ? goodbit : badbit)) \& exceptions()) == 0},
 returns.
 Otherwise, the function throws an object of class
-\tcode{basic_ios::failure}\iref{ios::failure},
+\tcode{basic_ios::failure}\iref{ios.failure},
 constructed with
 \impldef{argument values to construct \tcode{basic_ios::failure}}
 argument values.%
@@ -2273,7 +2272,7 @@ void setstate(iostate state);
 Calls
 \tcode{clear(rdstate() | state)}
 (which may throw
-\tcode{basic_ios::failure}\iref{ios::failure}).
+\tcode{basic_ios::failure}\iref{ios.failure}).
 \end{itemdescr}
 
 \indexlibrarymember{good}{basic_ios}%
@@ -4206,7 +4205,7 @@ namespace std {
     explicit basic_istream(basic_streambuf<charT, traits>* sb);
     virtual ~basic_istream();
 
-    // \ref{istream::sentry}, prefix/suffix
+    // \ref{istream.sentry}, prefix/suffix
     class sentry;
 
     // \ref{istream.formatted}, formatted input
@@ -4417,7 +4416,7 @@ Exchanges the values returned by \tcode{gcount()} and
 \tcode{rhs.gcount()}.
 \end{itemdescr}
 
-\rSec4[istream::sentry]{Class \tcode{basic_istream::sentry}}
+\rSec4[istream.sentry]{Class \tcode{basic_istream::sentry}}
 
 \indexlibrary{\idxcode{basic_istream::sentry}}%
 \indexlibrary{\idxcode{sentry}!\idxcode{basic_istream}}%
@@ -5587,7 +5586,7 @@ does not affect the value returned by subsequent calls to \tcode{is.gcount()}. A
 constructing a sentry object extracts characters as long as the next available
 character \tcode{c} is whitespace or until there are no more characters in the sequence.
 Whitespace characters are distinguished with the same criterion as used by
-\tcode{sentry::sentry}\iref{istream::sentry}.
+\tcode{sentry::sentry}\iref{istream.sentry}.
 If
 \tcode{ws}
 stops extracting characters because there are no more available it sets
@@ -5767,7 +5766,7 @@ namespace std {
     explicit basic_ostream(basic_streambuf<char_type, traits>* sb);
     virtual ~basic_ostream();
 
-    // \ref{ostream::sentry}, prefix/suffix
+    // \ref{ostream.sentry}, prefix/suffix
     class sentry;
 
     // \ref{ostream.formatted}, formatted output
@@ -5963,7 +5962,7 @@ void swap(basic_ostream& rhs);
 \effects Calls \tcode{basic_ios<charT, traits>::swap(rhs)}.
 \end{itemdescr}
 
-\rSec4[ostream::sentry]{Class \tcode{basic_ostream::sentry}}
+\rSec4[ostream.sentry]{Class \tcode{basic_ostream::sentry}}
 
 \indexlibrary{\idxcode{basic_ostream::sentry}}%
 \indexlibrary{\idxcode{sentry}!\idxcode{basic_ostream}}%
@@ -7271,7 +7270,7 @@ and \tcode{traits}, respectively, then the expression
 \tcode{in >> quoted(s, delim, escape)} behaves as if it extracts the following
 characters from \tcode{in} using
 \tcode{operator>>(basic_istream<charT, traits>\&, charT\&)}\iref{istream.extractors}
-which may throw \tcode{ios_base::failure}\iref{ios::failure}:
+which may throw \tcode{ios_base::failure}\iref{ios.failure}:
 \begin{itemize}
 \item If the first character extracted is equal to \tcode{delim}, as
 determined by \tcode{traits_type::eq}, then:
@@ -7794,9 +7793,9 @@ controlled sequences, if possible, as indicated in \tref{iostreams.seekoff.posit
 \tcode{ios_base::out)) ==}\br
 \tcode{(ios_base::in |}\br
 \tcode{ios_base::out)}\br
-and \tcode{way ==} either\br
-\tcode{ios_base::beg} or\br
-\tcode{ios_base::end}     &
+and either\br
+\tcode{way == ios_base::beg} or\br
+\tcode{way == ios_base::end}     &
  positions both the input and the output sequences  \\ \rowsep
 Otherwise &
  the positioning operation fails. \\
@@ -10713,8 +10712,8 @@ operating system or other APIs. \end{note}
 
 \pnum
 Implementations should provide such behavior as it is defined by
-POSIX. Implementations shall document any behavior that differs from the
-behavior defined by POSIX. Implementations that do not support exact POSIX
+POSIX\@. Implementations shall document any behavior that differs from the
+behavior defined by POSIX\@. Implementations that do not support exact POSIX
 behavior should provide behavior as close to POSIX behavior as is reasonable given the
 limitations of actual operating systems and file systems. If an implementation cannot provide any
 reasonable behavior, the implementation shall report an error as specified in~\ref{fs.err.report}.
@@ -10769,7 +10768,7 @@ is unreasonable for a program to detect them prior to calling the function.
 \pnum
 This subclause mentions commercially
 available operating systems for purposes of exposition.\footnote{
-POSIX\textregistered\ is a registered trademark of The IEEE.
+POSIX\textregistered\ is a registered trademark of The IEEE\@.
 Windows\textregistered\ is a registered trademark of Microsoft Corporation.
 This information is given for the convenience of users of this document and
 does not constitute an endorsement by ISO or IEC of these
@@ -10822,13 +10821,13 @@ namespace std::filesystem {
   void swap(path& lhs, path& rhs) noexcept;
   size_t hash_value(const path& p) noexcept;
 
-  // \ref{fs.class.filesystem_error}, filesystem errors
+  // \ref{fs.class.filesystem.error}, filesystem errors
   class filesystem_error;
 
-  // \ref{fs.class.directory_entry}, directory entries
+  // \ref{fs.class.directory.entry}, directory entries
   class directory_entry;
 
-  // \ref{fs.class.directory_iterator}, directory iterators
+  // \ref{fs.class.directory.iterator}, directory iterators
   class directory_iterator;
 
   // \ref{fs.dir.itr.nonmembers}, range access for directory iterators
@@ -10842,7 +10841,7 @@ namespace std::filesystem {
   recursive_directory_iterator begin(recursive_directory_iterator iter) noexcept;
   recursive_directory_iterator end(const recursive_directory_iterator&) noexcept;
 
-  // \ref{fs.class.file_status}, file status
+  // \ref{fs.class.file.status}, file status
   class file_status;
 
   struct space_info {
@@ -11584,14 +11583,14 @@ shall be one of:
 \item \tcode{basic_string_view<EcharT, traits>}. A function
   argument \tcode{const Source\&} \tcode{source} shall have an
   effective range \range{source.begin()}{source.end()}.
-\item A type meeting the \oldconcept{InputIterator} requirements that iterates over a NTCTS.
+\item A type meeting the \oldconcept{InputIterator} requirements that iterates over a NTCTS\@.
   The value type shall be an encoded character type. A function argument
   \tcode{const Source\&} \tcode{source} shall have an effective range
   \range{source}{end} where \tcode{end} is the first
   iterator value with an element value equal to
   \tcode{iterator_traits<Source>::value_type()}.
 \item A character array that after array-to-pointer decay results in a
-  pointer to the start of a NTCTS. The value type shall be an encoded character type. A
+  pointer to the start of a NTCTS\@. The value type shall be an encoded character type. A
   function argument \tcode{const Source\&} \tcode{source} shall
   have an effective range \range{source}{end} where
   \tcode{end} is the first iterator value with an element value equal to
@@ -12429,7 +12428,7 @@ even though the generic format pathnames are the same.
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{true} if the pathname in the generic format is empty, else \tcode{false}.
+\returns \tcode{true} if the pathname in the generic format is empty, otherwise \tcode{false}.
 \end{itemdescr}
 
 \indexlibrarymember{has_root_path}{path}%
@@ -12520,7 +12519,7 @@ bool is_absolute() const;
 \begin{itemdescr}
 \pnum
 \returns \tcode{true} if the pathname in the native format
-  contains an absolute path\iref{fs.class.path}, else \tcode{false}.
+  contains an absolute path\iref{fs.class.path}, otherwise \tcode{false}.
 
 \pnum
 \begin{example} \tcode{path("/").is_absolute()} is
@@ -12862,7 +12861,7 @@ friend path operator/ (const path& lhs, const path& rhs);
 \effects Equivalent to: \tcode{return path(lhs) /= rhs;}
 \end{itemdescr}
 
-\rSec2[fs.class.filesystem_error]{Class \tcode{filesystem_error}}
+\rSec2[fs.class.filesystem.error]{Class \tcode{filesystem_error}}
 
 \indexlibrary{\idxcode{filesystem_error}}%
 \begin{codeblock}
@@ -12886,7 +12885,7 @@ The class \tcode{filesystem_error} defines the type of
 objects thrown as exceptions to report file system errors from functions described in this
 subclause.
 
-\rSec3[fs.filesystem_error.members]{Members}
+\rSec3[fs.filesystem.error.members]{Members}
 
 \pnum
  Constructors are provided that store zero, one, or two paths associated with
@@ -12904,7 +12903,7 @@ filesystem_error(const string& what_arg, error_code ec);
 \item \tcode{code() == ec},
 \item \tcode{path1().empty() == true},
 \item \tcode{path2().empty() == true}, and
-\item \tcode{string_view(what()).find(what_arg)} \tcode{!= string_view::npos}.
+\item \tcode{string_view(what()).find(what_arg.c_str())} \tcode{!= string_view::npos}.
 \end{itemize}
 \end{itemdescr}
 
@@ -12920,7 +12919,7 @@ filesystem_error(const string& what_arg, const path& p1, error_code ec);
 \item \tcode{code() == ec},
 \item \tcode{path1()} returns a reference to the stored copy of \tcode{p1},
 \item \tcode{path2().empty() == true}, and
-\item \tcode{string_view(what()).find(what_arg)} \tcode{!= string_view::npos}.
+\item \tcode{string_view(what()).find(what_arg.c_str())} \tcode{!= string_view::npos}.
 \end{itemize}
 \end{itemdescr}
 
@@ -12936,7 +12935,7 @@ filesystem_error(const string& what_arg, const path& p1, const path& p2, error_c
 \item \tcode{code() == ec},
 \item \tcode{path1()} returns a reference to the stored copy of \tcode{p1},
 \item \tcode{path2()} returns a reference to the stored copy of \tcode{p2}, and
-\item \tcode{string_view(what()).find(what_arg)} \tcode{!= string_view::npos}.
+\item \tcode{string_view(what()).find(what_arg.c_str())} \tcode{!= string_view::npos}.
 \end{itemize}
 \end{itemdescr}
 
@@ -13003,16 +13002,16 @@ sequence, with the meanings listed in \tref{enum.path.format}.
   \end{note} \\\rowsep
 \end{floattable}
 
-\rSec3[fs.enum.file_type]{Enum class \tcode{file_type}}
+\rSec3[fs.enum.file.type]{Enum class \tcode{file_type}}
 
 \indexlibrary{\idxcode{file_type}}%
 \pnum
 This enum class specifies constants used to identify file types,
-with the meanings listed in \tref{fs.enum.file_type}.
+with the meanings listed in \tref{fs.enum.file.type}.
 The values of the constants are distinct.
 
 \begin{floattable}
-{Enum class \tcode{file_type}}{tab:fs.enum.file_type}
+{Enum class \tcode{file_type}}{tab:fs.enum.file.type}
 {lp{4.5in}}
 \topline
 \lhdr{Constant}	&
@@ -13182,10 +13181,10 @@ passed to \tcode{permissions}.
   \tcode{permissions} shall replace the file's permission bits with \tcode{perm} \\ \rowsep
 \tcode{add} &
   \tcode{permissions} shall replace the file's permission bits with
-  the bitwise OR of \tcode{perm} and the file's current permission bits. \\ \rowsep
+  the bitwise \logop{OR} of \tcode{perm} and the file's current permission bits. \\ \rowsep
 \tcode{remove} &
   \tcode{permissions} shall replace the file's permission bits with
-  the bitwise AND of the complement of \tcode{perm} and the file's current permission bits. \\ \rowsep
+  the bitwise \logop{AND} of the complement of \tcode{perm} and the file's current permission bits. \\ \rowsep
 \tcode{nofollow} &
   \tcode{permissions} shall change the permissions of a symbolic link itself
   rather than the permissions of the file the link resolves to. \\
@@ -13217,14 +13216,14 @@ Follow rather than skip directory symlinks. \\ \rowsep
 Skip directories that would otherwise result in permission denied. \\
 \end{floattable}
 
-\rSec2[fs.class.file_status]{Class \tcode{file_status}}
+\rSec2[fs.class.file.status]{Class \tcode{file_status}}
 
 \indexlibrary{\idxcode{file_status}}%
 \begin{codeblock}
 namespace std::filesystem {
   class file_status {
   public:
-    // \ref{fs.file_status.cons}, constructors and destructor
+    // \ref{fs.file.status.cons}, constructors and destructor
     file_status() noexcept : file_status(file_type::none) {}
     explicit file_status(file_type ft,
                          perms prms = perms::unknown) noexcept;
@@ -13236,11 +13235,11 @@ namespace std::filesystem {
     file_status& operator=(const file_status&) noexcept = default;
     file_status& operator=(file_status&&) noexcept = default;
 
-    // \ref{fs.file_status.mods}, modifiers
+    // \ref{fs.file.status.mods}, modifiers
     void       type(file_type ft) noexcept;
     void       permissions(perms prms) noexcept;
 
-    // \ref{fs.file_status.obs}, observers
+    // \ref{fs.file.status.obs}, observers
     file_type  type() const noexcept;
     perms      permissions() const noexcept;
   };
@@ -13250,7 +13249,7 @@ namespace std::filesystem {
 \pnum
 An object of type \tcode{file_status} stores information about the type
 and permissions of a file.
-\rSec3[fs.file_status.cons]{Constructors}
+\rSec3[fs.file.status.cons]{Constructors}
 
 \indexlibrary{\idxcode{file_status}!constructor}%
 \begin{itemdecl}
@@ -13262,7 +13261,7 @@ explicit file_status(file_type ft, perms prms = perms::unknown) noexcept;
 \ensures \tcode{type() == ft} and \tcode{permissions() == prms}.
 \end{itemdescr}
 
-\rSec3[fs.file_status.obs]{Observers}
+\rSec3[fs.file.status.obs]{Observers}
 
 \indexlibrarymember{type}{file_status}%
 \begin{itemdecl}
@@ -13286,7 +13285,7 @@ perms permissions() const noexcept;
   \tcode{operator=}, or \tcode{permissions(perms)} function.
 \end{itemdescr}
 
-\rSec3[fs.file_status.mods]{Modifiers}
+\rSec3[fs.file.status.mods]{Modifiers}
 
 \indexlibrarymember{type}{file_status}%
 \begin{itemdecl}
@@ -13308,7 +13307,7 @@ void permissions(perms prms) noexcept;
 \ensures \tcode{permissions() == prms}.
 \end{itemdescr}
 
-\rSec2[fs.class.directory_entry]{Class \tcode{directory_entry}}
+\rSec2[fs.class.directory.entry]{Class \tcode{directory_entry}}
 
 \indexlibrary{\idxcode{directory_entry}}%
 \begin{codeblock}
@@ -13396,7 +13395,7 @@ Such stored file attribute values are said to be \defnx{cached}{file attributes!
 \pnum
 \begin{note}
 For purposes of exposition,
-class \tcode{directory_iterator}\iref{fs.class.directory_iterator}
+class \tcode{directory_iterator}\iref{fs.class.directory.iterator}
 is shown above as a friend of class \tcode{directory_entry}.
 Friendship allows the \tcode{directory_iterator} implementation to cache
 already available attribute values
@@ -13507,7 +13506,7 @@ and the values of any cached attributes are unspecified.
 
 \pnum
 \begin{note}
-Implementations of \tcode{directory_iterator}\iref{fs.class.directory_iterator}
+Implementations of \tcode{directory_iterator}\iref{fs.class.directory.iterator}
 are prohibited from directly or indirectly calling the \tcode{refresh} function
 since it must access the external file system,
 and the objective of caching is to avoid unnecessary file system accesses.
@@ -13794,13 +13793,13 @@ bool operator>=(const directory_entry& rhs) const noexcept;
 \returns \tcode{pathobject >= rhs.pathobject}.
 \end{itemdescr}
 
-\rSec2[fs.class.directory_iterator]{Class \tcode{directory_iterator}}
+\rSec2[fs.class.directory.iterator]{Class \tcode{directory_iterator}}
 
 \indexlibrary{\idxcode{directory_iterator}}%
 \pnum
 An object of type \tcode{directory_iterator} provides an iterator for a
 sequence of \tcode{directory_entry} elements representing the
-path and any cached attribute values\iref{fs.class.directory_entry}
+path and any cached attribute values\iref{fs.class.directory.entry}
 for each file in a directory
 or in an \impldef{type of a directory-like file} directory-like file type.
 \begin{note} For iteration into sub-directories, see class \tcode{recursive_directory_iterator}\iref{fs.class.rec.dir.itr}.
@@ -13873,13 +13872,13 @@ increments of a \tcode{directory_iterator} is unspecified.
 
 \pnum
 Constructors and non-const \tcode{directory_iterator} member functions
-store the values of any cached attributes\iref{fs.class.directory_entry}
+store the values of any cached attributes\iref{fs.class.directory.entry}
 in the \tcode{directory_entry} element returned by \tcode{operator*()}.
 \tcode{directory_iterator} member functions shall not directly or indirectly call
 any \tcode{directory_entry} \tcode{refresh} function.
 \begin{note}
 The exact mechanism for storing cached attribute values is not exposed to users.
-For exposition, class \tcode{directory_iterator} is shown in \ref{fs.class.directory_entry}
+For exposition, class \tcode{directory_iterator} is shown in \ref{fs.class.directory.entry}
 as a friend of class \tcode{directory_entry}.
 \end{note}
 
@@ -14314,13 +14313,13 @@ void pop(error_code& ec);
   iterated over, and continue iteration over the parent directory.
 
 \pnum
-\ensures Any copies of the previous value of \tcode{*this}
-are no longer required
-to be dereferenceable nor to be in the domain of \tcode{==}.
-
-\pnum
 \throws As specified in~\ref{fs.err.report}.
 \end{itemdescr}
+
+\pnum
+\remarks Any copies of the previous value of \tcode{*this}
+are no longer required
+to be dereferenceable nor to be in the domain of \tcode{==}.
 
 \indexlibrarymember{disable_recursion_pending}{recursive_directory_iterator}%
 \begin{itemdecl}
@@ -14506,7 +14505,7 @@ Effects are then as follows:
 \begin{itemize}
 \item
 If \tcode{f.type()} or \tcode{t.type()} is an implementation-defined
-file type\iref{fs.enum.file_type}, then the effects are
+file type\iref{fs.enum.file.type}, then the effects are
 \impldef{effect of \tcode{filesystem::copy}}.
 
 \item
@@ -14628,7 +14627,7 @@ Alternatively, calling \tcode{copy("/dir1", "/dir3", copy_options::recursive)} w
 \end{itemdescr}
 
 
-\rSec3[fs.op.copy_file]{Copy file}
+\rSec3[fs.op.copy.file]{Copy file}
 
 \indexlibrary{\idxcode{copy_file}}%
 \begin{itemdecl}
@@ -14684,7 +14683,7 @@ Otherwise, copy the contents and attributes of the file \tcode{from}
 \item \tcode{exists(to)} is \tcode{false}, or
 \item \tcode{(options \& copy_options::overwrite_existing) != copy_options::none}, or
 \item \tcode{(options \& copy_options::update_existing) \: \: != copy_options::none} and \tcode{from}
-      is more recent than \tcode{to}, determined as if by use of the \tcode{last_write_time} function\iref{fs.op.last_write_time}.
+      is more recent than \tcode{to}, determined as if by use of the \tcode{last_write_time} function\iref{fs.op.last.write.time}.
 \end{itemize}
 
 \item
@@ -14703,7 +14702,7 @@ Otherwise, no effects.
 \complexity At most one direct or indirect invocation of \tcode{status(to)}.
 \end{itemdescr}
 
-\rSec3[fs.op.copy_symlink]{Copy symlink}
+\rSec3[fs.op.copy.symlink]{Copy symlink}
 
 \indexlibrary{\idxcode{copy_symlink}}%
 \begin{itemdecl}
@@ -14725,7 +14724,7 @@ void copy_symlink(const path& existing_symlink, const path& new_symlink,
 \end{itemdescr}
 
 
-\rSec3[fs.op.create_directories]{Create directories}
+\rSec3[fs.op.create.directories]{Create directories}
 
 \indexlibrary{\idxcode{create_directories}}%
 \begin{itemdecl}
@@ -14742,8 +14741,6 @@ bool create_directories(const path& p, error_code& ec);
 \returns \tcode{true} if a new directory was created
   for the directory \tcode{p} resolves to,
   otherwise \tcode{false}.
-  The signature with argument \tcode{ec}
-  returns \tcode{false} if an error occurs.
 
 \pnum
 \throws As specified in~\ref{fs.err.report}.
@@ -14754,7 +14751,7 @@ bool create_directories(const path& p, error_code& ec);
 \end{itemdescr}
 
 
-\rSec3[fs.op.create_directory]{Create directory}
+\rSec3[fs.op.create.directory]{Create directory}
 
 \indexlibrary{\idxcode{create_directory}}%
 \begin{itemdecl}
@@ -14765,13 +14762,13 @@ bool create_directory(const path& p, error_code& ec) noexcept;
 \begin{itemdescr}
 \pnum
 \effects Creates the directory \tcode{p} resolves to,
-  as if by POSIX \tcode{mkdir()} with a second argument of
+  as if by POSIX \tcode{mkdir} with a second argument of
   \tcode{static_cast<int>(perms::all)}.
-  Creation failure because \tcode{p} already exists is not an error.
+  If \tcode{mkdir} fails because \tcode{p} resolves to an existing directory,
+  no error is reported. Otherwise on failure an error is reported.
 
 \pnum
 \returns \tcode{true} if a new directory was created, otherwise \tcode{false}.
-  The signature with argument \tcode{ec} returns \tcode{false} if an error occurs.
 
 \pnum
 \throws As specified in~\ref{fs.err.report}.
@@ -14789,7 +14786,8 @@ bool create_directory(const path& p, const path& existing_p, error_code& ec) noe
   directory \tcode{p} resolves to, with
   attributes copied from directory \tcode{existing_p}. The set of attributes
   copied is operating system dependent.
-  Creation failure because \tcode{p} already exists is not an error.
+  If \tcode{mkdir} fails because \tcode{p} resolves to an existing directory,
+  no error is reported. Otherwise on failure an error is reported.
 \begin{note} For POSIX-based operating systems, the
       attributes are those copied by native API \tcode{stat(existing_p.c_str(), \&attributes_stat)}
       followed by \tcode{mkdir(p.c_str(), attributes_stat.st_mode)}. For
@@ -14798,15 +14796,16 @@ bool create_directory(const path& p, const path& existing_p, error_code& ec) noe
 \end{note}
 
 \pnum
-\returns \tcode{true} if a new directory was created, otherwise \tcode{false}.
-  The signature with argument \tcode{ec} returns \tcode{false} if an error occurs.
+\returns \tcode{true} if a new directory was created
+  with attributes copied from directory \tcode{existing_p},
+  otherwise \tcode{false}.
 
 \pnum
 \throws As specified in~\ref{fs.err.report}.
 \end{itemdescr}
 
 
-\rSec3[fs.op.create_dir_symlk]{Create directory symlink}
+\rSec3[fs.op.create.dir.symlk]{Create directory symlink}
 
 \indexlibrary{\idxcode{create_directory_symlink}}%
 \begin{itemdecl}
@@ -14838,7 +14837,7 @@ void create_directory_symlink(const path& to, const path& new_symlink,
   symbolic links regardless of the operating system. \end{note}
 \end{itemdescr}
 
-\rSec3[fs.op.create_hard_lk]{Create hard link}
+\rSec3[fs.op.create.hard.lk]{Create hard link}
 
 \indexlibrary{\idxcode{create_hard_link}}%
 \begin{itemdecl}
@@ -14869,7 +14868,7 @@ void create_hard_link(const path& to, const path& new_hard_link,
   Some file systems limit the number of links per file. \end{note}
 \end{itemdescr}
 
-\rSec3[fs.op.create_symlink]{Create symlink}
+\rSec3[fs.op.create.symlink]{Create symlink}
 
 \indexlibrary{\idxcode{create_symlink}}%
 \begin{itemdecl}
@@ -14896,7 +14895,7 @@ void create_symlink(const path& to, const path& new_symlink,
   support symbolic links regardless of the operating system. \end{note}
 \end{itemdescr}
 
-\rSec3[fs.op.current_path]{Current path}
+\rSec3[fs.op.current.path]{Current path}
 
 \indexlibrary{\idxcode{current_path}}%
 \begin{itemdecl}
@@ -14963,7 +14962,7 @@ bool equivalent(const path& p1, const path& p2, error_code& ec) noexcept;
 \begin{itemdescr}
 \pnum
 \returns \tcode{true}, if \tcode{p1} and \tcode{p2} resolve to the same file
-  system entity, else \tcode{false}. The signature with argument \tcode{ec}
+  system entity, otherwise \tcode{false}. The signature with argument \tcode{ec}
   returns \tcode{false} if an error occurs.
 
 \pnum
@@ -15019,7 +15018,7 @@ if \tcode{status_known(s)}.
 \end{itemdescr}
 
 
-\rSec3[fs.op.file_size]{File size}
+\rSec3[fs.op.file.size]{File size}
 
 \indexlibrary{\idxcode{file_size}}%
 \begin{itemdecl}
@@ -15050,7 +15049,7 @@ if an error occurs.
 \end{itemdescr}
 
 
-\rSec3[fs.op.hard_lk_ct]{Hard link count}
+\rSec3[fs.op.hard.lk.ct]{Hard link count}
 
 \indexlibrary{\idxcode{hard_link_count}}%
 \begin{itemdecl}
@@ -15069,7 +15068,7 @@ uintmax_t hard_link_count(const path& p, error_code& ec) noexcept;
 \end{itemdescr}
 
 
-\rSec3[fs.op.is_block_file]{Is block file}
+\rSec3[fs.op.is.block.file]{Is block file}
 
 \indexlibrary{\idxcode{is_block_file}}%
 \begin{itemdecl}
@@ -15097,7 +15096,7 @@ The signature with argument \tcode{ec} returns \tcode{false} if an error occurs.
 \end{itemdescr}
 
 
-\rSec3[fs.op.is_char_file]{Is character file}
+\rSec3[fs.op.is.char.file]{Is character file}
 
 \indexlibrary{\idxcode{is_character_file}}%
 \begin{itemdecl}
@@ -15127,7 +15126,7 @@ bool is_character_file(const path& p, error_code& ec) noexcept;
 \end{itemdescr}
 
 
-\rSec3[fs.op.is_directory]{Is directory}
+\rSec3[fs.op.is.directory]{Is directory}
 
 \indexlibrary{\idxcode{is_directory}}%
 \begin{itemdecl}
@@ -15156,7 +15155,7 @@ bool is_directory(const path& p, error_code& ec) noexcept;
 \end{itemdescr}
 
 
-\rSec3[fs.op.is_empty]{Is empty}
+\rSec3[fs.op.is.empty]{Is empty}
 
 \indexlibrary{\idxcode{is_empty}!function}%
 \begin{itemdecl}
@@ -15197,7 +15196,7 @@ Otherwise:
 \end{itemdescr}
 
 
-\rSec3[fs.op.is_fifo]{Is fifo}
+\rSec3[fs.op.is.fifo]{Is fifo}
 
 \indexlibrary{\idxcode{is_fifo}}%
 \begin{itemdecl}
@@ -15226,7 +15225,7 @@ The signature with argument \tcode{ec} returns \tcode{false} if an error occurs.
 \end{itemdescr}
 
 
-\rSec3[fs.op.is_other]{Is other}
+\rSec3[fs.op.is.other]{Is other}
 
 \indexlibrary{\idxcode{is_other}}%
 \begin{itemdecl}
@@ -15255,7 +15254,7 @@ bool is_other(const path& p, error_code& ec) noexcept;
 \end{itemdescr}
 
 
-\rSec3[fs.op.is_regular_file]{Is regular file}
+\rSec3[fs.op.is.regular.file]{Is regular file}
 
 \indexlibrary{\idxcode{is_regular_file}}%
 \begin{itemdecl}
@@ -15297,7 +15296,7 @@ Returns \tcode{false} if an error occurs.
 \end{itemdescr}
 
 
-\rSec3[fs.op.is_socket]{Is socket}
+\rSec3[fs.op.is.socket]{Is socket}
 
 \indexlibrary{\idxcode{is_socket}}%
 \begin{itemdecl}
@@ -15326,7 +15325,7 @@ bool is_socket(const path& p, error_code& ec) noexcept;
 \end{itemdescr}
 
 
-\rSec3[fs.op.is_symlink]{Is symlink}
+\rSec3[fs.op.is.symlink]{Is symlink}
 
 \indexlibrary{\idxcode{is_symlink}}%
 \begin{itemdecl}
@@ -15355,7 +15354,7 @@ bool is_symlink(const path& p, error_code& ec) noexcept;
 \end{itemdescr}
 
 
-\rSec3[fs.op.last_write_time]{Last write time}
+\rSec3[fs.op.last.write.time]{Last write time}
 
 \indexlibrary{\idxcode{last_write_time}}%
 \begin{itemdecl}
@@ -15465,7 +15464,7 @@ weakly_canonical(p, ec).lexically_proximate(weakly_canonical(base, ec));
 \throws As specified in~\ref{fs.err.report}.
 \end{itemdescr}
 
-\rSec3[fs.op.read_symlink]{Read symlink}
+\rSec3[fs.op.read.symlink]{Read symlink}
 
 \indexlibrary{\idxcode{read_symlink}}%
 \begin{itemdecl}
@@ -15550,7 +15549,7 @@ bool remove(const path& p, error_code& ec) noexcept;
 \end{itemdescr}
 
 
-\rSec3[fs.op.remove_all]{Remove all}
+\rSec3[fs.op.remove.all]{Remove all}
 
 \indexlibrary{\idxcode{remove_all}}%
 \begin{itemdecl}
@@ -15612,7 +15611,7 @@ A symbolic link is itself renamed, rather than the file it resolves to.
 \end{itemdescr}
 
 
-\rSec3[fs.op.resize_file]{Resize file}
+\rSec3[fs.op.resize.file]{Resize file}
 
 \indexlibrary{\idxcode{resize_file}}%
 \begin{itemdecl}
@@ -15751,7 +15750,7 @@ Otherwise,
 \item Otherwise, if the attributes indicate a socket, as if by POSIX
       \tcode{S_ISSOCK}, returns \tcode{file_status(file_type::socket, prms)}.
 \item Otherwise, if the attributes indicate an implementation-defined
-      file type\iref{fs.enum.file_type},
+      file type\iref{fs.enum.file.type},
       returns \tcode{file_status(file_type::\placeholdernc{A}, prms)},
       where \tcode{\placeholdernc{A}} is the constant for the
       \impldef{file type of the file argument of \tcode{filesystem::status}} file type.
@@ -15765,7 +15764,7 @@ Otherwise,
 \end{itemdescr}
 
 
-\rSec3[fs.op.status_known]{Status known}
+\rSec3[fs.op.status.known]{Status known}
 
 \indexlibrary{\idxcode{status_known}}%
 \begin{itemdecl}
@@ -15778,7 +15777,7 @@ bool status_known(file_status s) noexcept;
 \end{itemdescr}
 
 
-\rSec3[fs.op.symlink_status]{Symlink status}
+\rSec3[fs.op.symlink.status]{Symlink status}
 
 \indexlibrary{\idxcode{symlink_status}}%
 \begin{itemdecl}
@@ -15813,7 +15812,7 @@ of the obtained \tcode{struct stat} to the type \tcode{perms}.
 \end{itemdescr}
 
 
-\rSec3[fs.op.temp_dir_path]{Temporary directory path}
+\rSec3[fs.op.temp.dir.path]{Temporary directory path}
 
 \indexlibrary{\idxcode{temp_directory_path}}%
 \begin{itemdecl}
@@ -15848,7 +15847,7 @@ For Windows-based operating systems, an implementation might return the path
 \end{example}
 \end{itemdescr}
 
-\rSec3[fs.op.weakly_canonical]{Weakly canonical}
+\rSec3[fs.op.weakly.canonical]{Weakly canonical}
 
 \indexlibrary{\idxcode{weakly_canonical}}%
 \begin{itemdecl}
@@ -15983,7 +15982,7 @@ namespace std {
 
 namespace std {
   int remove(const char* filename);
-  int rename(const char* old, const char* new);
+  int rename(const char* old_p, const char* new_p);
   FILE* tmpfile();
   char* tmpnam(char* s);
   int fclose(FILE* stream);

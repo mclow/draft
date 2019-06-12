@@ -1085,12 +1085,9 @@ A type \tcode{TC} meets the \oldconcept{TrivialClock} requirements if:
 \item \tcode{TC} satisfies the \oldconcept{Clock} requirements\iref{time.clock.req},
 
 \item the types \tcode{TC::rep}, \tcode{TC::duration}, and \tcode{TC::time_point}
-satisfy the \oldconcept{EqualityComparable} (\tref{equalitycomparable}),
-\oldconcept{LessThanComparable} (\tref{lessthancomparable}),
-\oldconcept{DefaultConstructible} (\tref{defaultconstructible}),
-\oldconcept{\-Copy\-Con\-structible} (\tref{copyconstructible}),
-\oldconcept{CopyAssignable} (\tref{copyassignable}), and
-\oldconcept{Destructible} (\tref{destructible}) requirements and the requirements of
+meet the \oldconcept{EqualityComparable} (\tref{equalitycomparable}) and
+\oldconcept{LessThanComparable} (\tref{lessthancomparable})
+requirements and the requirements of
 numeric types\iref{numeric.requirements}. \begin{note} This means, in particular,
 that operations on these types will not throw exceptions. \end{note}
 
@@ -1105,7 +1102,7 @@ requirements, recursively.
 
 \rSec1[time.traits]{Time-related traits}
 
-\rSec2[time.traits.is_fp]{\tcode{treat_as_floating_point}}
+\rSec2[time.traits.is.fp]{\tcode{treat_as_floating_point}}
 
 \indexlibrary{\idxcode{treat_as_floating_point}}%
 \begin{itemdecl}
@@ -1126,7 +1123,7 @@ type, and thus allows division of one value by another with acceptable loss of p
 if it behaved like an integral type for the purpose of these conversions.
 \end{note}
 
-\rSec2[time.traits.duration_values]{\tcode{duration_values}}
+\rSec2[time.traits.duration.values]{\tcode{duration_values}}
 
 \indexlibrary{\idxcode{duration_values}}%
 \begin{itemdecl}
@@ -1226,7 +1223,7 @@ template<class Clock, class Duration1, class Duration2>
 The common type of two \tcode{time_point} types is a \tcode{time_point} with the same
 clock as the two types and the common type of their two \tcode{duration}s.
 
-\rSec2[time.traits.is_clock]{Class template \tcode{is_clock}}
+\rSec2[time.traits.is.clock]{Class template \tcode{is_clock}}
 
 \indexlibrary{\idxcode{is_clock}}%
 \begin{itemdecl}
@@ -2976,10 +2973,10 @@ namespace std::chrono {
 \pnum
 The clock \tcode{tai_clock} measures seconds since 1958-01-01 00:00:00
 and is offset 10s ahead of UTC at this date.
-That is, 1958-01-01 00:00:00 TAI is equivalent to 1957-12-31 23:59:50 UTC.
-Leap seconds are not inserted into TAI.
+That is, 1958-01-01 00:00:00 TAI is equivalent to 1957-12-31 23:59:50 UTC\@.
+Leap seconds are not inserted into TAI\@.
 Therefore every time a leap second is inserted into UTC,
-UTC falls another second behind TAI.
+UTC falls another second behind TAI\@.
 For example by 2000-01-01 there had been 22 leap seconds inserted
 so 2000-01-01 00:00:00 UTC is equivalent to 2000-01-01 00:00:32 TAI
 (22s plus the initial 10s offset).
@@ -3165,10 +3162,10 @@ namespace std::chrono {
 
 \pnum
 The clock \tcode{gps_clock} measures
-seconds since the first Sunday of January, 1980 00:00:00 UTC.
-Leap seconds are not inserted into GPS.
+seconds since the first Sunday of January, 1980 00:00:00 UTC\@.
+Leap seconds are not inserted into GPS\@.
 Therefore every time a leap second is inserted into UTC,
-UTC falls another second behind GPS.
+UTC falls another second behind GPS\@.
 Aside from the offset from \tcode{1958y/January/1} to \tcode{1980y/January/Sunday[1]},
 GPS is behind TAI by 19s due to the 10s offset between 1958 and 1970
 and the additional 9 leap seconds inserted between 1970 and 1980.
@@ -6118,6 +6115,7 @@ constexpr year_month operator+(const year_month& ym, const months& dm) noexcept;
 \pnum
 \returns A \tcode{year_month} value \tcode{z} such that \tcode{z - ym == dm}.
 
+\pnum
 \complexity
 \bigoh{1} with respect to the value of \tcode{dm}.
 \end{itemdescr}
@@ -7281,7 +7279,7 @@ constexpr year_month_weekday operator+(const years& dy, const year_month_weekday
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymwd + dm}.
+\returns \tcode{ymwd + dy}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{year_month_weekday}%
@@ -7291,7 +7289,7 @@ constexpr year_month_weekday operator-(const year_month_weekday& ymwd, const yea
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymwd + (-dm)}.
+\returns \tcode{ymwd + (-dy)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<<}{year_month_weekday}%
@@ -9328,6 +9326,10 @@ template<class charT, class traits>
 \pnum
 \effects
 Streams out the \tcode{sys_info} object \tcode{r} in an unspecified format.
+
+\pnum
+\returns
+\tcode{os}.
 \end{itemdescr}
 
 \rSec3[time.zone.info.local]{Class \tcode{local_info}}
@@ -9399,7 +9401,12 @@ template<class charT, class traits>
 
 \begin{itemdescr}
 \pnum
+\effects
 Streams out the \tcode{local_info} object \tcode{r} in an unspecified format.
+
+\pnum
+\returns
+\tcode{os}.
 \end{itemdescr}
 
 \rSec2[time.zone.timezone]{Class \tcode{time_zone}}
@@ -10804,7 +10811,7 @@ it is left-padded with \tcode{0} to four digits.
 \\ \rowsep
 \tcode{\%z} &
 The offset from UTC in the ISO 8601 format.
-For example \tcode{-0430} refers to 4 hours 30 minutes behind UTC.
+For example \tcode{-0430} refers to 4 hours 30 minutes behind UTC\@.
 If the offset is zero, \tcode{+0000} is used.
 The modified commands \tcode{\%Ez} and  \tcode{\%Oz}
 insert a \tcode{:} between the hours and minutes: \tcode{-04:30}.
@@ -11181,7 +11188,7 @@ the locale's alternative representation.
 \tcode{\%z} &
 The offset from UTC in the format \tcode{[+|-]hh[mm]}.
 For example \tcode{-0430} refers to 4 hours 30 minutes behind UTC,
-and \tcode{04} refers to 4 hours ahead of UTC.
+and \tcode{04} refers to 4 hours ahead of UTC\@.
 The modified commands \tcode{\%Ez} and \tcode{\%Oz}
 parse a \tcode{:} between the hours and minutes
 and render leading zeroes on the hour field optional:

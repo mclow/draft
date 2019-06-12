@@ -29,7 +29,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[pdftex, final]{graphicx}
 \usepackage[pdftex,
-            pdftitle={C++ International Standard},
+            pdftitle={Mandating the Standard Library: Clause 20},
             pdfsubject={C++ International Standard},
             pdfcreator={Richard Smith},
             bookmarks=true,
@@ -44,6 +44,8 @@
            ]{hyperref}
 \usepackage{memhfixc}     % fix interactions between hyperref and memoir
 \usepackage[active,header=false,handles=false,copydocumentclass=false,generate=std-gram.ext,extract-cmdline={gramSec},extract-env={bnf,simplebnf}]{extract} % Grammar extraction
+\usepackage{expl3}
+\usepackage{xparse}
 
 \pdfminorversion=5
 \pdfcompresslevel=9
@@ -115,7 +117,7 @@
 %\include{concepts}
 %\include{diagnostics}
 
-\setcounter{chapter}{18}
+\setcounter{chapter}{19}
 \setcounter{table}{37}
 \setcounter{footnote}{222}
 \include{utilities}

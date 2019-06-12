@@ -23,8 +23,8 @@ as summarized in \tref{numerics.lib.summary}.
 \ref{bit}   & Bit manipulation & \tcode{<bit>} \\ \rowsep
 \ref{rand}  & Random number generation & \tcode{<random>} \\ \rowsep
 \ref{numarray}  & Numeric arrays     & \tcode{<valarray>}  \\ \rowsep
-\ref{c.math}  & Mathematical functions for & \tcode{<cmath>}   \\
-              & floating-point types       & \tcode{<cstdlib>} \\
+\ref{c.math}  & Mathematical functions for floating-point types &
+  \tcode{<cmath>}, \tcode{<cstdlib>} \\
 \end{libsumtab}
 
 \rSec1[numeric.requirements]{Numeric type requirements}
@@ -36,70 +36,21 @@ The
 and
 \tcode{valarray}
 components are parameterized by the type of information they contain and manipulate.
-A \Cpp{} program shall instantiate these components only with a type
-\tcode{T}
+A \Cpp{} program shall instantiate these components only with a numeric type.
+A \defnadj{numeric}{type} is a cv-unqualified object type \tcode{T}
 that satisfies the
-following requirements:\footnote{In other words, value types.
+\oldconcept{DefaultConstructible},
+\oldconcept{CopyConstructible},
+\oldconcept{CopyAssignable}, and
+\oldconcept{Destructible}
+requirements\iref{utility.arg.requirements}.%
+\footnote{In other words, value types.
 These include arithmetic types,
 pointers, the library class
 \tcode{complex},
 and instantiations of
 \tcode{valarray}
 for value types.}
-
-\begin{itemize}
-\item \tcode{T} is not an abstract class (it has no pure virtual member functions);
-\item \tcode{T} is not a reference type;
-\item \tcode{T} is not cv-qualified;
-\item If \tcode{T} is a class, it has a public default constructor;
-\item If \tcode{T} is a class, it has a public copy constructor with the signature \tcode{T::T(const T\&)}
-\item If \tcode{T} is a class, it has a public destructor;
-\item If \tcode{T} is a class, it has a public assignment operator whose signature is either
-\tcode{T\& T::operator=(const T\&)}
-or
-\tcode{T\& T::operator=(T)}
-\item If \tcode{T} is a class, its assignment operator, copy and default constructors,
-and destructor shall correspond to each other in the following sense:
- \begin{itemize}
- \item Initialization of raw storage using the copy constructor
-   on the value of \tcode{T()}, however obtained,
-   is semantically equivalent to value-initialization of the same raw storage.
- \item Initialization of raw storage using the default constructor,
-   followed by assignment,
-   is semantically equivalent to initialization of raw storage using the copy constructor.
- \item Destruction of an object,
-   followed by initialization of its raw storage using the copy constructor,
-    is semantically equivalent to assignment to the original object.
- \end{itemize}
-
-\begin{note}
-This rule states, in part, that there shall not be any subtle differences in the semantics
-of initialization versus assignment.
-This gives an implementation
-considerable flexibility in how arrays are initialized.
-
-\begin{example}
-An implementation is allowed to initialize a
-\tcode{valarray}
-by allocating storage using the
-\tcode{new}
-operator (which
-implies a call to the default constructor for each element) and then
-assigning each element its value.
-Or the implementation can allocate raw
-storage and use the copy constructor to initialize each element.
-\end{example}
-
-If the distinction between initialization and assignment is important
-for a class, or if it fails to satisfy any of
-the other conditions listed above, the programmer should use
-\tcode{vector}\iref{vector} instead of
-\tcode{valarray}
-for that class.
-\end{note}
-\item If \tcode{T} is a class, it does not overload unary
-\tcode{operator\&}.
-\end{itemize}
 
 \pnum
 If any operation on \tcode{T}
@@ -983,7 +934,7 @@ template<class T> complex<T> polar(const T& rho, const T& theta = T());
 \begin{itemdescr}
 \pnum
 \requires
-\tcode{rho} shall be non-negative and non-NaN. \tcode{theta} shall be finite.
+\tcode{rho} shall be non-negative and non-NaN\@. \tcode{theta} shall be finite.
 
 \pnum
 \returns
@@ -1542,7 +1493,7 @@ identified as \tcode{result_type}.
 With \tcode{T} as the \tcode{result_type}
 thus associated with such an entity,
 that entity is characterized:
-\begin{enumeratea}
+\begin{itemize}
  \item
    as \term{boolean} or equivalently as \term{boolean-valued},
    if \tcode{T} is \tcode{bool};
@@ -1553,7 +1504,7 @@ that entity is characterized:
  \item
    otherwise
    as \term{floating} or equivalently as \term{real-valued}.
-\end{enumeratea}
+\end{itemize}
 \noindent
 If integer-valued,
 an entity may optionally be further characterized as
@@ -1573,7 +1524,7 @@ the operators
 denote the respective conventional bitwise operations.
 Further:
 
-\begin{enumeratea}
+\begin{itemize}
  \item
    the operator \rightshift{} denotes a bitwise right shift
    with zero-valued bits appearing in the high bits of the result, and
@@ -1581,7 +1532,7 @@ Further:
    the operator \leftshift{w} denotes a bitwise left shift
    with zero-valued bits appearing in the low bits of the result,
    and whose result is always taken modulo $2^w$.
-\end{enumeratea}
+\end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1760,7 +1711,7 @@ namespace std {
 \pnum
 Throughout this subclause \ref{rand},
 the effect of instantiating a template:
-\begin{enumeratea}
+\begin{itemize}
   \item
     that has a template type parameter
     named \tcode{Sseq}
@@ -1815,7 +1766,7 @@ the effect of instantiating a template:
       \tcode{unsigned long},
       or
       \tcode{unsigned long long}.
-\end{enumeratea}
+\end{itemize}
 
 \pnum
 Throughout this subclause \ref{rand},
@@ -1863,7 +1814,7 @@ are valid and have the indicated semantics,
 and if \tcode{S} also satisfies all other requirements
 of this subclause \ref{rand.req.seedseq}.
 In that Table and throughout this subclause:
-\begin{enumeratea}
+\begin{itemize}
   \item
     \tcode{T} is the type named by
     \tcode{S}'s associated \tcode{result_type};
@@ -1882,7 +1833,7 @@ In that Table and throughout this subclause:
   and
   \item
     \tcode{il} is a value of \tcode{initializer_list<T>}.
-\end{enumeratea}
+\end{itemize}
 
 
 \begin{libreqtab4d}
@@ -2059,7 +2010,7 @@ An engine's state may be established via
 
 \pnum
 \tcode{E}'s specification shall define:
-\begin{enumeratea}
+\begin{itemize}
  \item
    the size of \tcode{E}'s state
    in multiples of the size of \tcode{result_type},
@@ -2076,7 +2027,7 @@ An engine's state may be established via
    $\mathsf{GA}$
    by which an engine's state is mapped
    to a value of type \tcode{result_type}.
-\end{enumeratea}
+\end{itemize}
 
 \pnum
 A class \tcode{E}
@@ -2090,7 +2041,7 @@ are valid and have the indicated semantics,
 and if \tcode{E} also satisfies all other requirements
 of this subclause \ref{rand.req.eng}.
 In that Table and throughout this subclause:
-\begin{enumeratea}
+\begin{itemize}
   \item
     \tcode{T} is the type named by
     \tcode{E}'s associated \tcode{result_type};
@@ -2113,7 +2064,7 @@ In that Table and throughout this subclause:
   \item
     \tcode{is} is an lvalue of the type of some class template specialization
     \tcode{basic_istream<charT,} \tcode{traits>};
-\end{enumeratea}
+\end{itemize}
 where \tcode{charT} and \tcode{traits} are constrained
 according to \ref{strings} and \ref{input.output}.
 
@@ -2401,7 +2352,7 @@ template<class Sseq> void seed(Sseq& q);
 \pnum
 \tcode{A} shall also satisfy
 the following additional requirements:
-\begin{enumeratea}
+\begin{itemize}
  \item
    The complexity
    of each function
@@ -2425,7 +2376,7 @@ the following additional requirements:
    of \tcode{A}
    shall include
    the textual representation of its base engine.
-\end{enumeratea}
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Random Number Distribution requirements:
@@ -2474,7 +2425,7 @@ and if \tcode{D} and its associated types
 also satisfy all other requirements
 of this subclause \ref{rand.req.dist}.
 In that Table and throughout this subclause,
-\begin{enumeratea}
+\begin{itemize}
   \item
     \tcode{T} is the type named by
     \tcode{D}'s associated \tcode{result_type};
@@ -2506,7 +2457,7 @@ In that Table and throughout this subclause,
   \item
     \tcode{is} is an lvalue of the type of some class template specialization
     \tcode{basic_istream<charT,} \tcode{traits>};
-\end{enumeratea}
+\end{itemize}
 where \tcode{charT} and \tcode{traits} are constrained
 according to \ref{strings} and \ref{input.output}.
 
@@ -2965,7 +2916,7 @@ the bits of the raw shift register are additionally \term{tempered}
 defined by values $u$, $d$, $s$, $b$, $t$, $c$, and $\ell$.
 
 The state transition is performed as follows:
-\begin{enumeratea}
+\begin{itemize}
  \item
    Concatenate
      the upper $w-r$ bits of $X_{i-n}$
@@ -2976,7 +2927,7 @@ The state transition is performed as follows:
    With $\alpha = a \cdot (Y \bitand 1)$,
    set $X_i$ to
      $X_{i+m-n} \xor (Y \rightshift 1) \xor \alpha$.
-\end{enumeratea}
+\end{itemize}
 The sequence $X$ is initialized
 with the help of an initialization multiplier $f$.
 
@@ -2986,7 +2937,7 @@ The generation algorithm%
 \indextext{generation algorithm!\idxcode{mersenne_twister_engine}}
  determines the unsigned integer values $z_1, z_2, z_3, z_4$ as follows,
  then delivers $z_4$ as its result:
-\begin{enumeratea}
+\begin{itemize}
  \item
    Let $z_1 = X_i \xor \bigl(( X_i \rightshift u ) \bitand d\bigr)$.
  \item
@@ -2995,7 +2946,7 @@ The generation algorithm%
    Let $z_3 = z_2 \xor \bigl( (z_2 \leftshift{w} t) \bitand c \bigr)$.
  \item
    Let $z_4 = z_3 \xor ( z_3 \rightshift \ell )$.
-\end{enumeratea}
+\end{itemize}
 
 \indexlibrary{\idxcode{mersenne_twister_engine}}%
 \begin{codeblock}
@@ -3142,14 +3093,14 @@ The state transition%
 \indextext{\idxcode{subtract_with_carry_engine}!transition algorithm}%
 \indextext{transition algorithm!\idxcode{subtract_with_carry_engine}}
 is performed as follows:
-\begin{enumeratea}
+\begin{itemize}
  \item
    Let $Y = X_{i-s} - X_{i-r} - c$.
  \item
    Set $X_i$ to $y = Y \bmod m$.
    Set $c$ to 1 if $Y < 0$,
    otherwise set $c$ to 0.
-\end{enumeratea}
+\end{itemize}
 \begin{note}
  This algorithm corresponds
  to a modular linear function
@@ -3457,7 +3408,7 @@ the size of the state is
 The transition and generation algorithms
 are described in terms
 of the following integral constants:%
-\begin{enumeratea}
+\begin{itemize}
  \item
    Let
      $R = \tcode{e.max() - e.min() + 1}$
@@ -3479,7 +3430,7 @@ of the following integral constants:%
    holds as a result.
    Otherwise let
      $n = 1 + \left\lceil w / m \right\rceil$.
-\end{enumeratea}
+\end{itemize}
 \begin{note}
  The relation
  $w = n_0 w_0 + (n - n_0)(w_0 + 1)$
@@ -3595,7 +3546,7 @@ The transition algorithm%
 \indextext{transition algorithm!\idxcode{shuffle_order_engine}}
 permutes the values produced by $e$.
 The state transition is performed as follows:
-\begin{enumeratea}
+\begin{itemize}
  \item
    Calculate an integer
    $j = \left\lfloor \frac{k \cdot (Y - e_{\min})}
@@ -3605,7 +3556,7 @@ The state transition is performed as follows:
    .
  \item
    Set $Y$ to $V_j$ and then set $V_j$ to $\tcode{e()}$.
-\end{enumeratea}
+\end{itemize}
 
 \pnum
 The generation algorithm%
@@ -3910,8 +3861,8 @@ public:
   double entropy() const noexcept;
 
   @\textit{// no copy functions}@
-  random_device(const random_device& ) = delete;
-  void operator=(const random_device& ) = delete;
+  random_device(const random_device&) = delete;
+  void operator=(const random_device&) = delete;
 };
 \end{codeblock}
 
@@ -3966,8 +3917,7 @@ result_type operator()();
 \begin{itemdescr}
 \pnum\returns A nondeterministic random value,
  uniformly distributed
- between \tcode{min()} and \tcode{max()},
- inclusive.
+ between \tcode{min()} and \tcode{max()} (inclusive).
  It is \impldef{how \tcode{random_device::operator()} generates values}
  how these values are generated.
 
@@ -4019,8 +3969,8 @@ public:
     void param(OutputIterator dest) const;
 
   // no copy functions
-  seed_seq(const seed_seq& ) = delete;
-  void operator=(const seed_seq& ) = delete;
+  seed_seq(const seed_seq&) = delete;
+  void operator=(const seed_seq&) = delete;
 
 private:
   vector<result_type> v;   // \expos
@@ -4106,7 +4056,7 @@ template<class RandomAccessIterator>
  each indexing operator applied to \tcode{begin} is to be taken modulo $n$,
  and $T(x)$ is defined as $x \xor (x \rightshift 27)$:
 
-\begin{enumeratea}
+\begin{itemize}
  \item
    By way of initialization,
    set each element of the range to the value \tcode{0x8b8b8b8b}.
@@ -4141,10 +4091,10 @@ template<class RandomAccessIterator>
      \right.
    \end{eqnarray*}
    and, in order,
-   increment $\tcode{begin[}k+p\tcode{]}$ by $r_1$,
-   increment $\tcode{begin[}k+q\tcode{]}$ by $r_2$,
+   increment \tcode{begin[$k+p$]} by $r_1$,
+   increment \tcode{begin[$k+q$]} by $r_2$,
    and
-   set \tcode{begin[k]} to $r_2$.
+   set \tcode{begin[$k$]} to $r_2$.
  \item
    Transform the elements of the range again,
    beginning where the previous step ended:
@@ -4161,11 +4111,11 @@ template<class RandomAccessIterator>
    \end{eqnarray*}
    and, in order,
    \noindent
-   update $\tcode{begin[}k+p\tcode{]}$ by xoring it with $r_3$,
-   update $\tcode{begin[}k+q\tcode{]}$ by xoring it with $r_4$,
+   update \tcode{begin[$k+p$]} by xoring it with $r_3$,
+   update \tcode{begin[$k+q$]} by xoring it with $r_4$,
    and
-   set $\tcode{begin[}k\tcode{]}$ to $r_4$.
-\end{enumeratea}
+   set \tcode{begin[$k$]} to $r_4$.
+\end{itemize}
 
 \pnum\throws
 What and when \tcode{RandomAccessIterator} operations of \tcode{begin}
@@ -7026,12 +6976,12 @@ such that the value of \tcode{i} is less than the length of \tcode{a}.
 
 \pnum
 \remarks
-The expression \tcode{\&a[i+j] == \&a[i] + j}
+The expression \tcode{addressof(a[i+j]) == addressof(a[i]) + j}
 evaluates to \tcode{true} for all \tcode{size_t i} and \tcode{size_t j}
 such that \tcode{i+j < a.size()}.
 
 \pnum
-The expression \tcode{\&a[i] != \&b[j]}
+The expression \tcode{addressof(a[i]) != addressof(b[j])}
 evaluates to \tcode{true} for any two arrays
 \tcode{a} and \tcode{b} and for any
 \tcode{size_t i} and \tcode{size_t j}
@@ -8311,18 +8261,11 @@ mask_array<T> valarray<T>::operator[](const valarray<bool>&).
 
 \pnum
 It has reference semantics to a subset of an array specified by a boolean mask.
-Thus, the expression
-\tcode{a[mask] = b;}
+Thus, the expression \tcode{a[mask] = b;}
 has the effect of assigning the elements of
-\tcode{b}
-to the masked
-elements in
-\tcode{a}
-(those for which the corresponding element
-in
-\tcode{mask}
-is
-\tcode{true}.)
+\tcode{b} to the masked elements in \tcode{a}
+(those for which the corresponding element in
+\tcode{mask} is \tcode{true}).
 
 \rSec3[mask.array.assign]{Assignment}
 
@@ -9175,6 +9118,11 @@ namespace std {
   float fmaf(float x, float y, float z);
   long double fmal(long double x, long double y, long double z);
 
+  // \ref{c.math.lerp}, linear interpolation
+  constexpr float lerp(float a, float b, float t);
+  constexpr double lerp(double a, double b, double t);
+  constexpr long double lerp(long double a, long double b, long double t);
+
   // \ref{c.math.fpclass}, classification / comparison functions
   int fpclassify(float x);
   int fpclassify(double x);
@@ -9226,12 +9174,12 @@ namespace std {
 
   // \ref{sf.cmath}, mathematical special functions
 
-  // \ref{sf.cmath.assoc_laguerre}, associated Laguerre polynomials
+  // \ref{sf.cmath.assoc.laguerre}, associated Laguerre polynomials
   double       assoc_laguerre(unsigned n, unsigned m, double x);
   float        assoc_laguerref(unsigned n, unsigned m, float x);
   long double  assoc_laguerrel(unsigned n, unsigned m, long double x);
 
-  // \ref{sf.cmath.assoc_legendre}, associated Legendre functions
+  // \ref{sf.cmath.assoc.legendre}, associated Legendre functions
   double       assoc_legendre(unsigned l, unsigned m, double x);
   float        assoc_legendref(unsigned l, unsigned m, float x);
   long double  assoc_legendrel(unsigned l, unsigned m, long double x);
@@ -9241,53 +9189,53 @@ namespace std {
   float        betaf(float x, float y);
   long double  betal(long double x, long double y);
 
-  // \ref{sf.cmath.comp_ellint_1}, complete elliptic integral of the first kind
+  // \ref{sf.cmath.comp.ellint.1}, complete elliptic integral of the first kind
   double       comp_ellint_1(double k);
   float        comp_ellint_1f(float k);
   long double  comp_ellint_1l(long double k);
 
-  // \ref{sf.cmath.comp_ellint_2}, complete elliptic integral of the second kind
+  // \ref{sf.cmath.comp.ellint.2}, complete elliptic integral of the second kind
   double       comp_ellint_2(double k);
   float        comp_ellint_2f(float k);
   long double  comp_ellint_2l(long double k);
 
-  // \ref{sf.cmath.comp_ellint_3}, complete elliptic integral of the third kind
+  // \ref{sf.cmath.comp.ellint.3}, complete elliptic integral of the third kind
   double       comp_ellint_3(double k, double nu);
   float        comp_ellint_3f(float k, float nu);
   long double  comp_ellint_3l(long double k, long double nu);
 
-  // \ref{sf.cmath.cyl_bessel_i}, regular modified cylindrical Bessel functions
+  // \ref{sf.cmath.cyl.bessel.i}, regular modified cylindrical Bessel functions
   double       cyl_bessel_i(double nu, double x);
   float        cyl_bessel_if(float nu, float x);
   long double  cyl_bessel_il(long double nu, long double x);
 
-  // \ref{sf.cmath.cyl_bessel_j}, cylindrical Bessel functions of the first kind
+  // \ref{sf.cmath.cyl.bessel.j}, cylindrical Bessel functions of the first kind
   double       cyl_bessel_j(double nu, double x);
   float        cyl_bessel_jf(float nu, float x);
   long double  cyl_bessel_jl(long double nu, long double x);
 
-  // \ref{sf.cmath.cyl_bessel_k}, irregular modified cylindrical Bessel functions
+  // \ref{sf.cmath.cyl.bessel.k}, irregular modified cylindrical Bessel functions
   double       cyl_bessel_k(double nu, double x);
   float        cyl_bessel_kf(float nu, float x);
   long double  cyl_bessel_kl(long double nu, long double x);
 
-  // \ref{sf.cmath.cyl_neumann}, cylindrical Neumann functions;
+  // \ref{sf.cmath.cyl.neumann}, cylindrical Neumann functions;
   // cylindrical Bessel functions of the second kind
   double       cyl_neumann(double nu, double x);
   float        cyl_neumannf(float nu, float x);
   long double  cyl_neumannl(long double nu, long double x);
 
-  // \ref{sf.cmath.ellint_1}, incomplete elliptic integral of the first kind
+  // \ref{sf.cmath.ellint.1}, incomplete elliptic integral of the first kind
   double       ellint_1(double k, double phi);
   float        ellint_1f(float k, float phi);
   long double  ellint_1l(long double k, long double phi);
 
-  // \ref{sf.cmath.ellint_2}, incomplete elliptic integral of the second kind
+  // \ref{sf.cmath.ellint.2}, incomplete elliptic integral of the second kind
   double       ellint_2(double k, double phi);
   float        ellint_2f(float k, float phi);
   long double  ellint_2l(long double k, long double phi);
 
-  // \ref{sf.cmath.ellint_3}, incomplete elliptic integral of the third kind
+  // \ref{sf.cmath.ellint.3}, incomplete elliptic integral of the third kind
   double       ellint_3(double k, double nu, double phi);
   float        ellint_3f(float k, float nu, float phi);
   long double  ellint_3l(long double k, long double nu, long double phi);
@@ -9312,22 +9260,22 @@ namespace std {
   float        legendref(unsigned l, float x);
   long double  legendrel(unsigned l, long double x);
 
-  // \ref{sf.cmath.riemann_zeta}, Riemann zeta function
+  // \ref{sf.cmath.riemann.zeta}, Riemann zeta function
   double       riemann_zeta(double x);
   float        riemann_zetaf(float x);
   long double  riemann_zetal(long double x);
 
-  // \ref{sf.cmath.sph_bessel}, spherical Bessel functions of the first kind
+  // \ref{sf.cmath.sph.bessel}, spherical Bessel functions of the first kind
   double       sph_bessel(unsigned n, double x);
   float        sph_besself(unsigned n, float x);
   long double  sph_bessell(unsigned n, long double x);
 
-  // \ref{sf.cmath.sph_legendre}, spherical associated Legendre functions
+  // \ref{sf.cmath.sph.legendre}, spherical associated Legendre functions
   double       sph_legendre(unsigned l, unsigned m, double theta);
   float        sph_legendref(unsigned l, unsigned m, float theta);
   long double  sph_legendrel(unsigned l, unsigned m, long double theta);
 
-  // \ref{sf.cmath.sph_neumann}, spherical Neumann functions;
+  // \ref{sf.cmath.sph.neumann}, spherical Neumann functions;
   // spherical Bessel functions of the second kind
   double       sph_neumann(unsigned n, double x);
   float        sph_neumannf(unsigned n, float x);
@@ -9431,6 +9379,39 @@ long double hypot(long double x, long double y, long double z);
 \returns $\sqrt{x^2+y^2+z^2}$.
 \end{itemdescr}
 
+\rSec2[c.math.lerp]{Linear interpolation}
+
+\indexlibrary{\idxcode{lerp}}%
+\begin{itemdecl}
+constexpr float lerp(float a, float b, float t);
+constexpr double lerp(double a, double b, double t);
+constexpr long double lerp(long double a, long double b, long double t);
+\end{itemdecl}
+\begin{itemdescr}
+\pnum
+\returns
+$a+t(b-a)$.
+
+\pnum
+\remarks
+Let \tcode{r} be the value returned.
+If \tcode{isfinite(a) \&\& isfinite(b)}, then:
+\begin{itemize}
+\item If \tcode{t == 0}, then \tcode{r == a}.
+\item If \tcode{t == 1}, then \tcode{r == b}.
+\item If \tcode{t >= 0 \&\& t <= 1}, then \tcode{isfinite(r)}.
+\item If \tcode{isfinite(t) \&\& a == b}, then \tcode{r == a}.
+\item If \tcode{isfinite(t) || !isnan(t) \&\& b-a != 0}, then \tcode{!isnan(r)}.
+\end{itemize}
+Let \tcode{\placeholder{CMP}(x,y)} be \tcode{1} if \tcode{x > y},
+\tcode{-1} if \tcode{x < y}, and \tcode{0} otherwise.
+For any \tcode{t1} and \tcode{t2}, the product of
+\tcode{\placeholder{CMP}(lerp(a, b, t2), lerp(a, b, t1))},
+\tcode{\placeholder{CMP}(t2, t1)}, and
+\tcode{\placeholder{CMP}(b, a)}
+is non-negative.
+\end{itemdescr}
+
 \rSec2[c.math.fpclass]{Classification / comparison functions}
 
 \pnum
@@ -9491,7 +9472,7 @@ for all finite values,
 for negative infinity,
 and for positive infinity.
 
-\rSec3[sf.cmath.assoc_laguerre]{Associated Laguerre polynomials}%
+\rSec3[sf.cmath.assoc.laguerre]{Associated Laguerre polynomials}%
 \indexlibrary{\idxcode{assoc_laguerre}}%
 \indexlibrary{\idxcode{assoc_laguerref}}%
 \indexlibrary{\idxcode{assoc_laguerrel}}%
@@ -9528,7 +9509,7 @@ is \impldef{effect of calling associated Laguerre polynomials with \tcode{n >= 1
 if \tcode{n >= 128} or if \tcode{m >= 128}.
 \end{itemdescr}
 
-\rSec3[sf.cmath.assoc_legendre]{Associated Legendre functions}%
+\rSec3[sf.cmath.assoc.legendre]{Associated Legendre functions}%
 \indexlibrary{\idxcode{assoc_legendre}}%
 \indexlibrary{\idxcode{assoc_legendref}}%
 \indexlibrary{\idxcode{assoc_legendrel}}%
@@ -9594,7 +9575,7 @@ $x$ is \tcode{x} and
 $y$ is \tcode{y}.
 \end{itemdescr}
 
-\rSec3[sf.cmath.comp_ellint_1]{Complete elliptic integral of the first kind}%
+\rSec3[sf.cmath.comp.ellint.1]{Complete elliptic integral of the first kind}%
 \indexlibrary{\idxcode{comp_ellint_1}}%
 \indexlibrary{\idxcode{comp_ellint_1f}}%
 \indexlibrary{\idxcode{comp_ellint_1l}}%
@@ -9621,10 +9602,10 @@ where
 $k$ is \tcode{k}.
 
 \pnum
-See also \ref{sf.cmath.ellint_1}.
+See also \ref{sf.cmath.ellint.1}.
 \end{itemdescr}
 
-\rSec3[sf.cmath.comp_ellint_2]{Complete elliptic integral of the second kind}%
+\rSec3[sf.cmath.comp.ellint.2]{Complete elliptic integral of the second kind}%
 \indexlibrary{\idxcode{comp_ellint_2}}%
 \indexlibrary{\idxcode{comp_ellint_2f}}%
 \indexlibrary{\idxcode{comp_ellint_2l}}%
@@ -9651,10 +9632,10 @@ where
 $k$ is \tcode{k}.
 
 \pnum
-See also \ref{sf.cmath.ellint_2}.
+See also \ref{sf.cmath.ellint.2}.
 \end{itemdescr}
 
-\rSec3[sf.cmath.comp_ellint_3]{Complete elliptic integral of the third kind}%
+\rSec3[sf.cmath.comp.ellint.3]{Complete elliptic integral of the third kind}%
 \indexlibrary{\idxcode{comp_ellint_3}}%
 \indexlibrary{\idxcode{comp_ellint_3f}}%
 \indexlibrary{\idxcode{comp_ellint_3l}}%
@@ -9682,10 +9663,10 @@ $k$ is \tcode{k} and
 $\nu$ is \tcode{nu}.
 
 \pnum
-See also \ref{sf.cmath.ellint_3}.
+See also \ref{sf.cmath.ellint.3}.
 \end{itemdescr}
 
-\rSec3[sf.cmath.cyl_bessel_i]{Regular modified cylindrical Bessel functions}%
+\rSec3[sf.cmath.cyl.bessel.i]{Regular modified cylindrical Bessel functions}%
 \indexlibrary{\idxcode{cyl_bessel_i}}%
 \indexlibrary{\idxcode{cyl_bessel_if}}%
 \indexlibrary{\idxcode{cyl_bessel_il}}%
@@ -9722,10 +9703,10 @@ is \impldef{effect of calling regular modified cylindrical Bessel functions with
 if \tcode{nu >= 128}.
 
 \pnum
-See also \ref{sf.cmath.cyl_bessel_j}.
+See also \ref{sf.cmath.cyl.bessel.j}.
 \end{itemdescr}
 
-\rSec3[sf.cmath.cyl_bessel_j]{Cylindrical Bessel functions of the first kind}%
+\rSec3[sf.cmath.cyl.bessel.j]{Cylindrical Bessel functions of the first kind}%
 \indexlibrary{\idxcode{cyl_bessel_j}}%
 \indexlibrary{\idxcode{cyl_bessel_jf}}%
 \indexlibrary{\idxcode{cyl_bessel_jl}}%
@@ -9759,7 +9740,7 @@ is \impldef{effect of calling cylindrical Bessel functions of the first kind wit
 if \tcode{nu >= 128}.
 \end{itemdescr}
 
-\rSec3[sf.cmath.cyl_bessel_k]{Irregular modified cylindrical Bessel functions}%
+\rSec3[sf.cmath.cyl.bessel.k]{Irregular modified cylindrical Bessel functions}%
 \indexlibrary{\idxcode{cyl_bessel_k}}%
 \indexlibrary{\idxcode{cyl_bessel_kf}}%
 \indexlibrary{\idxcode{cyl_bessel_kl}}%
@@ -9812,10 +9793,10 @@ The effect of calling each of these functions
 is \impldef{effect of calling irregular modified cylindrical Bessel functions with \tcode{nu >= 128}}
 if \tcode{nu >= 128}.
 
-\pnum See also \ref{sf.cmath.cyl_bessel_i}, \ref{sf.cmath.cyl_bessel_j}, \ref{sf.cmath.cyl_neumann}.
+\pnum See also \ref{sf.cmath.cyl.bessel.i}, \ref{sf.cmath.cyl.bessel.j}, \ref{sf.cmath.cyl.neumann}.
 \end{itemdescr}
 
-\rSec3[sf.cmath.cyl_neumann]{Cylindrical Neumann functions}%
+\rSec3[sf.cmath.cyl.neumann]{Cylindrical Neumann functions}%
 \indexlibrary{\idxcode{cyl_neumann}}%
 \indexlibrary{\idxcode{cyl_neumannf}}%
 \indexlibrary{\idxcode{cyl_neumannl}}%
@@ -9863,10 +9844,10 @@ The effect of calling each of these functions
 is \impldef{effect of calling cylindrical Neumann functions with \tcode{nu >= 128}}
 if \tcode{nu >= 128}.
 
-\pnum See also \ref{sf.cmath.cyl_bessel_j}.
+\pnum See also \ref{sf.cmath.cyl.bessel.j}.
 \end{itemdescr}
 
-\rSec3[sf.cmath.ellint_1]{Incomplete elliptic integral of the first kind}%
+\rSec3[sf.cmath.ellint.1]{Incomplete elliptic integral of the first kind}%
 \indexlibrary{\idxcode{ellint_1}}%
 \indexlibrary{\idxcode{ellint_1f}}%
 \indexlibrary{\idxcode{ellint_1l}}%
@@ -9896,7 +9877,7 @@ $k$ is \tcode{k} and
 $\phi$ is \tcode{phi}.
 \end{itemdescr}
 
-\rSec3[sf.cmath.ellint_2]{Incomplete elliptic integral of the second kind}%
+\rSec3[sf.cmath.ellint.2]{Incomplete elliptic integral of the second kind}%
 \indexlibrary{\idxcode{ellint_2}}%
 \indexlibrary{\idxcode{ellint_2f}}%
 \indexlibrary{\idxcode{ellint_2l}}%
@@ -9925,7 +9906,7 @@ $k$ is \tcode{k} and
 $\phi$ is \tcode{phi}.
 \end{itemdescr}
 
-\rSec3[sf.cmath.ellint_3]{Incomplete elliptic integral of the third kind}%
+\rSec3[sf.cmath.ellint.3]{Incomplete elliptic integral of the third kind}%
 \indexlibrary{\idxcode{ellint_3}}%
 \indexlibrary{\idxcode{ellint_3f}}%
 \indexlibrary{\idxcode{ellint_3l}}%
@@ -10092,7 +10073,7 @@ is \impldef{effect of calling Legendre polynomials with \tcode{l >= 128}}
 if \tcode{l >= 128}.
 \end{itemdescr}
 
-\rSec3[sf.cmath.riemann_zeta]{Riemann zeta function}%
+\rSec3[sf.cmath.riemann.zeta]{Riemann zeta function}%
 \indexlibrary{\idxcode{riemann_zeta}}%
 \indexlibrary{\idxcode{riemann_zetaf}}%
 \indexlibrary{\idxcode{riemann_zetal}}%
@@ -10138,7 +10119,7 @@ where
 $x$ is \tcode{x}.
 \end{itemdescr}
 
-\rSec3[sf.cmath.sph_bessel]{Spherical Bessel functions of the first kind}%
+\rSec3[sf.cmath.sph.bessel]{Spherical Bessel functions of the first kind}%
 \indexlibrary{\idxcode{sph_bessel}}%
 \indexlibrary{\idxcode{sph_besself}}%
 \indexlibrary{\idxcode{sph_bessell}}%
@@ -10170,10 +10151,10 @@ The effect of calling each of these functions
 is \impldef{effect of calling spherical Bessel functions with \tcode{n >= 128}}
 if \tcode{n >= 128}.
 
-\pnum See also \ref{sf.cmath.cyl_bessel_j}.
+\pnum See also \ref{sf.cmath.cyl.bessel.j}.
 \end{itemdescr}
 
-\rSec3[sf.cmath.sph_legendre]{Spherical associated Legendre functions}%
+\rSec3[sf.cmath.sph.legendre]{Spherical associated Legendre functions}%
 \indexlibrary{\idxcode{sph_legendre}}%
 \indexlibrary{\idxcode{sph_legendref}}%
 \indexlibrary{\idxcode{sph_legendrel}}%
@@ -10214,10 +10195,10 @@ is \impldef{effect of calling spherical associated Legendre functions with \tcod
 if \tcode{l >= 128}.
 
 \pnum
-See also \ref{sf.cmath.assoc_legendre}.
+See also \ref{sf.cmath.assoc.legendre}.
 \end{itemdescr}
 
-\rSec3[sf.cmath.sph_neumann]{Spherical Neumann functions}%
+\rSec3[sf.cmath.sph.neumann]{Spherical Neumann functions}%
 \indexlibrary{\idxcode{sph_neumann}}%
 \indexlibrary{\idxcode{sph_neumannf}}%
 \indexlibrary{\idxcode{sph_neumannl}}%
@@ -10253,7 +10234,7 @@ is \impldef{effect of calling spherical Neumann functions with \tcode{n >= 128}}
 if \tcode{n >= 128}.
 
 \pnum
-See also \ref{sf.cmath.cyl_neumann}.
+See also \ref{sf.cmath.cyl.neumann}.
 \end{itemdescr}
 
 \indextext{mathematical special functions|)}
