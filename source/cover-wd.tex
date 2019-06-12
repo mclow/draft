@@ -6,12 +6,11 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & {\larger\docno}             \\
+          \textbf{Document Number:} & D0000R0                     \\
           \textbf{Date:}            & \reldate                    \\
-          \textbf{Revises:}         & \prevdocno                  \\
-          \textbf{Reply to:}        & Richard Smith               \\
-                                    & Google Inc                  \\
-                                    & cxxeditor@gmail.com
+          \textbf{Reply to:}        & Marshall Clow               \\
+                                    & CppAlliance                 \\
+                                    & mclow.lists@gmail.com
           \end{tabular}
 }
 \newlength{\hdwidth}
@@ -22,10 +21,106 @@
 \vspace{2.5cm}
 \begin{center}
 \textbf{\Huge
-Working Draft, Standard for Programming Language \Cpp{}}
+Mandating the Standard Library:\\Clause 29 - Input/output library}
 \end{center}
+
+With the adoption of P0788R3, we have a new way of specifying requirements for the
+library clauses of the standard. This is one of a series of papers reformulating the
+requirements into the new format. This effort was strongly influenced by the informational
+paper P1369R0.
+
+The changes in this series of papers fall into four broad categories.
+\begin{itemize}
+\item{Change "participate in overload resolution" wording into "Constraints" elements}
+\item{Change "Requires" elements into either "Mandates" or "Expects", depending (mostly) on whether or not they can be checked at compile time.}
+\item{Drive-by fixes (hopefully very few)}
+\end{itemize}
+
+This paper covers Clause 29 (Input/output), and is based on N4810.
+
+The entire clause is reproduced here, but the changes are confined to a few sections:
+
+%\begin{multicols}{3}
+%\begin{itemize}
+%\item{alg.foreach}					\ref{alg.foreach}
+%\item{alg.is.permutation}			\ref{alg.is.permutation}
+%\item{alg.copy}						\ref{alg.copy}
+%\item{alg.move}						\ref{alg.move}
+%\item{alg.swap}						\ref{alg.swap}
+%\item{alg.transform}				\ref{alg.transform}
+%\item{alg.replace}					\ref{alg.replace}
+%\item{alg.fill}						\ref{alg.fill}
+%\item{alg.generate}					\ref{alg.generate}
+%\item{alg.remove}					\ref{alg.remove}
+%\item{alg.unique}					\ref{alg.unique}
+%\item{alg.reverse}					\ref{alg.reverse}
+%\item{alg.rotate}					\ref{alg.rotate}
+%\item{alg.random.sample}			\ref{alg.random.sample}
+%\item{alg.random.shuffle}			\ref{alg.random.shuffle}
+%\item{alg.shift}					\ref{alg.shift}
+%\item{sort}							\ref{sort}
+%\item{stable.sort}					\ref{stable.sort}
+%\item{partial.sort}					\ref{partial.sort}
+%\item{partial.sort.copy}			\ref{partial.sort.copy}
+%\item{alg.nth.element}				\ref{alg.nth.element}
+%\item{lower.bound}					\ref{lower.bound}
+%\item{upper.bound}					\ref{upper.bound}
+%\item{equal.range}					\ref{equal.range}
+%\item{binary.search}				\ref{binary.search}
+%\item{alg.partitions}				\ref{alg.partitions}
+%\item{alg.merge}					\ref{alg.merge}
+%\item{includes}						\ref{includes}
+%\item{set.intersection}				\ref{set.intersection}
+%\item{set.difference}				\ref{set.difference}
+%\item{set.symmetric.difference}		\ref{set.symmetric.difference}
+%\item{push.heap}					\ref{push.heap}
+%\item{pop.heap}						\ref{pop.heap}
+%\item{make.heap}					\ref{make.heap}
+%\item{sort.heap}					\ref{sort.heap}
+%\item{alg.min.max}					\ref{alg.min.max}
+%\item{alg.clamp}					\ref{alg.clamp}
+%\item{alg.3way}						\ref{alg.3way}
+%\item{alg.permutation.generators}	\ref{alg.permutation.generators}
+%\item{accumulate}					\ref{accumulate}
+%\item{reduce}						\ref{reduce}
+%\item{inner.product}				\ref{inner.product}
+%\item{transform.reduce}				\ref{transform.reduce}
+%\item{exclusive.scan}				\ref{exclusive.scan}
+%\item{inclusive.scan}				\ref{inclusive.scan}
+%\item{transform.exclusive.scan}		\ref{transform.exclusive.scan}
+%\item{transform.inclusive.scan}		\ref{transform.inclusive.scan}
+%\item{adjacent.difference}			\ref{adjacent.difference}
+%\item{numeric.iota}					\ref{numeric.iota}
+%\item{numeric.ops.gcd}				\ref{numeric.ops.gcd}
+%\item{numeric.ops.lcm}				\ref{numeric.ops.lcm}
+%\end{itemize}
+%\end{multicols}
+
+%Drive-by fixes:
+%\begin{itemize}
+%\item{All of the \*_n algorithms now treat their \tcode{Size} parameter the same way. This also resolves LWG\#3213.}
+%\item{As I was "de-shalling" all the Requirements, I applied the guidance at https://github.com/cplusplus/draft/wiki/Specification-Style-Guidelines\#requirements-expressed-by-concepts. }
+%\end{itemize}
+%
+%Open questions:
+%\begin{itemize}
+%\item{alg.unique \ref{alg.unique} P7.2.3 is kind of a mess. Not quite sure how to "de-shall" it.}
+%\item{alg.random.sample \ref{alg.random.sample} has a \tcode{Distance} parameter that looks like the \tcode{Size} parameter from \*_n. Should it be specified the same way?}
+%\item{Where should "XX is writeable to YY" and "the expression 'Foo/bar' is valid" go? Mandates? Expects? I put them in "Expects".}
+%\end{itemize}
+
+
+%Changes from R0:
+%\begin{itemize}
+%\item{Changed a couple of the "Expects" into "Mandates".}
+%\item{Changed two of "shall not be"s into "is not"s in ostreambuf.iter.cons \ref{ostreambuf.iter.cons}.}
+%\item{Changed several "Constraints: The expression XXXX shall be valid and convertible to bool" to "XXXX is well-formed and convertible to bool".}
+%\end{itemize}
+
 \vfill
-\textbf{Note: this is an early draft. It's known to be incomplet and
-  incorrekt, and it has lots of
-  b\kern-1.2pta\kern1ptd\hspace{1.5em}for\kern-3ptmat\kern0.6ptti\raise0.15ex\hbox{n}g.}
-\newpage
+Help for the editors: The changes here can be viewed as latex sources with the following commands
+\begin{verbatim}
+git clone git@github.com:mclow/mandate.git
+cd mandate
+git diff master..chapter29 iostreams.tex
+\end{verbatim}
