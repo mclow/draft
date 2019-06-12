@@ -1236,7 +1236,7 @@ int value(charT ch, int radix) const;
 
 \begin{itemdescr}
 \pnum
-\requires  The value of \tcode{radix} shall be 8, 10, or 16.
+\changed{\requires}{\expects}  The value of \tcode{radix} \changed{shall be}{is} 8, 10, or 16.
 
 \pnum
 \returns The value represented by the digit \tcode{ch} in base
@@ -1426,7 +1426,7 @@ explicit basic_regex(const charT* p, flag_type f = regex_constants::ECMAScript);
 
 \begin{itemdescr}
 \pnum
-\requires  \tcode{p} shall not be a null pointer.
+\changed{\requires}{\expects} \tcode{p} \changed{shall not be}{is not} a null pointer.
 
 \pnum
 \throws  \tcode{regex_error} if \tcode{p} is not a valid regular expression.
@@ -1451,7 +1451,7 @@ basic_regex(const charT* p, size_t len, flag_type f = regex_constants::ECMAScrip
 
 \begin{itemdescr}
 \pnum
-\requires  \tcode{p} shall not be a null pointer.
+\changed{\requires}{\expects} \tcode{p} \changed{shall not be}{is not} a null pointer.
 
 \pnum
 \throws  \tcode{regex_error} if \tcode{p} is not a valid regular expression.
@@ -1593,7 +1593,7 @@ basic_regex& operator=(const charT* ptr);
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{ptr} shall not be a null pointer.
+\changed{\requires}{\expects} \tcode{ptr} \changed{shall not be}{is not} a null pointer.
 
 \pnum
 \effects Returns \tcode{assign(ptr)}.
@@ -1695,8 +1695,8 @@ template<class InputIterator>
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{InputIterator} shall satisfy the
+\changed{\requires}{\expects}
+\tcode{InputIterator} \changed{shall satisfy}{meets} the
 \oldconcept{InputIterator} requirements\iref{input.iterators}.
 
 \pnum
@@ -2674,7 +2674,7 @@ difference_type length(size_type sub = 0) const;
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{ready() == true}.
+\changed{\requires}{\expects} \tcode{ready() == true}.
 
 \pnum
 \returns \tcode{(*this)[sub].length()}.
@@ -2687,7 +2687,7 @@ difference_type position(size_type sub = 0) const;
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{ready() == true}.
+\changed{\requires}{\expects} \tcode{ready() == true}.
 
 \pnum
 \returns The distance from the start of the target sequence
@@ -2701,7 +2701,7 @@ string_type str(size_type sub = 0) const;
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{ready() == true}.
+\changed{\requires}{\expects} \tcode{ready() == true}.
 
 \pnum
 \returns \tcode{string_type((*this)[sub])}.
@@ -2714,7 +2714,7 @@ const_reference operator[](size_type n) const;
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{ready() == true}.
+\changed{\requires}{\expects} \tcode{ready() == true}.
 
 \pnum
 \returns A reference to the \tcode{sub_match} object representing the
@@ -2732,7 +2732,7 @@ const_reference prefix() const;
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{ready() == true}.
+\changed{\requires}{\expects} \tcode{ready() == true}.
 
 \pnum
 \returns A reference to the \tcode{sub_match} object representing the
@@ -2747,7 +2747,7 @@ const_reference suffix() const;
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{ready() == true}.
+\changed{\requires}{\expects} \tcode{ready() == true}.
 
 \pnum
 \returns A reference to the \tcode{sub_match} object representing the
@@ -2790,7 +2790,7 @@ template<class OutputIter>
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{ready() == true} and \tcode{OutputIter} shall satisfy the requirements for a
+\changed{\requires}{\expects} \tcode{ready() == true} and \tcode{OutputIter} \changed{shall satisfy}{meets} the requirements for a
 \oldconcept{OutputIterator}\iref{output.iterators}.
 
 \pnum
@@ -2832,7 +2832,7 @@ template<class ST, class SA>
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{ready() == true}.
+\changed{\requires}{\expects} \tcode{ready() == true}.
 
 \pnum
 \effects
@@ -2856,7 +2856,7 @@ string_type format(
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{ready() == true}.
+\changed{\requires}{\expects} \tcode{ready() == true}.
 
 \pnum
 \effects Constructs an empty string \tcode{result} of type \tcode{string_type} and
@@ -2978,8 +2978,8 @@ template<class BidirectionalIterator, class Allocator, class charT, class traits
 
 \begin{itemdescr}
 \pnum
-\requires
-The type \tcode{BidirectionalIterator} shall satisfy the
+\changed{\requires}{\expects}
+\removed{The type} \tcode{BidirectionalIterator} \changed{shall satisfy}{meets} the
 \oldconcept{BidirectionalIterator} requirements\iref{bidirectional.iterators}.
 
 \pnum
@@ -3162,8 +3162,8 @@ template<class BidirectionalIterator, class Allocator, class charT, class traits
 
 \begin{itemdescr}
 \pnum
-\requires
-Type \tcode{BidirectionalIterator} shall satisfy the
+\changed{\requires}{\expects}
+\removed{Type} \tcode{BidirectionalIterator} \changed{shall satisfy}{meets} the
 \oldconcept{BidirectionalIterator} requirements\iref{bidirectional.iterators}.
 
 \pnum
@@ -3867,7 +3867,7 @@ template<size_t N>
 
 \begin{itemdescr}
 \pnum
-\requires Each of the initialization values of \tcode{submatches} shall be
+\changed{\requires}{\expects} Each of the initialization values of \tcode{submatches} \changed{shall be}{is}
 \tcode{>= -1}.
 
 \pnum
