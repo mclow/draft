@@ -702,7 +702,7 @@ atomic_ref(T& obj);
 
 \begin{itemdescr}
 \pnum
-\requires The referenced object shall be aligned to \tcode{required_alignment}.
+\changed{\requires}{\expects} The referenced object \changed{shall be}{is} aligned to \tcode{required_alignment}.
 
 \pnum
 \effects Constructs an atomic reference that references the object.
@@ -779,7 +779,7 @@ void store(T desired, memory_order order = memory_order_seq_cst) const noexcept;
 
 \begin{itemdescr}
 \pnum
-\requires The \tcode{order} argument shall not be
+\changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is not}
 \tcode{memory_order_consume},
 \tcode{memory_order_acquire}, nor
 \tcode{memory_order_acq_rel}.
@@ -800,7 +800,7 @@ T load(memory_order order = memory_order_seq_cst) const noexcept;
 
 \begin{itemdescr}
 \pnum
-\requires The \tcode{order} argument shall not be
+\changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is not}
 \tcode{memory_order_release} nor \tcode{memory_order_acq_rel}.
 
 \pnum
@@ -854,7 +854,7 @@ bool compare_exchange_strong(T& expected, T desired,
 
 \begin{itemdescr}
 \pnum
-\requires The \tcode{failure} argument shall not be
+\changed{\requires}{\expects} The \tcode{failure} argument \changed{shall not be}{is not}
 \tcode{memory_order_release} nor \tcode{memory_order_acq_rel}.
 
 \pnum
@@ -1223,8 +1223,8 @@ T* fetch_@\placeholdernc{key}@(difference_type operand, memory_order order = mem
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{T} shall be an object type,
-otherwise the program is ill-formed.
+\changed{\requires}{\mandates} \tcode{T} \changed{shall be}{is} an object type \removed{,
+otherwise the program is ill-formed}.
 
 \pnum
 \effects Atomically replaces the value referenced by \tcode{*ptr} with
@@ -1481,7 +1481,7 @@ void store(T desired, memory_order order = memory_order::seq_cst) noexcept;
 
 \begin{itemdescr}
 \pnum
-\requires The \tcode{order} argument shall not be \tcode{memory_order::consume},
+\changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is not} \tcode{memory_order::consume},
 \tcode{memory_order::acquire}, nor \tcode{memory_order::acq_rel}.
 
 \pnum
@@ -1520,7 +1520,7 @@ T load(memory_order order = memory_order::seq_cst) const noexcept;
 
 \begin{itemdescr}
 \pnum
-\requires The \tcode{order} argument shall not be \tcode{memory_order::release} nor \tcode{memory_order::acq_rel}.
+\changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is not} \tcode{memory_order::release} nor \tcode{memory_order::acq_rel}.
 
 \pnum
 \effects Memory is affected according to the value of \tcode{order}.
@@ -1599,7 +1599,7 @@ bool compare_exchange_strong(T& expected, T desired,
 
 \begin{itemdescr}
 \pnum
-\requires The \tcode{failure} argument shall not be \tcode{memory_order::release} nor
+\changed{\requires}{\expects} The \tcode{failure} argument \changed{shall not be}{is not} \tcode{memory_order::release} nor
 \tcode{memory_order::acq_rel}.
 
 \pnum
@@ -2187,7 +2187,7 @@ T* fetch_@\placeholdernc{key}@(ptrdiff_t operand, memory_order order = memory_or
 
 \begin{itemdescr}
 \pnum
-\requires T shall be an object type, otherwise the program is ill-formed.
+\changed{\requires}{\mandates} T \changed{shall be}{is} an object type \removed{, otherwise the program is ill-formed}.
 \begin{note} Pointer arithmetic on \tcode{void*} or function pointers is ill-formed. \end{note}
 
 \pnum
@@ -2394,7 +2394,7 @@ void atomic_flag::clear(memory_order order = memory_order::seq_cst) noexcept;
 
 \begin{itemdescr}
 \pnum
-\requires The \tcode{order} argument shall not be \tcode{memory_order::consume},
+\changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is not} \tcode{memory_order::consume},
 \tcode{memory_order::acquire}, nor \tcode{memory_order::acq_rel}.
 
 \pnum
