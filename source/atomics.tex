@@ -625,8 +625,8 @@ for the lifetime\iref{basic.life} of the \tcode{atomic_ref} object,
 the object referenced by \tcode{*ptr} is an atomic object\iref{intro.races}.
 
 \pnum
-The template argument for \tcode{T}
-shall be trivially copyable\iref{basic.types}.
+\added{The program is ill-formed if \tcode{is_trivially_copyable_v<T>} is false.}
+\removed{The template argument for \tcode{T} shall be trivially copyable\iref{basic.types}.}
 
 \pnum
 The lifetime\iref{basic.life} of an object referenced by \tcode{*ptr}
@@ -2349,7 +2349,7 @@ The \tcode{atomic_flag} type is a standard-layout struct.
 It has a trivial default constructor and a trivial destructor.
 
 \pnum
-The macro \tcode{ATOMIC_FLAG_INIT} shall be defined in such a way that it can be used to initialize an object of type \tcode{atomic_flag} to the
+The macro \tcode{ATOMIC_FLAG_INIT} \changed{shall be}{is} defined in such a way that it can be used to initialize an object of type \tcode{atomic_flag} to the
 clear state. The macro can be used in the form:
 \begin{codeblock}
 atomic_flag guard = ATOMIC_FLAG_INIT;
