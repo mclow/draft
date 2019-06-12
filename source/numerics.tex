@@ -777,8 +777,8 @@ template<class T, class charT, class traits>
 
 \begin{itemdescr}
 \pnum
-\requires
-The input values shall be convertible to
+\changed{\requires}{\expects}
+The input values \changed{shall be}{are} convertible to
 \tcode{T}.
 
 \pnum
@@ -933,8 +933,8 @@ template<class T> complex<T> polar(const T& rho, const T& theta = T());
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{rho} shall be non-negative and non-NaN\@. \tcode{theta} shall be finite.
+\changed{\requires}{\expects}
+\tcode{rho} \changed{shall be}{is} non-negative and non-NaN\@. \tcode{theta} \changed{shall be}{is} finite.
 
 \pnum
 \returns
@@ -2271,7 +2271,7 @@ according to \ref{strings} and \ref{input.output}.
     provided that there have been no intervening invocations
     of \tcode{x} or of \tcode{v}.
 
-    \requires
+    \changed{\requires}{\expects}
     \tcode{is} provides a textual representation
     that was previously written
     using an output stream
@@ -2653,7 +2653,7 @@ according to \ref{strings} and \ref{input.output}.
     calls \tcode{is.setstate(ios::failbit)}
     (which may throw \tcode{ios::failure}\iref{iostate.flags}).
 
-    \requires \tcode{is} provides a textual representation
+    \changed{\requires}{\expects} \tcode{is} provides a textual representation
     that was previously written
     using an \tcode{os} whose imbued locale
     and whose type's template specialization arguments
@@ -4043,7 +4043,8 @@ template<class T>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires \tcode{T} shall be an integer type.
+\pnum
+\changed{\requires}{\mandates} \tcode{T} \changed{shall be}{is} an integer type.
 
 \pnum\effects
  Same as \tcode{seed_seq(il.begin(), il.end())}.
@@ -4057,12 +4058,20 @@ template<class InputIterator>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
-  \tcode{InputIterator} shall satisfy the
-  \oldconcept{InputIterator} requirements\iref{input.iterators}.
-  Moreover,
+\begin{addedblock}
+\pnum
+\mandates
   \tcode{iterator_traits<InputIterator>::value_type}
-  shall denote an integer type.
+  \changed{shall denote}{is} an integer type.
+\end{addedblock}
+
+\pnum
+\changed{\requires}{\expects}
+  \tcode{InputIterator} \changed{shall satisfy}{meets} the
+  \oldconcept{InputIterator} requirements\iref{input.iterators}.
+  \removed{Moreover,
+  \tcode{iterator_traits<InputIterator>::value_type}
+  shall denote an integer type.}
 
 \pnum\effects Constructs a \tcode{seed_seq} object
  by the following algorithm:
@@ -4079,14 +4088,22 @@ template<class RandomAccessIterator>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires \tcode{RandomAccessIterator}
-  shall satisfy the
+\begin{addedblock}
+\pnum
+\mandates
+  \tcode{iterator_traits<RandomAccessIterator>::\brk{}value_type}
+  is an unsigned integer type capable of accommodating 32-bit quantities.
+\end{addedblock}
+
+\pnum
+\changed{\requires}{\expects} \tcode{RandomAccessIterator}
+  \changed{shall satisfy}{meets} the
   \oldconcept{RandomAccessIterator} requirements\iref{random.access.iterators}
   and the requirements of a mutable iterator.
-  Moreover,
+  \removed{Moreover,
   \tcode{iterator_traits<RandomAccessIterator>::\brk{}value_type}
   shall denote an unsigned integer type
-  capable of accommodating 32-bit quantities.
+  capable of accommodating 32-bit quantities.}
 
 \pnum\effects
  Does nothing if \tcode{begin == end}.
@@ -4187,12 +4204,12 @@ template<class OutputIterator>
 
 \begin{itemdescr}
 \pnum\requires
-  \tcode{OutputIterator} shall satisfy the
+  \tcode{OutputIterator} \changed{shall satisfy}{meets} the
   \oldconcept{OutputIterator} requirements\iref{output.iterators}.
   Moreover,
   the expression
   \tcode{*dest = rt}
-  shall be valid for a value \tcode{rt} of type \tcode{result_type}.
+  \changed{shall be}{is} valid for a value \tcode{rt} of type \tcode{result_type}.
 
 \pnum\effects Copies the sequence of prepared 32-bit units
  to the given destination,
@@ -4386,7 +4403,7 @@ explicit uniform_int_distribution(IntType a, IntType b = numeric_limits<IntType>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum \changed{\requires}{\expects}
  $\tcode{a} \leq \tcode{b}$.
 
 \pnum\effects Constructs a \tcode{uniform_int_distribution} object;
@@ -4472,7 +4489,7 @@ explicit uniform_real_distribution(RealType a, RealType b = 1.0);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum \changed{\requires}{\expects}
  $\tcode{a} \leq \tcode{b}$
  and
  $\tcode{b} - \tcode{a} \leq \tcode{numeric_limits<RealType>::max()}$.
@@ -4571,7 +4588,7 @@ explicit bernoulli_distribution(double p);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum \changed{\requires}{\expects}
  $0 \leq \tcode{p} \leq 1$.
 
 \pnum\effects Constructs a \tcode{bernoulli_distribution} object;
@@ -4643,7 +4660,7 @@ explicit binomial_distribution(IntType t, double p = 0.5);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum \changed{\requires}{\expects}
  $0 \leq \tcode{p} \leq 1$ and $0 \leq \tcode{t} $.
 
 \pnum\effects Constructs a \tcode{binomial_distribution} object;
@@ -4723,7 +4740,7 @@ explicit geometric_distribution(double p);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum \changed{\requires}{\expects}
  $0 < \tcode{p} < 1$.
 
 \pnum\effects Constructs a \tcode{geometric_distribution} object;
@@ -4799,7 +4816,7 @@ explicit negative_binomial_distribution(IntType k, double p = 0.5);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum \changed{\requires}{\expects}
  $0 < \tcode{p} \leq 1$
  and $0 < \tcode{k} $.
 
@@ -4900,7 +4917,7 @@ explicit poisson_distribution(double mean);
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{mean}$.
+\changed{\requires}{\expects} $0 < \tcode{mean}$.
 
 \pnum
 \effects Constructs a \tcode{poisson_distribution} object;
@@ -4971,7 +4988,7 @@ explicit exponential_distribution(RealType lambda);
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{lambda}$.
+\changed{\requires}{\expects} $0 < \tcode{lambda}$.
 
 \pnum
 \effects Constructs an \tcode{exponential_distribution} object;
@@ -5045,7 +5062,7 @@ explicit gamma_distribution(RealType alpha, RealType beta = 1.0);
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{alpha}$ and $0 < \tcode{beta}$.
+\changed{\requires}{\expects} $0 < \tcode{alpha}$ and $0 < \tcode{beta}$.
 
 \pnum
 \effects Constructs a \tcode{gamma_distribution} object;
@@ -5131,7 +5148,7 @@ explicit weibull_distribution(RealType a, RealType b = 1.0);
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{a}$ and $0 < \tcode{b}$.
+\changed{\requires}{\expects} $0 < \tcode{a}$ and $0 < \tcode{b}$.
 
 \pnum
 \effects Constructs a \tcode{weibull_distribution} object;
@@ -5224,7 +5241,7 @@ explicit extreme_value_distribution(RealType a, RealType b = 1.0);
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{b}$.
+\changed{\requires}{\expects} $0 < \tcode{b}$.
 
 \pnum
 \effects Constructs an \tcode{extreme_value_distribution} object;
@@ -5338,7 +5355,7 @@ explicit normal_distribution(RealType mean, RealType stddev = 1.0);
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{stddev}$.
+\changed{\requires}{\expects} $0 < \tcode{stddev}$.
 
 \pnum
 \effects Constructs a \tcode{normal_distribution} object;
@@ -5424,7 +5441,7 @@ explicit lognormal_distribution(RealType m, RealType s = 1.0);
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{s}$.
+\changed{\requires}{\expects} $0 < \tcode{s}$.
 
 \pnum
 \effects Constructs a \tcode{lognormal_distribution} object;
@@ -5507,7 +5524,7 @@ explicit chi_squared_distribution(RealType n);
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{n}$.
+\changed{\requires}{\expects} $0 < \tcode{n}$.
 
 \pnum
 \effects Constructs a \tcode{chi_squared_distribution} object;
@@ -5580,7 +5597,7 @@ explicit cauchy_distribution(RealType a, RealType b = 1.0);
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{b}$.
+\changed{\requires}{\expects} $0 < \tcode{b}$.
 
 \pnum
 \effects Constructs a \tcode{cauchy_distribution} object;
@@ -5668,7 +5685,7 @@ explicit fisher_f_distribution(RealType m, RealType n = 1);
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{m}$ and $0 < \tcode{n}$.
+\changed{\requires}{\expects} $0 < \tcode{m}$ and $0 < \tcode{n}$.
 
 \pnum
 \effects Constructs a \tcode{fisher_f_distribution} object;
@@ -5754,7 +5771,7 @@ explicit student_t_distribution(RealType n);
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{n}$.
+\changed{\requires}{\expects} $0 < \tcode{n}$.
 
 \pnum
 \effects Constructs a \tcode{student_t_distribution} object;
@@ -5871,16 +5888,16 @@ template<class InputIterator>
 \begin{itemdescr}
 \pnum
 \requires
-  \tcode{InputIterator} shall satisfy the
+  \tcode{InputIterator} \changed{shall satisfy}{meets} the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
   Moreover,
   \tcode{iterator_traits<InputIterator>::value_type}
-  shall denote a type that is convertible to \tcode{double}.
+  \changed{shall denote}{is} a type that is convertible to \tcode{double}.
  If \tcode{firstW == lastW},
  let $n = 1$ and $w_0 = 1$.
  Otherwise,
  $\bigl[\tcode{firstW}, \tcode{lastW}\bigr)$
- shall form a sequence $w$ of length $n > 0$.
+ \changed{shall form}{forms} a sequence $w$ of length $n > 0$.
 
 \pnum
 \effects Constructs a \tcode{discrete_distribution} object
@@ -5905,17 +5922,17 @@ template<class UnaryOperation>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum \changed{\requires}{\expects}
  Each instance of type \tcode{UnaryOperation}
- shall be a function object\iref{function.objects}
- whose return type shall be convertible to \tcode{double}.
+ \changed{shall be}{is} a function object\iref{function.objects}
+ whose return type \changed{shall be}{is} convertible to \tcode{double}.
  Moreover,
- \tcode{double} shall be convertible
+ \tcode{double} \changed{shall be}{is} convertible
  to the type of \tcode{UnaryOperation}'s sole parameter.
  If $\tcode{nw} = 0$, let $n = 1$, otherwise let $n = \tcode{nw}$.
  The relation
    $0 < \delta = (\tcode{xmax} - \tcode{xmin}) / n$
- shall hold.
+ \changed{shall hold}{holds}.
 
 \pnum\effects Constructs a \tcode{discrete_distribution} object
  with probabilities given by the formula above,
@@ -6042,15 +6059,15 @@ template<class InputIteratorB, class InputIteratorW>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum \changed{\requires}{\expects}
   \tcode{InputIteratorB} and \tcode{InputIteratorW}
-  shall each satisfy the
+  \changed{shall each satisfy}{each meet} the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
   Moreover,
   the \grammarterm{id-expression}s
   \tcode{iterator_traits<InputIteratorB>::value_type} and
   \tcode{iterator_traits<Input\-IteratorW>::value_type}
-  shall each denote a type that is convertible to \tcode{double}.
+  \changed{shall each denote a type that is}{are both types that are} convertible to \tcode{double}.
  If \tcode{firstB == lastB}
  or \tcode{++firstB == lastB},
  let $n = 1$,
@@ -6076,12 +6093,12 @@ template<class UnaryOperation>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum \changed{\requires}{\expects}
  Each instance of type \tcode{UnaryOperation}
- shall be a function object\iref{function.objects}
- whose return type shall be convertible to \tcode{double}.
+ \changed{shall be}{is} a function object\iref{function.objects}
+ whose return type \changed{shall be}{is} convertible to \tcode{double}.
  Moreover,
- \tcode{double} shall be convertible
+ \tcode{double} \changed{shall be}{is} convertible
  to the type of \tcode{UnaryOperation}'s sole parameter.
 
 \pnum\effects Constructs a \tcode{piecewise_constant_distribution} object
@@ -6111,16 +6128,16 @@ template<class UnaryOperation>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum \changed{\requires}{\expects}
  Each instance of type \tcode{UnaryOperation}
- shall be a function object\iref{function.objects}
- whose return type shall be convertible to \tcode{double}.
+ \changed{shall be}{is} a function object\iref{function.objects}
+ whose return type \changed{shall be}{is} convertible to \tcode{double}.
  Moreover,
- \tcode{double} shall be convertible
+ \tcode{double} \changed{shall be}{is} convertible
  to the type of \tcode{UnaryOperation}'s sole parameter.
  If $\tcode{nw} = 0$, let $n = 1$, otherwise let $n = \tcode{nw}$.
  The relation $0 < \delta = (\tcode{xmax} - \tcode{xmin}) / n$
- shall hold.
+ \changed{shall hold}{holds}.
 
 \pnum\effects Constructs a \tcode{piecewise_constant_distribution} object
  with parameters taken or calculated
@@ -6253,15 +6270,15 @@ template<class InputIteratorB, class InputIteratorW>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum \changed{\requires}{\expects}
   \tcode{InputIteratorB} and \tcode{InputIteratorW}
-  shall each satisfy the
+  \changed{shall each satisfy}{both meet} the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
   Moreover,
   the \grammarterm{id-expression}s
   \tcode{iterator_traits<InputIteratorB>::value_type} and
   \tcode{iterator_traits<Input\-IteratorW>::value_type}
-  shall each denote a type that is convertible to \tcode{double}.
+  \changed{shall each denote a type that is}{are both} convertible to \tcode{double}.
  If \tcode{firstB == lastB}
  or \tcode{++firstB == lastB},
  let $n = 1$,
@@ -6270,10 +6287,10 @@ template<class InputIteratorB, class InputIteratorW>
  and $b_1 = 1$.
  Otherwise,
  $\bigl[\tcode{firstB}, \tcode{lastB}\bigr)$
- shall form a sequence $b$ of length $n+1$,
+ \changed{shall form}{forms} a sequence $b$ of length $n+1$,
  the length of the sequence $w$ starting from \tcode{firstW}
- shall be at least $n+1$,
- and any $w_k$ for $k \geq n + 1$ shall be ignored by the distribution.
+ \changed{shall be}{is} at least $n+1$,
+ and any $w_k$ for $k \geq n + 1$ \changed{shall be}{are} ignored by the distribution.
 
 \pnum\effects Constructs a \tcode{piecewise_linear_distribution} object
  with parameters as specified above.
@@ -6287,12 +6304,12 @@ template<class UnaryOperation>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum \changed{\requires}{\expects}
  Each instance of type \tcode{UnaryOperation}
- shall be a function object\iref{function.objects}
- whose return type shall be convertible to \tcode{double}.
+ \changed{shall be}{is} a function object\iref{function.objects}
+ whose return type \changed{shall}{are} be convertible to \tcode{double}.
  Moreover,
- \tcode{double} shall be convertible
+ \tcode{double} \changed{shall be}{is} convertible
  to the type of \tcode{UnaryOperation}'s sole parameter.
 
 \pnum\effects Constructs a \tcode{piecewise_linear_distribution} object
@@ -6322,16 +6339,16 @@ template<class UnaryOperation>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum \changed{\requires}{\expects}
  Each instance of type \tcode{UnaryOperation}
- shall be a function object\iref{function.objects}
- whose return type shall be convertible to \tcode{double}.
+ \changed{shall be}{is} a function object\iref{function.objects}
+ whose return type \changed{shall be}{is} convertible to \tcode{double}.
  Moreover,
- \tcode{double} shall be convertible
+ \tcode{double} \changed{shall be}{is} convertible
  to the type of \tcode{UnaryOperation}'s sole parameter.
  If $\tcode{nw} = 0$, let $n = 1$, otherwise let $n = \tcode{nw}$.
  The relation $0 < \delta = (\tcode{xmax} - \tcode{xmin}) / n$
- shall hold.
+ \changed{shall hold}{holds}.
 
 \pnum\effects Constructs a \tcode{piecewise_linear_distribution} object
  with parameters taken or calculated
@@ -6823,7 +6840,7 @@ valarray(const T* p, size_t n);
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{p} points to an array\iref{dcl.array} of at least
 \tcode{n} elements.
 
@@ -6985,7 +7002,7 @@ valarray& operator=(const indirect_array<T>&);
 
 \begin{itemdescr}
 \pnum
-\requires The length of the array to which the argument refers equals \tcode{size()}.
+\changed{\requires}{\expects} The length of the array to which the argument refers equals \tcode{size()}.
 The value of an element in the left-hand side of a \tcode{valarray} assignment
 operator does not depend on the value of another element in that left-hand side.
 
@@ -7005,7 +7022,7 @@ T& operator[](size_t n);
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{n < size()}.
 
 \pnum
@@ -7227,6 +7244,16 @@ valarray<bool> operator!() const;
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\constraints
+The indicated operator can be applied to operands of type \tcode{T}
+and returns a value which is of type \tcode{T} (\tcode{bool} for
+\tcode{operator!}) or which may be unambiguously implicitly converted to type
+\tcode{T} (\tcode{bool} for \tcode{operator!})
+\end{addedblock}
+
+\begin{removedblock}
 \pnum
 \requires
 Each of these operators may only be instantiated for a type \tcode{T}
@@ -7234,6 +7261,7 @@ to which the indicated operator can be applied and for which the indicated
 operator returns a value which is of type \tcode{T} (\tcode{bool} for
 \tcode{operator!}) or which may be unambiguously implicitly converted to type
 \tcode{T} (\tcode{bool} for \tcode{operator!}).
+\end{removedblock}
 
 \pnum
 \returns A \tcode{valarray} whose length is \tcode{size()}.
@@ -7267,11 +7295,17 @@ valarray& operator>>=(const valarray& v);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
 \pnum
-\requires
+\constraints
+The indicated operator can be applied to two operands of type \tcode{T}.
+\end{addedblock}
+
+\pnum
+\changed{\requires}{\expects}
 \tcode{size() == v.size()}.
-Each of these operators may only be instantiated for a type \tcode{T}
-if the indicated operator can be applied to two operands of type \tcode{T}.
+\removed{Each of these operators may only be instantiated for a type \tcode{T}
+if the indicated operator can be applied to two operands of type \tcode{T}.}
 The value of an element in the left-hand side of a valarray compound
 assignment operator does not depend on the value of another element in that left
 hand side.
@@ -7316,10 +7350,18 @@ valarray& operator>>=(const T& v);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\constraints
+The indicated operator can be applied to two operands of type \tcode{T}.
+\end{addedblock}
+
+\begin{removedblock}
 \pnum
 \requires
 Each of these operators may only be instantiated for a type \tcode{T}
 if the indicated operator can be applied to two operands of type \tcode{T}.
+\end{removedblock}
 
 \pnum
 \effects
@@ -7372,12 +7414,18 @@ T sum() const;
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
 \pnum
-\requires
+\constraints
+\tcode{operator+=} be applied to operarands of type \tcode{T}.
+\end{addedblock}
+
+\pnum
+\changed{\requires}{\expects}
 \tcode{size() > 0}.
-This function may only be instantiated for a type \tcode{T} to which
+\removed{This function may only be instantiated for a type \tcode{T} to which
 \tcode{operator+=}
-can be applied.
+can be applied.}
 
 \pnum
 \returns
@@ -7396,7 +7444,7 @@ T min() const;
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{size() > 0}
 
 \pnum
@@ -7415,7 +7463,7 @@ T max() const;
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{size() > 0}.
 
 \pnum
@@ -7526,12 +7574,20 @@ template<class T> valarray<T> operator>>(const valarray<T>&, const valarray<T>&)
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
 \pnum
-\requires
-Each of these operators may only be instantiated for a type \tcode{T}
+\constraints
+The indicated operator can be applied to an operarand of type \tcode{T} and returns 
+a value which is of type \tcode{T} or which can be unambiguously
+implicitly converted to \tcode{T}.
+\end{addedblock}
+
+\pnum
+\changed{\requires}{\expects}
+\removed{Each of these operators may only be instantiated for a type \tcode{T}
 to which the indicated operator can be applied and for which the indicated
 operator returns a value which is of type \tcode{T} or which
-can be unambiguously implicitly converted to type \tcode{T}.
+can be unambiguously implicitly converted to type \tcode{T}.}
 The argument arrays have the same length.
 
 \pnum
@@ -7597,12 +7653,22 @@ template<class T> valarray<T> operator>>(const typename valarray<T>::value_type&
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\constraints
+The indicated operator can be applied to an operand of type \tcode{T} and returns 
+a value which is of type \tcode{T} or which can be unambiguously
+implicitly converted to \tcode{T}.
+\end{addedblock}
+
+\begin{removedblock}
 \pnum
 \requires
 Each of these operators may only be instantiated for a type \tcode{T}
 to which the indicated operator can be applied and for which
 the indicated operator returns a value which is of type \tcode{T}
 or which can be unambiguously implicitly converted to type \tcode{T}.
+\end{removedblock}
 
 \pnum
 \returns
@@ -7635,12 +7701,20 @@ template<class T> valarray<bool> operator||(const valarray<T>&, const valarray<T
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
 \pnum
-\requires
-Each of these operators may only be instantiated for a type \tcode{T}
+\constraints
+The indicated operator can be applied to an operand of type \tcode{T} and returns 
+a value which is of type \tcode{bool} or which can be unambiguously
+implicitly converted to \tcode{bool}.
+\end{addedblock}
+
+\pnum
+\changed{\requires}{\expects}
+\removed{Each of these operators may only be instantiated for a type \tcode{T}
 to which the indicated operator can be applied and for which
 the indicated operator returns a value which is of type \tcode{bool}
-or which can be unambiguously implicitly converted to type \tcode{bool}.
+or which can be unambiguously implicitly converted to type \tcode{bool}.}
 The two array arguments have the same length.
 \indextext{undefined}
 
@@ -7697,12 +7771,22 @@ template<class T> valarray<bool> operator||(const typename valarray<T>::value_ty
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\constraints
+The indicated operator can be applied to an operand of type \tcode{T} and returns 
+a value which is of type \tcode{bool} or which can be unambiguously
+implicitly converted to \tcode{bool}.
+\end{addedblock}
+
+\begin{removedblock}
 \pnum
 \requires
 Each of these operators may only be instantiated for a type \tcode{T}
 to which the indicated operator can be applied and for which
 the indicated operator returns a value which is of type \tcode{bool}
 or which can be unambiguously implicitly converted to type \tcode{bool}.
+\end{removedblock}
 
 \pnum
 \returns
@@ -7755,12 +7839,23 @@ template<class T> valarray<T> tanh (const valarray<T>&);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\constraints
+A unique function with the indicated name can be applied (unqualified)
+to an operand of type \tcode{T}.
+This function returns a value which is of type \tcode{T}
+or which can be unambiguously implicitly converted to type \tcode{T}.
+\end{addedblock}
+
+\begin{removedblock}
 \pnum
 \requires
 Each of these functions may only be instantiated for a type \tcode{T}
 to which a unique function with the indicated name can be applied (unqualified).
 This function shall return a value which is of type \tcode{T}
 or which can be unambiguously implicitly converted to type \tcode{T}.
+\end{removedblock}
 \end{itemdescr}
 
 \rSec3[valarray.special]{Specialized algorithms}
