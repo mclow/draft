@@ -22,7 +22,7 @@
 \vspace{2.5cm}
 \begin{center}
 \textbf{\Huge
-Mandating the Standard Library:\\Clause 19 - Utilities library}
+Mandating the Standard Library:\\Clause 20 - Utilities library}
 \end{center}
 
 \vspace{1.0cm}
@@ -31,57 +31,71 @@ library clauses of the standard. This is one of a series of papers reformulating
 requirements into the new format. This effort was strongly influenced by the informational
 paper P1369R0.
 
-As a drive-by fix, a couple of places that said "The constructor of Foo constructs an object of class Foo" have been removed.
+This paper covers Clause 20 (Utilities), and is based on N4810.
+
 
 \vspace{1.0cm}
 The entire clause is reproduced here, but the changes are confined to a few sections:
 
-\begin{multicols}{2}
+%\begin{multicols}{2}
+%\begin{itemize}
+%\item{container.requirements.general  \ref{container.requirements.general}}
+%\item{sequence.reqmts      \ref{sequence.reqmts}}
+%\item{container.node.cons       \ref{container.node.cons}}
+%\item{container.node.observers   \ref{container.node.observers}}
+%\item{container.node.modifiers              \ref{container.node.modifiers}}
+%\item{associative.reqmts          \ref{associative.reqmts}}
+%\item{unord.req            \ref{unord.req}}
+%
+%\item{array.cons               \ref{array.cons}}
+%\item{array.special             \ref{array.special}}
+%\item{array.tuple              \ref{array.tuple}}
+%\item{deque.cons          \ref{deque.cons}}
+%\item{deque.capacity            \ref{deque.capacity}}
+%\item{forwardlist.cons          \ref{forwardlist.cons}}
+%\item{forwardlist.modifiers  \ref{forwardlist.modifiers}}
+%\item{forwardlist.ops   \ref{forwardlist.ops}}
+%\item{list.cons   \ref{list.cons}}
+%\item{list.capacity   \ref{list.capacity}}
+%\item{list.ops   \ref{list.ops}}
+%\item{vector.cons   \ref{vector.cons}}
+%\item{vector.capacity   \ref{vector.capacity}}
+%
+%\item{map.modifiers   \ref{map.modifiers}}
+%\item{multimap.modifiers   \ref{multimap.modifiers}}
+%\item{unord.map.modifiers  \ref{unord.map.modifiers}}
+%\item{unord.multimap.modifiers  \ref{unord.multimap.modifiers}}
+%
+%\item{queue.special  \ref{queue.special}}
+%\item{priqueue.cons  \ref{priqueue.cons}}
+%\item{priqueue.special  \ref{priqueue.special}}
+%\item{stack.special  \ref{stack.special}}
+%\item{span.cons  \ref{span.cons}}
+%
+%\item{span.sub  \ref{span.sub}}
+%\item{span.elem  \ref{span.elem}}
+%\item{span.objectrep  \ref{span.objectrep}}
+%\end{itemize}
+%\end{multicols}
+
+
+Drive-by fixes:
 \begin{itemize}
-\item{container.requirements.general  \ref{container.requirements.general}}
-\item{sequence.reqmts      \ref{sequence.reqmts}}
-\item{container.node.cons       \ref{container.node.cons}}
-\item{container.node.observers   \ref{container.node.observers}}
-\item{container.node.modifiers              \ref{container.node.modifiers}}
-\item{associative.reqmts          \ref{associative.reqmts}}
-\item{unord.req            \ref{unord.req}}
-
-\item{array.cons               \ref{array.cons}}
-\item{array.special             \ref{array.special}}
-\item{array.tuple              \ref{array.tuple}}
-\item{deque.cons          \ref{deque.cons}}
-\item{deque.capacity            \ref{deque.capacity}}
-\item{forwardlist.cons          \ref{forwardlist.cons}}
-\item{forwardlist.modifiers  \ref{forwardlist.modifiers}}
-\item{forwardlist.ops   \ref{forwardlist.ops}}
-\item{list.cons   \ref{list.cons}}
-\item{list.capacity   \ref{list.capacity}}
-\item{list.ops   \ref{list.ops}}
-\item{vector.cons   \ref{vector.cons}}
-\item{vector.capacity   \ref{vector.capacity}}
-
-\item{map.modifiers   \ref{map.modifiers}}
-\item{multimap.modifiers   \ref{multimap.modifiers}}
-\item{unord.map.modifiers  \ref{unord.map.modifiers}}
-\item{unord.multimap.modifiers  \ref{unord.multimap.modifiers}}
-
-\item{queue.special  \ref{queue.special}}
-\item{priqueue.cons  \ref{priqueue.cons}}
-\item{priqueue.special  \ref{priqueue.special}}
-\item{stack.special  \ref{stack.special}}
-\item{span.cons  \ref{span.cons}}
-
-\item{span.sub  \ref{span.sub}}
-\item{span.elem  \ref{span.elem}}
-\item{span.objectrep  \ref{span.objectrep}}
+\item{a couple of places that said "The constructor of Foo constructs an object of class Foo" have been removed}
 \end{itemize}
-\end{multicols}
+
+%Open questions:
+%\begin{itemize}
+%\item{alg.unique \ref{alg.unique} P7.2.3 is kind of a mess. Not quite sure how to "de-shall" it.}
+%\item{alg.random.sample \ref{alg.random.sample} has a \tcode{Distance} parameter that looks like the \tcode{Size} parameter from \*_n. Should it be specified the same way?}
+%\item{Where should "XX is writeable to YY" and "the expression 'Foo/bar' is valid" go? Mandates? Expects? I put them in "Expects".}
+%\end{itemize}
 
 \vfill
 Help for the editors: The changes here can be viewed as latex sources with the following commands
 \begin{verbatim}
 git clone git@github.com:mclow/mandate.git
 cd mandate
-git diff master..chapter21 utilities.tex
+git diff master..chapter19 utilities.tex
 \end{verbatim}
 \newpage
