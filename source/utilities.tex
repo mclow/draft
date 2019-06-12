@@ -457,9 +457,13 @@ template<class T, T N>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
 \pnum
-\removed{If \tcode{N} is negative the program is ill-formed.}
-\added{\mandates \tcode{N >= 0}.} The alias template
+\mandates \tcode{N >= 0}.
+\end{addedblock}
+
+\pnum
+\removed{If \tcode{N} is negative the program is ill-formed.} The alias template
 \tcode{make_integer_sequence} denotes a specialization of
 \tcode{integer_sequence} with \tcode{N} template non-type arguments.
 The type \tcode{make_integer_sequence<T, N>} denotes the type
