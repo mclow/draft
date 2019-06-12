@@ -926,7 +926,7 @@ template<class Facet> const Facet& use_facet(const locale& loc);
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\mandates}
 \tcode{Facet}
 is a facet class whose definition contains the public static member
 \tcode{id}
@@ -1628,8 +1628,8 @@ explicit ctype(const mask* tbl = nullptr, bool del = false, size_t refs = 0);
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{tbl} either 0 or an array of at least
+\changed{\requires}{\expects}
+\tcode{tbl} either \changed{0}{nullptr} or an array of at least
 \tcode{table_size}
 elements.
 
@@ -2024,7 +2024,7 @@ result do_in(
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{(from <= from_end \&\& to <= to_end)}
 well-defined and
 \tcode{true};
@@ -2143,7 +2143,7 @@ result do_unshift(stateT& state, externT* to, externT* to_end, externT*& to_next
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{(to <= to_end)}
 well-defined and \tcode{true}; state initialized, if at the beginning of a sequence,
 or else equal to the result of converting the preceding characters in the
@@ -2223,7 +2223,7 @@ int do_length(stateT& state, const externT* from, const externT* from_end, size_
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{(from <= from_end)}
 well-defined and
 \tcode{true};
@@ -3690,7 +3690,7 @@ iter_type get(iter_type s, iter_type end, ios_base& f, ios_base::iostate& err,
 
 \begin{itemdescr}
 \pnum
-\requires \range{fmt}{fmtend} shall be a valid range.
+\changed{\requires}{\expects} \range{fmt}{fmtend} \changed{shall be}{is} a valid range.
 
 \pnum
 \effects The function starts by evaluating
@@ -3891,8 +3891,8 @@ iter_type do_get(iter_type s, iter_type end, ios_base& f,
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{t} shall point to an object.
+\changed{\requires}{\expects}
+\tcode{t} \changed{shall point}{points} to an object.
 
 \pnum
 \effects The function starts by evaluating
@@ -4984,8 +4984,8 @@ string_type do_get(catalog cat, int set, int msgid, const string_type& dfault) c
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{cat} shall be a catalog obtained from
+\changed{\requires}{\expects}
+\tcode{cat} \changed{shall be}{is} a catalog obtained from
 \tcode{open()}
 and not yet closed.
 
@@ -5003,8 +5003,8 @@ void do_close(catalog cat) const;
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{cat} shall be a catalog obtained from
+\changed{\requires}{\expects}
+\tcode{cat} \changed{shall be}{is} a catalog obtained from
 \tcode{open()}
 and not yet closed.
 
