@@ -29,7 +29,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[pdftex, final]{graphicx}
 \usepackage[pdftex,
-            pdftitle={C++ International Standard},
+            pdftitle={Mandating the Standard Library: Clause 28},
             pdfsubject={C++ International Standard},
             pdfcreator={Richard Smith},
             bookmarks=true,
@@ -93,55 +93,62 @@
 %%--------------------------------------------------
 %% front matter
 \frontmatter
-\include{front}
+%\include{front}
+\include{cover-wd}
 
 %%--------------------------------------------------
 %% main body of the document
 \mainmatter
 \setglobalstyles
 
-\include{intro}
-\include{lex}
-\include{basic}
-\include{expressions}
-\include{statements}
-\include{declarations}
-\include{modules}
-\include{classes}
-\include{overloading}
-\include{templates}
-\include{exceptions}
-\include{preprocessor}
-\include{lib-intro}
-\include{support}
-\include{concepts}
-\include{diagnostics}
-\include{utilities}
-\include{strings}
-\include{containers}
-\include{iterators}
-\include{ranges}
-\include{algorithms}
-\include{numerics}
-\include{time}
+%\include{intro}
+%\include{lex}
+%\include{basic}
+%\include{expressions}
+%\include{statements}
+%\include{declarations}
+%\include{modules}
+%\include{classes}
+%\include{overloading}
+%\include{templates}
+%\include{exceptions}
+%\include{preprocessor}
+%\include{lib-intro}
+%\include{support}
+%\include{concepts}
+%\include{diagnostics}
+%\include{utilities}
+%\include{strings}
+%\include{containers}
+%\include{iterators}
+%\include{ranges}
+%\include{algorithms}
+%\include{numerics}
+%\include{time}
+
+\setcounter{chapter}{27}
+\setcounter{table}{88}
+\setcounter{footnote}{259}
+
 \include{locales}
-\include{iostreams}
-\include{regex}
-\include{atomics}
-\include{threads}
+
+%\include{iostreams}
+%\include{regex}
+%\include{atomics}
+%\include{threads}
 
 %%--------------------------------------------------
 %% appendices
-\appendix
-\include{grammar}
-\include{limits}
-\include{compatibility}
-\include{future}
+%\appendix
+%\include{grammar}
+%\include{limits}
+%\include{compatibility}
+%\include{future}
 
 %%--------------------------------------------------
 %% back matter
-\backmatter
-\include{back}
+%\backmatter
+%\include{back}
 
 
 %%--------------------------------------------------
