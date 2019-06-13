@@ -1151,8 +1151,7 @@ Init();
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
-\tcode{Init}.
+\removed{Constructs an object of class \tcode{Init}.}
 Constructs and initializes the objects \tcode{cin}, \tcode{cout}, \tcode{cerr},
 \tcode{clog}, \tcode{wcin}, \tcode{wcout}, \tcode{wcerr}, and \tcode{wclog} if
 they have not already been constructed and initialized.
@@ -1679,7 +1678,7 @@ If \tcode{is_trivially_copy_assignable<stateT>} is \tcode{true},
 then \tcode{fpos<stateT>} has a trivial copy assignment operator.
 If \tcode{is_trivially_destructible_v<stateT>} is \tcode{true},
 then \tcode{fpos<stateT>} has a trivial destructor.
-All specializations of \tcode{fpos} satisfy
+All specializations of \tcode{fpos} \changed{satisfy}{meet}
 the \oldconcept{DefaultConstructible},
 \oldconcept{CopyConstructible},
 \oldconcept{CopyAssignable},
@@ -8782,7 +8781,7 @@ basic_filebuf* open(const filesystem::path::value_type* s,
 \begin{itemdescr}
 \pnum
 \expects
-\tcode{s} shall point to a NTCTS\iref{defns.ntcts}.
+\tcode{s} \changed{shall point to}{is} a NTCTS\iref{defns.ntcts}.
 
 \pnum
 \effects
@@ -10178,7 +10177,7 @@ basic_syncbuf(streambuf_type* obuf, const Allocator& allocator);
 \begin{itemdescr}
 \pnum
 \effects
-Constructs the \tcode{basic_syncbuf} object and
+\removed{Constructs the \tcode{basic_syncbuf} object and}
 sets \tcode{wrapped} to \tcode{obuf}.
 
 \pnum
@@ -10471,7 +10470,7 @@ namespace std {
 \end{codeblock}
 
 \pnum
-\tcode{Allocator} shall satisfy the \oldconcept{Allocator} requirements
+\tcode{Allocator} shall \changed{satisfy}{meet} the \oldconcept{Allocator} requirements
 (\tref{utilities.allocator.requirements}).
 
 \pnum
@@ -11644,8 +11643,10 @@ path() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects Constructs an object of class \tcode{path}.
+\end{removedblock}
 
 \pnum
 \ensures \tcode{empty() == true}.
@@ -12018,11 +12019,18 @@ path& remove_filename();
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \ensures \tcode{!has_filename()}.
+\end{removedblock}
 
 \pnum
 \effects Remove the generic format pathname of \tcode{filename()} from the generic format pathname.
+
+\begin{addedblock}
+\pnum
+\ensures \tcode{!has_filename()}.
+\end{addedblock}
 
 \pnum
 \returns \tcode{*this}.
@@ -13854,7 +13862,7 @@ namespace std::filesystem {
 \end{codeblock}
 
 \pnum
- \tcode{directory_iterator} satisfies the
+ \tcode{directory_iterator} \changed{satisfies}{meets} the
  \oldconcept{InputIterator} requirements\iref{input.iterators}.
 
 \pnum
@@ -13961,8 +13969,10 @@ directory_iterator(directory_iterator&& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects Constructs an object of class \tcode{directory_iterator}.
+\end{removedblock}
 
 \pnum
 \ensures \tcode{*this} has the original value of \tcode{rhs}.
@@ -14160,8 +14170,10 @@ recursive_directory_iterator(const recursive_directory_iterator& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects Constructs an object of class \tcode{recursive_directory_iterator}.
+\end{removedblock}
 
 \pnum
 \ensures
@@ -14178,8 +14190,10 @@ recursive_directory_iterator(recursive_directory_iterator&& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects Constructs an object of class \tcode{recursive_directory_iterator}.
+\end{removedblock}
 
 \pnum
 \ensures \tcode{options()}, \tcode{depth()},

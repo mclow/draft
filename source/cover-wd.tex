@@ -42,31 +42,42 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 
 \begin{multicols}{2}
 \begin{itemize}
-\item{ios.base.storage}				\ref{ios.base.storage}
-\item{ios.base.callback}			\ref{ios.base.callback}
-\item{basic.ios.members}			\ref{basic.ios.members}
-\item{streambuf.virt.get}			\ref{streambuf.virt.get}
-\item{streambuf.virt.put}			\ref{streambuf.virt.put}
-\item{istream.rvalue}				\ref{istream.rvalue}
-\item{ostream.inserters.character}	\ref{ostream.inserters.character}
-\item{ostream.rvalue}				\ref{ostream.rvalue}
-\item{ext.manip}					\ref{ext.manip}
-\item{syncstream.syncbuf.assign}	\ref{syncstream.syncbuf.assign}
-\item{fs.op.copy}					\ref{fs.op.copy}
-\item{fs.op.copy.file}				\ref{fs.op.copy.file}
-\item{fs.op.permissions}			\ref{fs.op.permissions}
+\item{ios.init}							\ref{ios.init}
+\item{ios.base.storage}					\ref{ios.base.storage}
+\item{ios.base.callback}				\ref{ios.base.callback}
+\item{fpos.operations}					\ref{fpos.operations}
+\item{basic.ios.members}				\ref{basic.ios.members}
+\item{streambuf.virt.get}				\ref{streambuf.virt.get}
+\item{streambuf.virt.put}				\ref{streambuf.virt.put}
+\item{istream.rvalue}					\ref{istream.rvalue}
+\item{ostream.inserters.character}		\ref{ostream.inserters.character}
+\item{ostream.rvalue}					\ref{ostream.rvalue}
+\item{ext.manip}						\ref{ext.manip}
+\item{filebuf.members}					\ref{filebuf.members}
+\item{syncstream.syncbuf.cons}			\ref{syncstream.syncbuf.cons}
+\item{syncstream.syncbuf.assign}		\ref{syncstream.syncbuf.assign}
+\item{syncstream.osyncstream.overview}	\ref{syncstream.osyncstream.overview}
+\item{fs.path.construct}				\ref{fs.path.construct}
+\item{fs.path.modifiers}				\ref{fs.path.modifiers}
+\item{fs.class.directory.iterator}		\ref{fs.class.directory.iterator}
+\item{fs.dir.itr.members}				\ref{fs.dir.itr.members}
+\item{fs.rec.dir.itr.members}			\ref{fs.rec.dir.itr.members}
+\item{fs.op.copy}						\ref{fs.op.copy}
+\item{fs.op.copy.file}					\ref{fs.op.copy.file}
+\item{fs.op.permissions}				\ref{fs.op.permissions}
 \end{itemize}
 \end{multicols}
 
-%Drive-by fixes:
-%\begin{itemize}
-%\item{All of the \*_n algorithms now treat their \tcode{Size} parameter the same way. This also resolves LWG\#3213.}
-%\item{As I was "de-shalling" all the Requirements, I applied the guidance at https://github.com/cplusplus/draft/wiki/Specification-Style-Guidelines\#requirements-expressed-by-concepts. }
-%\end{itemize}
+Drive-by fixes:
+\begin{itemize}
+\item{Changed some random "shall"s to "meet"s.}
+\item{Re-ordered a couple of clauses in fs.path.modifiers (\ref{fs.path.modifiers}). }
+\item{Struck a few clauses that read "Constructs an object of type XXXX".}
+\end{itemize}
 
 Open questions:
 \begin{itemize}
-\item{There's stuff in [streambuf.virt.get] and [streambuf.virt.put] that I haven't dealt with.}
+\item{There's stuff (\requires) in [streambuf.virt.get] and [streambuf.virt.put] that I haven't dealt with.}
 \item{There's also explanatory text in [fs.race.behavior]/2 that refers to "Requires:" elements.}
 \end{itemize}
 
