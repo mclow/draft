@@ -6,7 +6,7 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & D0000R0                     \\
+          \textbf{Document Number:} & D1718R0                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
                                     & CppAlliance                 \\
@@ -42,6 +42,7 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 
 \begin{multicols}{3}
 \begin{itemize}
+\item{algorithms.requirements}		\ref{algorithms.requirements}
 \item{alg.foreach}					\ref{alg.foreach}
 \item{alg.is.permutation}			\ref{alg.is.permutation}
 \item{alg.copy}						\ref{alg.copy}
@@ -99,7 +100,8 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 Drive-by fixes:
 \begin{itemize}
 \item{All of the \*_n algorithms now treat their \tcode{Size} parameter the same way. This also resolves LWG\#3213.}
-\item{As I was "de-shalling" all the Requirements, I applied the guidance at https://github.com/cplusplus/draft/wiki/Specification-Style-Guidelines\#requirements-expressed-by-concepts. }
+\item{As I was "de-shalling" all the Requirements, I applied the guidance at https://github.com/cplusplus/draft/wiki/Specification-Style-Guidelines\#requirements-expressed-by-concepts.}
+\item{Change "shall satisfy" to "shall meet" for old concepts.}
 \end{itemize}
 
 Open questions:

@@ -72,35 +72,35 @@ the names of template parameters are used to express type requirements.
   \tcode{InputIterator},
   \tcode{InputIterator1}, or
   \tcode{Input\-Iterator2},
-  the template argument shall satisfy the
+  the template argument shall \changed{satisfy}{meet} the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
 \item
   If an algorithm's template parameter is named
   \tcode{OutputIterator},
   \tcode{OutputIterator1}, or
   \tcode{Output\-Iterator2},
-  the template argument shall satisfy the
+  the template argument shall \changed{satisfy}{meet} the
   \oldconcept{OutputIterator} requirements\iref{output.iterators}.
 \item
   If an algorithm's template parameter is named
   \tcode{ForwardIterator},
   \tcode{ForwardIterator1}, or
   \tcode{Forward\-Iterator2},
-  the template argument shall satisfy the
+  the template argument shall \changed{satisfy}{meet} the
   \oldconcept{ForwardIterator} requirements\iref{forward.iterators}.
 \item
   If an algorithm's template parameter is named
   \tcode{BidirectionalIterator},
   \tcode{Bidirectional\-Iterator1}, or
   \tcode{BidirectionalIterator2},
-  the template argument shall satisfy the
+  the template argument shall \changed{satisfy}{meet} the
   \oldconcept{BidirectionalIterator} requirements\iref{bidirectional.iterators}.
 \item
   If an algorithm's template parameter is named
   \tcode{RandomAccessIterator},
   \tcode{Random\-AccessIterator1}, or
   \tcode{RandomAccessIterator2},
-  the template argument shall satisfy the
+  the template argument shall \changed{satisfy}{meet} the
   \oldconcept{RandomAccessIterator} requirements\iref{random.access.iterators}.
 \end{itemize}
 
@@ -3154,7 +3154,7 @@ If the type of \tcode{first} satisfies the requirements of a mutable iterator,
 
 \pnum
 \returns
-\tcode{first + \changed{n}{N}}.
+\tcode{first + \changed{n}{$N$}}.
 
 \pnum
 \remarks
@@ -5323,9 +5323,9 @@ let $E$ be
     Otherwise, if \tcode{OutputIterator} meets
     the \oldconcept{ForwardIterator} requirements and
     its value type is the same as \tcode{T},
-    then \tcode{T} shall meet
+    then \tcode{T} \changed{shall meet}{meets}
     the \oldconcept{CopyAssignable} (\tref{copyassignable}) requirements.
-    Otherwise, \tcode{T} shall meet both
+    Otherwise, \tcode{T} \changed{shall meet}{meets} both
     the \oldconcept{CopyConstructible} (\tref{copyconstructible}) and
     \oldconcept{CopyAssignable} requirements.
     \begin{note}
@@ -5613,14 +5613,14 @@ template<class PopulationIterator, class SampleIterator,
   unless \tcode{Pop\-ulat\-ion\-Iter\-ator} satisfies
   the \oldconcept{ForwardIterator} requirements\iref{forward.iterators}.
 \item
-  \tcode{PopulationIterator}'s value type shall be
+  \tcode{PopulationIterator}'s value type \changed{shall be}{is}
   writable\iref{iterator.requirements.general} to \tcode{out}.
 \begin{removedblock}
 \item
   \tcode{Distance} shall be an integer type.
 \end{removedblock}
 \item
-  \tcode{remove_reference_t<UniformRandomBitGenerator>} \changed{shall satisfy}{satisfies}
+  \tcode{remove_reference_t<UniformRandomBitGenerator>} \changed{shall satisfy}{meets}
   the requirements of a uniform random bit generator type\iref{rand.req.urng}
   whose return type is convertible to \tcode{Distance}.
 \item
@@ -5649,7 +5649,7 @@ The end of the resulting sample range.
 \remarks
 \begin{itemize}
 \item
-  Stable if and only if \tcode{PopulationIterator} satisfies
+  Stable if and only if \tcode{PopulationIterator} \changed{satisfies}{meets}
   the \oldconcept{ForwardIterator} requirements.
 \item
   To the extent that the implementation of this function makes use
@@ -5779,7 +5779,7 @@ If \tcode{n <= 0} or \tcode{n >= last - first}, does nothing.
 Otherwise, moves the element
 from position \tcode{first + i} into \tcode{position first + n + i}
 for each non-negative integer \tcode{i < (last - first) - n}.
-In the first overload case, if \tcode{ForwardIterator} satisfies
+In the first overload case, if \tcode{ForwardIterator} \changed{satisfies}{meets}
 the \oldconcept{BidirectionalIterator} requirements,
 does so in order starting
 from \tcode{i = (last - first) - n - 1} and proceeding to \tcode{i = 0}.
@@ -8884,7 +8884,7 @@ template<class InputIterator, class T, class BinaryOperation>
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{T} \changed{shall satisfy}{satisfies}
+\tcode{T} \changed{shall satisfy}{meets}
 the \oldconcept{CopyConstructible} (\tref{copyconstructible})
 and \oldconcept{CopyAssignable} (\tref{copyassignable}) requirements.
 In the range \crange{first}{last},
@@ -9047,7 +9047,7 @@ template<class InputIterator1, class InputIterator2, class T,
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{T} \changed{shall satisfy}{satisfies}
+\tcode{T} \changed{shall satisfy}{meets}
 the \oldconcept{CopyConstructible} (\tref{copyconstructible})
 and \oldconcept{CopyAssignable} (\tref{copyassignable}) requirements.
 In the ranges \crange{first1}{last1} and
