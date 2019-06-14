@@ -454,10 +454,12 @@ template<class T> constexpr complex(const T& re = T(), const T& im = T());
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects
 Constructs an object of class
 \tcode{complex}.
+\end{removedblock}
 
 \pnum
 \ensures
@@ -1349,9 +1351,9 @@ If there is no value of type \tcode{To} corresponding to the
 value representation produced, the behavior is undefined.
 If there are multiple such values, which value is produced is unspecified.
 
-\begin{removedblock}
 \pnum
 \remarks
+\begin{removedblock}
 This function shall not participate in overload resolution unless:
 \begin{itemize}
 \item \tcode{sizeof(To) == sizeof(From)} is \tcode{true};
@@ -2287,7 +2289,7 @@ according to \ref{strings} and \ref{input.output}.
 \end{libreqtab4d}
 
 \pnum
-\tcode{E} shall satisfy the
+\tcode{E} shall \changed{satisfy}{meet} the
 \oldconcept{CopyConstructible} (\tref{copyconstructible})
 and \oldconcept{CopyAssignable} (\tref{copyassignable}) requirements.
 These operations shall each be of complexity
@@ -2666,7 +2668,7 @@ according to \ref{strings} and \ref{input.output}.
 \end{libreqtab4d}
 
 \pnum
-\tcode{D} shall satisfy the
+\tcode{D} \changed{shall}{meet} satisfy the
 \oldconcept{CopyConstructible} (\tref{copyconstructible})
 and \oldconcept{CopyAssignable} (\tref{copyassignable}) requirements.
 
@@ -4203,7 +4205,7 @@ template<class OutputIterator>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum\changed{\requires}{\expects}
   \tcode{OutputIterator} \changed{shall satisfy}{meets} the
   \oldconcept{OutputIterator} requirements\iref{output.iterators}.
   Moreover,
@@ -5886,13 +5888,19 @@ template<class InputIterator>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
 \pnum
-\requires
+\mandates
+\tcode{iterator_traits<InputIterator>::value_type} is a type that is convertible to \tcode{double}.
+\end{addedblock}
+
+\pnum
+\changed{\requires}{\expects}
   \tcode{InputIterator} \changed{shall satisfy}{meets} the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
-  Moreover,
+  \removed{Moreover,
   \tcode{iterator_traits<InputIterator>::value_type}
-  \changed{shall denote}{is} a type that is convertible to \tcode{double}.
+  shall denote a type that is convertible to \tcode{double}.}
  If \tcode{firstW == lastW},
  let $n = 1$ and $w_0 = 1$.
  Otherwise,
@@ -5922,13 +5930,22 @@ template<class UnaryOperation>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\mandates
+\begin{itemize}
+\item{\tcode{UnaryOperation} is a function object\iref{function.objects} whose return type is convertible to \tcode{double}.}
+\item{\tcode{double} is convertible to the type of \tcode{UnaryOperation}'s sole parameter.}
+\end{itemize}
+\end{addedblock}
+
 \pnum \changed{\requires}{\expects}
- Each instance of type \tcode{UnaryOperation}
- \changed{shall be}{is} a function object\iref{function.objects}
- whose return type \changed{shall be}{is} convertible to \tcode{double}.
- Moreover,
- \tcode{double} \changed{shall be}{is} convertible
- to the type of \tcode{UnaryOperation}'s sole parameter.
+ \removed{Each instance of type \tcode{UnaryOperation}
+ shall be a function object\iref{function.objects}
+ whose return type \changed{shall be}{is} convertible to \tcode{double}.}
+ \removed{Moreover,
+ \tcode{double} shall be convertible
+ to the type of \tcode{UnaryOperation}'s sole parameter.}
  If $\tcode{nw} = 0$, let $n = 1$, otherwise let $n = \tcode{nw}$.
  The relation
    $0 < \delta = (\tcode{xmax} - \tcode{xmin}) / n$
@@ -6059,15 +6076,24 @@ template<class InputIteratorB, class InputIteratorW>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\mandates
+The \grammarterm{id-expression}s
+\tcode{iterator_traits<InputIteratorB>::value_type} and
+\tcode{iterator_traits<Input\-IteratorW>::value_type}
+are both types that are convertible to \tcode{double}.
+\end{addedblock}
+
 \pnum \changed{\requires}{\expects}
   \tcode{InputIteratorB} and \tcode{InputIteratorW}
   \changed{shall each satisfy}{each meet} the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
-  Moreover,
+  \removed{Moreover,
   the \grammarterm{id-expression}s
   \tcode{iterator_traits<InputIteratorB>::value_type} and
   \tcode{iterator_traits<Input\-IteratorW>::value_type}
-  \changed{shall each denote a type that is}{are both types that are} convertible to \tcode{double}.
+  shall each denote a type that is convertible to \tcode{double}.}
  If \tcode{firstB == lastB}
  or \tcode{++firstB == lastB},
  let $n = 1$,
@@ -6093,13 +6119,24 @@ template<class UnaryOperation>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \changed{\requires}{\expects}
+\begin{addedblock}
+\pnum
+\mandates
+\begin{itemize}
+\item{\tcode{UnaryOperation} is a function object\iref{function.objects} whose return type is convertible to \tcode{double}.}
+\item{\tcode{double} is convertible to the type of \tcode{UnaryOperation}'s sole parameter.}
+\end{itemize}
+\end{addedblock}
+
+\begin{removedblock}
+\pnum \requires
  Each instance of type \tcode{UnaryOperation}
- \changed{shall be}{is} a function object\iref{function.objects}
- whose return type \changed{shall be}{is} convertible to \tcode{double}.
+ shall be a function object\iref{function.objects}
+ whose return type shall be convertible to \tcode{double}.
  Moreover,
- \tcode{double} \changed{shall be}{is} convertible
+ \tcode{double} shall be convertible
  to the type of \tcode{UnaryOperation}'s sole parameter.
+\end{removedblock}
 
 \pnum\effects Constructs a \tcode{piecewise_constant_distribution} object
  with parameters taken or calculated
@@ -6128,13 +6165,22 @@ template<class UnaryOperation>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\mandates
+\begin{itemize}
+\item{\tcode{UnaryOperation} is a function object\iref{function.objects} whose return type is convertible to \tcode{double}.}
+\item{\tcode{double} is convertible to the type of \tcode{UnaryOperation}'s sole parameter.}
+\end{itemize}
+\end{addedblock}
+
 \pnum \changed{\requires}{\expects}
- Each instance of type \tcode{UnaryOperation}
- \changed{shall be}{is} a function object\iref{function.objects}
- whose return type \changed{shall be}{is} convertible to \tcode{double}.
- Moreover,
- \tcode{double} \changed{shall be}{is} convertible
- to the type of \tcode{UnaryOperation}'s sole parameter.
+ \removed{Each instance of type \tcode{UnaryOperation}
+ shall be a function object\iref{function.objects}
+ whose return type \changed{shall be}{is} convertible to \tcode{double}.}
+ \removed{Moreover,
+ \tcode{double} shall be convertible
+ to the type of \tcode{UnaryOperation}'s sole parameter.}
  If $\tcode{nw} = 0$, let $n = 1$, otherwise let $n = \tcode{nw}$.
  The relation $0 < \delta = (\tcode{xmax} - \tcode{xmin}) / n$
  \changed{shall hold}{holds}.
@@ -6270,15 +6316,24 @@ template<class InputIteratorB, class InputIteratorW>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\mandates
+The \grammarterm{id-expression}s
+  \tcode{iterator_traits<InputIteratorB>::value_type} and
+  \tcode{iterator_traits<Input\-IteratorW>::value_type}
+  are both convertible to \tcode{double}.
+\end{addedblock}
+
 \pnum \changed{\requires}{\expects}
   \tcode{InputIteratorB} and \tcode{InputIteratorW}
   \changed{shall each satisfy}{both meet} the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
-  Moreover,
+  \removed{Moreover,
   the \grammarterm{id-expression}s
   \tcode{iterator_traits<InputIteratorB>::value_type} and
   \tcode{iterator_traits<Input\-IteratorW>::value_type}
-  \changed{shall each denote a type that is}{are both} convertible to \tcode{double}.
+  shall each denote a type that is convertible to \tcode{double}.}
  If \tcode{firstB == lastB}
  or \tcode{++firstB == lastB},
  let $n = 1$,
@@ -6304,13 +6359,24 @@ template<class UnaryOperation>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \changed{\requires}{\expects}
+\begin{addedblock}
+\pnum
+\mandates
+\begin{itemize}
+\item{\tcode{UnaryOperation} is a function object\iref{function.objects} whose return type is convertible to \tcode{double}.}
+\item{\tcode{double} is convertible to the type of \tcode{UnaryOperation}'s sole parameter.}
+\end{itemize}
+\end{addedblock}
+
+\begin{removedblock}
+\pnum \requires
  Each instance of type \tcode{UnaryOperation}
- \changed{shall be}{is} a function object\iref{function.objects}
- whose return type \changed{shall}{are} be convertible to \tcode{double}.
+ shall be a function object\iref{function.objects}
+ whose return type shall be convertible to \tcode{double}.
  Moreover,
- \tcode{double} \changed{shall be}{is} convertible
+ \tcode{double} shall be convertible
  to the type of \tcode{UnaryOperation}'s sole parameter.
+\end{removedblock}
 
 \pnum\effects Constructs a \tcode{piecewise_linear_distribution} object
  with parameters taken or calculated
@@ -6339,13 +6405,22 @@ template<class UnaryOperation>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\mandates
+\begin{itemize}
+\item{\tcode{UnaryOperation} is a function object\iref{function.objects} whose return type is convertible to \tcode{double}.}
+\item{\tcode{double} is convertible to the type of \tcode{UnaryOperation}'s sole parameter.}
+\end{itemize}
+\end{addedblock}
+
 \pnum \changed{\requires}{\expects}
- Each instance of type \tcode{UnaryOperation}
- \changed{shall be}{is} a function object\iref{function.objects}
- whose return type \changed{shall be}{is} convertible to \tcode{double}.
- Moreover,
- \tcode{double} \changed{shall be}{is} convertible
- to the type of \tcode{UnaryOperation}'s sole parameter.
+ \removed{Each instance of type \tcode{UnaryOperation}
+ shall be a function object\iref{function.objects}
+ whose return type shall be convertible to \tcode{double}.}
+ \removed{Moreover,
+ \tcode{double} shall be convertible
+ to the type of \tcode{UnaryOperation}'s sole parameter.}
  If $\tcode{nw} = 0$, let $n = 1$, otherwise let $n = \tcode{nw}$.
  The relation $0 < \delta = (\tcode{xmax} - \tcode{xmin}) / n$
  \changed{shall hold}{holds}.
@@ -7417,7 +7492,7 @@ T sum() const;
 \begin{addedblock}
 \pnum
 \constraints
-\tcode{operator+=} be applied to operarands of type \tcode{T}.
+\tcode{operator+=} can be applied to operands of type \tcode{T}.
 \end{addedblock}
 
 \pnum
