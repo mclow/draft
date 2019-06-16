@@ -1852,7 +1852,7 @@ shall be declared \tcode{explicit}.
 
 \pnum
 A class \tcode{S}
-satisfies the requirements
+\changed{satisfies}{meets} the requirements
 of a seed sequence
 if the expressions shown
 in \tref{SeedSequence}
@@ -2077,14 +2077,14 @@ An engine's state may be established via
 
 \pnum
 A class \tcode{E}
-that satisfies the requirements
+that \changed{satisfies}{meets} the requirements
 of a uniform random bit generator\iref{rand.req.urng}
-also satisfies the requirements
+also \changed{satisfies}{meets} the requirements
 of a \term{random number engine}
 if the expressions shown
 in \tref{RandomEngine}
 are valid and have the indicated semantics,
-and if \tcode{E} also satisfies all other requirements
+and if \tcode{E} also \changed{satisfies}{meets} all other requirements
 of this subclause \ref{rand.req.eng}.
 In that Table and throughout this subclause:
 \begin{itemize}
@@ -2099,7 +2099,7 @@ In that Table and throughout this subclause:
     \tcode{s} is a value of \tcode{T};
   \item
     \tcode{q} is an lvalue
-    satisfying the requirements of a seed sequence\iref{rand.req.seedseq};
+    \changed{satisfying}{meeting} the requirements of a seed sequence\iref{rand.req.seedseq};
   \item
     \tcode{z} is a value
     of type \tcode{unsigned long long};
@@ -2462,13 +2462,13 @@ or by writing, for example,
 
 \pnum
 A class \tcode{D}
-satisfies the requirements
+\changed{satisfies}{meets} the requirements
 of a \term{random number distribution}
 if the expressions shown
 in \tref{RandomDistribution}
 are valid and have the indicated semantics,
 and if \tcode{D} and its associated types
-also satisfy all other requirements
+also \changed{satisfy}{meet} all other requirements
 of this subclause \ref{rand.req.dist}.
 In that Table and throughout this subclause,
 \begin{itemize}
@@ -2494,7 +2494,7 @@ In that Table and throughout this subclause,
     \tcode{p} is a (possibly \tcode{const}) value of \tcode{P};
   \item
     \tcode{g}, \tcode{g1}, and \tcode{g2} are lvalues of a type
-    satisfying the requirements
+    \changed{satisfying}{that meet} the requirements
     of a uniform random bit generator\iref{rand.req.urng};
   \item
     \tcode{os} is an lvalue of the type of some class template specialization
@@ -2668,7 +2668,7 @@ according to \ref{strings} and \ref{input.output}.
 \end{libreqtab4d}
 
 \pnum
-\tcode{D} \changed{shall}{meet} satisfy the
+\tcode{D} shall \changed{satisfy}{meet} the
 \oldconcept{CopyConstructible} (\tref{copyconstructible})
 and \oldconcept{CopyAssignable} (\tref{copyassignable}) requirements.
 
@@ -2700,7 +2700,7 @@ are in the form of \tcode{typedef}s
 for convenience of exposition only.
 
 \pnum
-\tcode{P} shall satisfy the
+\tcode{P} shall \changed{satisfy}{meet} the
 \oldconcept{CopyConstructible} (\tref{copyconstructible}),
 \oldconcept{CopyAssignable} (\tref{copyassignable}),
 and
@@ -2898,7 +2898,7 @@ explicit linear_congruential_engine(result_type s);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{linear_congruential_engine} object.
+\pnum\effects \removed{Constructs a \tcode{linear_congruential_engine} object.}
  If $c \bmod m$ is $0$ and $\tcode{s} \bmod m$ is $0$,
  sets the engine's state to $1$,
  otherwise sets the engine's state to $\tcode{s} \bmod m$.
@@ -2910,7 +2910,7 @@ template<class Sseq> explicit linear_congruential_engine(Sseq& q);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{linear_congruential_engine} object.
+\pnum\effects \removed{Constructs a \tcode{linear_congruential_engine} object.}
  With
  $k = \left\lceil \frac{\log_2 m}{32} \right\rceil$
  and $a$ an array (or equivalent)
@@ -3067,7 +3067,7 @@ explicit mersenne_twister_engine(result_type value);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{mersenne_twister_engine} object.
+\pnum\effects \removed{Constructs a \tcode{mersenne_twister_engine} object.}
 Sets $X_{-n}$ to $\tcode{value} \bmod 2^w$.
 Then, iteratively for $i = 1 - n, \dotsc, -1$, sets $X_i$ to
 \[%
@@ -3088,7 +3088,7 @@ template<class Sseq> explicit mersenne_twister_engine(Sseq& q);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{mersenne_twister_engine} object.
+\pnum\effects \removed{Constructs a \tcode{mersenne_twister_engine} object.}
  With
  $k = \left\lceil w / 32 \right\rceil$
  and $a$ an array (or equivalent)
@@ -3217,7 +3217,7 @@ explicit subtract_with_carry_engine(result_type value);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{subtract_with_carry_engine} object.
+\pnum\effects \removed{Constructs a \tcode{subtract_with_carry_engine} object.}
  Sets the values of
  $X_{-r}, \dotsc, X_{-1}$,
  in that order, as specified below.
@@ -3250,7 +3250,7 @@ template<class Sseq> explicit subtract_with_carry_engine(Sseq& q);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{subtract_with_carry_engine} object.
+\pnum\effects \removed{Constructs a \tcode{subtract_with_carry_engine} object.}
  With
  $k = \left\lceil w / 32 \right\rceil$
  and $a$ an array (or equivalent)
@@ -3919,8 +3919,8 @@ explicit random_device(const string& token);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{random_device}
- nondeterministic uniform random bit generator object.
+\pnum\effects \removed{Constructs a \tcode{random_device}
+ nondeterministic uniform random bit generator object.}
  The semantics of the \tcode{token} parameter
  and the token value used by the default constructor are
  \impldef{semantics of \tcode{token} parameter and default token value used by \tcode{random_device} constructors}.%
@@ -4408,7 +4408,7 @@ explicit uniform_int_distribution(IntType a, IntType b = numeric_limits<IntType>
 \pnum \changed{\requires}{\expects}
  $\tcode{a} \leq \tcode{b}$.
 
-\pnum\effects Constructs a \tcode{uniform_int_distribution} object;
+\pnum\effects \removed{Constructs a \tcode{uniform_int_distribution} object;}
  \tcode{a} and \tcode{b}
  correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -4496,7 +4496,7 @@ explicit uniform_real_distribution(RealType a, RealType b = 1.0);
  and
  $\tcode{b} - \tcode{a} \leq \tcode{numeric_limits<RealType>::max()}$.
 
-\pnum\effects Constructs a \tcode{uniform_real_distribution} object;
+\pnum\effects \removed{Constructs a \tcode{uniform_real_distribution} object;}
  \tcode{a} and \tcode{b}
  correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -4593,7 +4593,7 @@ explicit bernoulli_distribution(double p);
 \pnum \changed{\requires}{\expects}
  $0 \leq \tcode{p} \leq 1$.
 
-\pnum\effects Constructs a \tcode{bernoulli_distribution} object;
+\pnum\effects \removed{Constructs a \tcode{bernoulli_distribution} object;}
  \tcode{p}
  corresponds to the parameter of the distribution.
 \end{itemdescr}
@@ -4665,7 +4665,7 @@ explicit binomial_distribution(IntType t, double p = 0.5);
 \pnum \changed{\requires}{\expects}
  $0 \leq \tcode{p} \leq 1$ and $0 \leq \tcode{t} $.
 
-\pnum\effects Constructs a \tcode{binomial_distribution} object;
+\pnum\effects \removed{Constructs a \tcode{binomial_distribution} object;}
  \tcode{t} and \tcode{p}
  correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -4745,7 +4745,7 @@ explicit geometric_distribution(double p);
 \pnum \changed{\requires}{\expects}
  $0 < \tcode{p} < 1$.
 
-\pnum\effects Constructs a \tcode{geometric_distribution} object;
+\pnum\effects \removed{Constructs a \tcode{geometric_distribution} object;}
  \tcode{p}
  corresponds to the parameter of the distribution.
 \end{itemdescr}
@@ -4822,7 +4822,7 @@ explicit negative_binomial_distribution(IntType k, double p = 0.5);
  $0 < \tcode{p} \leq 1$
  and $0 < \tcode{k} $.
 
-\pnum\effects Constructs a \tcode{negative_binomial_distribution} object;
+\pnum\effects \removed{Constructs a \tcode{negative_binomial_distribution} object;}
  \tcode{k} and \tcode{p}
  correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -4922,7 +4922,7 @@ explicit poisson_distribution(double mean);
 \changed{\requires}{\expects} $0 < \tcode{mean}$.
 
 \pnum
-\effects Constructs a \tcode{poisson_distribution} object;
+\effects \removed{Constructs a \tcode{poisson_distribution} object;}
 \tcode{mean} corresponds to the parameter of the distribution.
 \end{itemdescr}
 
@@ -4993,7 +4993,7 @@ explicit exponential_distribution(RealType lambda);
 \changed{\requires}{\expects} $0 < \tcode{lambda}$.
 
 \pnum
-\effects Constructs an \tcode{exponential_distribution} object;
+\effects \removed{Constructs an \tcode{exponential_distribution} object;}
 \tcode{lambda} corresponds to the parameter of the distribution.
 \end{itemdescr}
 
@@ -5067,7 +5067,7 @@ explicit gamma_distribution(RealType alpha, RealType beta = 1.0);
 \changed{\requires}{\expects} $0 < \tcode{alpha}$ and $0 < \tcode{beta}$.
 
 \pnum
-\effects Constructs a \tcode{gamma_distribution} object;
+\effects \removed{Constructs a \tcode{gamma_distribution} object;}
 \tcode{alpha} and \tcode{beta}
 correspond to the parameters of the distribution.
 \end{itemdescr}
@@ -5153,7 +5153,7 @@ explicit weibull_distribution(RealType a, RealType b = 1.0);
 \changed{\requires}{\expects} $0 < \tcode{a}$ and $0 < \tcode{b}$.
 
 \pnum
-\effects Constructs a \tcode{weibull_distribution} object;
+\effects \removed{Constructs a \tcode{weibull_distribution} object;}
 \tcode{a} and \tcode{b}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5246,7 +5246,7 @@ explicit extreme_value_distribution(RealType a, RealType b = 1.0);
 \changed{\requires}{\expects} $0 < \tcode{b}$.
 
 \pnum
-\effects Constructs an \tcode{extreme_value_distribution} object;
+\effects \removed{Constructs an \tcode{extreme_value_distribution} object;}
 \tcode{a} and \tcode{b}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5360,7 +5360,7 @@ explicit normal_distribution(RealType mean, RealType stddev = 1.0);
 \changed{\requires}{\expects} $0 < \tcode{stddev}$.
 
 \pnum
-\effects Constructs a \tcode{normal_distribution} object;
+\effects \removed{Constructs a \tcode{normal_distribution} object;}
 \tcode{mean} and \tcode{stddev}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5446,7 +5446,7 @@ explicit lognormal_distribution(RealType m, RealType s = 1.0);
 \changed{\requires}{\expects} $0 < \tcode{s}$.
 
 \pnum
-\effects Constructs a \tcode{lognormal_distribution} object;
+\effects \removed{Constructs a \tcode{lognormal_distribution} object;}
 \tcode{m} and \tcode{s}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5529,7 +5529,7 @@ explicit chi_squared_distribution(RealType n);
 \changed{\requires}{\expects} $0 < \tcode{n}$.
 
 \pnum
-\effects Constructs a \tcode{chi_squared_distribution} object;
+\effects \removed{Constructs a \tcode{chi_squared_distribution} object;}
 \tcode{n} corresponds to the parameter of the distribution.
 \end{itemdescr}
 
@@ -5602,7 +5602,7 @@ explicit cauchy_distribution(RealType a, RealType b = 1.0);
 \changed{\requires}{\expects} $0 < \tcode{b}$.
 
 \pnum
-\effects Constructs a \tcode{cauchy_distribution} object;
+\effects \removed{Constructs a \tcode{cauchy_distribution} object;}
 \tcode{a} and \tcode{b}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5690,7 +5690,7 @@ explicit fisher_f_distribution(RealType m, RealType n = 1);
 \changed{\requires}{\expects} $0 < \tcode{m}$ and $0 < \tcode{n}$.
 
 \pnum
-\effects Constructs a \tcode{fisher_f_distribution} object;
+\effects \removed{Constructs a \tcode{fisher_f_distribution} object;}
 \tcode{m} and \tcode{n}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5776,7 +5776,7 @@ explicit student_t_distribution(RealType n);
 \changed{\requires}{\expects} $0 < \tcode{n}$.
 
 \pnum
-\effects Constructs a \tcode{student_t_distribution} object;
+\effects \removed{Constructs a \tcode{student_t_distribution} object;}
 \tcode{n} corresponds to the parameter of the distribution.
 \end{itemdescr}
 
@@ -5891,7 +5891,8 @@ template<class InputIterator>
 \begin{addedblock}
 \pnum
 \mandates
-\tcode{iterator_traits<InputIterator>::value_type} is a type that is convertible to \tcode{double}.
+\tcode{is_convertible_v<iterator_traits<InputIterator>::value_type,
+double>} is a true.
 \end{addedblock}
 
 \pnum
@@ -6079,10 +6080,7 @@ template<class InputIteratorB, class InputIteratorW>
 \begin{addedblock}
 \pnum
 \mandates
-The \grammarterm{id-expression}s
-\tcode{iterator_traits<InputIteratorB>::value_type} and
-\tcode{iterator_traits<Input\-IteratorW>::value_type}
-are both types that are convertible to \tcode{double}.
+\tcode{is_convertible<iterator_traits<InputIteratorB>::value_type, double> \&\& is_convertible<iterator_traits<InputIteratorW>::value_type, double>} is true.
 \end{addedblock}
 
 \pnum \changed{\requires}{\expects}
@@ -6319,10 +6317,7 @@ template<class InputIteratorB, class InputIteratorW>
 \begin{addedblock}
 \pnum
 \mandates
-The \grammarterm{id-expression}s
-  \tcode{iterator_traits<InputIteratorB>::value_type} and
-  \tcode{iterator_traits<Input\-IteratorW>::value_type}
-  are both convertible to \tcode{double}.
+\tcode{is_convertible<iterator_traits<InputIteratorB>::value_type, double> \&\& is_convertible<iterator_traits<InputIteratorW>::value_type, double>} is true.
 \end{addedblock}
 
 \pnum \changed{\requires}{\expects}
@@ -7652,7 +7647,7 @@ template<class T> valarray<T> operator>>(const valarray<T>&, const valarray<T>&)
 \begin{addedblock}
 \pnum
 \constraints
-The indicated operator can be applied to an operarand of type \tcode{T} and returns 
+The indicated operator can be applied to an operand of type \tcode{T} and returns 
 a value which is of type \tcode{T} or which can be unambiguously
 implicitly converted to \tcode{T}.
 \end{addedblock}

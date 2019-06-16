@@ -44,22 +44,27 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \begin{itemize}
 \item{complex.members}			\ref{complex.members}
 \item{complex.ops}				\ref{complex.ops}
+\item{rand.req.seedseq}			\ref{rand.req.seedseq}
 \item{rand.req.eng}				\ref{rand.req.eng}
+\item{rand.req.dist}			\ref{rand.req.dist}
+\item{rand.eng.lcong}			\ref{rand.eng.lcong}
+\item{rand.eng.mers}			\ref{rand.eng.mers}
+\item{rand.eng.sub}				\ref{rand.eng.sub}
 \item{rand.util.seedseq}		\ref{rand.util.seedseq}
 \item{rand.dist.uni.int}		\ref{rand.dist.uni.int}
 \item{rand.dist.uni.real}		\ref{rand.dist.uni.real}
 \item{rand.dist.bern.bernoulli}	\ref{rand.dist.bern.bernoulli}
 \item{rand.dist.bern.bin}		\ref{rand.dist.bern.bin}
-\item{rand.dist.bern.negbin}	\ref{rand.dist.bern.negbin}
 \item{rand.dist.bern.geo}		\ref{rand.dist.bern.geo}
+\item{rand.dist.bern.negbin}	\ref{rand.dist.bern.negbin}
 \item{rand.dist.pois.poisson}	\ref{rand.dist.pois.poisson}
 \item{rand.dist.pois.exp}		\ref{rand.dist.pois.exp}
 \item{rand.dist.pois.gamma}		\ref{rand.dist.pois.gamma}
 \item{rand.dist.pois.weibull}	\ref{rand.dist.pois.weibull}
 \item{rand.dist.pois.extreme}	\ref{rand.dist.pois.extreme}
 \item{rand.dist.norm.normal}	\ref{rand.dist.norm.normal}
-\item{rand.dist.norm.chisq}		\ref{rand.dist.norm.chisq}
 \item{rand.dist.norm.lognormal}	\ref{rand.dist.norm.lognormal}
+\item{rand.dist.norm.chisq}		\ref{rand.dist.norm.chisq}
 \item{rand.dist.norm.cauchy}	\ref{rand.dist.norm.cauchy}
 \item{rand.dist.norm.f}			\ref{rand.dist.norm.f}
 \item{rand.dist.norm.t}			\ref{rand.dist.norm.t}
@@ -78,11 +83,11 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \end{itemize}
 \end{multicols}
 
-%Drive-by fixes:
-%\begin{itemize}
-%\item{All of the \*_n algorithms now treat their \tcode{Size} parameter the same way. This also resolves LWG\#3213.}
-%\item{As I was "de-shalling" all the Requirements, I applied the guidance at https://github.com/cplusplus/draft/wiki/Specification-Style-Guidelines\#requirements-expressed-by-concepts. }
-%\end{itemize}
+Drive-by fixes:
+\begin{itemize}
+\item{Changed a bunch of "satisfies the XXX requirements" to "meets the XXX requirements" when XXX are old-style requirements (or specified that way). See https://github.com/cplusplus/draft/wiki/Specification-Style-Guidelines\#requirements-expressed-by-concepts}
+\item{Removed several useless "Constructs an object of type XXXX" sentences.}
+\end{itemize}
 
 Open questions:
 \begin{itemize}
