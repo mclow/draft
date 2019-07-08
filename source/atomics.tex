@@ -779,7 +779,7 @@ void store(T desired, memory_order order = memory_order_seq_cst) const noexcept;
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is not}
+\changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is neither}
 \tcode{memory_order_consume},
 \tcode{memory_order_acquire}, nor
 \tcode{memory_order_acq_rel}.
@@ -800,7 +800,7 @@ T load(memory_order order = memory_order_seq_cst) const noexcept;
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is not}
+\changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is neither}
 \tcode{memory_order_release} nor \tcode{memory_order_acq_rel}.
 
 \pnum
@@ -854,7 +854,7 @@ bool compare_exchange_strong(T& expected, T desired,
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} The \tcode{failure} argument \changed{shall not be}{is not}
+\changed{\requires}{\expects} The \tcode{failure} argument \changed{shall not be}{is neither}
 \tcode{memory_order_release} nor \tcode{memory_order_acq_rel}.
 
 \pnum
@@ -1481,7 +1481,7 @@ void store(T desired, memory_order order = memory_order::seq_cst) noexcept;
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is not} \tcode{memory_order::consume},
+\changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is neither} \tcode{memory_order::consume},
 \tcode{memory_order::acquire}, nor \tcode{memory_order::acq_rel}.
 
 \pnum
@@ -1520,7 +1520,7 @@ T load(memory_order order = memory_order::seq_cst) const noexcept;
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is not} \tcode{memory_order::release} nor \tcode{memory_order::acq_rel}.
+\changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is neither} \tcode{memory_order::release} nor \tcode{memory_order::acq_rel}.
 
 \pnum
 \effects Memory is affected according to the value of \tcode{order}.
@@ -1599,7 +1599,7 @@ bool compare_exchange_strong(T& expected, T desired,
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} The \tcode{failure} argument \changed{shall not be}{is not} \tcode{memory_order::release} nor
+\changed{\requires}{\expects} The \tcode{failure} argument \changed{shall not be}{is neither} \tcode{memory_order::release} nor
 \tcode{memory_order::acq_rel}.
 
 \pnum
@@ -2394,7 +2394,7 @@ void atomic_flag::clear(memory_order order = memory_order::seq_cst) noexcept;
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is not} \tcode{memory_order::consume},
+\changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is neither} \tcode{memory_order::consume},
 \tcode{memory_order::acquire}, nor \tcode{memory_order::acq_rel}.
 
 \pnum
