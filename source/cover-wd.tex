@@ -10,7 +10,10 @@
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
                                     & CppAlliance                 \\
-                                    & mclow.lists@gmail.com
+                                    & mclow.lists@gmail.com       \\
+                                    & Daniel Sunderland           \\
+                                    & Sandia National Laboratory  \\
+                                    & dsunder@sandia.gov
           \end{tabular}
 }
 \newlength{\hdwidth}
@@ -51,11 +54,11 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \end{itemize}
 %\end{multicols}
 
-%Drive-by fixes:
-%\begin{itemize}
-%\item{All of the \*_n algorithms now treat their \tcode{Size} parameter the same way. This also resolves LWG\#3213.}
-%\item{As I was "de-shalling" all the Requirements, I applied the guidance at https://github.com/cplusplus/draft/wiki/Specification-Style-Guidelines\#requirements-expressed-by-concepts. }
-%\end{itemize}
+Drive-by fixes:
+\begin{itemize}
+\item{I strengthened the wording in [atomics.ref.generic] \ref{atomics.ref.generic} to require a compile-time failure for non-trivially copyable Ts.}
+\item{I removed a "shall" from the definition of \tcode{ATOMIC_INIT} in [atomics.flag] \ref{atomics.flag}.}
+\end{itemize}
 
 %Open questions:
 %\begin{itemize}
@@ -65,14 +68,14 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 %\end{itemize}
 
 
-%Changes from R0:
-%\begin{itemize}
-%\item{Changed a couple of the "Expects" into "Mandates".}
-%\item{Changed two of "shall not be"s into "is not"s in ostreambuf.iter.cons \ref{ostreambuf.iter.cons}.}
-%\item{Changed several "Constraints: The expression XXXX shall be valid and convertible to bool" to "XXXX is well-formed and convertible to bool".}
-%\end{itemize}
+Changes from R0:
+\begin{itemize}
+\item{Changed several "is not" into "is neither".}
+\end{itemize}
 
 Thanks to Daniel Krügler for his advice and reviews.
+
+Thanks to Daniel Sunderland for his paper P1505, which suggested similar changes.
 
 \vfill
 Help for the editors: The changes here can be viewed as latex sources with the following commands
