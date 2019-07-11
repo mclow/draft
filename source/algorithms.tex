@@ -4755,7 +4755,7 @@ Let $E$ be
 \end{itemize}
 
 \pnum
-\changed{\requires}{\expects}
+\changed{\requires}{\mandates}
 The expression \tcode{*first = new_value} \changed{shall be}{is} valid.
 
 \pnum
@@ -5137,10 +5137,15 @@ Let $E$ be
 Let $N$ be the number of elements in \range{first}{last}
 for which $E$ is \tcode{false}.
 
+\begin{addedblock}
+\pnum
+\mandates
+The expression \tcode{*result = *first} is valid.
+\end{addedblock}
 \pnum
 \changed{\requires}{\expects}
 The ranges \range{first}{last} and \range{result}{result + (last - first)}
-\changed{shall}{do} not overlap. The expression \tcode{*result = *first} \changed{shall be}{is} valid.
+\changed{shall}{do} not overlap. \removed{The expression \tcode{*result = *first} shall be valid.}
 \begin{note}
 For the overloads with an \tcode{ExecutionPolicy},
 there may be a performance cost
@@ -5295,6 +5300,12 @@ let $E$ be
   for the overloads in namespace \tcode{ranges}.
 \end{itemize}
 
+\begin{addedblock}
+\pnum
+\mandates
+The expression \tcode{*result = *first} is valid.
+\end{addedblock}
+
 \pnum
 \changed{\requires}{\expects}
 \begin{itemize}
@@ -5307,7 +5318,7 @@ let $E$ be
   \item
     The comparison function \changed{shall be}{is} an equivalence relation.
   \item
-    The expression \tcode{*result = *first} \changed{shall be}{is} valid.
+    \removed{The expression \tcode{*result = *first} shall be valid.}
   \item
     For the overloads with no \tcode{ExecutionPolicy},
     let \tcode{T} be the value type of \tcode{InputIterator}.
