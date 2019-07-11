@@ -705,7 +705,8 @@ atomic_ref(T& obj);
 \changed{\requires}{\expects} The referenced object \changed{shall be}{is} aligned to \tcode{required_alignment}.
 
 \pnum
-\effects Constructs an atomic reference that references the object.
+\removed{\effects Constructs an atomic reference that references the object.}
+\added{\ensures \tcode{*this} references \tcode{obj}.}
 
 \pnum
 \throws Nothing.
@@ -721,8 +722,9 @@ atomic_ref(const atomic_ref& ref) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects Constructs an atomic reference
-that references the object referenced by \tcode{ref}.
+\removed{\effects Constructs an atomic reference
+that references the object referenced by \tcode{ref}.}
+\added{\ensures \tcode{*this} references the object referenced by \tcode{ref}.}
 \end{itemdescr}
 
 \indexlibrarymember{operator=}{atomic_ref}%
