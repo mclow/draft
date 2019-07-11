@@ -5142,6 +5142,7 @@ for which $E$ is \tcode{false}.
 \mandates
 The expression \tcode{*result = *first} is valid.
 \end{addedblock}
+
 \pnum
 \changed{\requires}{\expects}
 The ranges \range{first}{last} and \range{result}{result + (last - first)}
@@ -9917,6 +9918,13 @@ template<class M, class N>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\mandates
+\tcode{M} are \tcode{N} both are integer types and not 
+\cv{}~\tcode{bool}.
+\end{addedblock}
+
 \pnum
 \changed{\requires}{\expects}
 $|\tcode{m}|$ and $|\tcode{n}|$
@@ -9933,12 +9941,6 @@ is representable as a value of type \tcode{M}.
 If either \tcode{M} or \tcode{N} is not an integer type, or
 if either is \cv{}~\tcode{bool}, the program is ill-formed.
 \end{removedblock}
-\begin{addedblock}
-\pnum
-\mandates
-\tcode{M} are \tcode{N} both are integer types and not 
-\cv{}~\tcode{bool}.
-\end{addedblock}
 
 \pnum
 \returns
@@ -9959,6 +9961,13 @@ template<class M, class N>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\mandates
+\tcode{M} are \tcode{N} both are integer types and not 
+\cv{}~\tcode{bool}.
+\end{addedblock}
+
 \pnum
 \changed{\requires}{\expects}
 $|\tcode{m}|$ and $|\tcode{n}|$
@@ -9972,12 +9981,6 @@ The least common multiple of $|\tcode{m}|$ and $|\tcode{n}|$
 If either \tcode{M} or \tcode{N} is not an integer type, or
 if either is \cv{}~\tcode{bool} the program is ill-formed.
 \end{removedblock}
-\begin{addedblock}
-\pnum
-\mandates
-\tcode{M} are \tcode{N} both are integer types and not 
-\cv{}~\tcode{bool}.
-\end{addedblock}
 
 \pnum
 \returns
