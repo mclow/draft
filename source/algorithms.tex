@@ -4846,11 +4846,19 @@ Let $E$ be
   for \tcode{ranges::replace_\-copy_if}.
 \end{itemize}
 
+\begin{addedblock}
+\pnum
+\mandates
+The results of the expressions \tcode{*first} and \tcode{new_value}
+are writable\iref{iterator.requirements.general}
+to the \tcode{result} output iterator.
+\end{addedblock}
+
 \pnum
 \changed{\requires}{\expects}
-The results of the expressions \tcode{*first} and \tcode{new_value}
-\changed{shall be}{are} writable\iref{iterator.requirements.general}
-to the \tcode{result} output iterator.
+\removed{The results of the expressions \tcode{*first} and \tcode{new_value}
+shall be writable\iref{iterator.requirements.general}
+to the \tcode{result} output iterator.}
 The ranges \range{first}{last} and \range{result}{result + (last - first)}
 \changed{shall}{do} not overlap.
 
@@ -4909,26 +4917,12 @@ template<class T, OutputIterator<const T&> O>
 Let $N$ be $\max(0, \tcode{n})$ for the \tcode{fill_n} algorithms, and
 \tcode{last - first} for the \tcode{fill} algorithms.
 
-\begin{removedblock}
 \pnum
-\requires
+\changed{\requires}{\mandates}
 The expression \tcode{value}
 shall be writable\iref{iterator.requirements.general} to the output iterator.
 The type \tcode{Size} shall be convertible
 to an integral type~(\ref{conv.integral}, \ref{class.conv}).
-\end{removedblock}
-
-\begin{addedblock}
-\pnum
-\mandates
-The type \tcode{Size} is convertible
-to an integral type~(\ref{conv.integral}, \ref{class.conv}).
-
-\pnum
-\expects
-The expression \tcode{value}
-is writable\iref{iterator.requirements.general} to the output iterator.
-\end{addedblock}
 
 \pnum
 \effects
@@ -5595,7 +5589,8 @@ template<class PopulationIterator, class SampleIterator,
 \begin{addedblock}
 \pnum
 \mandates
-\tcode{Distance} is an integer type.
+\tcode{Distance} is an integer type.   \tcode{PopulationIterator}'s value type is
+  writable\iref{iterator.requirements.general} to \tcode{out}.
 \end{addedblock}
 
 \pnum
@@ -5612,13 +5607,11 @@ template<class PopulationIterator, class SampleIterator,
   the \oldconcept{RandomAccessIterator} requirements\iref{random.access.iterators}
   unless \tcode{Pop\-ulat\-ion\-Iter\-ator} satisfies
   the \oldconcept{ForwardIterator} requirements\iref{forward.iterators}.
-\item
-  \tcode{PopulationIterator}'s value type \changed{shall be}{is}
-  writable\iref{iterator.requirements.general} to \tcode{out}.
-\begin{removedblock}
-\item
-  \tcode{Distance} shall be an integer type.
-\end{removedblock}
+\item \removed{
+  \tcode{PopulationIterator}'s value type shall be
+  writable\iref{iterator.requirements.general} to \tcode{out}.}
+\item \removed{
+  \tcode{Distance} shall be an integer type.}
 \item
   \tcode{remove_reference_t<UniformRandomBitGenerator>} \changed{shall satisfy}{meets}
   the requirements of a uniform random bit generator type\iref{rand.req.urng}
@@ -6145,6 +6138,14 @@ Let \tcode{comp} be \tcode{less\{\}}, and
 \tcode{proj1} and \tcode{proj2} be \tcode{identity\{\}}
 for the overloads with no parameters by those names.
 
+\begin{addedblock}
+\pnum
+\mandates
+For the overloads in namespace \tcode{std},
+the expression \tcode{*first}
+is writable\iref{iterator.requirements.general} to \tcode{result_first}.
+\end{addedblock}
+
 \pnum
 \changed{\requires}{\expects}
 For the overloads in namespace \tcode{std},
@@ -6153,8 +6154,8 @@ the \oldconcept{Value\-Swappable} requirements\iref{swappable.requirements},
 the type of \tcode{*result_first} \changed{shall meet}{meets}
 the \oldconcept{MoveConstructible} (\tref{moveconstructible}) and
 \oldconcept{\-Move\-Assignable} (\tref{moveassignable}) requirements,
-and the expression \tcode{*first}
-\changed{shall be}{is} writable\iref{iterator.requirements.general} to \tcode{result_first}.
+\removed{and the expression \tcode{*first}
+shall be writable\iref{iterator.requirements.general} to \tcode{result_first}}.
 
 \pnum
 \expects
@@ -6817,13 +6818,21 @@ Let \tcode{proj} be \tcode{identity\{\}}
 for the overloads with no parameter named \tcode{proj} and
 let $E(x)$ be \tcode{bool(invoke(\brk{}pred, invoke(proj, $x$)))}.
 
+\begin{addedblock}
+\pnum
+\mandates
+For the overloads in namespace \tcode{std},
+the expression \tcode{*first}
+is writable\iref{iterator.requirements.general}
+to \tcode{out_true} and \tcode{out_false}.
+\end{addedblock}
+
 \pnum
 \changed{\requires}{\expects}
 The input range and output ranges \changed{shall}{do} not overlap.
-For the overloads in namespace \tcode{std},
-the expression \tcode{*first}
-\changed{shall be}{is} writable\iref{iterator.requirements.general}
-to \tcode{out_true} and \tcode{out_false}.
+\removed{For the overloads in namespace \tcode{std},
+the expression \tcode{*first} shall be writable\iref{iterator.requirements.general}
+to \tcode{out_true} and \tcode{out_false}.}
 \begin{note}
 For the overload with an \tcode{ExecutionPolicy},
 there may be a performance cost if \tcode{first}'s value type
@@ -9273,6 +9282,8 @@ from the type of \tcode{*first}.
 The result of the
 expression \tcode{std::move(acc) + *i} or \tcode{binary_op(std::move(acc), *i)}
 is implicitly convertible to \tcode{InputIterator}'s value type.
+\tcode{acc} is writable\iref{iterator.requirements.general} to
+the \tcode{result} output iterator.
 \end{addedblock}
 
 \pnum
@@ -9281,9 +9292,9 @@ is implicitly convertible to \tcode{InputIterator}'s value type.
 from the type of \tcode{*first}.
 The result of the
 expression \tcode{std::move(acc) + *i} or \tcode{binary_op(std::move(acc), *i)}
-shall be implicitly convertible to \tcode{InputIterator}'s value type.}
-\tcode{acc} \changed{shall be}{is} writable\iref{iterator.requirements.general} to
-the \tcode{result} output iterator.
+shall be implicitly convertible to \tcode{InputIterator}'s value type.
+\tcode{acc} shall be writable\iref{iterator.requirements.general} to
+the \tcode{result} output iterator.}
 In the ranges \crange{first}{last} and \crange{result}{result + (last - first)}
 \tcode{binary_op} \changed{shall neither modify elements
 nor invalidate iterators or subranges}{neither modifies elements
@@ -9576,7 +9587,7 @@ template<class ExecutionPolicy,
   \item \tcode{binary_op(init, unary_op(*first))}, and
   \item \tcode{binary_op(unary_op(*first), unary_op(*first))}
   \end{itemize}
-  are be convertible to \tcode{T}.
+  are convertible to \tcode{T}.
 \end{addedblock}
 
 \pnum
@@ -9679,7 +9690,7 @@ template<class ExecutionPolicy,
   \end{itemize}
   are convertible to \tcode{T};
   otherwise, \tcode{binary_op(unary_op(*first), unary_op(*first))}
-  \changed{are}{is} convertible to \tcode{ForwardIterator1}'s value type.
+  is convertible to \tcode{ForwardIterator1}'s value type.
 \end{addedblock}
 
 \pnum
@@ -9779,10 +9790,11 @@ that denotes an object of type \tcode{minus<>}.
 
 \begin{addedblock}
 \pnum
+\mandates
 \begin{itemize}
 \item
   For the overloads with no \tcode{ExecutionPolicy},
-  \tcode{T} is constructible from \removed{the type of} \tcode{*first}.
+  \tcode{T} is constructible from \tcode{*first}.
   \tcode{acc} (defined below) is
   writable\iref{iterator.requirements.general}
   to the \tcode{result} output iterator.
@@ -9800,17 +9812,19 @@ that denotes an object of type \tcode{minus<>}.
 \begin{itemize}
 \item
   For the overloads with no \tcode{ExecutionPolicy},
-  \tcode{T} \changed{shall be}{meets the} \oldconcept{MoveAssignable} (\tref{moveassignable}) \added{requirements} and
-  \changed{shall be}{is} constructible from \removed{the type of} \tcode{*first}.
-  \tcode{acc} (defined below) \changed{shall be}{is}
+  \tcode{T} \changed{shall be}{meets the} \oldconcept{MoveAssignable} (\tref{moveassignable})
+  \added{requirements} \removed{and
+  is constructible from the type of \tcode{*first}.
+  \tcode{acc} (defined below) shall be
   writable\iref{iterator.requirements.general}
   to the \tcode{result} output iterator.
   The result of the expression \tcode{binary_op(val, std::move(acc))}
-  \changed{shall be}{is} writable to the \tcode{result} output iterator.
-\item
+  \changed{shall be}{is} writable to the \tcode{result} output iterator.}
+\item \removed{
   For the overloads with an \tcode{ExecutionPolicy},
   the result of the expressions \tcode{binary_op(*first, *first)} and
-  \tcode{*first} \changed{shall be}{is} writable to \tcode{result}.
+  \tcode{*first} shall be writable to \tcode{result}.
+}
 \item
   For all overloads, in the ranges \crange{first}{last}
   and \crange{result}{result + (last - first)},
