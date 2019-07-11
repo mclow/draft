@@ -4566,7 +4566,7 @@ template<class ForwardIterator1, class ForwardIterator2>
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{a} and \tcode{b} \changed{shall be}{is} dereferenceable. \tcode{*a} \changed{shall be}{is}
+\tcode{a} and \tcode{b} \changed{shall be}{are} dereferenceable. \tcode{*a} \changed{shall be}{is}
 swappable with\iref{swappable.requirements} \tcode{*b}.
 
 \pnum
@@ -5222,7 +5222,7 @@ let $E$ be
 \pnum
 \changed{\requires}{\expects}
 For the overloads in namepace \tcode{std},
-\tcode{pred} \changed{shall}{is} be an equivalence relation and
+\tcode{pred} \changed{shall be}{is} an equivalence relation and
 the type of \tcode{*first} \changed{shall meet}{meets}
 the \oldconcept{MoveAssignable} requirements (\tref{moveassignable}).
 
@@ -8040,7 +8040,7 @@ template<InputRange R, class Proj = identity,
 \changed{\requires}{\expects}
 \tcode{ranges::distance(r) > 0}.
 For the overloads in namespace \tcode{std},
-\tcode{T} \changed{shall be}{is} \oldconcept{Copy\-Constructible}.
+\tcode{T} \changed{shall be}{meets the} \oldconcept{Copy\-Constructible} \added{requirements}.
 For the first form, type \tcode{T} \changed{shall be}{meets the} \oldconcept{LessThanComparable}
 \begin{addedblock}
 requirements (\tref{lessthancomparable}).
@@ -8123,7 +8123,7 @@ template<InputRange R, class Proj = identity,
 \changed{\requires}{\expects}
 \tcode{ranges::distance(r) > 0}.
 For the overloads in namespace \tcode{std},
-\tcode{T} \changed{shall be}{is} \oldconcept{Copy\-Constructible}.
+\tcode{T} \changed{shall be}{meets the} \oldconcept{Copy\-Constructible} \added{requirements}.
 For the first form, type \tcode{T} \changed{shall be}{meets the} \oldconcept{LessThanComparable}
 \begin{addedblock}
 requirements (\tref{lessthancomparable}).
@@ -8456,10 +8456,17 @@ template<class InputIterator1, class InputIterator2, class Cmp>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
-\changed{\requires}{\expects}
-\tcode{Cmp} \changed{shall be}{is} a function object type
+\requires
+\tcode{Cmp} shall be a function object type
 whose return type is a comparison category type.
+\end{removedblock}
+\begin{addedblock}
+\pnum
+\mandates
+\tcode{decltype(comp(*b1, *b2))} is a comparison category type.
+\end{addedblock}
 
 \pnum
 \effects
@@ -8998,7 +9005,7 @@ template<class ExecutionPolicy, class ForwardIterator, class T, class BinaryOper
 \changed{\requires}{\expects}
 \begin{itemize}
 \item
-  \tcode{T} \changed{shall be}{is} \oldconcept{MoveConstructible} (\tref{moveconstructible}).
+  \tcode{T} \changed{shall be}{meets the} \oldconcept{MoveConstructible} (\tref{moveconstructible}) \added{requirements}.
 \begin{removedblock}
 \item
   All of \tcode{binary_op(init, *first)}, \tcode{binary_op(*first, init)},
@@ -9145,7 +9152,7 @@ All of
 \changed{\requires}{\expects}
 \begin{itemize}
 \item
-  \tcode{T} \changed{shall be}{is} \oldconcept{MoveConstructible} (\tref{moveconstructible}).
+  \tcode{T} \changed{shall be}{meets the} \oldconcept{MoveConstructible} (\tref{moveconstructible}) \added{requirements}.
 \begin{removedblock}
 \item
   All of
@@ -9208,7 +9215,7 @@ template<class ExecutionPolicy,
 \changed{\requires}{\expects}
 \begin{itemize}
 \item
-  \tcode{T} \changed{shall be}{is} \oldconcept{MoveConstructible} (\tref{moveconstructible}).
+  \tcode{T} \changed{shall be}{meets the} \oldconcept{MoveConstructible} (\tref{moveconstructible}) \added{requirements}.
 \begin{removedblock}
 \item
   All of
@@ -9370,7 +9377,7 @@ template<class ExecutionPolicy,
 \changed{\requires}{\expects}
 \begin{itemize}
 \item
-  \tcode{T} \changed{shall be}{is} \oldconcept{MoveConstructible} (\tref{moveconstructible}).
+  \tcode{T} \changed{shall be}{meets the} \oldconcept{MoveConstructible} (\tref{moveconstructible}) \added{requirements}.
 \begin{removedblock}
 \item
   All of
@@ -9487,9 +9494,9 @@ template<class ExecutionPolicy,
 \begin{itemize}
 \item
   If \tcode{init} is provided,
-  \tcode{T} \changed{shall be}{is} \oldconcept{MoveConstructible} (\tref{moveconstructible});
+  \tcode{T} \changed{shall be}{meets the} \oldconcept{MoveConstructible} (\tref{moveconstructible}) \added{requirements};
   otherwise, \tcode{ForwardIterator1}'s value type
-  \changed{shall be}{is} \oldconcept{MoveConstructible}.
+  \changed{shall be}{meets the} \oldconcept{MoveConstructible} \added{requirements}.
 \begin{removedblock}
 \item
   If \tcode{init} is provided, all of
@@ -9576,7 +9583,7 @@ template<class ExecutionPolicy,
 \changed{\requires}{\expects}
 \begin{itemize}
 \item
-  \tcode{T} \changed{shall be}{is} \oldconcept{MoveConstructible} (\tref{moveconstructible}).
+  \tcode{T} \changed{shall be}{meets the} \oldconcept{MoveConstructible} (\tref{moveconstructible}) \added{requirements}.
 \begin{removedblock}
 \item
   All of
@@ -9672,17 +9679,17 @@ template<class ExecutionPolicy,
   \end{itemize}
   are convertible to \tcode{T};
   otherwise, \tcode{binary_op(unary_op(*first), unary_op(*first))}
-  are convertible to \tcode{ForwardIterator1}'s value type.
+  \changed{are}{is} convertible to \tcode{ForwardIterator1}'s value type.
 \end{addedblock}
 
 \pnum
 \changed{\requires}{\expects}
 \begin{itemize}
 \item
-  If \tcode{init} is provided, \tcode{T} \changed{shall be}{is}
-  \oldconcept{MoveConstructible} (\tref{moveconstructible});
-  otherwise, \tcode{ForwardIterator1}'s value type \changed{shall be}{is}
-  \oldconcept{MoveConstructible}.
+  If \tcode{init} is provided, \tcode{T} \changed{shall be}{meets the}
+  \oldconcept{MoveConstructible} (\tref{moveconstructible}) \added{requirements};
+  otherwise, \tcode{ForwardIterator1}'s value type \changed{shall be}{meets the}
+  \oldconcept{MoveConstructible} \added{requirements}.
 \begin{removedblock}
 \item
   If \tcode{init} is provided, all of
@@ -9775,8 +9782,8 @@ that denotes an object of type \tcode{minus<>}.
 \begin{itemize}
 \item
   For the overloads with no \tcode{ExecutionPolicy},
-  \tcode{T} \changed{shall be}{is} \oldconcept{MoveAssignable} (\tref{moveassignable}) and
-  \changed{shall be}{is} constructible from the type of \tcode{*first}.
+  \tcode{T} \changed{shall be}{meets the} \oldconcept{MoveAssignable} (\tref{moveassignable}) \added{requirements} and
+  \changed{shall be}{is} constructible from \removed{the type of} \tcode{*first}.
   \tcode{acc} (defined below) \changed{shall be}{is}
   writable\iref{iterator.requirements.general}
   to the \tcode{result} output iterator.
@@ -9877,10 +9884,18 @@ that $\tcode{gcd(m, m)} = |\tcode{m}|$
 is representable as a value of type \tcode{M}.
 \end{note}
 
+\begin{removedblock}
 \pnum
 \remarks
 If either \tcode{M} or \tcode{N} is not an integer type, or
 if either is \cv{}~\tcode{bool}, the program is ill-formed.
+\end{removedblock}
+\begin{addedblock}
+\pnum
+\mandates
+\tcode{M} are \tcode{N} both are integer types and not 
+\cv{}~\tcode{bool}.
+\end{addedblock}
 
 \pnum
 \returns
@@ -9906,12 +9921,20 @@ template<class M, class N>
 $|\tcode{m}|$ and $|\tcode{n}|$
 \changed{shall be}{are} representable as a value of \tcode{common_type_t<M, N>}.
 The least common multiple of $|\tcode{m}|$ and $|\tcode{n}|$
-shall be representable as a value of type \tcode{common_type_t<M,N>}.
+\changed{shall be}{is} representable as a value of type \tcode{common_type_t<M,N>}.
 
+\begin{removedblock}
 \pnum
 \remarks
 If either \tcode{M} or \tcode{N} is not an integer type, or
 if either is \cv{}~\tcode{bool} the program is ill-formed.
+\end{removedblock}
+\begin{addedblock}
+\pnum
+\mandates
+\tcode{M} are \tcode{N} both are integer types and not 
+\cv{}~\tcode{bool}.
+\end{addedblock}
 
 \pnum
 \returns
@@ -10002,9 +10025,9 @@ void qsort(void* base, size_t nmemb, size_t size, @\placeholder{compare-pred}@* 
 These functions have the semantics specified in the C standard library.
 
 \pnum
-\remarks
-The behavior is undefined
-unless the objects in the array pointed to by \tcode{base} are of trivial type.
+\changed{\remarks}{\expects}
+\changed{The behavior is undefined
+unless the}{The} objects in the array pointed to by \tcode{base} are of trivial type.
 
 \pnum
 \throws
