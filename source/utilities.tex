@@ -4971,7 +4971,7 @@ template<size_t I, class... Args>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\mandates}
 \tcode{I < sizeof...(Types)}.
 
 \added{%
@@ -5017,7 +5017,7 @@ template<size_t I, class U, class... Args>
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\mandates}
 \tcode{I < sizeof...(Types)}.
 
 \added{%
@@ -5102,7 +5102,7 @@ void swap(variant& rhs) noexcept(@\seebelow@);
 
 \begin{itemdescr}
 \pnum
-\requires Lvalues of type $\tcode{T}_i$ shall be swappable\iref{swappable.requirements} and
+\changed{\requires}{\mandates} Lvalues of type $\tcode{T}_i$ shall be swappable\iref{swappable.requirements} and
 \tcode{is_move_constructible_v<$\tcode{T}_i$>} shall be \tcode{true} for all $i$.
 
 \pnum
@@ -5815,37 +5815,38 @@ template<class T>
 \pnum
 Let \tcode{VT} be \tcode{decay_t<T>}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \requires
 \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
-}
+\end{removedblock}
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{VT} is not the same type as \tcode{any},
 \tcode{VT} is not a specialization of \tcode{in_place_type_t},
 and \tcode{is_copy_constructible_v<VT>} is \tcode{true}.
-}
+\end{addedblock}
 
-\added{%
+
+\begin{addedblock}
 \pnum
 \expects
-\tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
-}
+\tcode{VT} meets the \oldconcept{CopyConstructible} requirements.
+\end{addedblock}
 
 \pnum
 \effects
 Constructs an object of type \tcode{any} that contains an object of type \tcode{VT} direct-initialized with \tcode{std::forward<T>(value)}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks
 This constructor shall not participate in overload resolution unless
 \tcode{VT} is not the same type as \tcode{any},
 \tcode{VT} is not a specialization of \tcode{in_place_type_t},
 and \tcode{is_copy_constructible_v<VT>} is \tcode{true}.
-}
+\end{removedblock}
 
 \pnum
 \throws
@@ -5862,21 +5863,23 @@ template<class T, class... Args>
 \pnum
 Let \tcode{VT} be \tcode{decay_t<T>}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \requires \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
-}
+\end{removedblock}
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, Args...>} is \tcode{true}.
-}
+\end{addedblock}
 
-\added{%
+
+\begin{addedblock}
 \pnum
-\expects \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
-}
+\expects \tcode{VT} meets the \oldconcept{CopyConstructible} requirements.
+\end{addedblock}
+
 
 \pnum
 \effects Initializes the contained value as if direct-non-list-initializing an object of
@@ -5888,13 +5891,14 @@ type \tcode{VT} with the arguments \tcode{std::forward<Args>(args)...}.
 \pnum
 \throws Any exception thrown by the selected constructor of \tcode{VT}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks
 This constructor shall not participate in overload resolution unless
 \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, Args...>} is \tcode{true}.
-}
+\end{removedblock}
+
 \end{itemdescr}
 
 \indexlibrary{\idxcode{any}!constructor}%
@@ -5907,21 +5911,21 @@ template<class T, class U, class... Args>
 \pnum
 Let \tcode{VT} be \tcode{decay_t<T>}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \requires \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
-}
+\end{removedblock}
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, initializer_list<U>\&, Args...>} is \tcode{true}.
-}
+\end{addedblock}
 
-\added{%
+\begin{addedblock}
 \pnum
-\expects \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
-}
+\expects \tcode{VT} meets the \oldconcept{CopyConstructible} requirements.
+\end{addedblock}
 
 \pnum
 \effects Initializes the contained value as if direct-non-list-initializing an object of
@@ -5933,13 +5937,13 @@ type \tcode{VT} with the arguments \tcode{il, std::forward<Args>(args)...}.
 \pnum
 \throws Any exception thrown by the selected constructor of \tcode{VT}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks
 This constructor shall not participate in overload resolution unless
 \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, initializer_list<U>\&, Args...>} is \tcode{true}.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{any}!destructor}
@@ -6005,23 +6009,23 @@ template<class T>
 \pnum
 Let \tcode{VT} be \tcode{decay_t<T>}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \requires
 \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
-}
+\end{removedblock}
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{VT} is not the same type as \tcode{any} and
 \tcode{is_copy_constructible_v<VT>} is \tcode{true}.
-}
+\end{addedblock}
 
-\added{%
+\begin{addedblock}
 \pnum
 \expects
-\tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
-}
+\tcode{VT} meets the \oldconcept{CopyConstructible} requirements.
+\end{addedblock}
 
 \pnum
 \effects
@@ -6032,13 +6036,13 @@ No effects if an exception is thrown.
 \returns
 \tcode{*this}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks
 This operator shall not participate in overload resolution unless
 \tcode{VT} is not the same type as \tcode{any} and
 \tcode{is_copy_constructible_v<VT>} is \tcode{true}.
-}
+\end{removedblock}
 
 \pnum
 \throws
@@ -6057,23 +6061,24 @@ template<class T, class... Args>
 \pnum
 Let \tcode{VT} be \tcode{decay_t<T>}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \requires
 \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
-}
+\end{removedblock}
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, Args...>} is \tcode{true}.
-}
+\end{addedblock}
 
-\added{%
+\begin{addedblock}
 \pnum
 \expects
-\tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
-}
+\tcode{VT} meets the \oldconcept{CopyConstructible} requirements.
+\end{addedblock}
+
 
 \pnum
 \effects Calls \tcode{reset()}.
@@ -6113,21 +6118,21 @@ Let \tcode{VT} be \tcode{decay_t<T>}.
 
 \removed{%
 \pnum
-\requires
-\tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
+\changed{\requires}{\expects}
+\tcode{VT} \changed{shall satisfy}{meets} the \oldconcept{CopyConstructible} requirements.
 }
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, initializer_list<U>\&, Args...>} is \tcode{true}.
-}
+\end{addedblock}
 
-\added{%
+\begin{addedblock}
 \pnum
 \expects
 \tcode{VT} shall satisfy the \oldconcept{CopyConstructible} requirements.
-}
+\end{addedblock}
 
 \pnum
 \effects Calls \tcode{reset()}. Then initializes the contained value
@@ -6594,7 +6599,7 @@ Subsequent decreasing character positions correspond to increasing bit positions
 \pnum
 If \tcode{M < N}, remaining bit positions are initialized to zero.
 
-\added{%
+\begin{addedblock}
 \pnum
 \throws
 \tcode{out_of_range}
@@ -6606,7 +6611,7 @@ other than \tcode{zero} or \tcode{one}. The function uses \tcode{traits::eq()}
 to compare the character values.%
 \indexlibrary{\idxcode{out_of_range}}%
 \indexlibrary{\idxcode{invalid_argument}}%
-}
+\end{addedblock}
 
 \end{itemdescr}
 
@@ -7918,7 +7923,7 @@ template<class T> constexpr T* to_address(T* p) noexcept;
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{T} is not a function type. Otherwise the program is ill-formed.
+\changed{\requires}{\mandates} \tcode{T} is not a function type. \removed{Otherwise the program is ill-formed.}
 
 \pnum
 \returns \tcode{p}.
@@ -7931,17 +7936,10 @@ template<class Ptr> auto to_address(const Ptr& p) noexcept;
 
 \begin{itemdescr}
 \pnum
-<<<<<<< HEAD
-\changed{\requires}{\mandates} \tcode{T} is not a function type. \removed{Otherwise the program is ill-formed.}
-
-\pnum
-\returns \tcode{p}.
-=======
 \returns
 \tcode{pointer_traits<Ptr>::to_address(p)} if that expression is well-formed
 (see \ref{pointer.traits.optmem}),
 otherwise \tcode{to_address(p.operator->())}.
->>>>>>> master
 \end{itemdescr}
 
 \rSec2[util.dynamic.safety]{Pointer safety}
@@ -10016,10 +10014,10 @@ unique_ptr(unique_ptr&& u) noexcept;
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects} If \tcode{D} is not a reference type,
-\tcode{D} shall satisfy the \oldconcept{MoveConstructible}
+\tcode{D} \changed{shall satisfy}{meets} the \oldconcept{MoveConstructible}
 requirements (\tref{moveconstructible}).
 Construction
-of the deleter from an rvalue of type \tcode{D} shall not
+of the deleter from an rvalue of type \tcode{D} \changed{shall}{does} not
 throw an exception.
 
 \pnum
@@ -10045,14 +10043,14 @@ template<class U, class E> unique_ptr(unique_ptr<U, E>&& u) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\removed{%
+\begin{removedblock}
 \pnum
 \requires If \tcode{E} is not a reference type,
 construction of the deleter from an rvalue of type
 \tcode{E} shall be well-formed and shall not throw an exception.
 Otherwise, \tcode{E} is a reference type and construction of the deleter from an
 lvalue of type \tcode{E} shall be well-formed and shall not throw an exception.
-}
+\end{removedblock}
 
 \pnum
 \changed{\remarks This constructor shall not participate in overload resolution unless:}{\constraints}
@@ -10097,8 +10095,8 @@ to the stored deleter that was constructed from
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} The expression \tcode{get_deleter()(get())} shall be well-formed,
-shall have well-defined behavior, and shall not throw exceptions. \begin{note} The
+\changed{\requires}{\expects} The expression \tcode{get_deleter()(get())} \changed{shall be}{is} well-formed,
+\changed{shall have}{has} well-defined behavior, and \changed{shall}{does} not throw exceptions. \begin{note} The
 use of \tcode{default_delete} requires \tcode{T} to be a complete type.
 \end{note}
 
@@ -10116,13 +10114,13 @@ unique_ptr& operator=(unique_ptr&& u) noexcept;
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} If \tcode{D} is not a reference type, \tcode{D} shall satisfy the
+\changed{\requires}{\expects} If \tcode{D} is not a reference type, \tcode{D} \changed{shall satisfy}{meets} the
 \oldconcept{MoveAssignable} requirements (\tref{moveassignable}) and assignment
-of the deleter from an rvalue of type \tcode{D} shall not throw an exception.
+of the deleter from an rvalue of type \tcode{D} \changed{shall}{does} not throw an exception.
 Otherwise, \tcode{D} is a reference type;
-\tcode{remove_reference_t<D>} shall satisfy the \oldconcept{CopyAssignable}
+\tcode{remove_reference_t<D>} \changed{shall satisfy}{meets} the \oldconcept{CopyAssignable}
 requirements and assignment of the deleter from an
-lvalue of type \tcode{D} shall not throw an exception.
+lvalue of type \tcode{D} \changed{shall}{does} not throw an exception.
 
 \pnum
 \effects Calls \tcode{reset(u.release())} followed by
@@ -10141,13 +10139,13 @@ template<class U, class E> unique_ptr& operator=(unique_ptr<U, E>&& u) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\removed{%
+\begin{removedblock}
 \pnum
 \requires If \tcode{E} is not a reference type, assignment of the deleter from
 an rvalue of type \tcode{E} shall be well-formed and shall not throw an exception.
 Otherwise, \tcode{E} is a reference type and assignment of the deleter from an lvalue
 of type \tcode{E} shall be well-formed and shall not throw an exception.
-}
+\end{removedblock}
 
 \pnum
 \changed{\remarks This constructor shall not participate in overload resolution unless:}{\constraints}
@@ -10281,8 +10279,9 @@ void reset(pointer p = pointer()) noexcept;
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} The expression \tcode{get_deleter()(get())} shall be well-formed, shall have
-well-defined behavior, and shall not throw exceptions.
+\changed{\requires}{\expects} The expression \tcode{get_deleter()(get())}
+\changed{shall be}{is} well-formed, \changed{shall have}{has}
+well-defined behavior, and \changed{shall}{does} not throw exceptions.
 
 \pnum
 \effects Assigns \tcode{p} to the stored pointer, and then if and only if the old value of the
@@ -10304,9 +10303,9 @@ void swap(unique_ptr& u) noexcept;
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} \tcode{get_deleter()} shall be
-swappable\iref{swappable.requirements} and shall
-not throw an exception
+\changed{\requires}{\expects} \tcode{get_deleter()} \changed{shall be}{meets the}
+swappable\iref{swappable.requirements} \added{requirements} and \changed{shall
+not}{does not} throw an exception
 under \tcode{swap}.
 
 \pnum
@@ -10697,7 +10696,7 @@ common_type_t<typename unique_ptr<T1, D1>::pointer,
               typename unique_ptr<T2, D2>::pointer>
 \end{codeblock}
 Then the specialization
-\tcode{less<CT>} shall be a function object type\iref{function.objects} that
+\tcode{less<CT>} \changed{shall be}{is} a function object type\iref{function.objects} that
 induces a strict weak ordering\iref{alg.sorting} on the pointer values.
 
 \added{%
@@ -10787,7 +10786,7 @@ template<class T, class D>
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} The specialization \tcode{less<unique_ptr<T, D>::pointer>} shall be
+\changed{\requires}{\expects} The specialization \tcode{less<unique_ptr<T, D>::pointer>} \changed{shall be}{is}
 a function object type\iref{function.objects} that induces a strict weak
 ordering\iref{alg.sorting} on the pointer values.
 
@@ -11064,11 +11063,11 @@ When \tcode{T} is not an array type, the expression \tcode{delete p} is well-for
 \tcode{Y*} is convertible to \tcode{T*}.
 }
 
-\pnum\changed{\requires}{\expects} \tcode{Y} shall be a complete type. The expression
+\pnum\changed{\requires}{\expects} \tcode{Y} \changed{shall be}{is} a complete type. The expression
 \tcode{delete[] p}, when \tcode{T} is an array type, or
 \tcode{delete p}, when \tcode{T} is not an array type,
-shall have well-defined behavior, and
-shall not throw exceptions.
+\changed{shall have}{has} well-defined behavior, and
+\changed{shall not}{does not} throw exceptions.
 
 \pnum\effects When \tcode{T} is not an array type,
 constructs a \tcode{shared_ptr} object
@@ -11122,10 +11121,10 @@ the expression \tcode{d(p)} is well-formed, and
 }
 
 \pnum\changed{\requires}{\expects} Construction of \tcode{d} and a deleter of type \tcode{D}
-initialized with \tcode{std::move(d)} shall not throw exceptions.
+initialized with \tcode{std::move(d)} \changed{shall not}{do not} throw exceptions.
 The expression \tcode{d(p)}
-shall have well-defined behavior and shall not throw exceptions.
-\tcode{A} shall satisfy the \oldconcept{Allocator} requirements
+\changed{shall have}{has} well-defined behavior and \changed{shall not}{does not} throw exceptions.
+\tcode{A} \changed{shall satisfy}{meets} the \oldconcept{Allocator} requirements
 (\tref{utilities.allocator.requirements}).
 
 \pnum\effects  Constructs a \tcode{shared_ptr} object that owns the
@@ -11544,7 +11543,7 @@ template<class T, class A, ...>
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} \tcode{A} shall satisfy the \oldconcept{Allocator}
+\changed{\requires}{\expects} \tcode{A} \changed{shall satisfy}{meets} the \oldconcept{Allocator}
 requirements (\tref{utilities.allocator.requirements}).
 
 \pnum
@@ -12059,8 +12058,8 @@ template<class T, class U>
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} The expression \tcode{static_cast<T*>((U*)nullptr)} shall
-be well-formed.
+\changed{\requires}{\expects} The expression \tcode{static_cast<T*>((U*)nullptr)}
+\changed{shall be}{is} well-formed.
 
 \pnum
 \returns
@@ -12090,9 +12089,9 @@ template<class T, class U>
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects} The expression \tcode{dynamic_cast<T*>((U*)nullptr)}
-shall be well-formed.
+\changed{shall be}{is} well-formed.
 The expression \tcode{dynamic_cast<typename shared_ptr<T>::element_type*>(r.get())}
-shall be well formed and shall have well-defined behavior.
+\changed{shall be}{is} well formed and \changed{shall have}{has} well-defined behavior.
 
 \pnum
 \returns
@@ -12123,8 +12122,8 @@ template<class T, class U>
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} The expression \tcode{const_cast<T*>((U*)nullptr)} shall
-be well-formed.
+\changed{\requires}{\expects} The expression \tcode{const_cast<T*>((U*)nullptr)} \changed{shall
+be}{is} well-formed.
 
 \pnum
 \returns
@@ -12153,7 +12152,7 @@ template<class T, class U>
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects} The expression \tcode{reinterpret_cast<T*>((U*)nullptr)}
-shall be well-formed.
+\changed{shall be}{is} well-formed.
 
 \pnum\returns
 \begin{codeblock}
@@ -12726,7 +12725,7 @@ void store(shared_ptr<T> desired, memory_order order = memory_order::seq_cst) no
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-The \tcode{order} argument shall not be
+The \tcode{order} argument \changed{shall not be}{is neither}
 \tcode{memory_order::consume},
 \tcode{memory_order::acquire}, nor
 \tcode{memory_order::acq_rel}.
@@ -12757,7 +12756,7 @@ shared_ptr<T> load(memory_order order = memory_order::seq_cst) const noexcept;
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{order} shall not be
+\tcode{order} \changed{shall not be}{is neither}
 \tcode{memory_order::release} nor \tcode{memory_order::acq_rel}.
 
 \pnum
@@ -12810,7 +12809,7 @@ bool compare_exchange_strong(shared_ptr<T>& expected, shared_ptr<T> desired,
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{failure} shall not be
+\tcode{failure} \changed{shall not be}{is neither}
 \tcode{memory_order::release} nor \tcode{memory_order::acq_rel}.
 
 \pnum
@@ -12968,7 +12967,7 @@ void store(weak_ptr<T> desired, memory_order order = memory_order::seq_cst) noex
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-The \tcode{order} argument shall not be
+The \tcode{order} argument \changed{shall not be}{is neither}
 \tcode{memory_order::consume},
 \tcode{memory_order::acquire}, nor
 \tcode{memory_order::acq_rel}.
@@ -12999,7 +12998,7 @@ weak_ptr<T> load(memory_order order = memory_order::seq_cst) const noexcept;
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{order} shall not be
+\tcode{order} \changed{shall not be}{is neither}
 \tcode{memory_order::release} nor \tcode{memory_order::acq_rel}.
 
 \pnum
@@ -13051,7 +13050,7 @@ bool compare_exchange_strong(weak_ptr<T>& expected, weak_ptr<T> desired,
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{failure} shall not be
+\tcode{failure} \changed{shall not be}{is neither}
 \tcode{memory_order::release} nor \tcode{memory_order::acq_rel}.
 
 \pnum
@@ -13256,8 +13255,8 @@ virtual void* do_allocate(size_t bytes, size_t alignment) = 0;
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{alignment} shall be a power of two.
+\changed{\requires}{\expects}
+\tcode{alignment} \changed{shall be}{is} a power of two.
 
 \pnum
 \returns
@@ -13278,9 +13277,9 @@ virtual void do_deallocate(void* p, size_t bytes, size_t alignment) = 0;
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{p} shall have been returned from a prior call to \tcode{allocate(bytes, alignment)} on a memory resource equal to \tcode{*this},
-and the storage at \tcode{p} shall not yet have been deallocated.
+\changed{\requires}{\expects}
+\tcode{p} \changed{shall have been}{was} returned from a prior call to \tcode{allocate(bytes, alignment)} on a memory resource equal to \tcode{*this},
+and the storage at \tcode{p} \changed{shall not yet have}{has not yet} been deallocated.
 
 \pnum
 \effects
@@ -13413,7 +13412,7 @@ polymorphic_allocator(memory_resource* r);
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{r} is non-null.
 
 \pnum
@@ -13466,7 +13465,7 @@ void deallocate(Tp* p, size_t n);
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{p} was allocated from a memory resource \tcode{x},
 equal to \tcode{*memory_rsrc},
 using \tcode{x.allocate(n * sizeof(Tp), alignof(Tp))}.
@@ -13931,7 +13930,7 @@ unsynchronized_pool_resource(const pool_options& opts, memory_resource* upstream
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 \tcode{upstream} is the address of a valid memory resource.
 
 \pnum
@@ -14152,9 +14151,9 @@ monotonic_buffer_resource(size_t initial_size, memory_resource* upstream);
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{upstream} shall be the address of a valid memory resource.
-\tcode{initial_size}, if specified, shall be greater than zero.
+\changed{\requires}{\expects}
+\tcode{upstream} \changed{shall be}{is} the address of a valid memory resource.
+\tcode{initial_size}, if specified, \changed{shall be}{is} greater than zero.
 
 \pnum
 \effects
@@ -14173,9 +14172,9 @@ monotonic_buffer_resource(void* buffer, size_t buffer_size, memory_resource* ups
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{upstream} shall be the address of a valid memory resource.
-\tcode{buffer_size} shall be no larger than the number of bytes in \tcode{buffer}.
+\changed{\requires}{\expects}
+\tcode{upstream} \changed{shall be}{is} the address of a valid memory resource.
+\tcode{buffer_size} \changed{shall be}{is} no larger than the number of bytes in \tcode{buffer}.
 
 \pnum
 \effects
@@ -16402,16 +16401,23 @@ template<class F, class... BoundArgs>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
 \pnum
-\requires
-\tcode{is_constructible_v<FD, F>} shall be \tcode{true}. For each $\tcode{T}_i$
-in \tcode{BoundArgs}, \tcode{is_cons\-tructible_v<$\tcode{TD}_i$, $\tcode{T}_i$>} shall be \tcode{true}.
+\mandates
+\tcode{is_constructible_v<FD, F>} is \tcode{true}. For each $\tcode{T}_i$
+in \tcode{BoundArgs}, \tcode{is_cons\-tructible_v<$\tcode{TD}_i$, $\tcode{T}_i$>} is \tcode{true}.
+\end{addedblock}
+
+\pnum
+\changed{\requires}{\expects}
+\removed{\tcode{is_constructible_v<FD, F>} shall be \tcode{true}. For each $\tcode{T}_i$
+in \tcode{BoundArgs}, \tcode{is_cons\-tructible_v<$\tcode{TD}_i$, $\tcode{T}_i$>} shall be \tcode{true}.}
 \tcode{\placeholdernc{INVOKE}(fd, $\tcode{w}_1$, $\tcode{w}_2$, $\dotsc$,
-$\tcode{w}_N$)}\iref{func.require} shall be a valid expression for some
+$\tcode{w}_N$)}\iref{func.require} \changed{shall be}{is} a valid expression for some
 values $\tcode{w}_1$, $\tcode{w}_2$, $\dotsc{}$, $\tcode{w}_N$, where
 $N$ has the value \tcode{sizeof...(bound_args)}.
 The cv-qualifiers \cv{} of the call wrapper \tcode{g},
-as specified below, shall be neither \tcode{volatile} nor \tcode{const volatile}.
+as specified below, \changed{shall be}{are} neither \tcode{volatile} nor \tcode{const volatile}.
 
 \pnum\returns
 An argument forwarding call wrapper \tcode{g}\iref{func.require}.
@@ -16444,16 +16450,23 @@ template<class R, class F, class... BoundArgs>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
 \pnum
-\requires
-\tcode{is_constructible_v<FD, F>} shall be \tcode{true}. For each $\tcode{T}_i$
-in \tcode{BoundArgs}, \tcode{is_con\-structible_v<$\tcode{TD}_i$, $\tcode{T}_i$>} shall be \tcode{true}.
-\tcode{\placeholdernc{INVOKE}(fd, $\tcode{w}_1$, $\tcode{w}_2$, $\dotsc$, $\tcode{w}_N$)} shall be  a valid
-expression for some
+\mandates
+\tcode{is_constructible_v<FD, F>} is \tcode{true}. For each $\tcode{T}_i$
+in \tcode{BoundArgs}, \tcode{is_con\-structible_v<$\tcode{TD}_i$, $\tcode{T}_i$>} is \tcode{true}.
+\end{addedblock}
+
+\pnum
+\changed{\requires}{\expects}
+\removed{\tcode{is_constructible_v<FD, F>} shall be \tcode{true}. For each $\tcode{T}_i$
+in \tcode{BoundArgs}, \tcode{is_con\-structible_v<$\tcode{TD}_i$, $\tcode{T}_i$>} shall be \tcode{true}.}
+\tcode{\placeholdernc{INVOKE}(fd, $\tcode{w}_1$, $\tcode{w}_2$, $\dotsc$, $\tcode{w}_N$)}
+\changed{shall be}{is} a valid expression for some
 values $\tcode{w}_1$, $\tcode{w}_2$, $\dotsc$, $\tcode{w}_N$, where
 $N$ has the value \tcode{sizeof...(bound_args)}.
 The cv-qualifiers \cv{} of the call wrapper \tcode{g},
-as specified below, shall be neither \tcode{volatile} nor \tcode{const volatile}.
+as specified below, \changed{shall be}{are} neither \tcode{volatile} nor \tcode{const volatile}.
 
 \pnum
 \returns
@@ -16752,7 +16765,7 @@ template<class F> function(F f);
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{F} shall be \oldconcept{CopyConstructible}.
+\changed{\requires}{\expects} \tcode{F} \changed{shall be}{meets the} \oldconcept{CopyConstructible} \added{requirements}.
 
 \pnum
 \remarks This constructor template shall not participate in overload resolution unless
@@ -17116,14 +17129,14 @@ boyer_moore_searcher(RandomAccessIterator1 pat_first,
 
 \begin{itemdescr}
 \pnum
-\requires
-The value type of \tcode{RandomAccessIterator1} shall satisfy the \oldconcept{DefaultConstructible} requirements,
+\changed{\requires}{\expects}
+The value type of \tcode{RandomAccessIterator1} \changed{shall satisfy}{meets} the \oldconcept{DefaultConstructible} requirements,
 the \oldconcept{CopyConstructible} requirements, and the \oldconcept{CopyAssignable} requirements.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 For any two values \tcode{A} and \tcode{B} of the type \tcode{iterator_traits<RandomAccessIterator1>::val\-ue_type},
-if \tcode{pred(A, B) == true}, then \tcode{hf(A) == hf(B)} shall be \tcode{true}.
+if \tcode{pred(A, B) == true}, then \tcode{hf(A) == hf(B)} \changed{shall be}{is} \tcode{true}.
 
 \pnum
 \effects
@@ -17147,8 +17160,8 @@ template<class RandomAccessIterator2>
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{RandomAccessIterator1} and \tcode{RandomAccessIterator2} shall have the same value type.
+\changed{\requires}{\mandates}
+\tcode{RandomAccessIterator1} and \tcode{RandomAccessIterator2} \removed{shall} have the same value type.
 
 \pnum
 \effects
@@ -17209,14 +17222,14 @@ boyer_moore_horspool_searcher(RandomAccessIterator1 pat_first,
 
 \begin{itemdescr}
 \pnum
-\requires
-The value type of \tcode{RandomAccessIterator1} shall satisfy the \oldconcept{DefaultConstructible},
+\changed{\requires}{\expects}
+The value type of \tcode{RandomAccessIterator1} \changed{shall satisfy}{meets} the \oldconcept{DefaultConstructible},
 \oldconcept{Copy\-Constructible}, and \oldconcept{CopyAssignable} requirements.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 For any two values \tcode{A} and \tcode{B} of the type \tcode{iterator_traits<RandomAccessIterator1>::val\-ue_type},
-if \tcode{pred(A, B) == true}, then \tcode{hf(A) == hf(B)} shall be \tcode{true}.
+if \tcode{pred(A, B) == true}, then \tcode{hf(A) == hf(B)} \changed{shall be}{is} \tcode{true}.
 
 \pnum
 \effects
@@ -17240,8 +17253,8 @@ template<class RandomAccessIterator2>
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{RandomAccessIterator1} and \tcode{RandomAccessIterator2} shall have the same value type.
+\changed{\requires}{\mandates}
+\tcode{RandomAccessIterator1} and \tcode{RandomAccessIterator2} \removed{shall} have the same value type.
 
 \pnum
 \effects
@@ -18516,8 +18529,8 @@ properties of types at compile time.
 \tcode{template<class T>\br
  struct alignment_of;}      &
  \tcode{alignof(T)}.\br
- \requires{}
- \tcode{alignof(T)} shall be a valid expression\iref{expr.alignof}  \\  \rowsep
+ \changed{\requires{}}{\mandates}
+ \tcode{alignof(T)} \changed{shall be}{is} a valid expression\iref{expr.alignof}  \\  \rowsep
 
 \indexlibrary{\idxcode{rank}}%
 \tcode{template<class T>\br
@@ -18850,7 +18863,7 @@ Each of the templates in this subclause shall be a
  rank\iref{conv.rank} for which
  \tcode{sizeof(T) == sizeof(type)}, with the same
  cv-qualifiers as \tcode{T}.\br
- \requires{} \tcode{T} shall be a (possibly cv-qualified)
+ \changed{\requires{}}{\mandates} \tcode{T} \changed{shall be}{is} a (possibly cv-qualified)
  integral type or enumeration
  but not a \tcode{bool} type.\\ \rowsep
 
@@ -18867,7 +18880,7 @@ Each of the templates in this subclause shall be a
  rank\iref{conv.rank} for which
  \tcode{sizeof(T) == sizeof(type)}, with the same
  cv-qualifiers as \tcode{T}.\br
- \requires{} \tcode{T} shall be a (possibly cv-qualified)
+ \changed{\requires{}}{\mandates} \tcode{T} \changed{shall be}{is} a (possibly cv-qualified)
  integral type or enumeration
  but not a \tcode{bool} type.\\
 \end{libreqtab2a}
@@ -18977,7 +18990,7 @@ assert((is_same_v<remove_all_extents_t<int[][3]>, int>));
  The member typedef \tcode{type} shall be a trivial standard-layout type
  suitable for use as uninitialized storage for any object whose size
  is at most \tcode{Len} and whose alignment is a divisor of \tcode{Align}.\br
- \requires{} \tcode{Len} shall not be zero. \tcode{Align} shall be equal to
+ \changed{\requires{}}{\expects} \tcode{Len} \changed{shall not be}{is not} zero. \tcode{Align} \changed{shall be}{is} equal to
  \tcode{alignof(T)} for some type \tcode{T} or to \textit{default-alignment}.\\ \rowsep
 
 \indexlibrary{\idxcode{aligned_union}}%
@@ -18990,8 +19003,8 @@ assert((is_same_v<remove_all_extents_t<int[][3]>, int>));
   its size shall be at least \tcode{Len}. The static member \tcode{alignment_value}
   shall be an integral constant of type \tcode{size_t} whose value is the
   strictest alignment of all types listed in \tcode{Types}.\br
- \requires{} At least one type is provided.
-  Each type in the template parameter pack \tcode{Types} shall be a complete object type.
+ \changed{\requires{}}{\mandates} At least one type is provided.
+  Each type in the template parameter pack \tcode{Types} \changed{shall be}{is} a complete object type.
   \\ \rowsep
 
 \indexlibrary{\idxcode{remove_cvref}}%
@@ -19083,8 +19096,8 @@ assert((is_same_v<remove_all_extents_t<int[][3]>, int>));
  functions, and so on. Such side effects are not in the ``immediate
  context'' and can result in the program being ill-formed.
  \end{note} \br
- \requires{} \tcode{Fn} and all types in the template parameter pack \tcode{ArgTypes} shall
- be complete types, \cv{}~\tcode{void}, or arrays of
+ \changed{\requires{}}{\expects} \tcode{Fn} and all types in the template parameter pack \tcode{ArgTypes}
+ \changed{shall be}{are} complete types, \cv{}~\tcode{void}, or arrays of
  unknown bound.\\
 \end{libreqtab2a}
 
@@ -20208,7 +20221,7 @@ to_chars_result to_chars(char* first, char* last, @\seebelow@ value, int base = 
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{base} has a value between 2 and 36 (inclusive).
+\changed{\requires}{\expects} \tcode{base} has a value between 2 and 36 (inclusive).
 
 \pnum
 \effects The value of \tcode{value} is converted
@@ -20260,7 +20273,7 @@ to_chars_result to_chars(char* first, char* last, long double value, chars_forma
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{fmt} has the value of
+\changed{\requires}{\expects} \tcode{fmt} has the value of
 one of the enumerators of \tcode{chars_format}.
 
 \pnum
@@ -20284,7 +20297,7 @@ to_chars_result to_chars(char* first, char* last, long double value,
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{fmt} has the value of
+\changed{\requires}{\expects} \tcode{fmt} has the value of
 one of the enumerators of \tcode{chars_format}.
 
 \pnum
@@ -20342,7 +20355,7 @@ from_chars_result from_chars(const char* first, const char* last,
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{base} has a value between 2 and 36 (inclusive).
+\changed{\requires}{\expects} \tcode{base} has a value between 2 and 36 (inclusive).
 
 \pnum
 \effects The pattern is the expected form of the subject sequence
@@ -20378,7 +20391,7 @@ from_chars_result from_chars(const char* first, const char* last, long double& v
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{fmt} has the value of
+\changed{\requires}{\expects} \tcode{fmt} has the value of
 one of the enumerators of \tcode{chars_format}.
 
 \pnum
