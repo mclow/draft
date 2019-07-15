@@ -5892,7 +5892,7 @@ template<class InputIterator>
 \pnum
 \mandates
 \tcode{is_convertible_v<iterator_traits<InputIterator>::value_type,
-double>} is a true.
+double>} is true.
 \end{addedblock}
 
 \pnum
@@ -6080,7 +6080,7 @@ template<class InputIteratorB, class InputIteratorW>
 \begin{addedblock}
 \pnum
 \mandates
-\tcode{is_convertible<iterator_traits<InputIteratorB>::value_type, double> \&\& is_convertible<iterator_traits<InputIteratorW>::value_type, double>} is true.
+\tcode{is_convertible_v<iterator_traits<InputIteratorB>::value_type, double> \&\& is_convertible_v<iterator_traits<InputIteratorW>::value_type, double>} is true.
 \end{addedblock}
 
 \pnum \changed{\requires}{\expects}
@@ -6317,7 +6317,7 @@ template<class InputIteratorB, class InputIteratorW>
 \begin{addedblock}
 \pnum
 \mandates
-\tcode{is_convertible<iterator_traits<InputIteratorB>::value_type, double> \&\& is_convertible<iterator_traits<InputIteratorW>::value_type, double>} is true.
+\tcode{is_convertible_v<iterator_traits<InputIteratorB>::value_type, double> \&\& is_convertible_v<iterator_traits<InputIteratorW>::value_type, double>} is true.
 \end{addedblock}
 
 \pnum \changed{\requires}{\expects}

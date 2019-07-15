@@ -6,7 +6,7 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & P1719R0                     \\
+          \textbf{Document Number:} & D1719R1                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
                                     & CppAlliance                 \\
@@ -95,12 +95,11 @@ Open questions:
 \end{itemize}
 
 
-%Changes from R0:
-%\begin{itemize}
-%\item{Changed a couple of the "Expects" into "Mandates".}
-%\item{Changed two of "shall not be"s into "is not"s in ostreambuf.iter.cons \ref{ostreambuf.iter.cons}.}
-%\item{Changed several "Constraints: The expression XXXX shall be valid and convertible to bool" to "XXXX is well-formed and convertible to bool".}
-%\end{itemize}
+Changes from R0:
+\begin{itemize}
+\item{Fixed a dumb type "is a true".}
+\item{Changed a couple is_constructible -> is_constructible_v.}
+\end{itemize}
 
 Thanks to Daniel Krügler for his several rounds of review.
 
