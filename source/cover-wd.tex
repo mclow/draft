@@ -102,20 +102,19 @@ Drive-by fixes:
 \item{All of the \*_n algorithms now treat their \tcode{Size} parameter the same way. This also resolves LWG\#3213.}
 \item{As I was "de-shalling" all the Requirements, I applied the guidance at https://github.com/cplusplus/draft/wiki/Specification-Style-Guidelines\#requirements-expressed-by-concepts.}
 \item{Change "shall satisfy" to "shall meet" for old concepts.}
+\item{Change "expression XXX is valid" to "expression XXX is well-formed".}
 \end{itemize}
 
 Open questions:
 \begin{itemize}
-\item{alg.unique \ref{alg.unique} P7.2.3 is kind of a mess. Not quite sure how to "de-shall" it.}
 \item{alg.random.sample \ref{alg.random.sample} has a \tcode{Distance} parameter that looks like the \tcode{Size} parameter from \*_n. Should it be specified the same way?}
-\item{Where should "XX is writable to YY" and "the expression 'Foo/bar' is valid" go? Mandates? Expects? I put them in "Expects".}
 \end{itemize}
 
 
 Changes from R0:
 \begin{itemize}
 \item{Changed all of the "XX is writable to YY" into Mandates.}
-\item{Changed all of the "the expression ZZZZZ" into Mandates.}
+\item{Changed all of the "the expression ZZZZZ is valid" into Mandates.}
 \item{Fixed a bunch of "is XXXXXX" to "meets the XXXXXX requirements"}
 \end{itemize}
 
