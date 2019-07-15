@@ -1225,7 +1225,7 @@ T* fetch_@\placeholdernc{key}@(difference_type operand, memory_order order = mem
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\mandates} \tcode{T} \changed{shall be}{is} an object type \removed{,
+\changed{\requires}{\mandates} \tcode{T} \changed{shall be an}{is a} \added{complete} object type \removed{,
 otherwise the program is ill-formed}.
 
 \pnum
@@ -2189,7 +2189,7 @@ T* fetch_@\placeholdernc{key}@(ptrdiff_t operand, memory_order order = memory_or
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\mandates} T \changed{shall be}{is} an object type \removed{, otherwise the program is ill-formed}.
+\changed{\requires}{\mandates} T \changed{shall be an}{is a} \added{complete} object type \removed{, otherwise the program is ill-formed}.
 \begin{note} Pointer arithmetic on \tcode{void*} or function pointers is ill-formed. \end{note}
 
 \pnum
@@ -2291,10 +2291,16 @@ template<class T>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\expects This function is only applied
+to objects that have been default constructed, and then only once.
+\end{addedblock}
+
 \pnum
 \effects Non-atomically
-initializes \tcode{*object} with value \tcode{desired}. This function shall only be applied
-to objects that have been default constructed, and then only once.
+initializes \tcode{*object} with value \tcode{desired}. \removed{This function shall only be applied
+to objects that have been default constructed, and then only once.}
 \begin{note}
 These semantics ensure compatibility with C.
 \end{note}
