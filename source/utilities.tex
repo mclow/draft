@@ -15783,7 +15783,7 @@ struct ranges::equal_to {
 
 \begin{itemdescr}
 \pnum
-\expects
+\changed{\expects}{\remarks}
 If the expression \tcode{std::forward<T>(t) == std::forward<U>(u)}
 results in a call to a built-in operator \tcode{==} comparing pointers of type
 \tcode{P}, the conversion sequences from both \tcode{T} and \tcode{U} to \tcode{P}
