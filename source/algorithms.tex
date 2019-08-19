@@ -3132,7 +3132,6 @@ template<class InputIterator, class Size, class Function>
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-<<<<<<< HEAD
 Let $N$ be $\max(0, \tcode{n})$.
 
 \pnum
@@ -3143,11 +3142,7 @@ to an integral type~(\ref{conv.integral}, \ref{class.conv}).
 
 \pnum
 \changed{\requires}{\expects}
-\tcode{Function} \changed{shall satisfy}{meets} the \oldconcept{MoveConstructible} requirements
-=======
-\requires
-\tcode{Function} shall meet the \oldconcept{MoveConstructible} requirements
->>>>>>> master
+\tcode{Function} \changed{shall meet}{meets} the \oldconcept{MoveConstructible} requirements
 \begin{note}
 \tcode{Function} need not meet
 the requirements of \oldconcept{CopyConstructible}.
@@ -3187,7 +3182,6 @@ template<class ExecutionPolicy, class ForwardIterator, class Size, class Functio
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-<<<<<<< HEAD
 Let $N$ be $\max(0, \tcode{n})$.
 
 \pnum
@@ -3195,14 +3189,10 @@ Let $N$ be $\max(0, \tcode{n})$.
 The type \tcode{Size} is convertible
 to an integral type~(\ref{conv.integral}, \ref{class.conv}).
 \end{addedblock}
-=======
-\requires
-\tcode{Function} shall meet the \oldconcept{CopyConstructible} requirements.
->>>>>>> master
 
 \pnum
 \changed{\requires}{\expects}
-\tcode{Function} \changed{shall satisfy}{meets} the \oldconcept{CopyConstructible} requirements.
+\tcode{Function} \changed{shall meet}{meets} the \oldconcept{CopyConstructible} requirements.
 
 \begin{removedblock}
 \pnum
@@ -4941,8 +4931,8 @@ Let $N$ be $\max(0, \tcode{n})$ for the \tcode{fill_n} algorithms, and
 \pnum
 \changed{\requires}{\mandates}
 The expression \tcode{value}
-shall be writable\iref{iterator.requirements.general} to the output iterator.
-The type \tcode{Size} shall be convertible
+\changed{shall be}{is} writable\iref{iterator.requirements.general} to the output iterator.
+The type \tcode{Size} \changed{shall be}{is} convertible
 to an integral type~(\ref{conv.integral}, \ref{class.conv}).
 
 \pnum
@@ -9099,7 +9089,6 @@ template<class InputIterator1, class InputIterator2, class T,
 
 \begin{itemdescr}
 \pnum
-<<<<<<< HEAD
 \changed{\requires}{\expects}
 \tcode{T} \changed{shall meet}{meets}
 the \oldconcept{CopyConstructible} (\tref{cpp17.copyconstructible})
@@ -9833,8 +9822,8 @@ that denotes an object of type \tcode{minus<>}.
 \item
   For the overloads with no \tcode{ExecutionPolicy},
   \tcode{T} \changed{shall be}{meets the} \oldconcept{MoveAssignable} (\tref{cpp17.moveassignable}) \added{requirements} and
-  shall be constructible from the type of \tcode{*first}.
-  \tcode{acc} (defined below) shall be
+  \changed{shall be}{is} constructible from the type of \tcode{*first}.
+  \tcode{acc} (defined below) \changed{shall be}{is}
   writable\iref{iterator.requirements.general}
   to the \tcode{result} output iterator.
   The result of the expression \tcode{binary_op(val, std::move(acc))}
@@ -9858,7 +9847,7 @@ that denotes an object of type \tcode{minus<>}.
   writable\iref{iterator.requirements.general}
   to the \tcode{result} output iterator.
   The result of the expression \tcode{binary_op(val, std::move(acc))}
-  \changed{shall be}{is} writable to the \tcode{result} output iterator.}
+  shall be writable to the \tcode{result} output iterator.}
 \item \removed{
   For the overloads with an \tcode{ExecutionPolicy},
   the result of the expressions \tcode{binary_op(*first, *first)} and
