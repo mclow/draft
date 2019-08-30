@@ -1,7 +1,7 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & P1720R0                     \\
+          \textbf{Document Number:} & D1720R1                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
                                     & CppAlliance                 \\
@@ -31,15 +31,14 @@ The changes in this series of papers fall into four broad categories.
 \item{Drive-by fixes (hopefully very few)}
 \end{itemize}
 
-This paper covers Clause 28 (Localization), and is based on N4810.
+This paper covers Clause 28 (Localization), and is based on N4830.
 
 The entire clause is reproduced here, but the changes are confined to a few sections:
 
 %\begin{multicols}{3}
 \begin{itemize}
-\item{locale.global.templates}		\ref{locale.global.templates}
-\item{locale.category}				\ref{locale.category}
 \item{locale.cons}					\ref{locale.cons}
+\item{locale.global.templates}		\ref{locale.global.templates}
 \item{facet.ctype.char.members}		\ref{facet.ctype.char.members}
 \item{locale.codecvt.virtuals}		\ref{locale.codecvt.virtuals}
 \item{locale.time.get.members}		\ref{locale.time.get.members}
@@ -54,6 +53,11 @@ Drive-by fixes:
 \item{Removed a meaningless paragraph in [locale.cons].}
 \end{itemize}
 
+Changes from R0
+\begin{itemize}
+\item{Updated to N4830}
+\end{itemize}
+
 %Open questions:
 %\begin{itemize}
 %\item{alg.unique \ref{alg.unique} P7.2.3 is kind of a mess. Not quite sure how to "de-shall" it.}
@@ -61,13 +65,6 @@ Drive-by fixes:
 %\item{Where should "XX is writeable to YY" and "the expression 'Foo/bar' is valid" go? Mandates? Expects? I put them in "Expects".}
 %\end{itemize}
 
-
-%Changes from R0:
-%\begin{itemize}
-%\item{Changed a couple of the "Expects" into "Mandates".}
-%\item{Changed two of "shall not be"s into "is not"s in ostreambuf.iter.cons \ref{ostreambuf.iter.cons}.}
-%\item{Changed several "Constraints: The expression XXXX shall be valid and convertible to bool" to "XXXX is well-formed and convertible to bool".}
-%\end{itemize}
 
 Thanks to Daniel Krügler for his advice and reviews.
 
