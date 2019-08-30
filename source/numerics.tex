@@ -170,7 +170,7 @@ constructed the object. \begin{note} That is, the child thread gets the floating
 state of the parent thread at the time of the child's creation. \end{note}
 
 \pnum
-A separate floating-point environment shall be maintained for each thread. Each function
+A separate floating-point environment \changed{shall be}{is} maintained for each thread. Each function
 accesses the environment corresponding to its calling thread.
 
 \xrefc{7.6}
@@ -203,16 +203,16 @@ undefined.
 If \tcode{z} is an lvalue of type \cv{} \tcode{complex<T>} then:
 
 \begin{itemize}
-\item the expression \tcode{reinterpret_cast<\cv{} T(\&)[2]>(z)} shall be well-formed,
-\item \tcode{reinterpret_cast<\cv{} T(\&)[2]>(z)[0]} shall designate the real part of \tcode{z}, and
-\item \tcode{reinterpret_cast<\cv{} T(\&)[2]>(z)[1]} shall designate the imaginary part of \tcode{z}.
+\item the expression \tcode{reinterpret_cast<\cv{} T(\&)[2]>(z)} \changed{shall be}{is} well-formed,
+\item \tcode{reinterpret_cast<\cv{} T(\&)[2]>(z)[0]} \changed{shall designate}{designates} the real part of \tcode{z}, and
+\item \tcode{reinterpret_cast<\cv{} T(\&)[2]>(z)[1]} \changed{shall designate}{designates} the imaginary part of \tcode{z}.
 \end{itemize}
 
 Moreover, if \tcode{a} is an expression of type \cv{}~\tcode{complex<T>*} and the expression \tcode{a[i]} is well-defined for an integer expression \tcode{i}, then:
 
 \begin{itemize}
-\item \tcode{reinterpret_cast<\cv{} T*>(a)[2*i]} shall designate the real part of \tcode{a[i]}, and
-\item \tcode{reinterpret_cast<\cv{} T*>(a)[2*i + 1]} shall designate the imaginary part of \tcode{a[i]}.
+\item \tcode{reinterpret_cast<\cv{} T*>(a)[2*i]} \changed{shall designate}{designates} the real part of \tcode{a[i]}, and
+\item \tcode{reinterpret_cast<\cv{} T*>(a)[2*i + 1]} \changed{shall designate}{designates} the imaginary part of \tcode{a[i]}.
 \end{itemize}
 
 \rSec2[complex.syn]{Header \tcode{<complex>} synopsis}
@@ -4267,9 +4267,11 @@ template<class InputIterator>
 \changed{\requires}{\expects}
   \tcode{InputIterator} \changed{shall meet}{meets} the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
-  \removed{Moreover,
+\begin{removedblock}
+  Moreover,
   \tcode{iterator_traits<InputIterator>::value_type}
-  shall denote an integer type.}
+  shall denote an integer type.
+\end{removedblock}
 
 \pnum\effects Constructs a \tcode{seed_seq} object
  by the following algorithm:
@@ -4298,10 +4300,12 @@ template<class RandomAccessIterator>
   \changed{shall meet}{meets} the
   \oldconcept{RandomAccessIterator} requirements\iref{random.access.iterators}
   and the requirements of a mutable iterator.
-  \removed{Moreover,
+\begin{removedblock}
+  Moreover,
   \tcode{iterator_traits<RandomAccessIterator>::\brk{}value_type}
   shall denote an unsigned integer type
-  capable of accommodating 32-bit quantities.}
+  capable of accommodating 32-bit quantities.
+\end{removedblock}
 
 \pnum\effects
  Does nothing if \tcode{begin == end}.
@@ -6095,9 +6099,11 @@ double>} is true.
 \changed{\requires}{\expects}
   \tcode{InputIterator} \changed{shall meet}{meets} the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
-  \removed{Moreover,
+\begin{removedblock}
+  Moreover,
   \tcode{iterator_traits<InputIterator>::value_type}
-  shall denote a type that is convertible to \tcode{double}.}
+  shall denote a type that is convertible to \tcode{double}.
+\end{removedblock}
  If \tcode{firstW == lastW},
  let $n = 1$ and $w_0 = 1$.
  Otherwise,
@@ -6140,9 +6146,11 @@ template<class UnaryOperation>
  \removed{Each instance of type \tcode{UnaryOperation}
  shall be a function object\iref{function.objects}
  whose return type shall be convertible to \tcode{double}.}
- \removed{Moreover,
+\begin{removedblock}
+ Moreover,
  \tcode{double} shall be convertible
- to the type of \tcode{UnaryOperation}'s sole parameter.}
+ to the type of \tcode{UnaryOperation}'s sole parameter.
+\end{removedblock}
  If $\tcode{nw} = 0$, let $n = 1$, otherwise let $n = \tcode{nw}$.
  The relation
    $0 < \delta = (\tcode{xmax} - \tcode{xmin}) / n$
@@ -6283,11 +6291,13 @@ template<class InputIteratorB, class InputIteratorW>
   \tcode{InputIteratorB} and \tcode{InputIteratorW}
   shall each meet the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
-  \removed{Moreover,
+\begin{removedblock}
+  Moreover,
   the \grammarterm{id-expression}s
   \tcode{iterator_traits<InputIteratorB>::value_type} and
   \tcode{iterator_traits<Input\-IteratorW>::value_type}
-  shall each denote a type that is convertible to \tcode{double}.}
+  shall each denote a type that is convertible to \tcode{double}.
+\end{removedblock}
  If \tcode{firstB == lastB}
  or \tcode{++firstB == lastB},
  let $n = 1$,
@@ -6372,9 +6382,11 @@ template<class UnaryOperation>
  \removed{Each instance of type \tcode{UnaryOperation}
  shall be a function object\iref{function.objects}
  whose return type shall be convertible to \tcode{double}.}
- \removed{Moreover,
+\begin{removedblock}
+ Moreover,
  \tcode{double} shall be convertible
- to the type of \tcode{UnaryOperation}'s sole parameter.}
+ to the type of \tcode{UnaryOperation}'s sole parameter.
+\end{removedblock}
  If $\tcode{nw} = 0$, let $n = 1$, otherwise let $n = \tcode{nw}$.
  The relation $0 < \delta = (\tcode{xmax} - \tcode{xmin}) / n$
  \changed{shall hold}{holds}.
@@ -6520,11 +6532,13 @@ template<class InputIteratorB, class InputIteratorW>
   \tcode{InputIteratorB} and \tcode{InputIteratorW}
   \changed{shall each satisfy}{each meet} the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
-  \removed{Moreover,
+\begin{removedblock}
+  Moreover,
   the \grammarterm{id-expression}s
   \tcode{iterator_traits<InputIteratorB>::value_type} and
   \tcode{iterator_traits<Input\-IteratorW>::value_type}
-  shall each denote a type that is convertible to \tcode{double}.}
+  shall each denote a type that is convertible to \tcode{double}.
+\end{removedblock}
  If \tcode{firstB == lastB}
  or \tcode{++firstB == lastB},
  let $n = 1$,
@@ -6609,9 +6623,11 @@ template<class UnaryOperation>
  \removed{Each instance of type \tcode{UnaryOperation}
  shall be a function object\iref{function.objects}
  whose return type shall be convertible to \tcode{double}.}
- \removed{Moreover,
+\begin{removedblock}
+ Moreover,
  \tcode{double} shall be convertible
- to the type of \tcode{UnaryOperation}'s sole parameter.}
+ to the type of \tcode{UnaryOperation}'s sole parameter.
+\end{removedblock}
  If $\tcode{nw} = 0$, let $n = 1$, otherwise let $n = \tcode{nw}$.
  The relation $0 < \delta = (\tcode{xmax} - \tcode{xmin}) / n$
  \changed{shall hold}{holds}.
@@ -7105,10 +7121,16 @@ valarray(const T* p, size_t n);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
-\changed{\requires}{\expects}
+\requires
 \tcode{p} points to an array\iref{dcl.array} of at least
 \tcode{n} elements.
+\end{removedblock}
+\begin{addedblock}
+\pnum
+\expects \tcode{[p, p + n)} is a valid range.
+\end{addedblock}
 
 \effects
 Constructs a \tcode{valarray} that has length \tcode{n}.
