@@ -42,6 +42,8 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 
 \begin{multicols}{3}
 \begin{itemize}
+\item{cfenv.syn}				\ref{cfenv.syn}
+\item{complex.numbers}			\ref{complex.numbers}
 \item{complex.members}			\ref{complex.members}
 \item{complex.ops}				\ref{complex.ops}
 \item{rand.req.seedseq}			\ref{rand.req.seedseq}
@@ -99,7 +101,8 @@ Changes from R0:
 \begin{itemize}
 \item{Fixed a dumb type "is a true".}
 \item{Changed a couple is_constructible -> is_constructible_v.}
-\end{itemize}
+\item{Removed several "shall"s from [cfenv.syn] (\ref{cfenv.syn}) and [complex.numbers] (\ref{complex.numbers})}
+\item{Changed a "points to an array of at least N" -> "\tcode{[p, p+n) is a valid range}"}\end{itemize}
 
 Thanks to Daniel Krügler for his several rounds of review.
 
