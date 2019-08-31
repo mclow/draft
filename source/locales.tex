@@ -1620,9 +1620,9 @@ explicit ctype(const mask* tbl = nullptr, bool del = false, size_t refs = 0);
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{tbl} \added{is} either \changed{0}{nullptr} or \added{a pointer to} an array of at least
+\tcode{tbl} \added{is} either \changed{0}{nullptr} or \changed{an array of at least
 \tcode{table_size}
-elements.
+elements.}{\tcode{[tbl, tbl+table\_size)} is a valid range.}
 
 \pnum
 \effects
