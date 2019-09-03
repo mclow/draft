@@ -6284,12 +6284,15 @@ template<class InputIteratorB, class InputIteratorW>
 \begin{addedblock}
 \pnum
 \mandates
-\tcode{is_convertible_v<iterator_traits<InputIteratorB>::value_type, double> \&\& is_convertible_v<iterator_traits<InputIteratorW>::value_type, double>} is true.
+\begin{itemize}
+\item{\tcode{is_convertible_v<iterator_traits<InputIteratorB>::value_type, double>} is true.}
+\item{\tcode{is_convertible_v<iterator_traits<InputIteratorW>::value_type, double>} is true.}
+\end{itemize}
 \end{addedblock}
 
 \pnum \changed{\requires}{\expects}
   \tcode{InputIteratorB} and \tcode{InputIteratorW}
-  shall each meet the
+  \removed{shall} each meet the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
 \begin{removedblock}
   Moreover,
@@ -6525,12 +6528,15 @@ template<class InputIteratorB, class InputIteratorW>
 \begin{addedblock}
 \pnum
 \mandates
-\tcode{is_convertible_v<iterator_traits<InputIteratorB>::value_type, double> \&\& is_convertible_v<iterator_traits<InputIteratorW>::value_type, double>} is true.
+\begin{itemize}
+\item{\tcode{is_convertible_v<iterator_traits<InputIteratorB>::value_type, double>} is true.}
+\item{\tcode{is_convertible_v<iterator_traits<InputIteratorW>::value_type, double>} is true.}
+\end{itemize}
 \end{addedblock}
 
 \pnum \changed{\requires}{\expects}
   \tcode{InputIteratorB} and \tcode{InputIteratorW}
-  \changed{shall each satisfy}{each meet} the
+  \removed{shall} each meet the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
 \begin{removedblock}
   Moreover,

@@ -29,7 +29,7 @@ library clauses of the standard. This is one of a series of papers reformulating
 requirements into the new format. This effort was strongly influenced by the informational
 paper P1369R0.
 
-The changes in this series of papers fall into four broad categories.
+The changes in this series of papers fall into three broad categories.
 \begin{itemize}
 \item{Change "participate in overload resolution" wording into "Constraints" elements}
 \item{Change "Requires" elements into either "Mandates" or "Expects", depending (mostly) on whether or not they can be checked at compile time.}
@@ -46,12 +46,15 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \item{complex.numbers}			\ref{complex.numbers}
 \item{complex.members}			\ref{complex.members}
 \item{complex.ops}				\ref{complex.ops}
-\item{rand.req.seedseq}			\ref{rand.req.seedseq}
+\item{complex.value.ops}		\ref{complex.value.ops}
+\item{bit.cast}					\ref{bit.cast}
+\item{bit.pow.two}				\ref{bit.pow.two}
 \item{rand.req.eng}				\ref{rand.req.eng}
 \item{rand.req.dist}			\ref{rand.req.dist}
 \item{rand.eng.lcong}			\ref{rand.eng.lcong}
 \item{rand.eng.mers}			\ref{rand.eng.mers}
 \item{rand.eng.sub}				\ref{rand.eng.sub}
+\item{rand.device}				\ref{rand.device}
 \item{rand.util.seedseq}		\ref{rand.util.seedseq}
 \item{rand.dist.uni.int}		\ref{rand.dist.uni.int}
 \item{rand.dist.uni.real}		\ref{rand.dist.uni.real}
@@ -87,8 +90,9 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 
 Drive-by fixes:
 \begin{itemize}
-\item{Changed a bunch of "satisfies the XXX requirements" to "meets the XXX requirements" when XXX are old-style requirements (or specified that way). See https://github.com/cplusplus/draft/wiki/Specification-Style-Guidelines\#requirements-expressed-by-concepts}
 \item{Removed several useless "Constructs an object of type XXXX" sentences.}
+\item{While moving "Expects" to "Mandates", changed "XXXX shall denote a type that is convertible to double" to "\tcode{is_convertible_v<XXXX, double>} is true."}
+\item{Changed a "points to an array of at least N" -> "\tcode{[p, p+n) is a valid range}"}
 \end{itemize}
 
 Open questions:
@@ -100,10 +104,10 @@ Open questions:
 Changes from R0:
 \begin{itemize}
 \item{Rebased on N4830}
-\item{Fixed a dumb type "is a true".}
-\item{Changed a couple is_constructible -> is_constructible_v.}
 \item{Removed several "shall"s from [cfenv.syn] (\ref{cfenv.syn}) and [complex.numbers] (\ref{complex.numbers})}
-\item{Changed a "points to an array of at least N" -> "\tcode{[p, p+n) is a valid range}"}\end{itemize}
+\item{Changed a "points to an array of at least N" -> "\tcode{[p, p+n) is a valid range}"}
+\item{Turned a couple of sentences into bullet points in [rand.dist.samp.pconst] and prand.dist.samp.plinear].}
+\end{itemize}
 
 Thanks to Daniel Krügler for his several rounds of review.
 
