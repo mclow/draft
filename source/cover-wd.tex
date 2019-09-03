@@ -6,7 +6,7 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & P1722R0                     \\
+          \textbf{Document Number:} & D1722R1                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
                                     & CppAlliance                 \\
@@ -29,14 +29,14 @@ library clauses of the standard. This is one of a series of papers reformulating
 requirements into the new format. This effort was strongly influenced by the informational
 paper P1369R0.
 
-The changes in this series of papers fall into four broad categories.
+The changes in this series of papers fall into three broad categories.
 \begin{itemize}
 \item{Change "participate in overload resolution" wording into "Constraints" elements}
 \item{Change "Requires" elements into either "Mandates" or "Expects", depending (mostly) on whether or not they can be checked at compile time.}
 \item{Drive-by fixes (hopefully very few)}
 \end{itemize}
 
-This paper covers Clause 30 (Regular Expressions), and is based on N4810.
+This paper covers Clause 30 (Regular Expressions), and is based on N4830.
 
 The entire clause is reproduced here, but the changes are confined to a few sections:
 
@@ -56,24 +56,21 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 
 Drive-by fixes:
 \begin{itemize}
+\item{In [re.regex.construct] and [re.regex.assign], I strengthened some of the preconditions. "p is not a null pointer" -> "\\range{p}{p+len)} is a valid range"}
 \item{"De-shalled" re.traits/1 (\ref{re.traits}).}
 \item{reworded a bunch of constructor details in re.badexp (\ref{re.badexp}),  re.regex.construct (\ref{re.regex.construct}), and re.results.const (\ref{re.results.const}).}
 \end{itemize}
 
-%Open questions:
-%\begin{itemize}
-%\item{alg.unique \ref{alg.unique} P7.2.3 is kind of a mess. Not quite sure how to "de-shall" it.}
-%\item{alg.random.sample \ref{alg.random.sample} has a \tcode{Distance} parameter that looks like the \tcode{Size} parameter from \*_n. Should it be specified the same way?}
-%\item{Where should "XX is writeable to YY" and "the expression 'Foo/bar' is valid" go? Mandates? Expects? I put them in "Expects".}
-%\end{itemize}
+Open questions:
+\begin{itemize}
+\item{Should I "de-shall" the entries in table 135 and 136?}
+\end{itemize}
 
 
-%Changes from R0:
-%\begin{itemize}
-%\item{Changed a couple of the "Expects" into "Mandates".}
-%\item{Changed two of "shall not be"s into "is not"s in ostreambuf.iter.cons \ref{ostreambuf.iter.cons}.}
-%\item{Changed several "Constraints: The expression XXXX shall be valid and convertible to bool" to "XXXX is well-formed and convertible to bool".}
-%\end{itemize}
+Changes from R0:
+\begin{itemize}
+\item{Updated to N4830}
+\end{itemize}
 
 Thanks to Daniel Krügler for his advice and reviews.
 
