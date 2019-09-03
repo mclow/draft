@@ -56,7 +56,7 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 
 Drive-by fixes:
 \begin{itemize}
-\item{In [re.regex.construct] and [re.regex.assign], I strengthened some of the preconditions. "p is not a null pointer" -> "\\range{p}{p+len)} is a valid range"}
+\item{In [re.regex.construct] and [re.regex.assign], I strengthened some of the preconditions. "p is not a null pointer" -> "\range{p}{p+len} is a valid range"}
 \item{"De-shalled" re.traits/1 (\ref{re.traits}).}
 \item{reworded a bunch of constructor details in re.badexp (\ref{re.badexp}),  re.regex.construct (\ref{re.regex.construct}), and re.results.const (\ref{re.results.const}).}
 \end{itemize}
