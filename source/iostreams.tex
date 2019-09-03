@@ -457,7 +457,7 @@ follows the same semantics as mixing such operations on
 as specified in the C standard library.
 
 \pnum
-Concurrent access to a synchronized\iref{ios.members.static} standard iostream object's formatted and unformatted input\iref{istream} and output\iref{ostream} functions or a standard C stream by multiple threads shall not result in a data race\iref{intro.multithread}. \begin{note} Users must still synchronize concurrent use of these objects and streams by multiple threads if they wish to avoid interleaved characters. \end{note}
+Concurrent access to a synchronized\iref{ios.members.static} standard iostream object's formatted and unformatted input\iref{istream} and output\iref{ostream} functions or a standard C stream by multiple threads \changed{shall}{does} not result in a data race\iref{intro.multithread}. \begin{note} Users must still synchronize concurrent use of these objects and streams by multiple threads if they wish to avoid interleaved characters. \end{note}
 
 \xrefc{7.21.2}
 
@@ -1437,7 +1437,7 @@ static int xalloc();
 
 \pnum
 \remarks
-Concurrent access to this function by multiple threads shall not result in a data
+Concurrent access to this function by multiple threads \changed{shall}{does} not result in a data
 race\iref{intro.multithread}.
 \end{itemdescr}
 
@@ -2159,12 +2159,12 @@ void move(basic_ios&& rhs);
 
 \begin{itemdescr}
 \pnum
-\ensures \tcode{*this} shall have the state that
+\ensures \tcode{*this} \changed{shall have}{has} the state that
 \tcode{rhs} had before the function call, except that
-\tcode{rdbuf()} shall return 0. \tcode{rhs} shall be in a valid but
-unspecified state, except that \tcode{rhs.rdbuf()} shall return the
+\tcode{rdbuf()} \changed{shall return}{returns} 0. \tcode{rhs} \changed{shall be}{is} in a valid but
+unspecified state, except that \tcode{rhs.rdbuf()} \changed{shall return}{returns} the
 same value as it returned before the function call, and
-\tcode{rhs.tie()} shall return 0.
+\tcode{rhs.tie()} \changed{shall return}{returns} 0.
 \end{itemdescr}
 
 \indexlibrarymember{swap}{basic_ios}%
@@ -2175,9 +2175,9 @@ void swap(basic_ios& rhs) noexcept;
 \begin{itemdescr}
 \pnum
 \effects The states of \tcode{*this} and \tcode{rhs}
-shall be exchanged, except that \tcode{rdbuf()} shall return the same
+\changed{shall be}{are} exchanged, except that \tcode{rdbuf()} \changed{shall return}{returns} the same
 value as it returned before the function call, and \tcode{rhs.rdbuf()}
-shall return the same value as it returned before the function call.
+\changed{shall return}{returns} the same value as it returned before the function call.
 \end{itemdescr}
 
 \indexlibrarymember{set_rdbuf}{basic_ios}%
@@ -6885,9 +6885,9 @@ void f(ios_base& str, ios_base::fmtflags mask) {
 }
 \end{codeblock}
 
-The expression \tcode{out << resetiosflags(mask)} shall have
+The expression \tcode{out << resetiosflags(mask)} \changed{shall have}{has}
 type \tcode{basic_ostream<charT, traits>\&} and value \tcode{out}. The
-expression \tcode{in >> resetiosflags(mask)} shall have type
+expression \tcode{in >> resetiosflags(mask)} \changed{shall have}{has} type
 \tcode{basic_istream<charT, traits>\&} and value \tcode{in}. \end{itemdescr}
 
 \indexlibrary{\idxcode{setiosflags}}%
@@ -6925,13 +6925,13 @@ void f(ios_base& str, ios_base::fmtflags mask) {
 
 The expression
 \tcode{out << setiosflags(mask)}
-shall have type
+\changed{shall have}{has} type
 \tcode{basic_ostream<charT, traits>\&}
 and value
 \tcode{out}.
 The expression
 \tcode{in >> setiosflags(mask)}
-shall have type
+\changed{shall have}{has} type
 \tcode{basic_istream<charT, \\traits>\&}
 and value
 \tcode{in}.
@@ -6974,13 +6974,13 @@ void f(ios_base& str, int base) {
 
 The expression
 \tcode{out << setbase(base)}
-shall have type
+\changed{shall have}{has} type
 \tcode{basic_ostream<charT, traits>\&}
 and value
 \tcode{out}.
 The expression
 \tcode{in >> setbase(base)}
-shall have type
+\changed{shall have}{has} type
 \tcode{basic_istream<charT, traits>\&}
 and value
 \tcode{in}.
@@ -7015,7 +7015,7 @@ void f(basic_ios<charT, traits>& str, charT c) {
 
 The expression
 \tcode{out << setfill(c)}
-shall have type
+\changed{shall have}{has} type
 \tcode{basic_ostream<charT, traits>\&}
 and value
 \tcode{out}.
@@ -7055,13 +7055,13 @@ void f(ios_base& str, int n) {
 
 The expression
 \tcode{out << setprecision(n)}
-shall have type
+\changed{shall have}{has} type
 \tcode{basic_ostream<charT, traits>\&}
 and value
 \tcode{out}.
 The expression
 \tcode{in >> setprecision(n)}
-shall have type
+\changed{shall have}{has} type
 \tcode{basic_istream<charT, traits>\&}
 and value
 \tcode{in}.
@@ -7101,13 +7101,13 @@ void f(ios_base& str, int n) {
 
 The expression
 \tcode{out << setw(n)}
-shall have type
+\changed{shall have}{has} type
 \tcode{basic_ostream<charT, traits>\&}
 and value
 \tcode{out}.
 The expression
 \tcode{in >> setw(n)}
-shall have type
+\changed{shall have}{has} type
 \tcode{basic_istream<charT, traits>\&}
 and value
 \tcode{in}.
@@ -7155,7 +7155,7 @@ void f(basic_ios<charT, traits>& str, moneyT& mon, bool intl) {
 }
 \end{codeblock}
 
-The expression \tcode{in >> get_money(mon, intl)} shall have type
+The expression \tcode{in >> get_money(mon, intl)} \changed{shall have}{has} type
 \tcode{basic_istream<charT, traits>\&} and value \tcode{in}.
 \end{itemdescr}
 
@@ -7190,7 +7190,7 @@ void f(basic_ios<charT, traits>& str, const moneyT& mon, bool intl) {
 }
 \end{codeblock}
 
-The expression \tcode{out << put_money(mon, intl)} shall have type
+The expression \tcode{out << put_money(mon, intl)} \changed{shall have}{has} type
 \tcode{basic_ostream<charT, traits>\&} and value \tcode{out}.
 
 \end{itemdescr}
@@ -7229,7 +7229,7 @@ void f(basic_ios<charT, traits>& str, struct tm* tmb, const charT* fmt) {
 }
 \end{codeblock}
 
-The expression \tcode{in >> get_time(tmb, fmt)} shall have type
+The expression \tcode{in >> get_time(tmb, fmt)} \changed{shall have}{has} type
 \tcode{basic_istream<charT, traits>\&} and value \tcode{in}.
 \end{itemdescr}
 
@@ -7266,7 +7266,7 @@ void f(basic_ios<charT, traits>& str, const struct tm* tmb, const charT* fmt) {
 }
 \end{codeblock}
 
-The expression \tcode{out << put_time(tmb, fmt)} shall have type
+The expression \tcode{out << put_time(tmb, fmt)} \changed{shall have}{has} type
 \tcode{basic_ostream<charT, traits>\&} and value \tcode{out}.
 \end{itemdescr}
 
@@ -7309,7 +7309,7 @@ Then padding is determined for \tcode{seq} as described
 in~\ref{ostream.formatted.reqmts}, \tcode{seq} is inserted as if by calling
 \tcode{out.rdbuf()->sputn(seq, n)}, where \tcode{n} is the larger of
 \tcode{out.width()} and \tcode{x}, and \tcode{out.width(0)} is called.
-The expression \tcode{out << quoted(s, delim, escape)} shall have type
+The expression \tcode{out << quoted(s, delim, escape)} \changed{shall have}{has} type
 \tcode{basic_ostream<charT, traits>\&} and value \tcode{out}.
 \end{itemdescr}
 
@@ -7353,9 +7353,9 @@ if an \tcode{escape} is reached, ignore it and append the next character to
 \tcode{const basic_string<charT, traits, Allocator>\&} overload of the
 \tcode{quoted} function.
 \end{itemize}
-The expression \tcode{in >> quoted(s, delim, escape)} shall have type
+The expression \tcode{in >> quoted(s, delim, escape)} \changed{shall have}{has} type
 \tcode{basic_istream<charT, traits>\&} and value \tcode{in}. The expression
-\tcode{out << quoted(s, delim, escape)} shall have type
+\tcode{out << quoted(s, delim, escape)} \changed{shall have}{has} type
 \tcode{basic_ostream\brk{}<charT, traits>\&} and value \tcode{out}.
 \end{itemdescr}
 
@@ -9519,7 +9519,7 @@ basic_filebuf* open(const filesystem::path::value_type* s,
 \begin{itemdescr}
 \pnum
 \expects
-\tcode{s} \changed{shall point to}{is} a NTCTS\iref{defns.ntcts}.
+\tcode{s} \changed{shall point}{points} to a NTCTS\iref{defns.ntcts}.
 
 \pnum
 \effects
