@@ -7202,8 +7202,9 @@ template<class charT> @\unspec@ get_time(struct tm* tmb, const charT* fmt);
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} The argument \tcode{tmb} \changed{shall be}{is} a valid pointer to an object of type \tcode{struct tm}.
-The argument \tcode{fmt} \changed{shall be}{is} a valid pointer to an array of objects of type \tcode{charT} with \tcode{char_traits<charT>::length(fmt)} elements.
+\changed{\requires}{\expects} The argument \tcode{tmb} \changed{shall be}{is} a valid pointer to an object of type \tcode{struct tm}
+\changed{. The argument \tcode{fmt} shall be a valid pointer to an array of objects of type \tcode{charT} with \tcode{char_traits<charT>::length(fmt)} elements.}
+{\tcode{, and [fmt, fmt + char_traits<charT>::length(fmt))} is a valid range.}
 
 \pnum
 \returns An object of unspecified type such that if \tcode{in} is an object of type
@@ -7240,9 +7241,9 @@ template<class charT> @\unspec@ put_time(const struct tm* tmb, const charT* fmt)
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects} The argument \tcode{tmb} \changed{shall be}{is} a valid pointer to an object of type
-\tcode{struct tm}, and the argument \tcode{fmt} \changed{shall be}{is} a valid pointer to an
+\tcode{struct tm}, and \changed{the argument \tcode{fmt} \changed{shall be}{is} a valid pointer to an
 array of objects of type \tcode{charT} with
-\tcode{char_traits<charT>::length(\brk{}fmt)} elements.
+\tcode{char_traits<charT>::length(\brk{}fmt)} elements}{\tcode{[fmt, fmt + char_traits<charT>::length(fmt))} is a valid range.}.
 
 \pnum
 \returns An object of unspecified type such that if \tcode{out} is an object of
@@ -11508,7 +11509,7 @@ Behavior is undefined if calls to functions provided by this subclause introduce
 \pnum
 If the possibility of a file system race would make it unreliable for a
 program to test for a precondition before calling a function described herein,
-\requires is not specified for the function.
+\changed{\requires}{\expects} is not specified for the function.
 \begin{note} As a design practice, preconditions are not specified when it
 is unreasonable for a program to detect them prior to calling the function.
 \end{note}
