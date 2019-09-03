@@ -877,7 +877,7 @@ otherwise, the effect on the C locale, if any, is \impldef{effect on C locale of
 \tcode{locale::global}}.
 No library function other than
 \tcode{locale::global()}
-shall affect the value returned by
+\changed{shall affect}{affects} the value returned by
 \tcode{locale()}.
 \begin{note} See~\ref{c.locales} for data race considerations when
 \tcode{setlocale} is invoked. \end{note}
@@ -3884,6 +3884,12 @@ iter_type do_get(iter_type s, iter_type end, ios_base& f,
 \pnum
 \changed{\requires}{\expects}
 \tcode{t} \changed{shall point}{points} to an object.
+\ednote{Why can't we just remove this? The effects talk about 
+"assigning those \tcode{struct tm} members" and "leaves the object pointed 
+to by \tcode{t} unchanged" - those should be enough, I would think. 
+This call was added for c++11, and it just said "t shall be dereferenceable", 
+but that was changed via CWG232. This is the only \tcode{do\_get} call that takes
+the object to be filled in as a pointer; all the others take references. }
 
 \pnum
 \effects The function starts by evaluating
