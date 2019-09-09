@@ -37,13 +37,18 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 
 \begin{multicols}{2}
 \begin{itemize}
+\item{locale}						\ref{locale}
 \item{locale.cons}					\ref{locale.cons}
+\item{locale.members}				\ref{locale.members}
 \item{locale.statics}				\ref{locale.statics}
 \item{locale.global.templates}		\ref{locale.global.templates}
 \item{facet.ctype.char.members}		\ref{facet.ctype.char.members}
 \item{locale.codecvt.virtuals}		\ref{locale.codecvt.virtuals}
+\item{facet.numpunct.virtuals}		\ref{facet.numpunct.virtuals}
 \item{locale.time.get.members}		\ref{locale.time.get.members}
 \item{locale.time.get.virtuals}		\ref{locale.time.get.virtuals}
+\item{locale.messages}				\ref{locale.messages}
+\item{locale.messages.members}		\ref{locale.messages.members}
 \item{locale.messages.virtuals}		\ref{locale.messages.virtuals}
 \end{itemize}
 \end{multicols}
@@ -51,8 +56,10 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 Drive-by fixes:
 \begin{itemize}
 \item{Reworked [facet.ctype.char.members]/2.}
-\item{Removed a meaningless paragraph in [locale.cons].}
+\item{Removed several meaningless paragraphs in [locale.cons].}
 \item{Removed a 'shall' from [locale.statics]}
+\item{Changed several \tcode{basic_string<char>} types to just \tcode{string}.}
+\item{Added 'is' in a few places to make english sentences.}
 \end{itemize}
 
 Changes from R0
@@ -60,13 +67,12 @@ Changes from R0
 \item{Updated to N4830}
 \item{Reworked the change in [facet.ctype.char.members]/2 to use 'is a valid range'}
 \item{Removed a 'shall' from [locale.statics]}
+\item{Incorporated feedback from LWG teleconference 6-Sep-2019.}
 \end{itemize}
 
-Open questions:
-\begin{itemize}
-\item{Do we really need the Expects in [locale.time.get.virtuals]/11?}
-\item{Can we nuke the description of the copy constructor from [locale.cons]?}
-\end{itemize}
+%Open questions:
+%\begin{itemize}
+%\end{itemize}
 
 
 Thanks to Daniel Krügler for his advice and reviews.

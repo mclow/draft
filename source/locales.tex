@@ -144,7 +144,7 @@ namespace std {
     template<class Facet> locale combine(const locale& other) const;
 
     // locale operations
-    basic_string<char> name() const;
+    @\changed{basic_string<char>}{string}@ name() const;
 
     bool operator==(const locale& other) const;
 
@@ -593,13 +593,14 @@ if it has been called; else, the resulting facets have virtual
 function semantics identical to those of
 \tcode{locale::classic()}.
 \begin{note}
-This constructor is commonly used as the default value for arguments
+This constructor \added{yields a copy of the current global locale. It} is commonly used as the default value for arguments
 of functions that take a
 \tcode{const locale\&}
 argument.
 \end{note}
 \end{itemdescr}
 
+\begin{removedblock}
 \indexlibrary{\idxcode{locale}!constructor}%
 \begin{itemdecl}
 locale(const locale& other) noexcept;
@@ -610,6 +611,7 @@ locale(const locale& other) noexcept;
 \effects
 Constructs a locale which is a copy of \tcode{other}.
 \end{itemdescr}
+\end{removedblock}
 
 \indexlibrary{\idxcode{locale}!constructor}%
 \begin{itemdecl}
@@ -720,6 +722,7 @@ The resulting locale has a name if and only if the first two arguments
 have names.
 \end{itemdescr}
 
+\begin{removedblock}
 \indexlibrarymember{operator=}{locale}%
 \begin{itemdecl}
 const locale& operator=(const locale& other) noexcept;
@@ -734,7 +737,9 @@ Creates a copy of \tcode{other}, replacing the current value.
 \returns
 \tcode{*this}.
 \end{itemdescr}
+\end{removedblock}
 
+\begin{removedblock}
 \indexlibrary{\idxcode{locale}!destructor}%
 \begin{itemdecl}
 ~locale();
@@ -744,6 +749,7 @@ Creates a copy of \tcode{other}, replacing the current value.
 \pnum
 A non-virtual destructor that throws no exceptions.
 \end{itemdescr}
+\end{removedblock}
 
 \rSec3[locale.members]{Members}
 
@@ -781,7 +787,7 @@ The resulting locale has no name.
 
 \indexlibrarymember{locale}{name}%
 \begin{itemdecl}
-basic_string<char> name() const;
+@\changed{basic_string<char>}{string}@ name() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -859,11 +865,15 @@ static locale global(const locale& loc);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum
-Sets the global locale to its argument.
+\ednote{The old P1 gets an \effects, and the old P2 gets merged into that. P3 split off from the old P2}
 
 \pnum
+\added{\effects} Sets the global locale to its argument.
+
+\begin{removedblock}
+\pnum
 \effects
+\end{removedblock}
 Causes future calls to the constructor
 \tcode{locale()}
 to return a copy of the argument.
@@ -875,10 +885,22 @@ setlocale(LC_ALL, loc.name().c_str());
 
 otherwise, the effect on the C locale, if any, is \impldef{effect on C locale of calling
 \tcode{locale::global}}.
+\begin{removedblock}
 No library function other than
 \tcode{locale::global()}
-\changed{shall affect}{affects} the value returned by
+shall affect the value returned by
 \tcode{locale()}.
+\end{removedblock}
+
+\begin{addedblock}
+\pnum
+\remarks
+No library function other than
+\tcode{locale::global()}
+affects the value returned by
+\tcode{locale()}.
+\end{addedblock}
+
 \begin{note} See~\ref{c.locales} for data race considerations when
 \tcode{setlocale} is invoked. \end{note}
 
@@ -1618,11 +1640,20 @@ explicit ctype(const mask* tbl = nullptr, bool del = false, size_t refs = 0);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
-\changed{\requires}{\expects}
-\tcode{tbl} \added{is} either \changed{0}{nullptr} or \changed{an array of at least
+\requires
+\tcode{tbl} either 0 or an array of at least
 \tcode{table_size}
-elements.}{\tcode{[tbl, tbl+table\_size)} is a valid range.}
+elements.
+\end{removedblock}
+
+\begin{addedblock}
+\pnum
+\expects
+Either \tcode{tbl == nullptr} is true or \range{tbl}{tbl+table_size} is a valid range.
+\end{addedblock}
+
 
 \pnum
 \effects
@@ -2016,10 +2047,10 @@ result do_in(
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{(from <= from_end \&\& to <= to_end)}
+\tcode{(from <= from_end \&\& to <= to_end)} \added{is}
 well-defined and
 \tcode{true};
-\tcode{state} initialized, if at the beginning of a sequence, or else equal to
+\tcode{state} \added{is} initialized, if at the beginning of a sequence, or else equal to
 the result of converting the preceding characters in the sequence.
 
 \pnum
@@ -2135,8 +2166,8 @@ result do_unshift(stateT& state, externT* to, externT* to_end, externT*& to_next
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{(to <= to_end)}
-well-defined and \tcode{true}; state initialized, if at the beginning of a sequence,
+\tcode{(to <= to_end)} \added{is}
+well-defined and \tcode{true}; state \added{is} initialized, if at the beginning of a sequence,
 or else equal to the result of converting the preceding characters in the
 sequence.
 
@@ -2215,10 +2246,10 @@ int do_length(stateT& state, const externT* from, const externT* from_end, size_
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{(from <= from_end)}
+\tcode{(from <= from_end)} \added{is}
 well-defined and
 \tcode{true};
-\tcode{state} initialized, if at the beginning of a sequence, or else equal to
+\tcode{state} \added{is} initialized, if at the beginning of a sequence, or else equal to
 the result of converting the preceding characters in the sequence.
 
 \pnum
@@ -3254,7 +3285,7 @@ string do_grouping() const;
 \begin{itemdescr}
 \pnum
 \returns
-A basic_string<char> \tcode{vec} used as a vector of integer values,
+A \changed{basic_string<char>}{string} \tcode{vec} used as a vector of integer values,
 in which each element
 \tcode{vec[i]}
 represents the number of digits\footnote{Thus, the string
@@ -3884,12 +3915,6 @@ iter_type do_get(iter_type s, iter_type end, ios_base& f,
 \pnum
 \changed{\requires}{\expects}
 \tcode{t} \changed{shall point}{points} to an object.
-\ednote{Why can't we just remove this? The effects talk about 
-"assigning those \tcode{struct tm} members" and "leaves the object pointed 
-to by \tcode{t} unchanged" - those should be enough, I would think. 
-This call was added for c++11, and it just said "t shall be dereferenceable", 
-but that was changed via CWG232. This is the only \tcode{do\_get} call that takes
-the object to be filled in as a pointer; all the others take references. }
 
 \pnum
 \effects The function starts by evaluating
@@ -4885,7 +4910,7 @@ namespace std {
 
       explicit messages(size_t refs = 0);
 
-      catalog open(const basic_string<char>& fn, const locale&) const;
+      catalog open(const @\changed{basic_string<char>}{string}@& fn, const locale&) const;
       string_type get(catalog c, int set, int msgid,
                        const string_type& dfault) const;
       void close(catalog c) const;
@@ -4894,7 +4919,7 @@ namespace std {
 
     protected:
       ~messages();
-      virtual catalog do_open(const basic_string<char>&, const locale&) const;
+      virtual catalog do_open(const @\changed{basic_string<char>}{string}@&, const locale&) const;
       virtual string_type do_get(catalog, int set, int msgid,
                                  const string_type& dfault) const;
       virtual void do_close(catalog) const;
@@ -4916,7 +4941,7 @@ can be obtained only by calling member
 
 \indexlibrarymember{messages}{open}%
 \begin{itemdecl}
-catalog open(const basic_string<char>& name, const locale& loc) const;
+catalog open(const @\changed{basic_string<char>}{string}@& name, const locale& loc) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4952,7 +4977,7 @@ Calls
 
 \indexlibrarymember{messages}{do_open}%
 \begin{itemdecl}
-catalog do_open(const basic_string<char>& name, const locale& loc) const;
+catalog do_open(const @\changed{basic_string<char>}{string}@& name, const locale& loc) const;
 \end{itemdecl}
 
 \begin{itemdescr}
