@@ -461,7 +461,7 @@ Constructs an object of class
 
 \pnum
 \ensures
-\tcode{real() == re \&\& imag() == im}.
+\tcode{real() == re \&\& imag() == im} \added{is true.}
 \end{itemdescr}
 
 \indexlibrarymember{real}{complex}%
@@ -664,9 +664,11 @@ template<class T> constexpr complex<T> operator+(const complex<T>& lhs);
 \returns
 \tcode{complex<T>(lhs)}.
 
+\begin{removedblock}
 \pnum
 \remarks
 unary operator.
+\end{removedblock}
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -692,8 +694,10 @@ template<class T> constexpr complex<T> operator-(const complex<T>& lhs);
 \tcode{complex<T>(-lhs.real(),-lhs.imag())}.
 
 \pnum
+\begin{removedblock}
 \remarks
 unary operator.
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{complex}%
@@ -762,6 +766,8 @@ template<class T, class charT, class traits>
 \end{itemdecl}
 
 \begin{itemdescr}
+\ednote{LWG 2714 proposes rewriting this entire description, so I've made a minimal change here.}
+
 \pnum
 \changed{\requires}{\expects}
 The input values \changed{shall be}{are} convertible to
@@ -3095,7 +3101,7 @@ explicit linear_congruential_engine(result_type s);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects \removed{Constructs a \tcode{linear_congruential_engine} object.}
+\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{linear_congruential_engine} object.}
  If $c \bmod m$ is $0$ and $\tcode{s} \bmod m$ is $0$,
  sets the engine's state to $1$,
  otherwise sets the engine's state to $\tcode{s} \bmod m$.
@@ -3107,7 +3113,7 @@ template<class Sseq> explicit linear_congruential_engine(Sseq& q);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects \removed{Constructs a \tcode{linear_congruential_engine} object.}
+\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{linear_congruential_engine} object.}
  With
  $k = \left\lceil \frac{\log_2 m}{32} \right\rceil$
  and $a$ an array (or equivalent)
@@ -3264,7 +3270,7 @@ explicit mersenne_twister_engine(result_type value);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects \removed{Constructs a \tcode{mersenne_twister_engine} object.}
+\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{mersenne_twister_engine} object.}
 Sets $X_{-n}$ to $\tcode{value} \bmod 2^w$.
 Then, iteratively for $i = 1 - n, \dotsc, -1$, sets $X_i$ to
 \[%
@@ -3285,7 +3291,7 @@ template<class Sseq> explicit mersenne_twister_engine(Sseq& q);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects \removed{Constructs a \tcode{mersenne_twister_engine} object.}
+\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{mersenne_twister_engine} object.}
  With
  $k = \left\lceil w / 32 \right\rceil$
  and $a$ an array (or equivalent)
@@ -3414,7 +3420,7 @@ explicit subtract_with_carry_engine(result_type value);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects \removed{Constructs a \tcode{subtract_with_carry_engine} object.}
+\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{subtract_with_carry_engine} object.}
  Sets the values of
  $X_{-r}, \dotsc, X_{-1}$,
  in that order, as specified below.
@@ -3447,7 +3453,7 @@ template<class Sseq> explicit subtract_with_carry_engine(Sseq& q);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects \removed{Constructs a \tcode{subtract_with_carry_engine} object.}
+\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{subtract_with_carry_engine} object.}
  With
  $k = \left\lceil w / 32 \right\rceil$
  and $a$ an array (or equivalent)
@@ -3898,7 +3904,7 @@ using minstd_rand0 =
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{minstd_rand0}
- shall produce the value $1043618065$.
+ \changed{shall produce}{produces} the value $1043618065$.
 \end{itemdescr}
 
 \indexlibrary{\idxcode{minstd_rand}}%
@@ -3913,7 +3919,7 @@ using minstd_rand =
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{minstd_rand}
- shall produce the value $399268537$.
+ \changed{shall produce}{produces} the value $399268537$.
 \end{itemdescr}
 
 \indexlibrary{\idxcode{mt19937}}%
@@ -3929,7 +3935,7 @@ using mt19937 =
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{mt19937}
- shall produce the value $4123659995$.
+ \changed{shall produce}{produces} the value $4123659995$.
 \end{itemdescr}
 
 \indexlibrary{\idxcode{mt19937_64}}%
@@ -3949,7 +3955,7 @@ using mt19937_64 =
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{mt19937_64}
- shall produce the value $9981545732273789042$.
+ \changed{shall produce}{produces} the value $9981545732273789042$.
 \end{itemdescr}
 
 \indexlibrary{\idxcode{ranlux24_base}}%
@@ -3964,7 +3970,7 @@ using ranlux24_base =
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{ran\-lux24_base}
- shall produce the value
+ \changed{shall produce}{produces} the value
  $7937952$.
 \end{itemdescr}
 
@@ -3980,7 +3986,7 @@ using ranlux48_base =
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{ran\-lux48_base}
- shall produce the value
+ \changed{shall produce}{produces} the value
  $61839128582725$.
 \end{itemdescr}
 
@@ -3995,7 +4001,7 @@ using ranlux24 = discard_block_engine<ranlux24_base, 223, 23>;
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{ranlux24}
- shall produce the value
+ \changed{shall produce}{produces} the value
  $9901578$.
 \end{itemdescr}
 
@@ -4010,7 +4016,7 @@ using ranlux48 = discard_block_engine<ranlux48_base, 389, 11>;
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{ranlux48}
- shall produce the value
+ \changed{shall produce}{produces} the value
  $249142670248501$.
 \end{itemdescr}
 
@@ -4025,7 +4031,7 @@ using knuth_b = shuffle_order_engine<minstd_rand0,256>;
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{knuth_b}
- shall produce the value $1112339016$.
+ \changed{shall produce}{produces} the value $1112339016$.
 \end{itemdescr}%
 
 \indexlibrary{\idxcode{default_random_engine}}%
@@ -4116,7 +4122,7 @@ explicit random_device(const string& token);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects \removed{Constructs a \tcode{random_device}
+\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{random_device}
  nondeterministic uniform random bit generator object.}
  The semantics of the \tcode{token} parameter
  and the token value used by the default constructor are
@@ -4405,13 +4411,20 @@ template<class OutputIterator>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\mandates
+  Values of type \tcode{result_type} are writable to \tcode{*dest}.
+\end{addedblock}
+
 \pnum\changed{\requires}{\expects}
   \tcode{OutputIterator} \changed{shall meet}{meets} the
   \oldconcept{OutputIterator} requirements\iref{output.iterators}.
+\begin{removedblock}
   Moreover,
   the expression
   \tcode{*dest = rt}
-  \changed{shall be}{is} valid for a value \tcode{rt} of type \tcode{result_type}.
+  shall be valid for a value \tcode{rt} of type \tcode{result_type}.
+\end{removedblock}
 
 \pnum\effects Copies the sequence of prepared 32-bit units
  to the given destination,
@@ -4608,7 +4621,7 @@ explicit uniform_int_distribution(IntType a, IntType b = numeric_limits<IntType>
 \pnum \changed{\requires}{\expects}
  $\tcode{a} \leq \tcode{b}$.
 
-\pnum\effects \removed{Constructs a \tcode{uniform_int_distribution} object;}
+\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{uniform_int_distribution} object;}
  \tcode{a} and \tcode{b}
  correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -4696,7 +4709,7 @@ explicit uniform_real_distribution(RealType a, RealType b = 1.0);
  and
  $\tcode{b} - \tcode{a} \leq \tcode{numeric_limits<RealType>::max()}$.
 
-\pnum\effects \removed{Constructs a \tcode{uniform_real_distribution} object;}
+\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{uniform_real_distribution} object;}
  \tcode{a} and \tcode{b}
  correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -4793,7 +4806,7 @@ explicit bernoulli_distribution(double p);
 \pnum \changed{\requires}{\expects}
  $0 \leq \tcode{p} \leq 1$.
 
-\pnum\effects \removed{Constructs a \tcode{bernoulli_distribution} object;}
+\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{bernoulli_distribution} object;}
  \tcode{p}
  corresponds to the parameter of the distribution.
 \end{itemdescr}
@@ -4865,7 +4878,7 @@ explicit binomial_distribution(IntType t, double p = 0.5);
 \pnum \changed{\requires}{\expects}
  $0 \leq \tcode{p} \leq 1$ and $0 \leq \tcode{t} $.
 
-\pnum\effects \removed{Constructs a \tcode{binomial_distribution} object;}
+\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{binomial_distribution} object;}
  \tcode{t} and \tcode{p}
  correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -4945,7 +4958,7 @@ explicit geometric_distribution(double p);
 \pnum \changed{\requires}{\expects}
  $0 < \tcode{p} < 1$.
 
-\pnum\effects \removed{Constructs a \tcode{geometric_distribution} object;}
+\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{geometric_distribution} object;}
  \tcode{p}
  corresponds to the parameter of the distribution.
 \end{itemdescr}
@@ -5022,7 +5035,7 @@ explicit negative_binomial_distribution(IntType k, double p = 0.5);
  $0 < \tcode{p} \leq 1$
  and $0 < \tcode{k} $.
 
-\pnum\effects \removed{Constructs a \tcode{negative_binomial_distribution} object;}
+\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{negative_binomial_distribution} object;}
  \tcode{k} and \tcode{p}
  correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5122,7 +5135,7 @@ explicit poisson_distribution(double mean);
 \changed{\requires}{\expects} $0 < \tcode{mean}$.
 
 \pnum
-\effects \removed{Constructs a \tcode{poisson_distribution} object;}
+\changed{\effects}{\remarks} \removed{Constructs a \tcode{poisson_distribution} object;}
 \tcode{mean} corresponds to the parameter of the distribution.
 \end{itemdescr}
 
@@ -5193,7 +5206,7 @@ explicit exponential_distribution(RealType lambda);
 \changed{\requires}{\expects} $0 < \tcode{lambda}$.
 
 \pnum
-\effects \removed{Constructs an \tcode{exponential_distribution} object;}
+\changed{\effects}{\remarks} \removed{Constructs an \tcode{exponential_distribution} object;}
 \tcode{lambda} corresponds to the parameter of the distribution.
 \end{itemdescr}
 
@@ -5267,7 +5280,7 @@ explicit gamma_distribution(RealType alpha, RealType beta = 1.0);
 \changed{\requires}{\expects} $0 < \tcode{alpha}$ and $0 < \tcode{beta}$.
 
 \pnum
-\effects \removed{Constructs a \tcode{gamma_distribution} object;}
+\changed{\effects}{\remarks} \removed{Constructs a \tcode{gamma_distribution} object;}
 \tcode{alpha} and \tcode{beta}
 correspond to the parameters of the distribution.
 \end{itemdescr}
@@ -5353,7 +5366,7 @@ explicit weibull_distribution(RealType a, RealType b = 1.0);
 \changed{\requires}{\expects} $0 < \tcode{a}$ and $0 < \tcode{b}$.
 
 \pnum
-\effects \removed{Constructs a \tcode{weibull_distribution} object;}
+\changed{\effects}{\remarks} \removed{Constructs a \tcode{weibull_distribution} object;}
 \tcode{a} and \tcode{b}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5446,7 +5459,7 @@ explicit extreme_value_distribution(RealType a, RealType b = 1.0);
 \changed{\requires}{\expects} $0 < \tcode{b}$.
 
 \pnum
-\effects \removed{Constructs an \tcode{extreme_value_distribution} object;}
+\changed{\effects}{\remarks} \removed{Constructs an \tcode{extreme_value_distribution} object;}
 \tcode{a} and \tcode{b}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5560,7 +5573,7 @@ explicit normal_distribution(RealType mean, RealType stddev = 1.0);
 \changed{\requires}{\expects} $0 < \tcode{stddev}$.
 
 \pnum
-\effects \removed{Constructs a \tcode{normal_distribution} object;}
+\changed{\effects}{\remarks} \removed{Constructs a \tcode{normal_distribution} object;}
 \tcode{mean} and \tcode{stddev}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5646,7 +5659,7 @@ explicit lognormal_distribution(RealType m, RealType s = 1.0);
 \changed{\requires}{\expects} $0 < \tcode{s}$.
 
 \pnum
-\effects \removed{Constructs a \tcode{lognormal_distribution} object;}
+\changed{\effects}{\remarks} \removed{Constructs a \tcode{lognormal_distribution} object;}
 \tcode{m} and \tcode{s}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5729,7 +5742,7 @@ explicit chi_squared_distribution(RealType n);
 \changed{\requires}{\expects} $0 < \tcode{n}$.
 
 \pnum
-\effects \removed{Constructs a \tcode{chi_squared_distribution} object;}
+\changed{\effects}{\remarks} \removed{Constructs a \tcode{chi_squared_distribution} object;}
 \tcode{n} corresponds to the parameter of the distribution.
 \end{itemdescr}
 
@@ -5802,7 +5815,7 @@ explicit cauchy_distribution(RealType a, RealType b = 1.0);
 \changed{\requires}{\expects} $0 < \tcode{b}$.
 
 \pnum
-\effects \removed{Constructs a \tcode{cauchy_distribution} object;}
+\changed{\effects}{\remarks} \removed{Constructs a \tcode{cauchy_distribution} object;}
 \tcode{a} and \tcode{b}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5890,7 +5903,7 @@ explicit fisher_f_distribution(RealType m, RealType n = 1);
 \changed{\requires}{\expects} $0 < \tcode{m}$ and $0 < \tcode{n}$.
 
 \pnum
-\effects \removed{Constructs a \tcode{fisher_f_distribution} object;}
+\changed{\effects}{\remarks} \removed{Constructs a \tcode{fisher_f_distribution} object;}
 \tcode{m} and \tcode{n}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5976,7 +5989,7 @@ explicit student_t_distribution(RealType n);
 \changed{\requires}{\expects} $0 < \tcode{n}$.
 
 \pnum
-\effects \removed{Constructs a \tcode{student_t_distribution} object;}
+\changed{\effects}{\remarks} \removed{Constructs a \tcode{student_t_distribution} object;}
 \tcode{n} corresponds to the parameter of the distribution.
 \end{itemdescr}
 
@@ -6136,10 +6149,7 @@ template<class UnaryOperation>
 \begin{addedblock}
 \pnum
 \mandates
-\begin{itemize}
-\item{\tcode{UnaryOperation} is a function object\iref{function.objects} whose return type is convertible to \tcode{double}.}
-\item{\tcode{double} is convertible to the type of \tcode{UnaryOperation}'s sole parameter.}
-\end{itemize}
+\tcode{is_invocable_r_v<double, UnaryOperation\&, double>} is true.
 \end{addedblock}
 
 \pnum \changed{\requires}{\expects}
@@ -6166,7 +6176,7 @@ template<class UnaryOperation>
  for $k = 0, \dotsc, n - 1$.
 
 \pnum\complexity
- The number of invocations of \tcode{fw} shall not exceed $n$.
+ The number of invocations of \tcode{fw} \changed{shall}{does} not exceed $n$.
 \end{itemdescr}
 
 \indexlibrarymember{probabilities}{discrete_distribution}%
@@ -6309,10 +6319,10 @@ template<class InputIteratorB, class InputIteratorW>
  and $b_1 = 1$.
  Otherwise,
  $\bigl[\tcode{firstB}, \tcode{lastB}\bigr)$
- shall form a sequence $b$ of length $n+1$,
+ \changed{shall form}{forms} a sequence $b$ of length $n+1$,
  the length of the sequence $w$ starting from \tcode{firstW}
- shall be at least $n$,
- and any $w_k$ for  $k \geq n$ shall be ignored by the distribution.
+ \changed{shall be}{is} at least $n$,
+ and any $w_k$ for  $k \geq n$ \changed{shall be}{are} ignored by the distribution.
 
 \pnum\effects Constructs a \tcode{piecewise_constant_distribution} object
  with parameters as specified above.
@@ -6329,10 +6339,7 @@ template<class UnaryOperation>
 \begin{addedblock}
 \pnum
 \mandates
-\begin{itemize}
-\item{\tcode{UnaryOperation} is a function object\iref{function.objects} whose return type is convertible to \tcode{double}.}
-\item{\tcode{double} is convertible to the type of \tcode{UnaryOperation}'s sole parameter.}
-\end{itemize}
+\tcode{is_invocable_r_v<double, UnaryOperation\&, double>} is true.
 \end{addedblock}
 
 \begin{removedblock}
@@ -6361,7 +6368,7 @@ template<class UnaryOperation>
  for $k = 0, \dotsc, n - 1$.
 
 \pnum\complexity
- The number of invocations of \tcode{fw} shall not exceed $n$.
+ The number of invocations of \tcode{fw} \changed{shall}{does} not exceed $n$.
 \end{itemdescr}
 
 
@@ -6375,10 +6382,7 @@ template<class UnaryOperation>
 \begin{addedblock}
 \pnum
 \mandates
-\begin{itemize}
-\item{\tcode{UnaryOperation} is a function object\iref{function.objects} whose return type is convertible to \tcode{double}.}
-\item{\tcode{double} is convertible to the type of \tcode{UnaryOperation}'s sole parameter.}
-\end{itemize}
+\tcode{is_invocable_r_v<double, UnaryOperation\&, double>} is true.
 \end{addedblock}
 
 \pnum \changed{\requires}{\expects}
@@ -6401,7 +6405,7 @@ template<class UnaryOperation>
  and $w_k = \tcode{fw}(b_k + \delta / 2) $ for $ k = 0, \dotsc, n - 1$.
 
 \pnum\complexity
- The number of invocations of \tcode{fw} shall not exceed $n$.
+ The number of invocations of \tcode{fw} \changed{shall}{does} not exceed $n$.
 \end{itemdescr}
 
 \indexlibrarymember{intervals}{piecewise_constant_distribution}%
@@ -6528,10 +6532,7 @@ template<class InputIteratorB, class InputIteratorW>
 \begin{addedblock}
 \pnum
 \mandates
-\begin{itemize}
-\item{\tcode{is_convertible_v<iterator_traits<InputIteratorB>::value_type, double>} is true.}
-\item{\tcode{is_convertible_v<iterator_traits<InputIteratorW>::value_type, double>} is true.}
-\end{itemize}
+\tcode{is_invocable_r_v<double, UnaryOperation\&, double>} is true.
 \end{addedblock}
 
 \pnum \changed{\requires}{\expects}
@@ -6573,10 +6574,7 @@ template<class UnaryOperation>
 \begin{addedblock}
 \pnum
 \mandates
-\begin{itemize}
-\item{\tcode{UnaryOperation} is a function object\iref{function.objects} whose return type is convertible to \tcode{double}.}
-\item{\tcode{double} is convertible to the type of \tcode{UnaryOperation}'s sole parameter.}
-\end{itemize}
+\tcode{is_invocable_r_v<double, UnaryOperation\&, double>} is true.
 \end{addedblock}
 
 \begin{removedblock}
@@ -6605,7 +6603,7 @@ template<class UnaryOperation>
  for $k = 0, \dotsc, n$.
 
 \pnum\complexity
- The number of invocations of \tcode{fw} shall not exceed $n+1$.
+ The number of invocations of \tcode{fw} \changed{shall}{does} not exceed $n+1$.
 \end{itemdescr}
 
 
@@ -6619,10 +6617,7 @@ template<class UnaryOperation>
 \begin{addedblock}
 \pnum
 \mandates
-\begin{itemize}
-\item{\tcode{UnaryOperation} is a function object\iref{function.objects} whose return type is convertible to \tcode{double}.}
-\item{\tcode{double} is convertible to the type of \tcode{UnaryOperation}'s sole parameter.}
-\end{itemize}
+\tcode{is_invocable_r_v<double, UnaryOperation\&, double>} is true.
 \end{addedblock}
 
 \pnum \changed{\requires}{\expects}
@@ -6645,7 +6640,7 @@ template<class UnaryOperation>
  and $w_k = \tcode{fw}(b_k)$ for $k = 0, \dotsc, n$.
 
 \pnum\complexity
- The number of invocations of \tcode{fw} shall not exceed $n+1$.
+ The number of invocations of \tcode{fw} \changed{shall}{does} not exceed $n+1$.
 \end{itemdescr}
 
 \indexlibrarymember{intervals}{piecewise_linear_distribution}%
@@ -7133,9 +7128,10 @@ valarray(const T* p, size_t n);
 \tcode{p} points to an array\iref{dcl.array} of at least
 \tcode{n} elements.
 \end{removedblock}
+
 \begin{addedblock}
 \pnum
-\expects \tcode{[p, p + n)} is a valid range.
+\expects \range{p}{p + n} is a valid range.
 \end{addedblock}
 
 \effects
@@ -7540,7 +7536,7 @@ valarray<bool> operator!() const;
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints
+\mandates
 The indicated operator can be applied to operands of type \tcode{T}
 and returns a value which is of type \tcode{T} (\tcode{bool} for
 \tcode{operator!}) or which may be unambiguously implicitly converted to type
@@ -7591,7 +7587,7 @@ valarray& operator>>=(const valarray& v);
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints
+\mandates
 The indicated operator can be applied to two operands of type \tcode{T}.
 \end{addedblock}
 
@@ -7646,7 +7642,7 @@ valarray& operator>>=(const T& v);
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints
+\mandates
 The indicated operator can be applied to two operands of type \tcode{T}.
 \end{addedblock}
 
@@ -7710,7 +7706,7 @@ T sum() const;
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints
+\mandates
 \tcode{operator+=} can be applied to operands of type \tcode{T}.
 \end{addedblock}
 
@@ -7870,7 +7866,7 @@ template<class T> valarray<T> operator>>(const valarray<T>&, const valarray<T>&)
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints
+\mandates
 The indicated operator can be applied to an operand of type \tcode{T} and returns 
 a value which is of type \tcode{T} or which can be unambiguously
 implicitly converted to \tcode{T}.
@@ -7949,7 +7945,7 @@ template<class T> valarray<T> operator>>(const typename valarray<T>::value_type&
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints
+\mandates
 The indicated operator can be applied to an operand of type \tcode{T} and returns 
 a value which is of type \tcode{T} or which can be unambiguously
 implicitly converted to \tcode{T}.
@@ -7997,7 +7993,7 @@ template<class T> valarray<bool> operator||(const valarray<T>&, const valarray<T
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints
+\mandates
 The indicated operator can be applied to an operand of type \tcode{T} and returns 
 a value which is of type \tcode{bool} or which can be unambiguously
 implicitly converted to \tcode{bool}.
@@ -8067,7 +8063,7 @@ template<class T> valarray<bool> operator||(const typename valarray<T>::value_ty
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints
+\mandates
 The indicated operator can be applied to an operand of type \tcode{T} and returns 
 a value which is of type \tcode{bool} or which can be unambiguously
 implicitly converted to \tcode{bool}.
@@ -8135,7 +8131,7 @@ template<class T> valarray<T> tanh (const valarray<T>&);
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints
+\mandates
 A unique function with the indicated name can be applied (unqualified)
 to an operand of type \tcode{T}.
 This function returns a value which is of type \tcode{T}

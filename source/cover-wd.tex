@@ -90,9 +90,11 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 
 Drive-by fixes:
 \begin{itemize}
-\item{Removed several useless "Constructs an object of type XXXX" sentences.}
+\item{Removed several useless "Constructs an object of type XXXX" sentences, and reworked a bunch left-over "Effects" into "Remarks"}
 \item{While moving "Expects" to "Mandates", changed "XXXX shall denote a type that is convertible to double" to "\tcode{is_convertible_v<XXXX, double>} is true."}
-\item{Changed a "points to an array of at least N" -> "\tcode{[p, p+n) is a valid range}"}
+\item{While moving "Expects" to "Mandates", changed "XXXX shall be callable with a type that is convertible to double" to "\tcode{is_invocable_r_v<XXXX, double>} is true."}
+\item{Changed a "points to an array of at least n elements" -> "\range{p}{p+n} is a valid range."}
+\item{Changed several "Complexity" clauses from "shall not exceed" to "does not exceed".}
 \end{itemize}
 
 Open questions:
@@ -107,6 +109,7 @@ Changes from R0:
 \item{Removed several "shall"s from [cfenv.syn] (\ref{cfenv.syn}) and [complex.numbers] (\ref{complex.numbers})}
 \item{Changed a "points to an array of at least N" -> "\tcode{[p, p+n) is a valid range}"}
 \item{Turned a couple of sentences into bullet points in [rand.dist.samp.pconst] and prand.dist.samp.plinear].}
+\item{Items discussed during the LWG telecom on 6-Sep-2019.}
 \end{itemize}
 
 Thanks to Daniel Krügler for his several rounds of review.
