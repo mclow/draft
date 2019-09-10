@@ -29,7 +29,7 @@ library clauses of the standard. This is one of a series of papers reformulating
 requirements into the new format. This effort was strongly influenced by the informational
 paper P1369R0.
 
-The changes in this series of papers fall into four broad categories.
+The changes in this series of papers fall into three broad categories.
 \begin{itemize}
 \item{Change "participate in overload resolution" wording into "Constraints" elements}
 \item{Change "Requires" elements into either "Mandates" or "Expects", depending (mostly) on whether or not they can be checked at compile time.}
@@ -45,8 +45,12 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \item{ios.init}							\ref{ios.init}
 \item{ios.base.storage}					\ref{ios.base.storage}
 \item{ios.base.callback}				\ref{ios.base.callback}
+\item{ios.base.cons}					\ref{ios.base.cons}
 \item{basic.ios.members}				\ref{basic.ios.members}
+\item{istream.cons}						\ref{istream.cons}
 \item{istream.rvalue}					\ref{istream.rvalue}
+\item{iostream.dest}					\ref{iostream.dest}
+\item{ostream.cons}						\ref{ostream.cons}
 \item{ostream.inserters.character}		\ref{ostream.inserters.character}
 \item{ostream.rvalue}					\ref{ostream.rvalue}
 \item{std.manip}						\ref{std.manip}
@@ -70,6 +74,7 @@ Drive-by fixes:
 \begin{itemize}
 \item{Re-ordered a couple of clauses in [fs.path.modifiers]. }
 \item{Struck a few clauses that read "Constructs an object of type XXXX".}
+\item{Struck a few clauses that read "Destroys an object of type XXXX". What object? SOME object!}
 \item{Changed the requirements for \tcode{get\_time} and \tcode{put\_time} in [ext.manip] to use "is a valid range."}
 \item{De-shalled a bunch of bits in [std.manip] and [quoted.manip]}
 \end{itemize}
@@ -77,7 +82,6 @@ Drive-by fixes:
 Open questions:
 \begin{itemize}
 \item{There's stuff (\requires) in [streambuf.virt.get] and [streambuf.virt.put] that I haven't dealt with.}
-\item{Any interest in de-shalling [ios.base.cons]/1 and [basic.ios.cons]/2?}
 \end{itemize}
 
 
@@ -87,6 +91,8 @@ Changes from R0:
 \item{Changed a \requires --> \expects in [fs.race.behavior].}
 \item{Changed the requirements for \tcode{get\_time} and \tcode{put\_time} in [ext.manip] to use "is a valid range."}
 \item{De-shalled a bunch of bits in [std.manip] and [quoted.manip]}
+\item{Struck a few clauses that read "Destroys an object of type XXXX".}
+\item{Items from the LWG review from the 6-Sep teleconference.}
 \end{itemize}
 
 Thanks to Daniel Krügler for his advice and reviews.

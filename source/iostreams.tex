@@ -1167,8 +1167,8 @@ they have not already been constructed and initialized.
 \begin{itemdescr}
 \pnum
 \effects
-Destroys an object of class
-\tcode{Init}.
+\removed{Destroys an object of class
+\tcode{Init}.}
 If there are no other instances of the class still in existence,
 calls
 \indexlibrary{\idxcode{flush}}%
@@ -1553,6 +1553,14 @@ void register_callback(event_callback fn, int idx);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\expects
+The function
+\tcode{fn}
+does not throw exceptions.
+\end{addedblock}
+
 \pnum
 \effects
 Registers the pair
@@ -1570,11 +1578,13 @@ Functions registered are called when an event occurs, in opposite order of
 registration.
 Functions registered while a callback function is active are not called until the next event.
 
+\begin{removedblock}
 \pnum
-\changed{\requires}{\expects}
+\requires
 The function
 \tcode{fn}
-\changed{shall}{does} not throw exceptions.
+shall not throw exceptions.
+\end{removedblock}
 
 \pnum
 \remarks
@@ -1609,8 +1619,8 @@ the behavior is undefined.
 \begin{itemdescr}
 \pnum
 \effects
-Destroys an object of class
-\tcode{ios_base}.
+\removed{Destroys an object of class
+\tcode{ios_base}.}
 Calls each registered callback pair
 \tcode{(fn, idx)}\iref{ios.base.callback} as
 \tcode{(*fn)(\brk{}erase_event, *this, idx)}
@@ -2161,10 +2171,10 @@ void move(basic_ios&& rhs);
 \pnum
 \ensures \tcode{*this} \changed{shall have}{has} the state that
 \tcode{rhs} had before the function call, except that
-\tcode{rdbuf()} \changed{shall return}{returns} 0. \tcode{rhs} \changed{shall be}{is} in a valid but
+\tcode{rdbuf()} \changed{shall return 0}{returns \tcode{nullptr}}. \tcode{rhs} \changed{shall be}{is} in a valid but
 unspecified state, except that \tcode{rhs.rdbuf()} \changed{shall return}{returns} the
 same value as it returned before the function call, and
-\tcode{rhs.tie()} \changed{shall return}{returns} 0.
+\tcode{rhs.tie()} \changed{shall return 0}{returns \tcode{nullptr}}.
 \end{itemdescr}
 
 \indexlibrarymember{swap}{basic_ios}%
@@ -2187,7 +2197,7 @@ void set_rdbuf(basic_streambuf<charT, traits>* sb);
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} \tcode{sb != nullptr}.
+\changed{\requires}{\expects} \tcode{sb != nullptr} \added{is true}.
 
 \pnum
 \effects Associates the \tcode{basic_streambuf} object
@@ -2195,7 +2205,7 @@ pointed to by \tcode{sb} with this stream without calling
 \tcode{clear()}.
 
 \pnum
-\ensures \tcode{rdbuf() == sb}.
+\ensures \tcode{rdbuf() == sb} \added{is true}.
 
 \pnum
 \throws Nothing.
@@ -4378,10 +4388,12 @@ virtual ~basic_istream();
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects
 Destroys an object of class
 \tcode{basic_istream}.
+\end{removedblock}
 
 \pnum
 \remarks
@@ -5609,7 +5621,7 @@ template<class charT, class traits, class T>
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints The expression \tcode{is >> std::forward<T>(x)} is well-formed.
+\constraints The expression \tcode{is >> std::forward<T>(x)} is well-formed when treated as an unevaluated operand.
 \end{addedblock}
 
 \pnum
@@ -5710,10 +5722,12 @@ virtual ~basic_iostream();
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects
 Destroys an object of class
 \tcode{basic_iostream}.
+\end{removedblock}
 
 \pnum
 \remarks
@@ -5978,10 +5992,12 @@ virtual ~basic_ostream();
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects
 Destroys an object of class
 \tcode{basic_ostream}.
+\end{removedblock}
 
 \pnum
 \remarks
@@ -6832,7 +6848,7 @@ template<class charT, class traits, class T>
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints The expression \tcode{os << x} is well-formed.
+\constraints The expression \tcode{os << x} is well-formed when treated as an unevaluated operand.
 \end{addedblock}
 
 \pnum
@@ -7241,9 +7257,9 @@ template<class charT> @\unspec@ put_time(const struct tm* tmb, const charT* fmt)
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects} The argument \tcode{tmb} \changed{shall be}{is} a valid pointer to an object of type
-\tcode{struct tm}, and \changed{the argument \tcode{fmt} \changed{shall be}{is} a valid pointer to an
+\tcode{struct tm}, and \changed{the argument \tcode{fmt} shall be a valid pointer to an
 array of objects of type \tcode{charT} with
-\tcode{char_traits<charT>::length(\brk{}fmt)} elements}{\tcode{[fmt, fmt + char_traits<charT>::length(fmt))} is a valid range.}.
+\tcode{char_traits<charT>::length(\brk{}fmt)} elements}{\range{fmt}{fmt + char_traits<charT>::length(fmt)} is a valid range}.
 
 \pnum
 \returns An object of unspecified type such that if \tcode{out} is an object of
@@ -7360,6 +7376,7 @@ The expression \tcode{in >> quoted(s, delim, escape)} \changed{shall have}{has} 
 \end{itemdescr}
 
 \rSec1[string.streams]{String-based streams}
+\ednote{Review stopped here 06-Sep-2019}
 
 \rSec2[sstream.syn]{Header \tcode{<sstream>} synopsis}
 \indexhdr{sstream}%
@@ -9445,8 +9462,8 @@ virtual ~basic_filebuf();
 \begin{itemdescr}
 \pnum
 \effects
-Destroys an object of class
-\tcode{basic_filebuf<charT, traits>}.
+\removed{Destroys an object of class
+\tcode{basic_filebuf<charT, traits>}.}
 Calls
 \tcode{close()}.
 If an exception occurs during the destruction of the object, including the call to \tcode{close()}, the exception is caught but not rethrown (see~\ref{res.on.exception.handling}).
