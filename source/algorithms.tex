@@ -9032,8 +9032,13 @@ template<class ExecutionPolicy, class ForwardIterator, class T, class BinaryOper
 \begin{addedblock}
 \pnum
 \mandates
-  All of \tcode{binary_op(init, *first)}, \tcode{binary_op(*first, init)},
-  \tcode{binary_op(init, init)}, and \tcode{binary_op(*first, *first)}
+All of
+  \begin{itemize}
+  \item \tcode{binary_op(init, *first)},
+  \item \tcode{binary_op(*first, init)},
+  \item \tcode{binary_op(init, init)}, and
+  \item \tcode{binary_op(*first, *first)}
+  \end{itemize}
   are convertible to \tcode{T}.
 \end{addedblock}
 
@@ -9404,9 +9409,11 @@ template<class ExecutionPolicy,
 \pnum
 \mandates
   All of
-  \tcode{binary_op(init, init)},
-  \tcode{binary_op(init, *first)},
-  and \tcode{binary_op(*first, *first)}
+  \begin{itemize}
+  \item \tcode{binary_op(init, init)},
+  \item \tcode{binary_op(init, *first)}, and
+  \item \tcode{binary_op(*first, *first)}
+  \end{itemize}
   are convertible to \tcode{T}.
 \end{addedblock}
 
@@ -9519,9 +9526,11 @@ template<class ExecutionPolicy,
 \pnum
 \mandates
   If \tcode{init} is provided, all of
-  \tcode{binary_op(init, init)},
-  \tcode{binary_op(init, *first)}, and
-  \tcode{binary_op(*first, *first)}
+  \begin{itemize}
+  \item \tcode{binary_op(init, init)},
+  \item \tcode{binary_op(init, *first)}, and
+  \item \tcode{binary_op(*first, *first)}
+  \end{itemize}
   are convertible to \tcode{T};
   otherwise, \tcode{binary_op(*first, *first)}
   is convertible to \tcode{ForwardIterator1}'s value type.

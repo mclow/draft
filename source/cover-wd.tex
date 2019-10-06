@@ -6,7 +6,7 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & D1718R1                     \\
+          \textbf{Document Number:} & P1718R1                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
                                     & CppAlliance                 \\
@@ -42,9 +42,9 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 
 \begin{multicols}{3}
 \begin{itemize}
-\item{algorithms.requirements}		\ref{algorithms.requirements}
 \item{alg.foreach}					\ref{alg.foreach}
 \item{alg.is.permutation}			\ref{alg.is.permutation}
+\item{alg.search}					\ref{alg.search}
 \item{alg.copy}						\ref{alg.copy}
 \item{alg.move}						\ref{alg.move}
 \item{alg.swap}						\ref{alg.swap}
@@ -71,6 +71,7 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \item{alg.partitions}				\ref{alg.partitions}
 \item{alg.merge}					\ref{alg.merge}
 \item{includes}						\ref{includes}
+\item{set.union}					\ref{set.union}
 \item{set.intersection}				\ref{set.intersection}
 \item{set.difference}				\ref{set.difference}
 \item{set.symmetric.difference}		\ref{set.symmetric.difference}
@@ -80,12 +81,13 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \item{sort.heap}					\ref{sort.heap}
 \item{alg.min.max}					\ref{alg.min.max}
 \item{alg.clamp}					\ref{alg.clamp}
-\item{alg.3way}						\ref{alg.3way}
+\item{alg.three.way}				\ref{alg.three.way}
 \item{alg.permutation.generators}	\ref{alg.permutation.generators}
 \item{accumulate}					\ref{accumulate}
 \item{reduce}						\ref{reduce}
 \item{inner.product}				\ref{inner.product}
 \item{transform.reduce}				\ref{transform.reduce}
+\item{partial.sum}					\ref{partial.sum}
 \item{exclusive.scan}				\ref{exclusive.scan}
 \item{inclusive.scan}				\ref{inclusive.scan}
 \item{transform.exclusive.scan}		\ref{transform.exclusive.scan}
@@ -94,6 +96,7 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \item{numeric.iota}					\ref{numeric.iota}
 \item{numeric.ops.gcd}				\ref{numeric.ops.gcd}
 \item{numeric.ops.lcm}				\ref{numeric.ops.lcm}
+\item{alg.c.library}				\ref{alg.c.library}
 \end{itemize}
 \end{multicols}
 
@@ -116,6 +119,7 @@ Changes from R0:
 \item{Changed all of the "XX is writable to YY" into Mandates.}
 \item{Changed all of the "the expression ZZZZZ is valid" into Mandates.}
 \item{Fixed a bunch of "is XXXXXX" to "meets the XXXXXX requirements"}
+\item{Reworked a few comma lists into bullets}
 \end{itemize}
 
 Thanks to Daniel Krügler and Tim Song for their advice and reviews.
