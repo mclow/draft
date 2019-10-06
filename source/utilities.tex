@@ -202,7 +202,8 @@ and
 \effects
 Exchanges values stored in two locations.
 
-\begin{addedblock}\remarks This function
+\begin{addedblock}
+\remarks This function
 is a designated customization point\iref{namespace.std}.
 The expression inside \tcode{noexcept} is equivalent to:
 
@@ -220,9 +221,9 @@ template<class T, size_t N>
 
 \begin{itemdescr}
 \pnum
-\changed{\remarks
-This function shall not participate in overload resolution
-unless}{\constraints} \tcode{is_swappable_v<T>} is \tcode{true}.
+\changed{\remarks}{\constraints}
+\removed{This function shall not participate in overload resolution
+unless} \tcode{is_swappable_v<T>} is \tcode{true}.
 
 \pnum
 \changed{\requires}{\expects}
@@ -1199,7 +1200,7 @@ constexpr explicit(@\seebelow@) tuple();
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints{\tcode{is_default_construct\-ible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$}
+\constraints{\tcode{is_default_construct\-ible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.}
 \end{addedblock}
 
 \pnum
@@ -1227,10 +1228,10 @@ constexpr explicit(@\seebelow@) tuple(const Types&...);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{sizeof...(Types) >= 1} and \tcode{is_copy_constructible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
-}
+\end{addedblock}
 
 \pnum
 \effects Initializes each element with the value of the
@@ -1252,12 +1253,12 @@ template<class... UTypes> constexpr explicit(@\seebelow@) tuple(UTypes&&... u);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints{\tcode{sizeof...(Types)} \tcode{==} \tcode{sizeof...(UTypes)} and
 \tcode{sizeof...(Types) >= 1} and \tcode{is_constructible_v<$\tcode{T}_i$, $\tcode{U}_i$\&\&>}
 is \tcode{true} for all $i$}
-}
+\end{addedblock}
 
 \pnum
 \effects Initializes the elements in the tuple with the
@@ -1408,12 +1409,12 @@ template<class U1, class U2> constexpr explicit(@\seebelow@) tuple(const pair<U1
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{sizeof...(Types) == 2},
 \tcode{is_constructible_v<$\tcode{T}_0$, const U1\&>} is \tcode{true} and
 \tcode{is_constructible_v<$\tcode{T}_1$, const U2\&>} is \tcode{true}.
-}
+\end{addedblock}
 
 \pnum
 \effects Initializes the first element with \tcode{u.first} and the
@@ -1441,12 +1442,12 @@ template<class U1, class U2> constexpr explicit(@\seebelow@) tuple(pair<U1, U2>&
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{sizeof...(Types) == 2},
 \tcode{is_constructible_v<$\tcode{T}_0$, U1\&\&>} is \tcode{true} and
 \tcode{is_constructible_v<$\tcode{T}_1$, U2\&\&>} is \tcode{true}.
-}
+\end{addedblock}
 
 \pnum
 \effects Initializes the first element with
@@ -1523,20 +1524,20 @@ constexpr tuple& operator=(const tuple& u);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \mandates \tcode{is_copy_assignable_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
-}
+\end{addedblock}
 
 \pnum
 \effects Assigns each element of \tcode{u} to the corresponding
 element of \tcode{*this}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks This operator shall be defined as deleted unless
 \tcode{is_copy_assignable_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
-}
+\end{removedblock}
 
 \pnum
 \returns \tcode{*this}.
@@ -1548,10 +1549,10 @@ constexpr tuple& operator=(tuple&& u) noexcept(@\seebelow@);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_move_assignable_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
-}
+\end{addedblock}
 
 \pnum
 \effects For all $i$, assigns \tcode{std::forward<$\tcode{T}_i$>(get<$i$>(u))} to
@@ -1582,11 +1583,11 @@ template<class... UTypes> constexpr tuple& operator=(const tuple<UTypes...>& u);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{sizeof...(Types) == sizeof...(UTypes)} and
 \tcode{is_assignable_v<$\tcode{T}_i$\&, const $\tcode{U}_i$\&>} is \tcode{true} for all $i$.
-}
+\end{addedblock}
 
 \pnum
 \effects Assigns each element of \tcode{u} to the corresponding element
@@ -1609,11 +1610,11 @@ template<class... UTypes> constexpr tuple& operator=(tuple<UTypes...>&& u);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_assignable_v<$\tcode{T}_i$\&, $\tcode{U}_i$\&\&> == true}
 for all $i$ and \tcode{sizeof...(Types) == sizeof...(UTypes)}.
-}
+\end{addedblock}
 
 \pnum
 \effects For all $i$, assigns \tcode{std::forward<$\tcode{U}_i$>(get<$i$>(u))} to
@@ -1637,13 +1638,13 @@ template<class U1, class U2> constexpr tuple& operator=(const pair<U1, U2>& u);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{sizeof...(Types) == 2} and
 \tcode{is_assignable_v<$\tcode{T}_0$\&, const U1\&>} is \tcode{true} for the first type $\tcode{T}_0$ in
 \tcode{Types} and \tcode{is_assignable_v<$\tcode{T}_1$\&, const U2\&>} is \tcode{true} for the
 second type $\tcode{T}_1$ in \tcode{Types}.
-}
+\end{addedblock}
 
 \pnum
 \effects  Assigns \tcode{u.first} to the first element of \tcode{*this}
@@ -1669,13 +1670,13 @@ template<class U1, class U2> constexpr tuple& operator=(pair<U1, U2>&& u);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{sizeof...(Types) == 2} and
 \tcode{is_assignable_v<$\tcode{T}_0$\&, U1\&\&>} is \tcode{true} for the first type $\tcode{T}_0$ in
 \tcode{Types} and \tcode{is_assignable_v<$\tcode{T}_1$\&, U2\&\&>} is \tcode{true} for the second
 type $\tcode{T}_1$ in \tcode{Types}.
-}
+\end{addedblock}
 
 \pnum
 \effects Assigns \tcode{std::forward<U1>(u.first)} to the first
@@ -2412,10 +2413,11 @@ constexpr optional(const optional& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \mandates
-\tcode{is_copy_constructible_v<T>} is \tcode{true}.}
+\tcode{is_copy_constructible_v<T>} is \tcode{true}.
+\end{addedblock}
 
 \pnum
 \effects
@@ -2444,10 +2446,10 @@ constexpr optional(optional&& rhs) noexcept(@\seebelow@);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_move_constructible_v<T>} is \tcode{true}
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -2479,10 +2481,10 @@ template<class... Args> constexpr explicit optional(in_place_t, Args&&... args);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_constructible_v<T, Args...>} is \tcode{true}
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -2510,10 +2512,10 @@ template<class U, class... Args>
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_constructible_v<T, initializer_list<U>\&, Args\&\&...>} is \tcode{true}.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -2539,12 +2541,12 @@ template<class U = T> explicit(@\seebelow@) constexpr optional(U&& v);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_constructible_v<T, U\&\&>} is \tcode{true},
 \tcode{is_same_v<remove_cvref_t<U>, in_place_t>} is \tcode{false}, and
 \tcode{is_same_v<remove_cvref_t<U>, optional>} is \tcode{false}.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -2722,21 +2724,21 @@ optional<T>& operator=(nullopt_t) noexcept;
 \effects
 If \tcode{*this} contains a value, calls \tcode{val->T::\~T()} to destroy the contained value; otherwise no effect.
 
-\added{%
+\begin{addedblock}
 \pnum
 \ensures
 \tcode{*this} does not contain a value.
-}
+\end{addedblock}
 
 \pnum
 \returns
 \tcode{*this}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \ensures
 \tcode{*this} does not contain a value.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrarymember{operator=}{optional}%
@@ -2745,12 +2747,12 @@ constexpr optional<T>& operator=(const optional& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \mandates
 \tcode{is_copy_constructible_v<T>} is \tcode{true} and
 \tcode{is_copy_assignable_v<T>} is \tcode{true}.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -2769,21 +2771,21 @@ destroys the contained value by calling \tcode{val->T::\~T()} &
 no effect \\
 \end{lib2dtab2}
 
-\added{%
+\begin{addedblock}
 \pnum
 \ensures
 \tcode{bool(rhs) == bool(*this)}.
-}
+\end{addedblock}
 
 \pnum
 \returns
 \tcode{*this}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \ensures
 \tcode{bool(rhs) == bool(*this)}.
-}
+\end{removedblock}
 
 \pnum
 \remarks
@@ -2806,11 +2808,11 @@ constexpr optional& operator=(optional&& rhs) noexcept(@\seebelow@);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_move_constructible_v<T>} is \tcode{true} and
 \tcode{is_move_assignable_v<T>} is \tcode{true}.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -2830,21 +2832,21 @@ destroys the contained value by calling \tcode{val->T::\~T()} &
 no effect \\
 \end{lib2dtab2}
 
-\added{%
+\begin{addedblock}
 \pnum
 \ensures
 \tcode{bool(rhs) == bool(*this)}.
-}
+\end{addedblock}
 
 \pnum
 \returns
 \tcode{*this}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \ensures
 \tcode{bool(rhs) == bool(*this)}.
-}
+\end{removedblock}
 
 \pnum
 \remarks
@@ -2876,33 +2878,33 @@ template<class U = T> optional<T>& operator=(U&& v);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_same_v<remove_cvref_t<U>, optional>} is \tcode{false},
 \tcode{conjunction_v<is_scalar<T>, is_same<T, decay_t<U>>>} is \tcode{false},
 \tcode{is_constructible_v<T, U>} is \tcode{true}, and
 \tcode{is_assignable_v<T\&, U>} is \tcode{true}.
-}
+\end{addedblock}
 
 \pnum
 \effects
 If \tcode{*this} contains a value, assigns \tcode{std::forward<U>(v)} to the contained value; otherwise initializes the contained value as if direct-non-list-initializing object of type \tcode{T} with \tcode{std::forward<U>(v)}.
 
-\added{%
+\begin{addedblock}
 \pnum
 \ensures
 \tcode{*this} contains a value.
-}
+\end{addedblock}
 
 \pnum
 \returns
 \tcode{*this}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \ensures
 \tcode{*this} contains a value.
-}
+\end{removedblock}
 
 \pnum
 \remarks
@@ -2961,21 +2963,21 @@ destroys the contained value by calling \tcode{val->T::\~T()} &
 no effect \\
 \end{lib2dtab2}
 
-\added{%
+\begin{addedblock}
 \pnum
 \ensures
 \tcode{bool(rhs) == bool(*this)}.
-}
+\end{addedblock}
 
 \pnum
 \returns
 \tcode{*this}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \ensures
 \tcode{bool(rhs) == bool(*this)}.
-}
+\end{removedblock}
 
 \pnum
 \remarks
@@ -3052,21 +3054,21 @@ destroys the contained value by calling \tcode{val->T::\~T()} &
 no effect \\
 \end{lib2dtab2}
 
-\added{%
+\begin{addedblock}
 \pnum
 \ensures
 \tcode{bool(rhs) == bool(*this)}.
-}
+\end{addedblock}
 
 \pnum
 \returns
 \tcode{*this}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \ensures
 \tcode{bool(rhs) == bool(*this)}.
-}
+\end{removedblock}
 
 \pnum
 \remarks
@@ -3136,10 +3138,10 @@ template<class U, class... Args> T& emplace(initializer_list<U> il, Args&&... ar
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_constructible_v<T, initializer_list<U>\&, Args\&\&...>} is \tcode{true}.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -3346,11 +3348,11 @@ template<class U> constexpr T value_or(U&& v) const&;
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \mandates
 \tcode{is_copy_constructible_v<T> \&\& is_convertible_v<U\&\&, T>} is \tcode{false}.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -3359,12 +3361,12 @@ Equivalent to:
 return bool(*this) ? **this : static_cast<T>(std::forward<U>(v));
 \end{codeblock}
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks
 If \tcode{is_copy_constructible_v<T> \&\& is_convertible_v<U\&\&, T>} is \tcode{false},
 the program is ill-formed.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrarymember{value_or}{optional}%
@@ -3373,11 +3375,11 @@ template<class U> constexpr T value_or(U&& v) &&;
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \mandates
 \tcode{is_move_constructible_v<T> \&\& is_convertible_v<U\&\&, T>} is \tcode{false}.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -3386,12 +3388,12 @@ Equivalent to:
 return bool(*this) ? std::move(**this) : static_cast<T>(std::forward<U>(v));
 \end{codeblock}
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks
 If \tcode{is_move_constructible_v<T> \&\& is_convertible_v<U\&\&, T>} is \tcode{false},
 the program is ill-formed.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \rSec3[optional.mod]{Modifiers}
@@ -3870,22 +3872,22 @@ template<class T> void swap(optional<T>& x, optional<T>& y) noexcept(noexcept(x.
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_move_constructible_v<T>} is \tcode{true} and
 \tcode{is_swappable_v<T>} is \tcode{true}.
-}
+\end{addedblock}
 
 \pnum
 \effects
 Calls \tcode{x.swap(y)}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks This function shall not participate in overload resolution
 unless \tcode{is_move_constructible_v<T>} is \tcode{true} and
 \tcode{is_swappable_v<T>} is \tcode{true}.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{make_optional}}%
@@ -4149,10 +4151,10 @@ constexpr variant() noexcept(@\seebelow@);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_default_constructible_v<$\tcode{T}_0$>} is \tcode{true}.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -4186,10 +4188,10 @@ constexpr variant(const variant& w);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \mandates \tcode{is_copy_constructible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -4216,10 +4218,10 @@ constexpr variant(variant&& w) noexcept(@\seebelow@);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_move_constructible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -4349,11 +4351,11 @@ template<class T, class... Args> constexpr explicit variant(in_place_type_t<T>, 
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints there is exactly one occurrence of \tcode{T} in 
 \tcode{Types...} and \tcode{is_constructible_v<T, Args...>} is \tcode{true}.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -4387,11 +4389,11 @@ template<class T, class U, class... Args>
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints there is exactly one occurrence of \tcode{T} in \tcode{Types...} and
 \tcode{is_constructible_v<T, initializer_list<U>\&, Args...>} is \tcode{true}.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -4537,13 +4539,13 @@ constexpr variant& operator=(const variant& rhs);
 \pnum
 Let $j$ be \tcode{rhs.index()}.
 
-\added{%
+\begin{addedblock}
 \pnum
 \mandates This operator shall be defined as deleted unless
 \tcode{is_copy_constructible_v<$\tcode{T}_i$> \&\&}
 \tcode{is_copy_assignable_v<$\tcode{T}_i$>}
 is \tcode{true} for all $i$.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -4592,11 +4594,11 @@ constexpr variant& operator=(variant&& rhs) noexcept(@\seebelow@);
 \pnum
 Let $j$ be \tcode{rhs.index()}.
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_move_constructible_v<$\tcode{T}_i$> \&\&}
 \tcode{is_move_assignable_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -4780,11 +4782,11 @@ template<class T, class U, class... Args> T& emplace(initializer_list<U> il, Arg
 \pnum
 Let $I$ be the zero-based index of \tcode{T} in \tcode{Types}.
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_constructible_v<T, initializer_list<U>\&, Args...>} is
 \tcode{true}, and \tcode{T} occurs exactly once in \tcode{Types...}.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -4810,10 +4812,10 @@ template<size_t I, class... Args>
 \changed{\requires}{\mandates}
 \tcode{I < sizeof...(Types)}.
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_constructible_v<$\tcode{T}_I$, Args...>} is \tcode{true}.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -4837,10 +4839,10 @@ Any exception thrown during the initialization of the contained value.
 
 \pnum
 \remarks
-\removed{%
+\begin{removedblock}
 This function shall not participate in overload resolution unless
 \tcode{is_constructible_v<$\tcode{T}_I$, Args...>} is \tcode{true}.
-}
+\end{removedblock}
 If an exception is thrown during the initialization of the contained value,
 the \tcode{variant} might not hold a value.
 \end{itemdescr}
@@ -4856,10 +4858,10 @@ template<size_t I, class U, class... Args>
 \changed{\requires}{\mandates}
 \tcode{I < sizeof...(Types)}.
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_constructible_v<$\tcode{T}_I$, initializer_list<U>\&, Args...>} is \tcode{true}.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -4883,10 +4885,10 @@ Any exception thrown during the initialization of the contained value.
 
 \pnum
 \remarks
-\removed{%
+\begin{removedblock}
 This function shall not participate in overload resolution unless
 \tcode{is_constructible_v<$\tcode{T}_I$, initializer_list<U>\&, Args...>} is \tcode{true}.
-}
+\end{removedblock}
 If an exception is thrown during the initialization of the contained value,
 the \tcode{variant} might not hold a value.
 \end{itemdescr}
@@ -5395,11 +5397,11 @@ template<class... Types>
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_move_constructible_v<$\tcode{T}_i$> \&\& is_swappable_v<$\tcode{T}_i$>}
 is \tcode{true} for all $i$.
-}
+\end{addedblock}
 
 \pnum
 \effects Equivalent to \tcode{v.swap(w)}.
@@ -5909,11 +5911,11 @@ A reference to the new contained value.
 \remarks If an exception is thrown during the call to \tcode{VT}'s constructor,
 \tcode{*this} does not contain a value, and any previously contained value
 has been destroyed.
-\removed{%
+\begin{removedblock}
 This function shall not participate in overload resolution unless
 \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, Args...>} is \tcode{true}.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrarymember{emplace}{any}%
@@ -5955,11 +5957,11 @@ A reference to the new contained value.
 \remarks If an exception is thrown during the call to \tcode{VT}'s constructor,
 \tcode{*this} does not contain a value, and any previously contained value
 has been destroyed.
-\removed{%
+\begin{removedblock}
 The function shall not participate in overload resolution unless
 \tcode{is_copy_constructible_v<VT>} is \tcode{true} and
 \tcode{is_constructible_v<VT, initializer_list<U>\&, Args...>} is \tcode{true}.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrarymember{reset}{any}%
@@ -6354,7 +6356,7 @@ template<class charT, class traits, class Allocator>
 \end{itemdecl}
 
 \begin{itemdescr}
-\removed{%
+\begin{removedblock}
 \pnum
 \throws
 \tcode{out_of_range}
@@ -6362,7 +6364,7 @@ if
 \tcode{pos > str.size()}
 or \tcode{invalid_argument} if an invalid character is found (see below).%
 \indexlibrary{\idxcode{out_of_range}}
-}
+\end{removedblock}
 
 \pnum
 \effects
@@ -6371,7 +6373,7 @@ Determines the effective length
 \tcode{n} and
 \tcode{str.size() - pos}.
 
-\removed{%
+\begin{removedblock}
 The function then throws%
 \indexlibrary{\idxcode{invalid_argument}}
 \tcode{invalid_argument}
@@ -6379,7 +6381,7 @@ if any of the \tcode{rlen}
 characters in \tcode{str} beginning at position \tcode{pos} is
 other than \tcode{zero} or \tcode{one}. The function uses \tcode{traits::eq()}
 to compare the character values.
-}
+\end{removedblock}
 
 \changed{Otherwise, t}{T}he function constructs an object of class
 \tcode{bitset<N>},
@@ -6565,13 +6567,13 @@ bitset<N>& set(size_t pos, bool val = true);
 \end{itemdecl}
 
 \begin{itemdescr}
-\removed{%
+\begin{removedblock}
 \pnum
 \throws
 \tcode{out_of_range}
 if \tcode{pos} does not correspond to a valid bit position.%
 \indexlibrary{\idxcode{out_of_range}}
-}
+\end{removedblock}
 
 \pnum
 \effects
@@ -6583,13 +6585,13 @@ If \tcode{val} is \tcode{true}, the stored value is one, otherwise it is zero.
 \returns
 \tcode{*this}.
 
-\added{%
+\begin{addedblock}
 \pnum
 \throws
 \tcode{out_of_range}
 if \tcode{pos} does not correspond to a valid bit position.%
 \indexlibrary{\idxcode{out_of_range}}
-}
+\end{addedblock}
 \end{itemdescr}
 
 \indexlibrarymember{reset}{bitset}%
@@ -6614,13 +6616,13 @@ bitset<N>& reset(size_t pos);
 \end{itemdecl}
 
 \begin{itemdescr}
-\removed{%
+\begin{removedblock}
 \pnum
 \throws
 \tcode{out_of_range}
 if \tcode{pos} does not correspond to a valid bit position.
 \indexlibrary{\idxcode{out_of_range}}%
-}
+\end{removedblock}
 
 \pnum
 \effects
@@ -6631,13 +6633,13 @@ Resets the bit at position \tcode{pos} in
 \returns
 \tcode{*this}.
 
-\added{%
+\begin{addedblock}
 \pnum
 \throws
 \tcode{out_of_range}
 if \tcode{pos} does not correspond to a valid bit position.
 \indexlibrary{\idxcode{out_of_range}}%
-}
+\end{addedblock}
 \end{itemdescr}
 
 \indexlibrarymember{operator\~{}}{bitset}%
@@ -6680,13 +6682,13 @@ bitset<N>& flip(size_t pos);
 \end{itemdecl}
 
 \begin{itemdescr}
-\removed{%
+\begin{removedblock}
 \pnum
 \throws
 \tcode{out_of_range}
 if \tcode{pos} does not correspond to a valid bit position.%
 \indexlibrary{\idxcode{out_of_range}}
-}
+\end{removedblock}
 
 \pnum
 \effects
@@ -6697,13 +6699,13 @@ Toggles the bit at position \tcode{pos} in
 \returns
 \tcode{*this}.
 
-\added{%
+\begin{addedblock}
 \pnum
 \throws
 \tcode{out_of_range}
 if \tcode{pos} does not correspond to a valid bit position.%
 \indexlibrary{\idxcode{out_of_range}}
-}
+\end{addedblock}
 \end{itemdescr}
 
 \indexlibrarymember{to_ulong}{bitset}%
@@ -6712,7 +6714,7 @@ unsigned long to_ulong() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\removed{%
+\begin{removedblock}
 \pnum
 \throws
 \tcode{overflow_error}%
@@ -6721,13 +6723,13 @@ if the integral value \tcode{x} corresponding to the bits in
 \tcode{*this}
 cannot be represented as type
 \tcode{unsigned long}.
-}
+\end{removedblock}
 
 \pnum
 \returns
 \tcode{x}.
 
-\added{%
+\begin{addedblock}
 \pnum
 \throws
 \tcode{overflow_error}%
@@ -6736,7 +6738,7 @@ if the integral value \tcode{x} corresponding to the bits in
 \tcode{*this}
 cannot be represented as type
 \tcode{unsigned long}.
-}
+\end{addedblock}
 \end{itemdescr}
 
 \indexlibrarymember{to_ullong}{bitset}%
@@ -6745,7 +6747,7 @@ unsigned long long to_ullong() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\removed{%
+\begin{removedblock}
 \pnum
 \indexlibrary{\idxcode{overflow_error}}%
 \throws
@@ -6754,13 +6756,13 @@ if the integral value \tcode{x} corresponding to the bits in
 \tcode{*this}
 cannot be represented as type
 \tcode{unsigned long long}.
-}
+\end{removedblock}
 
 \pnum
 \returns
 \tcode{x}.
 
-\added{%
+\begin{addedblock}
 \pnum
 \indexlibrary{\idxcode{overflow_error}}%
 \throws
@@ -6769,7 +6771,7 @@ if the integral value \tcode{x} corresponding to the bits in
 \tcode{*this}
 cannot be represented as type
 \tcode{unsigned long long}.
-}
+\end{addedblock}
 \end{itemdescr}
 
 \indexlibrarymember{to_string}{bitset}%
@@ -6842,13 +6844,13 @@ bool test(size_t pos) const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\removed{%
+\begin{removedblock}
 \pnum
 \throws
 \tcode{out_of_range}
 if \tcode{pos} does not correspond to a valid bit position.%
 \indexlibrary{\idxcode{out_of_range}}
-}
+\end{removedblock}
 
 \pnum
 \returns
@@ -6858,13 +6860,13 @@ in
 \tcode{*this}
 has the value one.
 
-\added{%
+\begin{addedblock}
 \pnum
 \throws
 \tcode{out_of_range}
 if \tcode{pos} does not correspond to a valid bit position.%
 \indexlibrary{\idxcode{out_of_range}}
-}
+\end{addedblock}
 \end{itemdescr}
 
 \indexlibrarymember{all}{bitset}%
@@ -7634,34 +7636,35 @@ static constexpr pointer pointer_traits<T*>::pointer_to(@\seebelow@ r) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \mandates For the first member function, \tcode{Ptr::pointer_to(r)} is well-formed.
-}
+\end{addedblock}
 
-\added{%
+
+\begin{addedblock}
 \pnum
 \expects For the first member function, \tcode{Ptr::pointer_to(r)} returns a pointer to \tcode{r} through which
 indirection is valid.
-}
+\end{addedblock}
 
-\added{%
+\begin{addedblock}
 \pnum
 \returns The first member function returns \tcode{Ptr::pointer_to(r)}. The second member function returns \tcode{addressof(r)}.
-}
+\end{addedblock}
 
 \pnum
 \remarks If \tcode{element_type} is \cv{}~\tcode{void}, the type of
 \tcode{r} is unspecified; otherwise, it is \tcode{element_type\&}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \returns The first member function returns a pointer to \tcode{r}
 obtained by calling \tcode{Ptr::pointer_to(r)} through which
 indirection is valid; an instantiation of this function is
 ill-formed if \tcode{Ptr} does not have a matching \tcode{pointer_to} static member
 function. The second member function returns \tcode{addressof(r)}.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \rSec3[pointer.traits.optmem]{Optional members}
@@ -9492,20 +9495,20 @@ template<class U> default_delete(const default_delete<U>& other) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{U*} is implicitly convertible to \tcode{T*}
-}
+\end{addedblock}
 
 \pnum
 \effects Constructs a \tcode{default_delete} object
 from another \tcode{default_delete<U>} object.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks This constructor shall not participate in overload resolution unless
 \tcode{U*} is implicitly convertible to \tcode{T*}.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrarymember{operator()}{default_delete}%
@@ -9539,21 +9542,21 @@ template<class U> default_delete(const default_delete<U[]>& other) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{U(*)[]} is convertible to \tcode{T(*)[]}.
-}
+\end{addedblock}
 
 \pnum
 \effects
 Constructs a \tcode{default_delete} object from another \tcode{default_delete<U[]>} object.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks
 This constructor shall not participate in overload resolution unless \tcode{U(*)[]} is
 convertible to \tcode{T(*)[]}.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrarymember{operator()}{default_delete}%
@@ -9562,10 +9565,10 @@ template<class U> void operator()(U* ptr) const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{U(*)[]} is convertible to \tcode{T(*)[]}.
-}
+\end{addedblock}
 
 \pnum
 \effects
@@ -9573,10 +9576,10 @@ Calls \tcode{delete[]} on \tcode{ptr}.
 
 \pnum
 \remarks If \tcode{U} is an incomplete type, the program is ill-formed.
-\removed{%
+\begin{removedblock}
 This function shall not participate in overload resolution
 unless \tcode{U(*)[]} is convertible to \tcode{T(*)[]}.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \rSec3[unique.ptr.single]{\tcode{unique_ptr} for single objects}
@@ -9673,11 +9676,11 @@ constexpr unique_ptr(nullptr_t) noexcept;
 meet}{meets} the \oldconcept{DefaultConstructible} requirements (\tref{cpp17.defaultconstructible}),
 and that construction shall not throw an exception.
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_pointer_v<deleter_type>} is \tcode{false} and 
 \tcode{is_default_constructible_v<deleter_type>} is \tcode{true}.
-}
+\end{addedblock}
 
 \pnum
 \effects Constructs a \tcode{unique_ptr} object that owns
@@ -9687,12 +9690,12 @@ nothing, value-initializing the stored pointer and the stored deleter.
 \ensures \tcode{get() == nullptr}. \tcode{get_deleter()}
 returns a reference to the stored deleter.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks If \tcode{is_pointer_v<deleter_type>} is \tcode{true} or
 \tcode{is_default_constructible_v<deleter_type>} is \tcode{false},
 this constructor shall not participate in overload resolution.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{unique_ptr}!constructor}%
@@ -9707,17 +9710,17 @@ explicit unique_ptr(pointer p) noexcept;
 meet}{meets} the \oldconcept{DefaultConstructible} requirements (\tref{cpp17.defaultconstructible}),
 and that construction shall not throw an exception.
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_pointer_v<deleter_type>} is \tcode{false} and
 \tcode{is_default_constructible_v<deleter_type>} is \tcode{true}.
-}
+\end{addedblock}
 
-\added{%
+\begin{addedblock}
 \pnum
 \mandates This constructor shall not be selected by class template
 argument deduction\iref{over.match.class.deduct}.
-}
+\end{addedblock}
 
 \pnum
 \effects Constructs a \tcode{unique_ptr} which owns
@@ -9728,7 +9731,7 @@ value-initializing the stored deleter.
 \ensures \tcode{get() == p}. \tcode{get_deleter()}
 returns a reference to the stored deleter.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks If \tcode{is_pointer_v<deleter_type>} is \tcode{true} or
 \tcode{is_default_constructible_v<deleter_type>} is \tcode{false},
@@ -9736,7 +9739,7 @@ this constructor shall not participate in overload resolution.
 If class template argument deduction\iref{over.match.class.deduct}
 would select the function template corresponding to this constructor,
 then the program is ill-formed.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{unique_ptr}!constructor}%
@@ -9746,16 +9749,16 @@ unique_ptr(pointer p, remove_reference_t<D>&& d) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{is_constructible_v<D, decltype(d)>} is \tcode{true}.
-}
+\end{addedblock}
 
-\added{%
+\begin{addedblock}
 \pnum
 \mandates For the second constructor, \tcode{D} is not a reference type. These constructors
 shall not be selected by class template argument deduction\iref{over.match.class.deduct}.
-}
+\end{addedblock}
 
 \pnum
 \changed{\requires}{\expects} For the first constructor, if \tcode{D} is not a reference type,
@@ -9770,13 +9773,13 @@ such construction shall not exit via an exception.
 the stored pointer with \tcode{p} and initializing the deleter
 from \tcode{std::forward<decltype(d)>(d)}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks If \tcode{D} is a reference type,
 the second constructor is defined as deleted.
 These constructors shall not participate in overload resolution
 unless \tcode{is_constructible_v<D, decltype(d)>} is \tcode{true}.
-}
+\end{removedblock}
 
 \pnum
 \ensures \tcode{get() == p}.
@@ -9784,12 +9787,12 @@ unless \tcode{is_constructible_v<D, decltype(d)>} is \tcode{true}.
 deleter. If \tcode{D} is a reference type then \tcode{get_deleter()}
 returns a reference to the lvalue \tcode{d}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks If class template argument deduction\iref{over.match.class.deduct}
 would select a function template corresponding to either of these constructors,
 then the program is ill-formed.
-}
+\end{removedblock}
 
 \pnum
 \begin{example}
@@ -9863,14 +9866,14 @@ lvalue of type \tcode{E} shall be well-formed and shall not throw an exception.
 \tcode{D} is not a reference type and \tcode{E} is implicitly convertible to \tcode{D}.
 \end{itemize}
 
-\added{%
+\begin{addedblock}
 \pnum
 \expects If \tcode{E} is not a reference type,
 construction of the deleter from an rvalue of type
 \tcode{E} shall be well-formed and shall not throw an exception.
 Otherwise, \tcode{E} is a reference type and construction of the deleter from an
 lvalue of type \tcode{E} shall be well-formed and shall not throw an exception.
-}
+\end{addedblock}
 
 \pnum
 \effects Constructs a \tcode{unique_ptr} from \tcode{u}.
@@ -9960,13 +9963,13 @@ of type \tcode{E} shall be well-formed and shall not throw an exception.
 \item \tcode{is_assignable_v<D\&, E\&\&>} is \tcode{true}.
 \end{itemize}
 
-\added{%
+\begin{addedblock}
 \pnum
 \expects If \tcode{E} is not a reference type, assignment of the deleter from
 an rvalue of type \tcode{E} shall be well-formed and shall not throw an exception.
 Otherwise, \tcode{E} is a reference type and assignment of the deleter from an lvalue
 of type \tcode{E} shall be well-formed and shall not throw an exception.
-}
+\end{addedblock}
 
 \pnum
 \effects Calls \tcode{reset(u.release())} followed by
@@ -10211,10 +10214,10 @@ takes a single parameter of type \tcode{pointer}\changed{%
 except that it additionally
 shall not participate in overload resolution unless}{.}
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints
-}
+\end{addedblock}
 \begin{itemize}
 \item \tcode{U} is the same type as \tcode{pointer}, or
 \item \tcode{pointer} is the same type as \tcode{element_type*},
@@ -10237,10 +10240,10 @@ take a parameter of type \tcode{pointer} and a second parameter
 \changed{except that they
 shall not participate in overload resolution unless either}{.}
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints
-}
+\end{addedblock}
 \begin{itemize}
 \item \tcode{U} is the same type as \tcode{pointer},
 \item \tcode{U} is \tcode{nullptr_t}, or
@@ -10261,10 +10264,10 @@ This constructor behaves the same as in the primary template\changed{,
 except that it shall not participate in overload resolution
 unless all of the following conditions hold,}{.}
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints
-}
+\end{addedblock}
 where \tcode{UP} is \tcode{unique_ptr<U, E>}:
 
 \begin{itemize}
@@ -10294,10 +10297,10 @@ This operator behaves the same as in the primary template\changed{,
 except that it shall not participate in overload resolution
 unless all of the following conditions hold,}{.}
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints
-}
+\end{addedblock}
 where \tcode{UP} is \tcode{unique_ptr<U, E>}:
 
 \begin{itemize}
@@ -10354,10 +10357,10 @@ the \tcode{reset} member of the primary template\changed{,
 except that it shall not participate in overload resolution
 unless either}{.}
 
-\added{%
+\begin{addedblock}
 \pnum
 \constraints
-}
+\end{addedblock}
 \begin{itemize}
 \item \tcode{U} is the same type as \tcode{pointer}, or
 \item \tcode{pointer} is the same type as \tcode{element_type*},
@@ -10492,22 +10495,22 @@ Then the specialization
 \tcode{less<CT>} \changed{shall be}{is} a function object type\iref{function.objects} that
 induces a strict weak ordering\iref{alg.sorting} on the pointer values.
 
-\added{%
+\begin{addedblock}
 \pnum
 \mandates \tcode{unique_ptr<T1, D1>::pointer} is implicitly convertible
 to \tcode{CT} and \tcode{unique_ptr<T2, D2>::pointer} is implicitly
 convertible to \tcode{CT}.
-}
+\end{addedblock}
 
 \pnum
 \returns \tcode{less<CT>()(x.get(), y.get())}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks If \tcode{unique_ptr<T1, D1>::pointer} is not implicitly convertible
 to \tcode{CT} or \tcode{unique_ptr<T2, D2>::pointer} is not implicitly
 convertible to \tcode{CT}, the program is ill-formed.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrarymember{operator>}{unique_ptr}%
@@ -10664,10 +10667,10 @@ template<class E, class T, class Y, class D>
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{os << p.get()} is a valid expression.
-}
+\end{addedblock}
 
 \pnum
 \effects Equivalent to: \tcode{os << p.get();}
@@ -10675,11 +10678,11 @@ template<class E, class T, class Y, class D>
 \pnum
 \returns \tcode{os}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks This function shall not participate in overload resolution
 unless \tcode{os << p.get()} is a valid expression.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \indextext{smart pointers|(}%
@@ -10863,13 +10866,13 @@ template<class Y> explicit shared_ptr(Y* p);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum\constraints When \tcode{T} is an array type, the expression \tcode{delete[] p} is well-formed and either
 \tcode{T} is \tcode{U[N]} and \tcode{Y(*)[N]} is convertible to \tcode{T*}, or
 \tcode{T} is \tcode{U[]} and \tcode{Y(*)[]} is convertible to \tcode{T*}.
 When \tcode{T} is not an array type, the expression \tcode{delete p} is well-formed and
 \tcode{Y*} is convertible to \tcode{T*}.
-}
+\end{addedblock}
 
 \pnum\changed{\requires}{\expects} \tcode{Y} \changed{shall be}{is} a complete type. The expression
 \tcode{delete[] p}, when \tcode{T} is an array type, or
@@ -10893,7 +10896,7 @@ when \tcode{T} is not an array type, \tcode{delete[] p} otherwise.
 \pnum\throws \tcode{bad_alloc}, or an \impldef{exception type when \tcode{shared_ptr}
 constructor fails} exception when a resource other than memory could not be obtained.
 
-\removed{%
+\begin{removedblock}
 \pnum\remarks When \tcode{T} is an array type,
 this constructor shall not participate in overload resolution unless
 the expression \tcode{delete[] p} is well-formed and either
@@ -10903,7 +10906,7 @@ When \tcode{T} is not an array type,
 this constructor shall not participate in overload resolution unless
 the expression \tcode{delete p} is well-formed and
 \tcode{Y*} is convertible to \tcode{T*}.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{shared_ptr}!constructor}%
@@ -10915,7 +10918,7 @@ template<class D, class A> shared_ptr(nullptr_t p, D d, A a);
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints When \tcode{T} is an array type,
 \tcode{is_move_constructible_v<D>} is \tcode{true},
@@ -10926,7 +10929,7 @@ When \tcode{T} is not an array type,
 \tcode{is_move_constructible_v<D>} is \tcode{true},
 the expression \tcode{d(p)} is well-formed, and
 \tcode{Y*} is convertible to \tcode{T*}.
-}
+\end{addedblock}
 
 \pnum\changed{\requires}{\expects} Construction of \tcode{d} and a deleter of type \tcode{D}
 initialized with \tcode{std::move(d)} \changed{shall not}{do not} throw exceptions.
@@ -10949,7 +10952,7 @@ If an exception is thrown, \tcode{d(p)} is called.
 constructor fails} exception
 when a resource other than memory could not be obtained.
 
-\removed{%
+\begin{removedblock}
 \pnum\remarks
 When \tcode{T} is an array type,
 this constructor shall not participate in overload resolution unless
@@ -10962,7 +10965,7 @@ this constructor shall not participate in overload resolution unless
 \tcode{is_move_constructible_v<D>} is \tcode{true},
 the expression \tcode{d(p)} is well-formed, and
 \tcode{Y*} is convertible to \tcode{T*}.
-}
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{shared_ptr}!constructor}%
@@ -11481,10 +11484,10 @@ template<class T, class A, class... Args>
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{T} is not an array type.
-}
+\end{addedblock}
 
 \pnum
 \returns A \tcode{shared_ptr} to an object of type \tcode{T}
@@ -11517,21 +11520,21 @@ template<class T, class A>
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{T} is of the form \tcode{U[]}.
-}
+\end{addedblock}
 
 \pnum
 \returns A \tcode{shared_ptr} to an object of type \tcode{U[N]}
 with a default initial value,
 where \tcode{U} is \tcode{remove_extent_t<T>}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks These overloads shall only participate in overload resolution
 when \tcode{T} is of the form \tcode{U[]}.
-}
+\end{removedblock}
 
 \pnum
 \begin{example}
@@ -11554,20 +11557,20 @@ template<class T, class A>
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{T} is of the form \tcode{U[N]}.
-}
+\end{addedblock}
 
 \pnum
 \returns A \tcode{shared_ptr} to an object of type \tcode{T}
 with a default initial value.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks These overloads shall only participate in overload resolution
 when \tcode{T} is of the form \tcode{U[N]}.
-}
+\end{removedblock}
 
 \pnum
 \begin{example}
@@ -11592,10 +11595,10 @@ template<class T, class A>
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{T} is of the form \tcode{U[]}.
-}
+\end{addedblock}
 
 \pnum
 \returns A \tcode{shared_ptr} to an object of type \tcode{U[N]},
@@ -11632,21 +11635,21 @@ template<class T, class A>
 \end{itemdecl}
 
 \begin{itemdescr}
-\added{%
+\begin{addedblock}
 \pnum
 \constraints \tcode{T} is of the form \tcode{U[N]}.
-}
+\end{addedblock}
 
 \pnum
 \returns A \tcode{shared_ptr} to an object of type \tcode{T},
 where each array element of type \tcode{remove_extent_t<T>}
 has an initial value of \tcode{u}.
 
-\removed{%
+\begin{removedblock}
 \pnum
 \remarks These overloads shall only participate in overload resolution
 when \tcode{T} is of the form \tcode{U[N]}.
-}
+\end{removedblock}
 
 \pnum
 \begin{example}
