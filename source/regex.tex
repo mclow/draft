@@ -938,7 +938,7 @@ namespace std {
 \indextext{requirements!regular expression traits}%
 \indextext{\idxcode{regex_traits}!specializations}%
 The specializations \tcode{regex_traits<char>} and
-\tcode{regex_traits<wchar_t>} \changed{shall be}{are} valid and \changed{shall meet}{meets} the
+\tcode{regex_traits<wchar_t>} \changed{shall be}{are} valid and \removed{shall }meet the
 requirements for a regular expression traits class\iref{re.req}.
 
 \indexlibrarymember{regex_traits}{char_class_type}%
@@ -1321,7 +1321,7 @@ explicit basic_regex(const charT* p, flag_type f = regex_constants::ECMAScript);
 \changed{\tcode{p}}{\range{p}{p+char_traits<charT>::length(p)}} is not a valid regular expression.
 
 \pnum
-\effects  \removed{Constructs an object of class \tcode{basic_regex};} the object's
+\effects  \removed{Constructs an object of class \tcode{basic_regex};} \changed{t}{T}he object's
 internal finite state machine is constructed from the regular
 expression contained in the \changed{array of \tcode{charT} of length
 \tcode{char_traits<charT>::\brk{}length(p)} whose first element is
@@ -1349,7 +1349,7 @@ basic_regex(const charT* p, size_t len, flag_type f = regex_constants::ECMAScrip
 \throws  \tcode{regex_error} if \changed{\tcode{p}}{\range{p}{p+len}} is not a valid regular expression.
 
 \pnum
-\effects  \removed{Constructs an object of class \tcode{basic_regex};} the object's
+\effects  \removed{Constructs an object of class \tcode{basic_regex};} \changed{t}{T}he object's
 internal finite state machine is constructed from the regular
 expression contained in the sequence of characters \range{p}{p+len}, and
 interpreted according the flags specified in \tcode{f}.
@@ -1406,7 +1406,7 @@ template<class ST, class SA>
 \throws  \tcode{regex_error} if \tcode{s} is not a valid regular expression.
 
 \pnum
-\effects  \removed{Constructs an object of class \tcode{basic_regex};} the object's
+\effects  \removed{Constructs an object of class \tcode{basic_regex};} \changed{t}{T}he object's
 internal finite state machine is constructed from the regular
 expression contained in the string \tcode{s}, and interpreted according to the
 flags specified in \tcode{f}.
@@ -1430,7 +1430,7 @@ template<class ForwardIterator>
 valid regular expression.
 
 \pnum
-\effects  \removed{Constructs an object of class \tcode{basic_regex};} the object's
+\effects  \removed{Constructs an object of class \tcode{basic_regex};} \changed{t}{T}he object's
 internal finite state machine is constructed from the regular
 expression contained in the sequence of characters \range{first}{last}, and
 interpreted according to the flags specified in \tcode{f}.
@@ -1492,7 +1492,7 @@ basic_regex& operator=(const charT* ptr);
 \changed{\requires \tcode{ptr} shall not be a null pointer.}
         {\expects \range{ptr}{ptr+char_traits<charT>::length(ptr)} is a valid range.}
 
-\ednote Do we even need this requirement? We get it from the call to \tcode{assign}
+\ednote{Do we even need this requirement? We get it (implicitly) from the call to \tcode{assign}, which gets it from the string's constructor.}
 
 \pnum
 \effects Returns \tcode{assign(ptr)}.
@@ -2305,7 +2305,7 @@ template<class OutputIter>
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} \tcode{ready() == true} and \tcode{OutputIter} \changed{shall meet}{meets} the requirements for a
+\changed{\requires}{\expects} \tcode{ready() == true} and \added{that} \tcode{OutputIter} \changed{shall meet}{meets} the requirements for a
 \oldconcept{OutputIterator}\iref{output.iterators}.
 
 \pnum

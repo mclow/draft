@@ -6,7 +6,7 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & D1722R1                     \\
+          \textbf{Document Number:} & P1722R1                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
                                     & CppAlliance                 \\
@@ -40,7 +40,7 @@ This paper covers Clause 30 (Regular Expressions), and is based on N4830.
 
 The entire clause is reproduced here, but the changes are confined to a few sections:
 
-%\begin{multicols}{3}
+\begin{multicols}{2}
 \begin{itemize}
 \item{re.badexp}			\ref{re.badexp}
 \item{re.traits}			\ref{re.traits}
@@ -52,7 +52,7 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \item{re.alg.match}			\ref{re.alg.match}
 \item{re.alg.search}		\ref{re.alg.search}
 \end{itemize}
-%\end{multicols}
+\end{multicols}
 
 Drive-by fixes:
 \begin{itemize}
@@ -64,12 +64,14 @@ Drive-by fixes:
 Open questions:
 \begin{itemize}
 \item{Should I "de-shall" the entries in table 135 and 136?}
+\item{Is the Expects in [re.regex.assign]/5 necessary?}
 \end{itemize}
 
 
 Changes from R0:
 \begin{itemize}
 \item{Updated to N4830}
+\item{Minor spelling and layout fixes}
 \end{itemize}
 
 Thanks to Daniel Krügler for his advice and reviews.
