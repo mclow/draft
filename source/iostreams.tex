@@ -3855,12 +3855,12 @@ int_type uflow();
 
 \begin{itemdescr}
 \pnum
-\requires
+\changed{\requires}{\expects}
 The constraints are the same as for
 \tcode{underflow()},
-except that the result character shall be transferred from the pending
-sequence to the backup sequence, and the pending sequence shall not
-be empty before the transfer.
+except that the result character \changed{shall be}{is} transferred from the pending
+sequence to the backup sequence, and the pending sequence \changed{shall not
+be}{is not} empty before the transfer.
 
 \pnum
 \default
@@ -4016,9 +4016,9 @@ no room can be found in the put buffer enough to accommodate the
 argument character sequence.
 
 \pnum
-\requires
+\changed{\requires}{\expects}
 Every overriding definition of this virtual function
-shall obey the following constraints:
+\changed{shall obey}{obeys} the following constraints:
 \begin{itemize}
 \item
 The effect of consuming a character on the associated output sequence is
@@ -4038,7 +4038,7 @@ is nonzero then
 \tcode{pbase()}
 and
 \tcode{pptr()}
-shall be set so that:
+\changed{shall be}{are} set so that:
 \tcode{pptr() - pbase() == r}
 and the \tcode{r} characters starting at
 \tcode{pbase()}

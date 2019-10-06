@@ -6,7 +6,7 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & D1721R1                     \\
+          \textbf{Document Number:} & P1721R1                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
                                     & CppAlliance                 \\
@@ -47,6 +47,8 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \item{ios.base.callback}				\ref{ios.base.callback}
 \item{ios.base.cons}					\ref{ios.base.cons}
 \item{basic.ios.members}				\ref{basic.ios.members}
+\item{streambuf.virt.get}				\ref{streambuf.virt.get}
+\item{streambuf.virt.put}				\ref{streambuf.virt.put}
 \item{istream.cons}						\ref{istream.cons}
 \item{istream.rvalue}					\ref{istream.rvalue}
 \item{iostream.dest}					\ref{iostream.dest}
@@ -79,11 +81,9 @@ Drive-by fixes:
 \item{De-shalled a bunch of bits in [std.manip] and [quoted.manip]}
 \end{itemize}
 
-Open questions:
-\begin{itemize}
-\item{There's stuff (\requires) in [streambuf.virt.get] and [streambuf.virt.put] that I haven't dealt with.}
-\end{itemize}
-
+%Open questions:
+%\begin{itemize}
+%\end{itemize}
 
 Changes from R0:
 \begin{itemize}
@@ -93,6 +93,7 @@ Changes from R0:
 \item{De-shalled a bunch of bits in [std.manip] and [quoted.manip]}
 \item{Struck a few clauses that read "Destroys an object of type XXXX".}
 \item{Items from the LWG review from the 6-Sep teleconference.}
+\item{Changed the last few Requires in [streambuf.virt.get] and [streambuf.virt.put]}
 \end{itemize}
 
 Thanks to Daniel Krügler for his advice and reviews.
