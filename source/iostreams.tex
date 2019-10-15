@@ -4410,7 +4410,7 @@ basic_istream& operator=(basic_istream&& rhs);
 
 \begin{itemdescr}
 \pnum
-\effects As if by \tcode{swap(rhs)}.
+\effects \changed{As if by}{Equivalent to:} \tcode{swap(rhs)}.
 
 \pnum
 \returns \tcode{*this}.
@@ -5744,7 +5744,7 @@ basic_iostream& operator=(basic_iostream&& rhs);
 
 \begin{itemdescr}
 \pnum
-\effects As if by \tcode{swap(rhs)}.
+\effects \changed{As if by}{Equivalent to:} \tcode{swap(rhs)}.
 \end{itemdescr}
 
 \indexlibrarymember{swap}{basic_iostream}%
@@ -6014,7 +6014,7 @@ basic_ostream& operator=(basic_ostream&& rhs);
 
 \begin{itemdescr}
 \pnum
-\effects As if by \tcode{swap(rhs)}.
+\effects \changed{As if by}{Equivalent to:} \tcode{swap(rhs)}.
 
 \pnum
 \returns \tcode{*this}.
@@ -7376,7 +7376,6 @@ The expression \tcode{in >> quoted(s, delim, escape)} \changed{shall have}{has} 
 \end{itemdescr}
 
 \rSec1[string.streams]{String-based streams}
-\ednote{Review stopped here 06-Sep-2019}
 
 \rSec2[sstream.syn]{Header \tcode{<sstream>} synopsis}
 \indexhdr{sstream}%
@@ -7761,7 +7760,7 @@ template<class charT, class traits, class Allocator>
 
 \begin{itemdescr}
 \pnum
-\effects As if by \tcode{x.swap(y)}.
+\effects \changed{As if by}{Equivalent to:} \tcode{x.swap(y)}.
 \end{itemdescr}
 
 \rSec3[stringbuf.members]{Member functions}
@@ -8423,6 +8422,7 @@ install the contained \tcode{basic_stringbuf}.
 
 \rSec3[istringstream.assign]{Assignment and swap}
 
+\begin{removedblock}
 \indexlibrarymember{operator=}{basic_istringstream}%
 \begin{itemdecl}
 basic_istringstream& operator=(basic_istringstream&& rhs);
@@ -8436,6 +8436,7 @@ members of \tcode{rhs}.
 \pnum
 \returns \tcode{*this}.
 \end{itemdescr}
+\end{removedblock}
 
 \indexlibrarymember{swap}{basic_istringstream}%
 \begin{itemdecl}
@@ -8461,7 +8462,7 @@ template<class charT, class traits, class Allocator>
 
 \begin{itemdescr}
 \pnum
-\effects As if by \tcode{x.swap(y)}.
+\effects \changed{As if by}{Equivalent to:} \tcode{x.swap(y)}.
 \end{itemdescr}
 
 \rSec3[istringstream.members]{Member functions}
@@ -8751,6 +8752,7 @@ install the contained \tcode{basic_stringbuf}.
 
 \rSec3[ostringstream.assign]{Assignment and swap}
 
+\begin{removedblock}
 \indexlibrarymember{operator=}{basic_ostringstream}%
 \begin{itemdecl}
 basic_ostringstream& operator=(basic_ostringstream&& rhs);
@@ -8764,6 +8766,7 @@ members of \tcode{rhs}.
 \pnum
 \returns \tcode{*this}.
 \end{itemdescr}
+\end{removedblock}
 
 \indexlibrarymember{swap}{basic_ostringstream}%
 \begin{itemdecl}
@@ -8788,7 +8791,7 @@ template<class charT, class traits, class Allocator>
 
 \begin{itemdescr}
 \pnum
-\effects As if by \tcode{x.swap(y)}.
+\effects \changed{As if by}{Equivalent to:} \tcode{x.swap(y)}.
 \end{itemdescr}
 
 \rSec3[ostringstream.members]{Member functions}
@@ -9087,6 +9090,7 @@ install the contained \tcode{basic_stringbuf}.
 
 \rSec3[stringstream.assign]{Assignment and swap}
 
+\begin{removedblock}
 \indexlibrarymember{operator=}{basic_stringstream}%
 \begin{itemdecl}
 basic_stringstream& operator=(basic_stringstream&& rhs);
@@ -9100,6 +9104,7 @@ members of \tcode{rhs}.
 \pnum
 \returns \tcode{*this}.
 \end{itemdescr}
+\end{removedblock}
 
 \indexlibrarymember{swap}{basic_stringstream}%
 \begin{itemdecl}
@@ -9125,7 +9130,7 @@ template<class charT, class traits, class Allocator>
 
 \begin{itemdescr}
 \pnum
-\effects As if by \tcode{x.swap(y)}.
+\effects \changed{As if by}{Equivalent to:} \tcode{x.swap(y)}.
 \end{itemdescr}
 
 \rSec3[stringstream.members]{Member functions}
@@ -9403,9 +9408,9 @@ basic_filebuf();
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
+\changed{Constructs an object of class
 \tcode{basic_filebuf<charT, traits>},
-initializing the base class with
+initializing}{Initializes} the base class with
 \tcode{basic_streambuf<charT, traits>()}\iref{streambuf.cons}.
 
 \pnum
@@ -9420,7 +9425,7 @@ basic_filebuf(basic_filebuf&& rhs);
 
 \begin{itemdescr}
 \pnum
-\effects Move constructs from the rvalue \tcode{rhs}. It
+\effects \removed{Move constructs from the rvalue \tcode{rhs}.} It
 is \impldef{whether sequence pointers are copied by \tcode{basic_filebuf} move
 constructor} whether the sequence pointers in \tcode{*this}
 (\tcode{eback()}, \tcode{gptr()}, \tcode{egptr()},
@@ -9506,7 +9511,7 @@ template<class charT, class traits>
 
 \begin{itemdescr}
 \pnum
-\effects As if by \tcode{x.swap(y)}.
+\effects \changed{As if by}{Equivalent to:} \tcode{x.swap(y)}.
 \end{itemdescr}
 
 \rSec3[filebuf.members]{Member functions}
@@ -10133,11 +10138,11 @@ basic_ifstream();
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
+\changed{Constructs an object of class
 \tcode{basic_ifstream<charT, traits>},
-initializing the base class with
+initializing}{Initializes} the base class with
 \tcode{basic_istream<charT, traits>(addressof(sb))}\iref{istream.cons}
-and initializing \tcode{sb} with
+and \removed{initializing} \tcode{sb} with
 \tcode{basic_filebuf<charT, traits>()}\iref{filebuf.cons}.
 \end{itemdescr}
 
@@ -10152,11 +10157,11 @@ explicit basic_ifstream(const filesystem::path::value_type* s,
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
+\changed{Constructs an object of class
 \tcode{basic_ifstream<charT, traits>},
-initializing the base class with
+initializing}{Initializes} the base class with
 \tcode{basic_istream<charT, traits>(addressof(sb))}\iref{istream.cons}
-and initializing \tcode{sb} with
+and \removed{initializing} \tcode{sb} with
 \tcode{basic_filebuf<charT, traits>()}\iref{filebuf.cons},
 then calls
 \tcode{rdbuf()->open(s, mode | ios_base::in)}.
@@ -10174,7 +10179,7 @@ explicit basic_ifstream(const filesystem::path& s,
 
 \begin{itemdescr}
 \pnum
-\effects The same as \tcode{basic_ifstream(s.c_str(), mode)}.
+\effects \changed{The same as}{Equivalent to:} \tcode{basic_ifstream(s.c_str(), mode)}.
 \end{itemdescr}
 
 \indexlibrary{\idxcode{basic_ifstream}!constructor}%
@@ -10184,8 +10189,8 @@ basic_ifstream(basic_ifstream&& rhs);
 
 \begin{itemdescr}
 \pnum
-\effects Move constructs from the rvalue \tcode{rhs}. This
-is accomplished by move constructing the base class, and the contained
+\effects \changed{Move constructs from the rvalue \tcode{rhs}. This
+is accomplished by move constructing}{Move constructs} the base class, and the contained
 \tcode{basic_filebuf}. Next
 \tcode{basic_istream<charT, traits>::set_rdbuf(\brk{}addressof(sb))}
 is called to install
@@ -10193,7 +10198,7 @@ the contained \tcode{basic_filebuf}.
 \end{itemdescr}
 
 \rSec3[ifstream.assign]{Assignment and swap}
-
+\begin{removedblock}
 \indexlibrarymember{operator=}{basic_ifstream}%
 \begin{itemdecl}
 basic_ifstream& operator=(basic_ifstream&& rhs);
@@ -10207,6 +10212,7 @@ members of \tcode{rhs}.
 \pnum
 \returns \tcode{*this}.
 \end{itemdescr}
+\end{removedblock}
 
 \indexlibrarymember{swap}{basic_ifstream}%
 \begin{itemdecl}
@@ -10230,7 +10236,7 @@ template<class charT, class traits>
 
 \begin{itemdescr}
 \pnum
-\effects As if by \tcode{x.swap(y)}.
+\effects \changed{As if by}{Equivalent to:} \tcode{x.swap(y)}.
 \end{itemdescr}
 
 \rSec3[ifstream.members]{Member functions}
@@ -10382,11 +10388,11 @@ basic_ofstream();
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
+\changed{Constructs an object of class
 \tcode{basic_ofstream<charT, traits>},
-initializing the base class with
+initializing}{Initializes} the base class with
 \tcode{basic_ostream<charT, traits>(addressof(sb))}\iref{ostream.cons}
-and initializing \tcode{sb} with
+and \removed{initializing} \tcode{sb} with
 \tcode{basic_filebuf<charT, traits>()}\iref{filebuf.cons}.
 \end{itemdescr}
 
@@ -10401,11 +10407,11 @@ explicit basic_ofstream(const filesystem::path::value_type* s,
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
+\changed{Constructs an object of class
 \tcode{basic_ofstream<charT, traits>},
-initializing the base class with
+initializing}{Initializes} the base class with
 \tcode{basic_ostream<charT, traits>(addressof(sb))}\iref{ostream.cons}
-and initializing \tcode{sb} with
+and \removed{initializing} \tcode{sb} with
 \tcode{basic_filebuf<charT, traits>()}\iref{filebuf.cons},
 then calls
 \tcode{rdbuf()->open(s, mode | ios_base::out)}.
@@ -10423,7 +10429,7 @@ explicit basic_ofstream(const filesystem::path& s,
 
 \begin{itemdescr}
 \pnum
-\effects The same as \tcode{basic_ofstream(s.c_str(), mode)}.
+\effects \changed{The same as}{Equivalent to: }\tcode{basic_ofstream(s.c_str(), mode)}.
 \end{itemdescr}
 
 \indexlibrary{\idxcode{basic_ofstream}!constructor}%
@@ -10433,8 +10439,8 @@ basic_ofstream(basic_ofstream&& rhs);
 
 \begin{itemdescr}
 \pnum
-\effects Move constructs from the rvalue \tcode{rhs}. This
-is accomplished by move constructing the base class, and the contained
+\effects \changed{Move constructs from the rvalue \tcode{rhs}. This
+is accomplished by move constructing}{Move constructs} the base class, and the contained
 \tcode{basic_filebuf}. Next
 \tcode{basic_ostream<charT, traits>::set_rdbuf(\brk{}addressof(sb))}
 is called to install
@@ -10443,6 +10449,7 @@ the contained \tcode{basic_filebuf}.
 
 \rSec3[ofstream.assign]{Assignment and swap}
 
+\begin{removedblock}
 \indexlibrarymember{operator=}{basic_ofstream}%
 \begin{itemdecl}
 basic_ofstream& operator=(basic_ofstream&& rhs);
@@ -10456,6 +10463,7 @@ members of \tcode{rhs}.
 \pnum
 \returns \tcode{*this}.
 \end{itemdescr}
+\end{removedblock}
 
 \indexlibrarymember{swap}{basic_ofstream}%
 \begin{itemdecl}
@@ -10479,7 +10487,7 @@ template<class charT, class traits>
 
 \begin{itemdescr}
 \pnum
-\effects As if by \tcode{x.swap(y)}.
+\effects \changed{As if by}{Equivalent to:} \tcode{x.swap(y)}.
 \end{itemdescr}
 
 \rSec3[ofstream.members]{Member functions}
@@ -10640,11 +10648,11 @@ basic_fstream();
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
+\changed{Constructs an object of class
 \tcode{basic_fstream<charT, traits>},
-initializing the base class with
+initializing}{Initializes} the base class with
 \tcode{basic_iostream<charT, traits>(addressof(sb))}\iref{iostream.cons}
-and initializing
+and \removed{initializing}
 \tcode{sb}
 with
 \tcode{basic_filebuf<charT, traits>()}.
@@ -10663,11 +10671,11 @@ explicit basic_fstream(
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
+\changed{Constructs an object of class
 \tcode{basic_fstream<charT, traits>},
-initializing the base class with
+initializing}{Initializes} the base class with
 \tcode{basic_iostream<charT, traits>(addressof(sb))}\iref{iostream.cons}
-and initializing
+and \removed{initializing}
 \tcode{sb}
 with
 \tcode{basic_filebuf<charT, traits>()}.
@@ -10689,7 +10697,7 @@ explicit basic_fstream(
 
 \begin{itemdescr}
 \pnum
-\effects The same as \tcode{basic_fstream(s.c_str(), mode)}.
+\effects \changed{The same as}{Equivalent to:} \tcode{basic_fstream(s.c_str(), mode)}.
 \end{itemdescr}
 
 \indexlibrary{\idxcode{basic_fstream}!constructor}%
@@ -10699,8 +10707,8 @@ basic_fstream(basic_fstream&& rhs);
 
 \begin{itemdescr}
 \pnum
-\effects Move constructs from the rvalue \tcode{rhs}. This
-is accomplished by move constructing the base class, and the contained
+\effects \changed{Move constructs from the rvalue \tcode{rhs}. This
+is accomplished by move constructing}{Move constructs} the base class, and the contained
 \tcode{basic_filebuf}. Next
 \tcode{basic_istream<charT, traits>::set_rdbuf(\brk{}addressof(sb))}
 is called to install
@@ -10709,6 +10717,7 @@ the contained \tcode{basic_filebuf}.
 
 \rSec3[fstream.assign]{Assignment and swap}
 
+\begin{removedblock}
 \indexlibrarymember{operator=}{basic_fstream}%
 \begin{itemdecl}
 basic_fstream& operator=(basic_fstream&& rhs);
@@ -10722,6 +10731,7 @@ members of \tcode{rhs}.
 \pnum
 \returns \tcode{*this}.
 \end{itemdescr}
+\end{removedblock}
 
 \indexlibrarymember{swap}{basic_fstream}%
 \begin{itemdecl}
@@ -10745,7 +10755,7 @@ template<class charT, class traits>
 
 \begin{itemdescr}
 \pnum
-\effects As if by \tcode{x.swap(y)}.
+\effects \changed{As if by}{Equivalent to:} \tcode{x.swap(y)}.
 \end{itemdescr}
 
 \rSec3[fstream.members]{Member functions}
@@ -10932,8 +10942,8 @@ basic_syncbuf(streambuf_type* obuf, const Allocator& allocator);
 \begin{itemdescr}
 \pnum
 \effects
-\removed{Constructs the \tcode{basic_syncbuf} object and}
-sets \tcode{wrapped} to \tcode{obuf}.
+\changed{Constructs the \tcode{basic_syncbuf} object and
+s}{S}ets \tcode{wrapped} to \tcode{obuf}.
 
 \pnum
 \remarks
@@ -10959,9 +10969,11 @@ basic_syncbuf(basic_syncbuf&& other);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects
 Move constructs from \tcode{other} (\tref{cpp17.moveconstructible}).
+\end{removedblock}
 
 \pnum
 \ensures

@@ -6,10 +6,9 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & P1721R1                     \\
+          \textbf{Document Number:} & D1721R2                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
-                                    & CppAlliance                 \\
                                     & mclow.lists@gmail.com
           \end{tabular}
 }
@@ -50,15 +49,30 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \item{streambuf.virt.get}				\ref{streambuf.virt.get}
 \item{streambuf.virt.put}				\ref{streambuf.virt.put}
 \item{istream.cons}						\ref{istream.cons}
+\item{istream.assign}					\ref{istream.assign}
 \item{istream.rvalue}					\ref{istream.rvalue}
 \item{iostream.dest}					\ref{iostream.dest}
+\item{iostream.assign}					\ref{iostream.assign}
 \item{ostream.cons}						\ref{ostream.cons}
+\item{ostream.assign}					\ref{ostream.assign}
 \item{ostream.inserters.character}		\ref{ostream.inserters.character}
 \item{ostream.rvalue}					\ref{ostream.rvalue}
 \item{std.manip}						\ref{std.manip}
 \item{ext.manip}						\ref{ext.manip}
+\item{stringbuf.assign}					\ref{stringbuf.assign}
 \item{quoted.manip}						\ref{quoted.manip}
+\item{istringstream.assign}				\ref{istringstream.assign}
+\item{ostringstream.assign}				\ref{ostringstream.assign}
+\item{stringstream.assign}				\ref{stringstream.assign}
 \item{filebuf.members}					\ref{filebuf.members}
+\item{filebuf.cons}						\ref{filebuf.cons}
+\item{filebuf.assign}					\ref{filebuf.assign}
+\item{ifstream.cons}					\ref{ifstream.cons}
+\item{ifstream.assign}					\ref{ifstream.assign}
+\item{ofstream.cons}					\ref{ofstream.cons}
+\item{ofstream.assign}					\ref{ofstream.assign}
+\item{fstream.cons}						\ref{fstream.cons}
+\item{fstream.assign}					\ref{fstream.assign}
 \item{syncstream.syncbuf.cons}			\ref{syncstream.syncbuf.cons}
 \item{syncstream.syncbuf.assign}		\ref{syncstream.syncbuf.assign}
 \item{fs.race.behavior}					\ref{fs.race.behavior}
@@ -79,6 +93,8 @@ Drive-by fixes:
 \item{Struck a few clauses that read "Destroys an object of type XXXX". What object? SOME object!}
 \item{Changed the requirements for \tcode{get\_time} and \tcode{put\_time} in [ext.manip] to use "is a valid range."}
 \item{De-shalled a bunch of bits in [std.manip] and [quoted.manip]}
+\item{Removed a bunch of redundant wording describing assignment operators}
+\item{Changed a bunch of swap \effects from "As if by" to "Equivalent to:"}
 \end{itemize}
 
 %Open questions:
@@ -94,6 +110,13 @@ Changes from R0:
 \item{Struck a few clauses that read "Destroys an object of type XXXX".}
 \item{Items from the LWG review from the 6-Sep teleconference.}
 \item{Changed the last few Requires in [streambuf.virt.get] and [streambuf.virt.put]}
+\end{itemize}
+
+Changes from R1:
+\begin{itemize}
+\item{Items from the LWG review from the 11-Oct teleconference.}
+\item{Removed a bunch of useless constructor wording from filebuf/ifstream/ofstream.}
+\item{Removed [ifstream.assign]/1 and /2, [ofstream.assign]/1 and /2, [fstream.assign]/1 and /2, [ostringstream.assign]/1 and /2,  [istringstream.assign]/1 and /2, [ostringstream.assign]/1 and /2, and [stringstream.assign]/1 and /2 because they didn't add anything.}
 \end{itemize}
 
 Thanks to Daniel Krügler for his advice and reviews.
