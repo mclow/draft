@@ -6,10 +6,9 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & P1723R1                     \\
+          \textbf{Document Number:} & D1723R2                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
-                                    & CppAlliance                 \\
                                     & mclow.lists@gmail.com       \\
                                     & Daniel Sunderland           \\
                                     & Sandia National Laboratory  \\
@@ -47,8 +46,11 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \begin{itemize}
 \item{atomics.ref.generic}		\ref{atomics.ref.generic}
 \item{atomics.ref.operations}	\ref{atomics.ref.operations}
+\item{atomics.ref.int}			\ref{atomics.ref.int}
+\item{atomics.ref.float}		\ref{atomics.ref.float}
 \item{atomics.ref.pointer}		\ref{atomics.ref.pointer}
 \item{atomics.types.operations}	\ref{atomics.types.operations}
+\item{atomics.types.float}		\ref{atomics.types.float}
 \item{atomics.types.pointer}	\ref{atomics.types.pointer}
 \item{atomics.nonmembers}		\ref{atomics.nonmembers}
 \item{atomics.flag}				\ref{atomics.flag}
@@ -59,6 +61,7 @@ Drive-by fixes:
 \begin{itemize}
 \item{I strengthened the wording in [atomics.ref.generic] \ref{atomics.ref.generic} to require a compile-time failure for non-trivially copyable Ts.}
 \item{I removed a "shall" from the definition of \tcode{ATOMIC_INIT} in [atomics.flag] \ref{atomics.flag}.}
+\item{Qualified all the \tcode{memory_order} enum value in [atomics.ref.*] and [atomics.types.*]}
 \end{itemize}
 
 %Open questions:
@@ -73,6 +76,12 @@ Changes from R0:
 \begin{itemize}
 \item{Incorporated changes from P1505, and changed several "is not" into "is neither".}
 \item{Updated to N4830.}
+\end{itemize}
+
+Changes from R1:
+\begin{itemize}
+\item{Items from the LWG review at 11-Oct teleconference.}
+\item{Qualified all the \tcode{memory_order} enum values.}
 \end{itemize}
 
 Thanks to Daniel Krügler for his advice and reviews.

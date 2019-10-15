@@ -718,17 +718,17 @@ namespace std {
     operator T() const noexcept;
 
     bool is_lock_free() const noexcept;
-    void store(T, memory_order = memory_order_seq_cst) const noexcept;
-    T load(memory_order = memory_order_seq_cst) const noexcept;
-    T exchange(T, memory_order = memory_order_seq_cst) const noexcept;
+    void store(T, memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
+    T load(memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
+    T exchange(T, memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     bool compare_exchange_weak(T&, T,
                                memory_order, memory_order) const noexcept;
     bool compare_exchange_strong(T&, T,
                                  memory_order, memory_order) const noexcept;
     bool compare_exchange_weak(T&, T,
-                               memory_order = memory_order_seq_cst) const noexcept;
+                               memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     bool compare_exchange_strong(T&, T,
-                                 memory_order = memory_order_seq_cst) const noexcept;
+                                 memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     void wait(T, memory_order = memory_order::seq_cst) const noexcept;
     void notify_one() noexcept;
     void notify_all() noexcept;
@@ -743,7 +743,7 @@ for the lifetime\iref{basic.life} of the \tcode{atomic_ref} object,
 the object referenced by \tcode{*ptr} is an atomic object\iref{intro.races}.
 
 \pnum
-\added{The program is ill-formed if \tcode{is_trivially_copyable_v<T>} is false.}
+\added{The program is ill-formed if \tcode{is_trivially_copyable_v<T>} is \tcode{false}.}
 \removed{The template argument for \tcode{T} shall be trivially copyable\iref{basic.types}.}
 
 \pnum
@@ -894,15 +894,15 @@ bool is_lock_free() const noexcept;
 \indexlibrarymember{store}{atomic_ref<\placeholder{integral}>}%
 \indexlibrarymember{store}{atomic_ref<\placeholder{floating-point}>}%
 \begin{itemdecl}
-void store(T desired, memory_order order = memory_order_seq_cst) const noexcept;
+void store(T desired, memory_order order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is neither}
-\tcode{memory_order_consume},
-\tcode{memory_order_acquire}, nor
-\tcode{memory_order_acq_rel}.
+\tcode{\added{memory_order::}memory_order_consume},
+\tcode{\added{memory_order::}memory_order_acquire}, nor
+\tcode{\added{memory_order::}memory_order_acq_rel}.
 
 \pnum
 \effects Atomically replaces the value referenced by \tcode{*ptr}
@@ -915,13 +915,13 @@ Memory is affected according to the value of \tcode{order}.
 \indexlibrarymember{load}{atomic_ref<\placeholder{integral}>}%
 \indexlibrarymember{load}{atomic_ref<\placeholder{floating-point}>}%
 \begin{itemdecl}
-T load(memory_order order = memory_order_seq_cst) const noexcept;
+T load(memory_order order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects} The \tcode{order} argument \changed{shall not be}{is neither}
-\tcode{memory_order_release} nor \tcode{memory_order_acq_rel}.
+\tcode{\added{memory_order::}memory_order_release} nor \tcode{\added{memory_order::}memory_order_acq_rel}.
 
 \pnum
 \effects Memory is affected according to the value of \tcode{order}.
@@ -935,7 +935,7 @@ T load(memory_order order = memory_order_seq_cst) const noexcept;
 \indexlibrarymember{exchange}{atomic_ref<\placeholder{integral}>}%
 \indexlibrarymember{exchange}{atomic_ref<\placeholder{floating-point}>}%
 \begin{itemdecl}
-T exchange(T desired, memory_order order = memory_order_seq_cst) const noexcept;
+T exchange(T desired, memory_order order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -966,16 +966,16 @@ bool compare_exchange_strong(T& expected, T desired,
                              memory_order success, memory_order failure) const noexcept;
 
 bool compare_exchange_weak(T& expected, T desired,
-                           memory_order order = memory_order_seq_cst) const noexcept;
+                           memory_order order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
 
 bool compare_exchange_strong(T& expected, T desired,
-                             memory_order order = memory_order_seq_cst) const noexcept;
+                             memory_order order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects} The \tcode{failure} argument \changed{shall not be}{is neither}
-\tcode{memory_order_release} nor \tcode{memory_order_acq_rel}.
+\tcode{\added{memory_order::}memory_order_release} nor \tcode{\added{memory_order::}memory_order_acq_rel}.
 
 \pnum
 \effects Retrieves the value in \tcode{expected}.
@@ -991,10 +991,10 @@ memory is affected according to the value of \tcode{failure}.
 When only one \tcode{memory_order} argument is supplied,
 the value of \tcode{success} is \tcode{order}, and
 the value of \tcode{failure} is \tcode{order}
-except that a value of \tcode{memory_order_acq_rel} shall be replaced by
-the value \tcode{memory_order_acquire} and
-a value of \tcode{memory_order_release} shall be replaced by
-the value \tcode{memory_order_relaxed}.
+except that a value of \tcode{\added{memory_order::}memory_order_acq_rel} shall be replaced by
+the value \tcode{\added{memory_order::}memory_order_acquire} and
+a value of \tcode{\added{memory_order::}memory_order_release} shall be replaced by
+the value \tcode{\added{memory_order::}memory_order_relaxed}.
 If and only if the comparison is \tcode{false} then,
 after the atomic operation,
 the value in \tcode{expected} is replaced by
@@ -1142,29 +1142,29 @@ namespace std {
     operator @\placeholdernc{integral}@() const noexcept;
 
     bool is_lock_free() const noexcept;
-    void store(@\placeholdernc{integral}@, memory_order = memory_order_seq_cst) const noexcept;
-    @\placeholdernc{integral}@ load(memory_order = memory_order_seq_cst) const noexcept;
+    void store(@\placeholdernc{integral}@, memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
+    @\placeholdernc{integral}@ load(memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     @\placeholdernc{integral}@ exchange(@\placeholdernc{integral}@,
-                      memory_order = memory_order_seq_cst) const noexcept;
+                      memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     bool compare_exchange_weak(@\placeholder{integral}@&, @\placeholder{integral}@,
                                memory_order, memory_order) const noexcept;
     bool compare_exchange_strong(@\placeholder{integral}@&, @\placeholder{integral}@,
                                  memory_order, memory_order) const noexcept;
     bool compare_exchange_weak(@\placeholder{integral}@&, @\placeholder{integral}@,
-                               memory_order = memory_order_seq_cst) const noexcept;
+                               memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     bool compare_exchange_strong(@\placeholder{integral}@&, @\placeholder{integral}@,
-                                 memory_order = memory_order_seq_cst) const noexcept;
+                                 memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
 
     @\placeholdernc{integral}@ fetch_add(@\placeholdernc{integral}@,
-                       memory_order = memory_order_seq_cst) const noexcept;
+                       memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     @\placeholdernc{integral}@ fetch_sub(@\placeholdernc{integral}@,
-                       memory_order = memory_order_seq_cst) const noexcept;
+                       memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     @\placeholdernc{integral}@ fetch_and(@\placeholdernc{integral}@,
-                       memory_order = memory_order_seq_cst) const noexcept;
+                       memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     @\placeholdernc{integral}@ fetch_or(@\placeholdernc{integral}@,
-                      memory_order = memory_order_seq_cst) const noexcept;
+                      memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     @\placeholdernc{integral}@ fetch_xor(@\placeholdernc{integral}@,
-                       memory_order = memory_order_seq_cst) const noexcept;
+                       memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
 
     void wait(@\placeholdernc{integral}@, memory_order = memory_order::seq_cst) const noexcept;
     void notify_one() noexcept;
@@ -1198,7 +1198,7 @@ in \tref{atomic.types.int.comp}.
 \indexlibrarymember{fetch_sub}{atomic_ref<\placeholder{integral}>}%
 \indexlibrarymember{fetch_xor}{atomic_ref<\placeholder{integral}>}%
 \begin{itemdecl}
-@\placeholdernc{integral}@ fetch_@\placeholdernc{key}@(@\placeholdernc{integral}@ operand, memory_order order = memory_order_seq_cst) const noexcept;
+@\placeholdernc{integral}@ fetch_@\placeholdernc{key}@(@\placeholdernc{integral}@ operand, memory_order order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1273,23 +1273,23 @@ namespace std {
     operator @\placeholdernc{floating-point}@() const noexcept;
 
     bool is_lock_free() const noexcept;
-    void store(@\placeholdernc{floating-point}@, memory_order = memory_order_seq_cst) const noexcept;
-    @\placeholder{floating-point}@ load(memory_order = memory_order_seq_cst) const noexcept;
+    void store(@\placeholdernc{floating-point}@, memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
+    @\placeholder{floating-point}@ load(memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     @\placeholder{floating-point}@ exchange(@\placeholdernc{floating-point}@,
-                            memory_order = memory_order_seq_cst) const noexcept;
+                            memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     bool compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
                                memory_order, memory_order) const noexcept;
     bool compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
                                  memory_order, memory_order) const noexcept;
     bool compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
-                               memory_order = memory_order_seq_cst) const noexcept;
+                               memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     bool compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
-                                 memory_order = memory_order_seq_cst) const noexcept;
+                                 memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
 
     @\placeholder{floating-point}@ fetch_add(@\placeholdernc{floating-point}@,
-                             memory_order = memory_order_seq_cst) const noexcept;
+                             memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     @\placeholder{floating-point}@ fetch_sub(@\placeholdernc{floating-point}@,
-                             memory_order = memory_order_seq_cst) const noexcept;
+                             memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
 
     void wait(@\placeholdernc{floating-point}@, memory_order = memory_order::seq_cst) const noexcept;
     void notify_one() noexcept;
@@ -1314,7 +1314,7 @@ in \tref{atomic.types.int.comp}.
 \indexlibrarymember{fetch_sub}{atomic_ref<\placeholder{floating-point}>}%
 \begin{itemdecl}
 @\placeholder{floating-point}@ fetch_@\placeholdernc{key}@(@\placeholder{floating-point}@ operand,
-                          memory_order order = memory_order_seq_cst) const noexcept;
+                          memory_order order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1375,20 +1375,20 @@ namespace std {
     operator T*() const noexcept;
 
     bool is_lock_free() const noexcept;
-    void store(T*, memory_order = memory_order_seq_cst) const noexcept;
-    T* load(memory_order = memory_order_seq_cst) const noexcept;
-    T* exchange(T*, memory_order = memory_order_seq_cst) const noexcept;
+    void store(T*, memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
+    T* load(memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
+    T* exchange(T*, memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     bool compare_exchange_weak(T*&, T*,
                                memory_order, memory_order) const noexcept;
     bool compare_exchange_strong(T*&, T*,
                                  memory_order, memory_order) const noexcept;
     bool compare_exchange_weak(T*&, T*,
-                               memory_order = memory_order_seq_cst) const noexcept;
+                               memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
     bool compare_exchange_strong(T*&, T*,
-                                 memory_order = memory_order_seq_cst) const noexcept;
+                                 memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
 
-    T* fetch_add(difference_type, memory_order = memory_order_seq_cst) const noexcept;
-    T* fetch_sub(difference_type, memory_order = memory_order_seq_cst) const noexcept;
+    T* fetch_add(difference_type, memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
+    T* fetch_sub(difference_type, memory_order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
 
     void wait(T*, memory_order = memory_order::seq_cst) const noexcept;
     void notify_one() noexcept;
@@ -1416,7 +1416,7 @@ in \tref{atomic.types.pointer.comp}.
 \indexlibrarymember{fetch_add}{atomic_ref<T*>}%
 \indexlibrarymember{fetch_sub}{atomic_ref<T*>}%
 \begin{itemdecl}
-T* fetch_@\placeholdernc{key}@(difference_type operand, memory_order order = memory_order_seq_cst) const noexcept;
+T* fetch_@\placeholdernc{key}@(difference_type operand, memory_order order = @\added{memory_order::}@memory_order_seq_cst) const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2242,16 +2242,16 @@ namespace std {
     static constexpr bool is_always_lock_free = @\impdefx{whether a given \tcode{atomic} type's operations are always lock free}@;
     bool is_lock_free() const volatile noexcept;
     bool is_lock_free() const noexcept;
-    void store(@\placeholdernc{floating-point}@, memory_order = memory_order_seq_cst) volatile noexcept;
-    void store(@\placeholdernc{floating-point}@, memory_order = memory_order_seq_cst) noexcept;
-    @\placeholdernc{floating-point}@ load(memory_order = memory_order_seq_cst) volatile noexcept;
-    @\placeholdernc{floating-point}@ load(memory_order = memory_order_seq_cst) noexcept;
+    void store(@\placeholdernc{floating-point}@, memory_order = @\added{memory_order::}@memory_order_seq_cst) volatile noexcept;
+    void store(@\placeholdernc{floating-point}@, memory_order = @\added{memory_order::}@memory_order_seq_cst) noexcept;
+    @\placeholdernc{floating-point}@ load(memory_order = @\added{memory_order::}@memory_order_seq_cst) volatile noexcept;
+    @\placeholdernc{floating-point}@ load(memory_order = @\added{memory_order::}@memory_order_seq_cst) noexcept;
     operator @\placeholdernc{floating-point}@() volatile noexcept;
     operator @\placeholdernc{floating-point}@() noexcept;
     @\placeholdernc{floating-point}@ exchange(@\placeholdernc{floating-point}@,
-                            memory_order = memory_order_seq_cst) volatile noexcept;
+                            memory_order = @\added{memory_order::}@memory_order_seq_cst) volatile noexcept;
     @\placeholdernc{floating-point}@ exchange(@\placeholdernc{floating-point}@,
-                            memory_order = memory_order_seq_cst) noexcept;
+                            memory_order = @\added{memory_order::}@memory_order_seq_cst) noexcept;
     bool compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
                                memory_order, memory_order) volatile noexcept;
     bool compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
@@ -2261,22 +2261,22 @@ namespace std {
     bool compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
                                  memory_order, memory_order) noexcept;
     bool compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
-                               memory_order = memory_order_seq_cst) volatile noexcept;
+                               memory_order = @\added{memory_order::}@memory_order_seq_cst) volatile noexcept;
     bool compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
-                               memory_order = memory_order_seq_cst) noexcept;
+                               memory_order = @\added{memory_order::}@memory_order_seq_cst) noexcept;
     bool compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
-                                 memory_order = memory_order_seq_cst) volatile noexcept;
+                                 memory_order = @\added{memory_order::}@memory_order_seq_cst) volatile noexcept;
     bool compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
-                                 memory_order = memory_order_seq_cst) noexcept;
+                                 memory_order = @\added{memory_order::}@memory_order_seq_cst) noexcept;
 
     @\placeholdernc{floating-point}@ fetch_add(@\placeholdernc{floating-point}@,
-                             memory_order = memory_order_seq_cst) volatile noexcept;
+                             memory_order = @\added{memory_order::}@memory_order_seq_cst) volatile noexcept;
     @\placeholdernc{floating-point}@ fetch_add(@\placeholdernc{floating-point}@,
-                             memory_order = memory_order_seq_cst) noexcept;
+                             memory_order = @\added{memory_order::}@memory_order_seq_cst) noexcept;
     @\placeholdernc{floating-point}@ fetch_sub(@\placeholdernc{floating-point}@,
-                             memory_order = memory_order_seq_cst) volatile noexcept;
+                             memory_order = @\added{memory_order::}@memory_order_seq_cst) volatile noexcept;
     @\placeholdernc{floating-point}@ fetch_sub(@\placeholdernc{floating-point}@,
-                             memory_order = memory_order_seq_cst) noexcept;
+                             memory_order = @\added{memory_order::}@memory_order_seq_cst) noexcept;
 
     void wait(@\placeholdernc{floating-point}@, memory_order = memory_order::seq_cst) const volatile noexcept;
     void wait(@\placeholdernc{floating-point}@, memory_order = memory_order::seq_cst) const noexcept;
@@ -2322,8 +2322,8 @@ The key, operator, and computation correspondence are identified in
 \indexlibrarymember{fetch_add}{atomic<\placeholder{floating-point}>}%
 \indexlibrarymember{fetch_sub}{atomic<\placeholder{floating-point}>}%
 \begin{itemdecl}
-T A::fetch_@\placeholdernc{key}@(T operand, memory_order order = memory_order_seq_cst) volatile noexcept;
-T A::fetch_@\placeholdernc{key}@(T operand, memory_order order = memory_order_seq_cst) noexcept;
+T A::fetch_@\placeholdernc{key}@(T operand, memory_order order = @\added{memory_order::}@memory_order_seq_cst) volatile noexcept;
+T A::fetch_@\placeholdernc{key}@(T operand, memory_order order = @\added{memory_order::}@memory_order_seq_cst) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2592,7 +2592,7 @@ template<class T>
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\expects This function is only applied
+\expects This function is applied only
 to objects that have been default constructed, and then only once.
 \end{addedblock}
 
