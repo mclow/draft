@@ -938,7 +938,7 @@ namespace std {
 \indextext{requirements!regular expression traits}%
 \indextext{\idxcode{regex_traits}!specializations}%
 The specializations \tcode{regex_traits<char>} and
-\tcode{regex_traits<wchar_t>} \changed{shall be}{are} valid and \removed{shall }meet the
+\tcode{regex_traits<wchar_t>} \removed{shall be valid and shall} meet the
 requirements for a regular expression traits class\iref{re.req}.
 
 \indexlibrarymember{regex_traits}{char_class_type}%
@@ -1299,9 +1299,10 @@ namespace std {
 basic_regex();
 \end{itemdecl}
 
+\ednote{All through this sub-clause, please move the "Throws:" elements to be after the "Effects:" and "Ensures:" elements.}
 \begin{itemdescr}
 \pnum
-\removed{\effects  Constructs an object of class \tcode{basic_regex} that
+\removed{\effects Constructs an object of class \tcode{basic_regex} that
 does not match any character sequence.}
 \added{\ensures \tcode{*this} does not match any character sequence.}
 \end{itemdescr}
@@ -1459,8 +1460,10 @@ basic_regex& operator=(const basic_regex& e);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects Copies \tcode{e} into \tcode{*this} and returns \tcode{*this}.
+\end{removedblock}
 
 \pnum\ensures
 \tcode{flags()} and \tcode{mark_count()} return
@@ -1473,8 +1476,10 @@ basic_regex& operator=(basic_regex&& e) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects Move assigns from \tcode{e} into \tcode{*this} and returns \tcode{*this}.
+\end{removedblock}
 
 \pnum
 \ensures \tcode{flags()} and \tcode{mark_count()} return the values that
@@ -1488,14 +1493,13 @@ basic_regex& operator=(const charT* ptr);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
-\changed{\requires \tcode{ptr} shall not be a null pointer.}
-        {\expects \range{ptr}{ptr+char_traits<charT>::length(ptr)} is a valid range.}
-
-\ednote{Do we even need this requirement? We get it (implicitly) from the call to \tcode{assign}, which gets it from the string's constructor.}
+\requires \tcode{ptr} shall not be a null pointer.
+\end{removedblock}
 
 \pnum
-\effects Returns \tcode{assign(ptr)}.
+\effects \changed{Returns}{Equivalent to:} \tcode{\added{return} assign(ptr)}.
 \end{itemdescr}
 
 \indexlibrarymember{basic_regex}{operator=}%
@@ -1505,7 +1509,7 @@ basic_regex& operator=(initializer_list<charT> il);
 
 \begin{itemdescr}
 \pnum
-\effects Returns \tcode{assign(il.begin(), il.end())}.
+\effects \changed{Returns}{Equivalent to:} \tcode{\added{return} assign(il.begin(), il.end())}.
 \end{itemdescr}
 
 \indexlibrarymember{basic_regex}{operator=}%
@@ -1516,7 +1520,7 @@ template<class ST, class SA>
 
 \begin{itemdescr}
 \pnum
-\effects Returns \tcode{assign(p)}.
+\effects \changed{Returns}{Equivalent to:} \tcode{\added{return} assign(p)}.
 \end{itemdescr}
 
 \indexlibrarymember{basic_regex}{assign}%
@@ -1526,7 +1530,7 @@ basic_regex& assign(const basic_regex& that);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return *this = that;}
+\effects Equivalent to: \tcode{return *this = that\changed{;}{.}}
 \end{itemdescr}
 
 \indexlibrarymember{basic_regex}{assign}%
@@ -1536,7 +1540,7 @@ basic_regex& assign(basic_regex&& that) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return *this = std::move(that);}
+\effects Equivalent to: \tcode{return *this = std::move(that)\changed{;}{.}}
 \end{itemdescr}
 
 \indexlibrarymember{basic_regex}{assign}%
@@ -1546,7 +1550,7 @@ basic_regex& assign(const charT* ptr, flag_type f = regex_constants::ECMAScript)
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{assign(string_type(ptr), f)}.
+\changed{\returns}{\effects Equivalent to:} \tcode{\added{return} assign(string_type(ptr), f)}.
 \end{itemdescr}
 
 \indexlibrarymember{basic_regex}{assign}%
@@ -1556,7 +1560,7 @@ basic_regex& assign(const charT* ptr, size_t len, flag_type f = regex_constants:
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{assign(string_type(ptr, len), f)}.
+\changed{\returns}{\effects Equivalent to:} \tcode{\added{return} assign(string_type(ptr, len), f)}.
 \end{itemdescr}
 
 \indexlibrarymember{basic_regex}{assign}%
@@ -1593,13 +1597,15 @@ template<class InputIterator>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
-\changed{\requires}{\expects}
-\tcode{InputIterator} \changed{shall meet}{meets} the
+\requires
+\tcode{InputIterator} shall meet the
 \oldconcept{InputIterator} requirements\iref{input.iterators}.
+\end{removedblock}
 
 \pnum
-\returns \tcode{assign(string_type(first, last), f)}.
+\effects \changed{Returns}{Equivalent to:} \tcode{\added{return} assign(string_type(first, last), f)}.
 \end{itemdescr}
 
 \indexlibrarymember{assign}{basic_regex}%
@@ -1610,10 +1616,12 @@ basic_regex& assign(initializer_list<charT> il,
 
 \begin{itemdescr}
 \pnum
-\effects Same as \tcode{assign(il.begin(), il.end(), f)}.
+\effects \changed{Same as}{Equivlent to:} \tcode{\added{return} assign(il.begin(), il.end(), f)}.
 
+\begin{removedblock}
 \pnum
 \returns \tcode{*this}.
+\end{removedblock}
 \end{itemdescr}
 
 
@@ -2060,7 +2068,7 @@ explicit match_results(const Allocator& a);
 \begin{itemdescr}
 \begin{removedblock}
 \pnum
-\effects  Constructs an object of class \tcode{match_results}.
+\effects Constructs an object of class \tcode{match_results}.
 \end{removedblock}
 
 \pnum
@@ -2069,6 +2077,7 @@ explicit match_results(const Allocator& a);
 \tcode{size()} returns \tcode{0}.
 \end{itemdescr}
 
+\begin{removedblock}
 \indexlibrary{\idxcode{match_results}!constructor}%
 \begin{itemdecl}
 match_results(const match_results& m);
@@ -2076,9 +2085,10 @@ match_results(const match_results& m);
 
 \begin{itemdescr}
 \pnum
-\effects  Constructs an object of class \tcode{match_results}, as a
+\effects Constructs an object of class \tcode{match_results}, as a
 copy of \tcode{m}.
 \end{itemdescr}
+\end{removedblock}
 
 \indexlibrary{\idxcode{match_results}!constructor}%
 \begin{itemdecl}
@@ -2087,12 +2097,15 @@ match_results(match_results&& m) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects\ Move constructs an object of class \tcode{match_results} from \tcode{m}
-satisfying the same postconditions as \tref{re.results.const}. Additionally,
-the stored \tcode{Allocator} value is move constructed from \tcode{m.get_allocator()}.
+\effects
+\changed{Move constructs an object of class \tcode{match_results} from \tcode{m} satisfying the same postconditions as}
+        {The postconditions of this function are indicated in} \tref{re.results.const}.
+\changed{Additionally, the}{The} stored \tcode{Allocator} value is move constructed from \tcode{m.get_allocator()}.
 
+\begin{removedblock}
 \pnum
 \throws Nothing.
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrarymember{match_results}{operator=}%
@@ -2102,7 +2115,7 @@ match_results& operator=(const match_results& m);
 
 \begin{itemdescr}
 \pnum
-\effects  Assigns \tcode{m} to \tcode{*this}. The postconditions of this
+\effects \removed{Assigns \tcode{m} to \tcode{*this}.} The postconditions of this
 function are indicated in \tref{re.results.const}.
 \end{itemdescr}
 
@@ -2113,7 +2126,7 @@ match_results& operator=(match_results&& m);
 
 \begin{itemdescr}
 \pnum
-\effects\ Move-assigns \tcode{m} to \tcode{*this}. The postconditions of this function
+\effects\ \removed{Move-assigns \tcode{m} to \tcode{*this}.} The postconditions of this function
 are indicated in \tref{re.results.const}.
 \end{itemdescr}
 
@@ -2305,7 +2318,7 @@ template<class OutputIter>
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} \tcode{ready() == true} and \added{that} \tcode{OutputIter} \changed{shall meet}{meets} the requirements for a
+\changed{\requires}{\expects} \tcode{ready() == true} and \tcode{OutputIter} \changed{shall meet}{meets} the requirements for a
 \oldconcept{OutputIterator}\iref{output.iterators}.
 
 \pnum
