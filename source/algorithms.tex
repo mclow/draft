@@ -4030,7 +4030,7 @@ Let $N$ be $\max(0, \tcode{count})$.
 \pnum
 \changed{\requires}{\mandates}
 The type \tcode{Size}
-\changed{shall be}{is} convertible to integral type~(\ref{conv.integral}, \ref{class.conv}).
+\changed{shall be}{is} convertible to \added{an} integral type~(\ref{conv.integral}, \ref{class.conv}).
 
 \pnum
 \returns
@@ -4118,7 +4118,7 @@ Let $N$ be \tcode{last - first}.
 
 \pnum
 \changed{\requires}{\expects}
-\tcode{result} \changed{shall}{is} not be in the range \range{first}{last}.
+\tcode{result} \changed{shall not be}{is not} in the range \range{first}{last}.
 
 \pnum
 \effects
@@ -4765,9 +4765,15 @@ Let $E$ be
 \item \tcode{bool(invoke(pred, invoke(proj, *i)))} for \tcode{ranges::replace_if}.
 \end{itemize}
 
+\begin{removedblock}
 \pnum
-\changed{\requires}{\mandates}
-The expression \tcode{*first = new_value} \changed{shall be}{is} \changed{valid}{well-formed}.
+\requires The expression \tcode{*first = new_value} shall be valid.
+\end{removedblock}
+
+\begin{addedblock}
+\pnum
+\mandates \tcode{new_value} is writable\iref{iterator.requirements.general} to \tcode{first}.
+\end{addedblock}
 
 \pnum
 \effects
@@ -4861,8 +4867,7 @@ Let $E$ be
 \pnum
 \mandates
 The results of the expressions \tcode{*first} and \tcode{new_value}
-are writable\iref{iterator.requirements.general}
-to the \tcode{result} output iterator.
+are writable\iref{iterator.requirements.general} to \tcode{result}.
 \end{addedblock}
 
 \pnum
@@ -5154,8 +5159,7 @@ for which $E$ is \tcode{false}.
 
 \begin{addedblock}
 \pnum
-\mandates
-The expression \tcode{*result = *first} is well-formed.
+\mandates \tcode{*first} is writable\iref{iterator.requirements.general} to \tcode{result}.
 \end{addedblock}
 
 \pnum
@@ -5322,8 +5326,7 @@ let $E$ be
 
 \begin{addedblock}
 \pnum
-\mandates
-The expression \tcode{*result = *first} is well-formed.
+\mandates \tcode{*first} is writable\iref{iterator.requirements.general} to \tcode{result}.
 \end{addedblock}
 
 \pnum
@@ -5620,7 +5623,7 @@ template<class PopulationIterator, class SampleIterator,
 \begin{addedblock}
 \pnum
 \mandates
-\tcode{Distance} is an integer type.   \tcode{PopulationIterator}'s value type is
+\tcode{Distance} is an integer type.   \tcode{*first} is
   writable\iref{iterator.requirements.general} to \tcode{out}.
 \end{addedblock}
 
@@ -7550,11 +7553,12 @@ and \tcode{proj1} and \tcode{proj2} be \tcode{identity\{\}}
 for the overloads with no parameters by those names.
 
 \pnum
+\ednote{The first sentence has been removed editorially outside of this paper.}
 \changed{\requires}{\expects}
-The resulting range \changed{shall}{does} not overlap with either of the original ranges.
+The resulting range shall not overlap with either of the original ranges.
 The ranges \range{first1}{last1} and \range{first2}{last2} \changed{shall be}{are} sorted
 with respect to \tcode{comp} and \tcode{proj1} or \tcode{proj2}, respectively.
-\removed{The resulting range shall not overlap with either of the original ranges.}
+The resulting range \changed{shall}{does} not overlap with either of the original ranges.
 
 \pnum
 \effects
@@ -7977,7 +7981,7 @@ template<class T, class Proj = identity,
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-For the first form, type \tcode{T} \changed{shall be}{meets the}
+For the first form, \removed{type} \tcode{T} \changed{shall be}{meets the}
 \oldconcept{LessThanComparable} \added{requirements} (\tref{cpp17.lessthancomparable}).
 
 \pnum
@@ -8019,7 +8023,7 @@ template<input_range R, class Proj = identity,
 \tcode{ranges::distance(r) > 0}.
 For the overloads in namespace \tcode{std},
 \tcode{T} \changed{shall be}{meets the} \oldconcept{Copy\-Constructible} \added{requirements}.
-For the first form, type \tcode{T} \changed{shall be}{meets the} \oldconcept{LessThanComparable}
+For the first form, \removed{type} \tcode{T} \changed{shall be}{meets the} \oldconcept{LessThanComparable}
 \begin{addedblock}
 requirements (\tref{lessthancomparable}).
 \end{addedblock}
@@ -8057,7 +8061,7 @@ template<class T, class Proj = identity,
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-For the first form, type \tcode{T} \changed{shall be}{meets the}
+For the first form, \removed{type} \tcode{T} \changed{shall be}{meets the}
 \oldconcept{LessThanComparable} \added{requirements} (\tref{cpp17.lessthancomparable}).
 
 \pnum
@@ -8099,7 +8103,7 @@ template<input_range R, class Proj = identity,
 \tcode{ranges::distance(r) > 0}.
 For the overloads in namespace \tcode{std},
 \tcode{T} \changed{shall be}{meets the} \oldconcept{Copy\-Constructible} \added{requirements}.
-For the first form, type \tcode{T} \changed{shall be}{meets the} \oldconcept{LessThanComparable}
+For the first form, \removed{type} \tcode{T} \changed{shall be}{meets the} \oldconcept{LessThanComparable}
 \begin{addedblock}
 requirements (\tref{lessthancomparable}).
 \end{addedblock}
@@ -8139,7 +8143,7 @@ template<class T, class Proj = identity,
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-For the first form, type \tcode{T} \changed{shall be}{meets the}
+For the first form, \removed{type} \tcode{T} \changed{shall be}{meets the}
 \oldconcept{LessThanComparable} \added {requirements} (\tref{cpp17.lessthancomparable}).
 
 \pnum
@@ -9309,13 +9313,11 @@ template<class InputIterator, class OutputIterator, class BinaryOperation>
 \begin{addedblock}
 \pnum
 \mandates
-\tcode{InputIterator}'s value type is constructible
-from the type of \tcode{*first}.
+\tcode{InputIterator}'s value type is constructible from \tcode{*first}.
 The result of the
 expression \tcode{std::move(acc) + *i} or \tcode{binary_op(std::move(acc), *i)}
 is implicitly convertible to \tcode{InputIterator}'s value type.
-\tcode{acc} is writable\iref{iterator.requirements.general} to
-the \tcode{result} output iterator.
+\tcode{acc} is writable\iref{iterator.requirements.general} to \tcode{result}.
 \end{addedblock}
 
 \pnum
@@ -9326,7 +9328,7 @@ The result of the
 expression \tcode{std::move(acc) + *i} or \tcode{binary_op(std::move(acc), *i)}
 shall be implicitly convertible to \tcode{InputIterator}'s value type.
 \tcode{acc} shall be writable\iref{iterator.requirements.general} to
-the \tcode{result} output iterator.}
+the \tcode{result} output iterator}.
 In the ranges \crange{first}{last} and \crange{result}{result + (last - first)}
 \tcode{binary_op} \changed{shall neither modify elements
 nor invalidate iterators or subranges}{neither modifies elements
@@ -9830,13 +9832,11 @@ that denotes an object of type \tcode{minus<>}.
 \begin{itemize}
 \item
   For the overloads with no \tcode{ExecutionPolicy},
-  \tcode{T} \changed{shall be}{meets the} \oldconcept{MoveAssignable} (\tref{cpp17.moveassignable}) \added{requirements} and
-  \changed{shall be}{is} constructible from the type of \tcode{*first}.
-  \tcode{acc} (defined below) \changed{shall be}{is}
-  writable\iref{iterator.requirements.general}
-  to the \tcode{result} output iterator.
+  \tcode{T} is constructible from \tcode{*first}.
+  \tcode{acc} (defined below) is
+  writable\iref{iterator.requirements.general} to \tcode{result}.
   The result of the expression \tcode{binary_op(val, std::move(acc))}
-  is writable to the \tcode{result} output iterator.
+  is writable to \tcode{result}.
 \item
   For the overloads with an \tcode{ExecutionPolicy},
   the result of the expressions \tcode{binary_op(*first, *first)} and
@@ -9856,7 +9856,7 @@ that denotes an object of type \tcode{minus<>}.
   writable\iref{iterator.requirements.general}
   to the \tcode{result} output iterator.
   The result of the expression \tcode{binary_op(val, std::move(acc))}
-  shall be writable to the \tcode{result} output iterator.}
+  shall be writable to the \tcode{result} output iterator}.
 \item \removed{
   For the overloads with an \tcode{ExecutionPolicy},
   the result of the expressions \tcode{binary_op(*first, *first)} and

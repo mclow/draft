@@ -6,10 +6,9 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & P1718R1                     \\
+          \textbf{Document Number:} & D1718R2                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
-                                    & CppAlliance                 \\
                                     & mclow.lists@gmail.com
           \end{tabular}
 }
@@ -106,6 +105,7 @@ Drive-by fixes:
 \item{As I was "de-shalling" all the Requirements, I applied the guidance at https://github.com/cplusplus/draft/wiki/Specification-Style-Guidelines\#requirements-expressed-by-concepts.}
 \item{Change "shall satisfy" to "shall meet" for old concepts.}
 \item{Change "expression XXX is valid" to "expression XXX is well-formed".}
+\item{Change "is writable to the \tcode{result} output iterator" to "is writable to \tcode{result}".}
 \end{itemize}
 
 Open questions:
@@ -120,6 +120,11 @@ Changes from R0:
 \item{Changed all of the "the expression ZZZZZ is valid" into Mandates.}
 \item{Fixed a bunch of "is XXXXXX" to "meets the XXXXXX requirements"}
 \item{Reworked a few comma lists into bullets}
+\end{itemize}
+
+Changes from R1:
+\begin{itemize}
+\item{Items from the LWG review at 11-Oct teleconference}
 \end{itemize}
 
 Thanks to Daniel Krügler and Tim Song for their advice and reviews.
