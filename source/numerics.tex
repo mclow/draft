@@ -4233,8 +4233,14 @@ seed_seq();
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum\effects Constructs a \tcode{seed_seq} object
  as if by default-constructing its member \tcode{v}.
+\end{removedblock}
+
+\begin{addedblock}
+\pnum\ensures \tcode{v.empty()} is true.
+\end{addedblock}
 
 \pnum
 \throws Nothing.
@@ -4279,7 +4285,7 @@ template<class InputIterator>
   shall denote an integer type.
 \end{removedblock}
 
-\pnum\effects Constructs a \tcode{seed_seq} object
+\pnum\effects \changed{Constructs a \tcode{seed_seq} object}{Initializes \tcode{v}}
  by the following algorithm:
 \begin{codeblock}
 for (InputIterator s = begin; s != end; ++s)

@@ -95,6 +95,7 @@ Drive-by fixes:
 \item{While moving "Expects" to "Mandates", changed "XXXX shall be callable with a type that is convertible to double" to "\tcode{is_invocable_r_v<XXXX, double>} is true."}
 \item{Changed a "points to an array of at least n elements" -> "\range{p}{p+n} is a valid range."}
 \item{Changed several "Complexity" clauses from "shall not exceed" to "does not exceed".}
+\item{Reworked two paragraphs in [rand.util.seedseq] to use the exposition-only variable \tcode{v}.}
 \end{itemize}
 
 Open questions:
@@ -110,6 +111,7 @@ Changes from R0:
 \item{Changed a "points to an array of at least N" -> "\tcode{[p, p+n) is a valid range}"}
 \item{Turned a couple of sentences into bullet points in [rand.dist.samp.pconst] and prand.dist.samp.plinear].}
 \item{Items discussed during the LWG telecom on 6-Sep-2019.}
+\item{Reworked two paragraphs in [rand.util.seedseq] to use the exposition-only variable \tcode{v}.}
 \end{itemize}
 
 Thanks to Daniel Krügler for his several rounds of review.
