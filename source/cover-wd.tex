@@ -64,12 +64,10 @@ Drive-by fixes:
 \item{Qualified all the \tcode{memory_order} enum value in [atomics.ref.*] and [atomics.types.*]}
 \end{itemize}
 
-%Open questions:
-%\begin{itemize}
-%\item{alg.unique \ref{alg.unique} P7.2.3 is kind of a mess. Not quite sure how to "de-shall" it.}
-%\item{alg.random.sample \ref{alg.random.sample} has a \tcode{Distance} parameter that looks like the \tcode{Size} parameter from \*_n. Should it be specified the same way?}
-%\item{Where should "XX is writeable to YY" and "the expression 'Foo/bar' is valid" go? Mandates? Expects? I put them in "Expects".}
-%\end{itemize}
+Open questions:
+\begin{itemize}
+\item{Should we change all the \tcode{memory_order::seq_cst} to \tcode{memory_order_seq_cst} (and others)?}
+\end{itemize}
 
 
 Changes from R0:
@@ -81,7 +79,6 @@ Changes from R0:
 Changes from R1:
 \begin{itemize}
 \item{Items from the LWG review at 11-Oct teleconference.}
-\item{Qualified all the \tcode{memory_order} enum values.}
 \end{itemize}
 
 Thanks to Daniel Krügler for his advice and reviews.
