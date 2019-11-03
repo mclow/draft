@@ -46,11 +46,8 @@ The entire clause is reproduced here, but the changes are confined to a few sect
 \begin{itemize}
 \item{atomics.ref.generic}		\ref{atomics.ref.generic}
 \item{atomics.ref.operations}	\ref{atomics.ref.operations}
-\item{atomics.ref.int}			\ref{atomics.ref.int}
-\item{atomics.ref.float}		\ref{atomics.ref.float}
 \item{atomics.ref.pointer}		\ref{atomics.ref.pointer}
 \item{atomics.types.operations}	\ref{atomics.types.operations}
-\item{atomics.types.float}		\ref{atomics.types.float}
 \item{atomics.types.pointer}	\ref{atomics.types.pointer}
 \item{atomics.nonmembers}		\ref{atomics.nonmembers}
 \item{atomics.flag}				\ref{atomics.flag}
@@ -61,12 +58,11 @@ Drive-by fixes:
 \begin{itemize}
 \item{I strengthened the wording in [atomics.ref.generic] \ref{atomics.ref.generic} to require a compile-time failure for non-trivially copyable Ts.}
 \item{I removed a "shall" from the definition of \tcode{ATOMIC_INIT} in [atomics.flag] \ref{atomics.flag}.}
-\item{Qualified all the \tcode{memory_order} enum value in [atomics.ref.*] and [atomics.types.*]}
 \end{itemize}
 
 Open questions:
 \begin{itemize}
-\item{Should we change all the \tcode{memory_order::seq_cst} to \tcode{memory_order_seq_cst} (and others)?}
+\item{Should we change all the \tcode{memory_order_seq_cst} to \tcode{memory_order::seq_cst} (and others)? - this will be done via a pull-request post-Belfast. See https://github.com/cplusplus/draft/issues/3365}
 \end{itemize}
 
 
