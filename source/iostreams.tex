@@ -937,8 +937,8 @@ explicit failure(const string& msg, const error_code& ec = io_errc::stream);
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
-\tcode{failure} by constructing the base class with \tcode{msg} and \tcode{ec}.
+\changed{Constructs an object of class
+\tcode{failure} by constructing}{Constructs} the base class with \tcode{msg} and \tcode{ec}.
 \end{itemdescr}
 
 \indexlibrary{\idxcode{ios_base::failure}!constructor}%
@@ -949,8 +949,8 @@ explicit failure(const char* msg, const error_code& ec = io_errc::stream);
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
-\tcode{failure} by constructing the base class with \tcode{msg} and \tcode{ec}.
+\changed{Constructs an object of class
+\tcode{failure} by constructing}{Constructs} the base class with \tcode{msg} and \tcode{ec}.
 \end{itemdescr}
 
 \rSec4[ios.fmtflags]{Type \tcode{ios_base::fmtflags}}
@@ -1336,14 +1336,22 @@ from within
 returns the new locale value
 \tcode{loc}.
 
+\begin{addedblock}
+\pnum
+\ensures
+\tcode{loc == getloc()}.
+\end{addedblock}
+
 \pnum
 \returns
 The previous value of
 \tcode{getloc()}.
 
+\begin{removedblock}
 \pnum
 \ensures
 \tcode{loc == getloc()}.
+\end{removedblock}
 \end{itemdescr}
 
 \indexlibrarymember{getloc}{ios_base}%
@@ -1866,9 +1874,9 @@ explicit basic_ios(basic_streambuf<charT, traits>* sb);
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
+\changed{Constructs an object of class
 \tcode{basic_ios},
-assigning initial values to its member objects by calling
+assigning}{Assigns} initial values to its member objects by calling
 \tcode{init(sb)}.
 \end{itemdescr}
 
@@ -1880,9 +1888,9 @@ basic_ios();
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
+\changed{Constructs an object of class
 \tcode{basic_ios}\iref{ios.base.cons}
-leaving its member objects uninitialized. The object
+leaving}{Leaves} its member objects uninitialized. The object
 shall be initialized by calling
 \tcode{basic_ios::init}
 before its first use or before it is destroyed, whichever comes first; otherwise the
@@ -1993,14 +2001,23 @@ basic_streambuf<charT, traits>* rdbuf(basic_streambuf<charT, traits>* sb);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum
-\ensures
-\tcode{sb == rdbuf()}.
-
+\begin{addedblock}
 \pnum
 \effects
 Calls
 \tcode{clear()}.
+\end{addedblock}
+
+\pnum
+\ensures
+\tcode{sb == rdbuf()}.
+
+\begin{removedblock}
+\pnum
+\effects
+Calls
+\tcode{clear()}.
+\end{removedblock}
 
 \pnum
 \returns
@@ -2089,7 +2106,7 @@ basic_ios& copyfmt(const basic_ios& rhs);
 \pnum
 \effects
 If
-\tcode{(this == addressof(rhs))}
+\tcode{(this == addressof(rhs))} \added{is true}
 does nothing.
 Otherwise assigns to the member objects of
 \tcode{*this}
@@ -3080,9 +3097,9 @@ basic_streambuf();
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
+\changed{Constructs an object of class
 \tcode{basic_streambuf<charT, traits>}
-and initializes:\footnote{The default constructor is protected for class
+and initializes}{Initializes}:\footnote{The default constructor is protected for class
 \tcode{basic_streambuf}
 to assure that only objects for classes
 derived from this class may be constructed.}
@@ -3114,8 +3131,10 @@ basic_streambuf(const basic_streambuf& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects Constructs a copy of \tcode{rhs}.
+\end{removedblock}
 
 \pnum
 \ensures
@@ -3152,14 +3171,22 @@ locale pubimbue(const locale& loc);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \ensures
 \tcode{loc == getloc()}.
+\end{removedblock}
 
 \pnum
 \effects
 Calls
 \tcode{imbue(loc)}.
+
+\begin{addedblock}
+\pnum
+\ensures
+\tcode{loc == getloc()}.
+\end{addedblock}
 
 \pnum
 \returns
@@ -3284,7 +3311,7 @@ int_type sbumpc();
 
 \begin{itemdescr}
 \pnum
-\returns
+\changed{\returns}{\effects}
 If the input sequence read position is not available,
 returns
 \tcode{uflow()}.
@@ -3328,7 +3355,7 @@ int_type sputbackc(char_type c);
 
 \begin{itemdescr}
 \pnum
-\returns
+\changed{\returns}{\effects}
 If the input sequence putback position is not available, or
 if
 \tcode{traits::eq(c, gptr()[-1])}
@@ -3346,7 +3373,7 @@ int_type sungetc();
 
 \begin{itemdescr}
 \pnum
-\returns
+\changed{\returns}{\effects}
 If the input sequence putback position is not available,
 returns
 \tcode{pbackfail()}.
@@ -3364,7 +3391,7 @@ int_type sputc(char_type c);
 
 \begin{itemdescr}
 \pnum
-\returns
+\changed{\returns}{\effects}
 If the output sequence write position is not available,
 returns
 \tcode{overflow(traits::to_int_type(c))}.
@@ -3395,9 +3422,11 @@ basic_streambuf& operator=(const basic_streambuf& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects Assigns the data members of \tcode{rhs}
 to \tcode{*this}.
+\end{removedblock}
 
 \pnum
 \ensures
@@ -3416,6 +3445,7 @@ to \tcode{*this}.
 \returns \tcode{*this}.
 \end{itemdescr}
 
+\begin{removedblock}
 \indexlibrarymember{swap}{basic_streambuf}%
 \begin{itemdecl}
 void swap(basic_streambuf& rhs);
@@ -3426,6 +3456,7 @@ void swap(basic_streambuf& rhs);
 \effects Swaps the data members of \tcode{rhs}
 and \tcode{*this}.
 \end{itemdescr}
+\end{removedblock}
 
 \rSec4[streambuf.get.area]{Get area access}
 
@@ -3484,7 +3515,7 @@ void setg(char_type* gbeg, char_type* gnext, char_type* gend);
 \tcode{gbeg == eback()},
 \tcode{gnext == gptr()},
 and
-\tcode{gend == egptr()}.
+\tcode{gend == egptr()} \added{are all \tcode{true}}.
 \end{itemdescr}
 
 \rSec4[streambuf.put.area]{Put area access}
@@ -3544,7 +3575,7 @@ void setp(char_type* pbeg, char_type* pend);
 \tcode{pbeg == pbase()},
 \tcode{pbeg == pptr()},
 and
-\tcode{pend == epptr()}.
+\tcode{pend == epptr()} \added{are all \tcode{true}}.
 \end{itemdescr}
 
 \rSec3[streambuf.virtuals]{Virtual functions}
