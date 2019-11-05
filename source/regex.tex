@@ -1392,7 +1392,7 @@ basic_regex(basic_regex&& e) noexcept;
 \pnum
 \ensures \tcode{flags()} and \tcode{mark_count()} return the values that
 \tcode{e.flags()} and \tcode{e.mark_count()}, respectively, had before construction.
-\tcode{e} is in a valid state with unspecified value.
+\removed{\tcode{e} is in a valid state with unspecified value.}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{basic_regex}!constructor}%
@@ -1499,7 +1499,7 @@ basic_regex& operator=(const charT* ptr);
 \end{removedblock}
 
 \pnum
-\effects \changed{Returns}{Equivalent to:} \tcode{\added{return} assign(ptr)}.
+\effects \changed{Returns}{Equivalent to:} \tcode{\added{return} assign(ptr)}\changed{.}{;}
 \end{itemdescr}
 
 \indexlibrarymember{basic_regex}{operator=}%
@@ -1509,7 +1509,7 @@ basic_regex& operator=(initializer_list<charT> il);
 
 \begin{itemdescr}
 \pnum
-\effects \changed{Returns}{Equivalent to:} \tcode{\added{return} assign(il.begin(), il.end())}.
+\effects \changed{Returns}{Equivalent to:} \tcode{\added{return} assign(il.begin(), il.end())}\changed{.}{;}
 \end{itemdescr}
 
 \indexlibrarymember{basic_regex}{operator=}%
@@ -1520,7 +1520,7 @@ template<class ST, class SA>
 
 \begin{itemdescr}
 \pnum
-\effects \changed{Returns}{Equivalent to:} \tcode{\added{return} assign(p)}.
+\effects \changed{Returns}{Equivalent to:} \tcode{\added{return} assign(p)}\changed{.}{;}
 \end{itemdescr}
 
 \indexlibrarymember{basic_regex}{assign}%
@@ -1530,7 +1530,7 @@ basic_regex& assign(const basic_regex& that);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return *this = that\changed{;}{.}}
+\effects Equivalent to: \tcode{return *this = that\changed{.}{;}}
 \end{itemdescr}
 
 \indexlibrarymember{basic_regex}{assign}%
@@ -1540,7 +1540,7 @@ basic_regex& assign(basic_regex&& that) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return *this = std::move(that)\changed{;}{.}}
+\effects Equivalent to: \tcode{return *this = std::move(that)\changed{.}{;}}
 \end{itemdescr}
 
 \indexlibrarymember{basic_regex}{assign}%
@@ -1550,7 +1550,7 @@ basic_regex& assign(const charT* ptr, flag_type f = regex_constants::ECMAScript)
 
 \begin{itemdescr}
 \pnum
-\changed{\returns}{\effects Equivalent to:} \tcode{\added{return} assign(string_type(ptr), f)}.
+\changed{\returns}{\effects Equivalent to:} \tcode{\added{return} assign(string_type(ptr), f)}\changed{.}{;}
 \end{itemdescr}
 
 \indexlibrarymember{basic_regex}{assign}%
@@ -1560,7 +1560,7 @@ basic_regex& assign(const charT* ptr, size_t len, flag_type f = regex_constants:
 
 \begin{itemdescr}
 \pnum
-\changed{\returns}{\effects Equivalent to:} \tcode{\added{return} assign(string_type(ptr, len), f)}.
+\changed{\returns}{\effects Equivalent to:} \tcode{\added{return} assign(string_type(ptr, len), f)}\changed{.}{;}
 \end{itemdescr}
 
 \indexlibrarymember{basic_regex}{assign}%
@@ -1605,7 +1605,7 @@ template<class InputIterator>
 \end{removedblock}
 
 \pnum
-\effects \changed{Returns}{Equivalent to:} \tcode{\added{return} assign(string_type(first, last), f)}.
+\effects \changed{Returns}{Equivalent to:} \tcode{\added{return} assign(string_type(first, last), f)}\changed{.}{;}
 \end{itemdescr}
 
 \indexlibrarymember{assign}{basic_regex}%
@@ -1616,7 +1616,7 @@ basic_regex& assign(initializer_list<charT> il,
 
 \begin{itemdescr}
 \pnum
-\effects \changed{Same as}{Equivlent to:} \tcode{\added{return} assign(il.begin(), il.end(), f)}.
+\effects \changed{Same as}{Equivalent to:} \tcode{\added{return} assign(il.begin(), il.end(), f)}\changed{.}{;}
 
 \begin{removedblock}
 \pnum
@@ -2096,11 +2096,20 @@ match_results(match_results&& m) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects
-\changed{Move constructs an object of class \tcode{match_results} from \tcode{m} satisfying the same postconditions as}
-        {The postconditions of this function are indicated in} \tref{re.results.const}.
-\changed{Additionally, the}{The} stored \tcode{Allocator} value is move constructed from \tcode{m.get_allocator()}.
+Move constructs an object of class \tcode{match_results} from \tcode{m} satisfying the same postconditions as \tref{re.results.const}.
+Additionally, the stored \tcode{Allocator} value is move constructed from \tcode{m.get_allocator()}.
+\end{removedblock}
+
+\begin{addedblock}
+\pnum
+\effects The stored \tcode{Allocator} value is move constructed from \tcode{m.get_allocator()}.
+
+\pnum
+\ensures {As specified in} \tref{re.results.const}.
+\end{addedblock}
 
 \begin{removedblock}
 \pnum
@@ -2114,9 +2123,16 @@ match_results& operator=(const match_results& m);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
-\effects \removed{Assigns \tcode{m} to \tcode{*this}.} The postconditions of this
+\effects Assigns \tcode{m} to \tcode{*this}. The postconditions of this
 function are indicated in \tref{re.results.const}.
+\end{removedblock}
+
+\begin{addedblock}
+\pnum
+\ensures {As specified in} \tref{re.results.const}.
+\end{addedblock}
 \end{itemdescr}
 
 \indexlibrarymember{match_results}{operator=}%
@@ -2125,9 +2141,16 @@ match_results& operator=(match_results&& m);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
-\effects\ \removed{Move-assigns \tcode{m} to \tcode{*this}.} The postconditions of this function
+\effects Move-assigns \tcode{m} to \tcode{*this}. The postconditions of this function
 are indicated in \tref{re.results.const}.
+\end{removedblock}
+
+\begin{addedblock}
+\pnum
+\ensures {As specified in} \tref{re.results.const}.
+\end{addedblock}
 \end{itemdescr}
 
 \begin{libefftabvalue}
