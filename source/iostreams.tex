@@ -4389,8 +4389,8 @@ explicit basic_istream(basic_streambuf<charT, traits>* sb);
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
-\tcode{basic_istream}, initializing the base class subobject with
+\changed{Constructs an object of class
+\tcode{basic_istream}, initializing}{Initializes} the base class subobject with
 \tcode{basic_ios::init(sb)}\iref{basic.ios.cons}.
 
 \pnum
@@ -4406,7 +4406,7 @@ basic_istream(basic_istream&& rhs);
 
 \begin{itemdescr}
 \pnum
-\effects Move constructs from the rvalue \tcode{rhs}.
+\effects \removed{Move constructs from the rvalue \tcode{rhs}.}
 This is accomplished by default constructing the base class, copying the
 \tcode{gcount()} from \tcode{rhs}, calling
 \tcode{basic_ios<charT, traits>::move(rhs)} to initialize the base
@@ -4597,10 +4597,18 @@ explicit operator bool() const;
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{removedblock}
 \pnum
 \effects
 Returns
 \tcode{ok_}.
+\end{removedblock}
+
+\begin{addedblock}
+\pnum
+\returns
+\tcode{ok_}.
+\end{addedblock}
 \end{itemdescr}
 
 \rSec3[istream.formatted]{Formatted input functions}
