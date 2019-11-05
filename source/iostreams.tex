@@ -3445,7 +3445,6 @@ to \tcode{*this}.
 \returns \tcode{*this}.
 \end{itemdescr}
 
-\begin{removedblock}
 \indexlibrarymember{swap}{basic_streambuf}%
 \begin{itemdecl}
 void swap(basic_streambuf& rhs);
@@ -3456,7 +3455,6 @@ void swap(basic_streambuf& rhs);
 \effects Swaps the data members of \tcode{rhs}
 and \tcode{*this}.
 \end{itemdescr}
-\end{removedblock}
 
 \rSec4[streambuf.get.area]{Get area access}
 
@@ -4406,11 +4404,11 @@ basic_istream(basic_istream&& rhs);
 
 \begin{itemdescr}
 \pnum
-\effects \removed{Move constructs from the rvalue \tcode{rhs}.}
-This is accomplished by default constructing the base class, copying the
-\tcode{gcount()} from \tcode{rhs}, calling
+\effects \removed{Move constructs from the rvalue \tcode{rhs}.
+This is accomplished by default constructing}{Default constructs} the base class, \changed{copying}{copies} the
+\tcode{gcount()} from \tcode{rhs}, \changed{calling}{calls}
 \tcode{basic_ios<charT, traits>::move(rhs)} to initialize the base
-class, and setting the \tcode{gcount()} for \tcode{rhs} to 0.
+class, and \changed{setting}{sets} the \tcode{gcount()} for \tcode{rhs} to 0.
 \end{itemdescr}
 
 \indexlibrary{\idxcode{basic_istream}!destructor}%
