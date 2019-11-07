@@ -3101,7 +3101,7 @@ explicit linear_congruential_engine(result_type s);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{linear_congruential_engine} object.}
+\pnum\effects \removed{Constructs a \tcode{linear_congruential_engine} object.}
  If $c \bmod m$ is $0$ and $\tcode{s} \bmod m$ is $0$,
  sets the engine's state to $1$,
  otherwise sets the engine's state to $\tcode{s} \bmod m$.
@@ -3113,7 +3113,7 @@ template<class Sseq> explicit linear_congruential_engine(Sseq& q);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{linear_congruential_engine} object.}
+\pnum\effects \removed{Constructs a \tcode{linear_congruential_engine} object.}
  With
  $k = \left\lceil \frac{\log_2 m}{32} \right\rceil$
  and $a$ an array (or equivalent)
@@ -3270,7 +3270,7 @@ explicit mersenne_twister_engine(result_type value);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{mersenne_twister_engine} object.}
+\pnum\effects \removed{Constructs a \tcode{mersenne_twister_engine} object.}
 Sets $X_{-n}$ to $\tcode{value} \bmod 2^w$.
 Then, iteratively for $i = 1 - n, \dotsc, -1$, sets $X_i$ to
 \[%
@@ -3291,7 +3291,7 @@ template<class Sseq> explicit mersenne_twister_engine(Sseq& q);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{mersenne_twister_engine} object.}
+\pnum\effects \removed{Constructs a \tcode{mersenne_twister_engine} object.}
  With
  $k = \left\lceil w / 32 \right\rceil$
  and $a$ an array (or equivalent)
@@ -3420,7 +3420,7 @@ explicit subtract_with_carry_engine(result_type value);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{subtract_with_carry_engine} object.}
+\pnum\effects \removed{Constructs a \tcode{subtract_with_carry_engine} object.}
  Sets the values of
  $X_{-r}, \dotsc, X_{-1}$,
  in that order, as specified below.
@@ -3453,7 +3453,7 @@ template<class Sseq> explicit subtract_with_carry_engine(Sseq& q);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\changed{\effects}{\remarks} \removed{Constructs a \tcode{subtract_with_carry_engine} object.}
+\pnum\effects \removed{Constructs a \tcode{subtract_with_carry_engine} object.}
  With
  $k = \left\lceil w / 32 \right\rceil$
  and $a$ an array (or equivalent)
@@ -4418,8 +4418,9 @@ template<class OutputIterator>
 
 \begin{itemdescr}
 \begin{addedblock}
+\pnum
 \mandates
-  Values of type \tcode{result_type} are writable to \tcode{*dest}.
+  Values of type \tcode{result_type} are writable to \tcode{dest}.
 \end{addedblock}
 
 \pnum\changed{\requires}{\expects}
@@ -6299,11 +6300,12 @@ template<class InputIteratorB, class InputIteratorW>
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\mandates
+\mandates Both of
 \begin{itemize}
-\item{\tcode{is_convertible_v<iterator_traits<InputIteratorB>::value_type, double>} is true.}
-\item{\tcode{is_convertible_v<iterator_traits<InputIteratorW>::value_type, double>} is true.}
+\item{\tcode{is_convertible_v<iterator_traits<InputIteratorB>::value_type, double>}}
+\item{\tcode{is_convertible_v<iterator_traits<InputIteratorW>::value_type, double>}}
 \end{itemize}
+are \tcode{true}.
 \end{addedblock}
 
 \pnum \changed{\requires}{\expects}
@@ -7319,7 +7321,7 @@ T& operator[](size_t n);
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{n < size()}.
+\tcode{n < size()} \added{is \tcode{true}}.
 
 \pnum
 \returns
@@ -7544,9 +7546,9 @@ valarray<bool> operator!() const;
 \pnum
 \mandates
 The indicated operator can be applied to operands of type \tcode{T}
-and returns a value which is of type \tcode{T} (\tcode{bool} for
+and returns a value of type \tcode{T} (\tcode{bool} for
 \tcode{operator!}) or which may be unambiguously implicitly converted to type
-\tcode{T} (\tcode{bool} for \tcode{operator!})
+\tcode{T} (\tcode{bool} for \tcode{operator!}).
 \end{addedblock}
 
 \begin{removedblock}
@@ -7599,7 +7601,7 @@ The indicated operator can be applied to two operands of type \tcode{T}.
 
 \pnum
 \changed{\requires}{\expects}
-\tcode{size() == v.size()}.
+\tcode{size() == v.size()} \added{is \tcode{true}}.
 \removed{Each of these operators may only be instantiated for a type \tcode{T}
 if the indicated operator can be applied to two operands of type \tcode{T}.}
 The value of an element in the left-hand side of a valarray compound
@@ -7718,7 +7720,7 @@ T sum() const;
 
 \pnum
 \changed{\requires}{\expects}
-\tcode{size() > 0}.
+\tcode{size() > 0} \added{is \tcode{true}}.
 \removed{This function may only be instantiated for a type \tcode{T} to which
 \tcode{operator+=}
 can be applied.}
@@ -7741,7 +7743,7 @@ T min() const;
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{size() > 0}
+\tcode{size() > 0} \added{is \tcode{true}.}
 
 \pnum
 \returns
@@ -7760,7 +7762,7 @@ T max() const;
 \begin{itemdescr}
 \pnum
 \changed{\requires}{\expects}
-\tcode{size() > 0}.
+\tcode{size() > 0} \added{is \tcode{true}}.
 
 \pnum
 \returns
@@ -7873,8 +7875,8 @@ template<class T> valarray<T> operator>>(const valarray<T>&, const valarray<T>&)
 \begin{addedblock}
 \pnum
 \mandates
-The indicated operator can be applied to an operand of type \tcode{T} and returns 
-a value which is of type \tcode{T} or which can be unambiguously
+The indicated operator can be applied to operands of type \tcode{T} and returns 
+a value of type \tcode{T} or which can be unambiguously
 implicitly converted to \tcode{T}.
 \end{addedblock}
 
@@ -7952,8 +7954,8 @@ template<class T> valarray<T> operator>>(const typename valarray<T>::value_type&
 \begin{addedblock}
 \pnum
 \mandates
-The indicated operator can be applied to an operand of type \tcode{T} and returns 
-a value which is of type \tcode{T} or which can be unambiguously
+The indicated operator can be applied to operands of type \tcode{T} and returns 
+a value of type \tcode{T} or which can be unambiguously
 implicitly converted to \tcode{T}.
 \end{addedblock}
 
@@ -8000,8 +8002,8 @@ template<class T> valarray<bool> operator||(const valarray<T>&, const valarray<T
 \begin{addedblock}
 \pnum
 \mandates
-The indicated operator can be applied to an operand of type \tcode{T} and returns 
-a value which is of type \tcode{bool} or which can be unambiguously
+The indicated operator can be applied to operands of type \tcode{T} and returns 
+a value of type \tcode{bool} or which can be unambiguously
 implicitly converted to \tcode{bool}.
 \end{addedblock}
 
@@ -8070,8 +8072,8 @@ template<class T> valarray<bool> operator||(const typename valarray<T>::value_ty
 \begin{addedblock}
 \pnum
 \mandates
-The indicated operator can be applied to an operand of type \tcode{T} and returns 
-a value which is of type \tcode{bool} or which can be unambiguously
+The indicated operator can be applied to operands of type \tcode{T} and returns 
+a value of type \tcode{bool} or which can be unambiguously
 implicitly converted to \tcode{bool}.
 \end{addedblock}
 
@@ -8140,7 +8142,7 @@ template<class T> valarray<T> tanh (const valarray<T>&);
 \mandates
 A unique function with the indicated name can be applied (unqualified)
 to an operand of type \tcode{T}.
-This function returns a value which is of type \tcode{T}
+This function returns a value of type \tcode{T}
 or which can be unambiguously implicitly converted to type \tcode{T}.
 \end{addedblock}
 
@@ -8149,7 +8151,7 @@ or which can be unambiguously implicitly converted to type \tcode{T}.
 \requires
 Each of these functions may only be instantiated for a type \tcode{T}
 to which a unique function with the indicated name can be applied (unqualified).
-This function shall return a value which is of type \tcode{T}
+This function shall return a value of type \tcode{T}
 or which can be unambiguously implicitly converted to type \tcode{T}.
 \end{removedblock}
 \end{itemdescr}
