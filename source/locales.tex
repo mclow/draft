@@ -722,7 +722,6 @@ The resulting locale has a name if and only if the first two arguments
 have names.
 \end{itemdescr}
 
-\begin{removedblock}
 \indexlibrarymember{operator=}{locale}%
 \begin{itemdecl}
 const locale& operator=(const locale& other) noexcept;
@@ -737,7 +736,6 @@ Creates a copy of \tcode{other}, replacing the current value.
 \returns
 \tcode{*this}.
 \end{itemdescr}
-\end{removedblock}
 
 \begin{removedblock}
 \indexlibrary{\idxcode{locale}!destructor}%
@@ -3285,7 +3283,7 @@ string do_grouping() const;
 \begin{itemdescr}
 \pnum
 \returns
-A \changed{basic_string<char>}{string} \tcode{vec} used as a vector of integer values,
+A \changed{basic_string<char>}{\tcode{string}} \tcode{vec} used as a vector of integer values,
 in which each element
 \tcode{vec[i]}
 represents the number of digits\footnote{Thus, the string
