@@ -3132,9 +3132,6 @@ template<class InputIterator, class Size, class Function>
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-Let $N$ be $\max(0, \tcode{n})$.
-
-\pnum
 \mandates
 The type \tcode{Size} is convertible
 to an integral type~(\ref{conv.integral}, \ref{class.conv}).
@@ -3148,16 +3145,14 @@ to an integral type~(\ref{conv.integral}, \ref{class.conv}).
 the requirements of \oldconcept{CopyConstructible}.
 \end{note}
 
-\begin{removedblock}
 \pnum
-\expects
-\tcode{n >= 0}.
-\end{removedblock}
+\changed{\requires}{\expects}
+\tcode{n >= 0} \added{is \tcode{true}}.
 
 \pnum
 \effects
 Applies \tcode{f} to the result of dereferencing
-every iterator in the range \range{first}{first + \changed{n}{$N$}} in order.
+every iterator in the range \range{first}{first + n} in order.
 \begin{note}
 If the type of \tcode{first} meets the requirements of a mutable iterator,
 \tcode{f} may apply non-constant functions through the dereferenced iterator.
@@ -3165,7 +3160,7 @@ If the type of \tcode{first} meets the requirements of a mutable iterator,
 
 \pnum
 \returns
-\tcode{first + \changed{n}{$N$}}.
+\tcode{first + n}.
 
 \pnum
 \remarks
@@ -3182,9 +3177,6 @@ template<class ExecutionPolicy, class ForwardIterator, class Size, class Functio
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-Let $N$ be $\max(0, \tcode{n})$.
-
-\pnum
 \mandates
 The type \tcode{Size} is convertible
 to an integral type~(\ref{conv.integral}, \ref{class.conv}).
@@ -3194,16 +3186,14 @@ to an integral type~(\ref{conv.integral}, \ref{class.conv}).
 \changed{\requires}{\expects}
 \tcode{Function} \changed{shall meet}{meets} the \oldconcept{CopyConstructible} requirements.
 
-\begin{removedblock}
 \pnum
-\requires
-\tcode{n >= 0}.
-\end{removedblock}
+\changed{\requires}{\expects}
+\tcode{n >= 0} \added{is \tcode{true}}.
 
 \pnum
 \effects
 Applies \tcode{f} to the result of dereferencing
-every iterator in the range \range{first}{first + \changed{n}{$N$}}.
+every iterator in the range \range{first}{first + n}.
 \begin{note}
 If the type of \tcode{first} meets the requirements of a mutable iterator,
 \tcode{f} may apply non-constant functions through the dereferenced iterator.
@@ -3211,7 +3201,7 @@ If the type of \tcode{first} meets the requirements of a mutable iterator,
 
 \pnum
 \returns
-\tcode{first + \changed{n}{$N$}}
+\tcode{first + n}
 
 \pnum
 \remarks
@@ -4022,10 +4012,6 @@ template<class ExecutionPolicy, class ForwardIterator, class Size, class T,
 \end{itemdecl}
 
 \begin{itemdescr}
-\begin{addedblock}
-\pnum
-Let $N$ be $\max(0, \tcode{count})$.
-\end{addedblock}
 
 \pnum
 \changed{\requires}{\mandates}
@@ -4034,8 +4020,8 @@ The type \tcode{Size}
 
 \pnum
 \returns
-The first iterator \tcode{i} in the range \range{first}{last-\changed{count}{$N$}}
-such that for every non-negative integer \tcode{n} less than \tcode{\changed{count}{$N$}}
+The first iterator \tcode{i} in the range \range{first}{last-count}
+such that for every non-negative integer \tcode{n} less than \tcode{count}
 the following corresponding conditions hold:
 \tcode{*(i + n) == value, pred(*(i + n),value) != false}.
 Returns \tcode{last} if no such iterator is found.
