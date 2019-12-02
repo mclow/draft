@@ -260,6 +260,15 @@ supplying a pointer to the function when calling any of the library functions th
 handler functions\iref{language.support}.
 \end{defnote}
 
+\definition{implementation-defined strict total order over pointers}
+{defns.order.ptr}
+\indexdefn{pointer!strict total order}%
+\impldef{strict total order over pointer values}
+strict total ordering over all pointer values
+such that the ordering is consistent with the partial order
+imposed by the builtin operators
+\tcode{<}, \tcode{>}, \tcode{<=}, \tcode{>=}, and \tcode{<=>}
+
 \definition{iostream class templates}{defns.iostream.templates}
 templates, defined in \ref{input.output},
 that take two template arguments
@@ -594,11 +603,12 @@ via a \grammarterm{constraint-expression}\iref{temp.constr.decl}.
 \end{example}
 
 \item
-\mandates the conditions that, if not met, render the program ill-formed.
+\mandates
+the conditions that, if not met, render the program ill-formed.
 \begin{example}
 An implementation might express such a condition
 via the \grammarterm{constant-expression}
-in a \grammarterm{static_assert-declaration}\iref{dcl.dcl}.
+in a \grammarterm{static_assert-declaration}\iref{dcl.pre}.
 If the diagnostic is to be emitted only after the function
 has been selected by overload resolution,
 an implementation might express such a condition
@@ -607,33 +617,42 @@ and also define the function as deleted.
 \end{example}
 
 \item
-\expects the conditions (sometimes termed preconditions)
+\expects
+the conditions
 that the function assumes to hold whenever it is called.
 
 \item
-\effects the actions performed by the function.
+\effects
+the actions performed by the function.
 
 \item
-\sync the synchronization operations\iref{intro.multithread} applicable to the function.
+\sync
+the synchronization operations\iref{intro.multithread} applicable to the function.
 
 \item
-\ensures the conditions (sometimes termed observable results or postconditions)
+\ensures
+the conditions (sometimes termed observable results)
 established by the function.
 
 \item
-\returns a description of the value(s) returned by the function.
+\returns
+a description of the value(s) returned by the function.
 
 \item
-\throws any exceptions thrown by the function, and the conditions that would cause the exception.
+\throws
+any exceptions thrown by the function, and the conditions that would cause the exception.
 
 \item
-\complexity the time and/or space complexity of the function.
+\complexity
+the time and/or space complexity of the function.
 
 \item
-\remarks additional semantic constraints on the function.
+\remarks
+additional semantic constraints on the function.
 
 \item
-\errors the error conditions for error codes reported by the function.
+\errors
+the error conditions for error codes reported by the function.
 \end{itemize}
 
 \pnum
@@ -643,8 +662,8 @@ interpreted as follows.
 If \tcode{F}'s semantics specifies any \Fundescx{Constraints} or \Fundescx{Mandates} elements,
 then those requirements are logically imposed prior to the \term{equivalent-to} semantics.
 Next, the semantics of the code sequence are determined by the
-\Fundescx{Constraints}, \Fundescx{Mandates}, \Fundescx{Expects}, \Fundescx{Effects},
-\Fundescx{Synchronization}, \Fundescx{Ensures}, \Fundescx{Returns}, \Fundescx{Throws},
+\Fundescx{Constraints}, \Fundescx{Mandates}, \Fundescx{Preconditions}, \Fundescx{Effects},
+\Fundescx{Synchronization}, \Fundescx{Postconditions}, \Fundescx{Returns}, \Fundescx{Throws},
 \Fundescx{Complexity}, \Fundescx{Remarks}, and \Fundescx{Error conditions}
 specified for the function invocations contained in the code sequence.
 The value returned from \tcode{F} is specified by \tcode{F}'s \Fundescx{Returns} element,
@@ -652,7 +671,7 @@ or if \tcode{F} has no \Fundescx{Returns} element,
 a non-\tcode{void} return from \tcode{F} is specified by the
 \tcode{return} statements\iref{stmt.return} in the code sequence.
 If \tcode{F}'s semantics contains a \Fundescx{Throws},
-\Fundescx{Ensures}, or \Fundescx{Complexity} element,
+\Fundescx{Postconditions}, or \Fundescx{Complexity} element,
 then that supersedes any occurrences of that element in the code sequence.
 
 \pnum
@@ -919,11 +938,9 @@ also its value in the \tcode{"C"}
 locale, but may change during program
 execution by a call to
 \tcode{setlocale(int, const char*)},\footnote{declared in
-\tcode{<clocale>}\iref{c.locales}.
-\indextext{\idxcode{setlocale}}%
-\indexlibrary{\idxcode{setlocale}}%
-\indexhdr{clocale}%
-\indexhdr{clocale}}
+\libheaderref{clocale}.
+\indexlibraryglobal{setlocale}%
+}
 or by a change to a
 \tcode{locale}
 object, as described in \ref{locales} and \ref{input.output}.
@@ -958,11 +975,9 @@ is a character sequence whose highest-addressed element
 with defined content has the value zero
 (the \defnx{terminating null character}{character!terminating null});
 no other element in the sequence has the value zero.%
-\indexhdr{cstring}%
 \footnote{Many of the objects manipulated by
 function signatures declared in
-\tcode{<cstring>}\iref{c.strings} are character sequences or \ntbs{}s.
-\indexhdr{cstring}%
+\libheaderref{cstring} are character sequences or \ntbs{}s.
 The size of some of these character sequences is limited by
 a length value, maintained separately from the character sequence.}
 
@@ -1077,7 +1092,7 @@ The declarations for such members are
 followed by a comment that ends with \expos, as in:
 
 \begin{codeblock}
-streambuf* sb;  // \expos
+streambuf* sb;      // \expos
 \end{codeblock}
 
 \pnum
@@ -1248,9 +1263,9 @@ The facilities of the C standard library are provided in the
 additional headers shown in \tref{headers.cpp.c}.%
 \footnote{It is intentional that there is no \Cpp{} header
 for any of these C headers:
-\tcode{<stdatomic.h>}\indextext{\idxhdr{stdatomic.h}!absence thereof},
-\tcode{<stdnoreturn.h>}\indextext{\idxhdr{stdnoreturn.h}!absence thereof},
-\tcode{<threads.h>}\indextext{\idxhdr{threads.h}!absence thereof}.}
+\libnoheader{stdatomic.h},
+\libnoheader{stdnoreturn.h},
+\libnoheader{threads.h}.}
 
 \begin{multicolfloattable}{\Cpp{} headers for C library facilities}{headers.cpp.c}
 {lllllll}
@@ -1295,8 +1310,8 @@ imported as module units\iref{module.import}.
 \end{note}
 \begin{example}
 \begin{codeblock}
-import <vector>;               // imports the \tcode{<vector>} header unit
-std::vector<int> vi;           // OK
+import <vector>;                // imports the \tcode{<vector>} header unit
+std::vector<int> vi;            // OK
 \end{codeblock}
 \end{example}
 
@@ -1317,9 +1332,11 @@ and are then injected into namespace \tcode{std} by explicit
 \pnum
 Names which are defined as macros in C shall be defined as macros in the \Cpp{}
 standard library, even if C grants license for implementation as functions.
-\begin{note} The names defined as macros in C include the following:
+\begin{note}
+The names defined as macros in C include the following:
 \tcode{assert}, \tcode{offsetof}, \tcode{setjmp}, \tcode{va_arg},
-\tcode{va_end}, and \tcode{va_start}. \end{note}
+\tcode{va_end}, and \tcode{va_start}.
+\end{note}
 
 \pnum
 Names that are defined as functions in C shall be defined as functions in the
@@ -1331,7 +1348,7 @@ extern inline function.}
 \pnum
 Identifiers that are keywords or operators in \Cpp{} shall not be defined as
 macros in \Cpp{} standard library headers.\footnote{In particular, including the
-standard header \tcode{<iso646.h>} has no effect.}
+standard header \libheader{iso646.h} has no effect.}
 
 \pnum
 \ref{depr.c.headers}, C standard library headers, describes the effects of using
@@ -1472,6 +1489,7 @@ include at least the headers shown in \tref{headers.cpp.fs}.
 \ref{support.srcloc}     & Source location           & \tcode{<source_location>}  \\ \rowsep
 \ref{support.exception}  & Exception handling        & \tcode{<exception>}        \\ \rowsep
 \ref{support.initlist}   & Initializer lists         & \tcode{<initializer_list>} \\ \rowsep
+\ref{cmp}                & Comparisons               & \tcode{<compare>}          \\ \rowsep
 \ref{support.coroutine}  & Coroutines support        & \tcode{<coroutine>}        \\ \rowsep
 \ref{support.runtime}    & Other runtime support     & \tcode{<cstdarg>}          \\ \rowsep
 \ref{concepts}           & Concepts library          & \tcode{<concepts>}         \\ \rowsep
@@ -1481,22 +1499,20 @@ include at least the headers shown in \tref{headers.cpp.fs}.
 \end{libsumtab}
 
 \pnum
-The supplied version of the header
-\tcode{<cstdlib>}
-\indexhdr{cstdlib}%
+The supplied version of the header \libheaderref{cstdlib}
 shall declare at least the functions
-\indexlibrary{\idxcode{abort}}%
+\indexlibraryglobal{abort}%
 \tcode{abort},
-\indexlibrary{\idxcode{atexit}}%
+\indexlibraryglobal{atexit}%
 \tcode{atexit},
-\indexlibrary{\idxcode{at_quick_exit}}%
+\indexlibraryglobal{at_quick_exit}%
 \tcode{at_quick_exit},
-\indexlibrary{\idxcode{exit}}%
+\indexlibraryglobal{exit}%
 \tcode{exit},
 and
-\indexlibrary{\idxcode{quick_exit}}%
+\indexlibraryglobal{quick_exit}%
 \tcode{quick_exit}\iref{support.start.term}.
-The supplied version of the header \tcode{<atomic>}
+The supplied version of the header \libheaderrefx{atomic}{atomics.syn}
 shall meet the same requirements as for a hosted implementation
 except that support for
 always lock-free integral atomic types\iref{atomics.lockfree}
@@ -1534,19 +1550,14 @@ or the appropriate
 \indextext{source file}
 
 \pnum
-A translation unit may include library headers in any order\iref{lex}.
+A translation unit may include library headers in any order\iref{lex.separate}.
 \indextext{unit!translation}%
 Each may be included more than once, with no effect different from
 being included exactly once, except that the effect of including either
-\tcode{<cassert>}
-or
-\tcode{<assert.h>}
-depends each time on the lexically
-\indexhdr{cassert}%
-\indexhdr{assert.h}%
-current definition of
+\libheaderref{cassert} or \libheaderrefx{assert.h}{depr.c.headers}
+depends each time on the lexically current definition of
 \indextext{\idxcode{NDEBUG}}%
-\indexlibrary{\idxcode{NDEBUG}}%
+\indexlibraryglobal{NDEBUG}%
 \tcode{NDEBUG}.\footnote{This is the same as the C standard library.}
 
 \pnum
@@ -1685,9 +1696,12 @@ convertible to \tcode{bool} &
   \tcode{T(rv)} is equivalent to the value of \tcode{rv} before the construction \\ \rowsep
 \multicolumn{2}{|p{5.3in}|}{
   \tcode{rv}'s state is unspecified
-  \begin{note} \tcode{rv} must still meet the requirements of the library
+  \begin{note}
+\tcode{rv} must still meet the requirements of the library
   component that is using it. The operations listed in those requirements must
-  work as specified whether \tcode{rv} has been moved from or not. \end{note}}\\
+  work as specified whether \tcode{rv} has been moved from or not.
+\end{note}
+}\\
 \end{concepttable}
 
 \indextext{requirements!\idxoldconcept{CopyConstructible}}%
@@ -1710,10 +1724,13 @@ convertible to \tcode{bool} &
   \tcode{t} is equivalent to the value of \tcode{rv} before the assignment\\ \rowsep
 \multicolumn{4}{|p{5.3in}|}{
   \tcode{rv}'s state is unspecified.
-  \begin{note}\ \tcode{rv} must still meet the requirements of the library
+  \begin{note}
+\ \tcode{rv} must still meet the requirements of the library
   component that is using it, whether or not \tcode{t} and \tcode{rv} refer to the same object.
   The operations listed in those requirements must
-  work as specified whether \tcode{rv} has been moved from or not. \end{note}}\\
+  work as specified whether \tcode{rv} has been moved from or not.
+\end{note}
+}\\
 \end{concepttable}
 
 \indextext{requirements!\idxoldconcept{CopyAssignable}}%
@@ -1746,7 +1763,6 @@ denote an expression of type \tcode{U}.
 
 \pnum
 An object \tcode{t} is \defn{swappable with} an object \tcode{u} if and only if:
-
 \begin{itemize}
 \item the expressions \tcode{swap(t, u)} and \tcode{swap(u, t)} are valid when
 evaluated in the context described below, and
@@ -1763,23 +1779,26 @@ evaluated in the context described below, and
 The context in which \tcode{swap(t, u)} and \tcode{swap(u, t)} are evaluated shall
 ensure that a binary non-member function named ``swap'' is selected via overload
 resolution\iref{over.match} on a candidate set that includes:
-
 \begin{itemize}
 \item the two \tcode{swap} function templates defined in
-\tcode{<utility>}\iref{utility} and
+\libheaderref{utility} and
 
 \item the lookup set produced by argument-dependent lookup\iref{basic.lookup.argdep}.
 \end{itemize}
 
-\begin{note} If \tcode{T} and \tcode{U} are both fundamental types or arrays of
-fundamental types and the declarations from the header \tcode{<utility>} are in
+\begin{note}
+If \tcode{T} and \tcode{U} are both fundamental types or arrays of
+fundamental types and the declarations from the header \libheader{utility} are in
 scope, the overall lookup set described above is equivalent to that of the
 qualified name lookup applied to the expression \tcode{std::swap(t, u)} or
-\tcode{std::swap(u, t)} as appropriate. \end{note}
+\tcode{std::swap(u, t)} as appropriate.
+\end{note}
 
-\begin{note} It is unspecified whether a library component that has a swappable
-requirement includes the header \tcode{<utility>} to ensure an appropriate
-evaluation context. \end{note}
+\begin{note}
+It is unspecified whether a library component that has a swappable
+requirement includes the header \libheader{utility} to ensure an appropriate
+evaluation context.
+\end{note}
 
 \pnum
 An rvalue or lvalue \tcode{t} is \defn{swappable} if and only if \tcode{t} is
@@ -1792,7 +1811,8 @@ for any dereferenceable object
 \tcode{x} of type \tcode{X},
 \tcode{*x} is swappable.
 
-\begin{example} User code can ensure that the evaluation of \tcode{swap} calls
+\begin{example}
+User code can ensure that the evaluation of \tcode{swap} calls
 is performed in an appropriate context under the various conditions as follows:
 \begin{codeblock}
 #include <utility>
@@ -1841,7 +1861,6 @@ int main() {
 \pnum
 A \oldconcept{NullablePointer} type is a pointer-like type that supports null values.
 A type \tcode{P} meets the \oldconcept{\-Nullable\-Pointer} requirements if:
-
 \begin{itemize}
 \item \tcode{P} meets the \oldconcept{EqualityComparable},
 \oldconcept{DefaultConstructible}, \oldconcept{CopyConstructible}, \oldconcept{\-Copy\-Assign\-able},
@@ -1858,8 +1877,11 @@ valid and have the indicated semantics, and
 \pnum
 A value-initialized object of type \tcode{P} produces the null value of the type.
 The null value shall be equivalent only to itself. A default-initialized object
-of type \tcode{P} may have an indeterminate value. \begin{note} Operations involving
-indeterminate values may cause undefined behavior. \end{note}
+of type \tcode{P} may have an indeterminate value.
+\begin{note}
+Operations involving
+indeterminate values may cause undefined behavior.
+\end{note}
 
 \pnum
 An object \tcode{p} of type \tcode{P} can be contextually converted to
@@ -1919,7 +1941,6 @@ Expression  &   Return type   &   Operational semantics \\ \capsep
 \indextext{requirements!\idxoldconcept{Hash}}
 \pnum
 A type \tcode{H} meets the \oldconcept{Hash} requirements if:
-
 \begin{itemize}
 \item it is a function object type\iref{function.objects},
 \item it meets the \oldconcept{CopyConstructible} (\tref{cpp17.copyconstructible}) and
@@ -1941,12 +1962,17 @@ Expression        &     Return type     &       Requirement \\ \capsep
 \tcode{h(k)}      &
   \tcode{size_t}  &
   The value returned shall depend only on the argument \tcode{k} for the duration of
-  the program. \begin{note} Thus all evaluations of the expression \tcode{h(k)} with the
+  the program.
+\begin{note}
+Thus all evaluations of the expression \tcode{h(k)} with the
   same value for \tcode{k} yield the same result for a given execution of the program.
-  \end{note} \begin{note} For two different
+  \end{note}
+\begin{note}
+For two different
   values \tcode{t1} and \tcode{t2}, the probability that \tcode{h(t1)} and \tcode{h(t2)}
   compare equal should be very small, approaching \tcode{1.0 / numeric_limits<size_t>::max()}.
-  \end{note} \\ \rowsep
+  \end{note}
+\\ \rowsep
 \tcode{h(u)}      &
   \tcode{size_t}  &
   Shall not modify \tcode{u}. \\
@@ -2109,7 +2135,8 @@ is small. That is, there is no need for a container to maintain its own
 free list.}
 \begin{note}
 If \tcode{n == 0}, the return value is unspecified.
-\end{note}              &  \\ \rowsep
+\end{note}
+&  \\ \rowsep
 
 \tcode{a.allocate(n, y)}    &
   \tcode{X::pointer}        &
@@ -2218,12 +2245,16 @@ If \tcode{n == 0}, the return value is unspecified.
 
 \pnum
 Note A: The member class template \tcode{rebind} in the table above is
-effectively a typedef template. \begin{note} In general, if
+effectively a typedef template.
+\begin{note}
+In general, if
 the name \tcode{Allocator} is bound to \tcode{SomeAllocator<T>}, then
 \tcode{Allocator::rebind<U>::other} is the same type as
 \tcode{SomeAllocator<U>}, where
 \tcode{SomeAllocator<T>::value_type} is \tcode{T} and
-\tcode{SomeAllocator<U>::\brk{}value_type} is \tcode{U}. \end{note} If
+\tcode{SomeAllocator<U>::\brk{}value_type} is \tcode{U}.
+\end{note}
+If
 \tcode{Allocator} is a class template instantiation of the form
 \tcode{SomeAllocator<T, Args>}, where \tcode{Args} is zero or more type
 arguments, and \tcode{Allocator} does not supply a \tcode{rebind} member
@@ -2309,12 +2340,15 @@ class or the call to \tcode{construct} or \tcode{destroy} may fail to instantiat
 If the alignment associated with a specific over-aligned type is not
 supported by an allocator, instantiation of the allocator for that type may
 fail. The allocator also may silently ignore the requested alignment.
-\begin{note} Additionally, the member function \tcode{allocate}
+\begin{note}
+Additionally, the member function \tcode{allocate}
 for that type may fail by throwing an object of type
-\tcode{bad_alloc}.\end{note}
+\tcode{bad_alloc}.
+\end{note}
 
 \pnum
-\begin{example} The following is an allocator class template supporting the minimal
+\begin{example}
+The following is an allocator class template supporting the minimal
 interface that meets the requirements of
 \tref{cpp17.allocator}:
 
@@ -2343,7 +2377,6 @@ bool operator!=(const SimpleAllocator<T>&, const SimpleAllocator<U>&);
 If \tcode{X} is an allocator class for type \tcode{T},
 \tcode{X} additionally meets the allocator completeness requirements if,
 whether or not \tcode{T} is a complete type:
-
 \begin{itemize}
 \item \tcode{X} is a complete type, and
 \item all the member types of \tcode{allocator_traits<X>}\iref{allocator.traits}
@@ -2509,13 +2542,15 @@ ISO/IEC 9945 and other POSIX standards.
 \rSec4[namespace.future]{Namespaces for future standardization}
 
 \pnum
-Top level namespaces with a name starting with \tcode{std} and
-followed by a non-empty sequence of digits
+Top-level namespaces whose \grammarterm{namespace-name} consists of \tcode{std}
+followed by one or more \grammarterm{digit}{s}\iref{lex.name}
 are reserved for future standardization.
 The behavior of a \Cpp{} program is undefined if
 it adds declarations or definitions to such a namespace.
-\begin{example} The top level namespace \tcode{std2} is reserved
-for use by future revisions of this International Standard. \end{example}
+\begin{example}
+The top-level namespace \tcode{std2} is reserved
+for use by future revisions of this International Standard.
+\end{example}
 
 \rSec3[reserved.names]{Reserved names}%
 \indextext{name!reserved}
@@ -2542,69 +2577,74 @@ undefined.%
 \pnum
 In namespace \tcode{std}, the following names are reserved for previous standardization:
 \begin{itemize}
-\item \indexlibrary{\idxcode{auto_ptr}!zombie} \tcode{auto_ptr},
-\item \indexlibrary{\idxcode{auto_ptr_ref}!zombie} \tcode{auto_ptr_ref},
-\item \indexlibrary{\idxcode{binary_function}!zombie} \tcode{binary_function},
-\item \indexlibrary{\idxcode{binary_negate}!zombie} \tcode{binary_negate},
-\item \indexlibrary{\idxcode{bind1st}!zombie} \tcode{bind1st},
-\item \indexlibrary{\idxcode{bind2nd}!zombie} \tcode{bind2nd},
-\item \indexlibrary{\idxcode{binder1st}!zombie} \tcode{binder1st},
-\item \indexlibrary{\idxcode{binder2nd}!zombie} \tcode{binder2nd},
-\item \indexlibrary{\idxcode{const_mem_fun1_ref_t}!zombie} \tcode{const_mem_fun1_ref_t},
-\item \indexlibrary{\idxcode{const_mem_fun1_t}!zombie} \tcode{const_mem_fun1_t},
-\item \indexlibrary{\idxcode{const_mem_fun_ref_t}!zombie} \tcode{const_mem_fun_ref_t},
-\item \indexlibrary{\idxcode{const_mem_fun_t}!zombie} \tcode{const_mem_fun_t},
-\item \indexlibrary{\idxcode{get_temporary_buffer}!zombie} \tcode{get_temporary_buffer},
-\item \indexlibrary{\idxcode{get_unexpected}!zombie} \tcode{get_unexpected},
-\item \indexlibrary{\idxcode{gets}!zombie} \tcode{gets},
-\item \indexlibrary{\idxcode{is_literal_type}!zombie} \tcode{is_literal_type},
-\item \indexlibrary{\idxcode{is_literal_type_v}!zombie} \tcode{is_literal_type_v},
-\item \indexlibrary{\idxcode{mem_fun1_ref_t}!zombie} \tcode{mem_fun1_ref_t},
-\item \indexlibrary{\idxcode{mem_fun1_t}!zombie} \tcode{mem_fun1_t},
-\item \indexlibrary{\idxcode{mem_fun_ref_t}!zombie} \tcode{mem_fun_ref_t},
-\item \indexlibrary{\idxcode{mem_fun_ref}!zombie} \tcode{mem_fun_ref},
-\item \indexlibrary{\idxcode{mem_fun_t}!zombie} \tcode{mem_fun_t},
-\item \indexlibrary{\idxcode{mem_fun}!zombie} \tcode{mem_fun},
-\item \indexlibrary{\idxcode{not1}!zombie} \tcode{not1},
-\item \indexlibrary{\idxcode{not2}!zombie} \tcode{not2},
-\item \indexlibrary{\idxcode{pointer_to_binary_function}!zombie} \tcode{pointer_to_binary_function},
-\item \indexlibrary{\idxcode{pointer_to_unary_function}!zombie} \tcode{pointer_to_unary_function},
-\item \indexlibrary{\idxcode{ptr_fun}!zombie} \tcode{ptr_fun},
-\item \indexlibrary{\idxcode{random_shuffle}!zombie} \tcode{random_shuffle},
-\item \indexlibrary{\idxcode{raw_storage_iterator}!zombie} \tcode{raw_storage_iterator},
-\item \indexlibrary{\idxcode{result_of}!zombie} \tcode{result_of},
-\item \indexlibrary{\idxcode{result_of_t}!zombie} \tcode{result_of_t},
-\item \indexlibrary{\idxcode{return_temporary_buffer}!zombie} \tcode{return_temporary_buffer},
-\item \indexlibrary{\idxcode{set_unexpected}!zombie} \tcode{set_unexpected},
-\item \indexlibrary{\idxcode{unary_function}!zombie} \tcode{unary_function},
-\item \indexlibrary{\idxcode{unary_negate}!zombie} \tcode{unary_negate},
-\item \indexlibrary{\idxcode{uncaught_exception}!zombie} \tcode{uncaught_exception},
-\item \indexlibrary{\idxcode{unexpected}!zombie} \tcode{unexpected},
+\item \indexlibraryzombie{auto_ptr} \tcode{auto_ptr},
+\item \indexlibraryzombie{auto_ptr_ref} \tcode{auto_ptr_ref},
+\item \indexlibraryzombie{binary_function} \tcode{binary_function},
+\item \indexlibraryzombie{binary_negate} \tcode{binary_negate},
+\item \indexlibraryzombie{bind1st} \tcode{bind1st},
+\item \indexlibraryzombie{bind2nd} \tcode{bind2nd},
+\item \indexlibraryzombie{binder1st} \tcode{binder1st},
+\item \indexlibraryzombie{binder2nd} \tcode{binder2nd},
+\item \indexlibraryzombie{const_mem_fun1_ref_t} \tcode{const_mem_fun1_ref_t},
+\item \indexlibraryzombie{const_mem_fun1_t} \tcode{const_mem_fun1_t},
+\item \indexlibraryzombie{const_mem_fun_ref_t} \tcode{const_mem_fun_ref_t},
+\item \indexlibraryzombie{const_mem_fun_t} \tcode{const_mem_fun_t},
+\item \indexlibraryzombie{get_temporary_buffer} \tcode{get_temporary_buffer},
+\item \indexlibraryzombie{get_unexpected} \tcode{get_unexpected},
+\item \indexlibraryzombie{gets} \tcode{gets},
+\item \indexlibraryzombie{is_literal_type} \tcode{is_literal_type},
+\item \indexlibraryzombie{is_literal_type_v} \tcode{is_literal_type_v},
+\item \indexlibraryzombie{mem_fun1_ref_t} \tcode{mem_fun1_ref_t},
+\item \indexlibraryzombie{mem_fun1_t} \tcode{mem_fun1_t},
+\item \indexlibraryzombie{mem_fun_ref_t} \tcode{mem_fun_ref_t},
+\item \indexlibraryzombie{mem_fun_ref} \tcode{mem_fun_ref},
+\item \indexlibraryzombie{mem_fun_t} \tcode{mem_fun_t},
+\item \indexlibraryzombie{mem_fun} \tcode{mem_fun},
+\item \indexlibraryzombie{not1} \tcode{not1},
+\item \indexlibraryzombie{not2} \tcode{not2},
+\item \indexlibraryzombie{pointer_to_binary_function} \tcode{pointer_to_binary_function},
+\item \indexlibraryzombie{pointer_to_unary_function} \tcode{pointer_to_unary_function},
+\item \indexlibraryzombie{ptr_fun} \tcode{ptr_fun},
+\item \indexlibraryzombie{random_shuffle} \tcode{random_shuffle},
+\item \indexlibraryzombie{raw_storage_iterator} \tcode{raw_storage_iterator},
+\item \indexlibraryzombie{result_of} \tcode{result_of},
+\item \indexlibraryzombie{result_of_t} \tcode{result_of_t},
+\item \indexlibraryzombie{return_temporary_buffer} \tcode{return_temporary_buffer},
+\item \indexlibraryzombie{set_unexpected} \tcode{set_unexpected},
+\item \indexlibraryzombie{unary_function} \tcode{unary_function},
+\item \indexlibraryzombie{unary_negate} \tcode{unary_negate},
+\item \indexlibraryzombie{uncaught_exception} \tcode{uncaught_exception},
+\item \indexlibraryzombie{unexpected} \tcode{unexpected},
 and
-\item \indexlibrary{\idxcode{unexpected_handler}!zombie} \tcode{unexpected_handler}.
+\item \indexlibraryzombie{unexpected_handler} \tcode{unexpected_handler}.
 \end{itemize}
 
 \pnum
 The following names are reserved as member types for previous standardization,
 and may not be used as a name for object-like macros in portable code:
 \begin{itemize}
-\item \indexlibrary{\idxcode{argument_type}!zombie} \tcode{argument_type},
-\item \indexlibrary{\idxcode{first_argument_type}!zombie} \tcode{first_argument_type},
-\item \indexlibrary{\idxcode{io_state}!zombie} \tcode{io_state},
-\item \indexlibrary{\idxcode{open_mode}!zombie} \tcode{open_mode},
-\item \indexlibrary{\idxcode{second_argument_type}!zombie} \tcode{second_argument_type},
+\item \indexlibraryzombie{argument_type} \tcode{argument_type},
+\item \indexlibraryzombie{first_argument_type} \tcode{first_argument_type},
+\item \indexlibraryzombie{io_state} \tcode{io_state},
+\item \indexlibraryzombie{open_mode} \tcode{open_mode},
+\item \indexlibraryzombie{second_argument_type} \tcode{second_argument_type},
 and
-\item \indexlibrary{\idxcode{seek_dir}!zombie} \tcode{seek_dir},
+\item \indexlibraryzombie{seek_dir} \tcode{seek_dir}.
 \end{itemize}
 
 \pnum
-The name \indexlibrary{\idxcode{stossc}!zombie} \tcode{stossc} is reserved as a
+The name \indexlibraryzombie{stossc} \tcode{stossc} is reserved as a
 member function for previous standardization, and may not be used as a name for
 function-like macros in portable code.
 
 \pnum
-The header names \tcode{<ccomplex>}, \tcode{<ciso646>}, \tcode{<cstdalign>},
-\tcode{<cstdbool>}, and \tcode{<ctgmath>} are reserved for previous standardization.
+The header names
+\libnoheader{ccomplex},
+\libnoheader{ciso646},
+\libnoheader{cstdalign},
+\libnoheader{cstdbool}, and
+\libnoheader{ctgmath}
+are reserved for previous standardization.
 
 \rSec4[macro.names]{Macro names}
 
@@ -2633,13 +2673,8 @@ Each name declared as an object with external linkage
 in a header is reserved to the implementation to designate that library
 object with external linkage,%
 \indextext{linkage!external}\footnote{The list of such reserved names includes
-\tcode{errno},
-declared or defined in
-\indexhdr{cerrno}%
-\tcode{<cerrno>}.}
-both in namespace
-\tcode{std}
-and in the global namespace.
+\tcode{errno}, declared or defined in \libheaderref{cerrno}.}
+both in namespace \tcode{std} and in the global namespace.
 
 \pnum
 Each
@@ -2651,18 +2686,15 @@ implementation to designate that function signature with
 \indextext{linkage!external}%
 external linkage.\footnote{The list of such reserved function
 signatures with external linkage includes
-\indexlibrary{\idxcode{setjmp}}%
+\indexlibraryglobal{setjmp}%
 \tcode{setjmp(jmp_buf)},
-declared or defined in
-\indexhdr{csetjmp}%
-\tcode{<csetjmp>},
+declared or defined in \libheaderref{csetjmp},
 and
-\indexlibrary{\idxcode{va_end}}%
-\indexlibrary{\idxcode{va_list}}%
+\indexlibraryglobal{va_end}%
+\indexlibraryglobal{va_list}%
 \tcode{va_end(va_list)},
 declared or defined in
-\indexhdr{cstdarg}%
-\tcode{<cstdarg>}.}
+\libheaderref{cstdarg}.}
 
 \pnum
 Each name from the C standard library declared with external linkage
@@ -2687,13 +2719,10 @@ and
 \tcode{extern "C++"}
 linkage,\footnote{The function signatures declared in
 \indextext{Amendment 1}%
-\indexhdr{cuchar}%
-\indexhdr{cwchar}%
-\indexhdr{cwctype}%
-\tcode{<cuchar>},
-\tcode{<cwchar>},
+\libheaderref{cuchar},
+\libheaderref{cwchar},
 and
-\tcode{<cwctype>}
+\libheaderref{cwctype}
 are always reserved, notwithstanding the restrictions imposed in subclause
 4.5.1 of Amendment 1 to the C Standard for these headers.}
 or as a name of namespace scope in the global namespace.
@@ -2772,7 +2801,7 @@ dynamic memory allocation function signatures declared in header
 \tcode{<new>}~(\ref{basic.stc.dynamic}, \ref{support.dynamic}):
 
 \indextext{\idxcode{new}!\idxcode{operator}!replaceable}%
-\indexlibrary{\idxcode{new}!\idxcode{operator}}%
+\indexlibrarymember{new}{operator}%
 \begin{codeblock}
 operator new(std::size_t)
 operator new(std::size_t, std::align_val_t)
@@ -2780,7 +2809,7 @@ operator new(std::size_t, const std::nothrow_t&)
 operator new(std::size_t, std::align_val_t, const std::nothrow_t&)
 \end{codeblock}%
 \indextext{\idxcode{delete}!\idxcode{operator}!replaceable}%
-\indexlibrary{\idxcode{delete}!\idxcode{operator}}%
+\indexlibrarymember{delete}{operator}%
 \begin{codeblock}
 operator delete(void*)
 operator delete(void*, std::size_t)
@@ -2790,7 +2819,7 @@ operator delete(void*, const std::nothrow_t&)
 operator delete(void*, std::align_val_t, const std::nothrow_t&)
 \end{codeblock}%
 \indextext{\idxcode{new}!\idxcode{operator}!replaceable}%
-\indexlibrary{\idxcode{new}!\idxcode{operator}}%
+\indexlibrarymember{new}{operator}%
 \begin{codeblock}
 operator new[](std::size_t)
 operator new[](std::size_t, std::align_val_t)
@@ -2798,7 +2827,7 @@ operator new[](std::size_t, const std::nothrow_t&)
 operator new[](std::size_t, std::align_val_t, const std::nothrow_t&)
 \end{codeblock}%
 \indextext{\idxcode{delete}!\idxcode{operator}!replaceable}%
-\indexlibrary{\idxcode{delete}!\idxcode{operator}}%
+\indexlibrarymember{delete}{operator}%
 \begin{codeblock}
 operator delete[](void*)
 operator delete[](void*, std::size_t)
@@ -2826,7 +2855,7 @@ function\iref{language.support}:
 \begin{itemize}
 \item
 \tcode{terminate_handler}
-\indexlibrary{\idxcode{terminate_handler}}%
+\indexlibraryglobal{terminate_handler}%
 \end{itemize}
 
 \pnum
@@ -2834,8 +2863,8 @@ A \Cpp{} program may install different handler functions during execution, by
 supplying a pointer to a function defined in the program or the library
 as an argument to (respectively):
 \begin{itemize}
-\item \indexlibrary{\idxcode{set_new_handler}}\tcode{set_new_handler}
-\item \indexlibrary{\idxcode{set_terminate}}\tcode{set_terminate}
+\item \indexlibraryglobal{set_new_handler}\tcode{set_new_handler}
+\item \indexlibraryglobal{set_terminate}\tcode{set_terminate}
 \end{itemize}
 See also subclauses~\ref{alloc.errors}, Storage allocation errors, and~\ref{support.exception},
 Exception handling.
@@ -2846,10 +2875,10 @@ functions:
 
 \begin{itemize}
 \item
-\indexlibrary{\idxcode{get_new_handler}}%
+\indexlibraryglobal{get_new_handler}%
 \tcode{get_new_handler}
 \item
-\indexlibrary{\idxcode{get_terminate}}
+\indexlibraryglobal{get_terminate}
 \tcode{get_terminate}
 \end{itemize}
 
@@ -2951,9 +2980,12 @@ an lvalue.
 \pnum
 The behavior of a program is undefined if calls to standard library functions from different
 threads may introduce a data race. The conditions under which this may occur are specified
-in~\ref{res.on.data.races}. \begin{note} Modifying an object of a standard library type that is
+in~\ref{res.on.data.races}.
+\begin{note}
+Modifying an object of a standard library type that is
 shared between threads risks undefined behavior unless objects of that type are explicitly
-specified as being shareable without data races or the user supplies a locking mechanism. \end{note}
+specified as being shareable without data races or the user supplies a locking mechanism.
+\end{note}
 
 \pnum
 If an object of a standard library type is accessed, and
@@ -3099,6 +3131,29 @@ with two or more member functions with equivalent behavior,
 or add additional signatures for a member function name.
 \end{note}
 
+\rSec3[hidden.friends]{Friend functions}
+
+\pnum
+Whenever this document specifies
+a friend declaration of a function or function template
+within a class or class template definition,
+that declaration shall be
+the only declaration of that function or function template
+provided by an implementation.
+\begin{note}
+In particular,
+an implementation is not allowed to provide
+an additional declaration of that function or function template
+at namespace scope.
+\end{note}
+\begin{note}
+Such a friend function or function template declaration
+is known as a hidden friend,
+as it is visible neither
+to ordinary unqualified lookup\iref{basic.lookup.unqual} nor
+to qualified lookup\iref{basic.lookup.qual}.
+\end{note}
+
 \rSec3[constexpr.functions]{Constexpr functions and constructors}
 
 \pnum
@@ -3158,9 +3213,11 @@ unless the objects are accessed directly or indirectly via the function's non-co
 arguments, including \tcode{this}.
 
 \pnum
-\begin{note} This means, for example, that implementations can't use a static object for
+\begin{note}
+This means, for example, that implementations can't use a static object for
 internal purposes without synchronization because it could cause a data race even in
-programs that do not explicitly share objects between threads. \end{note}
+programs that do not explicitly share objects between threads.
+\end{note}
 
 \pnum
 A \Cpp{} standard library function shall not access objects indirectly accessible via its
@@ -3170,8 +3227,10 @@ required by its specification on those container elements.
 \pnum
 Operations on iterators obtained by calling a standard library container or string
 member function may access the underlying container, but shall not modify it.
-\begin{note} In particular, container operations that invalidate iterators conflict
-with operations on iterators associated with that container. \end{note}
+\begin{note}
+In particular, container operations that invalidate iterators conflict
+with operations on iterators associated with that container.
+\end{note}
 
 \pnum
 Implementations may share their own internal objects between threads if the objects are
@@ -3183,9 +3242,11 @@ solely within the current thread if those operations have effects that are
 visible\iref{intro.multithread} to users.
 
 \pnum
-\begin{note} This allows implementations to parallelize operations if there are no visible
+\begin{note}
+This allows implementations to parallelize operations if there are no visible
 \indextext{side effects}%
-side effects. \end{note}
+side effects.
+\end{note}
 
 \rSec3[protection.within.classes]{Protection within classes}
 
@@ -3214,7 +3275,6 @@ through a hierarchy of base classes with names reserved to the implementation.
 
 \pnum
 In any case:
-
 \begin{itemize}
 \item
 Every base class described as
@@ -3306,11 +3366,14 @@ by adding a non-throwing exception specification.
 \indextext{pointer!to traceable object}%
 Objects constructed by the standard library that may hold a user-supplied pointer value
 or an integer of type \tcode{std::intptr_t} shall store such values in a traceable
-pointer location\iref{basic.stc.dynamic.safety}. \begin{note} Other libraries are
+pointer location\iref{basic.stc.dynamic.safety}.
+\begin{note}
+Other libraries are
 strongly encouraged to do the same, since not doing so may result in accidental use of
 pointers that are not safely derived. Libraries that store pointers outside the user's
 address space should make it appear that they are stored and retrieved from a traceable
-pointer location. \end{note}
+pointer location.
+\end{note}
 
 \rSec3[value.error.codes]{Value of error codes}
 
@@ -3322,13 +3385,16 @@ errors originating from the operating system, or a reference to an
 \impldef{\tcode{error_category} for errors originating outside the
 operating system} \tcode{error_category} object for errors originating elsewhere.
 The implementation shall define the possible values of \tcode{value()} for each of these
-error categories. \begin{example} For operating systems that are based on POSIX,
+error categories.
+\begin{example}
+For operating systems that are based on POSIX,
 implementations should define the \tcode{std::system_category()} values as
 identical to the POSIX \tcode{errno} values, with additional values as defined by the
 operating system's documentation. Implementations for operating systems that are not
 based on POSIX should define values identical to the operating system's
 values. For errors that do not originate from the operating system, the implementation
-may provide enums for the associated values. \end{example}
+may provide enums for the associated values.
+\end{example}
 
 \rSec3[lib.types.movedfrom]{Moved-from state of library types}
 

@@ -8,6 +8,8 @@
 
 \gramSec[gram.cpp]{Preprocessing directives}
 
+\rSec1[cpp.pre]{Preamble}
+
 \pnum
 A \defn{preprocessing directive} consists of a sequence of preprocessing tokens
 that satisfies the following constraints:
@@ -176,17 +178,17 @@ before translation of the resulting translation unit.
 The preprocessing tokens within a preprocessing directive
 are not subject to macro expansion unless otherwise stated.
 
-\begin{example} In:
-
+\begin{example}
+In:
 \begin{codeblock}
 #define EMPTY
 EMPTY   #   include <file.h>
 \end{codeblock}
-
 the sequence of preprocessing tokens on the second line is \textit{not}
 a preprocessing directive, because it does not begin with a \tcode{\#} at the start of
 translation phase 4, even though it will do so after the macro \tcode{EMPTY}
-has been replaced.\end{example}
+has been replaced.
+\end{example}
 
 \rSec1[cpp.cond]{Conditional inclusion}%
 \indextext{preprocessing directive!conditional inclusion}%
@@ -530,11 +532,9 @@ that can be processed by the implementation.
 
 \pnum
 A preprocessing directive of the form
-
 \begin{ncsimplebnf}
 \terminal{\# include <} h-char-sequence \terminal{>} new-line
 \end{ncsimplebnf}
-
 searches a sequence of
 \impldef{sequence of places searched for a header}
 places
@@ -575,11 +575,9 @@ characters, if any) from the original directive.
 
 \pnum
 A preprocessing directive of the form
-
 \begin{ncsimplebnf}
 \terminal{\# include} pp-tokens new-line
 \end{ncsimplebnf}
-
 (that does not match one of the two previous forms) is permitted.
 The preprocessing tokens after
 \tcode{include}
@@ -717,6 +715,13 @@ the preprocessor and later phases of translation.
 Each \tcode{\#define} directive encountered when preprocessing
 each translation unit in a program results in a distinct
 \defnx{macro definition}{macro!definition}.
+\begin{note}
+A predefined macro name\iref{cpp.predefined}
+is not introduced by a \tcode{\#define} directive.
+Implementations providing mechanisms to predefine additional macros
+are encouraged to not treat them
+as being introduced by a \tcode{\#define} directive.
+\end{note}
 Importing macros from a header unit makes macro definitions
 from a translation unit visible in other translation units.
 Each macro definition has at most one point of definition in
@@ -789,7 +794,7 @@ int c = Z;      // error: active macro definitions \#3 and \#5 are not valid red
 \end{example}
 \indextext{macro!import|)}
 
-\rSec1[cpp.glob.frag]{Global module fragment}
+\rSec1[cpp.global.frag]{Global module fragment}
 
 \begin{bnf}
 \nontermdef{pp-global-module-fragment}\br
@@ -914,12 +919,10 @@ the identifier is not subject to macro replacement.
 
 \pnum
 A preprocessing directive of the form
-
 \begin{ncsimplebnf}
 \terminal{\# define} identifier replacement-list new-line
 \indextext{\idxcode{\#define}}%
 \end{ncsimplebnf}
-
 defines an
 \defnadj{object-like}{macro} that
 causes each subsequent instance of the macro name\footnote{Since, by macro-replacement time,
@@ -1191,7 +1194,8 @@ The order of evaluation of
 \tcode{\#\#}
 operators is unspecified.
 
-\begin{example} In the following fragment:
+\begin{example}
+In the following fragment:
 
 \begin{codeblock}
 #define hash_hash # ## #
@@ -1213,7 +1217,8 @@ mkstr(x ## y)
 
 In other words, expanding \tcode{hash_hash} produces a new token,
 consisting of two adjacent sharp signs, but this new token is not the
-\tcode{\#\#} operator. \end{example}
+\tcode{\#\#} operator.
+\end{example}
 
 \rSec2[cpp.rescan]{Rescanning and further replacement}%
 \indextext{macro!rescanning and replacement}%
@@ -1261,12 +1266,10 @@ Macro definitions have no significance after translation phase 4.
 
 \pnum
 A preprocessing directive of the form
-
 \begin{ncsimplebnf}
 \terminal{\# undef} identifier new-line
 \indextext{\idxcode{\#undef}}%
 \end{ncsimplebnf}
-
 causes the specified identifier no longer to be defined as a macro name.
 It is ignored if the specified identifier is not currently defined as
 a macro name.
@@ -1308,7 +1311,6 @@ the resulting expression are bound properly.
 \begin{example}
 To illustrate the rules for redefinition and reexamination,
 the sequence
-
 \begin{codeblock}
 #define x       3
 #define f(a)    f(x * (a))
@@ -1331,9 +1333,7 @@ g(x+(3,4)-w) | h 5) & m
 p() i[q()] = { q(1), r(2,3), r(4,), r(,5), r(,) };
 char c[2][6] = { str(hello), str() };
 \end{codeblock}
-
 results in
-
 \begin{codeblock}
 f(2 * (y+1)) + f(2 * (f(2 * (z[0])))) % f(2 * (0)) + t(1);
 f(2 * (2+(3,4)-0,1)) | f(2 * (~ 5)) & f(2 * (0,1))^m(0,1);
@@ -1347,7 +1347,6 @@ char c[2][6] = { "hello", "" };
 To illustrate the rules for creating character string literals
 and concatenating tokens,
 the sequence
-
 \begin{codeblock}
 #define str(s)      # s
 #define xstr(s)     str(s)
@@ -1366,9 +1365,7 @@ fputs(str(strncmp("abc@\textbackslash@0d", "abc", '@\textbackslash@4')        //
 glue(HIGH, LOW);
 xglue(HIGH, LOW)
 \end{codeblock}
-
 results in
-
 \begin{codeblock}
 printf("x" "1" "= %d, x" "2" "= %s", x1, x2);
 fputs("strncmp(@\textbackslash@"abc@\textbackslash\textbackslash@0d@\textbackslash@", @\textbackslash@"abc@\textbackslash@", '@\textbackslash\textbackslash@4') == 0" ": @\atsign\textbackslash@n", s);
@@ -1376,9 +1373,7 @@ fputs("strncmp(@\textbackslash@"abc@\textbackslash\textbackslash@0d@\textbacksla
 "hello";
 "hello" ", world"
 \end{codeblock}
-
 or, after concatenation of the character string literals,
-
 \begin{codeblock}
 printf("x1= %d, x2= %s", x1, x2);
 fputs("strncmp(@\textbackslash@"abc@\textbackslash\textbackslash@0d@\textbackslash@", @\textbackslash@"abc@\textbackslash@", '@\textbackslash\textbackslash@4') == 0: @\atsign\textbackslash@n", s);
@@ -1397,15 +1392,12 @@ tokens in the macro definition is optional.
 \pnum
 \begin{example}
 To illustrate the rules for placemarker preprocessing tokens, the sequence
-
 \begin{codeblock}
 #define t(x,y,z) x ## y ## z
 int j[] = { t(1,2,3), t(,4,5), t(6,,7), t(8,9,),
   t(10,,), t(,11,), t(,,12), t(,,) };
 \end{codeblock}
-
 results in
-
 \begin{codeblock}
 int j[] = { 123, 45, 67, 89,
   10, 11, 12, };
@@ -1427,7 +1419,6 @@ the following sequence is valid.
 \end{codeblock}
 
 But the following redefinitions are invalid:
-
 \begin{codeblock}
 #define OBJ_LIKE    (0)         // different token sequence
 #define OBJ_LIKE    (1 - 1)     // different white space
@@ -1439,7 +1430,6 @@ But the following redefinitions are invalid:
 \pnum
 \begin{example}
 Finally, to show the variable argument list macro facilities:
-
 \begin{codeblock}
 #define debug(...) fprintf(stderr, @\mname{VA_ARGS}@)
 #define showlist(...) puts(#@\mname{VA_ARGS}@)
@@ -1449,9 +1439,7 @@ debug("X = %d\n", x);
 showlist(The first, second, and third items.);
 report(x>y, "x is %d but y is %d", x, y);
 \end{codeblock}
-
 results in
-
 \begin{codeblock}
 fprintf(stderr, "Flag");
 fprintf(stderr, "X = %d\n", x);
@@ -1482,11 +1470,9 @@ while processing the source file to the current token.
 
 \pnum
 A preprocessing directive of the form
-
 \begin{ncsimplebnf}
 \terminal{\# line} digit-sequence new-line
 \end{ncsimplebnf}
-
 causes the implementation to behave as if
 the following sequence of source lines begins with a
 source line that has a line number as specified
@@ -1497,22 +1483,18 @@ the behavior is undefined.
 
 \pnum
 A preprocessing directive of the form
-
 \begin{ncsimplebnf}
 \terminal{\# line} digit-sequence \terminal{"} \opt{s-char-sequence} \terminal{"} new-line
 \end{ncsimplebnf}
-
 sets the presumed line number similarly and changes the
 presumed name of the source file to be the contents
 of the character string literal.
 
 \pnum
 A preprocessing directive of the form
-
 \begin{ncsimplebnf}
 \terminal{\# line} pp-tokens new-line
 \end{ncsimplebnf}
-
 (that does not match one of the two previous forms)
 is permitted.
 The preprocessing tokens after
@@ -1530,11 +1512,9 @@ otherwise, the result is processed as appropriate.
 
 \pnum
 A preprocessing directive of the form
-
 \begin{ncsimplebnf}
 \terminal{\# error} \opt{pp-tokens} new-line
 \end{ncsimplebnf}
-
 causes the implementation to produce
 a diagnostic message that includes the specified sequence of preprocessing tokens,
 and renders the program ill-formed.
@@ -1545,11 +1525,9 @@ and renders the program ill-formed.
 
 \pnum
 A preprocessing directive of the form
-
 \begin{ncsimplebnf}
 \terminal{\# pragma} \opt{pp-tokens} new-line
 \end{ncsimplebnf}
-
 causes the implementation to behave
 in an \impldef{\tcode{\#pragma}} manner.
 The behavior might cause translation to fail or cause the translator or
@@ -1561,11 +1539,9 @@ Any pragma that is not recognized by the implementation is ignored.
 
 \pnum
 A preprocessing directive of the form
-
 \begin{ncsimplebnf}
 \terminal{\#} new-line
 \end{ncsimplebnf}
-
 has no effect.
 
 \rSec1[cpp.predefined]{Predefined macro names}
@@ -1667,34 +1643,37 @@ the values of these macros with greater values.
 \defnxname{cpp_binary_literals}                   & \tcode{201304L} \\ \rowsep
 \defnxname{cpp_capture_star_this}                 & \tcode{201603L} \\ \rowsep
 \defnxname{cpp_char8_t}                           & \tcode{201811L} \\ \rowsep
+\defnxname{cpp_concepts}                          & \tcode{201907L} \\ \rowsep
 \defnxname{cpp_conditional_explicit}              & \tcode{201806L} \\ \rowsep
 \defnxname{cpp_constexpr}                         & \tcode{201907L} \\ \rowsep
 \defnxname{cpp_constexpr_dynamic_alloc}           & \tcode{201907L} \\ \rowsep
+\defnxname{cpp_constexpr_in_decltype}             & \tcode{201711L} \\ \rowsep
+\defnxname{cpp_consteval}                         & \tcode{201811L} \\ \rowsep
 \defnxname{cpp_constinit}                         & \tcode{201907L} \\ \rowsep
 \defnxname{cpp_coroutines}                        & \tcode{201902L} \\ \rowsep
 \defnxname{cpp_decltype}                          & \tcode{200707L} \\ \rowsep
 \defnxname{cpp_decltype_auto}                     & \tcode{201304L} \\ \rowsep
 \defnxname{cpp_deduction_guides}                  & \tcode{201907L} \\ \rowsep
 \defnxname{cpp_delegating_constructors}           & \tcode{200604L} \\ \rowsep
+\defnxname{cpp_designated_initializers}           & \tcode{201707L} \\ \rowsep
 \defnxname{cpp_enumerator_attributes}             & \tcode{201411L} \\ \rowsep
 \defnxname{cpp_fold_expressions}                  & \tcode{201603L} \\ \rowsep
-\defnxname{cpp_generic_lambdas}                   & \tcode{201304L} \\ \rowsep
+\defnxname{cpp_generic_lambdas}                   & \tcode{201707L} \\ \rowsep
 \defnxname{cpp_guaranteed_copy_elision}           & \tcode{201606L} \\ \rowsep
 \defnxname{cpp_hex_float}                         & \tcode{201603L} \\ \rowsep
 \defnxname{cpp_if_constexpr}                      & \tcode{201606L} \\ \rowsep
 \defnxname{cpp_impl_destroying_delete}            & \tcode{201806L} \\ \rowsep
 \defnxname{cpp_impl_three_way_comparison}         & \tcode{201907L} \\ \rowsep
 \defnxname{cpp_inheriting_constructors}           & \tcode{201511L} \\ \rowsep
-\defnxname{cpp_init_captures}                     & \tcode{201304L} \\ \rowsep
+\defnxname{cpp_init_captures}                     & \tcode{201803L} \\ \rowsep
 \defnxname{cpp_initializer_lists}                 & \tcode{200806L} \\ \rowsep
 \defnxname{cpp_inline_variables}                  & \tcode{201606L} \\ \rowsep
 \defnxname{cpp_lambdas}                           & \tcode{200907L} \\ \rowsep
 \defnxname{cpp_modules}                           & \tcode{201907L} \\ \rowsep
 \defnxname{cpp_namespace_attributes}              & \tcode{201411L} \\ \rowsep
 \defnxname{cpp_noexcept_function_type}            & \tcode{201510L} \\ \rowsep
-\defnxname{cpp_nontype_template_args}             & \tcode{201411L} \\ \rowsep
+\defnxname{cpp_nontype_template_args}             & \tcode{201911L} \\ \rowsep
 \defnxname{cpp_nontype_template_parameter_auto}   & \tcode{201606L} \\ \rowsep
-\defnxname{cpp_nontype_template_parameter_class}  & \tcode{201806L} \\ \rowsep
 \defnxname{cpp_nsdmi}                             & \tcode{200809L} \\ \rowsep
 \defnxname{cpp_range_based_for}                   & \tcode{201603L} \\ \rowsep
 \defnxname{cpp_raw_strings}                       & \tcode{200710L} \\ \rowsep
@@ -1785,11 +1764,9 @@ underscore.
 
 \pnum
 A unary operator expression of the form:
-
 \begin{ncbnf}
 \terminal{_Pragma} \terminal{(} string-literal \terminal{)}
 \end{ncbnf}
-
 is processed as follows: The string literal is \defnx{destringized}{destringization}
 by deleting the \tcode{L} prefix, if present, deleting the leading and trailing
 double-quotes, replacing each escape sequence \tcode{\textbackslash"} by a double-quote, and
@@ -1816,5 +1793,5 @@ as shown, or results from macro replacement, as in:
 
 LISTING( ..\listing.dir )
 \end{codeblock}
-\end{example}%
+\end{example}
 \indextext{preprocessing directive|)}

@@ -110,10 +110,14 @@
 %%--------------------------------------------------
 % Indexing
 
+% Layout of general index
+\newcommand{\rSecindex}[2]{\section*{#2}\pdfbookmark[1]{#2}{pdf.idx.#1.#2}\label{idx.#1.#2}}
+
 % locations
 \newcommand{\indextext}[1]{\index[generalindex]{#1}}
 \newcommand{\indexlibrary}[1]{\index[libraryindex]{#1}}
 \newcommand{\indexhdr}[1]{\indextext{\idxhdr{#1}}\index[headerindex]{\idxhdr{#1}}}
+\newcommand{\indexconcept}[1]{\index[conceptindex]{#1}}
 \newcommand{\indexgram}[1]{\index[grammarindex]{#1}}
 
 % Collation helper: When building an index key, replace all macro definitions
@@ -163,22 +167,45 @@
 
 % appearance
 \newcommand{\idxcode}[1]{#1@\tcode{#1}}
-\newcommand{\idxhdr}[1]{#1@\tcode{<#1>}}
+
+% avoid \tcode to avoid falling victim of \tcode redefinition in CodeBlockSetup
+\newcommand{\idxconcept}[1]{#1@\CodeStylex{#1}}
+\newcommand{\idxexposconcept}[1]{#1@\CodeStylex{\placeholder{#1}}}
+\newcommand{\idxhdr}[1]{#1@\CodeStylex{<#1>}}
 \newcommand{\idxgram}[1]{#1@\gterm{#1}}
 \newcommand{\idxterm}[1]{#1@\term{#1}}
 \newcommand{\idxxname}[1]{__#1@\xname{#1}}
 
+% library index entries
+\newcommand{\indexlibraryglobal}[1]{\indexlibrary{\idxcode{#1}}}
+\newcommand{\indexlibraryctor}[1]{\indexlibrary{\idxcode{#1}!constructor}}
+\newcommand{\indexlibrarydtor}[1]{\indexlibrary{\idxcode{#1}!destructor}}
+
 % class member library index
 \newcommand{\indexlibrarymember}[2]{\indexlibrary{\idxcode{#1}!\idxcode{#2}}\indexlibrary{\idxcode{#2}!\idxcode{#1}}}
+\newcommand{\indexlibraryzombie}[1]{\indexlibrary{\idxcode{#1}!zombie}}
+
+\newcommand{\libglobal}[1]{\indexlibraryglobal{#1}#1}
+\newcommand{\libmember}[2]{\indexlibrarymember{#1}{#2}#1}
+
+% index for library headers
+\newcommand{\libheader}[1]{\indexhdr{#1}\tcode{<#1>}}
+\newcommand{\indexheader}[1]{\indextext{\idxhdr{#1}}\index[headerindex]{\idxhdr{#1}|idxbfpage}}
+\newcommand{\libheaderdef}[1]{\indexheader{#1}\tcode{<#1>}}
+\newcommand{\libnoheader}[1]{\indextext{\idxhdr{#1}!absence thereof}\tcode{<#1>}}
+\newcommand{\libheaderrefx}[2]{\libheader{#1}\iref{#2}}
+\newcommand{\libheaderref}[1]{\libheaderrefx{#1}{#1.syn}}
+\newcommand{\libdeprheaderref}[1]{\libheaderrefx{#1}{depr.#1.syn}}
 
 %%--------------------------------------------------
 % General code style
 \newcommand{\CodeStyle}{\ttfamily}
 \newcommand{\CodeStylex}[1]{\texttt{#1}}
 
+\definecolor{grammar-gray}{gray}{0.2}
+
 % General grammar style
-\newcommand{\GrammarStyle}{\itfamily}
-\newcommand{\GrammarStylex}[1]{\textit{#1}}
+\newcommand{\GrammarStylex}[1]{\textcolor{grammar-gray}{\textsf{\textit{#1}}}}
 
 % Code and definitions embedded in text.
 \newcommand{\tcode}[1]{\CodeStylex{#1}}
@@ -188,6 +215,7 @@
 \newcommand{\keyword}[1]{\tcode{#1}\indextext{\idxcode{#1}}}
 \newcommand{\grammarterm}[1]{\indexgram{\idxgram{#1}}\gterm{#1}}
 \newcommand{\grammartermnc}[1]{\indexgram{\idxgram{#1}}\gterm{#1\nocorr}}
+\newcommand{\regrammarterm}[1]{\textit{#1}}
 \newcommand{\placeholder}[1]{\textit{#1}}
 \newcommand{\placeholdernc}[1]{\textit{#1\nocorr}}
 \newcommand{\exposid}[1]{\tcode{\placeholder{#1}}}
@@ -213,7 +241,7 @@
 \newcommand{\CppXI}{\Cpp{} 2011}
 \newcommand{\CppXIV}{\Cpp{} 2014}
 \newcommand{\CppXVII}{\Cpp{} 2017}
-\newcommand{\opt}[1]{#1\ensuremath{_\mathit{opt}}}
+\newcommand{\opt}[1]{#1\ensuremath{_\mathit{\color{black}opt}}}
 \newcommand{\dcr}{-{-}}
 \newcommand{\bigoh}[1]{\ensuremath{\mathscr{O}(#1)}}
 
@@ -245,9 +273,9 @@
 \newcommand{\requires}{\Fundesc{Requires}}
 \newcommand{\constraints}{\Fundesc{Constraints}}
 \newcommand{\mandates}{\Fundesc{Mandates}}
-\newcommand{\expects}{\Fundesc{Expects}}
+\newcommand{\expects}{\Fundesc{Preconditions}}
 \newcommand{\effects}{\Fundesc{Effects}}
-\newcommand{\ensures}{\Fundesc{Ensures}}
+\newcommand{\ensures}{\Fundesc{Postconditions}}
 \newcommand{\returns}{\Fundesc{Returns}}
 \newcommand{\throws}{\Fundesc{Throws}}
 \newcommand{\default}{\Fundesc{Default behavior}}
@@ -301,8 +329,6 @@
 \newcommand{\unspecbool}{\UNSP{unspecified-bool-type}}
 \newcommand{\seebelow}{\UNSP{see below}}
 \newcommand{\seebelownc}{\UNSPnc{see below}}
-\newcommand{\seeref}[1]{\UNSP{see~\ref{#1}}}
-\newcommand{\seerefnc}[1]{\UNSPnc{see~\ref{#1}}}
 \newcommand{\unspecuniqtype}{\UNSP{unspecified unique type}}
 \newcommand{\unspecalloctype}{\UNSP{unspecified allocator type}}
 
@@ -338,7 +364,14 @@
 \newcommand{\newoldconceptdefn}[1]{\defn{#1}}
 \newcommand{\idxnewoldconcept}[1]{#1@\textit{#1}}
 
-\newcommand{\libconcept}[1]{\tcode{#1}}
+\newcommand{\cname}[1]{\tcode{#1}}
+\newcommand{\ecname}[1]{\tcode{\placeholder{#1}}}
+\newcommand{\libconceptx}[2]{\cname{#1}\indexconcept{\idxconcept{#2}}}
+\newcommand{\libconcept}[1]{\libconceptx{#1}{#1}}
+\newcommand{\deflibconcept}[1]{\cname{#1}\indexlibrary{\idxconcept{#1}}\indexconcept{\idxconcept{#1}|idxbfpage}}
+\newcommand{\exposconcept}[1]{\ecname{#1}\indexconcept{\idxexposconcept{#1}}}
+\newcommand{\exposconceptnc}[1]{\indexconcept{\idxexposconcept{#1}}\ecname{#1\nocorr}}
+\newcommand{\defexposconcept}[1]{\ecname{#1}\indexconcept{\idxexposconcept{#1}|idxbfpage}}
 
 %% Ranges
 \newcommand{\Range}[4]{\tcode{#1#3,\penalty2000{} #4#2}}
@@ -368,7 +401,8 @@
 \cs_set_eq:NN \diffrefs \diffref
 \ExplSyntaxOff
 % \nodiffref swallows a following \change and removes the preceding line break.
-\def\nodiffref\change{\pnum\diffhead{Change}}
+\def\nodiffref\change{\pnum
+\diffhead{Change}}
 \newcommand{\change}{\diffdef{Change}}
 \newcommand{\rationale}{\diffdef{Rationale}}
 \newcommand{\effect}{\diffdef{Effect on original feature}}
@@ -491,7 +525,8 @@
 \setlength{\BnfInc}{\BnfIndent}
 \newlength{\BnfRest}
 \setlength{\BnfRest}{2\BnfIndent}
-\newcommand{\BnfNontermshape}{\small\rmfamily\itshape}
+\newcommand{\BnfNontermshape}{\small\color{grammar-gray}\sffamily\itshape}
+\newcommand{\BnfReNontermshape}{\small\rmfamily\itshape}
 \newcommand{\BnfTermshape}{\small\ttfamily\upshape}
 
 \newenvironment{bnfbase}
@@ -499,7 +534,8 @@
  \newcommand{\nontermdef}[1]{{\BnfNontermshape##1\itcorr}\indexgrammar{\idxgram{##1}}\textnormal{:}}
  \newcommand{\terminal}[1]{{\BnfTermshape ##1}}
  \renewcommand{\keyword}[1]{\terminal{##1}\indextext{\idxcode{##1}}}
- \renewcommand{\exposid}[1]{\terminal{\placeholder{##1}}}
+ \renewcommand{\exposid}[1]{\terminal{\textit{##1}}}
+ \renewcommand{\placeholder}[1]{\textrm{\textit{##1}}}
  \newcommand{\descr}[1]{\textnormal{##1}}
  \newcommand{\bnfindent}{\hspace*{\bnfindentfirst}}
  \newcommand{\bnfindentfirst}{\BnfIndent}
@@ -529,6 +565,19 @@
  \begin{bnfbase}
  \begin{bnflist}
  \BnfNontermshape
+ \item\relax
+}
+{
+ \end{bnflist}
+ \end{bnfbase}
+}
+
+\newenvironment{ncrebnf}
+{
+ \begin{bnfbase}
+ \newcommand{\renontermdef}[1]{{\BnfReNontermshape##1\itcorr}\,\textnormal{::}}
+ \begin{bnflist}
+ \BnfReNontermshape
  \item\relax
 }
 {

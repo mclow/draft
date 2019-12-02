@@ -143,7 +143,7 @@ as ill-formed a program that requires \tcode{C<T>}.
 
 \rSec1[concepts.syn]{Header \tcode{<concepts>} synopsis}
 
-\indexlibrary{\idxhdr{concepts}}%
+\indexheader{concepts}%
 \begin{codeblock}
 namespace std {
   // \ref{concepts.lang}, language-related concepts
@@ -256,6 +256,10 @@ namespace std {
   template<class R, class T, class U>
     concept relation = @\seebelow@;
 
+  // \ref{concept.equiv}, concept \libconcept{equivalence_relation}
+  template<class R, class T, class U>
+    concept equivalence_relation = @\seebelow@;
+
   // \ref{concept.strictweakorder}, concept \libconcept{strict_weak_order}
   template<class R, class T, class U>
     concept strict_weak_order = @\seebelow@;
@@ -267,19 +271,18 @@ namespace std {
 \rSec2[concepts.lang.general]{General}
 
 \pnum
-This subclause contains the definition of concepts corresponding to language
+Subclause \ref{concepts.lang} contains the definition of concepts corresponding to language
 features. These concepts express relationships between types, type
 classifications, and fundamental type properties.
 
-\rSec2[concept.same]{Concept \libconcept{same_as}}
+\rSec2[concept.same]{Concept \cname{same_as}}
 
-\indexlibrary{\idxcode{same_as}}%
 \begin{itemdecl}
 template<class T, class U>
-  concept @\placeholdernc{same-as-impl}@ = is_same_v<T, U>;       // \expos
+  concept @\defexposconcept{same-as-impl}@ = is_same_v<T, U>;       // \expos
 
 template<class T, class U>
-  concept same_as = @\placeholdernc{same-as-impl}@<T, U> && @\placeholdernc{same-as-impl}@<U, T>;
+  concept @\deflibconcept{same_as}@ = @\exposconcept{same-as-impl}@<T, U> && @\exposconcept{same-as-impl}@<U, T>;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -290,12 +293,11 @@ vice versa.
 \end{note}
 \end{itemdescr}
 
-\rSec2[concept.derived]{Concept \libconcept{derived_from}}
+\rSec2[concept.derived]{Concept \cname{derived_from}}
 
-\indexlibrary{\idxcode{derived_from}}%
 \begin{itemdecl}
 template<class Derived, class Base>
-  concept derived_from =
+  concept @\deflibconcept{derived_from}@ =
     is_base_of_v<Base, Derived> &&
     is_convertible_v<const volatile Derived*, const volatile Base*>;
 \end{itemdecl}
@@ -309,7 +311,7 @@ template<class Derived, class Base>
 \end{note}
 \end{itemdescr}
 
-\rSec2[concept.convertible]{Concept \libconcept{convertible_to}}
+\rSec2[concept.convertible]{Concept \cname{convertible_to}}
 
 \pnum
 The \libconcept{convertible_to} concept requires an expression of a particular
@@ -317,10 +319,9 @@ type and value category to be both implicitly and explicitly convertible to some
 other type. The implicit and explicit conversions are required to produce equal
 results.
 
-\indexlibrary{\idxcode{convertible_to}}%
 \begin{itemdecl}
 template<class From, class To>
-  concept convertible_to =
+  concept @\deflibconcept{convertible_to}@ =
     is_convertible_v<From, To> &&
     requires(From (&f)()) {
       static_cast<To>(f());
@@ -363,7 +364,7 @@ expression.
 \end{itemdescr}
 
 
-\rSec2[concept.commonref]{Concept \libconcept{common_reference_with}}
+\rSec2[concept.commonref]{Concept \cname{common_reference_with}}
 
 \pnum
 For two types \tcode{T} and \tcode{U}, if \tcode{common_reference_t<T, U>}
@@ -378,10 +379,9 @@ are modeled, then \tcode{T} and \tcode{U} share a
 different type. \tcode{C} may be a reference type.
 \end{note}
 
-\indexlibrary{\idxcode{common_reference_with}}%
 \begin{itemdecl}
 template<class T, class U>
-  concept common_reference_with =
+  concept @\deflibconcept{common_reference_with}@ =
     same_as<common_reference_t<T, U>, common_reference_t<U, T>> &&
     convertible_to<T, common_reference_t<T, U>> &&
     convertible_to<U, common_reference_t<T, U>>;
@@ -411,7 +411,7 @@ the \tcode{basic_common_reference} class template\iref{meta.trans.other}.
 \end{note}
 \end{itemdescr}
 
-\rSec2[concept.common]{Concept \libconcept{common_with}}
+\rSec2[concept.common]{Concept \cname{common_with}}
 
 \pnum
 If \tcode{T} and \tcode{U} can both be explicitly converted to some third type,
@@ -422,10 +422,9 @@ If \tcode{T} and \tcode{U} can both be explicitly converted to some third type,
 different type. \tcode{C} might not be unique.
 \end{note}
 
-\indexlibrary{\idxcode{common_with}}%
 \begin{itemdecl}
 template<class T, class U>
-  concept common_with =
+  concept @\deflibconcept{common_with}@ =
     same_as<common_type_t<T, U>, common_type_t<U, T>> &&
     requires {
       static_cast<common_type_t<T, U>>(declval<T>());
@@ -468,40 +467,36 @@ Users can customize the behavior of \libconcept{common_with} by specializing the
 
 \rSec2[concepts.arithmetic]{Arithmetic concepts}
 
-\indexlibrary{\idxcode{integral}}%
-\indexlibrary{\idxcode{signed_integral}}%
-\indexlibrary{\idxcode{unsigned_integral}}%
 \begin{itemdecl}
 template<class T>
-  concept integral = is_integral_v<T>;
+  concept @\deflibconcept{integral}@ = is_integral_v<T>;
 template<class T>
-  concept signed_integral = integral<T> && is_signed_v<T>;
+  concept @\deflibconcept{signed_integral}@ = integral<T> && is_signed_v<T>;
 template<class T>
-  concept unsigned_integral = integral<T> && !signed_integral<T>;
+  concept @\deflibconcept{unsigned_integral}@ = integral<T> && !signed_integral<T>;
 template<class T>
-  concept floating_point = is_floating_point_v<T>;
+  concept @\deflibconcept{floating_point}@ = is_floating_point_v<T>;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
 \begin{note}
 \libconcept{signed_integral} can be modeled even by types that are
-not signed integral types\iref{basic.fundamental}; for example, \tcode{char}.
+not signed integer types\iref{basic.fundamental}; for example, \tcode{char}.
 \end{note}
 
 \pnum
 \begin{note}
 \libconcept{unsigned_integral} can be modeled even by types that are
-not unsigned integral types\iref{basic.fundamental}; for example, \tcode{bool}.
+not unsigned integer types\iref{basic.fundamental}; for example, \tcode{bool}.
 \end{note}
 \end{itemdescr}
 
-\rSec2[concept.assignable]{Concept \libconcept{assignable_from}}
+\rSec2[concept.assignable]{Concept \cname{assignable_from}}
 
-\indexlibrary{\idxcode{assignable_from}}%
 \begin{itemdecl}
 template<class LHS, class RHS>
-  concept assignable_from =
+  concept @\deflibconcept{assignable_from}@ =
     is_lvalue_reference_v<LHS> &&
     common_reference_with<const remove_reference_t<LHS>&, const remove_reference_t<RHS>&> &&
     requires(LHS lhs, RHS&& rhs) {
@@ -548,7 +543,7 @@ of \tcode{=}.
 \end{note}
 \end{itemdescr}
 
-\rSec2[concept.swappable]{Concept \libconcept{swappable}}
+\rSec2[concept.swappable]{Concept \cname{swappable}}
 
 \pnum
 Let \tcode{t1} and \tcode{t2} be equality-preserving expressions that denote
@@ -574,7 +569,7 @@ if the operation modifies neither \tcode{t2} nor \tcode{u2} and:
 \end{itemize}
 
 \pnum
-\indexlibrary{\idxcode{ranges::swap}}%
+\indexlibraryglobal{ranges::swap}%
 The name \tcode{ranges::swap} denotes a customization point
 object\iref{customization.point.object}. The expression
 \tcode{ranges::swap(E1, E2)} for some subexpressions \tcode{E1}
@@ -588,8 +583,8 @@ and \tcode{E2} is expression-equivalent to an expression
   has class or enumeration type\iref{basic.compound} and that expression is valid, with
   overload resolution performed in a context that includes the declaration
 \begin{codeblock}
-  template<class T>
-    void swap(T&, T&) = delete;
+template<class T>
+  void swap(T&, T&) = delete;
 \end{codeblock}
   and does not include a declaration of \tcode{ranges::swap}.
   If the function selected by overload resolution does not
@@ -622,7 +617,6 @@ and \tcode{E2} is expression-equivalent to an expression
 T t1(std::move(E1));
 T t2(std::move(E2));
 \end{codeblock}
-
 are constant subexpressions.
   \end{itemize}
   \tcode{noexcept(S)} is equal to
@@ -643,16 +637,14 @@ exchanges the values denoted by
 \tcode{E1} and \tcode{E2} and has type \tcode{void}.
 \end{note}
 
-\indexlibrary{\idxcode{swappable}}%
 \begin{itemdecl}
 template<class T>
-  concept swappable = requires(T& a, T& b) { ranges::swap(a, b); };
+  concept @\deflibconcept{swappable}@ = requires(T& a, T& b) { ranges::swap(a, b); };
 \end{itemdecl}
 
-\indexlibrary{\idxcode{swappable_with}}%
 \begin{itemdecl}
 template<class T, class U>
-  concept swappable_with =
+  concept @\deflibconcept{swappable_with}@ =
     common_reference_with<const remove_reference_t<T>&, const remove_reference_t<U>&> &&
     requires(T&& t, U&& u) {
       ranges::swap(std::forward<T>(t), std::forward<T>(t));
@@ -712,17 +704,16 @@ int main() {
 \end{codeblock}
 \end{example}
 
-\rSec2[concept.destructible]{Concept \libconcept{destructible}}
+\rSec2[concept.destructible]{Concept \cname{destructible}}
 
 \pnum
 The \libconcept{destructible} concept specifies properties of all types,
 instances of which can be destroyed at the end of their lifetime, or reference
 types.
 
-\indexlibrary{\idxcode{destructible}}%
 \begin{itemdecl}
 template<class T>
-  concept destructible = is_nothrow_destructible_v<T>;
+  concept @\deflibconcept{destructible}@ = is_nothrow_destructible_v<T>;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -734,32 +725,47 @@ invocation of the destructor does not actually throw.
 \end{note}
 \end{itemdescr}
 
-\rSec2[concept.constructible]{Concept \libconcept{constructible_from}}
+\rSec2[concept.constructible]{Concept \cname{constructible_from}}
 
 \pnum
 The \libconcept{constructible_from} concept constrains the initialization of a
 variable of a given type with a particular set of argument types.
 
-\indexlibrary{\idxcode{constructible_from}}%
 \begin{itemdecl}
 template<class T, class... Args>
-  concept constructible_from = destructible<T> && is_constructible_v<T, Args...>;
+  concept @\deflibconcept{constructible_from}@ = destructible<T> && is_constructible_v<T, Args...>;
 \end{itemdecl}
 
-\rSec2[concept.defaultconstructible]{Concept \libconcept{default_constructible}}
+\rSec2[concept.defaultconstructible]{Concept \cname{default_constructible}}
 
-\indexlibrary{\idxcode{default_constructible}}%
 \begin{itemdecl}
 template<class T>
-  concept default_constructible = constructible_from<T>;
+  inline constexpr bool @\defexposconcept{is-default-initializable}@ = @\seebelow@;  // \expos
+
+template<class T>
+  concept @\deflibconcept{default_constructible}@ = constructible_from<T> &&
+                                  requires { T{}; } &&
+                                  @\exposconcept{is-default-initializable}@<T>;
 \end{itemdecl}
 
-\rSec2[concept.moveconstructible]{Concept \libconcept{move_constructible}}
+\begin{itemdescr}
+\pnum
+For a type \tcode{T}, \tcode{\exposconcept{is-default-initializable}<T>} is \tcode{true}
+if and only if the variable definition
+\begin{codeblock}
+T t;
+\end{codeblock}
+is well-formed for some invented variable \tcode{t};
+otherwise it is \tcode{false}.
+Access checking is performed as if in a context unrelated to \tcode{T}.
+Only the validity of the immediate context of the variable initialization is considered.
+\end{itemdescr}
 
-\indexlibrary{\idxcode{move_constructible}}%
+\rSec2[concept.moveconstructible]{Concept \cname{move_constructible}}
+
 \begin{itemdecl}
 template<class T>
-  concept move_constructible = constructible_from<T, T> && convertible_to<T, T>;
+  concept @\deflibconcept{move_constructible}@ = constructible_from<T, T> && convertible_to<T, T>;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -778,12 +784,11 @@ but unspecified\iref{lib.types.movedfrom}; otherwise, it is unchanged.
 \end{itemize}
 \end{itemdescr}
 
-\rSec2[concept.copyconstructible]{Concept \libconcept{copy_constructible}}
+\rSec2[concept.copyconstructible]{Concept \cname{copy_constructible}}
 
-\indexlibrary{\idxcode{copy_constructible}}%
 \begin{itemdecl}
 template<class T>
-  concept copy_constructible =
+  concept @\deflibconcept{copy_constructible}@ =
     move_constructible<T> &&
     constructible_from<T, T&> && convertible_to<T&, T> &&
     constructible_from<T, const T&> && convertible_to<const T&, T> &&
@@ -809,19 +814,18 @@ If \tcode{T} is an object type, then let \tcode{v} be an lvalue of type
 \rSec2[concepts.compare.general]{General}
 
 \pnum
-This subclause describes concepts that establish relationships and orderings
+Subclause \ref{concepts.compare} describes concepts that establish relationships and orderings
 on values of possibly differing object types.
 
-\rSec2[concept.boolean]{Concept \libconcept{boolean}}
+\rSec2[concept.boolean]{Concept \cname{boolean}}
 
 \pnum
 The \libconcept{boolean} concept specifies the requirements on a type that is
-usable in Boolean contexts.
+usable as a truth value.
 
-\indexlibrary{\idxcode{boolean}}%
 \begin{itemdecl}
 template<class B>
-  concept boolean =
+  concept @\deflibconcept{boolean}@ =
     movable<remove_cvref_t<B>> &&       // (see \ref{concepts.object})
     requires(const remove_reference_t<B>& b1,
              const remove_reference_t<B>& b2, const bool a) {
@@ -873,11 +877,11 @@ types. Pointers, smart pointers, and types with only explicit conversions to
 \tcode{bool} are not \libconcept{boolean} types.
 \end{example}
 
-\rSec2[concept.equalitycomparable]{Concept \libconcept{equality_comparable}}
+\rSec2[concept.equalitycomparable]{Concept \cname{equality_comparable}}
 
 \begin{itemdecl}
 template<class T, class U>
-  concept @\placeholder{weakly-equality-comparable-with}@ = // \expos
+  concept @\defexposconcept{weakly-equality-comparable-with}@ = // \expos
     requires(const remove_reference_t<T>& t,
              const remove_reference_t<U>& u) {
       { t == u } -> boolean;
@@ -904,10 +908,9 @@ let \tcode{t} and \tcode{u} be lvalues of types
 \end{itemize}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{equality_comparable}}%
 \begin{itemdecl}
 template<class T>
-  concept equality_comparable = @\placeholder{weakly-equality-comparable-with}@<T, T>;
+  concept @\deflibconcept{equality_comparable}@ = @\exposconcept{weakly-equality-comparable-with}@<T, T>;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -924,17 +927,16 @@ implies that \tcode{==} is transitive and symmetric.
 \end{note}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{equality_comparable_with}}%
 \begin{itemdecl}
 template<class T, class U>
-  concept equality_comparable_with =
+  concept @\deflibconcept{equality_comparable_with}@ =
     equality_comparable<T> && equality_comparable<U> &&
     common_reference_with<const remove_reference_t<T>&, const remove_reference_t<U>&> &&
     equality_comparable<
       common_reference_t<
         const remove_reference_t<T>&,
         const remove_reference_t<U>&>> &&
-    @\placeholder{weakly-equality-comparable-with}@<T, U>;
+    @\exposconcept{weakly-equality-comparable-with}@<T, U>;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -951,12 +953,11 @@ common_reference_t<const remove_reference_t<T>&, const remove_reference_t<U>&>
 \tcode{bool(t == u) == bool(C(t) == C(u))}.
 \end{itemdescr}
 
-\rSec2[concept.totallyordered]{Concept \libconcept{totally_ordered}}
+\rSec2[concept.totallyordered]{Concept \cname{totally_ordered}}
 
-\indexlibrary{\idxcode{totally_ordered}}%
 \begin{itemdecl}
 template<class T>
-  concept totally_ordered =
+  concept @\deflibconcept{totally_ordered}@ =
     equality_comparable<T> &&
     requires(const remove_reference_t<T>& a,
              const remove_reference_t<T>& b) {
@@ -987,7 +988,7 @@ lvalues of type \tcode{const remove_reference_t<T>}.
 
 \begin{itemdecl}
 template<class T, class U>
-  concept totally_ordered_with =
+  concept @\deflibconcept{totally_ordered_with}@ =
     totally_ordered<T> && totally_ordered<U> &&
     common_reference_with<const remove_reference_t<T>&, const remove_reference_t<U>&> &&
     totally_ordered<
@@ -1038,20 +1039,16 @@ common_reference_t<const remove_reference_t<T>&, const remove_reference_t<U>&>
 This subclause describes concepts that specify the basis of the
 value-oriented programming style on which the library is based.
 
-\indexlibrary{\idxcode{movable}}%
-\indexlibrary{\idxcode{copyable}}%
-\indexlibrary{\idxcode{semiregular}}%
-\indexlibrary{\idxcode{regular}}%
 \begin{itemdecl}
 template<class T>
-  concept movable = is_object_v<T> && move_constructible<T> &&
+  concept @\deflibconcept{movable}@ = is_object_v<T> && move_constructible<T> &&
                     assignable_from<T&, T> && swappable<T>;
 template<class T>
-  concept copyable = copy_constructible<T> && movable<T> && assignable_from<T&, const T&>;
+  concept @\deflibconcept{copyable}@ = copy_constructible<T> && movable<T> && assignable_from<T&, const T&>;
 template<class T>
-  concept semiregular = copyable<T> && default_constructible<T>;
+  concept @\deflibconcept{semiregular}@ = copyable<T> && default_constructible<T>;
 template<class T>
-  concept regular = semiregular<T> && equality_comparable<T>;
+  concept @\deflibconcept{regular}@ = semiregular<T> && equality_comparable<T>;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1075,20 +1072,19 @@ built-in types like \tcode{int} and that are comparable with
 \rSec2[concepts.callable.general]{General}
 
 \pnum
-The concepts in this subclause describe the requirements on function
+The concepts in subclause \ref{concepts.callable} describe the requirements on function
 objects\iref{function.objects} and their arguments.
 
-\rSec2[concept.invocable]{Concept \libconcept{invocable}}
+\rSec2[concept.invocable]{Concept \cname{invocable}}
 
 \pnum
 The \libconcept{invocable} concept specifies a relationship between a callable
 type\iref{func.def} \tcode{F} and a set of argument types \tcode{Args...} which
 can be evaluated by the library function \tcode{invoke}\iref{func.invoke}.
 
-\indexlibrary{\idxcode{invocable}}%
 \begin{itemdecl}
 template<class F, class... Args>
-  concept invocable = requires(F&& f, Args&&... args) {
+  concept @\deflibconcept{invocable}@ = requires(F&& f, Args&&... args) {
     invoke(std::forward<F>(f), std::forward<Args>(args)...); // not required to be equality-preserving
   };
 \end{itemdecl}
@@ -1102,19 +1098,18 @@ equality-preserving\iref{concepts.equality}.
 \end{example}
 \end{itemdescr}
 
-\rSec2[concept.regularinvocable]{Concept \libconcept{regular_invocable}}
+\rSec2[concept.regularinvocable]{Concept \cname{regular_invocable}}
 
-\indexlibrary{\idxcode{regular_invocable}}%
 \begin{itemdecl}
 template<class F, class... Args>
-  concept regular_invocable = invocable<F, Args...>;
+  concept @\deflibconcept{regular_invocable}@ = invocable<F, Args...>;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-The \tcode{invoke} function call expression shall be equality-preserving and
-shall not modify the function object or the
-arguments\iref{concepts.equality}.
+The \tcode{invoke} function call expression shall be
+equality-preserving\iref{concepts.equality} and
+shall not modify the function object or the arguments.
 \begin{note}
 This requirement supersedes the annotation in the definition of
 \libconcept{invocable}.
@@ -1132,30 +1127,40 @@ is purely semantic.
 \end{note}
 \end{itemdescr}
 
-\rSec2[concept.predicate]{Concept \libconcept{predicate}}
+\rSec2[concept.predicate]{Concept \cname{predicate}}
 
-\indexlibrary{\idxcode{predicate}}%
 \begin{itemdecl}
 template<class F, class... Args>
-  concept predicate = regular_invocable<F, Args...> && boolean<invoke_result_t<F, Args...>>;
+  concept @\deflibconcept{predicate}@ = regular_invocable<F, Args...> && boolean<invoke_result_t<F, Args...>>;
 \end{itemdecl}
 
-\rSec2[concept.relation]{Concept \libconcept{relation}}
+\rSec2[concept.relation]{Concept \cname{relation}}
 
-\indexlibrary{\idxcode{relation}}%
 \begin{itemdecl}
 template<class R, class T, class U>
-  concept relation =
+  concept @\deflibconcept{relation}@ =
     predicate<R, T, T> && predicate<R, U, U> &&
     predicate<R, T, U> && predicate<R, U, T>;
 \end{itemdecl}
 
-\rSec2[concept.strictweakorder]{Concept \libconcept{strict_weak_order}}
+\rSec2[concept.equiv]{Concept \cname{equivalence_relation}}
 
-\indexlibrary{\idxcode{strict_weak_order}}%
 \begin{itemdecl}
 template<class R, class T, class U>
-  concept strict_weak_order = relation<R, T, U>;
+  concept @\deflibconcept{equivalence_relation}@ = relation<R, T, U>;
+\end{itemdecl}
+
+\begin{itemdescr}
+\pnum
+A \libconcept{relation} models \libconcept{equivalence_relation} only if
+it imposes an equivalence relation on its arguments.
+\end{itemdescr}
+
+\rSec2[concept.strictweakorder]{Concept \cname{strict_weak_order}}
+
+\begin{itemdecl}
+template<class R, class T, class U>
+  concept @\deflibconcept{strict_weak_order}@ = relation<R, T, U>;
 \end{itemdecl}
 
 \begin{itemdescr}

@@ -43,13 +43,13 @@ as summarized in \tref{support.summary}.
 
 \rSec2[cstddef.syn]{Header \tcode{<cstddef>} synopsis}
 
-\indexlibrary{\idxcode{NULL}}%
-\indexlibrary{\idxcode{offsetof}}%
-\indexlibrary{\idxcode{ptrdiff_t}}%
-\indexlibrary{\idxcode{size_t}}%
-\indexlibrary{\idxcode{max_align_t}}%
-\indexlibrary{\idxcode{nullptr_t}}%
-\indexlibrary{\idxcode{byte}}%
+\indexlibraryglobal{NULL}%
+\indexlibraryglobal{offsetof}%
+\indexlibraryglobal{ptrdiff_t}%
+\indexlibraryglobal{size_t}%
+\indexlibraryglobal{max_align_t}%
+\indexlibraryglobal{nullptr_t}%
+\indexlibraryglobal{byte}%
 \begin{codeblock}
 namespace std {
   using ptrdiff_t = @\seebelow@;
@@ -84,8 +84,8 @@ namespace std {
 \end{codeblock}
 
 \pnum
-The contents and meaning of the header \tcode{<cstddef>} are the same as
-the C standard library header \tcode{<stddef.h>},
+The contents and meaning of the header \libheaderdef{cstddef} are the same as
+the C standard library header \libheader{stddef.h},
 except that it does not declare the type \tcode{wchar_t},
 that it also declares the type \tcode{byte}
 and its associated operations\iref{support.types.byteops},
@@ -97,55 +97,55 @@ and as noted in
 
 \rSec2[cstdlib.syn]{Header \tcode{<cstdlib>} synopsis}
 
-\indexhdr{cstdlib}%
-\indexlibrary{\idxcode{EXIT_FAILURE}}%
-\indexlibrary{\idxcode{EXIT_SUCCESS}}%
-\indexlibrary{\idxcode{MB_CUR_MAX}}%
-\indexlibrary{\idxcode{NULL}}%
-\indexlibrary{\idxcode{RAND_MAX}}%
-\indexlibrary{\idxcode{_Exit}}%
-\indexlibrary{\idxcode{abort}}%
-\indexlibrary{\idxcode{abs}}%
-\indexlibrary{\idxcode{aligned_alloc}}%
-\indexlibrary{\idxcode{at_quick_exit}}%
-\indexlibrary{\idxcode{atexit}}%
-\indexlibrary{\idxcode{atof}}%
-\indexlibrary{\idxcode{atoi}}%
-\indexlibrary{\idxcode{atol}}%
-\indexlibrary{\idxcode{atoll}}%
-\indexlibrary{\idxcode{bsearch}}%
-\indexlibrary{\idxcode{calloc}}%
-\indexlibrary{\idxcode{div}}%
-\indexlibrary{\idxcode{div_t}}%
-\indexlibrary{\idxcode{exit}}%
-\indexlibrary{\idxcode{free}}%
-\indexlibrary{\idxcode{getenv}}%
-\indexlibrary{\idxcode{labs}}%
-\indexlibrary{\idxcode{ldiv}}%
-\indexlibrary{\idxcode{ldiv_t}}%
-\indexlibrary{\idxcode{llabs}}%
-\indexlibrary{\idxcode{lldiv}}%
-\indexlibrary{\idxcode{lldiv_t}}%
-\indexlibrary{\idxcode{malloc}}%
-\indexlibrary{\idxcode{mblen}}%
-\indexlibrary{\idxcode{mbstowcs}}%
-\indexlibrary{\idxcode{mbtowc}}%
-\indexlibrary{\idxcode{qsort}}%
-\indexlibrary{\idxcode{quick_exit}}%
-\indexlibrary{\idxcode{rand}}%
-\indexlibrary{\idxcode{realloc}}%
-\indexlibrary{\idxcode{size_t}}%
-\indexlibrary{\idxcode{srand}}%
-\indexlibrary{\idxcode{strtod}}%
-\indexlibrary{\idxcode{strtof}}%
-\indexlibrary{\idxcode{strtol}}%
-\indexlibrary{\idxcode{strtold}}%
-\indexlibrary{\idxcode{strtoll}}%
-\indexlibrary{\idxcode{strtoul}}%
-\indexlibrary{\idxcode{strtoull}}%
-\indexlibrary{\idxcode{system}}%
-\indexlibrary{\idxcode{wcstombs}}%
-\indexlibrary{\idxcode{wctomb}}%
+\indexheader{cstdlib}%
+\indexlibraryglobal{EXIT_FAILURE}%
+\indexlibraryglobal{EXIT_SUCCESS}%
+\indexlibraryglobal{MB_CUR_MAX}%
+\indexlibraryglobal{NULL}%
+\indexlibraryglobal{RAND_MAX}%
+\indexlibraryglobal{_Exit}%
+\indexlibraryglobal{abort}%
+\indexlibraryglobal{abs}%
+\indexlibraryglobal{aligned_alloc}%
+\indexlibraryglobal{at_quick_exit}%
+\indexlibraryglobal{atexit}%
+\indexlibraryglobal{atof}%
+\indexlibraryglobal{atoi}%
+\indexlibraryglobal{atol}%
+\indexlibraryglobal{atoll}%
+\indexlibraryglobal{bsearch}%
+\indexlibraryglobal{calloc}%
+\indexlibraryglobal{div}%
+\indexlibraryglobal{div_t}%
+\indexlibraryglobal{exit}%
+\indexlibraryglobal{free}%
+\indexlibraryglobal{getenv}%
+\indexlibraryglobal{labs}%
+\indexlibraryglobal{ldiv}%
+\indexlibraryglobal{ldiv_t}%
+\indexlibraryglobal{llabs}%
+\indexlibraryglobal{lldiv}%
+\indexlibraryglobal{lldiv_t}%
+\indexlibraryglobal{malloc}%
+\indexlibraryglobal{mblen}%
+\indexlibraryglobal{mbstowcs}%
+\indexlibraryglobal{mbtowc}%
+\indexlibraryglobal{qsort}%
+\indexlibraryglobal{quick_exit}%
+\indexlibraryglobal{rand}%
+\indexlibraryglobal{realloc}%
+\indexlibraryglobal{size_t}%
+\indexlibraryglobal{srand}%
+\indexlibraryglobal{strtod}%
+\indexlibraryglobal{strtof}%
+\indexlibraryglobal{strtol}%
+\indexlibraryglobal{strtold}%
+\indexlibraryglobal{strtoll}%
+\indexlibraryglobal{strtoul}%
+\indexlibraryglobal{strtoull}%
+\indexlibraryglobal{system}%
+\indexlibraryglobal{wcstombs}%
+\indexlibraryglobal{wctomb}%
 \begin{codeblock}
 namespace std {
   using size_t = @\seebelow@;
@@ -230,16 +230,16 @@ namespace std {
   long long int llabs(long long int j);
 
   div_t div(int numer, int denom);
-  ldiv_t div(long int numer, long int denom);             // see \ref{library.c}
-  lldiv_t div(long long int numer, long long int denom);  // see \ref{library.c}
+  ldiv_t div(long int numer, long int denom);                   // see \ref{library.c}
+  lldiv_t div(long long int numer, long long int denom);        // see \ref{library.c}
   ldiv_t ldiv(long int numer, long int denom);
   lldiv_t lldiv(long long int numer, long long int denom);
 }
 \end{codeblock}
 
 \pnum
-The contents and meaning of the header \tcode{<cstdlib>} are the same as
-the C standard library header \tcode{<stdlib.h>},
+The contents and meaning of the header \libheader{cstdlib} are the same as
+the C standard library header \libheader{stdlib.h},
 except that it does not declare the type \tcode{wchar_t},
 and except as noted in
 \ref{support.types.nullptr},
@@ -260,7 +260,7 @@ but they have the same behavior as in the C standard library\iref{library.c}.
 \rSec2[support.types.nullptr]{Null pointers}
 
 \pnum
-\indexlibrary{\idxcode{nullptr_t}}%
+\indexlibraryglobal{nullptr_t}%
 The type \tcode{nullptr_t} is a synonym
 for the type of a \tcode{nullptr} expression, and it
 has the characteristics
@@ -272,7 +272,7 @@ Although \tcode{nullptr}'s address cannot be taken, the address of another
 
 \pnum
 The macro
-\indexlibrary{\idxcode{NULL}}%
+\indexlibraryglobal{NULL}%
 \tcode{NULL}
 is an \impldef{definition of \tcode{NULL}} null pointer constant.%
 \footnote{Possible definitions include
@@ -288,10 +288,10 @@ but not
 
 \pnum
 The macro
-\indexlibrary{\idxcode{offsetof}}%
+\indexlibraryglobal{offsetof}%
 \tcode{offsetof(\placeholder{type}, \placeholder{member-designator})}
 has the same semantics as the corresponding macro in
-the C standard library header \tcode{<stddef.h>}, but
+the C standard library header \libheader{stddef.h}, but
 accepts a restricted set of \tcode{\placeholder{type}}
 arguments in this document.
 Use of the \tcode{offsetof} macro with a \tcode{\placeholder{type}}
@@ -329,7 +329,7 @@ whose integer conversion ranks\iref{conv.rank} are no greater than that of
 
 \pnum
 The type
-\indexlibrary{\idxcode{max_align_t}}%
+\indexlibraryglobal{max_align_t}%
 \tcode{max_align_t} is a trivial standard-layout type whose alignment requirement
 is at least as great as that of every scalar type, and whose alignment
 requirement is supported in every context\iref{basic.align}.
@@ -345,9 +345,12 @@ template<class IntType>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \constraints \tcode{is_integral_v<IntType>} is \tcode{true}.
+\pnum
+\constraints \tcode{is_integral_v<IntType>} is \tcode{true}.
 
-\pnum \effects Equivalent to:
+\pnum
+\effects
+Equivalent to:
 \tcode{return b = b << shift;}
 \end{itemdescr}
 
@@ -358,9 +361,12 @@ template<class IntType>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \constraints \tcode{is_integral_v<IntType>} is \tcode{true}.
+\pnum
+\constraints \tcode{is_integral_v<IntType>} is \tcode{true}.
 
-\pnum \effects Equivalent to:
+\pnum
+\effects
+Equivalent to:
 \begin{codeblock}
 return static_cast<byte>(static_cast<unsigned char>(
 	                   static_cast<unsigned int>(b) << shift));
@@ -374,9 +380,12 @@ template<class IntType>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \constraints \tcode{is_integral_v<IntType>} is \tcode{true}.
+\pnum
+\constraints \tcode{is_integral_v<IntType>} is \tcode{true}.
 
-\pnum \effects Equivalent to:
+\pnum
+\effects
+Equivalent to:
 \tcode{return b >> shift;}
 \end{itemdescr}
 
@@ -387,9 +396,12 @@ template<class IntType>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \constraints \tcode{is_integral_v<IntType>} is \tcode{true}.
+\pnum
+\constraints \tcode{is_integral_v<IntType>} is \tcode{true}.
 
-\pnum \effects Equivalent to:
+\pnum
+\effects
+Equivalent to:
 \begin{codeblock}
 return static_cast<byte>(static_cast<unsigned char>(
 	                   static_cast<unsigned int>(b) >> shift));
@@ -402,7 +414,9 @@ constexpr byte& operator|=(byte& l, byte r) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \effects Equivalent to: \tcode{return l = l | r;}
+\pnum
+\effects
+Equivalent to: \tcode{return l = l | r;}
 \end{itemdescr}
 
 \indexlibrarymember{operator"|}{byte}%
@@ -411,7 +425,9 @@ constexpr byte operator|(byte l, byte r) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \effects Equivalent to:
+\pnum
+\effects
+Equivalent to:
 \begin{codeblock}
 return static_cast<byte>(static_cast<unsigned char>(static_cast<unsigned int>(l) |
                                                     static_cast<unsigned int>(r)));
@@ -424,7 +440,9 @@ constexpr byte& operator&=(byte& l, byte r) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \effects Equivalent to: \tcode{return l = l \& r;}
+\pnum
+\effects
+Equivalent to: \tcode{return l = l \& r;}
 \end{itemdescr}
 
 \indexlibrarymember{operator\&}{byte}%
@@ -433,7 +451,9 @@ constexpr byte operator&(byte l, byte r) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \effects Equivalent to:
+\pnum
+\effects
+Equivalent to:
 \begin{codeblock}
 return static_cast<byte>(static_cast<unsigned char>(static_cast<unsigned int>(l) &
                                                     static_cast<unsigned int>(r)));
@@ -446,7 +466,9 @@ constexpr byte& operator^=(byte& l, byte r) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \effects Equivalent to: \tcode{return l = l \caret{} r;}
+\pnum
+\effects
+Equivalent to: \tcode{return l = l \caret{} r;}
 \end{itemdescr}
 
 \indexlibrarymember{operator\caret}{byte}%
@@ -455,7 +477,9 @@ constexpr byte operator^(byte l, byte r) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \effects Equivalent to:
+\pnum
+\effects
+Equivalent to:
 \begin{codeblock}
 return static_cast<byte>(static_cast<unsigned char>(static_cast<unsigned int>(l) ^
                                                     static_cast<unsigned int>(r)));
@@ -468,7 +492,9 @@ constexpr byte operator~(byte b) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \effects Equivalent to:
+\pnum
+\effects
+Equivalent to:
 \begin{codeblock}
 return static_cast<byte>(static_cast<unsigned char>(
 	                   ~static_cast<unsigned int>(b)));
@@ -482,9 +508,12 @@ template<class IntType>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \constraints \tcode{is_integral_v<IntType>} is \tcode{true}.
+\pnum
+\constraints \tcode{is_integral_v<IntType>} is \tcode{true}.
 
-\pnum \effects Equivalent to: \tcode{return static_cast<IntType>(b);}
+\pnum
+\effects
+Equivalent to: \tcode{return static_cast<IntType>(b);}
 \end{itemdescr}
 
 \rSec1[support.limits]{Implementation properties}
@@ -493,266 +522,177 @@ template<class IntType>
 
 \pnum
 The headers
-\tcode{<limits>}\iref{limits.syn},
-\tcode{<climits>}\iref{climits.syn}, and
-\tcode{<cfloat>}\iref{cfloat.syn}
+\libheaderref{limits},
+\libheaderref{climits}, and
+\libheaderref{cfloat}
 supply characteristics of
 \indextext{implementation-dependent}%
 imple\-mentation-dependent
 arithmetic types\iref{basic.fundamental}.
 
+\rSec2[version.syn]{Header \tcode{<version>} synopsis}
+
 \pnum
-The header \tcode{<version>}
+The header \libheaderdef{version}
 supplies implementation-dependent information
 about the C++ standard library
 (e.g., version number and release date).
 
 \pnum
-The macros in \tref{support.ft} are defined
-after inclusion of the header \tcode{<version>} or
-one of the corresponding headers specified in the table.
+Each of the macros defined in \libheader{version} is also defined
+after inclusion of any member of the set of library headers
+indicated in the corresponding comment in this synopsis.
 \begin{note}
 Future versions of this International Standard might replace
 the values of these macros with greater values.
 \end{note}
 
-\begin{LongTable}{Standard library feature-test macros}
-{support.ft}{llx{.3\hsize}}
-\\ \topline
-\lhdr{Macro name} & \chdr{Value} & \rhdr{Header(s)} \\ \capsep
-\endfirsthead
-\continuedcaption \\
-\hline
-\lhdr{Macro name} & \chdr{Value} & \rhdr{Header(s)} \\ \capsep
-\endhead
-\defnlibxname{cpp_lib_addressof_constexpr}                  & \tcode{201603L} &
-  \tcode{<memory>} \\ \rowsep
-\defnlibxname{cpp_lib_allocator_traits_is_always_equal}     & \tcode{201411L} &
-  \tcode{<memory>} \tcode{<scoped_allocator>} \tcode{<string>}
-  \tcode{<deque>} \tcode{<forward_list>} \tcode{<list>} \tcode{<vector>}
-  \tcode{<map>} \tcode{<set>} \tcode{<unordered_map>}
-  \tcode{<unordered_set>} \\ \rowsep
-\defnlibxname{cpp_lib_any}                                  & \tcode{201606L} &
-  \tcode{<any>} \\ \rowsep
-\defnlibxname{cpp_lib_apply}                                & \tcode{201603L} &
-  \tcode{<tuple>} \\ \rowsep
-\defnlibxname{cpp_lib_array_constexpr}                      & \tcode{201603L} &
-  \tcode{<iterator>} \tcode{<array>} \\ \rowsep
-\defnlibxname{cpp_lib_as_const}                             & \tcode{201510L} &
-  \tcode{<utility>} \\ \rowsep
-\defnlibxname{cpp_lib_atomic_flag_test}                     & \tcode{201907L} &
-  \tcode{<atomic>} \\ \rowsep
-\defnlibxname{cpp_lib_atomic_is_always_lock_free}           & \tcode{201603L} &
-  \tcode{<atomic>} \\ \rowsep
-\defnlibxname{cpp_lib_atomic_lock_free_type_aliases}        & \tcode{201907L} &
-  \tcode{<atomic>} \\ \rowsep
-\defnlibxname{cpp_lib_atomic_ref}                           & \tcode{201806L} &
-  \tcode{<atomic>} \\ \rowsep
-\defnlibxname{cpp_lib_atomic_wait}                          & \tcode{201907L} &
-  \tcode{<atomic>} \\ \rowsep
-\defnlibxname{cpp_lib_barrier}                              & \tcode{201907L} &
-  \tcode{<barrier>} \\ \rowsep
-\defnlibxname{cpp_lib_bit_cast}                             & \tcode{201806L} &
-  \tcode{<bit>} \\ \rowsep
-\defnlibxname{cpp_lib_bind_front}                           & \tcode{201907L} &
-  \tcode{<functional>} \\ \rowsep
-\defnlibxname{cpp_lib_bitops}                               & \tcode{201907L} &
-  \tcode{<bit>} \\ \rowsep
-\defnlibxname{cpp_lib_bool_constant}                        & \tcode{201505L} &
-  \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_bounded_array_traits}                 & \tcode{201902L} &
-  \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_boyer_moore_searcher}                 & \tcode{201603L} &
-  \tcode{<functional>} \\ \rowsep
-\defnlibxname{cpp_lib_byte}                                 & \tcode{201603L} &
-  \tcode{<cstddef>} \\ \rowsep
-\defnlibxname{cpp_lib_char8_t}                              & \tcode{201907L} &
-  \tcode{<atomic>} \tcode{<filesystem>} \tcode{<istream>} \tcode{<limits>}
-  \tcode{<locale>} \tcode{<ostream>} \tcode{<string>} \tcode{<string_view>}
-  \\ \rowsep
-\defnlibxname{cpp_lib_chrono}                               & \tcode{201907L} &
-  \tcode{<chrono>} \\ \rowsep
-\defnlibxname{cpp_lib_chrono_udls}                          & \tcode{201304L} &
-  \tcode{<chrono>} \\ \rowsep
-\defnlibxname{cpp_lib_clamp}                                & \tcode{201603L} &
-  \tcode{<algorithm>} \\ \rowsep
-\defnlibxname{cpp_lib_complex_udls}                         & \tcode{201309L} &
-  \tcode{<complex>} \\ \rowsep
-\defnlibxname{cpp_lib_concepts}                             & \tcode{201806L} &
-  \tcode{<concepts>} \\ \rowsep
-\defnlibxname{cpp_lib_constexpr}                            & \tcode{201811L} &
-  any C++ library header from \tref{headers.cpp} or
-  any C++ header for C library facilities from \tref{headers.cpp.c} \\ \rowsep
-\defnlibxname{cpp_lib_constexpr_dynamic_alloc}              & \tcode{201907L} &
-  \tcode{<memory>} \\ \rowsep
-\defnlibxname{cpp_lib_constexpr_invoke}                     & \tcode{201907L} &
-  \tcode{<functional>} \\ \rowsep
-\defnlibxname{cpp_lib_constexpr_string}                     & \tcode{201907L} &
-  \tcode{<string>} \\ \rowsep
-\defnlibxname{cpp_lib_constexpr_swap_algorithms}            & \tcode{201806L} &
-  \tcode{<algorithm>} \\ \rowsep
-\defnlibxname{cpp_lib_constexpr_vector}                     & \tcode{201907L} &
-  \tcode{<vector>} \\ \rowsep
-\defnlibxname{cpp_lib_destroying_delete}                    & \tcode{201806L} &
-  \tcode{<new>} \\ \rowsep
-\defnlibxname{cpp_lib_enable_shared_from_this}              & \tcode{201603L} &
-  \tcode{<memory>} \\ \rowsep
-\defnlibxname{cpp_lib_endian}                               & \tcode{201907L} &
-  \tcode{<bit>} \\ \rowsep
-\defnlibxname{cpp_lib_erase_if}                             & \tcode{201811L} &
-  \tcode{<string>} \tcode{<deque>} \tcode{<forward_list>} \tcode{<list>}
-  \tcode{<vector>} \tcode{<map>} \tcode{<set>} \tcode{<unordered_map>}
-  \tcode{<unordered_set>} \\ \rowsep
-\defnlibxname{cpp_lib_exchange_function}                    & \tcode{201304L} &
-  \tcode{<utility>} \\ \rowsep
-\defnlibxname{cpp_lib_execution}                            & \tcode{201902L} &
-  \tcode{<execution>} \\ \rowsep
-\defnlibxname{cpp_lib_filesystem}                           & \tcode{201703L} &
-  \tcode{<filesystem>} \\ \rowsep
-\defnlibxname{cpp_lib_format}                               & \tcode{201907L} &
-  \tcode{<format>} \\ \rowsep
-\defnlibxname{cpp_lib_gcd_lcm}                              & \tcode{201606L} &
-  \tcode{<numeric>} \\ \rowsep
-\defnlibxname{cpp_lib_generic_associative_lookup}           & \tcode{201304L} &
-  \tcode{<map>} \tcode{<set>} \\ \rowsep
-\defnlibxname{cpp_lib_generic_unordered_lookup}             & \tcode{201811L} &
-  \tcode{<unordered_map>} \tcode{<unordered_set>} \\ \rowsep
-\defnlibxname{cpp_lib_hardware_interference_size}           & \tcode{201703L} &
-  \tcode{<new>} \\ \rowsep
-\defnlibxname{cpp_lib_has_unique_object_representations}    & \tcode{201606L} &
-  \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_hypot}                                & \tcode{201603L} &
-  \tcode{<cmath>} \\ \rowsep
-\defnlibxname{cpp_lib_incomplete_container_elements}        & \tcode{201505L} &
-  \tcode{<forward_list>} \tcode{<list>} \tcode{<vector>} \\ \rowsep
-\defnlibxname{cpp_lib_integer_sequence}                     & \tcode{201304L} &
-  \tcode{<utility>} \\ \rowsep
-\defnlibxname{cpp_lib_integral_constant_callable}           & \tcode{201304L} &
-  \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_interpolate}                          & \tcode{201902L} &
-  \tcode{<cmath>} \tcode{<numeric>} \\ \rowsep
-\defnlibxname{cpp_lib_invoke}                               & \tcode{201411L} &
-  \tcode{<functional>} \\ \rowsep
-\defnlibxname{cpp_lib_is_aggregate}                         & \tcode{201703L} &
-  \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_is_constant_evaluated}                & \tcode{201811L} &
-  \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_is_final}                             & \tcode{201402L} &
-  \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_is_invocable}                         & \tcode{201703L} &
-  \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_is_layout_compatible}                 & \tcode{201907L} &
-  \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_is_null_pointer}                      & \tcode{201309L} &
-  \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_is_pointer_interconvertible}          & \tcode{201907L} &
-  \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_is_swappable}                         & \tcode{201603L} &
-  \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_jthread}                              & \tcode{201907L} &
-  \tcode{<stop_token>} \tcode{<thread>} \\ \rowsep
-\defnlibxname{cpp_lib_latch}                                & \tcode{201907L} &
-  \tcode{<latch>} \\ \rowsep
-\defnlibxname{cpp_lib_launder}                              & \tcode{201606L} &
-  \tcode{<new>} \\ \rowsep
-\defnlibxname{cpp_lib_list_remove_return_type}              & \tcode{201806L} &
-  \tcode{<forward_list>} \tcode{<list>} \\ \rowsep
-\defnlibxname{cpp_lib_logical_traits}                       & \tcode{201510L} &
-  \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_make_from_tuple}                      & \tcode{201606L} &
-  \tcode{<tuple>} \\ \rowsep
-\defnlibxname{cpp_lib_make_reverse_iterator}                & \tcode{201402L} &
-  \tcode{<iterator>} \\ \rowsep
-\defnlibxname{cpp_lib_make_unique}                          & \tcode{201304L} &
-  \tcode{<memory>} \\ \rowsep
-\defnlibxname{cpp_lib_map_try_emplace}                      & \tcode{201411L} &
-  \tcode{<map>} \\ \rowsep
-\defnlibxname{cpp_lib_math_constants}                       & \tcode{201907L} &
-  \tcode{<numbers>} \\ \rowsep
-\defnlibxname{cpp_lib_math_special_functions}               & \tcode{201603L} &
-  \tcode{<cmath>} \\ \rowsep
-\defnlibxname{cpp_lib_memory_resource}                      & \tcode{201603L} &
-  \tcode{<memory_resource>} \\ \rowsep
-\defnlibxname{cpp_lib_node_extract}                         & \tcode{201606L} &
-  \tcode{<map>} \tcode{<set>} \tcode{<unordered_map>}
-  \tcode{<unordered_set>} \\ \rowsep
-\defnlibxname{cpp_lib_nonmember_container_access}           & \tcode{201411L} &
-  \tcode{<iterator>} \tcode{<array>} \tcode{<deque>} \tcode{<forward_list>}
-  \tcode{<list>} \tcode{<map>} \tcode{<regex>} \tcode{<set>} \tcode{<string>}
-  \tcode{<unordered_map>} \tcode{<unordered_set>} \tcode{<vector>} \\ \rowsep
-\defnlibxname{cpp_lib_not_fn}                               & \tcode{201603L} &
-  \tcode{<functional>} \\ \rowsep
-\defnlibxname{cpp_lib_null_iterators}                       & \tcode{201304L} &
-  \tcode{<iterator>} \\ \rowsep
-\defnlibxname{cpp_lib_optional}                             & \tcode{201606L} &
-  \tcode{<optional>} \\ \rowsep
-\defnlibxname{cpp_lib_parallel_algorithm}                   & \tcode{201603L} &
-  \tcode{<algorithm>} \tcode{<numeric>} \\ \rowsep
-\defnlibxname{cpp_lib_quoted_string_io}                     & \tcode{201304L} &
-  \tcode{<iomanip>} \\ \rowsep
-\defnlibxname{cpp_lib_ranges}                               & \tcode{201811L} &
-  \tcode{<algorithm>} \tcode{<functional>} \tcode{<iterator>}
-  \tcode{<memory>} \tcode{<ranges>} \\ \rowsep
-\defnlibxname{cpp_lib_raw_memory_algorithms}                & \tcode{201606L} &
-  \tcode{<memory>} \\ \rowsep
-\defnlibxname{cpp_lib_result_of_sfinae}                     & \tcode{201210L} &
-  \tcode{<functional>} \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_robust_nonmodifying_seq_ops}          & \tcode{201304L} &
-  \tcode{<algorithm>} \\ \rowsep
-\defnlibxname{cpp_lib_sample}                               & \tcode{201603L} &
-  \tcode{<algorithm>} \\ \rowsep
-\defnlibxname{cpp_lib_scoped_lock}                          & \tcode{201703L} &
-  \tcode{<mutex>} \\ \rowsep
-\defnlibxname{cpp_lib_semaphore}                            & \tcode{201907L} &
-  \tcode{<semaphore>} \\ \rowsep
-\defnlibxname{cpp_lib_shared_mutex}                         & \tcode{201505L} &
-  \tcode{<shared_mutex>} \\ \rowsep
-\defnlibxname{cpp_lib_shared_ptr_arrays}                    & \tcode{201611L} &
-  \tcode{<memory>} \\ \rowsep
-\defnlibxname{cpp_lib_shared_ptr_weak_type}                 & \tcode{201606L} &
-  \tcode{<memory>} \\ \rowsep
-\defnlibxname{cpp_lib_shared_timed_mutex}                   & \tcode{201402L} &
-  \tcode{<shared_mutex>} \\ \rowsep
-\defnlibxname{cpp_lib_source_location}                      & \tcode{201907L} &
-  \tcode{<source_location>} \\ \rowsep
-\defnlibxname{cpp_lib_spaceship}                            & \tcode{201907L} &
-  \tcode{<compare>} \\ \rowsep
-\defnlibxname{cpp_lib_string_udls}                          & \tcode{201304L} &
-  \tcode{<string>} \\ \rowsep
-\defnlibxname{cpp_lib_string_view}                          & \tcode{201606L} &
-  \tcode{<string>} \tcode{<string_view>} \\ \rowsep
-\defnlibxname{cpp_lib_three_way_comparison}                 & \tcode{201711L} &
-  \tcode{<compare>} \\ \rowsep
-\defnlibxname{cpp_lib_to_array}                             & \tcode{201907L} &
-  \tcode{<array>} \\ \rowsep
-\defnlibxname{cpp_lib_to_chars}                             & \tcode{201611L} &
-  \tcode{<charconv>} \\ \rowsep
-\defnlibxname{cpp_lib_transformation_trait_aliases}         & \tcode{201304L} &
-  \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_transparent_operators}                & \tcode{201510L} &
-  \tcode{<memory>} \tcode{<functional>} \\ \rowsep
-\defnlibxname{cpp_lib_tuple_element_t}                      & \tcode{201402L} &
-  \tcode{<tuple>} \\ \rowsep
-\defnlibxname{cpp_lib_tuples_by_type}                       & \tcode{201304L} &
-  \tcode{<utility>} \tcode{<tuple>} \\ \rowsep
-\defnlibxname{cpp_lib_type_trait_variable_templates}        & \tcode{201510L} &
-  \tcode{<type_traits>} \\ \rowsep
-\defnlibxname{cpp_lib_uncaught_exceptions}                  & \tcode{201411L} &
-  \tcode{<exception>} \\ \rowsep
-\defnlibxname{cpp_lib_unordered_map_try_emplace}            & \tcode{201411L} &
-  \tcode{<unordered_map>} \\ \rowsep
-\defnlibxname{cpp_lib_variant}                              & \tcode{201606L} &
-  \tcode{<variant>} \\ \rowsep
-\defnlibxname{cpp_lib_void_t}                               & \tcode{201411L} &
-  \tcode{<type_traits>} \\ \rowsep
-\end{LongTable}
+\begin{codeblock}
+#define @\defnlibxname{cpp_lib_addressof_constexpr}@               201603L // also in \libheader{memory}
+#define @\defnlibxname{cpp_lib_allocator_traits_is_always_equal}@  201411L
+  // also in \libheader{memory}, \libheader{scoped_allocator}, \libheader{string}, \libheader{deque}, \libheader{forward_list}, \libheader{list}, \libheader{vector},
+  // \libheader{map}, \libheader{set}, \libheader{unordered_map}, \libheader{unordered_set}
+#define @\defnlibxname{cpp_lib_any}@                               201606L // also in \libheader{any}
+#define @\defnlibxname{cpp_lib_apply}@                             201603L // also in \libheader{tuple}
+#define @\defnlibxname{cpp_lib_array_constexpr}@                   201811L // also in \libheader{iterator}, \libheader{array}
+#define @\defnlibxname{cpp_lib_as_const}@                          201510L // also in \libheader{utility}
+#define @\defnlibxname{cpp_lib_assume_aligned}@                    201811L // also in \libheader{memory}
+#define @\defnlibxname{cpp_lib_atomic_flag_test}@                  201907L // also in \libheader{atomic}
+#define @\defnlibxname{cpp_lib_atomic_float}@                      201711L // also in \libheader{atomic}
+#define @\defnlibxname{cpp_lib_atomic_is_always_lock_free}@        201603L // also in \libheader{atomic}
+#define @\defnlibxname{cpp_lib_atomic_lock_free_type_aliases}@     201907L // also in \libheader{atomic}
+#define @\defnlibxname{cpp_lib_atomic_ref}@                        201806L // also in \libheader{atomic}
+#define @\defnlibxname{cpp_lib_atomic_shared_ptr}@                 201711L // also in \libheader{memory}
+#define @\defnlibxname{cpp_lib_atomic_value_initialization}@       201911L // also in \libheader{atomic}, \libheader{memory}
+#define @\defnlibxname{cpp_lib_atomic_wait}@                       201907L // also in \libheader{atomic}
+#define @\defnlibxname{cpp_lib_barrier}@                           201907L // also in \libheader{barrier}
+#define @\defnlibxname{cpp_lib_bit_cast}@                          201806L // also in \libheader{bit}
+#define @\defnlibxname{cpp_lib_bind_front}@                        201907L // also in \libheader{functional}
+#define @\defnlibxname{cpp_lib_bitops}@                            201907L // also in \libheader{bit}
+#define @\defnlibxname{cpp_lib_bool_constant}@                     201505L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_bounded_array_traits}@              201902L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_boyer_moore_searcher}@              201603L // also in \libheader{functional}
+#define @\defnlibxname{cpp_lib_byte}@                              201603L // also in \libheader{cstddef}
+#define @\defnlibxname{cpp_lib_char8_t}@                           201907L
+  // also in \libheader{atomic}, \libheader{filesystem}, \libheader{istream}, \libheader{limits}, \libheader{locale}, \libheader{ostream}, \libheader{string}, \libheader{string_view}
+#define @\defnlibxname{cpp_lib_chrono}@                            201907L // also in \libheader{chrono}
+#define @\defnlibxname{cpp_lib_chrono_udls}@                       201304L // also in \libheader{chrono}
+#define @\defnlibxname{cpp_lib_clamp}@                             201603L // also in \libheader{algorithm}
+#define @\defnlibxname{cpp_lib_complex_udls}@                      201309L // also in \libheader{complex}
+#define @\defnlibxname{cpp_lib_concepts}@                          201907L // also in \libheader{concepts}
+#define @\defnlibxname{cpp_lib_constexpr_algorithms}@              201806L // also in \libheader{algorithm}
+#define @\defnlibxname{cpp_lib_constexpr_dynamic_alloc}@           201907L // also in \libheader{memory}
+#define @\defnlibxname{cpp_lib_constexpr_functional}@              201907L // also in \libheader{functional}
+#define @\defnlibxname{cpp_lib_constexpr_iterator}@                201811L // also in \libheader{iterator}
+#define @\defnlibxname{cpp_lib_constexpr_memory}@                  201811L // also in \libheader{memory}
+#define @\defnlibxname{cpp_lib_constexpr_numeric}@                 201911L // also in \libheader{numeric}
+#define @\defnlibxname{cpp_lib_constexpr_string}@                  201907L // also in \libheader{string}
+#define @\defnlibxname{cpp_lib_constexpr_string_view}@             201811L // also in \libheader{string_view}
+#define @\defnlibxname{cpp_lib_constexpr_tuple}@                   201811L // also in \libheader{tuple}
+#define @\defnlibxname{cpp_lib_constexpr_utility}@                 201811L // also in \libheader{utility}
+#define @\defnlibxname{cpp_lib_constexpr_vector}@                  201907L // also in \libheader{vector}
+#define @\defnlibxname{cpp_lib_destroying_delete}@                 201806L // also in \libheader{new}
+#define @\defnlibxname{cpp_lib_enable_shared_from_this}@           201603L // also in \libheader{memory}
+#define @\defnlibxname{cpp_lib_endian}@                            201907L // also in \libheader{bit}
+#define @\defnlibxname{cpp_lib_erase_if}@                          201811L
+  // also in \libheader{string}, \libheader{deque}, \libheader{forward_list}, \libheader{list}, \libheader{vector}, \libheader{map}, \libheader{set}, \libheader{unordered_map},
+  // \libheader{unordered_set}
+#define @\defnlibxname{cpp_lib_exchange_function}@                 201304L // also in \libheader{utility}
+#define @\defnlibxname{cpp_lib_execution}@                         201902L // also in \libheader{execution}
+#define @\defnlibxname{cpp_lib_filesystem}@                        201703L // also in \libheader{filesystem}
+#define @\defnlibxname{cpp_lib_format}@                            201907L // also in \libheader{format}
+#define @\defnlibxname{cpp_lib_gcd_lcm}@                           201606L // also in \libheader{numeric}
+#define @\defnlibxname{cpp_lib_generic_associative_lookup}@        201304L // also in \libheader{map}, \libheader{set}
+#define @\defnlibxname{cpp_lib_generic_unordered_lookup}@          201811L
+  // also in \libheader{unordered_map}, \libheader{unordered_set}
+#define @\defnlibxname{cpp_lib_hardware_interference_size}@        201703L // also in \libheader{new}
+#define @\defnlibxname{cpp_lib_has_unique_object_representations}@ 201606L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_hypot}@                             201603L // also in \libheader{cmath}
+#define @\defnlibxname{cpp_lib_incomplete_container_elements}@     201505L
+  // also in \libheader{forward_list}, \libheader{list}, \libheader{vector}
+#define @\defnlibxname{cpp_lib_int_pow2}@                          201806L // also in \libheader{bit}
+#define @\defnlibxname{cpp_lib_integer_sequence}@                  201304L // also in \libheader{utility}
+#define @\defnlibxname{cpp_lib_integral_constant_callable}@        201304L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_interpolate}@                       201902L // also in \libheader{cmath}, \libheader{numeric}
+#define @\defnlibxname{cpp_lib_invoke}@                            201411L // also in \libheader{functional}
+#define @\defnlibxname{cpp_lib_is_aggregate}@                      201703L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_is_constant_evaluated}@             201811L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_is_final}@                          201402L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_is_invocable}@                      201703L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_is_layout_compatible}@              201907L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_is_null_pointer}@                   201309L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_is_pointer_interconvertible}@       201907L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_is_swappable}@                      201603L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_jthread}@                           201911L // also in \libheader{stop_token}, \libheader{thread}
+#define @\defnlibxname{cpp_lib_latch}@                             201907L // also in \libheader{latch}
+#define @\defnlibxname{cpp_lib_launder}@                           201606L // also in \libheader{new}
+#define @\defnlibxname{cpp_lib_list_remove_return_type}@           201806L // also in \libheader{forward_list}, \libheader{list}
+#define @\defnlibxname{cpp_lib_logical_traits}@                    201510L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_make_from_tuple}@                   201606L // also in \libheader{tuple}
+#define @\defnlibxname{cpp_lib_make_reverse_iterator}@             201402L // also in \libheader{iterator}
+#define @\defnlibxname{cpp_lib_make_unique}@                       201304L // also in \libheader{memory}
+#define @\defnlibxname{cpp_lib_map_try_emplace}@                   201411L // also in \libheader{map}
+#define @\defnlibxname{cpp_lib_math_constants}@                    201907L // also in \libheader{numbers}
+#define @\defnlibxname{cpp_lib_math_special_functions}@            201603L // also in \libheader{cmath}
+#define @\defnlibxname{cpp_lib_memory_resource}@                   201603L // also in \libheader{memory_resource}
+#define @\defnlibxname{cpp_lib_node_extract}@                      201606L
+  // also in \libheader{map}, \libheader{set}, \libheader{unordered_map}, \libheader{unordered_set}
+#define @\defnlibxname{cpp_lib_nonmember_container_access}@        201411L
+  // also in \libheader{array}, \libheader{deque}, \libheader{forward_list}, \libheader{iterator}, \libheader{list}, \libheader{map}, \libheader{regex}, \libheader{set}, \libheader{string},
+  // \libheader{unordered_map}, \libheader{unordered_set}, \libheader{vector}
+#define @\defnlibxname{cpp_lib_not_fn}@                            201603L // also in \libheader{functional}
+#define @\defnlibxname{cpp_lib_nothrow_convertible}@               201806L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_null_iterators}@                    201304L // also in \libheader{iterator}
+#define @\defnlibxname{cpp_lib_optional}@                          201606L // also in \libheader{optional}
+#define @\defnlibxname{cpp_lib_parallel_algorithm}@                201603L // also in \libheader{algorithm}, \libheader{numeric}
+#define @\defnlibxname{cpp_lib_polymorphic_allocator}@             201902L // also in \libheader{memory}
+#define @\defnlibxname{cpp_lib_quoted_string_io}@                  201304L // also in \libheader{iomanip}
+#define @\defnlibxname{cpp_lib_ranges}@                            201911L
+  // also in \libheader{algorithm}, \libheader{functional}, \libheader{iterator}, \libheader{memory}, \libheader{ranges}
+#define @\defnlibxname{cpp_lib_raw_memory_algorithms}@             201606L // also in \libheader{memory}
+#define @\defnlibxname{cpp_lib_remove_cvref}@                      201711L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_result_of_sfinae}@                  201210L // also in \libheader{functional}, \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_robust_nonmodifying_seq_ops}@       201304L // also in \libheader{algorithm}
+#define @\defnlibxname{cpp_lib_sample}@                            201603L // also in \libheader{algorithm}
+#define @\defnlibxname{cpp_lib_scoped_lock}@                       201703L // also in \libheader{mutex}
+#define @\defnlibxname{cpp_lib_semaphore}@                         201907L // also in \libheader{semaphore}
+#define @\defnlibxname{cpp_lib_shared_mutex}@                      201505L // also in \libheader{shared_mutex}
+#define @\defnlibxname{cpp_lib_shared_ptr_arrays}@                 201707L // also in \libheader{memory}
+#define @\defnlibxname{cpp_lib_shared_ptr_weak_type}@              201606L // also in \libheader{memory}
+#define @\defnlibxname{cpp_lib_shared_timed_mutex}@                201402L // also in \libheader{shared_mutex}
+#define @\defnlibxname{cpp_lib_shift}@                             201806L // also in \libheader{algorithm}
+#define @\defnlibxname{cpp_lib_smart_ptr_default_init}@            201811L // also in \libheader{memory}
+#define @\defnlibxname{cpp_lib_source_location}@                   201907L // also in \libheader{source_location}
+#define @\defnlibxname{cpp_lib_span}@                              201902L // also in \libheader{span}
+#define @\defnlibxname{cpp_lib_ssize}@                             201902L // also in \libheader{iterator}
+#define @\defnlibxname{cpp_lib_starts_ends_with}@                  201711L // also in \libheader{string}, \libheader{string_view}
+#define @\defnlibxname{cpp_lib_string_udls}@                       201304L // also in \libheader{string}
+#define @\defnlibxname{cpp_lib_string_view}@                       201803L // also in \libheader{string}, \libheader{string_view}
+#define @\defnlibxname{cpp_lib_syncbuf}@                           201803L // also in \libheader{syncstream}
+#define @\defnlibxname{cpp_lib_three_way_comparison}@              201907L // also in \libheader{compare}
+#define @\defnlibxname{cpp_lib_to_address}@                        201711L // also in \libheader{memory}
+#define @\defnlibxname{cpp_lib_to_array}@                          201907L // also in \libheader{array}
+#define @\defnlibxname{cpp_lib_to_chars}@                          201611L // also in \libheader{charconv}
+#define @\defnlibxname{cpp_lib_transformation_trait_aliases}@      201304L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_transparent_operators}@             201510L // also in \libheader{memory}, \libheader{functional}
+#define @\defnlibxname{cpp_lib_tuple_element_t}@                   201402L // also in \libheader{tuple}
+#define @\defnlibxname{cpp_lib_tuples_by_type}@                    201304L // also in \libheader{utility}, \libheader{tuple}
+#define @\defnlibxname{cpp_lib_type_identity}@                     201806L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_type_trait_variable_templates}@     201510L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_uncaught_exceptions}@               201411L // also in \libheader{exception}
+#define @\defnlibxname{cpp_lib_unordered_map_try_emplace}@         201411L // also in \libheader{unordered_map}
+#define @\defnlibxname{cpp_lib_unwrap_ref}@                        201811L // also in \libheader{type_traits}
+#define @\defnlibxname{cpp_lib_variant}@                           201606L // also in \libheader{variant}
+#define @\defnlibxname{cpp_lib_void_t}@                            201411L // also in \libheader{type_traits}
+\end{codeblock}
 
 \rSec2[limits.syn]{Header \tcode{<limits>} synopsis}
-\indexhdr{limits}%
+
+\indexheader{limits}%
 \indextext{\idxcode{numeric_limits}}%
-\indexlibrary{\idxcode{numeric_limits}}%
-\indexlibrary{\idxcode{float_round_style}}%
-\indexlibrary{\idxcode{float_denorm_style}}%
+\indexlibraryglobal{numeric_limits}%
+\indexlibraryglobal{float_round_style}%
+\indexlibraryglobal{float_denorm_style}%
 
 \begin{codeblock}
 namespace std {
@@ -796,7 +736,7 @@ namespace std {
 
 \rSec3[round.style]{Type \tcode{float_round_style}}
 
-\indexlibrary{\idxcode{float_round_style}}%
+\indexlibraryglobal{float_round_style}%
 \begin{codeblock}
 namespace std {
   enum float_round_style {
@@ -812,33 +752,32 @@ namespace std {
 \pnum
 The rounding mode for floating-point arithmetic is characterized by the
 values:
-
 \begin{itemize}
 \item
-\indexlibrary{\idxcode{round_indeterminate}}%
+\indexlibraryglobal{round_indeterminate}%
 \tcode{round_indeterminate}
 if the rounding style is indeterminable
 \item
-\indexlibrary{\idxcode{round_toward_zero}}%
+\indexlibraryglobal{round_toward_zero}%
 \tcode{round_toward_zero}
 if the rounding style is toward zero
 \item
-\indexlibrary{\idxcode{round_to_nearest}}%
+\indexlibraryglobal{round_to_nearest}%
 \tcode{round_to_nearest}
 if the rounding style is to the nearest representable value
 \item
-\indexlibrary{\idxcode{round_toward_infinity}}%
+\indexlibraryglobal{round_toward_infinity}%
 \tcode{round_toward_infinity}
 if the rounding style is toward infinity
 \item
-\indexlibrary{\idxcode{round_toward_neg_infinity}}%
+\indexlibraryglobal{round_toward_neg_infinity}%
 \tcode{round_toward_neg_infinity}
 if the rounding style is toward negative infinity
 \end{itemize}
 
 \rSec3[denorm.style]{Type \tcode{float_denorm_style}}
 
-\indexlibrary{\idxcode{float_denorm_style}}%
+\indexlibraryglobal{float_denorm_style}%
 \begin{codeblock}
 namespace std {
   enum float_denorm_style {
@@ -856,18 +795,17 @@ namespace std {
 \pnum
 The presence or absence of subnormal numbers (variable number of exponent bits)
 is characterized by the values:
-
 \begin{itemize}
 \item
-\indexlibrary{\idxcode{denorm_indeterminate}}%
+\indexlibraryglobal{denorm_indeterminate}%
 \tcode{denorm_indeterminate}
 if it cannot be determined whether or not the type allows subnormal values
 \item
-\indexlibrary{\idxcode{denorm_absent}}%
+\indexlibraryglobal{denorm_absent}%
 \tcode{denorm_absent}
 if the type does not allow subnormal values
 \item
-\indexlibrary{\idxcode{denorm_present}}%
+\indexlibraryglobal{denorm_present}%
 \tcode{denorm_present}
 if the type does allow subnormal values
 \end{itemize}
@@ -876,13 +814,13 @@ if the type does allow subnormal values
 
 \pnum
 The
-\indexlibrary{\idxcode{numeric_limits}}%
+\indexlibraryglobal{numeric_limits}%
 \tcode{numeric_limits}
 class template provides a \Cpp{} program with information about various properties of
 the implementation's representation of the
 arithmetic types.
 
-\indexlibrary{\idxcode{numeric_limits}}%
+\indexlibraryglobal{numeric_limits}%
 \begin{codeblock}
 namespace std {
   template<class T> class numeric_limits {
@@ -1039,7 +977,8 @@ digits that can be represented without change.
 \pnum
 For integer types, the number of non-sign bits in the representation.
 
-\pnum For floating-point types, the number of \tcode{radix} digits in the
+\pnum
+For floating-point types, the number of \tcode{radix} digits in the
 mantissa.\footnote{Equivalent to \tcode{FLT_MANT_DIG}, \tcode{DBL_MANT_DIG},
 \tcode{LDBL_MANT_DIG}.} \end{itemdescr}
 
@@ -1405,8 +1344,10 @@ static constexpr bool is_bounded;
 \begin{itemdescr}
 \pnum
 \tcode{true} if the set of values representable by the type is finite.\footnote{Required by LIA-1.}
-\begin{note} All fundamental types\iref{basic.fundamental} are bounded. This member would be \tcode{false} for arbitrary
-precision types.\end{note}
+\begin{note}
+All fundamental types\iref{basic.fundamental} are bounded. This member would be \tcode{false} for arbitrary
+precision types.
+\end{note}
 
 \pnum
 Meaningful for all specializations.
@@ -1554,7 +1495,7 @@ namespace std {
 The specialization for
 \tcode{bool}
 shall be provided as follows:
-\indexlibrary{\idxcode{numeric_limits<bool>}}%
+\indexlibraryglobal{numeric_limits<bool>}%
 \begin{codeblock}
 namespace std {
    template<> class numeric_limits<bool> {
@@ -1603,25 +1544,26 @@ namespace std {
 
 \rSec2[climits.syn]{Header \tcode{<climits>} synopsis}
 
-\indexlibrary{\idxcode{CHAR_BIT}}%
-\indexlibrary{\idxcode{SCHAR_MIN}}%
-\indexlibrary{\idxcode{SCHAR_MAX}}%
-\indexlibrary{\idxcode{UCHAR_MAX}}%
-\indexlibrary{\idxcode{CHAR_MIN}}%
-\indexlibrary{\idxcode{CHAR_MAX}}%
-\indexlibrary{\idxcode{MB_LEN_MAX}}%
-\indexlibrary{\idxcode{SHRT_MIN}}%
-\indexlibrary{\idxcode{SHRT_MAX}}%
-\indexlibrary{\idxcode{USHRT_MAX}}%
-\indexlibrary{\idxcode{INT_MIN}}%
-\indexlibrary{\idxcode{INT_MAX}}%
-\indexlibrary{\idxcode{UINT_MAX}}%
-\indexlibrary{\idxcode{LONG_MIN}}%
-\indexlibrary{\idxcode{LONG_MAX}}%
-\indexlibrary{\idxcode{ULONG_MAX}}%
-\indexlibrary{\idxcode{LLONG_MIN}}%
-\indexlibrary{\idxcode{LLONG_MAX}}%
-\indexlibrary{\idxcode{ULLONG_MAX}}%
+\indexheader{climits}%
+\indexlibraryglobal{CHAR_BIT}%
+\indexlibraryglobal{SCHAR_MIN}%
+\indexlibraryglobal{SCHAR_MAX}%
+\indexlibraryglobal{UCHAR_MAX}%
+\indexlibraryglobal{CHAR_MIN}%
+\indexlibraryglobal{CHAR_MAX}%
+\indexlibraryglobal{MB_LEN_MAX}%
+\indexlibraryglobal{SHRT_MIN}%
+\indexlibraryglobal{SHRT_MAX}%
+\indexlibraryglobal{USHRT_MAX}%
+\indexlibraryglobal{INT_MIN}%
+\indexlibraryglobal{INT_MAX}%
+\indexlibraryglobal{UINT_MAX}%
+\indexlibraryglobal{LONG_MIN}%
+\indexlibraryglobal{LONG_MAX}%
+\indexlibraryglobal{ULONG_MAX}%
+\indexlibraryglobal{LLONG_MIN}%
+\indexlibraryglobal{LLONG_MAX}%
+\indexlibraryglobal{ULLONG_MAX}%
 \begin{codeblock}
 #define CHAR_BIT @\seebelow@
 #define SCHAR_MIN @\seebelow@
@@ -1645,10 +1587,10 @@ namespace std {
 \end{codeblock}
 
 \pnum
-The header \tcode{<climits>} defines all macros the same as
-the C standard library header \tcode{<limits.h>}.
+The header \libheader{climits} defines all macros the same as
+the C standard library header \libheader{limits.h}.
 \begin{note}
-The types of the constants defined by macros in \tcode{<climits>} are not
+The types of the constants defined by macros in \libheader{climits} are not
 required to match the types to which the macros refer.
 \end{note}
 
@@ -1656,46 +1598,47 @@ required to match the types to which the macros refer.
 
 \rSec2[cfloat.syn]{Header \tcode{<cfloat>} synopsis}
 
-\indexlibrary{\idxcode{DBL_DECIMAL_DIG}}%
-\indexlibrary{\idxcode{DBL_DIG}}%
-\indexlibrary{\idxcode{DBL_EPSILON}}%
-\indexlibrary{\idxcode{DBL_HAS_SUBNORM}}%
-\indexlibrary{\idxcode{DBL_MANT_DIG}}%
-\indexlibrary{\idxcode{DBL_MAX}}%
-\indexlibrary{\idxcode{DBL_MAX_10_EXP}}%
-\indexlibrary{\idxcode{DBL_MAX_EXP}}%
-\indexlibrary{\idxcode{DBL_MIN}}%
-\indexlibrary{\idxcode{DBL_MIN_10_EXP}}%
-\indexlibrary{\idxcode{DBL_MIN_EXP}}%
-\indexlibrary{\idxcode{DBL_TRUE_MIN}}%
-\indexlibrary{\idxcode{DECIMAL_DIG}}%
-\indexlibrary{\idxcode{FLT_DECIMAL_DIG}}%
-\indexlibrary{\idxcode{FLT_DIG}}%
-\indexlibrary{\idxcode{FLT_EPSILON}}%
-\indexlibrary{\idxcode{FLT_EVAL_METHOD}}%
-\indexlibrary{\idxcode{FLT_HAS_SUBNORM}}%
-\indexlibrary{\idxcode{FLT_MANT_DIG}}%
-\indexlibrary{\idxcode{FLT_MAX}}%
-\indexlibrary{\idxcode{FLT_MAX_10_EXP}}%
-\indexlibrary{\idxcode{FLT_MAX_EXP}}%
-\indexlibrary{\idxcode{FLT_MIN}}%
-\indexlibrary{\idxcode{FLT_MIN_10_EXP}}%
-\indexlibrary{\idxcode{FLT_MIN_EXP}}%
-\indexlibrary{\idxcode{FLT_RADIX}}%
-\indexlibrary{\idxcode{FLT_ROUNDS}}%
-\indexlibrary{\idxcode{FLT_TRUE_MIN}}%
-\indexlibrary{\idxcode{LDBL_DECIMAL_DIG}}%
-\indexlibrary{\idxcode{LDBL_DIG}}%
-\indexlibrary{\idxcode{LDBL_EPSILON}}%
-\indexlibrary{\idxcode{LDBL_HAS_SUBNORM}}%
-\indexlibrary{\idxcode{LDBL_MANT_DIG}}%
-\indexlibrary{\idxcode{LDBL_MAX}}%
-\indexlibrary{\idxcode{LDBL_MAX_10_EXP}}%
-\indexlibrary{\idxcode{LDBL_MAX_EXP}}%
-\indexlibrary{\idxcode{LDBL_MIN}}%
-\indexlibrary{\idxcode{LDBL_MIN_10_EXP}}%
-\indexlibrary{\idxcode{LDBL_MIN_EXP}}%
-\indexlibrary{\idxcode{LDBL_TRUE_MIN}}%
+\indexheader{cfloat}%
+\indexlibraryglobal{DBL_DECIMAL_DIG}%
+\indexlibraryglobal{DBL_DIG}%
+\indexlibraryglobal{DBL_EPSILON}%
+\indexlibraryglobal{DBL_HAS_SUBNORM}%
+\indexlibraryglobal{DBL_MANT_DIG}%
+\indexlibraryglobal{DBL_MAX}%
+\indexlibraryglobal{DBL_MAX_10_EXP}%
+\indexlibraryglobal{DBL_MAX_EXP}%
+\indexlibraryglobal{DBL_MIN}%
+\indexlibraryglobal{DBL_MIN_10_EXP}%
+\indexlibraryglobal{DBL_MIN_EXP}%
+\indexlibraryglobal{DBL_TRUE_MIN}%
+\indexlibraryglobal{DECIMAL_DIG}%
+\indexlibraryglobal{FLT_DECIMAL_DIG}%
+\indexlibraryglobal{FLT_DIG}%
+\indexlibraryglobal{FLT_EPSILON}%
+\indexlibraryglobal{FLT_EVAL_METHOD}%
+\indexlibraryglobal{FLT_HAS_SUBNORM}%
+\indexlibraryglobal{FLT_MANT_DIG}%
+\indexlibraryglobal{FLT_MAX}%
+\indexlibraryglobal{FLT_MAX_10_EXP}%
+\indexlibraryglobal{FLT_MAX_EXP}%
+\indexlibraryglobal{FLT_MIN}%
+\indexlibraryglobal{FLT_MIN_10_EXP}%
+\indexlibraryglobal{FLT_MIN_EXP}%
+\indexlibraryglobal{FLT_RADIX}%
+\indexlibraryglobal{FLT_ROUNDS}%
+\indexlibraryglobal{FLT_TRUE_MIN}%
+\indexlibraryglobal{LDBL_DECIMAL_DIG}%
+\indexlibraryglobal{LDBL_DIG}%
+\indexlibraryglobal{LDBL_EPSILON}%
+\indexlibraryglobal{LDBL_HAS_SUBNORM}%
+\indexlibraryglobal{LDBL_MANT_DIG}%
+\indexlibraryglobal{LDBL_MAX}%
+\indexlibraryglobal{LDBL_MAX_10_EXP}%
+\indexlibraryglobal{LDBL_MAX_EXP}%
+\indexlibraryglobal{LDBL_MIN}%
+\indexlibraryglobal{LDBL_MIN_10_EXP}%
+\indexlibraryglobal{LDBL_MIN_EXP}%
+\indexlibraryglobal{LDBL_TRUE_MIN}%
 \begin{codeblock}
 #define FLT_ROUNDS @\seebelow@
 #define FLT_EVAL_METHOD @\seebelow@
@@ -1740,44 +1683,44 @@ required to match the types to which the macros refer.
 \end{codeblock}
 
 \pnum
-The header \tcode{<cfloat>} defines all macros the same as
-the C standard library header \tcode{<float.h>}.
+The header \libheader{cfloat} defines all macros the same as
+the C standard library header \libheader{float.h}.
 
 \xrefc{5.2.4.2.2}
 
 \rSec1[cstdint]{Integer types}
 
 \rSec2[cstdint.syn]{Header \tcode{<cstdint>} synopsis}
-\indexhdr{cstdint}%
-\indexlibrary{\idxcode{int8_t}}%
-\indexlibrary{\idxcode{int16_t}}%
-\indexlibrary{\idxcode{int32_t}}%
-\indexlibrary{\idxcode{int64_t}}%
-\indexlibrary{\idxcode{int_fast8_t}}%
-\indexlibrary{\idxcode{int_fast16_t}}%
-\indexlibrary{\idxcode{int_fast32_t}}%
-\indexlibrary{\idxcode{int_fast64_t}}%
-\indexlibrary{\idxcode{int_least8_t}}%
-\indexlibrary{\idxcode{int_least16_t}}%
-\indexlibrary{\idxcode{int_least32_t}}%
-\indexlibrary{\idxcode{int_least64_t}}%
-\indexlibrary{\idxcode{intmax_t}}%
-\indexlibrary{\idxcode{intptr_t}}%
-\indexlibrary{\idxcode{uint8_t}}%
-\indexlibrary{\idxcode{uint16_t}}%
-\indexlibrary{\idxcode{uint32_t}}%
-\indexlibrary{\idxcode{uint64_t}}%
-\indexlibrary{\idxcode{uint_fast8_t}}%
-\indexlibrary{\idxcode{uint_fast16_t}}%
-\indexlibrary{\idxcode{uint_fast32_t}}%
-\indexlibrary{\idxcode{uint_fast64_t}}%
-\indexlibrary{\idxcode{uint_least8_t}}%
-\indexlibrary{\idxcode{uint_least16_t}}%
-\indexlibrary{\idxcode{uint_least32_t}}%
-\indexlibrary{\idxcode{uint_least64_t}}%
-\indexlibrary{\idxcode{uintmax_t}}%
-\indexlibrary{\idxcode{uintptr_t}}%
 
+\indexheader{cstdint}%
+\indexlibraryglobal{int8_t}%
+\indexlibraryglobal{int16_t}%
+\indexlibraryglobal{int32_t}%
+\indexlibraryglobal{int64_t}%
+\indexlibraryglobal{int_fast8_t}%
+\indexlibraryglobal{int_fast16_t}%
+\indexlibraryglobal{int_fast32_t}%
+\indexlibraryglobal{int_fast64_t}%
+\indexlibraryglobal{int_least8_t}%
+\indexlibraryglobal{int_least16_t}%
+\indexlibraryglobal{int_least32_t}%
+\indexlibraryglobal{int_least64_t}%
+\indexlibraryglobal{intmax_t}%
+\indexlibraryglobal{intptr_t}%
+\indexlibraryglobal{uint8_t}%
+\indexlibraryglobal{uint16_t}%
+\indexlibraryglobal{uint32_t}%
+\indexlibraryglobal{uint64_t}%
+\indexlibraryglobal{uint_fast8_t}%
+\indexlibraryglobal{uint_fast16_t}%
+\indexlibraryglobal{uint_fast32_t}%
+\indexlibraryglobal{uint_fast64_t}%
+\indexlibraryglobal{uint_least8_t}%
+\indexlibraryglobal{uint_least16_t}%
+\indexlibraryglobal{uint_least32_t}%
+\indexlibraryglobal{uint_least64_t}%
+\indexlibraryglobal{uintmax_t}%
+\indexlibraryglobal{uintptr_t}%
 \begin{codeblock}
 namespace std {
   using int8_t         = @\textit{signed integer type}@;  // optional
@@ -1820,7 +1763,6 @@ namespace std {
 
 \pnum
 The header also defines numerous macros of the form:
-
 \begin{codeblock}
   INT_[FAST LEAST]{8 16 32 64}_MIN
   [U]INT_[FAST LEAST]{8 16 32 64}_MAX
@@ -1829,29 +1771,26 @@ The header also defines numerous macros of the form:
   {PTRDIFF SIG_ATOMIC WCHAR WINT}{_MAX _MIN}
   SIZE_MAX
 \end{codeblock}
-
 plus function macros of the form:
-
 \begin{codeblock}
   [U]INT{8 16 32 64 MAX}_C
 \end{codeblock}
 
 \pnum
 The header defines all types and macros the same as
-the C standard library header \tcode{<stdint.h>}.
+the C standard library header \libheader{stdint.h}.
 
 \xrefc{7.20}
 
 \rSec1[support.start.term]{Start and termination}
 
 \pnum
-\indexhdr{cstdlib}%
 \begin{note}
-The header \tcode{<cstdlib>}\iref{cstdlib.syn}
+The header \libheaderref{cstdlib}
 declares the functions described in this subclause.
 \end{note}
 
-\indexlibrary{\idxcode{_Exit}}%
+\indexlibraryglobal{_Exit}%
 \begin{itemdecl}
 [[noreturn]] void _Exit(int status) noexcept;
 \end{itemdecl}
@@ -1870,7 +1809,7 @@ thread, or static storage duration and without calling functions passed to
 The function \tcode{_Exit} is signal-safe\iref{support.signal}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{abort}}%
+\indexlibraryglobal{abort}%
 \begin{itemdecl}
 [[noreturn]] void abort() noexcept;
 \end{itemdecl}
@@ -1890,7 +1829,7 @@ duration and without calling functions passed to
 The function \tcode{abort} is signal-safe\iref{support.signal}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{atexit}}%
+\indexlibraryglobal{atexit}%
 \begin{itemdecl}
 int atexit(@\placeholder{c-atexit-handler}@* f) noexcept;
 int atexit(@\placeholder{atexit-handler}@* f) noexcept;
@@ -1905,8 +1844,10 @@ functions register the function pointed to by \tcode{f}
 to be called without arguments at normal program termination.
 It is unspecified whether a call to \tcode{atexit()} that does not
 happen before\iref{intro.multithread} a call to \tcode{exit()} will succeed.
-\begin{note} The \tcode{atexit()} functions do not introduce a data
-race\iref{res.on.data.races}. \end{note}
+\begin{note}
+The \tcode{atexit()} functions do not introduce a data
+race\iref{res.on.data.races}.
+\end{note}
 
 \pnum
 \implimits
@@ -1920,7 +1861,7 @@ function returns zero if the registration succeeds,
 nonzero if it fails.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{exit}}%
+\indexlibraryglobal{exit}%
 \begin{itemdecl}
 [[noreturn]] void exit(int status);
 \end{itemdecl}
@@ -1948,16 +1889,14 @@ by throwing an exception that is caught in
 
 If control leaves a registered function called by \tcode{exit} because the function does
 not provide a handler for a thrown exception, the function \tcode{std::terminate} shall be called\iref{except.terminate}.%
-\indexlibrary{\idxcode{terminate}}%
+\indexlibraryglobal{terminate}%
 
 \item
 Next, all open C streams (as mediated by the function
-signatures declared in
-\tcode{<cstdio>})
+signatures declared in \libheaderref{cstdio})
 with unwritten buffered data are flushed, all open C
 streams are closed, and all files created by calling
-\tcode{tmpfile()}
-are removed.
+\tcode{tmpfile()} are removed.
 
 \item
 Finally, control is returned to the host environment.
@@ -1972,16 +1911,13 @@ If \tcode{status} is
 an \impldef{exit status} form of the status
 \term{unsuccessful termination}
 is returned.
-Otherwise the status returned is \impldef{exit status}.\footnote{The macros
-\tcode{EXIT_FAILURE}
-and
-\tcode{EXIT_SUCCESS}
-are defined in
-\tcode{<cstdlib>}.}
+Otherwise the status returned is \impldef{exit status}.%
+\footnote{The macros \tcode{EXIT_FAILURE} and \tcode{EXIT_SUCCESS}
+are defined in \libheaderref{cstdlib}.}
 \end{itemize}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{at_quick_exit}}%
+\indexlibraryglobal{at_quick_exit}%
 \begin{itemdecl}
 int at_quick_exit(@\placeholder{c-atexit-handler}@* f) noexcept;
 int at_quick_exit(@\placeholder{atexit-handler}@* f) noexcept;
@@ -1989,17 +1925,22 @@ int at_quick_exit(@\placeholder{atexit-handler}@* f) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects The \tcode{at_quick_exit()} functions register the function pointed to by \tcode{f}
+\effects
+The \tcode{at_quick_exit()} functions register the function pointed to by \tcode{f}
 to be called without arguments when \tcode{quick_exit} is called.
 It is unspecified whether a call to \tcode{at_quick_exit()} that does not
-happen before\iref{intro.multithread} all calls to \tcode{quick_exit} will succeed. \begin{note} The
+happen before\iref{intro.multithread} all calls to \tcode{quick_exit} will succeed.
+\begin{note}
+The
 \tcode{at_quick_exit()} functions do not introduce a
-data race\iref{res.on.data.races}. \end{note}
+data race\iref{res.on.data.races}.
+\end{note}
 \begin{note}
 The order of registration may be indeterminate if \tcode{at_quick_exit} was called from more
 than one thread.
 \end{note}
-\begin{note} The
+\begin{note}
+The
 \tcode{at_quick_exit} registrations are distinct from the \tcode{atexit} registrations,
 and applications may need to call both registration functions with the same argument.
 \end{note}
@@ -2009,23 +1950,25 @@ and applications may need to call both registration functions with the same argu
 The implementation shall support the registration of at least 32 functions.
 
 \pnum
-\returns Zero if the registration succeeds, nonzero if it fails.
+\returns
+Zero if the registration succeeds, nonzero if it fails.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{quick_exit}}%
+\indexlibraryglobal{quick_exit}%
 \begin{itemdecl}
 [[noreturn]] void quick_exit(int status) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects Functions registered by calls to \tcode{at_quick_exit} are called in the
+\effects
+Functions registered by calls to \tcode{at_quick_exit} are called in the
 reverse order of their registration, except that a function shall be called after any
 previously registered functions that had already been called at the time it was
 registered. Objects shall not be destroyed as a result of calling \tcode{quick_exit}.
 If control leaves a registered function called by \tcode{quick_exit} because the
 function does not provide a handler for a thrown exception, the function \tcode{std::terminate} shall
-be called.\indexlibrary{\idxcode{terminate}}
+be called.\indexlibraryglobal{terminate}
 \begin{note}
 A function registered via \tcode{at_quick_exit}
 is invoked by the thread that calls \tcode{quick_exit},
@@ -2047,19 +1990,17 @@ when the functions registered with \tcode{at_quick_exit} are.
 \rSec1[support.dynamic]{Dynamic memory management}
 
 \pnum
-The header
-\tcode{<new>}
-defines several
+The header \libheaderdef{new} defines several
 functions that manage the allocation of dynamic storage in a program.
 It also defines components for reporting storage management errors.
 
 \rSec2[new.syn]{Header \tcode{<new>} synopsis}
-\indexhdr{new}%
-\indexlibrary{\idxcode{align_val_t}}%
-\indexlibrary{\idxcode{destroying_delete_t}}%
-\indexlibrary{\idxcode{destroying_delete}}%
-\indexlibrary{\idxcode{nothrow_t}}%
-\indexlibrary{\idxcode{nothrow}}%
+
+\indexlibraryglobal{align_val_t}%
+\indexlibraryglobal{destroying_delete_t}%
+\indexlibraryglobal{destroying_delete}%
+\indexlibraryglobal{nothrow_t}%
+\indexlibraryglobal{nothrow}%
 \begin{codeblock}
 namespace std {
   class bad_alloc;
@@ -2138,7 +2079,7 @@ and thereby displace the default versions defined by the
 
 \rSec3[new.delete.single]{Single-object forms}
 
-\indexlibrary{\idxcode{new}!\idxcode{operator}}%
+\indexlibrarymember{new}{operator}%
 \begin{itemdecl}
 [[nodiscard]] void* operator new(std::size_t size);
 [[nodiscard]] void* operator new(std::size_t size, std::align_val_t alignment);
@@ -2165,7 +2106,7 @@ the first form is called otherwise.
 Return a non-null pointer to suitably aligned storage\iref{basic.stc.dynamic},
 or else throw a
 \tcode{bad_alloc}
-\indexlibrary{\idxcode{bad_alloc}}%
+\indexlibraryglobal{bad_alloc}%
 exception.
 This requirement is binding on any replacement versions of these functions.
 
@@ -2198,7 +2139,7 @@ function does not return.
 \end{itemize}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{new}!\idxcode{operator}}%
+\indexlibrarymember{new}{operator}%
 \begin{itemdecl}
 [[nodiscard]] void* operator new(std::size_t size, const std::nothrow_t&) noexcept;
 [[nodiscard]] void* operator new(std::size_t size, std::align_val_t alignment,
@@ -2248,7 +2189,7 @@ T* p2 = new(nothrow) T;         // returns \tcode{nullptr} if it fails
 \end{example}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{delete}!\idxcode{operator}}%
+\indexlibrarymember{delete}{operator}%
 \begin{itemdecl}
 void operator delete(void* ptr) noexcept;
 void operator delete(void* ptr, std::size_t size) noexcept;
@@ -2316,16 +2257,20 @@ may be changed to
 a call to the corresponding \tcode{operator delete}
 without a \tcode{size} parameter,
 without affecting memory allocation.
-\begin{note} A conforming implementation is for
+\begin{note}
+A conforming implementation is for
 \tcode{operator delete(void* ptr, std::size_t size)} to simply call
-\tcode{operator delete(ptr)}. \end{note}
+\tcode{operator delete(ptr)}.
+\end{note}
 
 \pnum
 \default
 The functions that have a \tcode{size} parameter
 forward their other parameters
 to the corresponding function without a \tcode{size} parameter.
-\begin{note} See the note in the above \replaceable paragraph. \end{note}
+\begin{note}
+See the note in the above \replaceable paragraph.
+\end{note}
 
 \pnum
 \default
@@ -2345,11 +2290,10 @@ or any of
 \tcode{malloc},
 or
 \tcode{realloc},
-declared in
-\tcode{<cstdlib>}.
+declared in \libheaderref{cstdlib}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{delete}!\idxcode{operator}}%
+\indexlibrarymember{delete}{operator}%
 \begin{itemdecl}
 void operator delete(void* ptr, const std::nothrow_t&) noexcept;
 void operator delete(void* ptr, std::align_val_t alignment, const std::nothrow_t&) noexcept;
@@ -2404,7 +2348,7 @@ respectively.
 
 \rSec3[new.delete.array]{Array forms}
 
-\indexlibrary{\idxcode{new}!\idxcode{operator}}%
+\indexlibrarymember{new}{operator}%
 \begin{itemdecl}
 [[nodiscard]] void* operator new[](std::size_t size);
 [[nodiscard]] void* operator new[](std::size_t size, std::align_val_t alignment);
@@ -2456,7 +2400,7 @@ or
 respectively.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{new}!\idxcode{operator}}%
+\indexlibrarymember{new}{operator}%
 \begin{itemdecl}
 [[nodiscard]] void* operator new[](std::size_t size, const std::nothrow_t&) noexcept;
 [[nodiscard]] void* operator new[](std::size_t size, std::align_val_t alignment,
@@ -2498,7 +2442,7 @@ returns the result of that call.
 Otherwise, returns a null pointer.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{delete}!\idxcode{operator}}%
+\indexlibrarymember{delete}{operator}%
 \begin{itemdecl}
 void operator delete[](void* ptr) noexcept;
 void operator delete[](void* ptr, std::size_t size) noexcept;
@@ -2566,9 +2510,11 @@ may be changed to
 a call to the corresponding \tcode{operator delete[]}
 without a \tcode{size} parameter,
 without affecting memory allocation.
-\begin{note} A conforming implementation is for
+\begin{note}
+A conforming implementation is for
 \tcode{operator delete[](void* ptr, std::size_t size)} to simply call
-\tcode{operator delete[](ptr)}. \end{note}
+\tcode{operator delete[](ptr)}.
+\end{note}
 
 \pnum
 \default
@@ -2580,7 +2526,7 @@ forward their parameters
 to the corresponding \tcode{operator delete} (single-object) function.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{delete}!\idxcode{operator}}%
+\indexlibrarymember{delete}{operator}%
 \begin{itemdecl}
 void operator delete[](void* ptr, const std::nothrow_t&) noexcept;
 void operator delete[](void* ptr, std::align_val_t alignment, const std::nothrow_t&) noexcept;
@@ -2641,7 +2587,7 @@ the versions in the \Cpp{} standard library\iref{constraints}.
 The provisions of~\ref{basic.stc.dynamic} do not apply to these reserved
 placement forms of \tcode{operator new} and \tcode{operator delete}.
 
-\indexlibrary{\idxcode{new}!\idxcode{operator}}%
+\indexlibrarymember{new}{operator}%
 \begin{itemdecl}
 [[nodiscard]] void* operator new(std::size_t size, void* ptr) noexcept;
 \end{itemdecl}
@@ -2666,7 +2612,7 @@ Something* p = new (place) Something();
 \end{example}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{new}!\idxcode{operator}}%
+\indexlibrarymember{new}{operator}%
 \begin{itemdecl}
 [[nodiscard]] void* operator new[](std::size_t size, void* ptr) noexcept;
 \end{itemdecl}
@@ -2681,7 +2627,7 @@ Something* p = new (place) Something();
 Intentionally performs no other action.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{delete}!\idxcode{operator}}%
+\indexlibrarymember{delete}{operator}%
 \begin{itemdecl}
 void operator delete(void* ptr, void*) noexcept;
 \end{itemdecl}
@@ -2704,7 +2650,7 @@ non-array placement operator new
 terminates by throwing an exception\iref{expr.new}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{delete}!\idxcode{operator}}%
+\indexlibrarymember{delete}{operator}%
 \begin{itemdecl}
 void operator delete[](void* ptr, void*) noexcept;
 \end{itemdecl}
@@ -2746,10 +2692,10 @@ this order.
 
 \rSec2[alloc.errors]{Storage allocation errors}
 
-\indexlibrary{\idxcode{bad_alloc}}%
+\indexlibraryglobal{bad_alloc}%
 \rSec3[bad.alloc]{Class \tcode{bad_alloc}}
 
-\indexlibrary{\idxcode{bad_alloc}!constructor}%
+\indexlibraryctor{bad_alloc}%
 \begin{codeblock}
 namespace std {
   class bad_alloc : public exception {
@@ -2777,8 +2723,8 @@ const char* what() const noexcept override;
 An \impldef{return value of \tcode{bad_alloc::what}} \ntbs{}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{bad_array_new_length}}%
-\indexlibrary{\idxcode{bad_array_new_length}!constructor}%
+\indexlibraryglobal{bad_array_new_length}%
+\indexlibraryctor{bad_array_new_length}%
 \rSec3[new.badlength]{Class \tcode{bad_array_new_length}}
 
 \begin{codeblock}
@@ -2810,7 +2756,7 @@ An \impldef{return value of \tcode{bad_array_new_length::what}} \ntbs{}.
 
 \rSec3[new.handler]{Type \tcode{new_handler}}
 
-\indexlibrary{\idxcode{new_handler}}%
+\indexlibraryglobal{new_handler}%
 \begin{itemdecl}
 using new_handler = void (*)();
 \end{itemdecl}
@@ -2827,7 +2773,6 @@ or
 \pnum
 \required
 A \tcode{new_handler} shall perform one of the following:
-
 \begin{itemize}
 \item
 make more storage available for allocation and then return;
@@ -2835,18 +2780,18 @@ make more storage available for allocation and then return;
 throw an exception of type
 \tcode{bad_alloc}
 or a class derived from
-\indexlibrary{\idxcode{bad_alloc}}%
+\indexlibraryglobal{bad_alloc}%
 \tcode{bad_alloc};
 \item
 terminate execution of the program without returning to the caller.
-\indexlibrary{\idxcode{abort}}%
-\indexlibrary{\idxcode{exit}}%
+\indexlibraryglobal{abort}%
+\indexlibraryglobal{exit}%
 \end{itemize}
 \end{itemdescr}
 
 \rSec3[set.new.handler]{\tcode{set_new_handler}}
 
-\indexlibrary{\idxcode{set_new_handler}}%
+\indexlibraryglobal{set_new_handler}%
 \begin{itemdecl}
 new_handler set_new_handler(new_handler new_p) noexcept;
 \end{itemdecl}
@@ -2868,20 +2813,23 @@ The initial \tcode{new_handler} is a null pointer.
 
 \rSec3[get.new.handler]{\tcode{get_new_handler}}
 
-\indexlibrary{\idxcode{get_new_handler}}%
+\indexlibraryglobal{get_new_handler}%
 \begin{itemdecl}
 new_handler get_new_handler() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns The current \tcode{new_handler}.
-\begin{note} This may be a null pointer value. \end{note}
+\returns
+The current \tcode{new_handler}.
+\begin{note}
+This may be a null pointer value.
+\end{note}
 \end{itemdescr}
 
 \rSec2[ptr.launder]{Pointer optimization barrier}
 
-\indexlibrary{\idxcode{launder}}%
+\indexlibraryglobal{launder}%
 \begin{itemdecl}
 template<class T> [[nodiscard]] constexpr T* launder(T* p) noexcept;
 \end{itemdecl}
@@ -2945,7 +2893,7 @@ const int c = std::launder(p)->n;   // OK
 
 \rSec2[hardware.interference]{Hardware interference size}
 
-\indexlibrary{\idxcode{hardware_destructive_interference_size}}%
+\indexlibraryglobal{hardware_destructive_interference_size}%
 \begin{itemdecl}
 inline constexpr size_t hardware_destructive_interference_size = @\impdef{}@;
 \end{itemdecl}
@@ -2967,7 +2915,7 @@ struct keep_apart {
 \end{codeblock}
 \end{example}
 
-\indexlibrary{\idxcode{hardware_constructive_interference_size}}%
+\indexlibraryglobal{hardware_constructive_interference_size}%
 \begin{itemdecl}
 inline constexpr size_t hardware_constructive_interference_size = @\impdef{}@;
 \end{itemdecl}
@@ -2996,18 +2944,15 @@ static_assert(sizeof(together) <= hardware_constructive_interference_size);
 \rSec1[support.rtti]{Type identification}
 
 \pnum
-The header
-\tcode{<typeinfo>}
-defines a
+The header \libheaderdef{typeinfo} defines a
 type associated with type information generated by the implementation.
 It also defines two types for reporting dynamic type identification errors.
 
 \rSec2[typeinfo.syn]{Header \tcode{<typeinfo>} synopsis}
-\indexhdr{typeinfo}%
-\indexlibrary{\idxcode{type_info}}%
-\indexlibrary{\idxcode{bad_cast}}%
-\indexlibrary{\idxcode{bad_typeid}}%
 
+\indexlibraryglobal{type_info}%
+\indexlibraryglobal{bad_cast}%
+\indexlibraryglobal{bad_typeid}%
 \begin{codeblock}
 namespace std {
   class type_info;
@@ -3018,7 +2963,7 @@ namespace std {
 
 \rSec2[type.info]{Class \tcode{type_info}}
 
-\indexlibrary{\idxcode{type_info}}%
+\indexlibraryglobal{type_info}%
 \begin{codeblock}
 namespace std {
   class type_info {
@@ -3029,8 +2974,8 @@ namespace std {
     size_t hash_code() const noexcept;
     const char* name() const noexcept;
 
-    type_info(const type_info& rhs) = delete;                   // cannot be copied
-    type_info& operator=(const type_info& rhs) = delete;        // cannot be copied
+    type_info(const type_info&) = delete;                   // cannot be copied
+    type_info& operator=(const type_info&) = delete;        // cannot be copied
   };
 }
 \end{codeblock}
@@ -3086,12 +3031,14 @@ size_t hash_code() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns An unspecified value, except that within a single execution of the
+\returns
+An unspecified value, except that within a single execution of the
 program, it shall return the same value for any two \tcode{type_info}
 objects which compare equal.
 
 \pnum
-\remarks An implementation should return different values for two
+\remarks
+An implementation should return different values for two
 \tcode{type_info} objects which do not compare equal.
 \end{itemdescr}
 
@@ -3110,13 +3057,13 @@ An \impldef{return value of \tcode{type_info::name()}} \ntbs{}.
 \remarks
 The message may be a null-terminated multibyte string\iref{multibyte.strings},
 suitable for conversion and display as a
-\tcode{wstring}~(\ref{string.classes}, \ref{locale.codecvt})
+\tcode{wstring}~(\ref{string.classes}, \ref{locale.codecvt}).
 \end{itemdescr}
 
 \rSec2[bad.cast]{Class \tcode{bad_cast}}
 
-\indexlibrary{\idxcode{bad_cast}}%
-\indexlibrary{\idxcode{bad_cast}!constructor}%
+\indexlibraryglobal{bad_cast}%
+\indexlibraryctor{bad_cast}%
 \begin{codeblock}
 namespace std {
   class bad_cast : public exception {
@@ -3149,8 +3096,8 @@ An \impldef{return value of \tcode{bad_cast::what}} \ntbs{}.
 
 \rSec2[bad.typeid]{Class \tcode{bad_typeid}}
 
-\indexlibrary{\idxcode{bad_typeid}}%
-\indexlibrary{\idxcode{bad_typeid}!constructor}%
+\indexlibraryglobal{bad_typeid}%
+\indexlibraryctor{bad_typeid}%
 \begin{codeblock}
 namespace std {
   class bad_typeid : public exception {
@@ -3181,14 +3128,23 @@ const char* what() const noexcept override;
 An \impldef{return value of \tcode{bad_typeid::what}} \ntbs{}.
 \end{itemdescr}
 
-\rSec1[support.srcloc]{Class \tcode{source_location}}
+\rSec1[support.srcloc]{Source location}
 
-The header \tcode{<source_location>} defines the class \tcode{source_location} that provides a means to obtain source location information.
+\rSec2[source.location.syn]{Header \tcode{<source_location>} synopsis}
 
-\rSec2[source_location.syn]{Header \tcode{<source_location>} synopsis}
-\indexhdr{source_location}%
-\indexlibrary{\idxcode{source_location}}%
+The header \libheaderdef{source_location} defines
+the class \tcode{source_location}
+that provides a means to obtain source location information.
 
+\begin{codeblock}
+namespace std {
+  struct source_location;
+}
+\end{codeblock}
+
+\rSec2[support.srcloc.class]{Class \tcode{source_location}}
+
+\indexlibraryglobal{source_location}%
 \begin{codeblock}
 namespace std {
   struct source_location {
@@ -3250,7 +3206,7 @@ then each of the following conditions is \tcode{true}:
 \item \tcode{lhs.column() == rhs_p.column()}
 \end{itemize}
 
-\rSec2[support.srcloc.cons]{Creation}
+\rSec3[support.srcloc.cons]{Creation}
 
 \begin{itemdecl}
 static consteval source_location current() noexcept;
@@ -3352,14 +3308,15 @@ constexpr source_location() noexcept;
 The data members are initialized with valid but unspecified values.
 \end{itemdescr}
 
-\rSec2[support.srcloc.access]{Field access}
+\rSec3[support.srcloc.obs]{Observers}
 
 \begin{itemdecl}
 constexpr uint_least32_t line() const noexcept;
 \end{itemdecl}
 \begin{itemdescr}
 \pnum
-\returns \tcode{line_}.
+\returns
+\tcode{line_}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -3392,12 +3349,10 @@ constexpr const char* function_name() const noexcept;
 \rSec1[support.exception]{Exception handling}
 
 \pnum
-The header
-\tcode{<exception>}
+The header \libheaderdef{exception}
 defines several types and functions related to the handling of exceptions in a \Cpp{} program.
 
 \rSec2[exception.syn]{Header \tcode{<exception>} synopsis}
-\indexhdr{exception}%
 
 \begin{codeblock}
 namespace std {
@@ -3425,8 +3380,8 @@ namespace std {
 
 \rSec2[exception]{Class \tcode{exception}}
 
-\indexlibrary{\idxcode{exception}}%
-\indexlibrary{\idxcode{exception}!constructor}%
+\indexlibraryglobal{exception}%
+\indexlibraryctor{exception}%
 \begin{codeblock}
 namespace std {
   class exception {
@@ -3464,7 +3419,7 @@ dynamic type \tcode{T} and \tcode{lhs} is a copy of \tcode{rhs}, then
 The \tcode{what()} member function of each such \tcode{T} satisfies the
 constraints specified for \tcode{exception::what()} (see below).
 
-\indexlibrary{\idxcode{exception}!constructor}%
+\indexlibraryctor{exception}%
 \indexlibrarymember{operator=}{exception}%
 \begin{itemdecl}
 exception(const exception& rhs) noexcept;
@@ -3473,11 +3428,12 @@ exception& operator=(const exception& rhs) noexcept;
 
 \begin{itemdescr}
 \pnum
-\ensures If \tcode{*this} and \tcode{rhs} both have dynamic type \tcode{exception}
+\ensures
+If \tcode{*this} and \tcode{rhs} both have dynamic type \tcode{exception}
 then the value of the expression \tcode{strcmp(what(), rhs.what())} shall equal 0.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{exception}!destructor}%
+\indexlibrarydtor{exception}%
 \begin{itemdecl}
 virtual ~exception();
 \end{itemdecl}
@@ -3511,8 +3467,8 @@ member function of the exception object is called.
 
 \rSec2[bad.exception]{Class \tcode{bad_exception}}
 
-\indexlibrary{\idxcode{bad_exception}}%
-\indexlibrary{\idxcode{bad_exception}!constructor}%
+\indexlibraryglobal{bad_exception}%
+\indexlibraryctor{bad_exception}%
 \begin{codeblock}
 namespace std {
   class bad_exception : public exception {
@@ -3546,7 +3502,7 @@ An \impldef{return value of \tcode{bad_exception::what}} \ntbs{}.
 
 \rSec3[terminate.handler]{Type \tcode{terminate_handler}}
 
-\indexlibrary{\idxcode{terminate_handler}}%
+\indexlibraryglobal{terminate_handler}%
 \begin{itemdecl}
 using terminate_handler = void (*)();
 \end{itemdecl}
@@ -3557,7 +3513,7 @@ The type of a
 \term{handler function}
 to be called by
 \tcode{std::terminate()}
-\indexlibrary{\idxcode{terminate}}%
+\indexlibraryglobal{terminate}%
 when terminating exception processing.
 
 \pnum
@@ -3569,12 +3525,12 @@ terminate execution of the program without returning to the caller.
 \default
 The implementation's default \tcode{terminate_handler} calls
 \tcode{abort()}.%
-\indexlibrary{\idxcode{abort}}%
+\indexlibraryglobal{abort}%
 \end{itemdescr}
 
 \rSec3[set.terminate]{\tcode{set_terminate}}
 
-\indexlibrary{\idxcode{set_terminate}}%
+\indexlibraryglobal{set_terminate}%
 \begin{itemdecl}
 terminate_handler set_terminate(terminate_handler f) noexcept;
 \end{itemdecl}
@@ -3586,7 +3542,8 @@ Establishes the function designated by \tcode{f} as the current
 handler function for terminating exception processing.
 
 \pnum
-\remarks It is unspecified whether a null pointer value designates the default
+\remarks
+It is unspecified whether a null pointer value designates the default
 \tcode{terminate_handler}.
 
 \pnum
@@ -3596,20 +3553,23 @@ The previous \tcode{terminate_handler}.
 
 \rSec3[get.terminate]{\tcode{get_terminate}}
 
-\indexlibrary{\idxcode{get_terminate}}%
+\indexlibraryglobal{get_terminate}%
 \begin{itemdecl}
 terminate_handler get_terminate() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns The current \tcode{terminate_handler}.
-\begin{note} This may be a null pointer value. \end{note}
+\returns
+The current \tcode{terminate_handler}.
+\begin{note}
+This may be a null pointer value.
+\end{note}
 \end{itemdescr}
 
 \rSec3[terminate]{\tcode{terminate}}
 
-\indexlibrary{\idxcode{terminate}}%
+\indexlibraryglobal{terminate}%
 \begin{itemdecl}
 [[noreturn]] void terminate() noexcept;
 \end{itemdecl}
@@ -3626,14 +3586,17 @@ May also be called directly by the program.
 Calls a \tcode{terminate_handler} function. It is unspecified which
 \tcode{terminate_handler} function will be called if an exception is active
 during a call to \tcode{set_terminate}.
-Otherwise calls the current \tcode{terminate_handler} function. \begin{note} A
+Otherwise calls the current \tcode{terminate_handler} function.
+\begin{note}
+A
 default \tcode{terminate_handler} is always considered a callable handler in
-this context. \end{note}
+this context.
+\end{note}
 \end{itemdescr}
 
 \rSec2[uncaught.exceptions]{\tcode{uncaught_exceptions}}
 
-\indexlibrary{\idxcode{uncaught_exceptions}}%
+\indexlibraryglobal{uncaught_exceptions}%
 \begin{itemdecl}
 int uncaught_exceptions() noexcept;
 \end{itemdecl}
@@ -3652,7 +3615,7 @@ throwing an exception can result in a call of the function
 
 \rSec2[propagation]{Exception propagation}
 
-\indexlibrary{\idxcode{exception_ptr}}%
+\indexlibraryglobal{exception_ptr}%
 \begin{itemdecl}
 using exception_ptr = @\unspec@;
 \end{itemdecl}
@@ -3678,29 +3641,35 @@ type.
 enumeration, or pointer type.
 
 \pnum
-\begin{note} An implementation might use a reference-counted smart
-pointer as \tcode{exception_ptr}. \end{note}
+\begin{note}
+An implementation might use a reference-counted smart
+pointer as \tcode{exception_ptr}.
+\end{note}
 
 \pnum
 For purposes of determining the presence of a data race, operations on
 \tcode{exception_ptr} objects shall access and modify only the
 \tcode{exception_ptr} objects themselves and not the exceptions they refer to.
 Use of \tcode{rethrow_exception} on \tcode{exception_ptr} objects that refer to
-the same exception object shall not introduce a data race. \begin{note} If
+the same exception object shall not introduce a data race.
+\begin{note}
+If
 \tcode{rethrow_exception} rethrows the same exception object (rather than a copy),
 concurrent access to that rethrown exception object may introduce a data race.
 Changes in the number of \tcode{exception_ptr} objects that refer to a
-particular exception do not introduce a data race. \end{note}
+particular exception do not introduce a data race.
+\end{note}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{current_exception}}%
+\indexlibraryglobal{current_exception}%
 \begin{itemdecl}
 exception_ptr current_exception() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns An \tcode{exception_ptr} object that refers to
+\returns
+An \tcode{exception_ptr} object that refers to
 the currently handled exception\iref{except.handle} or a copy of the currently
 handled exception, or a null \tcode{exception_ptr} object if no exception is being
 handled. The referenced object shall remain valid at least as long as there is an
@@ -3709,37 +3678,45 @@ If the function needs to allocate memory and the attempt fails, it returns an
 \tcode{exception_ptr} object that refers to an instance of \tcode{bad_alloc}.
 It is unspecified whether the return values of two successive calls to
 \tcode{current_exception} refer to the same exception object.
-\begin{note} That is, it is unspecified whether \tcode{current_exception}
-creates a new copy each time it is called. \end{note}
+\begin{note}
+That is, it is unspecified whether \tcode{current_exception}
+creates a new copy each time it is called.
+\end{note}
 If the attempt to copy the current exception object throws an exception, the function
 returns an \tcode{exception_ptr} object that refers to the thrown exception or,
-if this is not possible, to an instance of \tcode{bad_exception}. \begin{note} The
+if this is not possible, to an instance of \tcode{bad_exception}.
+\begin{note}
+The
 copy constructor of the thrown exception may also fail, so the implementation is allowed
 to substitute a \tcode{bad_exception} object to avoid infinite
-recursion.\end{note}
+recursion.
+\end{note}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{rethrow_exception}}%
+\indexlibraryglobal{rethrow_exception}%
 \begin{itemdecl}
 [[noreturn]] void rethrow_exception(exception_ptr p);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{p} is not a null pointer.
+\expects
+\tcode{p} is not a null pointer.
 
 \pnum
-\throws The exception object to which \tcode{p} refers.
+\throws
+The exception object to which \tcode{p} refers.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{make_exception_ptr}}%
+\indexlibraryglobal{make_exception_ptr}%
 \begin{itemdecl}
 template<class E> exception_ptr make_exception_ptr(E e) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects Creates an \tcode{exception_ptr} object that refers to a copy of \tcode{e}, as if:
+\effects
+Creates an \tcode{exception_ptr} object that refers to a copy of \tcode{e}, as if:
 \begin{codeblock}
 try {
   throw e;
@@ -3749,13 +3726,15 @@ try {
 \end{codeblock}
 
 \pnum
-\begin{note} This function is provided for convenience and
-efficiency reasons. \end{note}
+\begin{note}
+This function is provided for convenience and
+efficiency reasons.
+\end{note}
 \end{itemdescr}
 
 \rSec2[except.nested]{\tcode{nested_exception}}
 
-\indexlibrary{\idxcode{nested_exception}}%
+\indexlibraryglobal{nested_exception}%
 \begin{codeblock}
 namespace std {
   class nested_exception {
@@ -3781,18 +3760,20 @@ multiple inheritance. It captures the currently handled exception and stores it
 for later use.
 
 \pnum
-\begin{note} \tcode{nested_exception} has a virtual destructor to make it a
+\begin{note}
+\tcode{nested_exception} has a virtual destructor to make it a
 polymorphic class. Its presence can be tested for with \tcode{dynamic_cast}.
 \end{note}
 
-\indexlibrary{\idxcode{nested_exception}!constructor}%
+\indexlibraryctor{nested_exception}%
 \begin{itemdecl}
 nested_exception() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects The constructor calls \tcode{current_exception()} and stores the returned value.
+\effects
+The constructor calls \tcode{current_exception()} and stores the returned value.
 \end{itemdescr}
 
 \indexlibrarymember{rethrow_nested}{nested_exception}%
@@ -3802,7 +3783,8 @@ nested_exception() noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects If \tcode{nested_ptr()} returns a null pointer, the function calls the function \tcode{std::terminate}.
+\effects
+If \tcode{nested_ptr()} returns a null pointer, the function calls the function \tcode{std::terminate}.
 Otherwise, it throws the stored exception captured by \tcode{*this}.
 \end{itemdescr}
 
@@ -3813,7 +3795,8 @@ exception_ptr nested_ptr() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns The stored exception captured by this \tcode{nested_exception} object.
+\returns
+The stored exception captured by this \tcode{nested_exception} object.
 \end{itemdescr}
 
 \indexlibrarymember{throw_with_nested}{nested_exception}%
@@ -3826,7 +3809,8 @@ template<class T> [[noreturn]] void throw_with_nested(T&& t);
 Let \tcode{U} be \tcode{decay_t<T>}.
 
 \pnum
-\expects \tcode{U} meets the \oldconcept{CopyConstructible} requirements.
+\expects
+\tcode{U} meets the \oldconcept{CopyConstructible} requirements.
 
 \pnum
 \throws
@@ -3858,17 +3842,16 @@ if (auto p = dynamic_cast<const nested_exception*>(addressof(e)))
 
 \rSec1[support.initlist]{Initializer lists}
 
-\indexhdr{initializer_list}%
 \pnum
-The header \tcode{<initializer_list>} defines a class template and several
+The header \libheaderdef{initializer_list} defines a class template and several
 support functions related to list-initialization~(see \ref{dcl.init.list}).
 \indextext{signal-safe!\idxcode{initializer_list} functions}%
 All functions specified in this subclause are signal-safe\iref{support.signal}.
 
 \rSec2[initializer.list.syn]{Header \tcode{<initializer_list>} synopsis}
-\indexlibrary{\idxcode{initializer_list}}%
-\indexlibrary{\idxcode{begin}}%
-\indexlibrary{\idxcode{end}}%
+\indexlibraryglobal{initializer_list}%
+\indexlibraryglobal{begin}%
+\indexlibraryglobal{end}%
 
 \begin{codeblock}
 namespace std {
@@ -3897,11 +3880,14 @@ namespace std {
 
 \pnum
 An object of type \tcode{initializer_list<E>} provides access to an array of
-objects of type \tcode{const E}. \begin{note} A pair of pointers or a pointer plus
+objects of type \tcode{const E}.
+\begin{note}
+A pair of pointers or a pointer plus
 a length would be obvious representations for \tcode{initializer_list}.
 \tcode{initializer_list} is used to implement initializer lists as specified
 in~\ref{dcl.init.list}. Copying an initializer list does not copy the underlying
-elements. \end{note}
+elements.
+\end{note}
 
 \pnum
 If an explicit specialization or partial specialization of
@@ -3909,14 +3895,15 @@ If an explicit specialization or partial specialization of
 
 \rSec2[support.initlist.cons]{Initializer list constructors}
 
-\indexlibrary{\idxcode{initializer_list}!constructor}%
+\indexlibraryctor{initializer_list}%
 \begin{itemdecl}
 constexpr initializer_list() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\ensures \tcode{size() == 0}.
+\ensures
+\tcode{size() == 0}.
 \end{itemdescr}
 
 \rSec2[support.initlist.access]{Initializer list access}
@@ -3928,7 +3915,8 @@ constexpr const E* begin() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns A pointer to the beginning of the array. If \tcode{size() == 0} the
+\returns
+A pointer to the beginning of the array. If \tcode{size() == 0} the
 values of \tcode{begin()} and \tcode{end()} are unspecified but they shall be
 identical.
 \end{itemdescr}
@@ -3940,7 +3928,8 @@ constexpr const E* end() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{begin() + size()}.
+\returns
+\tcode{begin() + size()}.
 \end{itemdescr}
 
 \indexlibrarymember{size}{initializer_list}%
@@ -3950,10 +3939,12 @@ constexpr size_t size() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns The number of elements in the array.
+\returns
+The number of elements in the array.
 
 \pnum
-\complexity Constant time.
+\complexity
+Constant time.
 \end{itemdescr}
 
 \rSec2[support.initlist.range]{Initializer list range access}
@@ -3965,7 +3956,8 @@ template<class E> constexpr const E* begin(initializer_list<E> il) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{il.begin()}.
+\returns
+\tcode{il.begin()}.
 \end{itemdescr}
 
 \indexlibrary{\idxcode{end(initializer_list<E>)}}%
@@ -3975,7 +3967,8 @@ template<class E> constexpr const E* end(initializer_list<E> il) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{il.end()}.
+\returns
+\tcode{il.end()}.
 \end{itemdescr}
 
 \rSec1[cmp]{Comparisons}
@@ -3983,31 +3976,28 @@ template<class E> constexpr const E* end(initializer_list<E> il) noexcept;
 \rSec2[compare.syn]{Header \tcode{<compare>} synopsis}
 
 \pnum
-The header \tcode{<compare>} specifies types, objects, and functions
+The header \libheaderdef{compare} specifies types, objects, and functions
 for use primarily in connection with
 the three-way comparison operator\iref{expr.spaceship}.
 
-\indexhdr{compare}%
-\indexlibrary{\idxcode{is_eq}}%
-\indexlibrary{\idxcode{is_neq}}%
-\indexlibrary{\idxcode{is_lt}}%
-\indexlibrary{\idxcode{is_lteq}}%
-\indexlibrary{\idxcode{is_gt}}%
-\indexlibrary{\idxcode{is_geq}}%
-\indexlibrary{\idxcode{is_gteq}}%
-\indexlibrary{\idxcode{common_comparison_category_t}}%
+\indexlibraryglobal{is_eq}%
+\indexlibraryglobal{is_neq}%
+\indexlibraryglobal{is_lt}%
+\indexlibraryglobal{is_lteq}%
+\indexlibraryglobal{is_gt}%
+\indexlibraryglobal{is_geq}%
+\indexlibraryglobal{is_gteq}%
+\indexlibraryglobal{common_comparison_category_t}%
 \begin{codeblock}
 namespace std {
   // \ref{cmp.categories}, comparison category types
-  class weak_equality;
-  class strong_equality;
   class partial_ordering;
   class weak_ordering;
   class strong_ordering;
 
   // named comparison functions
-  constexpr bool is_eq  (weak_equality cmp) noexcept    { return cmp == 0; }
-  constexpr bool is_neq (weak_equality cmp) noexcept    { return cmp != 0; }
+  constexpr bool is_eq  (partial_ordering cmp) noexcept { return cmp == 0; }
+  constexpr bool is_neq (partial_ordering cmp) noexcept { return cmp != 0; }
   constexpr bool is_lt  (partial_ordering cmp) noexcept { return cmp < 0; }
   constexpr bool is_lteq(partial_ordering cmp) noexcept { return cmp <= 0; }
   constexpr bool is_gt  (partial_ordering cmp) noexcept { return cmp > 0; }
@@ -4054,8 +4044,6 @@ namespace std {
 
 \pnum
 The types
-\tcode{weak_equality},
-\tcode{strong_equality},
 \tcode{partial_ordering},
 \tcode{weak_ordering}, and
 \tcode{strong_ordering}
@@ -4073,9 +4061,9 @@ enum class @\placeholdernc{ncmp}@ { @\placeholdernc{unordered}@ = -127 };       
 
 \pnum
 \begin{note}
-The types \tcode{strong_ordering} and \tcode{weak_equality}
-correspond, respectively, to the terms
-total ordering and equivalence in mathematics.
+The type \tcode{strong_ordering}
+corresponds to the term
+total ordering in mathematics.
 \end{note}
 
 \pnum
@@ -4091,151 +4079,11 @@ In this context, the behavior of a program that supplies
 an argument other than a literal \tcode{0} is undefined.
 
 \pnum
-For the purposes of this subclause,
+For the purposes of subclause \ref{cmp.categories},
 \defn{substitutability} is the property that \tcode{f(a) == f(b)} is \tcode{true}
 whenever \tcode{a == b} is true,
 where \tcode{f} denotes a function that reads only comparison-salient state
 that is accessible via the argument's public const members.
-
-\rSec3[cmp.weakeq]{Class \tcode{weak_equality}}
-
-\pnum
-The \tcode{weak_equality} type is typically used
-as the result type of a three-way comparison operator\iref{expr.spaceship}
-that (a) admits only equality and inequality comparisons,
-and (b) does not imply substitutability.
-
-\indexlibrary{\idxcode{weak_equality}}%
-\indexlibrarymember{equivalent}{weak_equality}%
-\indexlibrarymember{nonequivalent}{weak_equality}%
-\begin{codeblock}
-namespace std {
-  class weak_equality {
-    int value;  // \expos
-
-    // exposition-only constructor
-    constexpr explicit weak_equality(@\placeholder{eq}@ v) noexcept : value(int(v)) {}  // \expos
-
-  public:
-    // valid values
-    static const weak_equality equivalent;
-    static const weak_equality nonequivalent;
-
-    // comparisons
-    friend constexpr bool operator==(weak_equality v, @\unspec@) noexcept;
-    friend constexpr bool operator==(weak_equality v, weak_equality w) noexcept = default;
-    friend constexpr weak_equality operator<=>(weak_equality v, @\unspec@) noexcept;
-    friend constexpr weak_equality operator<=>(@\unspec@, weak_equality v) noexcept;
-  };
-
-  // valid values' definitions
-  inline constexpr weak_equality weak_equality::equivalent(@\placeholder{eq}@::@\placeholder{equivalent}@);
-  inline constexpr weak_equality weak_equality::nonequivalent(@\placeholder{eq}@::@\placeholder{nonequivalent}@);
-}
-\end{codeblock}
-
-\indexlibrarymember{operator==}{weak_equality}%
-\begin{itemdecl}
-constexpr bool operator==(weak_equality v, @\unspec@) noexcept;
-\end{itemdecl}
-
-\begin{itemdescr}
-\pnum
-\returns
-\tcode{v.value == 0}.
-\end{itemdescr}
-
-\indexlibrarymember{operator<=>}{weak_equality}%
-\begin{itemdecl}
-constexpr weak_equality operator<=>(weak_equality v, @\unspec@) noexcept;
-constexpr weak_equality operator<=>(@\unspec@, weak_equality v) noexcept;
-\end{itemdecl}
-
-\begin{itemdescr}
-\pnum
-\returns
-\tcode{v}.
-\end{itemdescr}
-
-\rSec3[cmp.strongeq]{Class \tcode{strong_equality}}
-
-\pnum
-The \tcode{strong_equality} type is typically used
-as the result type of a three-way comparison operator\iref{expr.spaceship}
-that (a) admits only equality and inequality comparisons,
-and (b) does imply substitutability.
-
-\indexlibrary{\idxcode{strong_equality}}%
-\indexlibrarymember{equal}{strong_equality}%
-\indexlibrarymember{nonequal}{strong_equality}%
-\indexlibrarymember{equivalent}{strong_equality}%
-\indexlibrarymember{nonequivalent}{strong_equality}%
-\begin{codeblock}
-namespace std {
-  class strong_equality {
-    int value;  // \expos
-
-    // exposition-only constructor
-    constexpr explicit strong_equality(@\placeholder{eq}@ v) noexcept : value(int(v)) {}    // \expos
-
-  public:
-    // valid values
-    static const strong_equality equal;
-    static const strong_equality nonequal;
-    static const strong_equality equivalent;
-    static const strong_equality nonequivalent;
-
-    // conversion
-    constexpr operator weak_equality() const noexcept;
-
-    // comparisons
-    friend constexpr bool operator==(strong_equality v, @\unspec@) noexcept;
-    friend constexpr bool operator==(strong_equality v, strong_equality w) noexcept = default;
-    friend constexpr strong_equality operator<=>(strong_equality v, @\unspec@) noexcept;
-    friend constexpr strong_equality operator<=>(@\unspec@, strong_equality v) noexcept;
-  };
-
-  // valid values' definitions
-  inline constexpr strong_equality strong_equality::equal(@\placeholder{eq}@::@\placeholder{equal}@);
-  inline constexpr strong_equality strong_equality::nonequal(@\placeholder{eq}@::@\placeholder{nonequal}@);
-  inline constexpr strong_equality strong_equality::equivalent(@\placeholder{eq}@::@\placeholder{equivalent}@);
-  inline constexpr strong_equality strong_equality::nonequivalent(@\placeholder{eq}@::@\placeholder{nonequivalent}@);
-}
-\end{codeblock}
-
-\indexlibrarymember{operator weak_equality}{strong_equality}%
-\begin{itemdecl}
-constexpr operator weak_equality() const noexcept;
-\end{itemdecl}
-
-\begin{itemdescr}
-\pnum
-\returns
-\tcode{value == 0 ?\ weak_equality::equivalent :\ weak_equality::nonequivalent}.
-\end{itemdescr}
-
-\indexlibrarymember{operator==}{strong_equality}%
-\begin{itemdecl}
-constexpr bool operator==(strong_equality v, @\unspec@) noexcept;
-\end{itemdecl}
-
-\begin{itemdescr}
-\pnum
-\returns
-\tcode{v.value == 0}.
-\end{itemdescr}
-
-\indexlibrarymember{operator<=>}{strong_equality}%
-\begin{itemdecl}
-constexpr strong_equality operator<=>(strong_equality v, @\unspec@) noexcept;
-constexpr strong_equality operator<=>(@\unspec@, strong_equality v) noexcept;
-\end{itemdecl}
-
-\begin{itemdescr}
-\pnum
-\returns
-\tcode{v}.
-\end{itemdescr}
 
 \rSec3[cmp.partialord]{Class \tcode{partial_ordering}}
 
@@ -4247,7 +4095,7 @@ that (a) admits all of the six two-way comparison operators (\ref{expr.rel}, \re
 and (c) permits two values to be incomparable.%
 \footnote{That is, \tcode{a < b}, \tcode{a == b}, and \tcode{a > b} might all be \tcode{false}.}
 
-\indexlibrary{\idxcode{partial_ordering}}%
+\indexlibraryglobal{partial_ordering}%
 \indexlibrarymember{less}{partial_ordering}%
 \indexlibrarymember{equivalent}{partial_ordering}%
 \indexlibrarymember{greater}{partial_ordering}%
@@ -4273,9 +4121,6 @@ namespace std {
     static const partial_ordering greater;
     static const partial_ordering unordered;
 
-    // conversion
-    constexpr operator weak_equality() const noexcept;
-
     // comparisons
     friend constexpr bool operator==(partial_ordering v, @\unspec@) noexcept;
     friend constexpr bool operator==(partial_ordering v, partial_ordering w) noexcept = default;
@@ -4298,20 +4143,6 @@ namespace std {
   inline constexpr partial_ordering partial_ordering::unordered(@\placeholder{ncmp}@::@\placeholder{unordered}@);
 }
 \end{codeblock}
-
-\indexlibrarymember{operator weak_equality}{partial_ordering}%
-\begin{itemdecl}
-constexpr operator weak_equality() const noexcept;
-\end{itemdecl}
-
-\begin{itemdescr}
-\pnum
-\returns
-\tcode{value == 0 ?\ weak_equality::equivalent :\ weak_equality::nonequivalent}.
-\begin{note}
-The result is independent of the \tcode{is_ordered} member.
-\end{note}
-\end{itemdescr}
 
 \indexlibrarymember{operator==}{partial_ordering}%
 \indexlibrarymember{operator<}{partial_ordering}%
@@ -4379,7 +4210,7 @@ as the result type of a three-way comparison operator\iref{expr.spaceship}
 that (a) admits all of the six two-way comparison operators (\ref{expr.rel}, \ref{expr.eq}),
 and (b) does not imply substitutability.
 
-\indexlibrary{\idxcode{weak_ordering}}%
+\indexlibraryglobal{weak_ordering}%
 \indexlibrarymember{less}{weak_ordering}%
 \indexlibrarymember{equivalent}{weak_ordering}%
 \indexlibrarymember{greater}{weak_ordering}%
@@ -4399,7 +4230,6 @@ namespace std {
     static const weak_ordering greater;
 
     // conversions
-    constexpr operator weak_equality() const noexcept;
     constexpr operator partial_ordering() const noexcept;
 
     // comparisons
@@ -4423,17 +4253,6 @@ namespace std {
   inline constexpr weak_ordering weak_ordering::greater(@\placeholder{ord}@::@\placeholder{greater}@);
 }
 \end{codeblock}
-
-\indexlibrarymember{operator weak_equality}{weak_ordering}%
-\begin{itemdecl}
-constexpr operator weak_equality() const noexcept;
-\end{itemdecl}
-
-\begin{itemdescr}
-\pnum
-\returns
-\tcode{value == 0 ?\ weak_equality::equivalent :\ weak_equality::nonequivalent}.
-\end{itemdescr}
 
 \indexlibrarymember{operator partial_ordering}{weak_ordering}%
 \begin{itemdecl}
@@ -4516,7 +4335,7 @@ as the result type of a three-way comparison operator\iref{expr.spaceship}
 that (a) admits all of the six two-way comparison operators (\ref{expr.rel}, \ref{expr.eq}),
 and (b) does imply substitutability.
 
-\indexlibrary{\idxcode{strong_ordering}}%
+\indexlibraryglobal{strong_ordering}%
 \indexlibrarymember{less}{strong_ordering}%
 \indexlibrarymember{equal}{strong_ordering}%
 \indexlibrarymember{equivalent}{strong_ordering}%
@@ -4538,8 +4357,6 @@ namespace std {
     static const strong_ordering greater;
 
     // conversions
-    constexpr operator weak_equality() const noexcept;
-    constexpr operator strong_equality() const noexcept;
     constexpr operator partial_ordering() const noexcept;
     constexpr operator weak_ordering() const noexcept;
 
@@ -4565,28 +4382,6 @@ namespace std {
   inline constexpr strong_ordering strong_ordering::greater(@\placeholder{ord}@::@\placeholder{greater}@);
 }
 \end{codeblock}
-
-\indexlibrarymember{operator weak_equality}{strong_ordering}%
-\begin{itemdecl}
-constexpr operator weak_equality() const noexcept;
-\end{itemdecl}
-
-\begin{itemdescr}
-\pnum
-\returns
-\tcode{value == 0 ?\ weak_equality::equivalent :\ weak_equality::nonequivalent}.
-\end{itemdescr}
-
-\indexlibrarymember{operator strong_equality}{strong_ordering}%
-\begin{itemdecl}
-constexpr operator strong_equality() const noexcept;
-\end{itemdecl}
-
-\begin{itemdescr}
-\pnum
-\returns
-\tcode{value == 0 ?\ strong_equality::equal :\ strong_equality::nonequal}.
-\end{itemdescr}
 
 \indexlibrarymember{operator partial_ordering}{strong_ordering}%
 \begin{itemdecl}
@@ -4688,7 +4483,7 @@ they are distinct types and an instance of the former
 can be converted to an instance of the latter.
 \end{note}
 
-\indexlibrary{\idxcode{common_comparison_category}}%
+\indexlibraryglobal{common_comparison_category}%
 \begin{itemdecl}
 template<class... Ts>
 struct common_comparison_category {
@@ -4713,11 +4508,11 @@ includes a type that is not a comparison category type.
 
 \begin{codeblock}
 template<class T, class Cat>
-  concept @\placeholder{compares-as}@ =                 // \expos
+  concept @\defexposconcept{compares-as}@ =                 // \expos
     same_as<common_comparison_category_t<T, Cat>, Cat>;
 
 template<class T, class U>
-  concept @\placeholder{partially-ordered-with}@ =      // \expos
+  concept @\defexposconcept{partially-ordered-with}@ =      // \expos
     requires(const remove_reference_t<T>& t, const remove_reference_t<U>& u) {
       { t <  u } -> boolean;
       { t >  u } -> boolean;
@@ -4735,7 +4530,7 @@ Let \tcode{t} and \tcode{u} be
 lvalues of types \tcode{const remove_reference_t<T>} and
 \tcode{const remove_reference_t<U>}, respectively.
 \tcode{T} and \tcode{U} model
-\tcode{\placeholder{partially-ordered-with}<T, U>} only if:
+\tcode{\exposconcept{partially-ordered-with}<T, U>} only if:
 \begin{itemize}
 \item
   \tcode{t < u},
@@ -4757,14 +4552,14 @@ lvalues of types \tcode{const remove_reference_t<T>} and
   \tcode{bool(u <= t) == bool(t >= u)} is \tcode{true}.
 \end{itemize}
 
-\indexlibrary{\idxcode{three_way_comparable}}%
+\indexlibraryglobal{three_way_comparable}%
 \begin{codeblock}
 template<class T, class Cat = partial_ordering>
-  concept three_way_comparable =
-    @\placeholder{weakly-equality-comparable-with}@<T, T> &&
-    (!convertible_to<Cat, partial_ordering> || @\placeholder{partially-ordered-with}@<T, T>) &&
+  concept @\deflibconcept{three_way_comparable}@ =
+    @\exposconcept{weakly-equality-comparable-with}@<T, T> &&
+    @\exposconcept{partially-ordered-with}@<T, T> &&
     requires(const remove_reference_t<T>& a, const remove_reference_t<T>& b) {
-      { a <=> b } -> @\placeholder{compares-as}@<Cat>;
+      { a <=> b } -> @\exposconcept{compares-as}@<Cat>;
     };
 \end{codeblock}
 
@@ -4775,45 +4570,38 @@ of type \tcode{const remove_reference_t<T>}.
 model \tcode{\libconcept{three_way_comparable}<T, Cat>} only if:
 \begin{itemize}
 \item
-  \tcode{(a <=> b == 0) == bool(a == b)} is \tcode{true};
+  \tcode{(a <=> b == 0) == bool(a == b)} is \tcode{true},
 \item
-  \tcode{(a <=> b != 0) == bool(a != b)} is \tcode{true};
+  \tcode{(a <=> b != 0) == bool(a != b)} is \tcode{true},
 \item
-  \tcode{((a <=> b) <=> 0)} and \tcode{(0 <=> (b <=> a))} are equal;
+  \tcode{((a <=> b) <=> 0)} and \tcode{(0 <=> (b <=> a))} are equal,
 \item
-  if \tcode{Cat} is convertible to \tcode{strong_equality}, \tcode{T} models
-  \libconcept{equality_comparable}\iref{concept.equalitycomparable};
+  \tcode{(a <=> b < 0) == bool(a < b)} is \tcode{true},
 \item
-  if \tcode{Cat} is convertible to \tcode{partial_ordering}:
-  \begin{itemize}
-  \item
-    \tcode{(a <=> b < 0) == bool(a < b)} is \tcode{true},
-  \item
-    \tcode{(a <=> b > 0) == bool(a > b)} is \tcode{true},
-  \item
-    \tcode{(a <=> b <= 0) == bool(a <= b)} is \tcode{true}, and
-  \item
-    \tcode{(a <=> b >= 0) == bool(a >= b)} is \tcode{true}; and
-  \end{itemize}
+  \tcode{(a <=> b > 0) == bool(a > b)} is \tcode{true},
 \item
-  If \tcode{Cat} is convertible to \tcode{strong_ordering}, \tcode{T} models
+  \tcode{(a <=> b <= 0) == bool(a <= b)} is \tcode{true},
+\item
+  \tcode{(a <=> b >= 0) == bool(a >= b)} is \tcode{true}, and
+\item
+  if \tcode{Cat} is convertible to \tcode{strong_ordering}, \tcode{T} models
   \libconcept{totally_ordered}\iref{concept.totallyordered}.
 \end{itemize}
 
-\indexlibrary{\idxcode{three_way_comparable_with}}%
+\indexlibraryglobal{three_way_comparable_with}%
 \begin{codeblock}
 template<class T, class U, class Cat = partial_ordering>
-  concept three_way_comparable_with =
-    @\placeholder{weakly-equality-comparable-with}@<T, U> &&
-    (!convertible_to<Cat, partial_ordering> || @\placeholder{partially-ordered-with}@<T, U>) &&
+  concept @\deflibconcept{three_way_comparable_with}@ =
+    @\exposconcept{weakly-equality-comparable-with}@<T, U> &&
+    @\exposconcept{partially-ordered-with}@<T, U> &&
     three_way_comparable<T, Cat> &&
     three_way_comparable<U, Cat> &&
     common_reference_with<const remove_reference_t<T>&, const remove_reference_t<U>&> &&
     three_way_comparable<
       common_reference_t<const remove_reference_t<T>&, const remove_reference_t<U>&>, Cat> &&
     requires(const remove_reference_t<T>& t, const remove_reference_t<U>& u) {
-      { t <=> u } -> @\placeholder{compares-as}@<Cat>;
-      { u <=> t } -> @\placeholder{compares-as}@<Cat>;
+      { t <=> u } -> @\exposconcept{compares-as}@<Cat>;
+      { u <=> t } -> @\exposconcept{compares-as}@<Cat>;
     };
 \end{codeblock}
 
@@ -4827,31 +4615,23 @@ Let \tcode{C} be
 model \tcode{\libconcept{three_way_comparable_with}<T, U, Cat>} only if:
 \begin{itemize}
 \item
-  \tcode{t <=> u} and \tcode{u <=> t} have the same domain;
+  \tcode{t <=> u} and \tcode{u <=> t} have the same domain,
 \item
-  \tcode{((t <=> u) <=> 0)} and \tcode{(0 <=> (u <=> t))} are equal;
+  \tcode{((t <=> u) <=> 0)} and \tcode{(0 <=> (u <=> t))} are equal,
 \item
-  \tcode{(t <=> u == 0) == bool(t == u)} is \tcode{true};
+  \tcode{(t <=> u == 0) == bool(t == u)} is \tcode{true},
 \item
-  \tcode{(t <=> u != 0) == bool(t != u)} is \tcode{true};
+  \tcode{(t <=> u != 0) == bool(t != u)} is \tcode{true},
 \item
-  \tcode{Cat(t <=> u) == Cat(C(t) <=> C(u))} is \tcode{true};
+  \tcode{Cat(t <=> u) == Cat(C(t) <=> C(u))} is \tcode{true},
 \item
-  if \tcode{Cat} is convertible to \tcode{strong_equality},
-  \tcode{T} and \tcode{U} model
-  \tcode{\libconcept{equality_comparable_with}<T, U>}\iref{concept.equalitycomparable};
+  \tcode{(t <=> u < 0) == bool(t < u)} is \tcode{true},
 \item
-  if \tcode{Cat} is convertible to \tcode{partial_ordering}:
-  \begin{itemize}
-  \item
-    \tcode{(t <=> u < 0) == bool(t < u)} is \tcode{true},
-  \item
-    \tcode{(t <=> u > 0) == bool(t > u)} is \tcode{true},
-  \item
-    \tcode{(t <=> u <= 0) == bool(t <= u)} is \tcode{true},
-  \item
-    \tcode{(t <=> u >= 0) == bool(t >= u)} is \tcode{true}; and
-  \end{itemize}
+  \tcode{(t <=> u > 0) == bool(t > u)} is \tcode{true},
+\item
+  \tcode{(t <=> u <= 0) == bool(t <= u)} is \tcode{true},
+\item
+  \tcode{(t <=> u >= 0) == bool(t >= u)} is \tcode{true}, and
 \item
   if \tcode{Cat} is convertible to \tcode{strong_ordering},
   \tcode{T} and \tcode{U} model
@@ -4889,7 +4669,7 @@ declval<T>() <=> declval<U>()
 \end{codeblock}
 resolves to a built-in operator comparing pointers.
 
-\indexlibrary{\idxcode{compare_three_way}}%
+\indexlibraryglobal{compare_three_way}%
 \begin{codeblock}
 struct compare_three_way {
   template<class T, class U>
@@ -4901,9 +4681,9 @@ struct compare_three_way {
 \end{codeblock}
 
 \pnum
-In addition to being available via inclusion of the \tcode{<compare>} header,
+In addition to being available via inclusion of the \libheader{compare} header,
 the class \tcode{compare_three_way} is available
-when the header \tcode{<functional>} is included.
+when the header \libheaderref{functional} is included.
 
 \begin{itemdecl}
 template<class T, class U>
@@ -4927,8 +4707,8 @@ are equality-preserving\iref{concepts.equality}.
   a call to a built-in operator \tcode{<=>} comparing pointers of type \tcode{P},
   returns \tcode{strong_ordering::less}
   if (the converted value of) \tcode{t} precedes \tcode{u}
-  in the implementation-defined strict total order\iref{range.cmp}
-  over pointers of type \tcode{P},
+  in the implementation-defined strict total order
+  over pointers\iref{defns.order.ptr},
   \tcode{strong_ordering::greater}
   if \tcode{u} precedes \tcode{t}, and
   otherwise \tcode{strong_ordering::equal}.
@@ -4939,7 +4719,7 @@ are equality-preserving\iref{concepts.equality}.
 
 \rSec2[cmp.alg]{Comparison algorithms}
 
-\indexlibrary{\idxcode{strong_order}}%
+\indexlibraryglobal{strong_order}%
 \pnum
 The name \tcode{strong_order} denotes
 a customization point object\iref{customization.point.object}.
@@ -4963,7 +4743,7 @@ is expression-equivalent\iref{defns.expression-equivalent} to the following:
   observed by \tcode{T}'s comparison operators, and
   if \tcode{numeric_limits<T>::is_iec559} is \tcode{true},
   is additionally consistent with the \tcode{totalOrder} operation
-  as specified in ISO/IEC/IEEE 60599.
+  as specified in ISO/IEC/IEEE 60559.
 \item
   Otherwise, \tcode{strong_ordering(E <=> F)} if it is a well-formed expression.
 \item
@@ -4975,7 +4755,7 @@ is expression-equivalent\iref{defns.expression-equivalent} to the following:
   \end{note}
 \end{itemize}
 
-\indexlibrary{\idxcode{weak_order}}%
+\indexlibraryglobal{weak_order}%
 \pnum
 The name \tcode{weak_order} denotes
 a customization point object\iref{customization.point.object}.
@@ -5025,7 +4805,7 @@ is expression-equivalent\iref{defns.expression-equivalent} to the following:
   \end{note}
 \end{itemize}
 
-\indexlibrary{\idxcode{partial_order}}%
+\indexlibraryglobal{partial_order}%
 \pnum
 The name \tcode{partial_order} denotes
 a customization point object\iref{customization.point.object}.
@@ -5056,12 +4836,12 @@ is expression-equivalent\iref{defns.expression-equivalent} to the following:
 \end{note}
 \end{itemize}
 
-\indexlibrary{\idxcode{compare_strong_order_fallback}}%
+\indexlibraryglobal{compare_strong_order_fallback}%
 \pnum
 The name \tcode{compare_strong_order_fallback}
 denotes a customization point object\iref{customization.point.object}.
 The expression \tcode{compare_strong_order_fallback(E, F)}
-for some subexpressions \tcode{E} and {F}
+for some subexpressions \tcode{E} and \tcode{F}
 is expression-equivalent\iref{defns.expression-equivalent} to:
 \begin{itemize}
 \item
@@ -5082,7 +4862,7 @@ except that \tcode{E} and \tcode{F} are evaluated only once.
 Otherwise, \tcode{compare_strong_order_fallback(E, F)} is ill-formed.
 \end{itemize}
 
-\indexlibrary{\idxcode{compare_weak_order_fallback}}%
+\indexlibraryglobal{compare_weak_order_fallback}%
 \pnum
 The name \tcode{compare_weak_order_fallback} denotes
 a customization point object\iref{customization.point.object}.
@@ -5099,7 +4879,7 @@ is expression-equivalent\iref{defns.expression-equivalent} to:
   Otherwise, if the expressions \tcode{E == F} and \tcode{E < F}
   are both well-formed and convertible to \tcode{bool},
 \begin{codeblock}
-E == F ? weak_ordering::equal :
+E == F ? weak_ordering::equivalent :
 E < F  ? weak_ordering::less :
          weak_ordering::greater
 \end{codeblock}
@@ -5108,7 +4888,7 @@ except that \tcode{E} and \tcode{F} are evaluated only once.
   Otherwise, \tcode{compare_weak_order_fallback(E, F)} is ill-formed.
 \end{itemize}
 
-\indexlibrary{\idxcode{compare_partial_order_fallback}}%
+\indexlibraryglobal{compare_partial_order_fallback}%
 \pnum
 The name \tcode{compare_partial_order_fallback} denotes
 a customization point object\iref{customization.point.object}.
@@ -5138,17 +4918,15 @@ except that \tcode{E} and \tcode{F} are evaluated only once.
 \rSec1[support.coroutine]{Coroutines}
 
 \pnum
-The header
-\tcode{<coroutine>}
+The header \libheaderdef{coroutine}
 defines several types providing
 compile and run-time support for
 coroutines in a \Cpp{} program.
 
 \rSec2[coroutine.syn]{Header \tcode{<coroutine>} synopsis}
 
-\indextext{\idxhdr{coroutine}}%
-\indexlibrary{\idxhdr{coroutine}}%
-\indexlibrary{\idxcode{noop_coroutine_handle}}%
+\indexheader{coroutine}%
+\indexlibraryglobal{noop_coroutine_handle}%
 \begin{codeblock}
 namespace std {
   // \ref{coroutine.traits}, coroutine traits
@@ -5193,7 +4971,7 @@ that meets those requirements.
 \rSec3[coroutine.traits.primary]{Class template \tcode{coroutine_traits}}
 
 \pnum
-The header \tcode{<coroutine>} defines the primary template
+The header \libheader{coroutine} defines the primary template
 \tcode{coroutine_traits} such that
 if \tcode{ArgTypes} is a parameter pack of types and
 if the \grammarterm{qualified-id} \tcode{R::promise_type} is valid and
@@ -5202,7 +4980,7 @@ then \tcode{coroutine_traits<R,ArgTypes...>} has the following publicly
 accessible member:
 
 \begin{codeblock}
-  using promise_type = typename R::promise_type;
+using promise_type = typename R::promise_type;
 \end{codeblock}
 
 Otherwise, \tcode{coroutine_traits<R,ArgTypes...>} has no members.
@@ -5213,7 +4991,7 @@ accessible nested type named \tcode{promise_type}.
 
 \rSec2[coroutine.handle]{Class template \tcode{coroutine_handle}}
 
-\indexlibrary{\idxcode{coroutine_handle}}%
+\indexlibraryglobal{coroutine_handle}%
 \begin{codeblock}
 namespace std {
   template<>
@@ -5271,7 +5049,7 @@ If a program declares an explicit or partial specialization of
 
 \rSec3[coroutine.handle.con]{Construct/reset}
 
-\indexlibrary{\idxcode{coroutine_handle}!constructor}%
+\indexlibraryctor{coroutine_handle}%
 \begin{itemdecl}
 constexpr coroutine_handle() noexcept;
 constexpr coroutine_handle(nullptr_t) noexcept;
@@ -5279,7 +5057,8 @@ constexpr coroutine_handle(nullptr_t) noexcept;
 
 \begin{itemdescr}
 \pnum
-\ensures \tcode{address() == nullptr}.
+\ensures
+\tcode{address() == nullptr}.
 \end{itemdescr}
 
 \indexlibrarymember{from_promise}{coroutine_handle}%
@@ -5292,10 +5071,12 @@ static coroutine_handle from_promise(Promise& p);
 \requires \tcode{p} is a reference to a promise object of a coroutine.
 
 \pnum
-\returns A coroutine handle \tcode{h} referring to the coroutine.
+\returns
+A coroutine handle \tcode{h} referring to the coroutine.
 
 \pnum
-\ensures \tcode{addressof(h.promise()) == addressof(p)}.
+\ensures
+\tcode{addressof(h.promise()) == addressof(p)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator=}{coroutine_handle}%
@@ -5305,10 +5086,12 @@ coroutine_handle& operator=(nullptr_t) noexcept;
 
 \begin{itemdescr}
 \pnum
-\ensures \tcode{address() == nullptr}.
+\ensures
+\tcode{address() == nullptr}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \rSec3[coroutine.handle.export.import]{Export/import}
@@ -5320,7 +5103,8 @@ constexpr void* address() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ptr}.
+\returns
+\tcode{ptr}.
 \end{itemdescr}
 
 \indexlibrarymember{from_address}{coroutine_handle}%
@@ -5334,7 +5118,8 @@ static constexpr coroutine_handle<Promise> coroutine_handle<Promise>::from_addre
 \requires \tcode{addr} was obtained via a prior call to \tcode{address}.
 
 \pnum
-\ensures \tcode{from_address(address()) == *this}.
+\ensures
+\tcode{from_address(address()) == *this}.
 \end{itemdescr}
 
 \rSec3[coroutine.handle.observers]{Observers}
@@ -5346,7 +5131,8 @@ constexpr explicit operator bool() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{address() != nullptr}.
+\returns
+\tcode{address() != nullptr}.
 \end{itemdescr}
 
 \indexlibrarymember{done}{coroutine_handle}%
@@ -5359,7 +5145,8 @@ bool done() const;
 \requires \tcode{*this} refers to a suspended coroutine.
 
 \pnum
-\returns \tcode{true} if the coroutine is suspended at its
+\returns
+\tcode{true} if the coroutine is suspended at its
 final suspend point, otherwise \tcode{false}.
 \end{itemdescr}
 
@@ -5393,7 +5180,8 @@ void resume() const;
 \requires \tcode{*this} refers to a suspended coroutine.
 
 \pnum
-\effects Resumes the execution of the coroutine. If the coroutine
+\effects
+Resumes the execution of the coroutine. If the coroutine
 was suspended at its final suspend point, behavior is undefined.
 \end{itemdescr}
 
@@ -5407,7 +5195,8 @@ void destroy() const;
 \requires \tcode{*this} refers to a suspended coroutine.
 
 \pnum
-\effects Destroys the coroutine\iref{dcl.fct.def.coroutine}.
+\effects
+Destroys the coroutine\iref{dcl.fct.def.coroutine}.
 \end{itemdescr}
 
 \rSec3[coroutine.handle.promise]{Promise access}
@@ -5422,7 +5211,8 @@ Promise& promise() const;
 \requires \tcode{*this} refers to a coroutine.
 
 \pnum
-\returns A reference to the promise of the coroutine.
+\returns
+A reference to the promise of the coroutine.
 \end{itemdescr}
 
 \rSec3[coroutine.handle.compare]{Comparison operators}
@@ -5434,7 +5224,9 @@ constexpr bool operator==(coroutine_handle<> x, coroutine_handle<> y) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \returns \tcode{x.address() == y.address()}.
+\pnum
+\returns
+\tcode{x.address() == y.address()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=>}{coroutine_handle}%
@@ -5443,38 +5235,42 @@ constexpr strong_ordering operator<=>(coroutine_handle<> x, coroutine_handle<> y
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \returns \tcode{compare_three_way()(x.address(), y.address())}.
+\pnum
+\returns
+\tcode{compare_three_way()(x.address(), y.address())}.
 \end{itemdescr}
 
 \rSec3[coroutine.handle.hash]{Hash support}
 
-\indexlibrary{\idxcode{hash}!\idxcode{coroutine_handle}}%
+\indexlibrarymember{hash}{coroutine_handle}%
 \begin{itemdecl}
 template<class P> struct hash<coroutine_handle<P>>;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum The specialization is enabled\iref{unord.hash}.
+\pnum
+The specialization is enabled\iref{unord.hash}.
 \end{itemdescr}
 
 \rSec2[coroutine.noop]{No-op coroutines}
 
 \rSec3[coroutine.promise.noop]{Class \tcode{noop_coroutine_promise}}
 
-\indexlibrary{\idxcode{noop_coroutine_promise}}%
+\indexlibraryglobal{noop_coroutine_promise}%
 \begin{itemdecl}
 struct noop_coroutine_promise {};
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum The class \tcode{noop_coroutine_promise} defines the promise type for
+\pnum
+The class \tcode{noop_coroutine_promise} defines the promise type for
 the coroutine referred to
 by \tcode{noop_coroutine_handle}\iref{coroutine.syn}.
 \end{itemdescr}
 
 \rSec3[coroutine.handle.noop]{Class \tcode{coroutine_handle<noop_coroutine_promise>}}
 
-\indexlibrary{\idxcode{coroutine_handle<noop_coroutine_promise>}}%
+\indexlibraryglobal{coroutine_handle<noop_coroutine_promise>}%
 \begin{codeblock}
 namespace std {
   template<>
@@ -5508,7 +5304,9 @@ constexpr explicit operator bool() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \returns \tcode{true}.
+\pnum
+\returns
+\tcode{true}.
 \end{itemdescr}
 
 \indexlibrarymember{done}{coroutine_handle<noop_coroutine_promise>}%
@@ -5517,7 +5315,9 @@ constexpr bool done() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \returns \tcode{false}.
+\pnum
+\returns
+\tcode{false}.
 \end{itemdescr}
 
 \rSec4[coroutine.handle.noop.resumption]{Resumption}
@@ -5532,7 +5332,9 @@ constexpr void destroy() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \effects None.
+\pnum
+\effects
+None.
 
 \pnum
 \remarks
@@ -5549,7 +5351,9 @@ noop_coroutine_promise& promise() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \returns A reference to the promise object associated with this
+\pnum
+\returns
+A reference to the promise object associated with this
 coroutine handle.
 \end{itemdescr}
 
@@ -5561,9 +5365,13 @@ constexpr void* address() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \returns \tcode{ptr}.
+\pnum
+\returns
+\tcode{ptr}.
 
-\pnum \remarks A \tcode{noop_coroutine_handle}'s \tcode{ptr} is always a
+\pnum
+\remarks
+A \tcode{noop_coroutine_handle}'s \tcode{ptr} is always a
 non-null pointer value.
 \end{itemdescr}
 
@@ -5575,21 +5383,25 @@ noop_coroutine_handle noop_coroutine() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \returns A handle to a coroutine that has no observable effects
+\pnum
+\returns
+A handle to a coroutine that has no observable effects
 when resumed or destroyed.
 
-\pnum \remarks A handle returned from \tcode{noop_coroutine} may or may not
+\pnum
+\remarks
+A handle returned from \tcode{noop_coroutine} may or may not
 compare equal to a handle returned from another invocation
 of \tcode{noop_coroutine}.
 \end{itemdescr}
 
 \rSec2[coroutine.trivial.awaitables]{Trivial awaitables}
 
-\indexlibrary{\idxcode{suspend_never}}%
+\indexlibraryglobal{suspend_never}%
 \indexlibrarymember{await_ready}{suspend_never}%
 \indexlibrarymember{await_suspend}{suspend_never}%
 \indexlibrarymember{await_resume}{suspend_never}%
-\indexlibrary{\idxcode{suspend_always}}%
+\indexlibraryglobal{suspend_always}%
 \indexlibrarymember{await_ready}{suspend_always}%
 \indexlibrarymember{await_suspend}{suspend_always}%
 \indexlibrarymember{await_resume}{suspend_always}%
@@ -5618,32 +5430,29 @@ suspend or always suspend, and in either case not produce a value.
 \rSec1[support.runtime]{Other runtime support}
 
 \pnum
-\indexhdr{cstdarg}%
-\indexhdr{csetjmp}%
-\indexhdr{ctime}%
-\indexhdr{csignal}%
-\indexhdr{cstdlib}%
-\indexlibrary{\idxcode{getenv}}%
-\indexlibrary{\idxcode{system}}%
+\indexlibraryglobal{getenv}%
+\indexlibraryglobal{system}%
 Headers
-\tcode{<csetjmp>} (nonlocal jumps),
-\tcode{<csignal>} (signal handling),
-\tcode{<cstdarg>} (variable arguments),
+\libheader{csetjmp} (nonlocal jumps),
+\libheader{csignal} (signal handling),
+\libheader{cstdarg} (variable arguments),
 and
-\tcode{<cstdlib>} (runtime environment \tcode{getenv}, \tcode{system}),
+\libheader{cstdlib} (runtime environment \tcode{getenv}, \tcode{system}),
 provide further compatibility with C code.
 
 \pnum
 Calls to the function
-\indexlibrary{\idxcode{getenv}}%
+\indexlibraryglobal{getenv}%
 \tcode{getenv}\iref{cstdlib.syn} shall not introduce a data
 race\iref{res.on.data.races} provided that nothing modifies the environment.
-\begin{note} Calls to the POSIX functions
-\indexlibrary{\idxcode{setenv}}%
+\begin{note}
+Calls to the POSIX functions
+\indexlibraryglobal{setenv}%
 \tcode{setenv} and
-\indexlibrary{\idxcode{putenv}}%
+\indexlibraryglobal{putenv}%
 \tcode{putenv} modify the
-environment. \end{note}
+environment.
+\end{note}
 
 \pnum
 A call to the \tcode{setlocale} function\iref{c.locales}
@@ -5655,12 +5464,12 @@ function.
 
 \rSec2[cstdarg.syn]{Header \tcode{<cstdarg>} synopsis}
 
-\indexhdr{cstdarg}%
-\indexlibrary{\idxcode{va_list}}%
-\indexlibrary{\idxcode{va_start}}%
-\indexlibrary{\idxcode{va_copy}}%
-\indexlibrary{\idxcode{va_end}}%
-\indexlibrary{\idxcode{va_arg}}%
+\indexheader{cstdarg}%
+\indexlibraryglobal{va_list}%
+\indexlibraryglobal{va_start}%
+\indexlibraryglobal{va_copy}%
+\indexlibraryglobal{va_end}%
+\indexlibraryglobal{va_arg}%
 \begin{codeblock}
 namespace std {
   using va_list = @\seebelow@;
@@ -5673,15 +5482,11 @@ namespace std {
 \end{codeblock}
 
 \pnum
-\indexhdr{stdarg.h}%
-The contents of the header \tcode{<cstdarg>} are the same as the C
-standard library header \tcode{<stdarg.h>}, with the following changes:
+The contents of the header \libheaderdef{cstdarg} are the same as the C
+standard library header \libheader{stdarg.h}, with the following changes:
 The restrictions that ISO C places on the second parameter to the
-\indexlibrary{\idxcode{va_start}}%
-\tcode{va_start}
-macro in header
-\indexhdr{stdarg.h}%
-\tcode{<stdarg.h>}
+\indexlibraryglobal{va_start}%
+\tcode{va_start} macro in header \libheader{stdarg.h}
 are different in this document.
 The parameter
 \tcode{parmN}
@@ -5706,10 +5511,9 @@ parameter, the behavior is undefined.
 
 \rSec2[csetjmp.syn]{Header \tcode{<csetjmp>} synopsis}
 
-\indexhdr{csetjmp}%
-\indexlibrary{\idxcode{jmp_buf}}%
-\indexlibrary{\idxcode{longjmp}}%
-\indexlibrary{\idxcode{setjmp}}%
+\indexlibraryglobal{jmp_buf}%
+\indexlibraryglobal{longjmp}%
+\indexlibraryglobal{setjmp}%
 \begin{codeblock}
 namespace std {
   using jmp_buf = @\seebelow@;
@@ -5720,13 +5524,12 @@ namespace std {
 \end{codeblock}
 
 \pnum
-\indexhdr{setjmp.h}%
-The contents of the header \tcode{<csetjmp>} are the same as the C
-standard library header \tcode{<setjmp.h>}.
+The contents of the header \libheaderdef{csetjmp} are the same as the C
+standard library header \libheader{setjmp.h}.
 
 \pnum
 The function signature
-\indexlibrary{\idxcode{longjmp}}%
+\indexlibraryglobal{longjmp}%
 \tcode{longjmp(jmp_buf jbuf, int val)}
 has more restricted behavior in this document.
 A \tcode{setjmp}/\tcode{longjmp} call pair has undefined
@@ -5740,19 +5543,18 @@ behavior if invoked in a suspension context of a coroutine\iref{expr.await}.
 
 \rSec2[csignal.syn]{Header \tcode{<csignal>} synopsis}
 
-\indexhdr{csignal}%
-\indexlibrary{\idxcode{sig_atomic_t}}%
-\indexlibrary{\idxcode{signal}}%
-\indexlibrary{\idxcode{raise}}%
-\indexlibrary{\idxcode{SIG_IGN}}%
-\indexlibrary{\idxcode{SIGABRT}}%
-\indexlibrary{\idxcode{SIGFPE}}%
-\indexlibrary{\idxcode{SIGILL}}%
-\indexlibrary{\idxcode{SIGINT}}%
-\indexlibrary{\idxcode{SIGSEGV}}%
-\indexlibrary{\idxcode{SIGTERM}}%
-\indexlibrary{\idxcode{SIG_DFL}}%
-\indexlibrary{\idxcode{SIG_ERR}}%
+\indexlibraryglobal{sig_atomic_t}%
+\indexlibraryglobal{signal}%
+\indexlibraryglobal{raise}%
+\indexlibraryglobal{SIG_IGN}%
+\indexlibraryglobal{SIGABRT}%
+\indexlibraryglobal{SIGFPE}%
+\indexlibraryglobal{SIGILL}%
+\indexlibraryglobal{SIGINT}%
+\indexlibraryglobal{SIGSEGV}%
+\indexlibraryglobal{SIGTERM}%
+\indexlibraryglobal{SIG_DFL}%
+\indexlibraryglobal{SIG_ERR}%
 \begin{codeblock}
 namespace std {
   using sig_atomic_t = @\seebelow@;
@@ -5776,9 +5578,8 @@ namespace std {
 \end{codeblock}
 
 \pnum
-\indexhdr{signal.h}%
-The contents of the header \tcode{<csignal>} are the same as the C
-standard library header \tcode{<signal.h>}.
+The contents of the header \libheaderdef{csignal} are the same as the C
+standard library header \libheader{signal.h}.
 
 \rSec2[support.signal]{Signal handlers}
 
@@ -5790,7 +5591,6 @@ invocation of the signal handler so installed.
 A \defn{plain lock-free atomic operation} is
 an invocation of a function \tcode{f} from \ref{atomics},
 such that:
-
 \begin{itemize}
 \item
 \tcode{f} is the function \tcode{atomic_is_lock_free()}, or
@@ -5811,12 +5611,11 @@ for every pointer-to-atomic argument \tcode{A} passed to \tcode{f},
 \pnum
 \indextext{signal-safe!evaluation|see{evaluation, signal-safe}}%
 An evaluation is \defnx{signal-safe}{evaluation!signal-safe} unless it includes one of the following:
-
 \begin{itemize}
 \item
 a call to any standard library function,
 except for plain lock-free atomic operations and
-functions explicitly identified as signal-safe.
+functions explicitly identified as signal-safe;
 \begin{note}
 This implicitly excludes the use of \tcode{new} and \tcode{delete} expressions
 that rely on a library-provided memory allocator.

@@ -4,7 +4,7 @@
 \rSec1[time.general]{General}
 
 \pnum
-\indexlibrary{\idxcode{chrono}}%
+\indexlibraryglobal{chrono}%
 This Clause describes the chrono library\iref{time.syn} and various C
 functions\iref{ctime.syn} that provide generally useful time
 utilities, as summarized in \tref{time.summary}.
@@ -32,34 +32,34 @@ Let \exposid{STATICALLY-WIDEN}\tcode{<charT>("...")} be
 
 \rSec1[time.syn]{Header \tcode{<chrono>} synopsis}
 
-\indexhdr{chrono}%
-\indexlibrary{\idxcode{treat_as_floating_point_v}}%
-\indexlibrary{\idxcode{is_clock_v}}%
-\indexlibrary{\idxcode{nanoseconds}}%
-\indexlibrary{\idxcode{microseconds}}%
-\indexlibrary{\idxcode{milliseconds}}%
-\indexlibrary{\idxcode{seconds}}%
-\indexlibrary{\idxcode{minutes}}%
-\indexlibrary{\idxcode{hours}}%
-\indexlibrary{\idxcode{days}}%
-\indexlibrary{\idxcode{weeks}}%
-\indexlibrary{\idxcode{years}}%
-\indexlibrary{\idxcode{months}}%
-\indexlibrary{\idxcode{sys_time}}%
-\indexlibrary{\idxcode{sys_seconds}}%
-\indexlibrary{\idxcode{sys_days}}%
-\indexlibrary{\idxcode{utc_time}}%
-\indexlibrary{\idxcode{utc_seconds}}%
-\indexlibrary{\idxcode{tai_time}}%
-\indexlibrary{\idxcode{tai_seconds}}%
-\indexlibrary{\idxcode{gps_time}}%
-\indexlibrary{\idxcode{gps_seconds}}%
-\indexlibrary{\idxcode{file_time}}%
-\indexlibrary{\idxcode{local_time}}%
-\indexlibrary{\idxcode{local_seconds}}%
-\indexlibrary{\idxcode{local_days}}%
-\indexlibrary{\idxcode{local_t}}%
-\indexlibrary{\idxcode{choose}}%
+\indexheader{chrono}%
+\indexlibraryglobal{treat_as_floating_point_v}%
+\indexlibraryglobal{is_clock_v}%
+\indexlibraryglobal{nanoseconds}%
+\indexlibraryglobal{microseconds}%
+\indexlibraryglobal{milliseconds}%
+\indexlibraryglobal{seconds}%
+\indexlibraryglobal{minutes}%
+\indexlibraryglobal{hours}%
+\indexlibraryglobal{days}%
+\indexlibraryglobal{weeks}%
+\indexlibraryglobal{years}%
+\indexlibraryglobal{months}%
+\indexlibraryglobal{sys_time}%
+\indexlibraryglobal{sys_seconds}%
+\indexlibraryglobal{sys_days}%
+\indexlibraryglobal{utc_time}%
+\indexlibraryglobal{utc_seconds}%
+\indexlibraryglobal{tai_time}%
+\indexlibraryglobal{tai_seconds}%
+\indexlibraryglobal{gps_time}%
+\indexlibraryglobal{gps_seconds}%
+\indexlibraryglobal{file_time}%
+\indexlibraryglobal{local_time}%
+\indexlibraryglobal{local_seconds}%
+\indexlibraryglobal{local_days}%
+\indexlibraryglobal{local_t}%
+\indexlibraryglobal{choose}%
 \indexlibrarymember{earliest}{choose}%
 \indexlibrarymember{latest}{choose}%
 \begin{codeblock}
@@ -138,7 +138,7 @@ namespace std {
       constexpr auto operator<=>(const duration<Rep1, Period1>& lhs,
                                  const duration<Rep2, Period2>& rhs);
 
-    // \ref{time.duration.cast}, \tcode{duration_cast}
+    // \ref{time.duration.cast}, conversions
     template<class ToDuration, class Rep, class Period>
       constexpr ToDuration duration_cast(const duration<Rep, Period>& d);
     template<class ToDuration, class Rep, class Period>
@@ -211,7 +211,7 @@ namespace std {
        constexpr auto operator<=>(const time_point<Clock, Duration1>& lhs,
                                   const time_point<Clock, Duration2>& rhs);
 
-    // \ref{time.point.cast}, \tcode{time_point_cast}
+    // \ref{time.point.cast}, conversions
     template<class ToDuration, class Clock, class Duration>
       constexpr time_point<Clock, ToDuration>
         time_point_cast(const time_point<Clock, Duration>& t);
@@ -940,8 +940,10 @@ In \tref{time.clock} \tcode{C1} and \tcode{C2} denote clock types. \tcode{t1} an
 before\iref{intro.multithread} the call returning \tcode{t2} and both of these calls
 occur
 before \tcode{C1::time_point::max()}.
-\begin{note} This means \tcode{C1} did not wrap around between \tcode{t1} and
-\tcode{t2}. \end{note}
+\begin{note}
+This means \tcode{C1} did not wrap around between \tcode{t1} and
+\tcode{t2}.
+\end{note}
 
 \begin{libreqtab3a}
 {\oldconcept{Clock} requirements}
@@ -983,12 +985,13 @@ before \tcode{C1::time_point::max()}.
 \end{libreqtab3a}
 
 \pnum
-\begin{note} The relative difference in durations between those reported by a given clock and the
-SI definition is a measure of the quality of implementation. \end{note}
+\begin{note}
+The relative difference in durations between those reported by a given clock and the
+SI definition is a measure of the quality of implementation.
+\end{note}
 
 \pnum
 A type \tcode{TC} meets the \oldconcept{TrivialClock} requirements if:
-
 \begin{itemize}
 \item \tcode{TC} meets the \oldconcept{Clock} requirements\iref{time.clock.req},
 
@@ -996,8 +999,11 @@ A type \tcode{TC} meets the \oldconcept{TrivialClock} requirements if:
 meet the \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable}) and
 \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparable})
 requirements and the requirements of
-numeric types\iref{numeric.requirements}. \begin{note} This means, in particular,
-that operations on these types will not throw exceptions. \end{note}
+numeric types\iref{numeric.requirements}.
+\begin{note}
+This means, in particular,
+that operations on these types will not throw exceptions.
+\end{note}
 
 \item lvalues of the types \tcode{TC::rep}, \tcode{TC::duration}, and
 \tcode{TC::time_point} are swappable\iref{swappable.requirements},
@@ -1012,7 +1018,7 @@ requirements, recursively.
 
 \rSec2[time.traits.is.fp]{\tcode{treat_as_floating_point}}
 
-\indexlibrary{\idxcode{treat_as_floating_point}}%
+\indexlibraryglobal{treat_as_floating_point}%
 \begin{itemdecl}
 template<class Rep> struct treat_as_floating_point : is_floating_point<Rep> { };
 \end{itemdecl}
@@ -1033,7 +1039,7 @@ if it behaved like an integral type for the purpose of these conversions.
 
 \rSec2[time.traits.duration.values]{\tcode{duration_values}}
 
-\indexlibrary{\idxcode{duration_values}}%
+\indexlibraryglobal{duration_values}%
 \begin{itemdecl}
 template<class Rep>
   struct duration_values {
@@ -1059,12 +1065,17 @@ static constexpr Rep zero() noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{Rep(0)}. \begin{note} \tcode{Rep(0)} is specified instead of
+\returns
+\tcode{Rep(0)}.
+\begin{note}
+\tcode{Rep(0)} is specified instead of
 \tcode{Rep()} because \tcode{Rep()} may have some other meaning, such as an
-uninitialized value. \end{note}
+uninitialized value.
+\end{note}
 
 \pnum
-\remarks The value returned shall be the additive identity.
+\remarks
+The value returned shall be the additive identity.
 \end{itemdescr}
 
 \indexlibrarymember{min}{duration_values}%
@@ -1074,10 +1085,12 @@ static constexpr Rep min() noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{numeric_limits<Rep>::lowest()}.
+\returns
+\tcode{numeric_limits<Rep>::lowest()}.
 
 \pnum
-\remarks The value returned shall compare less than or equal to \tcode{zero()}.
+\remarks
+The value returned shall compare less than or equal to \tcode{zero()}.
 \end{itemdescr}
 
 \indexlibrarymember{max}{duration_values}%
@@ -1087,15 +1100,17 @@ static constexpr Rep max() noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{numeric_limits<Rep>::max()}.
+\returns
+\tcode{numeric_limits<Rep>::max()}.
 
 \pnum
-\remarks The value returned shall compare greater than \tcode{zero()}.
+\remarks
+The value returned shall compare greater than \tcode{zero()}.
 \end{itemdescr}
 
 \rSec2[time.traits.specializations]{Specializations of \tcode{common_type}}
 
-\indexlibrary{\idxcode{common_type}}%
+\indexlibraryglobal{common_type}%
 \begin{itemdecl}
 template<class Rep1, class Period1, class Rep2, class Period2>
 struct common_type<chrono::duration<Rep1, Period1>, chrono::duration<Rep2, Period2>> {
@@ -1105,21 +1120,25 @@ struct common_type<chrono::duration<Rep1, Period1>, chrono::duration<Rep2, Perio
 
 \pnum
 The \tcode{period} of the \tcode{duration} indicated by this specialization of
-\tcode{common_type} shall be the greatest common divisor of \tcode{Period1} and
-\tcode{Period2}. \begin{note} This can be computed by forming a ratio of the
+\tcode{common_type} is the greatest common divisor of \tcode{Period1} and
+\tcode{Period2}.
+\begin{note}
+This can be computed by forming a ratio of the
 greatest common divisor of \tcode{Period1::num} and \tcode{Period2::num} and the
 least common multiple of \tcode{Period1::den} and \tcode{Period2::den}.
 \end{note}
 
 \pnum
-\begin{note} The \tcode{typedef} name \tcode{type} is a synonym for the
+\begin{note}
+The \tcode{typedef} name \tcode{type} is a synonym for the
 \tcode{duration} with the largest tick \tcode{period} possible where both
 \tcode{duration} arguments will convert to it without requiring a division
 operation. The representation of this type is intended to be able to hold any
 value resulting from this conversion with no truncation error, although
-floating-point durations may have round-off errors. \end{note}
+floating-point durations may have round-off errors.
+\end{note}
 
-\indexlibrary{\idxcode{common_type}}%
+\indexlibraryglobal{common_type}%
 \begin{itemdecl}
 template<class Clock, class Duration1, class Duration2>
   struct common_type<chrono::time_point<Clock, Duration1>, chrono::time_point<Clock, Duration2>> {
@@ -1133,7 +1152,7 @@ clock as the two types and the common type of their two \tcode{duration}s.
 
 \rSec2[time.traits.is.clock]{Class template \tcode{is_clock}}
 
-\indexlibrary{\idxcode{is_clock}}%
+\indexlibraryglobal{is_clock}%
 \begin{itemdecl}
 template<class T> struct is_clock;
 \end{itemdecl}
@@ -1149,7 +1168,6 @@ that a type cannot meet the \oldconcept{Clock} requirements is unspecified,
 except that as a minimum
 a type \tcode{T} shall not qualify as a \oldconcept{Clock}
 unless it meets all of the following conditions:
-
 \begin{itemize}
 \item the \grammarterm{qualified-id}s
 \tcode{T::rep},
@@ -1176,7 +1194,7 @@ A \tcode{duration} has a representation which holds a count of ticks and a tick 
 The tick period is the amount of time which occurs from one tick to the next, in units
 of seconds. It is expressed as a rational constant using the template \tcode{ratio}.
 
-\indexlibrary{\idxcode{duration}}%
+\indexlibraryglobal{duration}%
 \begin{codeblock}
 namespace std::chrono {
   template<class Rep, class Period = ratio<1>>
@@ -1236,7 +1254,7 @@ If \tcode{Period} is not a specialization of \tcode{ratio}, the program is ill-f
 If \tcode{Period::num} is not positive, the program is ill-formed.
 
 \pnum
-Members of \tcode{duration} shall not throw exceptions other than
+Members of \tcode{duration} do not throw exceptions other than
 those thrown by the indicated operations on their representations.
 
 \pnum
@@ -1257,7 +1275,7 @@ duration<double, ratio<1, 30>>  d2; // holds a count with a tick period of $\fra
 
 \rSec2[time.duration.cons]{Constructors}
 
-\indexlibrary{\idxcode{duration}!constructor}%
+\indexlibraryctor{duration}%
 \begin{itemdecl}
 template<class Rep2>
   constexpr explicit duration(const Rep2& r);
@@ -1265,9 +1283,8 @@ template<class Rep2>
 
 \begin{itemdescr}
 \pnum
-\remarks This constructor shall not participate in overload
-resolution unless
-\tcode{Rep2} is implicitly convertible to \tcode{rep} and
+\constraints
+\tcode{is_convertible_v<Rep2, rep>} is \tcode{true} and
 \begin{itemize}
 \item \tcode{treat_as_floating_point_v<rep>} is \tcode{true} or
 \item \tcode{treat_as_floating_point_v<Rep2>} is \tcode{false}.
@@ -1280,13 +1297,11 @@ duration<int, milli> d(3.5);        // error
 \end{example}
 
 \pnum
-\effects Constructs an object of type \tcode{duration}.
-
-\pnum
-\ensures \tcode{count() == static_cast<rep>(r)}.
+\ensures
+\tcode{count() == static_cast<rep>(r)}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{duration}!constructor}%
+\indexlibraryctor{duration}%
 \begin{itemdecl}
 template<class Rep2, class Period2>
   constexpr duration(const duration<Rep2, Period2>& d);
@@ -1294,14 +1309,17 @@ template<class Rep2, class Period2>
 
 \begin{itemdescr}
 \pnum
-\remarks This constructor shall not participate in overload resolution unless
-no overflow is induced in the conversion and
+\constraints
+No overflow is induced in the conversion and
 \tcode{treat_as_floating_point_v<rep>} is \tcode{true} or both
 \tcode{ratio_divide<Period2, period>::den} is \tcode{1} and
-\tcode{treat_as_floating_point_v<Rep2>} is \tcode{false}. \begin{note} This
+\tcode{treat_as_floating_point_v<Rep2>} is \tcode{false}.
+\begin{note}
+This
 requirement prevents implicit truncation error when converting between
 integral-based \tcode{duration} types. Such a construction could easily lead to
-confusion about the value of the \tcode{duration}. \end{note}
+confusion about the value of the \tcode{duration}.
+\end{note}
 \begin{example}
 \begin{codeblock}
 duration<int, milli> ms(3);
@@ -1311,8 +1329,8 @@ duration<int, milli> ms2 = us;      // error
 \end{example}
 
 \pnum
-\effects Constructs an object of type \tcode{duration}, constructing \tcode{rep_} from\\
-\tcode{duration_cast<duration>(d).count()}.
+\effects
+Initializes \tcode{rep_} with \tcode{duration_cast<duration>(d).count()}.
 \end{itemdescr}
 
 \rSec2[time.duration.observer]{Observer}
@@ -1324,7 +1342,8 @@ constexpr rep count() const;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{rep_}.
+\returns
+\tcode{rep_}.
 \end{itemdescr}
 
 \rSec2[time.duration.arithmetic]{Arithmetic}
@@ -1336,7 +1355,8 @@ constexpr common_type_t<duration> operator+() const;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{common_type_t<duration>(*this)}.
+\returns
+\tcode{common_type_t<duration>(*this)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{duration}%
@@ -1346,7 +1366,8 @@ constexpr common_type_t<duration> operator-() const;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{common_type_t<duration>(-rep_)}.
+\returns
+\tcode{common_type_t<duration>(-rep_)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator++}{duration}%
@@ -1356,10 +1377,12 @@ constexpr duration& operator++();
 
 \begin{itemdescr}
 \pnum
-\effects As if by \tcode{++rep_}.
+\effects
+Equivalent to: \tcode{++rep_}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator++}{duration}%
@@ -1369,7 +1392,8 @@ constexpr duration operator++(int);
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{duration(rep_++)}.
+\effects
+Equivalent to: \tcode{return duration(rep_++);}
 \end{itemdescr}
 
 \indexlibrarymember{operator\dcr}{duration}%
@@ -1379,10 +1403,12 @@ constexpr duration& operator--();
 
 \begin{itemdescr}
 \pnum
-\effects As if by \tcode{--rep_}.
+\effects
+Equivalent to: \tcode{--rep_}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator\dcr}{duration}%
@@ -1392,7 +1418,8 @@ constexpr duration operator--(int);
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{duration(rep_-{}-)}.
+\effects
+Equivalent to: \tcode{return duration(rep_-{}-);}
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{duration}%
@@ -1402,10 +1429,12 @@ constexpr duration& operator+=(const duration& d);
 
 \begin{itemdescr}
 \pnum
-\effects As if by: \tcode{rep_ += d.count();}
+\effects
+Equivalent to: \tcode{rep_ += d.count()}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{duration}%
@@ -1415,10 +1444,12 @@ constexpr duration& operator-=(const duration& d);
 
 \begin{itemdescr}
 \pnum
-\effects As if by: \tcode{rep_ -= d.count();}
+\effects
+Equivalent to: \tcode{rep_ -= d.count()}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator*=}{duration}%
@@ -1428,10 +1459,12 @@ constexpr duration& operator*=(const rep& rhs);
 
 \begin{itemdescr}
 \pnum
-\effects As if by: \tcode{rep_ *= rhs;}
+\effects
+Equivalent to: \tcode{rep_ *= rhs}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator/=}{duration}%
@@ -1441,10 +1474,12 @@ constexpr duration& operator/=(const rep& rhs);
 
 \begin{itemdescr}
 \pnum
-\effects As if by: \tcode{rep_ /= rhs;}
+\effects
+Equivalent to: \tcode{rep_ /= rhs}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator\%=}{duration}%
@@ -1454,10 +1489,12 @@ constexpr duration& operator%=(const rep& rhs);
 
 \begin{itemdescr}
 \pnum
-\effects As if by: \tcode{rep_ \%= rhs;}
+\effects
+Equivalent to: \tcode{rep_ \%= rhs}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator\%=}{duration}%
@@ -1467,10 +1504,12 @@ constexpr duration& operator%=(const duration& rhs);
 
 \begin{itemdescr}
 \pnum
-\effects As if by: \tcode{rep_ \%= rhs.count();}
+\effects
+Equivalent to: \tcode{rep_ \%= rhs.count()}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 
@@ -1483,7 +1522,8 @@ static constexpr duration zero() noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{duration(duration_values<rep>::zero())}.
+\returns
+\tcode{duration(duration_values<rep>::zero())}.
 \end{itemdescr}
 
 \indexlibrarymember{min}{duration}%
@@ -1493,7 +1533,8 @@ static constexpr duration min() noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{duration(duration_values<rep>::min())}.
+\returns
+\tcode{duration(duration_values<rep>::min())}.
 \end{itemdescr}
 
 \indexlibrarymember{max}{duration}%
@@ -1503,7 +1544,8 @@ static constexpr duration max() noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{duration(duration_values<rep>::max())}.
+\returns
+\tcode{duration(duration_values<rep>::max())}.
 \end{itemdescr}
 
 \rSec2[time.duration.nonmember]{Non-member arithmetic}
@@ -1512,7 +1554,7 @@ static constexpr duration max() noexcept;
 In the function descriptions that follow, unless stated otherwise,
 let \tcode{CD} represent the return type of the function.
 
-\indexlibrary{\idxcode{common_type}}%
+\indexlibraryglobal{common_type}%
 \begin{itemdecl}
 template<class Rep1, class Period1, class Rep2, class Period2>
   constexpr common_type_t<duration<Rep1, Period1>, duration<Rep2, Period2>>
@@ -1521,10 +1563,11 @@ template<class Rep1, class Period1, class Rep2, class Period2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{CD(CD(lhs).count() + CD(rhs).count())}.
+\returns
+\tcode{CD(CD(lhs).count() + CD(rhs).count())}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{common_type}}%
+\indexlibraryglobal{common_type}%
 \begin{itemdecl}
 template<class Rep1, class Period1, class Rep2, class Period2>
   constexpr common_type_t<duration<Rep1, Period1>, duration<Rep2, Period2>>
@@ -1533,7 +1576,8 @@ template<class Rep1, class Period1, class Rep2, class Period2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{CD(CD(lhs).count() - CD(rhs).count())}.
+\returns
+\tcode{CD(CD(lhs).count() - CD(rhs).count())}.
 \end{itemdescr}
 
 \indexlibrarymember{operator*}{duration}%
@@ -1545,11 +1589,12 @@ template<class Rep1, class Period, class Rep2>
 
 \begin{itemdescr}
 \pnum
-\remarks This operator shall not participate in overload
-resolution unless \tcode{Rep2} is implicitly convertible to \tcode{common_type_t<Rep1, Rep2>}.
+\constraints
+\tcode{is_convertible_v<Rep2, common_type_t<Rep1, Rep2>>} is \tcode{true}.
 
 \pnum
-\returns \tcode{CD(CD(d).count() * s)}.
+\returns
+\tcode{CD(CD(d).count() * s)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator*}{duration}%
@@ -1561,11 +1606,12 @@ template<class Rep1, class Rep2, class Period>
 
 \begin{itemdescr}
 \pnum
-\remarks This operator shall not participate in overload
-resolution unless \tcode{Rep1} is implicitly convertible to \tcode{common_type_t<Rep1, Rep2>}.
+\constraints
+\tcode{is_convertible_v<Rep1, common_type_t<Rep1, Rep2>>} is \tcode{true}.
 
 \pnum
-\returns \tcode{d * s}.
+\returns
+\tcode{d * s}.
 \end{itemdescr}
 
 \indexlibrarymember{operator/}{duration}%
@@ -1577,12 +1623,13 @@ template<class Rep1, class Period, class Rep2>
 
 \begin{itemdescr}
 \pnum
-\remarks This operator shall not participate in overload
-resolution unless \tcode{Rep2} is implicitly convertible to \tcode{common_type_t<Rep1, Rep2>}
+\constraints
+\tcode{is_convertible_v<Rep2, common_type_t<Rep1, Rep2>>} is \tcode{true}
 and \tcode{Rep2} is not a specialization of \tcode{duration}.
 
 \pnum
-\returns \tcode{CD(CD(d).count() / s)}.
+\returns
+\tcode{CD(CD(d).count() / s)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator/}{duration}%
@@ -1598,7 +1645,8 @@ Let \tcode{CD} be
 \tcode{common_type_t<duration<Rep1, Period1>, duration<Rep2, Period2>>}.
 
 \pnum
-\returns \tcode{CD(lhs).count() / CD(rhs).count()}.
+\returns
+\tcode{CD(lhs).count() / CD(rhs).count()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator\%}{duration}%
@@ -1610,12 +1658,13 @@ template<class Rep1, class Period, class Rep2>
 
 \begin{itemdescr}
 \pnum
-\remarks This operator shall not participate in overload
-resolution unless \tcode{Rep2} is implicitly convertible to \tcode{common_type_t<Rep1, Rep2>} and
+\constraints
+\tcode{is_convertible_v<Rep2, common_type_t<Rep1, Rep2>>} is \tcode{true} and
 \tcode{Rep2} is not a specialization of \tcode{duration}.
 
 \pnum
-\returns \tcode{CD(CD(d).count() \% s)}.
+\returns
+\tcode{CD(CD(d).count() \% s)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator\%}{duration}%
@@ -1627,7 +1676,8 @@ template<class Rep1, class Period1, class Rep2, class Period2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{CD(CD(lhs).count() \% CD(rhs).count())}.
+\returns
+\tcode{CD(CD(lhs).count() \% CD(rhs).count())}.
 \end{itemdescr}
 
 
@@ -1647,7 +1697,8 @@ template<class Rep1, class Period1, class Rep2, class Period2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{CT(lhs).count() == CT(rhs).count()}.
+\returns
+\tcode{CT(lhs).count() == CT(rhs).count()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<}{duration}%
@@ -1659,7 +1710,8 @@ template<class Rep1, class Period1, class Rep2, class Period2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{CT(lhs).count() < CT(rhs).count()}.
+\returns
+\tcode{CT(lhs).count() < CT(rhs).count()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator>}{duration}%
@@ -1671,7 +1723,8 @@ template<class Rep1, class Period1, class Rep2, class Period2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{rhs < lhs}.
+\returns
+\tcode{rhs < lhs}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=}{duration}%
@@ -1683,7 +1736,8 @@ template<class Rep1, class Period1, class Rep2, class Period2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{!(rhs < lhs)}.
+\returns
+\tcode{!(rhs < lhs)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator>=}{duration}%
@@ -1695,7 +1749,8 @@ template<class Rep1, class Period1, class Rep2, class Period2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{!(lhs < rhs)}.
+\returns
+\tcode{!(lhs < rhs)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=>}{duration}%
@@ -1708,13 +1763,14 @@ template<class Rep1, class Period1, class Rep2, class Period2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{CT(lhs).count() <=> CT(rhs).count()}.
+\returns
+\tcode{CT(lhs).count() <=> CT(rhs).count()}.
 \end{itemdescr}
 
-\rSec2[time.duration.cast]{\tcode{duration_cast}}
+\rSec2[time.duration.cast]{Conversions}
 
-\indexlibrary{\idxcode{duration}!\idxcode{duration_cast}}%
-\indexlibrary{\idxcode{duration_cast}}%
+\indexlibrarymember{duration}{duration_cast}%
+\indexlibraryglobal{duration_cast}%
 \begin{itemdecl}
 template<class ToDuration, class Rep, class Period>
   constexpr ToDuration duration_cast(const duration<Rep, Period>& d);
@@ -1722,11 +1778,12 @@ template<class ToDuration, class Rep, class Period>
 
 \begin{itemdescr}
 \pnum
-\remarks This function shall not participate in overload resolution
-unless \tcode{ToDuration} is a specialization of \tcode{duration}.
+\constraints
+\tcode{ToDuration} is a specialization of \tcode{duration}.
 
 \pnum
-\returns Let \tcode{CF} be \tcode{ratio_divide<Period, typename
+\returns
+Let \tcode{CF} be \tcode{ratio_divide<Period, typename
 ToDuration::period>}, and \tcode{CR} be \tcode{common_type<typename
 ToDuration::rep, Rep, intmax_t>::type}.
 \begin{itemize}
@@ -1772,11 +1829,12 @@ template<class ToDuration, class Rep, class Period>
 
 \begin{itemdescr}
 \pnum
-\remarks This function shall not participate in overload resolution
-unless \tcode{ToDuration} is a specialization of \tcode{duration}.
+\constraints
+\tcode{ToDuration} is a specialization of \tcode{duration}.
 
 \pnum
-\returns The greatest result \tcode{t} representable in \tcode{ToDuration}
+\returns
+The greatest result \tcode{t} representable in \tcode{ToDuration}
 for which \tcode{t <= d}.
 \end{itemdescr}
 
@@ -1788,11 +1846,12 @@ template<class ToDuration, class Rep, class Period>
 
 \begin{itemdescr}
 \pnum
-\remarks This function shall not participate in overload resolution
-unless \tcode{ToDuration} is a specialization of \tcode{duration}.
+\constraints
+\tcode{ToDuration} is a specialization of \tcode{duration}.
 
 \pnum
-\returns The least result \tcode{t} representable in \tcode{ToDuration}
+\returns
+The least result \tcode{t} representable in \tcode{ToDuration}
 for which \tcode{t >= d}.
 \end{itemdescr}
 
@@ -1804,13 +1863,13 @@ template<class ToDuration, class Rep, class Period>
 
 \begin{itemdescr}
 \pnum
-\remarks This function shall not participate in overload resolution
-unless \tcode{ToDuration} is a specialization of \tcode{duration},
-and \tcode{treat_as_floating_point_v<typename ToDuration::rep>}
-is \tcode{false}.
+\constraints
+\tcode{ToDuration} is a specialization of \tcode{duration} and
+\tcode{treat_as_floating_point_v<typename ToDuration::rep>} is \tcode{false}.
 
 \pnum
-\returns The value of \tcode{ToDuration} that is closest to \tcode{d}.
+\returns
+The value of \tcode{ToDuration} that is closest to \tcode{d}.
 If there are two closest values, then return the value \tcode{t}
 for which \tcode{t \% 2 == 0}.
 \end{itemdescr}
@@ -1933,11 +1992,12 @@ template<class Rep, class Period>
 
 \begin{itemdescr}
 \pnum
-\remarks This function shall not participate in overload resolution
-unless \tcode{numeric_limits<Rep>::is_signed} is \tcode{true}.
+\constraints
+\tcode{numeric_limits<Rep>::is_signed} is \tcode{true}.
 
 \pnum
-\returns If \tcode{d >= d.zero()}, return \tcode{d},
+\returns
+If \tcode{d >= d.zero()}, return \tcode{d},
 otherwise return \tcode{-d}.
 \end{itemdescr}
 
@@ -1952,10 +2012,11 @@ template<class charT, class traits, class Rep, class Period>
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{Rep} is an integral type
+\mandates
+\tcode{Rep} is an integral type
 whose integer conversion rank\iref{conv.rank}
 is greater than or equal to that of \tcode{short},
-or a floating point type.
+or a floating-point type.
 \tcode{charT} is \tcode{char} or \tcode{wchar_t}.
 
 \pnum
@@ -2007,7 +2068,8 @@ the encoding used for \tcode{charT},
 the unit suffix \tcode{"us"} is used instead of \tcode{"\textmu{}s"}.
 
 \pnum
-\returns \tcode{os}.
+\returns
+\tcode{os}.
 \end{itemdescr}
 
 \indexlibrarymember{from_stream}{duration}%
@@ -2036,12 +2098,13 @@ If \tcode{\%z} (or a modified variant) is used and successfully parsed,
 that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 
 \pnum
-\returns \tcode{is}.
+\returns
+\tcode{is}.
 \end{itemdescr}
 
 \rSec1[time.point]{Class template \tcode{time_point}}
 
-\indexlibrary{\idxcode{time_point}}%
+\indexlibraryglobal{time_point}%
 \begin{codeblock}
 namespace std::chrono {
   template<class Clock, class Duration = typename Clock::duration>
@@ -2091,31 +2154,31 @@ the program is ill-formed.
 
 \rSec2[time.point.cons]{Constructors}
 
-\indexlibrary{\idxcode{time_point}!constructor}%
+\indexlibraryctor{time_point}%
 \begin{itemdecl}
 constexpr time_point();
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects Constructs an object of type \tcode{time_point}, initializing
-\tcode{d_} with \tcode{duration::zero()}. Such a \tcode{time_point} object
-represents the epoch.
+\effects
+Initializes \tcode{d_} with \tcode{duration::zero()}.
+Such a \tcode{time_point} object represents the epoch.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{time_point}!constructor}%
+\indexlibraryctor{time_point}%
 \begin{itemdecl}
 constexpr explicit time_point(const duration& d);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects Constructs an object of type \tcode{time_point}, initializing
-\tcode{d_} with \tcode{d}. Such a \tcode{time_point} object represents the epoch
-\tcode{+ d}.
+\effects
+Initializes \tcode{d_} with \tcode{d}.
+Such a \tcode{time_point} object represents the epoch \tcode{+ d}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{time_point}!constructor}%
+\indexlibraryctor{time_point}%
 \begin{itemdecl}
 template<class Duration2>
   constexpr time_point(const time_point<clock, Duration2>& t);
@@ -2123,12 +2186,12 @@ template<class Duration2>
 
 \begin{itemdescr}
 \pnum
-\remarks This constructor shall not participate in overload resolution unless \tcode{Duration2}
-is implicitly convertible to \tcode{duration}.
+\constraints
+\tcode{is_convertible_v<Duration2, duration>} is \tcode{true}.
 
 \pnum
-\effects Constructs an object of type \tcode{time_point}, initializing
-\tcode{d_} with \tcode{t.time_since_epoch()}.
+\effects
+Initializes \tcode{d_} with \tcode{t.time_since_epoch()}.
 \end{itemdescr}
 
 \rSec2[time.point.observer]{Observer}
@@ -2140,7 +2203,8 @@ constexpr duration time_since_epoch() const;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{d_}.
+\returns
+\tcode{d_}.
 \end{itemdescr}
 
 \rSec2[time.point.arithmetic]{Arithmetic}
@@ -2152,10 +2216,12 @@ constexpr time_point& operator++();
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{++d_}.
+\effects
+Equivalent to: \tcode{++d_}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator++}{time_point}%
@@ -2165,7 +2231,8 @@ constexpr time_point operator++(int);
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{time_point\{d_++\}}.
+\effects
+Equivalent to: \tcode{return time_point\{d_++\};}
 \end{itemdescr}
 
 \indexlibrarymember{operator--}{time_point}%
@@ -2175,10 +2242,12 @@ constexpr time_point& operator--();
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{--d_}.
+\effects
+Equivalent to: \tcode{--d_}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator--}{time_point}%
@@ -2188,7 +2257,8 @@ constexpr time_point operator--(int);
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{time_point\{d_--\}}.
+\effects
+Equivalent to: \tcode{return time_point\{d_-{}-\};}
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{time_point}%
@@ -2198,10 +2268,12 @@ constexpr time_point& operator+=(const duration& d);
 
 \begin{itemdescr}
 \pnum
-\effects As if by: \tcode{d_ += d;}
+\effects
+Equivalent to: \tcode{d_ += d}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{time_point}%
@@ -2211,10 +2283,12 @@ constexpr time_point& operator-=(const duration& d);
 
 \begin{itemdescr}
 \pnum
-\effects As if by: \tcode{d_ -= d;}
+\effects
+Equivalent to: \tcode{d_ -= d}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \rSec2[time.point.special]{Special values}
@@ -2226,7 +2300,8 @@ static constexpr time_point min() noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{time_point(duration::min())}.
+\returns
+\tcode{time_point(duration::min())}.
 \end{itemdescr}
 
 \indexlibrarymember{max}{time_point}%
@@ -2236,7 +2311,8 @@ static constexpr time_point max() noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{time_point(duration::max())}.
+\returns
+\tcode{time_point(duration::max())}.
 \end{itemdescr}
 
 \rSec2[time.point.nonmember]{Non-member arithmetic}
@@ -2251,7 +2327,8 @@ template<class Clock, class Duration1, class Rep2, class Period2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{CT(lhs.time_since_epoch() + rhs)}, where \tcode{CT} is the type of the return value.
+\returns
+\tcode{CT(lhs.time_since_epoch() + rhs)}, where \tcode{CT} is the type of the return value.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{time_point}%
@@ -2264,7 +2341,8 @@ template<class Rep1, class Period1, class Clock, class Duration2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{rhs + lhs}.
+\returns
+\tcode{rhs + lhs}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{time_point}%
@@ -2277,7 +2355,8 @@ template<class Clock, class Duration1, class Rep2, class Period2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{CT(lhs.time_since_epoch() - rhs)},
+\returns
+\tcode{CT(lhs.time_since_epoch() - rhs)},
 where \tcode{CT} is the type of the return value.
 \end{itemdescr}
 
@@ -2290,7 +2369,8 @@ template<class Clock, class Duration1, class Duration2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{lhs.time_since_epoch() - rhs.time_since_epoch()}.
+\returns
+\tcode{lhs.time_since_epoch() - rhs.time_since_epoch()}.
 \end{itemdescr}
 
 \rSec2[time.point.comparisons]{Comparisons}
@@ -2304,7 +2384,8 @@ template<class Clock, class Duration1, class Duration2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{lhs.time_since_epoch() == rhs.time_since_epoch()}.
+\returns
+\tcode{lhs.time_since_epoch() == rhs.time_since_epoch()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<}{time_point}%
@@ -2316,7 +2397,8 @@ template<class Clock, class Duration1, class Duration2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{lhs.time_since_epoch() < rhs.time_since_epoch()}.
+\returns
+\tcode{lhs.time_since_epoch() < rhs.time_since_epoch()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator>}{time_point}%
@@ -2328,7 +2410,8 @@ template<class Clock, class Duration1, class Duration2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{rhs < lhs}.
+\returns
+\tcode{rhs < lhs}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=}{time_point}%
@@ -2340,7 +2423,8 @@ template<class Clock, class Duration1, class Duration2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{!(rhs < lhs)}.
+\returns
+\tcode{!(rhs < lhs)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator>=}{time_point}%
@@ -2352,7 +2436,8 @@ template<class Clock, class Duration1, class Duration2>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{!(lhs < rhs)}.
+\returns
+\tcode{!(lhs < rhs)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator>=}{time_point}%
@@ -2365,13 +2450,14 @@ template<class Clock, class Duration1,
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{lhs.time_since_epoch() <=> rhs.time_since_epoch()}.
+\returns
+\tcode{lhs.time_since_epoch() <=> rhs.time_since_epoch()}.
 \end{itemdescr}
 
-\rSec2[time.point.cast]{\tcode{time_point_cast}}
+\rSec2[time.point.cast]{Conversions}
 
-\indexlibrary{\idxcode{time_point}!\idxcode{time_point_cast}}%
-\indexlibrary{\idxcode{time_point_cast}}%
+\indexlibrarymember{time_point}{time_point_cast}%
+\indexlibraryglobal{time_point_cast}%
 \begin{itemdecl}
 template<class ToDuration, class Clock, class Duration>
   constexpr time_point<Clock, ToDuration> time_point_cast(const time_point<Clock, Duration>& t);
@@ -2379,8 +2465,8 @@ template<class ToDuration, class Clock, class Duration>
 
 \begin{itemdescr}
 \pnum
-\remarks This function shall not participate in overload resolution
-unless \tcode{ToDuration} is a specialization of \tcode{duration}.
+\constraints
+\tcode{ToDuration} is a specialization of \tcode{duration}.
 
 \pnum
 \returns
@@ -2397,11 +2483,12 @@ template<class ToDuration, class Clock, class Duration>
 
 \begin{itemdescr}
 \pnum
-\remarks This function shall not participate in overload resolution
-unless \tcode{ToDuration} is a specialization of \tcode{duration}.
+\constraints
+\tcode{ToDuration} is a specialization of \tcode{duration}.
 
 \pnum
-\returns \tcode{time_point<Clock, ToDuration>(floor<ToDuration>(tp.time_since_epoch()))}.
+\returns
+\tcode{time_point<Clock, ToDuration>(floor<ToDuration>(tp.time_since_epoch()))}.
 \end{itemdescr}
 
 \indexlibrarymember{ceil}{time_point}%
@@ -2412,11 +2499,12 @@ template<class ToDuration, class Clock, class Duration>
 
 \begin{itemdescr}
 \pnum
-\remarks This function shall not participate in overload resolution
-unless \tcode{ToDuration} is a specialization of \tcode{duration}.
+\constraints
+\tcode{ToDuration} is a specialization of \tcode{duration}.
 
 \pnum
-\returns \tcode{time_point<Clock, ToDuration>(ceil<ToDuration>(tp.time_since_epoch()))}.
+\returns
+\tcode{time_point<Clock, ToDuration>(ceil<ToDuration>(tp.time_since_epoch()))}.
 \end{itemdescr}
 
 \indexlibrarymember{round}{time_point}%
@@ -2427,18 +2515,19 @@ template<class ToDuration, class Clock, class Duration>
 
 \begin{itemdescr}
 \pnum
-\remarks This function shall not participate in overload resolution
-unless \tcode{ToDuration} is a specialization of \tcode{duration}, and
+\constraints
+\tcode{ToDuration} is a specialization of \tcode{duration}, and
 \tcode{treat_as_floating_point_v<typename ToDuration::rep>} is \tcode{false}.
 
 \pnum
-\returns \tcode{time_point<Clock, ToDuration>(round<ToDuration>(tp.time_since_epoch()))}.
+\returns
+\tcode{time_point<Clock, ToDuration>(round<ToDuration>(tp.time_since_epoch()))}.
 \end{itemdescr}
 
 \rSec1[time.clock]{Clocks}
 
 \pnum
-The types defined in this subclause shall meet the
+The types defined in this subclause meet the
 \oldconcept{TrivialClock}
 requirements\iref{time.clock.req}
 unless otherwise specified.
@@ -2446,7 +2535,7 @@ unless otherwise specified.
 \rSec2[time.clock.system]{Class \tcode{system_clock}}
 
 \rSec3[time.clock.system.overview]{Overview}
-\indexlibrary{\idxcode{system_clock}}%
+\indexlibraryglobal{system_clock}%
 
 \begin{codeblock}
 namespace std::chrono {
@@ -2475,7 +2564,8 @@ Objects of type \tcode{sys_time<Duration>} measure time since (and before)
 This measure is commonly referred to as \defn{Unix time}.
 This measure facilitates an efficient mapping between
 \tcode{sys_time} and calendar types\iref{time.cal}.
-\begin{example} \\
+\begin{example}
+\\
 \tcode{sys_seconds\{sys_days\{1970y/January/1\}\}.time_since_epoch()} is \tcode{0s}. \\
 \tcode{sys_seconds\{sys_days\{2000y/January/1\}\}.time_since_epoch()} is \tcode{946'684'800s},
 which is \tcode{10'957 * 86'400s}. \\
@@ -2490,9 +2580,11 @@ using system_clock::rep = @\unspec@;
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{system_clock::duration::min() < system_clock::duration::zero()} shall
-be \tcode{true}.\\
-\begin{note} This implies that \tcode{rep} is a signed type. \end{note}
+\constraints
+\tcode{system_clock::duration::min() < system_clock::duration::zero()} is \tcode{true}. \\
+\begin{note}
+This implies that \tcode{rep} is a signed type.
+\end{note}
 \end{itemdescr}
 
 \indexlibrarymember{to_time_t}{system_clock}%
@@ -2502,7 +2594,8 @@ static time_t to_time_t(const time_point& t) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns A \tcode{time_t} object that represents the same point in time as \tcode{t}
+\returns
+A \tcode{time_t} object that represents the same point in time as \tcode{t}
 when both values are restricted to the coarser of the precisions of \tcode{time_t} and
 \tcode{time_point}.
 It is \impldef{whether values are rounded or truncated to the
@@ -2517,7 +2610,8 @@ static time_point from_time_t(time_t t) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns A \tcode{time_point} object that represents the same point in time as \tcode{t}
+\returns
+A \tcode{time_point} object that represents the same point in time as \tcode{t}
 when both values are restricted to the coarser of the precisions of \tcode{time_t} and
 \tcode{time_point}.
 It is \impldef{whether values are rounded or truncated to the
@@ -2536,10 +2630,9 @@ template<class charT, class traits, class Duration>
 
 \begin{itemdescr}
 \pnum
-\remarks
-This operator shall not participate in overload resolution if
-\tcode{treat_as_floating_point_v<typename Duration::rep>} is \tcode{true},
-or if \tcode{Duration\{1\} >= days\{1\}}.
+\constraints
+\tcode{treat_as_floating_point_v<typename Duration::rep>} is \tcode{false}, and
+\tcode{Duration\{1\} < days\{1\}} is \tcode{true}.
 
 \pnum
 \effects
@@ -2569,10 +2662,12 @@ template<class charT, class traits>
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{os << year_month_day\{dp\}}.
+\effects
+\tcode{os << year_month_day\{dp\}}.
 
 \pnum
-\returns \tcode{os}.
+\returns
+\tcode{os}.
 \end{itemdescr}
 
 \indexlibrarymember{from_stream}{sys_time}%
@@ -2586,13 +2681,14 @@ template<class charT, class traits, class Duration, class Alloc = allocator<char
 
 \begin{itemdescr}
 \pnum
-\effects Attempts to parse the input stream \tcode{is}
+\effects
+Attempts to parse the input stream \tcode{is}
 into the \tcode{sys_time} \tcode{tp} using
 the format flags given in the NTCTS \tcode{fmt}
 as specified in \ref{time.parse}.
 If the parse fails to decode a valid date,
-\tcode{is.setstate(ios_base::failbit)}
-shall be called and \tcode{tp} shall not be modified.
+\tcode{is.setstate(ios_base::failbit)} is called and
+\tcode{tp} is not modified.
 If \tcode{\%Z} is used and successfully parsed,
 that value will be assigned to \tcode{*abbrev} if \tcode{abbrev} is non-null.
 If \tcode{\%z} (or a modified variant) is used and successfully parsed,
@@ -2602,13 +2698,14 @@ from the successfully parsed timestamp
 prior to assigning that difference to \tcode{tp}.
 
 \pnum
-\returns \tcode{is}.
+\returns
+\tcode{is}.
 \end{itemdescr}
 
 \rSec2[time.clock.utc]{Class \tcode{utc_clock}}
 
 \rSec3[time.clock.utc.overview]{Overview}
-\indexlibrary{\idxcode{utc_clock}}%
+\indexlibraryglobal{utc_clock}%
 
 \begin{codeblock}
 namespace std::chrono {
@@ -2637,7 +2734,8 @@ In contrast to \tcode{sys_time},
 which does not take leap seconds into account,
 \tcode{utc_clock} and its associated \tcode{time_point}, \tcode{utc_time},
 count time, including leap seconds, since 1970-01-01 00:00:00 UTC.
-\begin{example} \\
+\begin{example}
+\\
 \tcode{clock_cast<utc_clock>(sys_seconds\{sys_days\{1970y/January/1\}\}).time_since_epoch()} is \tcode{0s}. \\
 \tcode{clock_cast<utc_clock>(sys_seconds\{sys_days\{2000y/January/1\}\}).time_since_epoch()} \\
 is \tcode{946'684'822s}, which is \tcode{10'957 * 86'400s + 22s}. \\
@@ -2647,7 +2745,9 @@ is \tcode{946'684'822s}, which is \tcode{10'957 * 86'400s + 22s}. \\
 \tcode{utc_clock} is not a \oldconcept{TrivialClock}
 unless the implementation can guarantee that \tcode{utc_clock::now()}
 does not propagate an exception.
-\begin{note} \tcode{noexcept(from_sys(system_clock::now()))} is \tcode{false}. \end{note}
+\begin{note}
+\tcode{noexcept(from_sys(system_clock::now()))} is \tcode{false}.
+\end{note}
 
 \rSec3[time.clock.utc.members]{Member functions}
 
@@ -2658,7 +2758,8 @@ static time_point now();
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{from_sys(system_clock::now())}, or a more accurate value of \tcode{utc_time}.
+\returns
+\tcode{from_sys(system_clock::now())}, or a more accurate value of \tcode{utc_time}.
 \end{itemdescr}
 
 \indexlibrarymember{to_sys}{utc_clock}%
@@ -2772,8 +2873,8 @@ into the \tcode{utc_time} \tcode{tp} using
 the format flags given in the NTCTS \tcode{fmt}
 as specified in \ref{time.parse}.
 If the parse fails to decode a valid date,
-\tcode{is.setstate(ios_base::failbit)} shall be called
-and \tcode{tp} shall not be modified.
+\tcode{is.setstate(ios_base::failbit)} is called and
+\tcode{tp} is not modified.
 If \tcode{\%Z} is used and successfully parsed,
 that value will be assigned to \tcode{*abbrev} if \tcode{abbrev} is non-null.
 If \tcode{\%z} (or a modified variant) is used and successfully parsed,
@@ -2783,10 +2884,11 @@ the successfully parsed timestamp
 prior to assigning that difference to \tcode{tp}.
 
 \pnum
-\returns \tcode{is}.
+\returns
+\tcode{is}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{leap_second_info}}%
+\indexlibraryglobal{leap_second_info}%
 \begin{itemdecl}
 struct leap_second_info {
   bool    is_leap_second;
@@ -2801,7 +2903,7 @@ has data members and special members specified above.
 It has no base classes or members other than those specified.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{get_leap_second_info}}%
+\indexlibraryglobal{get_leap_second_info}%
 \begin{itemdecl}
 template<class Duration>
   leap_second_info get_leap_second_info(const utc_time<Duration>& ut);
@@ -2820,7 +2922,7 @@ the leap second referred to by \tcode{ut} is included in the count.
 \rSec2[time.clock.tai]{Class \tcode{tai_clock}}
 
 \rSec3[time.clock.tai.overview]{Overview}
-\indexlibrary{\idxcode{tai_clock}}%
+\indexlibraryglobal{tai_clock}%
 
 \begin{codeblock}
 namespace std::chrono {
@@ -2872,7 +2974,8 @@ static time_point now();
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{from_utc(utc_clock::now())}, or a more accurate value of \tcode{tai_time}.
+\returns
+\tcode{from_utc(utc_clock::now())}, or a more accurate value of \tcode{tai_time}.
 \end{itemdescr}
 
 \indexlibrarymember{to_utc}{tai_clock}%
@@ -2966,8 +3069,8 @@ into the \tcode{tai_time} \tcode{tp} using
 the format flags given in the NTCTS \tcode{fmt}
 as specified in \ref{time.parse}.
 If the parse fails to decode a valid date,
-\tcode{is.setstate(ios_base::failbit)} shall be called
-and \tcode{tp} shall not be modified.
+\tcode{is.setstate(ios_base::failbit)} is called and
+\tcode{tp} is not modified.
 If \tcode{\%Z} is used and successfully parsed,
 that value will be assigned to \tcode{*abbrev} if \tcode{abbrev} is non-null.
 If \tcode{\%z} (or a modified variant) is used and successfully parsed,
@@ -2976,13 +3079,14 @@ Additionally, the parsed offset will be subtracted from
 the successfully parsed timestamp prior to assigning that difference to \tcode{tp}.
 
 \pnum
-\returns \tcode{is}.
+\returns
+\tcode{is}.
 \end{itemdescr}
 
 \rSec2[time.clock.gps]{Class \tcode{gps_clock}}
 
 \rSec3[time.clock.gps.overview]{Overview}
-\indexlibrary{\idxcode{gps_clock}}%
+\indexlibraryglobal{gps_clock}%
 
 \begin{codeblock}
 namespace std::chrono {
@@ -3033,7 +3137,8 @@ static time_point now();
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{from_utc(utc_clock::now())}, or a more accurate value of \tcode{gps_time}.
+\returns
+\tcode{from_utc(utc_clock::now())}, or a more accurate value of \tcode{gps_time}.
 \end{itemdescr}
 
 \indexlibrarymember{to_utc}{gps_clock}%
@@ -3127,8 +3232,8 @@ into the \tcode{gps_time} \tcode{tp} using
 the format flags given in the NTCTS \tcode{fmt}
 as specified in \ref{time.parse}.
 If the parse fails to decode a valid date,
-\tcode{is.setstate(ios_base::failbit)} shall be called
-and \tcode{tp} shall not be modified.
+\tcode{is.setstate(ios_base::failbit)} is called and
+\tcode{tp} is not modified.
 If \tcode{\%Z} is used and successfully parsed,
 that value will be assigned to \tcode{*abbrev} if \tcode{abbrev} is non-null.
 If \tcode{\%z} (or a modified variant) is used and successfully parsed,
@@ -3137,13 +3242,14 @@ Additionally, the parsed offset will be subtracted from
 the successfully parsed timestamp prior to assigning that difference to \tcode{tp}.
 
 \pnum
-\returns \tcode{is}.
+\returns
+\tcode{is}.
 \end{itemdescr}
 
 \rSec2[time.clock.file]{Type \tcode{file_clock}}
 
 \rSec3[time.clock.file.overview]{Overview}
-\indexlibrary{\idxcode{file_clock}}%
+\indexlibraryglobal{file_clock}%
 
 \begin{codeblock}
 namespace std::chrono {
@@ -3233,8 +3339,8 @@ into the \tcode{file_time} \tcode{tp} using
 the format flags given in the NTCTS \tcode{fmt}
 as specified in \ref{time.parse}.
 If the parse fails to decode a valid date,
-\tcode{is.setstate(ios_base::failbit)} shall be called
-and \tcode{tp} shall not be modified.
+\tcode{is.setstate(ios_base::failbit)} is called and
+\tcode{tp} is not modified.
 If \tcode{\%Z} is used and successfully parsed,
 that value will be assigned to \tcode{*abbrev} if \tcode{abbrev} is non-null.
 If \tcode{\%z} (or a modified variant) is used and successfully parsed,
@@ -3243,11 +3349,12 @@ Additionally, the parsed offset will be subtracted from
 the successfully parsed timestamp prior to assigning that difference to \tcode{tp}.
 
 \pnum
-\returns \tcode{is}.
+\returns
+\tcode{is}.
 \end{itemdescr}
 
 \rSec2[time.clock.steady]{Class \tcode{steady_clock}}
-\indexlibrary{\idxcode{steady_clock}}%
+\indexlibraryglobal{steady_clock}%
 
 \begin{codeblock}
 namespace std::chrono {
@@ -3270,7 +3377,7 @@ never decrease as physical time advances and for which values of \tcode{time_poi
 a steady rate relative to real time. That is, the clock may not be adjusted.
 
 \rSec2[time.clock.hires]{Class \tcode{high_resolution_clock}}
-\indexlibrary{\idxcode{high_resolution_clock}}%
+\indexlibraryglobal{high_resolution_clock}%
 
 \begin{codeblock}
 namespace std::chrono {
@@ -3293,7 +3400,7 @@ shortest tick period. \tcode{high_resolution_clock} may be a synonym for
 \tcode{system_clock} or \tcode{steady_clock}.
 
 \rSec2[time.clock.local]{Local time}
-\indexlibrary{\idxcode{local_time}}%
+\indexlibraryglobal{local_time}%
 
 \pnum
 The family of time points
@@ -3322,7 +3429,8 @@ os << sys_time<Duration>{lt.time_since_epoch()};
 \end{codeblock}
 
 \pnum
-\returns \tcode{os}.
+\returns
+\tcode{os}.
 \end{itemdescr}
 
 \indexlibrarymember{from_stream}{local_time}%
@@ -3342,21 +3450,22 @@ into the \tcode{local_time} \tcode{tp} using
 the format flags given in the NTCTS \tcode{fmt}
 as specified in \ref{time.parse}.
 If the parse fails to decode a valid date,
-\tcode{is.setstate(ios_base::failbit)} shall be called
-and \tcode{tp} shall not be modified.
+\tcode{is.setstate(ios_base::failbit)} is called and
+\tcode{tp} is not modified.
 If \tcode{\%Z} is used and successfully parsed,
 that value will be assigned to \tcode{*abbrev} if \tcode{abbrev} is non-null.
 If \tcode{\%z} (or a modified variant) is used and successfully parsed,
 that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 
 \pnum
-\returns \tcode{is}.
+\returns
+\tcode{is}.
 \end{itemdescr}
 
 \rSec2[time.clock.cast]{\tcode{time_point} conversions}
 
 \rSec3[time.clock.conv]{Class template \tcode{clock_time_conversion}}
-\indexlibrary{\idxcode{clock_time_conversion}}%
+\indexlibraryglobal{clock_time_conversion}%
 
 \begin{codeblock}
 namespace std::chrono {
@@ -3413,7 +3522,8 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{t}.
+\returns
+\tcode{t}.
 \end{itemdescr}
 
 \begin{codeblock}
@@ -3434,7 +3544,8 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{t}.
+\returns
+\tcode{t}.
 \end{itemdescr}
 
 \begin{codeblock}
@@ -3455,7 +3566,8 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{t}.
+\returns
+\tcode{t}.
 \end{itemdescr}
 
 \rSec3[time.clock.cast.sys.utc]{Conversions between \tcode{system_clock} and \tcode{utc_clock}}
@@ -3478,7 +3590,8 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{utc_clock::from_sys(t)}.
+\returns
+\tcode{utc_clock::from_sys(t)}.
 \end{itemdescr}
 
 \begin{codeblock}
@@ -3499,7 +3612,8 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{utc_clock::to_sys(t)}.
+\returns
+\tcode{utc_clock::to_sys(t)}.
 \end{itemdescr}
 
 \rSec3[time.clock.cast.sys]{Conversions between \tcode{system_clock} and other clocks}
@@ -3522,16 +3636,17 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\remarks
-This function does not participate in overload resolution unless
+\constraints
 \tcode{SourceClock::to_sys(t)} is well-formed.
-If \tcode{SourceClock::to_sys(t)}
-does not return \tcode{sys_time<Duration>},
-where \tcode{Duration} is a valid \tcode{chrono::duration} specialization,
-the program is ill-formed.
 
 \pnum
-\returns \tcode{SourceClock::to_sys(t)}.
+\mandates
+\tcode{SourceClock::to_sys(t)} returns a \tcode{sys_time<Duration>},
+where \tcode{Duration} is a valid \tcode{chrono::duration} specialization.
+
+\pnum
+\returns
+\tcode{SourceClock::to_sys(t)}.
 \end{itemdescr}
 
 \begin{codeblock}
@@ -3552,16 +3667,17 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\remarks
-This function does not participate in overload resolution unless
+\constraints
 \tcode{DestClock::from_sys(t)} is well-formed.
-If \tcode{DestClock::from_sys(t)} does not return
-\tcode{time_point<DestClock, Duration>},
-where \tcode{Duration} is a valid \tcode{chrono::duration} specialization,
-the program is ill-formed.
 
 \pnum
-\returns \tcode{DestClock::from_sys(t)}.
+\mandates
+\tcode{DestClock::from_sys(t)} returns a \tcode{time_point<DestClock, Duration>},
+where \tcode{Duration} is a valid \tcode{chrono::duration} specialization.
+
+\pnum
+\returns
+\tcode{DestClock::from_sys(t)}.
 \end{itemdescr}
 
 \rSec3[time.clock.cast.utc]{Conversions between \tcode{utc_clock} and other clocks}
@@ -3584,16 +3700,17 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\remarks
-This function does not participate in overload resolution unless
+\constraints
 \tcode{SourceClock::to_utc(t)} is well-formed.
-If \tcode{SourceClock::to_utc(t)} does not return
-\tcode{utc_time<Duration>},
-where \tcode{Duration} is a valid \tcode{chrono::duration} specialization,
-the program is ill-formed.
 
 \pnum
-\returns \tcode{SourceClock::to_utc(t)}.
+\mandates
+\tcode{SourceClock::to_utc(t)}  returns a \tcode{utc_time<Duration>},
+where \tcode{Duration} is a valid \tcode{chrono::duration} specialization.
+
+\pnum
+\returns
+\tcode{SourceClock::to_utc(t)}.
 \end{itemdescr}
 
 \begin{codeblock}
@@ -3614,21 +3731,22 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\remarks
-This function does not participate in overload resolution unless
+\constraints
 \tcode{DestClock::from_utc(t)} is well-formed.
-If \tcode{DestClock::from_utc(t)} does not return
-\tcode{time_point<DestClock, Duration>},
-where \tcode{Duration} is a valid \tcode{chrono::duration} specialization,
-the program is ill-formed.
 
 \pnum
-\returns \tcode{DestClock::from_utc(t)}.
+\mandates
+\tcode{DestClock::from_utc(t)} returns a \tcode{time_point<DestClock, Duration>},
+where \tcode{Duration} is a valid \tcode{chrono::duration} specialization.
+
+\pnum
+\returns
+\tcode{DestClock::from_utc(t)}.
 \end{itemdescr}
 
 \rSec3[time.clock.cast.fn]{Function template \tcode{clock_cast}}
 
-\indexlibrary{\idxcode{clock_cast}}%
+\indexlibraryglobal{clock_cast}%
 \begin{itemdecl}
 template<class DestClock, class SourceClock, class Duration>
   auto clock_cast(const time_point<SourceClock, Duration>& t);
@@ -3636,9 +3754,8 @@ template<class DestClock, class SourceClock, class Duration>
 
 \begin{itemdescr}
 \pnum
-\remarks
-This function does not participate in overload resolution unless
-at least one of the following clock time conversion expressions
+\constraints
+At least one of the following clock time conversion expressions
 is well-formed:
 
 \begin{itemize}
@@ -3678,9 +3795,11 @@ A clock time conversion expression is considered better than
 another clock time conversion expression if it involves fewer
 \tcode{operator()} calls on \tcode{clock_time_conversion}
 specializations.
-If, among the well-formed clock time conversion expressions
-from the above list, there is not a unique best expression,
-the \tcode{clock_cast} is ambiguous and the program is ill-formed.
+
+\pnum
+\mandates
+Among the well-formed clock time conversion expressions
+from the above list, there is a unique best expression.
 
 \pnum
 \returns
@@ -3696,7 +3815,7 @@ The types in \ref{time.cal} describe the civil (Gregorian) calendar
 and its relationship to \tcode{sys_days} and \tcode{local_days}.
 
 \rSec2[time.cal.last]{Class \tcode{last_spec}}
-\indexlibrary{\idxcode{last_spec}}%
+\indexlibraryglobal{last_spec}%
 
 \begin{codeblock}
 namespace std::chrono {
@@ -3717,7 +3836,7 @@ or the last day of the week of a month.
 \rSec2[time.cal.day]{Class \tcode{day}}
 
 \rSec3[time.cal.day.overview]{Overview}
-\indexlibrary{\idxcode{day}}
+\indexlibraryglobal{day}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -3747,8 +3866,8 @@ It normally holds values in the range 1 to 31,
 but may hold non-negative values outside this range.
 It can be constructed with any \tcode{unsigned} value,
 which will be subsequently truncated to fit into \tcode{day}'s unspecified internal storage.
-\tcode{day} is \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable})
-and \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparable}),
+\tcode{day} meets the \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable})
+and \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparable}) requirements,
 and participates in basic arithmetic with \tcode{days} objects,
 which represent a difference between two \tcode{day} objects.
 
@@ -3757,7 +3876,7 @@ which represent a difference between two \tcode{day} objects.
 
 \rSec3[time.cal.day.members]{Member functions}
 
-\indexlibrary{\idxcode{day}!constructor}%
+\indexlibraryctor{day}%
 \begin{itemdecl}
 constexpr explicit day(unsigned d) noexcept;
 \end{itemdecl}
@@ -3765,8 +3884,7 @@ constexpr explicit day(unsigned d) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{day} by
-initializing \tcode{d_} with \tcode{d}.
+Initializes \tcode{d_} with \tcode{d}.
 The value held is unspecified if \tcode{d} is not in the range \crange{0}{255}.
 \end{itemdescr}
 
@@ -3777,10 +3895,12 @@ constexpr day& operator++() noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{++d_}.
+\effects
+\tcode{++d_}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator++}{day}%
@@ -3790,10 +3910,12 @@ constexpr day operator++(int) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{++(*this)}.
+\effects
+\tcode{++(*this)}.
 
 \pnum
-\returns A copy of \tcode{*this} as it existed on entry to this member function.
+\returns
+A copy of \tcode{*this} as it existed on entry to this member function.
 \end{itemdescr}
 
 \indexlibrarymember{operator--}{day}%
@@ -3803,10 +3925,12 @@ constexpr day& operator--() noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{--d_}.
+\effects
+Equivalent to: \tcode{--d_}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator--}{day}%
@@ -3816,10 +3940,12 @@ constexpr day operator--(int) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{--(*this)}.
+\effects
+\tcode{--(*this)}.
 
 \pnum
-\returns A copy of \tcode{*this} as it existed on entry to this member function.
+\returns
+A copy of \tcode{*this} as it existed on entry to this member function.
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{day}%
@@ -3829,10 +3955,12 @@ constexpr day& operator+=(const days& d) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this + d}.
+\effects
+\tcode{*this = *this + d}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{day}%
@@ -3842,10 +3970,12 @@ constexpr day& operator-=(const days& d) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this - d}.
+\effects
+\tcode{*this = *this - d}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator unsigned}{day}%
@@ -3855,7 +3985,8 @@ constexpr explicit operator unsigned() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{d_}.
+\returns
+\tcode{d_}.
 \end{itemdescr}
 
 \indexlibrarymember{ok}{day}%
@@ -3865,7 +3996,8 @@ constexpr bool ok() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{1 <= d_ \&\& d_ <= 31}.
+\returns
+\tcode{1 <= d_ \&\& d_ <= 31}.
 \end{itemdescr}
 
 \rSec3[time.cal.day.nonmembers]{Non-member functions}
@@ -3877,7 +4009,8 @@ constexpr bool operator==(const day& x, const day& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{unsigned\{x\} == unsigned\{y\}}.
+\returns
+\tcode{unsigned\{x\} == unsigned\{y\}}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=>}{day}%
@@ -3887,7 +4020,8 @@ constexpr strong_ordering operator<=>(const day& x, const day& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{unsigned\{x\} <=> unsigned\{y\}}.
+\returns
+\tcode{unsigned\{x\} <=> unsigned\{y\}}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{day}%
@@ -3897,7 +4031,8 @@ constexpr day operator+(const day& x, const days& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{day(unsigned\{x\} + y.count())}.
+\returns
+\tcode{day(unsigned\{x\} + y.count())}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{day}%
@@ -3907,7 +4042,8 @@ constexpr day operator+(const days& x, const day& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y + x}.
+\returns
+\tcode{y + x}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{day}%
@@ -3917,7 +4053,8 @@ constexpr day operator-(const day& x, const days& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x + -y}.
+\returns
+\tcode{x + -y}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{day}%
@@ -3927,7 +4064,8 @@ constexpr days operator-(const day& x, const day& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{days\{int(unsigned\{x\}) - int(unsigned\{y\})}.
+\returns
+\tcode{days\{int(unsigned\{x\}) - int(unsigned\{y\})\}}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<<}{day}%
@@ -3965,31 +4103,33 @@ into the \tcode{day} \tcode{d} using
 the format flags given in the NTCTS \tcode{fmt}
 as specified in \ref{time.parse}.
 If the parse fails to decode a valid day,
-\tcode{is.setstate(ios_base::failbit)} shall be called
-and \tcode{d} shall not be modified.
+\tcode{is.setstate(ios_base::failbit)} is called and
+\tcode{d} is not modified.
 If \tcode{\%Z} is used and successfully parsed,
 that value will be assigned to \tcode{*abbrev} if \tcode{abbrev} is non-null.
 If \tcode{\%z} (or a modified variant) is used and successfully parsed,
 that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 
 \pnum
-\returns \tcode{is}.
+\returns
+\tcode{is}.
 \end{itemdescr}
 
 \indexlibrarymember{operator""""d}{day}%
 \begin{itemdecl}
-constexpr day operator""d(unsigned long long d) noexcept;
+constexpr chrono::day operator""d(unsigned long long d) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{day\{static_cast<unsigned>(d)\}}.
+\returns
+\tcode{day\{static_cast<unsigned>(d)\}}.
 \end{itemdescr}
 
 \rSec2[time.cal.month]{Class \tcode{month}}
 
 \rSec3[time.cal.month.overview]{Overview}
-\indexlibrary{\idxcode{month}}
+\indexlibraryglobal{month}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -4019,8 +4159,8 @@ It normally holds values in the range 1 to 12,
 but may hold non-negative values outside this range.
 It can be constructed with any \tcode{unsigned} value,
 which will be subsequently truncated to fit into \tcode{month}'s unspecified internal storage.
-\tcode{month} is \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable})
-and \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparable}),
+\tcode{month} meets the \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable})
+and \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparable}) requirements,
 and participates in basic arithmetic with \tcode{months} objects,
 which represent a difference between two \tcode{month} objects.
 
@@ -4029,7 +4169,7 @@ which represent a difference between two \tcode{month} objects.
 
 \rSec3[time.cal.month.members]{Member functions}
 
-\indexlibrary{\idxcode{month}!constructor}%
+\indexlibraryctor{month}%
 \begin{itemdecl}
 constexpr explicit month(unsigned m) noexcept;
 \end{itemdecl}
@@ -4037,22 +4177,23 @@ constexpr explicit month(unsigned m) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{month} by
-initializing \tcode{m_} with \tcode{m}.
+Initializes \tcode{m_} with \tcode{m}.
 The value held is unspecified if \tcode{m} is not in the range \crange{0}{255}.
 \end{itemdescr}
 
 \indexlibrarymember{operator++}{month}%
 \begin{itemdecl}
-constexpr month& month::operator++() noexcept;
+constexpr month& operator++() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this += months\{1\}}.
+\effects
+\tcode{*this += months\{1\}}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator++}{month}%
@@ -4062,10 +4203,12 @@ constexpr month operator++(int) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{++(*this)}.
+\effects
+\tcode{++(*this)}.
 
 \pnum
-\returns A copy of \tcode{*this} as it existed on entry to this member function.
+\returns
+A copy of \tcode{*this} as it existed on entry to this member function.
 \end{itemdescr}
 
 \indexlibrarymember{operator--}{month}%
@@ -4075,10 +4218,12 @@ constexpr month& operator--() noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this -= months\{1\}}.
+\effects
+\tcode{*this -= months\{1\}}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator--}{month}%
@@ -4088,10 +4233,12 @@ constexpr month operator--(int) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{--(*this)}.
+\effects
+\tcode{--(*this)}.
 
 \pnum
-\returns A copy of \tcode{*this} as it existed on entry to this member function.
+\returns
+A copy of \tcode{*this} as it existed on entry to this member function.
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{month}%
@@ -4101,10 +4248,12 @@ constexpr month& operator+=(const months& m) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this + m}.
+\effects
+\tcode{*this = *this + m}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{month}%
@@ -4114,30 +4263,34 @@ constexpr month& operator-=(const months& m) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this - m}.
+\effects
+\tcode{*this = *this - m}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator unsigned}{month}%
 \begin{itemdecl}
-constexpr explicit month::operator unsigned() const noexcept;
+constexpr explicit operator unsigned() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m_}.
+\returns
+\tcode{m_}.
 \end{itemdescr}
 
 \indexlibrarymember{ok}{month}%
 \begin{itemdecl}
-constexpr bool month::ok() const noexcept;
+constexpr bool ok() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{1 <= m_ \&\& m_ <= 12}.
+\returns
+\tcode{1 <= m_ \&\& m_ <= 12}.
 \end{itemdescr}
 
 \rSec3[time.cal.month.nonmembers]{Non-member functions}
@@ -4149,7 +4302,8 @@ constexpr bool operator==(const month& x, const month& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{unsigned\{x\} == unsigned\{y\}}.
+\returns
+\tcode{unsigned\{x\} == unsigned\{y\}}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=>}{month}%
@@ -4159,7 +4313,8 @@ constexpr strong_ordering operator<=>(const month& x, const month& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{unsigned\{x\} <=> unsigned\{y\}}.
+\returns
+\tcode{unsigned\{x\} <=> unsigned\{y\}}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{month}%
@@ -4192,7 +4347,8 @@ constexpr month operator+(const months& x, const month& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y + x}.
+\returns
+\tcode{y + x}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{month}%
@@ -4202,7 +4358,8 @@ constexpr month operator-(const month& x, const months& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x + -y}.
+\returns
+\tcode{x + -y}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{month}%
@@ -4260,21 +4417,22 @@ into the \tcode{month} \tcode{m} using
 the format flags given in the NTCTS \tcode{fmt}
 as specified in \ref{time.parse}.
 If the parse fails to decode a valid month,
-\tcode{is.setstate(ios_base::failbit)} shall be called
-and \tcode{m} shall not be modified.
+\tcode{is.setstate(ios_base::failbit)} is called and
+\tcode{m} is not modified.
 If \tcode{\%Z} is used and successfully parsed,
 that value will be assigned to \tcode{*abbrev} if \tcode{abbrev} is non-null.
 If \tcode{\%z} (or a modified variant) is used and successfully parsed,
 that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 
 \pnum
-\returns \tcode{is}.
+\returns
+\tcode{is}.
 \end{itemdescr}
 
 \rSec2[time.cal.year]{Class \tcode{year}}
 
 \rSec3[time.cal.year.overview]{Overview}
-\indexlibrary{\idxcode{year}}
+\indexlibraryglobal{year}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -4311,8 +4469,8 @@ namespace std::chrono {
 It can represent values in the range \crange{min()}{max()}.
 It can be constructed with any \tcode{int} value,
 which will be subsequently truncated to fit into \tcode{year}'s unspecified internal storage.
-\tcode{year} is \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable})
-and \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparable}),
+\tcode{year} meets the \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable})
+and \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparable}) requirements,
 and participates in basic arithmetic with \tcode{years} objects,
 which represent a difference between two \tcode{year} objects.
 
@@ -4321,7 +4479,7 @@ which represent a difference between two \tcode{year} objects.
 
 \rSec3[time.cal.year.members]{Member functions}
 
-\indexlibrary{\idxcode{year}!constructor}%
+\indexlibraryctor{year}%
 \begin{itemdecl}
 constexpr explicit year(int y) noexcept;
 \end{itemdecl}
@@ -4329,8 +4487,7 @@ constexpr explicit year(int y) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{year} by
-initializing \tcode{y_} with \tcode{y}.
+Initializes \tcode{y_} with \tcode{y}.
 The value held is unspecified if \tcode{y} is not in the range \crange{-32767}{32767}.
 \end{itemdescr}
 
@@ -4341,10 +4498,12 @@ constexpr year& operator++() noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{++y_}.
+\effects
+\tcode{++y_}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator++}{year}%
@@ -4354,10 +4513,12 @@ constexpr year operator++(int) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{++(*this)}.
+\effects
+\tcode{++(*this)}.
 
 \pnum
-\returns A copy of \tcode{*this} as it existed on entry to this member function.
+\returns
+A copy of \tcode{*this} as it existed on entry to this member function.
 \end{itemdescr}
 
 \indexlibrarymember{operator--}{year}%
@@ -4367,10 +4528,12 @@ constexpr year& operator--() noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{--y_}.
+\effects
+\tcode{--y_}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator--}{year}%
@@ -4380,10 +4543,12 @@ constexpr year operator--(int) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{--(*this)}.
+\effects
+\tcode{--(*this)}.
 
 \pnum
-\returns A copy of \tcode{*this} as it existed on entry to this member function.
+\returns
+A copy of \tcode{*this} as it existed on entry to this member function.
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{year}%
@@ -4393,10 +4558,12 @@ constexpr year& operator+=(const years& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this + y}.
+\effects
+\tcode{*this = *this + y}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{year}%
@@ -4406,10 +4573,12 @@ constexpr year& operator-=(const years& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this - y}.
+\effects
+\tcode{*this = *this - y}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{year}%
@@ -4419,7 +4588,8 @@ constexpr year operator+() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{year}%
@@ -4429,7 +4599,8 @@ constexpr year year::operator-() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{year\{-y_\}}.
+\returns
+\tcode{year\{-y_\}}.
 \end{itemdescr}
 
 \indexlibrarymember{is_leap}{year}%
@@ -4439,7 +4610,8 @@ constexpr bool is_leap() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y_ \% 4 == 0 \&\& (y_ \% 100 != 0 || y_ \% 400 == 0)}.
+\returns
+\tcode{y_ \% 4 == 0 \&\& (y_ \% 100 != 0 || y_ \% 400 == 0)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator int}{year}%
@@ -4449,7 +4621,8 @@ constexpr explicit operator int() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y_}.
+\returns
+\tcode{y_}.
 \end{itemdescr}
 
 \indexlibrarymember{ok}{year}%
@@ -4459,7 +4632,8 @@ constexpr bool ok() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{min().y_ <= y_ \&\& y_ <= max().y_}.
+\returns
+\tcode{min().y_ <= y_ \&\& y_ <= max().y_}.
 \end{itemdescr}
 
 \indexlibrarymember{min}{year}%
@@ -4469,7 +4643,8 @@ static constexpr year min() noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{year\{-32767\}}.
+\returns
+\tcode{year\{-32767\}}.
 \end{itemdescr}
 
 \indexlibrarymember{max}{year}%
@@ -4479,7 +4654,8 @@ static constexpr year max() noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{year\{32767\}}.
+\returns
+\tcode{year\{32767\}}.
 \end{itemdescr}
 
 \rSec3[time.cal.year.nonmembers]{Non-member functions}
@@ -4491,7 +4667,8 @@ constexpr bool operator==(const year& x, const year& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{int\{x\} == int\{y\}}.
+\returns
+\tcode{int\{x\} == int\{y\}}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=>}{year}%
@@ -4501,7 +4678,8 @@ constexpr strong_ordering operator<=>(const year& x, const year& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{int\{x\} <=> int\{y\}}.
+\returns
+\tcode{int\{x\} <=> int\{y\}}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{year}%
@@ -4511,7 +4689,8 @@ constexpr year operator+(const year& x, const years& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{year\{int\{x\} + y.count()\}}.
+\returns
+\tcode{year\{int\{x\} + y.count()\}}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{year}%
@@ -4521,7 +4700,8 @@ constexpr year operator+(const years& x, const year& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y + x}.
+\returns
+\tcode{y + x}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{year}%
@@ -4531,7 +4711,8 @@ constexpr year operator-(const year& x, const years& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x + -y}.
+\returns
+\tcode{x + -y}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{year}%
@@ -4541,7 +4722,8 @@ constexpr years operator-(const year& x, const year& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{years\{int\{x\} - int\{y\}\}}.
+\returns
+\tcode{years\{int\{x\} - int\{y\}\}}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<<}{year}%
@@ -4579,31 +4761,33 @@ into the \tcode{year} \tcode{y} using
 the format flags given in the NTCTS \tcode{fmt}
 as specified in \ref{time.parse}.
 If the parse fails to decode a valid year,
-\tcode{is.setstate(ios_base::failbit)} shall be called
-and \tcode{y} shall not be modified.
+\tcode{is.setstate(ios_base::failbit)} is called and
+\tcode{y} is not modified.
 If \tcode{\%Z} is used and successfully parsed,
 that value will be assigned to \tcode{*abbrev} if \tcode{abbrev} is non-null.
 If \tcode{\%z} (or a modified variant) is used and successfully parsed,
 that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 
 \pnum
-\returns \tcode{is}.
+\returns
+\tcode{is}.
 \end{itemdescr}
 
 \indexlibrarymember{operator""""y}{year}%
 \begin{itemdecl}
-constexpr year operator""y(unsigned long long y) noexcept;
+constexpr chrono::year operator""y(unsigned long long y) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{year\{static_cast<int>(y)\}}.
+\returns
+\tcode{year\{static_cast<int>(y)\}}.
 \end{itemdescr}
 
 \rSec2[time.cal.wd]{Class \tcode{weekday}}
 
 \rSec3[time.cal.wd.overview]{Overview}
-\indexlibrary{\idxcode{weekday}}
+\indexlibraryglobal{weekday}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -4640,7 +4824,7 @@ corresponding to Sunday through Saturday, but
 it may hold non-negative values outside this range.
 It can be constructed with any \tcode{unsigned} value,
 which will be subsequently truncated to fit into \tcode{weekday}'s unspecified internal storage.
-\tcode{weekday} is \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable}).
+\tcode{weekday} meets the \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable}) requirements.
 \begin{note}
 \tcode{weekday} is not
 \oldconcept{LessThanComparable}
@@ -4654,7 +4838,7 @@ with no beginning and no end.
 
 \rSec3[time.cal.wd.members]{Member functions}
 
-\indexlibrary{\idxcode{weekday}!constructor}%
+\indexlibraryctor{weekday}%
 \begin{itemdecl}
 constexpr explicit weekday(unsigned wd) noexcept;
 \end{itemdecl}
@@ -4662,12 +4846,11 @@ constexpr explicit weekday(unsigned wd) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{weekday} by
-initializing \tcode{wd_} with \tcode{wd == 7 ?\ 0 :\ wd}.
+Initializes \tcode{wd_} with \tcode{wd == 7 ?\ 0 :\ wd}.
 The value held is unspecified if \tcode{wd} is not in the range \crange{0}{255}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{weekday}!constructor}%
+\indexlibraryctor{weekday}%
 \begin{itemdecl}
 constexpr weekday(const sys_days& dp) noexcept;
 \end{itemdecl}
@@ -4675,9 +4858,8 @@ constexpr weekday(const sys_days& dp) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{weekday} by
-computing what day of the week corresponds to the \tcode{sys_days} \tcode{dp},
-and representing that day of the week in \tcode{wd_}.
+Computes what day of the week corresponds to the \tcode{sys_days} \tcode{dp},
+and initializes that day of the week in \tcode{wd_}.
 
 \pnum
 \begin{example}
@@ -4687,7 +4869,7 @@ by storing \tcode{4} in \tcode{wd_}.
 \end{example}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{weekday}!constructor}%
+\indexlibraryctor{weekday}%
 \begin{itemdecl}
 constexpr explicit weekday(const local_days& dp) noexcept;
 \end{itemdecl}
@@ -4695,13 +4877,12 @@ constexpr explicit weekday(const local_days& dp) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{weekday} by
-computing what day of the week corresponds to the \tcode{local_days} \tcode{dp},
-and representing that day of the week in \tcode{wd_}.
+Computes what day of the week corresponds to the \tcode{local_days} \tcode{dp},
+and initializes that day of the week in \tcode{wd_}.
 
 \pnum
-\remarks
-The value after construction is identical to that constructed from
+\ensures
+The value is identical to that constructed from
 \tcode{sys_days\{dp.time_since_epoch()\}}.
 \end{itemdescr}
 
@@ -4712,10 +4893,12 @@ constexpr weekday& operator++() noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this += days\{1\}}.
+\effects
+\tcode{*this += days\{1\}}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator++}{weekday}%
@@ -4725,10 +4908,12 @@ constexpr weekday operator++(int) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{++(*this)}.
+\effects
+\tcode{++(*this)}.
 
 \pnum
-\returns A copy of \tcode{*this} as it existed on entry to this member function.
+\returns
+A copy of \tcode{*this} as it existed on entry to this member function.
 \end{itemdescr}
 
 \indexlibrarymember{operator--}{weekday}%
@@ -4738,10 +4923,12 @@ constexpr weekday& operator--() noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this -= days\{1\}}.
+\effects
+\tcode{*this -= days\{1\}}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator--}{weekday}%
@@ -4751,10 +4938,12 @@ constexpr weekday operator--(int) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{--(*this)}.
+\effects
+\tcode{--(*this)}.
 
 \pnum
-\returns A copy of \tcode{*this} as it existed on entry to this member function.
+\returns
+A copy of \tcode{*this} as it existed on entry to this member function.
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{weekday}%
@@ -4764,10 +4953,12 @@ constexpr weekday& operator+=(const days& d) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this + d}.
+\effects
+\tcode{*this = *this + d}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{weekday}%
@@ -4777,10 +4968,12 @@ constexpr weekday& operator-=(const days& d) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this - d}.
+\effects
+\tcode{*this = *this - d}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{c_encoding}{weekday}%
@@ -4790,7 +4983,8 @@ constexpr unsigned c_encoding() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{wd_}.
+\returns
+\tcode{wd_}.
 \end{itemdescr}
 
 \indexlibrarymember{iso_encoding}{weekday}%
@@ -4800,7 +4994,8 @@ constexpr unsigned iso_encoding() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{wd_ == 0u ?\ 7u :\ wd_}.
+\returns
+\tcode{wd_ == 0u ?\ 7u :\ wd_}.
 \end{itemdescr}
 
 \indexlibrarymember{ok}{weekday}%
@@ -4810,7 +5005,8 @@ constexpr bool ok() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{wd_ <= 6}.
+\returns
+\tcode{wd_ <= 6}.
 \end{itemdescr}
 
 \indexlibrarymember{operator[]}{weekday}%
@@ -4820,7 +5016,8 @@ constexpr weekday_indexed operator[](unsigned index) const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{*this, index\}}.
+\returns
+\tcode{\{*this, index\}}.
 \end{itemdescr}
 
 \indexlibrarymember{operator[]}{weekday}%
@@ -4830,7 +5027,8 @@ constexpr weekday_last operator[](last_spec) const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{weekday_last\{*this\}}.
+\returns
+\tcode{weekday_last\{*this\}}.
 \end{itemdescr}
 
 \rSec3[time.cal.wd.nonmembers]{Non-member functions}
@@ -4842,7 +5040,8 @@ constexpr bool operator==(const weekday& x, const weekday& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.wd_ == y.wd_}.
+\returns
+\tcode{x.wd_ == y.wd_}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{weekday}%
@@ -4875,7 +5074,8 @@ constexpr weekday operator+(const days& x, const weekday& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y + x}.
+\returns
+\tcode{y + x}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{weekday}%
@@ -4885,7 +5085,8 @@ constexpr weekday operator-(const weekday& x, const days& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x + -y}.
+\returns
+\tcode{x + -y}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{weekday}%
@@ -4943,21 +5144,22 @@ into the \tcode{weekday} \tcode{wd} using
 the format flags given in the NTCTS \tcode{fmt}
 as specified in \ref{time.parse}.
 If the parse fails to decode a valid weekday,
-\tcode{is.setstate(ios_base::failbit)} shall be called
-and \tcode{wd} shall not be modified.
+\tcode{is.setstate(ios_base::failbit)} is called and
+\tcode{wd} is not modified.
 If \tcode{\%Z} is used and successfully parsed,
 that value will be assigned to \tcode{*abbrev} if \tcode{abbrev} is non-null.
 If \tcode{\%z} (or a modified variant) is used and successfully parsed,
 that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 
 \pnum
-\returns \tcode{is}.
+\returns
+\tcode{is}.
 \end{itemdescr}
 
 \rSec2[time.cal.wdidx]{Class \tcode{weekday_indexed}}
 
 \rSec3[time.cal.wdidx.overview]{Overview}
-\indexlibrary{\idxcode{weekday_indexed}}
+\indexlibraryglobal{weekday_indexed}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -5001,7 +5203,7 @@ static_assert(wdi.index() == 2);
 
 \rSec3[time.cal.wdidx.members]{Member functions}
 
-\indexlibrary{\idxcode{weekday_indexed}!constructor}%
+\indexlibraryctor{weekday_indexed}%
 \begin{itemdecl}
 constexpr weekday_indexed(const chrono::weekday& wd, unsigned index) noexcept;
 \end{itemdecl}
@@ -5009,9 +5211,8 @@ constexpr weekday_indexed(const chrono::weekday& wd, unsigned index) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{weekday_indexed} by
-initializing \tcode{wd_} with \tcode{wd} and \tcode{index_} with \tcode{index}.
-The values held are unspecified if \tcode{!wd.ok()} or \tcode{index} is not in the range \crange{1}{5}.
+Initializes \tcode{wd_} with \tcode{wd} and \tcode{index_} with \tcode{index}.
+The values held are unspecified if \tcode{!wd.ok()} or \tcode{index} is not in the range \crange{0}{7}.
 \end{itemdescr}
 
 \indexlibrarymember{weekday}{weekday_indexed}%
@@ -5021,7 +5222,8 @@ constexpr chrono::weekday weekday() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{wd_}.
+\returns
+\tcode{wd_}.
 \end{itemdescr}
 
 \indexlibrarymember{index}{weekday_indexed}%
@@ -5031,7 +5233,8 @@ constexpr unsigned index() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{index_}.
+\returns
+\tcode{index_}.
 \end{itemdescr}
 
 \indexlibrarymember{ok}{weekday_indexed}%
@@ -5041,7 +5244,8 @@ constexpr bool ok() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{wd_.ok() \&\& 1 <= index_ \&\& index_ <= 5}.
+\returns
+\tcode{wd_.ok() \&\& 1 <= index_ \&\& index_ <= 5}.
 \end{itemdescr}
 
 \rSec3[time.cal.wdidx.nonmembers]{Non-member functions}
@@ -5053,7 +5257,8 @@ constexpr bool operator==(const weekday_indexed& x, const weekday_indexed& y) no
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.weekday() == y.weekday() \&\& x.index() == y.index()}.
+\returns
+\tcode{x.weekday() == y.weekday() \&\& x.index() == y.index()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<<}{weekday_indexed}%
@@ -5071,7 +5276,7 @@ Equivalent to:
 auto i = wdi.index();
 return os << (i >= 1 && i <= 5 ?
   format(os.getloc(), @\placeholder{STATICALLY-WIDEN}@<charT>("{}[{}]"), wdi.weekday(), i) :
-  format(os.getloc(), @\placeholder{STATICALLY-WIDEN}@<charT>("{}[{} is not a valid index"]"),
+  format(os.getloc(), @\placeholder{STATICALLY-WIDEN}@<charT>("{}[{} is not a valid index]"),
          wdi.weekday(), i));
 \end{codeblock}
 \end{itemdescr}
@@ -5079,7 +5284,7 @@ return os << (i >= 1 && i <= 5 ?
 \rSec2[time.cal.wdlast]{Class \tcode{weekday_last}}
 
 \rSec3[time.cal.wdlast.overview]{Overview}
-\indexlibrary{\idxcode{weekday_last}}
+\indexlibraryglobal{weekday_last}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -5115,7 +5320,7 @@ static_assert(wdl.weekday() == Sunday);
 
 \rSec3[time.cal.wdlast.members]{Member functions}
 
-\indexlibrary{\idxcode{weekday_last}!constructor}%
+\indexlibraryctor{weekday_last}%
 \begin{itemdecl}
 constexpr explicit weekday_last(const chrono::weekday& wd) noexcept;
 \end{itemdecl}
@@ -5123,8 +5328,7 @@ constexpr explicit weekday_last(const chrono::weekday& wd) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{weekday_last} by
-initializing \tcode{wd_} with \tcode{wd}.
+Initializes \tcode{wd_} with \tcode{wd}.
 \end{itemdescr}
 
 \indexlibrarymember{weekday_last}{weekday}%
@@ -5134,7 +5338,8 @@ constexpr chrono::weekday weekday() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{wd_}.
+\returns
+\tcode{wd_}.
 \end{itemdescr}
 
 \indexlibrarymember{ok}{weekday_last}%
@@ -5144,7 +5349,8 @@ constexpr bool ok() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{wd_.ok()}.
+\returns
+\tcode{wd_.ok()}.
 \end{itemdescr}
 
 \rSec3[time.cal.wdlast.nonmembers]{Non-member functions}
@@ -5156,7 +5362,8 @@ constexpr bool operator==(const weekday_last& x, const weekday_last& y) noexcept
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.weekday() == y.weekday()}.
+\returns
+\tcode{x.weekday() == y.weekday()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<<}{weekday_last}%
@@ -5178,7 +5385,7 @@ return os << format(os.getloc(), @\placeholder{STATICALLY-WIDEN}@<charT>("{}[las
 \rSec2[time.cal.md]{Class \tcode{month_day}}
 
 \rSec3[time.cal.md.overview]{Overview}
-\indexlibrary{\idxcode{month_day}}
+\indexlibraryglobal{month_day}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -5200,15 +5407,15 @@ namespace std::chrono {
 \pnum
 \tcode{month_day} represents a specific day of a specific month,
 but with an unspecified year.
-\tcode{month_day} is \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable})
-and \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparable}).
+\tcode{month_day} meets the \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable})
+and \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparable}) requirements.
 
 \pnum
 \tcode{month_day} is a trivially copyable and standard-layout class type.
 
 \rSec3[time.cal.md.members]{Member functions}
 
-\indexlibrary{\idxcode{month_day}!constructor}%
+\indexlibraryctor{month_day}%
 \begin{itemdecl}
 constexpr month_day(const chrono::month& m, const chrono::day& d) noexcept;
 \end{itemdecl}
@@ -5216,8 +5423,7 @@ constexpr month_day(const chrono::month& m, const chrono::day& d) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{month_day} by
-initializing \tcode{m_} with \tcode{m}, and \tcode{d_} with \tcode{d}.
+Initializes \tcode{m_} with \tcode{m}, and \tcode{d_} with \tcode{d}.
 \end{itemdescr}
 
 \indexlibrarymember{month}{month_day}%
@@ -5227,7 +5433,8 @@ constexpr chrono::month month() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m_}.
+\returns
+\tcode{m_}.
 \end{itemdescr}
 
 \indexlibrarymember{day}{month_day}%
@@ -5237,7 +5444,8 @@ constexpr chrono::day day() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{d_}.
+\returns
+\tcode{d_}.
 \end{itemdescr}
 
 \indexlibrarymember{ok}{month_day}%
@@ -5266,7 +5474,8 @@ constexpr bool operator==(const month_day& x, const month_day& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.month() == y.month() \&\& x.day() == y.day()}.
+\returns
+\tcode{x.month() == y.month() \&\& x.day() == y.day()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=>}{month_day}%
@@ -5318,19 +5527,20 @@ into the \tcode{month_day} \tcode{md} using
 the format flags given in the NTCTS \tcode{fmt}
 as specified in \ref{time.parse}.
 If the parse fails to decode a valid \tcode{month_day},
-\tcode{is.setstate(ios_base::failbit)} shall be called
-and \tcode{md} shall not be modified.
+\tcode{is.setstate(ios_base::failbit)} is called and
+\tcode{md} is not modified.
 If \tcode{\%Z} is used and successfully parsed,
 that value will be assigned to \tcode{*abbrev} if \tcode{abbrev} is non-null.
 If \tcode{\%z} (or a modified variant) is used and successfully parsed,
 that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 
 \pnum
-\returns \tcode{is}.
+\returns
+\tcode{is}.
 \end{itemdescr}
 
 \rSec2[time.cal.mdlast]{Class \tcode{month_day_last}}
-\indexlibrary{\idxcode{month_day_last}}
+\indexlibraryglobal{month_day_last}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -5365,7 +5575,7 @@ static_assert(mdl.month() == February);
 \pnum
 \tcode{month_day_last} is a trivially copyable and standard-layout class type.
 
-\indexlibrary{\idxcode{month_day_last}!constructor}%
+\indexlibraryctor{month_day_last}%
 \begin{itemdecl}
 constexpr explicit month_day_last(const chrono::month& m) noexcept;
 \end{itemdecl}
@@ -5373,8 +5583,7 @@ constexpr explicit month_day_last(const chrono::month& m) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{month_day_last} by
-initializing \tcode{m_} with \tcode{m}.
+Initializes \tcode{m_} with \tcode{m}.
 \end{itemdescr}
 
 \indexlibrarymember{month}{month_day_last}%
@@ -5384,7 +5593,8 @@ constexpr month month() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m_}.
+\returns
+\tcode{m_}.
 \end{itemdescr}
 
 \indexlibrarymember{ok}{month_day_last}%
@@ -5394,7 +5604,8 @@ constexpr bool ok() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m_.ok()}.
+\returns
+\tcode{m_.ok()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator==}{month_day_last}%
@@ -5404,7 +5615,8 @@ constexpr bool operator==(const month_day_last& x, const month_day_last& y) noex
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.month() == y.month()}.
+\returns
+\tcode{x.month() == y.month()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=>}{month_day_last}%
@@ -5414,7 +5626,8 @@ constexpr strong_ordering operator<=>(const month_day_last& x, const month_day_l
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.month() <=> y.month()}.
+\returns
+\tcode{x.month() <=> y.month()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<<}{month_day_last}%
@@ -5436,7 +5649,7 @@ return os << format(os.getloc(), @\placeholder{STATICALLY-WIDEN}@<charT>("{}/las
 \rSec2[time.cal.mwd]{Class \tcode{month_weekday}}
 
 \rSec3[time.cal.mwd.overview]{Overview}
-\indexlibrary{\idxcode{month_weekday}}
+\indexlibraryglobal{month_weekday}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -5462,7 +5675,7 @@ To do this the \tcode{month_weekday} stores a \tcode{month} and a \tcode{weekday
 \begin{example}
 \begin{codeblock}
 constexpr auto mwd
-    = February/Tuesday[3];               // \tcode{mwd} is the third Tuesday of February of an as yet unspecified year
+    = February/Tuesday[3];              // \tcode{mwd} is the third Tuesday of February of an as yet unspecified year
 static_assert(mwd.month() == February);
 static_assert(mwd.weekday_indexed() == Tuesday[3]);
 \end{codeblock}
@@ -5473,7 +5686,7 @@ static_assert(mwd.weekday_indexed() == Tuesday[3]);
 
 \rSec3[time.cal.mwd.members]{Member functions}
 
-\indexlibrary{\idxcode{month_weekday}!constructor}%
+\indexlibraryctor{month_weekday}%
 \begin{itemdecl}
 constexpr month_weekday(const chrono::month& m, const chrono::weekday_indexed& wdi) noexcept;
 \end{itemdecl}
@@ -5481,8 +5694,7 @@ constexpr month_weekday(const chrono::month& m, const chrono::weekday_indexed& w
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{month_weekday} by
-initializing \tcode{m_} with \tcode{m}, and \tcode{wdi_} with \tcode{wdi}.
+Initializes \tcode{m_} with \tcode{m}, and \tcode{wdi_} with \tcode{wdi}.
 \end{itemdescr}
 
 \indexlibrarymember{month}{month_weekday}%
@@ -5492,7 +5704,8 @@ constexpr chrono::month month() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m_}.
+\returns
+\tcode{m_}.
 \end{itemdescr}
 
 \indexlibrarymember{weekday_indexed}{month_weekday}%
@@ -5502,7 +5715,8 @@ constexpr chrono::weekday_indexed weekday_indexed() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{wdi_}.
+\returns
+\tcode{wdi_}.
 \end{itemdescr}
 
 \indexlibrarymember{ok}{month_weekday}%
@@ -5512,7 +5726,8 @@ constexpr bool ok() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m_.ok() \&\& wdi_.ok()}.
+\returns
+\tcode{m_.ok() \&\& wdi_.ok()}.
 \end{itemdescr}
 
 \rSec3[time.cal.mwd.nonmembers]{Non-member functions}
@@ -5524,7 +5739,8 @@ constexpr bool operator==(const month_weekday& x, const month_weekday& y) noexce
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.month() == y.month() \&\& x.weekday_indexed() == y.weekday_indexed()}.
+\returns
+\tcode{x.month() == y.month() \&\& x.weekday_indexed() == y.weekday_indexed()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<<}{month_weekday}%
@@ -5547,7 +5763,7 @@ return os << format(os.getloc(), @\placeholder{STATICALLY-WIDEN}@<charT>("{}/{}"
 \rSec2[time.cal.mwdlast]{Class \tcode{month_weekday_last}}
 
 \rSec3[time.cal.mwdlast.overview]{Overview}
-\indexlibrary{\idxcode{month_weekday_last}}
+\indexlibraryglobal{month_weekday_last}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -5574,7 +5790,7 @@ To do this the \tcode{month_weekday_last} stores a \tcode{month} and a \tcode{we
 \begin{example}
 \begin{codeblock}
 constexpr auto mwd
-    = February/Tuesday[last];    // \tcode{mwd} is the last Tuesday of February of an as yet unspecified year
+    = February/Tuesday[last];   // \tcode{mwd} is the last Tuesday of February of an as yet unspecified year
 static_assert(mwd.month() == February);
 static_assert(mwd.weekday_last() == Tuesday[last]);
 \end{codeblock}
@@ -5585,7 +5801,7 @@ static_assert(mwd.weekday_last() == Tuesday[last]);
 
 \rSec3[time.cal.mwdlast.members]{Member functions}
 
-\indexlibrary{\idxcode{month_weekday_last}!constructor}%
+\indexlibraryctor{month_weekday_last}%
 \begin{itemdecl}
 constexpr month_weekday_last(const chrono::month& m,
                              const chrono::weekday_last& wdl) noexcept;
@@ -5594,8 +5810,7 @@ constexpr month_weekday_last(const chrono::month& m,
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{month_weekday_last} by
-initializing \tcode{m_} with \tcode{m}, and \tcode{wdl_} with \tcode{wdl}.
+Initializes \tcode{m_} with \tcode{m}, and \tcode{wdl_} with \tcode{wdl}.
 \end{itemdescr}
 
 \indexlibrarymember{month}{month_weekday_last}%
@@ -5605,7 +5820,8 @@ constexpr chrono::month month() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m_}.
+\returns
+\tcode{m_}.
 \end{itemdescr}
 
 \indexlibrarymember{weekday_last}{month_weekday_last}%
@@ -5615,7 +5831,8 @@ constexpr chrono::weekday_last weekday_last() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{wdl_}.
+\returns
+\tcode{wdl_}.
 \end{itemdescr}
 
 \indexlibrarymember{ok}{month_weekday_last}%
@@ -5625,7 +5842,8 @@ constexpr bool ok() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m_.ok() \&\& wdl_.ok()}.
+\returns
+\tcode{m_.ok() \&\& wdl_.ok()}.
 \end{itemdescr}
 
 \rSec3[time.cal.mwdlast.nonmembers]{Non-member functions}
@@ -5637,7 +5855,8 @@ constexpr bool operator==(const month_weekday_last& x, const month_weekday_last&
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.month() == y.month() \&\& x.weekday_last() == y.weekday_last()}.
+\returns
+\tcode{x.month() == y.month() \&\& x.weekday_last() == y.weekday_last()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<<}{month_weekday_last}%
@@ -5660,7 +5879,7 @@ return os << format(os.getloc(), @\placeholder{STATICALLY-WIDEN}@<charT>("{}/{}"
 \rSec2[time.cal.ym]{Class \tcode{year_month}}
 
 \rSec3[time.cal.ym.overview]{Overview}
-\indexlibrary{\idxcode{year_month}}
+\indexlibraryglobal{year_month}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -5689,15 +5908,15 @@ namespace std::chrono {
 \tcode{year_month} represents a specific month of a specific year,
 but with an unspecified day.
 \tcode{year_month} is a field-based time point with a resolution of \tcode{months}.
-\tcode{year_month} is \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable})
-and \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparable}).
+\tcode{year_month} meets the \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable})
+and \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparable}) requirements.
 
 \pnum
 \tcode{year_month} is a trivially copyable and standard-layout class type.
 
 \rSec3[time.cal.ym.members]{Member functions}
 
-\indexlibrary{\idxcode{year_month}!constructor}%
+\indexlibraryctor{year_month}%
 \begin{itemdecl}
 constexpr year_month(const chrono::year& y, const chrono::month& m) noexcept;
 \end{itemdecl}
@@ -5705,8 +5924,7 @@ constexpr year_month(const chrono::year& y, const chrono::month& m) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{year_month} by
-initializing \tcode{y_} with \tcode{y}, and \tcode{m_} with \tcode{m}.
+Initializes \tcode{y_} with \tcode{y}, and \tcode{m_} with \tcode{m}.
 \end{itemdescr}
 
 \indexlibrarymember{year}{year_month}%
@@ -5716,7 +5934,8 @@ constexpr chrono::year year() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y_}.
+\returns
+\tcode{y_}.
 \end{itemdescr}
 
 \indexlibrarymember{month}{year_month}%
@@ -5726,7 +5945,8 @@ constexpr chrono::month month() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m_}.
+\returns
+\tcode{m_}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{year_month}%
@@ -5736,10 +5956,12 @@ constexpr year_month& operator+=(const months& dm) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this + dm}.
+\effects
+\tcode{*this = *this + dm}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{year_month}%
@@ -5749,10 +5971,12 @@ constexpr year_month& operator-=(const months& dm) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this - dm}.
+\effects
+\tcode{*this = *this - dm}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{year_month}%
@@ -5762,10 +5986,12 @@ constexpr year_month& operator+=(const years& dy) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this + dy}.
+\effects
+\tcode{*this = *this + dy}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{year_month}%
@@ -5775,10 +6001,12 @@ constexpr year_month& operator-=(const years& dy) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this - dy}.
+\effects
+\tcode{*this = *this - dy}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{ok}{year_month}%
@@ -5788,7 +6016,8 @@ constexpr bool ok() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y_.ok() \&\& m_.ok()}.
+\returns
+\tcode{y_.ok() \&\& m_.ok()}.
 \end{itemdescr}
 
 \rSec3[time.cal.ym.nonmembers]{Non-member functions}
@@ -5800,7 +6029,8 @@ constexpr bool operator==(const year_month& x, const year_month& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.year() == y.year() \&\& x.month() == y.month()}.
+\returns
+\tcode{x.year() == y.year() \&\& x.month() == y.month()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=>}{year_month}%
@@ -5825,7 +6055,9 @@ constexpr year_month operator+(const year_month& ym, const months& dm) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns A \tcode{year_month} value \tcode{z} such that \tcode{z - ym == dm}.
+\returns
+A \tcode{year_month} value \tcode{z} such that \tcode{z.ok() \&\& z - ym == dm}
+is \tcode{true}.
 
 \pnum
 \complexity
@@ -5839,7 +6071,8 @@ constexpr year_month operator+(const months& dm, const year_month& ym) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ym + dm}.
+\returns
+\tcode{ym + dm}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{year_month}%
@@ -5849,7 +6082,8 @@ constexpr year_month operator-(const year_month& ym, const months& dm) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ym + -dm}.
+\returns
+\tcode{ym + -dm}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{year_month}%
@@ -5873,7 +6107,8 @@ constexpr year_month operator+(const year_month& ym, const years& dy) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{(ym.year() + dy) / ym.month()}.
+\returns
+\tcode{(ym.year() + dy) / ym.month()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{year_month}%
@@ -5883,7 +6118,8 @@ constexpr year_month operator+(const years& dy, const year_month& ym) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ym + dy}.
+\returns
+\tcode{ym + dy}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{year_month}%
@@ -5893,7 +6129,8 @@ constexpr year_month operator-(const year_month& ym, const years& dy) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ym + -dy}.
+\returns
+\tcode{ym + -dy}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<<}{year_month}%
@@ -5930,21 +6167,22 @@ into the \tcode{year_month} \tcode{ym} using
 the format flags given in the NTCTS \tcode{fmt}
 as specified in \ref{time.parse}.
 If the parse fails to decode a valid \tcode{year_month},
-\tcode{is.setstate(ios_base::failbit)} shall be called
-and \tcode{ym} shall not be modified.
+\tcode{is.setstate(ios_base::failbit)} is called and
+\tcode{ym} is not modified.
 If \tcode{\%Z} is used and successfully parsed,
 that value will be assigned to \tcode{*abbrev} if \tcode{abbrev} is non-null.
 If \tcode{\%z} (or a modified variant) is used and successfully parsed,
 that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 
 \pnum
-\returns \tcode{is}.
+\returns
+\tcode{is}.
 \end{itemdescr}
 
 \rSec2[time.cal.ymd]{Class \tcode{year_month_day}}
 
 \rSec3[time.cal.ymd.overview]{Overview}
-\indexlibrary{\idxcode{year_month_day}}
+\indexlibraryglobal{year_month_day}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -5986,15 +6224,15 @@ but not \tcode{days}-oriented arithmetic.
 For the latter, there is a conversion to \tcode{sys_days},
 which efficiently supports \tcode{days}-oriented arithmetic.
 \end{note}
-\tcode{year_month_day} is \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable})
-and \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparable}),
+\tcode{year_month_day} meets the \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable})
+and \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparable}) requirements.
 
 \pnum
 \tcode{year_month_day} is a trivially copyable and standard-layout class type.
 
 \rSec3[time.cal.ymd.members]{Member functions}
 
-\indexlibrary{\idxcode{year_month_day}!constructor}%
+\indexlibraryctor{year_month_day}%
 \begin{itemdecl}
 constexpr year_month_day(const chrono::year& y, const chrono::month& m,
                          const chrono::day& d) noexcept;
@@ -6003,14 +6241,13 @@ constexpr year_month_day(const chrono::year& y, const chrono::month& m,
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{year_month_day} by
-initializing
+Initializes
 \tcode{y_} with \tcode{y},
 \tcode{m_} with \tcode{m}, and
 \tcode{d_} with \tcode{d}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{year_month_day}!constructor}%
+\indexlibraryctor{year_month_day}%
 \begin{itemdecl}
 constexpr year_month_day(const year_month_day_last& ymdl) noexcept;
 \end{itemdecl}
@@ -6018,8 +6255,7 @@ constexpr year_month_day(const year_month_day_last& ymdl) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{year_month_day} by
-initializing
+Initializes
 \tcode{y_} with \tcode{ymdl.year()},
 \tcode{m_} with \tcode{ymdl.month()}, and
 \tcode{d_} with \tcode{ymdl.day()}.
@@ -6030,7 +6266,7 @@ and then converting that \tcode{sys_days} to a \tcode{year_month_day}.
 \end{note}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{year_month_day}!constructor}%
+\indexlibraryctor{year_month_day}%
 \begin{itemdecl}
 constexpr year_month_day(const sys_days& dp) noexcept;
 \end{itemdecl}
@@ -6049,7 +6285,7 @@ for which \tcode{ymd.ok()} is \tcode{true},
 is \tcode{true}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{year_month_day}!constructor}%
+\indexlibraryctor{year_month_day}%
 \begin{itemdecl}
 constexpr explicit year_month_day(const local_days& dp) noexcept;
 \end{itemdecl}
@@ -6057,11 +6293,6 @@ constexpr explicit year_month_day(const local_days& dp) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{year_month_day}
-that corresponds to the date represented by \tcode{dp}.
-
-\pnum
-\remarks
 Equivalent to constructing with \tcode{sys_days\{dp.time_since_epoch()\}}.
 \end{itemdescr}
 
@@ -6072,10 +6303,12 @@ constexpr year_month_day& operator+=(const months& m) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this + m}.
+\effects
+\tcode{*this = *this + m}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{year_month_day}%
@@ -6085,10 +6318,12 @@ constexpr year_month_day& operator-=(const months& m) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this - m}.
+\effects
+\tcode{*this = *this - m}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{year_month_day}%
@@ -6098,10 +6333,12 @@ constexpr year_month_day& year_month_day::operator+=(const years& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this + y}.
+\effects
+\tcode{*this = *this + y}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{year_month_day}%
@@ -6111,10 +6348,12 @@ constexpr year_month_day& year_month_day::operator-=(const years& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this - y}.
+\effects
+\tcode{*this = *this - y}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{year}{year_month_day}%
@@ -6124,7 +6363,8 @@ constexpr chrono::year year() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y_}.
+\returns
+\tcode{y_}.
 \end{itemdescr}
 
 \indexlibrarymember{month}{year_month_day}%
@@ -6134,7 +6374,8 @@ constexpr chrono::month month() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m_}.
+\returns
+\tcode{m_}.
 \end{itemdescr}
 
 \indexlibrarymember{day}{year_month_day}%
@@ -6144,7 +6385,8 @@ constexpr chrono::day day() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{d_}.
+\returns
+\tcode{d_}.
 \end{itemdescr}
 
 \indexlibrarymember{operator sys_days}{year_month_day}%
@@ -6167,7 +6409,7 @@ Otherwise the value returned is unspecified.
 \remarks
 A \tcode{sys_days} in the range \crange{days\{-12687428\}}{days\{11248737\}}
 which is converted to a \tcode{year_month_day}
-shall have the same value when converted back to a \tcode{sys_days}.
+has the same value when converted back to a \tcode{sys_days}.
 
 \pnum
 \begin{example}
@@ -6186,7 +6428,8 @@ constexpr explicit operator local_days() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{local_days\{sys_days\{*this\}.time_since_epoch()\}}.
+\returns
+\tcode{local_days\{sys_days\{*this\}.time_since_epoch()\}}.
 \end{itemdescr}
 
 \indexlibrarymember{ok}{year_month_day}%
@@ -6212,7 +6455,8 @@ constexpr bool operator==(const year_month_day& x, const year_month_day& y) noex
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.year() == y.year() \&\& x.month() == y.month() \&\& x.day() == y.day()}.
+\returns
+\tcode{x.year() == y.year() \&\& x.month() == y.month() \&\& x.day() == y.day()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=>}{year_month_day}%
@@ -6238,7 +6482,8 @@ constexpr year_month_day operator+(const year_month_day& ymd, const months& dm) 
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{(ymd.year() / ymd.month() + dm) / ymd.day()}.
+\returns
+\tcode{(ymd.year() / ymd.month() + dm) / ymd.day()}.
 
 \pnum
 \begin{note}
@@ -6255,7 +6500,8 @@ constexpr year_month_day operator+(const months& dm, const year_month_day& ymd) 
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymd + dm}.
+\returns
+\tcode{ymd + dm}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{year_month_day}%
@@ -6265,7 +6511,8 @@ constexpr year_month_day operator-(const year_month_day& ymd, const months& dm) 
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymd + (-dm)}.
+\returns
+\tcode{ymd + (-dm)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{year_month_day}%
@@ -6275,7 +6522,8 @@ constexpr year_month_day operator+(const year_month_day& ymd, const years& dy) n
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{(ymd.year() + dy) / ymd.month() / ymd.day()}.
+\returns
+\tcode{(ymd.year() + dy) / ymd.month() / ymd.day()}.
 
 \pnum
 \begin{note}
@@ -6293,7 +6541,8 @@ constexpr year_month_day operator+(const years& dy, const year_month_day& ymd) n
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymd + dy}.
+\returns
+\tcode{ymd + dy}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{year_month_day}%
@@ -6303,7 +6552,8 @@ constexpr year_month_day operator-(const year_month_day& ymd, const years& dy) n
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymd + (-dy)}.
+\returns
+\tcode{ymd + (-dy)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<<}{year_month_day}%
@@ -6341,21 +6591,22 @@ into the \tcode{year_month_day} \tcode{ymd} using
 the format flags given in the NTCTS \tcode{fmt}
 as specified in \ref{time.parse}.
 If the parse fails to decode a valid \tcode{year_month_day},
-\tcode{is.setstate(ios_base::failbit)} shall be called
-and \tcode{ymd} shall not be modified.
+\tcode{is.setstate(ios_base::failbit)} is called and
+\tcode{ymd} is not modified.
 If \tcode{\%Z} is used and successfully parsed,
 that value will be assigned to \tcode{*abbrev} if \tcode{abbrev} is non-null.
 If \tcode{\%z} (or a modified variant) is used and successfully parsed,
 that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 
 \pnum
-\returns \tcode{is}.
+\returns
+\tcode{is}.
 \end{itemdescr}
 
 \rSec2[time.cal.ymdlast]{Class \tcode{year_month_day_last}}
 
 \rSec3[time.cal.ymdlast.overview]{Overview}
-\indexlibrary{\idxcode{year_month_day_last}}
+\indexlibraryglobal{year_month_day_last}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -6394,15 +6645,15 @@ but not \tcode{days}-oriented arithmetic.
 For the latter, there is a conversion to \tcode{sys_days},
 which efficiently supports \tcode{days}-oriented arithmetic.
 \end{note}
-\tcode{year_month_day_last} is \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable})
-and \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparable}),
+\tcode{year_month_day_last} meets the \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable})
+and \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparable}) requirements.
 
 \pnum
 \tcode{year_month_day_last} is a trivially copyable and standard-layout class type.
 
 \rSec3[time.cal.ymdlast.members]{Member functions}
 
-\indexlibrary{\idxcode{year_month_day_last}!constructor}%
+\indexlibraryctor{year_month_day_last}%
 \begin{itemdecl}
 constexpr year_month_day_last(const chrono::year& y,
                               const chrono::month_day_last& mdl) noexcept;
@@ -6411,8 +6662,7 @@ constexpr year_month_day_last(const chrono::year& y,
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{year_month_day_last} by
-initializing \tcode{y_} with \tcode{y} and \tcode{mdl_} with \tcode{mdl}.
+Initializes \tcode{y_} with \tcode{y} and \tcode{mdl_} with \tcode{mdl}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{year_month_day_last}%
@@ -6422,10 +6672,12 @@ constexpr year_month_day_last& operator+=(const months& m) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this + m}.
+\effects
+\tcode{*this = *this + m}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{year_month_day_last}%
@@ -6435,10 +6687,12 @@ constexpr year_month_day_last& operator-=(const months& m) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this - m}.
+\effects
+\tcode{*this = *this - m}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{year_month_day_last}%
@@ -6448,10 +6702,12 @@ constexpr year_month_day_last& operator+=(const years& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this + y}.
+\effects
+\tcode{*this = *this + y}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{year_month_day_last}%
@@ -6461,10 +6717,12 @@ constexpr year_month_day_last& operator-=(const years& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this - y}.
+\effects
+\tcode{*this = *this - y}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{year}{year_month_day_last}%
@@ -6474,7 +6732,8 @@ constexpr chrono::year year() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y_}.
+\returns
+\tcode{y_}.
 \end{itemdescr}
 
 \indexlibrarymember{month}{year_month_day_last}%
@@ -6484,7 +6743,8 @@ constexpr chrono::month month() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{mdl_.month()}.
+\returns
+\tcode{mdl_.month()}.
 \end{itemdescr}
 
 \indexlibrarymember{month_day_last}{year_month_day_last}%
@@ -6494,7 +6754,8 @@ constexpr chrono::month_day_last month_day_last() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{mdl_}.
+\returns
+\tcode{mdl_}.
 \end{itemdescr}
 
 \indexlibrarymember{day}{year_month_day_last}%
@@ -6505,8 +6766,11 @@ constexpr chrono::day day() const noexcept;
 \begin{itemdescr}
 \pnum
 \returns
-A \tcode{day} representing the last day of the (\tcode{year}, \tcode{month}) pair
+If \tcode{ok()} is \tcode{true},
+returns a \tcode{day} representing
+the last day of the (\tcode{year}, \tcode{month}) pair
 represented by \tcode{*this}.
+Otherwise, the returned value is unspecified.
 
 \pnum
 \begin{note}
@@ -6521,7 +6785,8 @@ constexpr operator sys_days() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{sys_days\{year()/month()/day()\}}.
+\returns
+\tcode{sys_days\{year()/month()/day()\}}.
 \end{itemdescr}
 
 \indexlibrarymember{operator local_days}{year_month_day_last}%
@@ -6531,7 +6796,8 @@ constexpr explicit operator local_days() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{local_days\{sys_days\{*this\}.time_since_epoch()\}}.
+\returns
+\tcode{local_days\{sys_days\{*this\}.time_since_epoch()\}}.
 \end{itemdescr}
 
 \indexlibrarymember{ok}{year_month_day_last}%
@@ -6541,7 +6807,8 @@ constexpr bool ok() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y_.ok() \&\& mdl_.ok()}.
+\returns
+\tcode{y_.ok() \&\& mdl_.ok()}.
 \end{itemdescr}
 
 \rSec3[time.cal.ymdlast.nonmembers]{Non-member functions}
@@ -6553,7 +6820,8 @@ constexpr bool operator==(const year_month_day_last& x, const year_month_day_las
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.year() == y.year() \&\& x.month_day_last() == y.month_day_last()}.
+\returns
+\tcode{x.year() == y.year() \&\& x.month_day_last() == y.month_day_last()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=>}{year_month_day_last}%
@@ -6580,7 +6848,8 @@ constexpr year_month_day_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{(ymdl.year() / ymdl.month() + dm) / last}.
+\returns
+\tcode{(ymdl.year() / ymdl.month() + dm) / last}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{year_month_day_last}%
@@ -6591,7 +6860,8 @@ constexpr year_month_day_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymdl + dm}.
+\returns
+\tcode{ymdl + dm}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{year_month_day_last}%
@@ -6602,7 +6872,8 @@ constexpr year_month_day_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymdl + (-dm)}.
+\returns
+\tcode{ymdl + (-dm)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{year_month_day_last}%
@@ -6613,7 +6884,8 @@ constexpr year_month_day_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{ymdl.year()+dy, ymdl.month_day_last()\}}.
+\returns
+\tcode{\{ymdl.year()+dy, ymdl.month_day_last()\}}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{year_month_day_last}%
@@ -6624,7 +6896,8 @@ constexpr year_month_day_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymdl + dy}.
+\returns
+\tcode{ymdl + dy}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{year_month_day_last}%
@@ -6635,7 +6908,8 @@ constexpr year_month_day_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymdl + (-dy)}.
+\returns
+\tcode{ymdl + (-dy)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<<}{year_month_day_last}%
@@ -6658,7 +6932,7 @@ return os << format(os.getloc(), @\placeholder{STATICALLY-WIDEN}@<charT>("{}/{}"
 \rSec2[time.cal.ymwd]{Class \tcode{year_month_weekday}}
 
 \rSec3[time.cal.ymwd.overview]{Overview}
-\indexlibrary{\idxcode{year_month_weekday}}
+\indexlibraryglobal{year_month_weekday}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -6702,14 +6976,14 @@ but not \tcode{days}-oriented arithmetic.
 For the latter, there is a conversion to \tcode{sys_days},
 which efficiently supports \tcode{days}-oriented arithmetic.
 \end{note}
-\tcode{year_month_weekday} is \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable}).
+\tcode{year_month_weekday} meets the \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable}) requirements.
 
 \pnum
 \tcode{year_month_weekday} is a trivially copyable and standard-layout class type.
 
 \rSec3[time.cal.ymwd.members]{Member functions}
 
-\indexlibrary{\idxcode{year_month_weekday}!constructor}%
+\indexlibraryctor{year_month_weekday}%
 \begin{itemdecl}
 constexpr year_month_weekday(const chrono::year& y, const chrono::month& m,
                              const chrono::weekday_indexed& wdi) noexcept;
@@ -6718,11 +6992,10 @@ constexpr year_month_weekday(const chrono::year& y, const chrono::month& m,
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{year_month_weekday} by
-initializing \tcode{y_} with \tcode{y}, \tcode{m_} with \tcode{m}, and \tcode{wdi_} with \tcode{wdi}.
+Initializes \tcode{y_} with \tcode{y}, \tcode{m_} with \tcode{m}, and \tcode{wdi_} with \tcode{wdi}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{year_month_weekday}!constructor}%
+\indexlibraryctor{year_month_weekday}%
 \begin{itemdecl}
 constexpr year_month_weekday(const sys_days& dp) noexcept;
 \end{itemdecl}
@@ -6740,7 +7013,7 @@ for which \tcode{ymdl.ok()} is \tcode{true},
 \tcode{ymdl == year_month_weekday\{sys_days\{ymdl\}\}} is \tcode{true}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{year_month_weekday}!constructor}%
+\indexlibraryctor{year_month_weekday}%
 \begin{itemdecl}
 constexpr explicit year_month_weekday(const local_days& dp) noexcept;
 \end{itemdecl}
@@ -6748,11 +7021,6 @@ constexpr explicit year_month_weekday(const local_days& dp) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{year_month_weekday}
-that corresponds to the date represented by \tcode{dp}.
-
-\pnum
-\remarks
 Equivalent to constructing with \tcode{sys_days\{dp.time_since_epoch()\}}.
 \end{itemdescr}
 
@@ -6763,10 +7031,12 @@ constexpr year_month_weekday& operator+=(const months& m) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this + m}.
+\effects
+\tcode{*this = *this + m}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{year_month_weekday}%
@@ -6776,10 +7046,12 @@ constexpr year_month_weekday& operator-=(const months& m) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this - m}.
+\effects
+\tcode{*this = *this - m}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{year_month_weekday}%
@@ -6789,10 +7061,12 @@ constexpr year_month_weekday& operator+=(const years& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this + y}.
+\effects
+\tcode{*this = *this + y}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{year_month_weekday}%
@@ -6802,10 +7076,12 @@ constexpr year_month_weekday& operator-=(const years& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this - y}.
+\effects
+\tcode{*this = *this - y}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{year}{year_month_weekday}%
@@ -6815,7 +7091,8 @@ constexpr chrono::year year() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y_}.
+\returns
+\tcode{y_}.
 \end{itemdescr}
 
 \indexlibrarymember{month}{year_month_weekday}%
@@ -6825,7 +7102,8 @@ constexpr chrono::month month() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m_}.
+\returns
+\tcode{m_}.
 \end{itemdescr}
 
 \indexlibrarymember{weekday}{year_month_weekday}%
@@ -6835,7 +7113,8 @@ constexpr chrono::weekday weekday() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{wdi_.weekday()}.
+\returns
+\tcode{wdi_.weekday()}.
 \end{itemdescr}
 
 \indexlibrarymember{index}{year_month_weekday}%
@@ -6845,7 +7124,8 @@ constexpr unsigned index() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{wdi_.index()}.
+\returns
+\tcode{wdi_.index()}.
 \end{itemdescr}
 
 \indexlibrarymember{weekday_indexed}{year_month_weekday}%
@@ -6855,7 +7135,8 @@ constexpr chrono::weekday_indexed weekday_indexed() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{wdi_}.
+\returns
+\tcode{wdi_}.
 \end{itemdescr}
 
 \indexlibrarymember{operator sys_days}{year_month_weekday}%
@@ -6884,7 +7165,8 @@ constexpr explicit operator local_days() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{local_days\{sys_days\{*this\}.time_since_epoch()\}}.
+\returns
+\tcode{local_days\{sys_days\{*this\}.time_since_epoch()\}}.
 \end{itemdescr}
 
 \indexlibrarymember{ok}{year_month_weekday}%
@@ -6927,7 +7209,8 @@ constexpr year_month_weekday operator+(const year_month_weekday& ymwd, const mon
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{(ymwd.year() / ymwd.month() + dm) / ymwd.weekday_indexed()}.
+\returns
+\tcode{(ymwd.year() / ymwd.month() + dm) / ymwd.weekday_indexed()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{year_month_weekday}%
@@ -6937,7 +7220,8 @@ constexpr year_month_weekday operator+(const months& dm, const year_month_weekda
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymwd + dm}.
+\returns
+\tcode{ymwd + dm}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{year_month_weekday}%
@@ -6947,7 +7231,8 @@ constexpr year_month_weekday operator-(const year_month_weekday& ymwd, const mon
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymwd + (-dm)}.
+\returns
+\tcode{ymwd + (-dm)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{year_month_weekday}%
@@ -6957,7 +7242,8 @@ constexpr year_month_weekday operator+(const year_month_weekday& ymwd, const yea
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{ymwd.year()+dy, ymwd.month(), ymwd.weekday_indexed()\}}.
+\returns
+\tcode{\{ymwd.year()+dy, ymwd.month(), ymwd.weekday_indexed()\}}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{year_month_weekday}%
@@ -6967,7 +7253,8 @@ constexpr year_month_weekday operator+(const years& dy, const year_month_weekday
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymwd + dy}.
+\returns
+\tcode{ymwd + dy}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{year_month_weekday}%
@@ -6977,7 +7264,8 @@ constexpr year_month_weekday operator-(const year_month_weekday& ymwd, const yea
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymwd + (-dy)}.
+\returns
+\tcode{ymwd + (-dy)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<<}{year_month_weekday}%
@@ -7000,7 +7288,7 @@ return os << format(os.getloc(), @\placeholder{STATICALLY-WIDEN}@<charT>("{}/{}/
 \rSec2[time.cal.ymwdlast]{Class \tcode{year_month_weekday_last}}
 
 \rSec3[time.cal.ymwdlast.overview]{Overview}
-\indexlibrary{\idxcode{year_month_weekday_last}}
+\indexlibraryglobal{year_month_weekday_last}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -7041,14 +7329,14 @@ but not \tcode{days}-oriented arithmetic.
 For the latter, there is a conversion to \tcode{sys_days},
 which efficiently supports \tcode{days}-oriented arithmetic.
 \end{note}
-\tcode{year_month_weekday_last} is \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable}).
+\tcode{year_month_weekday_last} meets the \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparable}) requirements.
 
 \pnum
 \tcode{year_month_weekday_last} is a trivially copyable and standard-layout class type.
 
 \rSec3[time.cal.ymwdlast.members]{Member functions}
 
-\indexlibrary{\idxcode{year_month_weekday_last}!constructor}%
+\indexlibraryctor{year_month_weekday_last}%
 \begin{itemdecl}
 constexpr year_month_weekday_last(const chrono::year& y, const chrono::month& m,
                                   const chrono::weekday_last& wdl) noexcept;
@@ -7057,8 +7345,7 @@ constexpr year_month_weekday_last(const chrono::year& y, const chrono::month& m,
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of type \tcode{year_month_weekday_last} by
-initializing \tcode{y_} with \tcode{y}, \tcode{m_} with \tcode{m}, and \tcode{wdl_} with \tcode{wdl}.
+Initializes \tcode{y_} with \tcode{y}, \tcode{m_} with \tcode{m}, and \tcode{wdl_} with \tcode{wdl}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{year_month_weekday_last}%
@@ -7068,10 +7355,12 @@ constexpr year_month_weekday_last& operator+=(const months& m) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this + m}.
+\effects
+\tcode{*this = *this + m}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{year_month_weekday_last}%
@@ -7081,10 +7370,12 @@ constexpr year_month_weekday_last& operator-=(const months& m) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this - m}.
+\effects
+\tcode{*this = *this - m}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{year_month_weekday_last}%
@@ -7094,10 +7385,12 @@ constexpr year_month_weekday_last& operator+=(const years& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this + y}.
+\effects
+\tcode{*this = *this + y}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-=}{year_month_weekday_last}%
@@ -7107,10 +7400,12 @@ constexpr year_month_weekday_last& operator-=(const years& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this = *this - y}.
+\effects
+\tcode{*this = *this - y}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{year}{year_month_weekday_last}%
@@ -7120,7 +7415,8 @@ constexpr chrono::year year() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y_}.
+\returns
+\tcode{y_}.
 \end{itemdescr}
 
 \indexlibrarymember{month}{year_month_weekday_last}%
@@ -7130,7 +7426,8 @@ constexpr chrono::month month() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m_}.
+\returns
+\tcode{m_}.
 \end{itemdescr}
 
 \indexlibrarymember{weekday}{year_month_weekday_last}%
@@ -7140,7 +7437,8 @@ constexpr chrono::weekday weekday() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{wdl_.weekday()}.
+\returns
+\tcode{wdl_.weekday()}.
 \end{itemdescr}
 
 \indexlibrarymember{weekday_last}{year_month_weekday_last}%
@@ -7150,7 +7448,8 @@ constexpr chrono::weekday_last weekday_last() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{wdl_}.
+\returns
+\tcode{wdl_}.
 \end{itemdescr}
 
 \indexlibrarymember{operator sys_days}{year_month_weekday_last}%
@@ -7174,7 +7473,8 @@ constexpr explicit operator local_days() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{local_days\{sys_days\{*this\}.time_since_epoch()\}}.
+\returns
+\tcode{local_days\{sys_days\{*this\}.time_since_epoch()\}}.
 \end{itemdescr}
 
 \indexlibrarymember{ok}{year_month_weekday_last}%
@@ -7184,7 +7484,8 @@ constexpr bool ok() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y_.ok() \&\& m_.ok() \&\& wdl_.ok()}.
+\returns
+\tcode{y_.ok() \&\& m_.ok() \&\& wdl_.ok()}.
 \end{itemdescr}
 
 \rSec3[time.cal.ymwdlast.nonmembers]{Non-member functions}
@@ -7211,7 +7512,8 @@ constexpr year_month_weekday_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{(ymwdl.year() / ymwdl.month() + dm) / ymwdl.weekday_last()}.
+\returns
+\tcode{(ymwdl.year() / ymwdl.month() + dm) / ymwdl.weekday_last()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{year_month_weekday_last}%
@@ -7222,7 +7524,8 @@ constexpr year_month_weekday_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymwdl + dm}.
+\returns
+\tcode{ymwdl + dm}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{year_month_weekday_last}%
@@ -7233,7 +7536,8 @@ constexpr year_month_weekday_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymwdl + (-dm)}.
+\returns
+\tcode{ymwdl + (-dm)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{year_month_weekday_last}%
@@ -7244,7 +7548,8 @@ constexpr year_month_weekday_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{ymwdl.year()+dy, ymwdl.month(), ymwdl.weekday_last()\}}.
+\returns
+\tcode{\{ymwdl.year()+dy, ymwdl.month(), ymwdl.weekday_last()\}}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+}{year_month_weekday_last}%
@@ -7255,7 +7560,8 @@ constexpr year_month_weekday_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymwdl + dy}.
+\returns
+\tcode{ymwdl + dy}.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{year_month_weekday_last}%
@@ -7266,7 +7572,8 @@ constexpr year_month_weekday_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ymwdl + (-dy)}.
+\returns
+\tcode{ymwdl + (-dy)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<<}{year_month_weekday_last}%
@@ -7328,10 +7635,10 @@ month_day md2 = 4d/April;
 \pnum
 \begin{example}
 \begin{codeblock}
-auto a = 2015/4/4;         // \tcode{a == int(125)}
-auto b = 2015y/4/4;        // \tcode{b == year_month_day\{year(2015), month(4), day(4)\}}
-auto c = 2015y/4d/April;   // error: no viable \tcode{operator/} for first \tcode{/}
-auto d = 2015/April/4;     // error: no viable \tcode{operator/} for first \tcode{/}
+auto a = 2015/4/4;          // \tcode{a == int(125)}
+auto b = 2015y/4/4;         // \tcode{b == year_month_day\{year(2015), month(4), day(4)\}}
+auto c = 2015y/4d/April;    // error: no viable \tcode{operator/} for first \tcode{/}
+auto d = 2015/April/4;      // error: no viable \tcode{operator/} for first \tcode{/}
 \end{codeblock}
 \end{example}
 
@@ -7342,7 +7649,8 @@ constexpr year_month
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{y, m\}}.
+\returns
+\tcode{\{y, m\}}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7352,7 +7660,8 @@ constexpr year_month
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y / month(m)}.
+\returns
+\tcode{y / month(m)}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7362,7 +7671,8 @@ constexpr month_day
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{m, d\}}.
+\returns
+\tcode{\{m, d\}}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7372,7 +7682,8 @@ constexpr month_day
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m / day(d)}.
+\returns
+\tcode{m / day(d)}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7382,7 +7693,8 @@ constexpr month_day
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{month(m) / d}.
+\returns
+\tcode{month(m) / d}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7392,7 +7704,8 @@ constexpr month_day
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m / d}.
+\returns
+\tcode{m / d}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7402,7 +7715,8 @@ constexpr month_day
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{month(m) / d}.
+\returns
+\tcode{month(m) / d}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7412,7 +7726,8 @@ constexpr month_day_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{month_day_last\{m\}}.
+\returns
+\tcode{month_day_last\{m\}}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7422,7 +7737,8 @@ constexpr month_day_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{month(m) / last}.
+\returns
+\tcode{month(m) / last}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7432,7 +7748,8 @@ constexpr month_day_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m / last}.
+\returns
+\tcode{m / last}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7442,7 +7759,8 @@ constexpr month_day_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{month(m) / last}.
+\returns
+\tcode{month(m) / last}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7452,7 +7770,8 @@ constexpr month_weekday
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{m, wdi\}}.
+\returns
+\tcode{\{m, wdi\}}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7462,7 +7781,8 @@ constexpr month_weekday
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{month(m) / wdi}.
+\returns
+\tcode{month(m) / wdi}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7472,7 +7792,8 @@ constexpr month_weekday
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m / wdi}.
+\returns
+\tcode{m / wdi}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7482,7 +7803,8 @@ constexpr month_weekday
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{month(m) / wdi}.
+\returns
+\tcode{month(m) / wdi}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7492,7 +7814,8 @@ constexpr month_weekday_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{m, wdl\}}.
+\returns
+\tcode{\{m, wdl\}}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7502,7 +7825,8 @@ constexpr month_weekday_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{month(m) / wdl}.
+\returns
+\tcode{month(m) / wdl}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7512,7 +7836,8 @@ constexpr month_weekday_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{m / wdl}.
+\returns
+\tcode{m / wdl}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7522,7 +7847,8 @@ constexpr month_weekday_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{month(m) / wdl}.
+\returns
+\tcode{month(m) / wdl}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7532,7 +7858,8 @@ constexpr year_month_day
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{ym.year(), ym.month(), d\}}.
+\returns
+\tcode{\{ym.year(), ym.month(), d\}}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7542,7 +7869,8 @@ constexpr year_month_day
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ym / day(d)}.
+\returns
+\tcode{ym / day(d)}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7552,7 +7880,8 @@ constexpr year_month_day
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y / md.month() / md.day()}.
+\returns
+\tcode{y / md.month() / md.day()}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7562,7 +7891,8 @@ constexpr year_month_day
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{year(y) / md}.
+\returns
+\tcode{year(y) / md}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7572,7 +7902,8 @@ constexpr year_month_day
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y / md}.
+\returns
+\tcode{y / md}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7582,7 +7913,8 @@ constexpr year_month_day
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{year(y) / md}.
+\returns
+\tcode{year(y) / md}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7592,7 +7924,8 @@ constexpr year_month_day_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{ym.year(), month_day_last\{ym.month()\}\}}.
+\returns
+\tcode{\{ym.year(), month_day_last\{ym.month()\}\}}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7602,7 +7935,8 @@ constexpr year_month_day_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{y, mdl\}}.
+\returns
+\tcode{\{y, mdl\}}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7612,7 +7946,8 @@ constexpr year_month_day_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{year(y) / mdl}.
+\returns
+\tcode{year(y) / mdl}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7622,7 +7957,8 @@ constexpr year_month_day_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y / mdl}.
+\returns
+\tcode{y / mdl}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7632,7 +7968,8 @@ constexpr year_month_day_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{year(y) / mdl}.
+\returns
+\tcode{year(y) / mdl}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7642,7 +7979,8 @@ constexpr year_month_weekday
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{ym.year(), ym.month(), wdi\}}.
+\returns
+\tcode{\{ym.year(), ym.month(), wdi\}}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7652,7 +7990,8 @@ constexpr year_month_weekday
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{y, mwd.month(), mwd.weekday_indexed()\}}.
+\returns
+\tcode{\{y, mwd.month(), mwd.weekday_indexed()\}}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7662,7 +8001,8 @@ constexpr year_month_weekday
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{year(y) / mwd}.
+\returns
+\tcode{year(y) / mwd}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7672,7 +8012,8 @@ constexpr year_month_weekday
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y / mwd}.
+\returns
+\tcode{y / mwd}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7682,7 +8023,8 @@ constexpr year_month_weekday
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{year(y) / mwd}.
+\returns
+\tcode{year(y) / mwd}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7692,7 +8034,8 @@ constexpr year_month_weekday_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{ym.year(), ym.month(), wdl\}}.
+\returns
+\tcode{\{ym.year(), ym.month(), wdl\}}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7702,7 +8045,8 @@ constexpr year_month_weekday_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{y, mwdl.month(), mwdl.weekday_last()\}}.
+\returns
+\tcode{\{y, mwdl.month(), mwdl.weekday_last()\}}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7712,7 +8056,8 @@ constexpr year_month_weekday_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{year(y) / mwdl}.
+\returns
+\tcode{year(y) / mwdl}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7722,7 +8067,8 @@ constexpr year_month_weekday_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y / mwdl}.
+\returns
+\tcode{y / mwdl}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -7732,7 +8078,8 @@ constexpr year_month_weekday_last
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{year(y) / mwdl}.
+\returns
+\tcode{year(y) / mwdl}.
 \end{itemdescr}
 
 \indexlibrary{\idxcode{operator/}!calendar types|)}
@@ -7740,7 +8087,7 @@ constexpr year_month_weekday_last
 \rSec1[time.hms]{Class template \tcode{hh_mm_ss}}
 
 \rSec2[time.hms.overview]{Overview}
-\indexlibrary{\idxcode{hms}}
+\indexlibraryglobal{hms}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -8018,7 +8365,7 @@ Produces the output (assuming the "C" locale):
 These functions aid in translating between a 12h format time of day
 and a 24h format time of day.
 
-\indexlibrary{\idxcode{is_am}}%
+\indexlibraryglobal{is_am}%
 \begin{itemdecl}
 constexpr bool is_am(const hours& h) noexcept;
 \end{itemdecl}
@@ -8029,7 +8376,7 @@ constexpr bool is_am(const hours& h) noexcept;
 \tcode{0h <= h \&\& h <= 11h}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{is_pm}}%
+\indexlibraryglobal{is_pm}%
 \begin{itemdecl}
 constexpr bool is_pm(const hours& h) noexcept;
 \end{itemdecl}
@@ -8040,7 +8387,7 @@ constexpr bool is_pm(const hours& h) noexcept;
 \tcode{12h <= h \&\& h <= 23h}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{make12}}%
+\indexlibraryglobal{make12}%
 \begin{itemdecl}
 constexpr hours make12(const hours& h) noexcept;
 \end{itemdecl}
@@ -8053,7 +8400,7 @@ If \tcode{h} is not in the range \crange{0h}{23h},
 the value returned is unspecified.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{make24}}%
+\indexlibraryglobal{make24}%
 \begin{itemdecl}
 constexpr hours make24(const hours& h, bool is_pm) noexcept;
 \end{itemdecl}
@@ -8088,7 +8435,7 @@ and to user-defined calendars.
 \rSec2[time.zone.db]{Time zone database}
 
 \rSec3[time.zone.db.tzdb]{Class \tcode{tzdb}}
-\indexlibrary{\idxcode{tzdb}}
+\indexlibraryglobal{tzdb}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -8128,6 +8475,7 @@ to the \tcode{time_zone} for which \tcode{zone.name() == link.target()}.
 A \tcode{link} specifies an alternative name for a \tcode{time_zone}.
 \end{note}
 
+\pnum
 \throws
 If a \tcode{const time_zone*} cannot be found
 as described in the \returns clause,
@@ -8149,7 +8497,7 @@ A pointer to the time zone which the computer has set as its local time zone.
 \end{itemdescr}
 
 \rSec3[time.zone.db.list]{Class \tcode{tzdb_list}}
-\indexlibrary{\idxcode{tzdb_list}}
+\indexlibraryglobal{tzdb_list}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -8203,16 +8551,16 @@ const tzdb& front() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns
-A reference to the first \tcode{tzdb} in the container.
-
-\pnum
-\remarks
+\sync
 This operation is thread-safe with respect to \tcode{reload_tzdb()}.
 \begin{note}
 \tcode{reload_tzdb()} pushes a new \tcode{tzdb}
 onto the front of this container.
 \end{note}
+
+\pnum
+\returns
+A reference to the first \tcode{tzdb} in the container.
 \end{itemdescr}
 
 \indexlibrarymember{erase_after}{tzdb_list}%
@@ -8222,7 +8570,7 @@ const_iterator erase_after(const_iterator p);
 
 \begin{itemdescr}
 \pnum
-\requires
+\expects
 The iterator following \tcode{p} is dereferenceable.
 
 \pnum
@@ -8235,7 +8583,7 @@ An iterator pointing to the element following the one that was erased,
 or \tcode{end()} if no such element exists.
 
 \pnum
-\remarks
+\ensures
 No pointers, references, or iterators are invalidated
 except those referring to the erased \tcode{tzdb}.
 \begin{note}
@@ -8244,7 +8592,8 @@ referred to by \tcode{begin()}.
 \end{note}
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 \end{itemdescr}
 
 \indexlibrarymember{begin}{tzdb_list}%
@@ -8276,7 +8625,8 @@ const_iterator cbegin() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{begin()}.
+\returns
+\tcode{begin()}.
 \end{itemdescr}
 
 \indexlibrarymember{cend}{tzdb_list}%
@@ -8286,12 +8636,13 @@ const_iterator cend() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{end()}.
+\returns
+\tcode{end()}.
 \end{itemdescr}
 
 \rSec3[time.zone.db.access]{Time zone database access}
 
-\indexlibrary{\idxcode{get_tzdb_list}}%
+\indexlibraryglobal{get_tzdb_list}%
 \begin{itemdecl}
 tzdb_list& get_tzdb_list();
 \end{itemdecl}
@@ -8306,12 +8657,12 @@ the resulting database will be a \tcode{tzdb_list}
 holding a single initialized \tcode{tzdb}.
 
 \pnum
-\returns
-A reference to the database.
+\sync
+It is safe to call this function from multiple threads at one time.
 
 \pnum
-\remarks
-It is safe to call this function from multiple threads at one time.
+\returns
+A reference to the database.
 
 \pnum
 \throws
@@ -8320,24 +8671,26 @@ a reference cannot be returned to a valid \tcode{tzdb_list}
 containing one or more valid \tcode{tzdb}s.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{get_tzdb}}%
+\indexlibraryglobal{get_tzdb}%
 \begin{itemdecl}
 const tzdb& get_tzdb();
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{get_tzdb_list().front()}.
+\returns
+\tcode{get_tzdb_list().front()}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{locate_zone}}%
+\indexlibraryglobal{locate_zone}%
 \begin{itemdecl}
 const time_zone* locate_zone(string_view tz_name);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{get_tzdb().locate_zone(tz_name)}.
+\returns
+\tcode{get_tzdb().locate_zone(tz_name)}.
 
 \pnum
 \begin{note}
@@ -8346,14 +8699,15 @@ if this is the first reference to the database.
 \end{note}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{current_zone}}%
+\indexlibraryglobal{current_zone}%
 \begin{itemdecl}
 const time_zone* current_zone();
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{get_tzdb().current_zone()}.
+\returns
+\tcode{get_tzdb().current_zone()}.
 \end{itemdescr}
 
 \rSec3[time.zone.db.remote]{Remote time zone database support}
@@ -8370,7 +8724,7 @@ unless the program calls the functions in this subclause.
 This potentially updated time zone database
 is referred to as the \defn{remote time zone database}.
 
-\indexlibrary{\idxcode{reload_tzdb}}%
+\indexlibraryglobal{reload_tzdb}%
 \begin{itemdecl}
 const tzdb& reload_tzdb();
 \end{itemdecl}
@@ -8387,16 +8741,17 @@ to the front of the \tcode{tzdb_list}
 accessed by \tcode{get_tzdb_list()}.
 
 \pnum
-\returns \tcode{get_tzdb_list().front()}.
+\sync
+This function is thread-safe with respect to
+\tcode{get_tzdb_list().front()} and \tcode{get_tzdb_list().erase_after()}.
 
 \pnum
-\remarks
+\ensures
 No pointers, references, or iterators are invalidated.
 
 \pnum
-\remarks
-This function is thread-safe with respect to
-\tcode{get_tzdb_list().front()} and \tcode{get_tzdb_list().erase_after()}.
+\returns
+\tcode{get_tzdb_list().front()}.
 
 \pnum
 \throws
@@ -8404,14 +8759,15 @@ This function is thread-safe with respect to
 a reference cannot be returned to a valid \tcode{tzdb}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{remote_version}}%
+\indexlibraryglobal{remote_version}%
 \begin{itemdecl}
 string remote_version();
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns The latest remote database version.
+\returns
+The latest remote database version.
 
 \begin{note}
 This can be compared with \tcode{get_tzdb().version}
@@ -8422,7 +8778,7 @@ to discover if the local and remote databases are equivalent.
 \rSec2[time.zone.exception]{Exception classes}
 
 \rSec3[time.zone.exception.nonexist]{Class \tcode{nonexistent_local_time}}
-\indexlibrary{\idxcode{nonexistent_local_time}}
+\indexlibraryglobal{nonexistent_local_time}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -8440,7 +8796,7 @@ an attempt is made
 to convert a non-existent \tcode{local_time} to a \tcode{sys_time}
 without specifying \tcode{choose::earliest} or \tcode{choose::latest}.
 
-\indexlibrary{\idxcode{nonexistent_local_time}!constructor}%
+\indexlibraryctor{nonexistent_local_time}%
 \begin{itemdecl}
 template<class Duration>
   nonexistent_local_time(const local_time<Duration>& tp, const local_info& i);
@@ -8448,12 +8804,12 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{i.result == local_info::nonexistent}.
+\expects
+\tcode{i.result == local_info::nonexistent} is \tcode{true}.
 
 \pnum
 \effects
-Constructs a \tcode{nonexistent_local_time}
-by initializing the base class with a sequence of \tcode{char}
+Initializes the base class with a sequence of \tcode{char}
 equivalent to that produced by \tcode{os.str()}
 initialized as shown below:
 
@@ -8497,7 +8853,7 @@ Produces the output:
 \end{itemdescr}
 
 \rSec3[time.zone.exception.ambig]{Class \tcode{ambiguous_local_time}}
-\indexlibrary{\idxcode{ambiguous_local_time}}
+\indexlibraryglobal{ambiguous_local_time}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -8515,7 +8871,7 @@ an attempt is made
 to convert an ambiguous \tcode{local_time} to a \tcode{sys_time}
 without specifying \tcode{choose::earliest} or \tcode{choose::latest}.
 
-\indexlibrary{\idxcode{ambiguous_local_time}!constructor}%
+\indexlibraryctor{ambiguous_local_time}%
 \begin{itemdecl}
 template<class Duration>
   ambiguous_local_time(const local_time<Duration>& tp, const local_info& i);
@@ -8523,12 +8879,12 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{i.result == local_info::ambiguous}.
+\expects
+\tcode{i.result == local_info::ambiguous} is \tcode{true}.
 
 \pnum
 \effects
-Constructs an \tcode{ambiguous_local_time}
-by initializing the base class with a sequence of \tcode{char}
+Initializes the base class with a sequence of \tcode{char}
 equivalent to that produced by \tcode{os.str()}
 initialized as shown below:
 
@@ -8571,7 +8927,7 @@ Produces the output:
 \rSec2[time.zone.info]{Information classes}
 
 \rSec3[time.zone.info.sys]{Class \tcode{sys_info}}
-\indexlibrary{\idxcode{sys_info}}
+\indexlibraryglobal{sys_info}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -8658,7 +9014,7 @@ Streams out the \tcode{sys_info} object \tcode{r} in an unspecified format.
 \end{itemdescr}
 
 \rSec3[time.zone.info.local]{Class \tcode{local_info}}
-\indexlibrary{\idxcode{local_info}}
+\indexlibraryglobal{local_info}
 
 \indexlibrarymember{unique}{local_info}%
 \indexlibrarymember{nonexistent}{local_info}%
@@ -8737,7 +9093,7 @@ Streams out the \tcode{local_info} object \tcode{r} in an unspecified format.
 \rSec2[time.zone.timezone]{Class \tcode{time_zone}}
 
 \rSec3[time.zone.overview]{Overview}
-\indexlibrary{\idxcode{time_zone}}
+\indexlibraryglobal{time_zone}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -8787,7 +9143,8 @@ string_view name() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns The name of the \tcode{time_zone}.
+\returns
+The name of the \tcode{time_zone}.
 
 \pnum
 \begin{example}
@@ -8887,7 +9244,8 @@ bool operator==(const time_zone& x, const time_zone& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.name() == y.name()}.
+\returns
+\tcode{x.name() == y.name()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=>}{time_zone}%
@@ -8897,11 +9255,12 @@ strong_ordering operator<=>(const time_zone& x, const time_zone& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.name() <=> y.name()}.
+\returns
+\tcode{x.name() <=> y.name()}.
 \end{itemdescr}
 
 \rSec2[time.zone.zonedtraits]{Class template \tcode{zoned_traits}}
-\indexlibrary{\idxcode{zoned_traits}}
+\indexlibraryglobal{zoned_traits}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -8932,7 +9291,8 @@ static const time_zone* default_zone();
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{std::chrono::locate_zone("UTC")}.
+\returns
+\tcode{std::chrono::locate_zone("UTC")}.
 \end{itemdescr}
 
 \indexlibrarymember{locate_zone}{zoned_traits<const time_zone*>}%
@@ -8942,13 +9302,14 @@ static const time_zone* locate_zone(string_view name);
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{std::chrono::locate_zone(name)}.
+\returns
+\tcode{std::chrono::locate_zone(name)}.
 \end{itemdescr}
 
 \rSec2[time.zone.zonedtime]{Class template \tcode{zoned_time}}
 
 \rSec3[time.zone.zonedtime.overview]{Overview}
-\indexlibrary{\idxcode{zoned_time}}
+\indexlibraryglobal{zoned_time}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -8973,7 +9334,7 @@ namespace std::chrono {
     explicit zoned_time(string_view name);
 
     template<class Duration2>
-      zoned_time(const zoned_time<Duration2, TimeZonePtr>& zt) noexcept;
+      zoned_time(const zoned_time<Duration2, TimeZonePtr>& zt);
 
     zoned_time(TimeZonePtr z,    const sys_time<Duration>& st);
     zoned_time(string_view name, const sys_time<Duration>& st);
@@ -9033,7 +9394,7 @@ namespace std::chrono {
 
   template<class Duration, class TimeZonePtr, class TimeZonePtr2>
     zoned_time(TimeZonePtr, zoned_time<Duration, TimeZonePtr2>, choose = choose::earliest)
-      -> zoned_time<Duration, TimeZonePtr>;
+      -> zoned_time<common_type_t<Duration, seconds>, TimeZonePtr>;
 }
 \end{codeblock}
 
@@ -9058,15 +9419,13 @@ zoned_time();
 
 \begin{itemdescr}
 \pnum
-\remarks
-This constructor does not participate in overload resolution unless
+\constraints
 \tcode{traits::default_zone()} is a well-formed expression.
 
 \pnum
 \effects
-Constructs a \tcode{zoned_time} by
-initializing \tcode{zone_} with \tcode{traits::default_zone()} and
-default constructing \tcode{tp_}.
+Initializes \tcode{zone_} with \tcode{traits::default_zone()} and
+default constructs \tcode{tp_}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -9075,14 +9434,12 @@ zoned_time(const sys_time<Duration>& st);
 
 \begin{itemdescr}
 \pnum
-\remarks
-This constructor does not participate in overload resolution unless
+\constraints
 \tcode{traits::default_zone()} is a well-formed expression.
 
 \pnum
 \effects
-Constructs a \tcode{zoned_time} by
-initializing \tcode{zone_} with \tcode{traits::default_zone()} and \tcode{tp_} with \tcode{st}.
+Initializes \tcode{zone_} with \tcode{traits::default_zone()} and \tcode{tp_} with \tcode{st}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -9091,12 +9448,13 @@ explicit zoned_time(TimeZonePtr z);
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{z} refers to a time zone.
+\expects
+\tcode{z} refers to a time zone.
 
 \pnum
-\effects Constructs a \tcode{zoned_time} by
-initializing \tcode{zone_} with \tcode{std::move(z)}.
-% FIXME: What about tp_?
+\effects
+Initializes \tcode{zone_} with \tcode{std::move(z)} and
+default constructs \tcode{tp_}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -9105,33 +9463,29 @@ explicit zoned_time(string_view name);
 
 \begin{itemdescr}
 \pnum
-\remarks
-This constructor does not participate in overload resolution unless
+\constraints
 \tcode{traits::locate_zone(string_view\{\})} is a well-formed expression and
 \tcode{zoned_time} is constructible from the return type of \tcode{traits::locate_zone(string_view\{\})}.
 
 \pnum
 \effects
-Constructs a \tcode{zoned_time} by
-initializing \tcode{zone_} with \tcode{traits::locate_zone(name)} and
-default constructing \tcode{tp_}.
+Initializes \tcode{zone_} with \tcode{traits::locate_zone(name)} and
+default constructs \tcode{tp_}.
 \end{itemdescr}
 
 \begin{itemdecl}
 template<class Duration2>
-  zoned_time(const zoned_time<Duration2, TimeZonePtr>& y) noexcept;
+  zoned_time(const zoned_time<Duration2, TimeZonePtr>& y);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\remarks
-Does not participate in overload resolution unless
-\tcode{sys_time<Duration2>} is implicitly convertible to \tcode{sys_time<Duration>}.
+\constraints
+\tcode{is_convertible_v<sys_time<Duration2>, sys_time<Duration>>} is \tcode{true}.
 
 \pnum
 \effects
-Constructs a \tcode{zoned_time} by
-initializing \tcode{zone_} with \tcode{y.zone_} and \tcode{tp_} with \tcode{y.tp_}.
+Initializes \tcode{zone_} with \tcode{y.zone_} and \tcode{tp_} with \tcode{y.tp_}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -9140,12 +9494,12 @@ zoned_time(TimeZonePtr z, const sys_time<Duration>& st);
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{z} refers to a time zone.
+\expects
+\tcode{z} refers to a time zone.
 
 \pnum
 \effects
-Constructs a \tcode{zoned_time} by
-initializing \tcode{zone_} with \tcode{std::move(z)} and \tcode{tp_} with \tcode{st}.
+Initializes \tcode{zone_} with \tcode{std::move(z)} and \tcode{tp_} with \tcode{st}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -9154,8 +9508,7 @@ zoned_time(string_view name, const sys_time<Duration>& st);
 
 \begin{itemdescr}
 \pnum
-\remarks
-This constructor does not participate in overload resolution unless
+\constraints
 \tcode{zoned_time} is constructible from the return type of \tcode{traits::locate_zone(name)} and \tcode{st}.
 
 \pnum
@@ -9169,20 +9522,21 @@ zoned_time(TimeZonePtr z, const local_time<Duration>& tp);
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{z} refers to a time zone.
+\expects
+\tcode{z} refers to a time zone.
 
 \pnum
-\remarks
-This constructor does not participate in overload resolution unless
+\constraints
 \begin{codeblock}
-decltype(declval<TimeZonePtr&>()->to_sys(local_time<Duration>{}))
+is_convertible_v<
+  decltype(declval<TimeZonePtr&>()->to_sys(local_time<Duration>{})),
+  sys_time<duration>>
 \end{codeblock}
-is convertible to \tcode{sys_time<duration>}.
+is \tcode{true}.
 
 \pnum
 \effects
-Constructs a \tcode{zoned_time} by
-initializing \tcode{zone_} with \tcode{std::move(z)} and \tcode{tp_} with \tcode{zone_->to_sys(tp)}.
+Initializes \tcode{zone_} with \tcode{std::move(z)} and \tcode{tp_} with \tcode{zone_->to_sys(tp)}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -9191,8 +9545,7 @@ zoned_time(string_view name, const local_time<Duration>& tp);
 
 \begin{itemdescr}
 \pnum
-\remarks
-This constructor does not participate in overload resolution unless
+\constraints
 \tcode{zoned_time} is constructible from the return type of \tcode{traits::locate_zone(name)} and \tcode{tp}.
 
 \pnum
@@ -9206,20 +9559,21 @@ zoned_time(TimeZonePtr z, const local_time<Duration>& tp, choose c);
 
 \begin{itemdescr}
 \pnum
-\requires \tcode{z} refers to a time zone.
+\expects
+\tcode{z} refers to a time zone.
 
 \pnum
-\remarks
-This constructor does not participate in overload resolution unless
+\constraints
 \begin{codeblock}
-decltype(declval<TimeZonePtr&>()->to_sys(local_time<Duration>{}, choose::earliest))
+is_convertible_v<
+  decltype(declval<TimeZonePtr&>()->to_sys(local_time<Duration>{}, choose::earliest)),
+  sys_time<duration>>
 \end{codeblock}
-is convertible to \tcode{sys_time<duration>}.
+is \tcode{true}.
 
 \pnum
 \effects
-Constructs a \tcode{zoned_time} by
-initializing \tcode{zone_} with \tcode{std::move(z)} and \tcode{tp_} with \tcode{zone_->to_sys(tp, c)}.
+Initializes \tcode{zone_} with \tcode{std::move(z)} and \tcode{tp_} with \tcode{zone_->to_sys(tp, c)}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -9228,8 +9582,7 @@ zoned_time(string_view name, const local_time<Duration>& tp, choose c);
 
 \begin{itemdescr}
 \pnum
-\remarks
-This constructor does not participate in overload resolution unless
+\constraints
 \tcode{zoned_time} is constructible from
 the return type of \tcode{traits::locate_zone(name)}, \tcode{local_time<Duration>}, and \tcode{choose}.
 
@@ -9245,16 +9598,16 @@ template<class Duration2, class TimeZonePtr2>
 
 \begin{itemdescr}
 \pnum
-\remarks
-Does not participate in overload resolution unless
-\tcode{sys_time<Duration2>} is implicitly convertible to \tcode{sys_time<Duration>}.
+\constraints
+\tcode{is_convertible_v<sys_time<Duration2>, sys_time<Duration>>} is \tcode{true}.
 
 \pnum
-\requires \tcode{z} refers to a valid time zone.
+\expects
+\tcode{z} refers to a valid time zone.
 
 \pnum
-\effects Constructs a \tcode{zoned_time} by
-initializing \tcode{zone_} with \tcode{std::move(z)} and \tcode{tp_} with \tcode{y.tp_}.
+\effects
+Initializes \tcode{zone_} with \tcode{std::move(z)} and \tcode{tp_} with \tcode{y.tp_}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -9264,12 +9617,12 @@ template<class Duration2, class TimeZonePtr2>
 
 \begin{itemdescr}
 \pnum
-\remarks
-Does not participate in overload resolution unless
-\tcode{sys_time<Duration2>} is implicitly convertible to \tcode{sys_time<Duration>}.
+\constraints
+\tcode{is_convertible_v<sys_time<Duration2>, sys_time<Duration>>} is \tcode{true}.
 
 \pnum
-\requires \tcode{z} refers to a valid time zone.
+\expects
+\tcode{z} refers to a valid time zone.
 
 \pnum
 \effects
@@ -9287,8 +9640,7 @@ zoned_time(string_view name, const zoned_time<Duration>& y);
 
 \begin{itemdescr}
 \pnum
-\remarks
-This constructor does not participate in overload resolution unless
+\constraints
 \tcode{zoned_time} is constructible from the return type of \tcode{traits::locate_zone(name)} and \tcode{zoned_time}.
 
 \pnum
@@ -9302,8 +9654,7 @@ zoned_time(string_view name, const zoned_time<Duration>& y, choose c);
 
 \begin{itemdescr}
 \pnum
-\remarks
-This constructor does not participate in overload resolution unless
+\constraints
 \tcode{zoned_time} is constructible from
 the return type of \tcode{traits::locate_zone(name)}, \tcode{zoned_time}, and \tcode{choose}.
 
@@ -9332,7 +9683,8 @@ After assignment, \tcode{get_sys_time() == st}.
 This assignment has no effect on the return value of \tcode{get_time_zone()}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator=}{zoned_time}%
@@ -9347,7 +9699,8 @@ After assignment, \tcode{get_local_time() == lt}.
 This assignment has no effect on the return value of \tcode{get_time_zone()}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator sys_time}{zoned_time}%
@@ -9357,7 +9710,8 @@ operator sys_time<duration>() const;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{get_sys_time()}.
+\returns
+\tcode{get_sys_time()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator local_time}{zoned_time}%
@@ -9367,7 +9721,8 @@ explicit operator local_time<duration>() const;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{get_local_time()}.
+\returns
+\tcode{get_local_time()}.
 \end{itemdescr}
 
 \indexlibrarymember{get_time_zone}{zoned_time}%
@@ -9377,7 +9732,8 @@ TimeZonePtr get_time_zone() const;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{zone_}.
+\returns
+\tcode{zone_}.
 \end{itemdescr}
 
 \indexlibrarymember{get_local_time}{zoned_time}%
@@ -9387,7 +9743,8 @@ local_time<duration> get_local_time() const;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{zone_->to_local(tp_)}.
+\returns
+\tcode{zone_->to_local(tp_)}.
 \end{itemdescr}
 
 \indexlibrarymember{get_sys_time}{zoned_time}%
@@ -9397,7 +9754,8 @@ sys_time<duration> get_sys_time() const;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{tp_}.
+\returns
+\tcode{tp_}.
 \end{itemdescr}
 
 \indexlibrarymember{get_info}{zoned_time}%
@@ -9407,7 +9765,8 @@ sys_info get_info() const;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{zone_->get_info(tp_)}.
+\returns
+\tcode{zone_->get_info(tp_)}.
 \end{itemdescr}
 
 \rSec3[time.zone.zonedtime.nonmembers]{Non-member functions}
@@ -9421,7 +9780,8 @@ template<class Duration1, class Duration2, class TimeZonePtr>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.zone_ == y.zone_ \&\& x.tp_ == y.tp_}.
+\returns
+\tcode{x.zone_ == y.zone_ \&\& x.tp_ == y.tp_}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<<}{zoned_time}%
@@ -9441,13 +9801,14 @@ to \tcode{os}
 using the format \tcode{"\%F \%T \%Z"}.
 
 \pnum
-\returns \tcode{os}.
+\returns
+\tcode{os}.
 \end{itemdescr}
 
 \rSec2[time.zone.leap]{Class \tcode{leap}}
 
 \rSec3[time.zone.leap.overview]{Overview}
-\indexlibrary{\idxcode{leap}}
+\indexlibraryglobal{leap}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -9518,7 +9879,8 @@ constexpr sys_seconds date() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns The date and time at which the leap second was inserted.
+\returns
+The date and time at which the leap second was inserted.
 \end{itemdescr}
 
 \rSec3[time.zone.leap.nonmembers]{Non-member functions}
@@ -9530,7 +9892,8 @@ constexpr bool operator==(const leap& x, const leap& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.date() == y.date()}.
+\returns
+\tcode{x.date() == y.date()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=>}{leap}%
@@ -9540,7 +9903,8 @@ constexpr strong_ordering operator<=>(const leap& x, const leap& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.date() <=> y.date()}.
+\returns
+\tcode{x.date() <=> y.date()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator==}{leap}%
@@ -9552,7 +9916,8 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.date() == y}.
+\returns
+\tcode{x.date() == y}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<}{leap}%
@@ -9564,7 +9929,8 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.date() < y}.
+\returns
+\tcode{x.date() < y}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<}{leap}%
@@ -9576,7 +9942,8 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x < y.date()}.
+\returns
+\tcode{x < y.date()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator>}{leap}%
@@ -9588,7 +9955,8 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y < x}.
+\returns
+\tcode{y < x}.
 \end{itemdescr}
 
 \indexlibrarymember{operator>}{leap}%
@@ -9600,7 +9968,8 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{y < x}.
+\returns
+\tcode{y < x}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=}{leap}%
@@ -9612,7 +9981,8 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{!(y < x)}.
+\returns
+\tcode{!(y < x)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=}{leap}%
@@ -9624,7 +9994,8 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{!(y < x)}.
+\returns
+\tcode{!(y < x)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator>=}{leap}%
@@ -9636,7 +10007,8 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{!(x < y)}.
+\returns
+\tcode{!(x < y)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator>=}{leap}%
@@ -9648,7 +10020,8 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{!(x < y)}.
+\returns
+\tcode{!(x < y)}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=>}{leap}%
@@ -9660,13 +10033,14 @@ template<three_way_comparable_with<sys_seconds> Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.date() <=> y}.
+\returns
+\tcode{x.date() <=> y}.
 \end{itemdescr}
 
 \rSec2[time.zone.link]{Class \tcode{link}}
 
 \rSec3[time.zone.link.overview]{Overview}
-\indexlibrary{\idxcode{link}}
+\indexlibraryglobal{link}
 
 \begin{codeblock}
 namespace std::chrono {
@@ -9721,7 +10095,8 @@ bool operator==(const link& x, const link& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.name() == y.name()}.
+\returns
+\tcode{x.name() == y.name()}.
 \end{itemdescr}
 
 \indexlibrarymember{operator<=>}{link}%
@@ -9731,7 +10106,8 @@ strong_ordering operator<=>(const link& x, const link& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{x.name() <=> y.name()}.
+\returns
+\tcode{x.name() <=> y.name()}.
 \end{itemdescr}
 
 \rSec1[time.format]{Formatting}
@@ -9757,10 +10133,9 @@ according to the following syntax:
     chrono-specs literal-char
 \end{ncbnf}
 
-% FIXME: This should obviously also exclude \tcode{\%}.
 \begin{ncbnf}
 \fmtnontermdef{literal-char}\br
-    \textnormal{any character other than \tcode{\{} or \tcode{\}}}
+    \textnormal{any character other than \tcode{\{}, \tcode{\}}, or \tcode{\%}}
 \end{ncbnf}
 
 \begin{ncbnf}
@@ -9825,6 +10200,19 @@ the \fmtgrammarterm{chrono-format-spec},
 an exception of type \tcode{format_error} is thrown,
 as described above.
 \end{note}
+
+\pnum
+If the type being formatted does not contain
+the information that the format flag needs,
+an exception of type \tcode{format_error} is thrown.
+\begin{example}
+A \tcode{duration} does not contain enough information
+to format as a \tcode{weekday}.
+\end{example}
+However, if a flag refers to a ``time of day''
+(e.g. \tcode{\%H}, \tcode{\%I}, \tcode{\%p}, etc.),
+then a specialization of \tcode{duration} is interpreted as
+the time of day elapsed since midnight.
 
 \begin{LongTable}{Meaning of conversion specifiers}{time.format.spec}{lx{.8\hsize}}
 \\ \topline
@@ -9953,9 +10341,9 @@ Equivalent to \tcode{\%H:\%M}.
 Seconds as a decimal number.
 If the number of seconds is less than \tcode{10}, the result is prefixed with \tcode{0}.
 If the precision of the input cannot be exactly represented with seconds,
-then the format is a decimal floating point number with a fixed format
+then the format is a decimal floating-point number with a fixed format
 and a precision matching that of the precision of the input
-(or to a microseconds precision if the conversion to floating point decimal seconds
+(or to a microseconds precision if the conversion to floating-point decimal seconds
 cannot be made within 18 fractional digits).
 The character for the decimal point is localized according to the locale.
 The modified command \tcode{\%OS} produces
@@ -10013,11 +10401,16 @@ the locale's alternate time representation.
 \tcode{\%y} &
 The last two decimal digits of the year.
 If the result is a single digit it is prefixed by \tcode{0}.
+The modified command \tcode{\%Oy} produces the locale's alternative representation.
+The modified command \tcode{\%Ey} produces the locale's alternative representation
+of offset from \tcode{\%EC} (year only).
 \\ \rowsep
 \tcode{\%Y} &
 The year as a decimal number.
 If the result is less than four digits
 it is left-padded with \tcode{0} to four digits.
+The modified command \tcode{\%EY} produces
+the locale's alternative full year representation.
 \\ \rowsep
 \tcode{\%z} &
 The offset from UTC in the ISO 8601 format.
@@ -10046,7 +10439,7 @@ and copying \tcode{os.str()} through the output iterator of the context
 with additional padding and adjustments as specified by the format specifiers.
 \begin{example}
 \begin{codeblock}
-string s = format("{:=>8}", 42ms);       // value of \tcode{s} is \tcode{"====42ms"}
+string s = format("{:=>8}", 42ms);      // value of \tcode{s} is \tcode{"====42ms"}
 \end{codeblock}
 \end{example}
 
@@ -10168,7 +10561,7 @@ template<class Duration> struct @\placeholder{local-time-format-t}@ {           
 };
 \end{codeblock}
 
-\indexlibrary{\idxcode{local_time_format}}%
+\indexlibraryglobal{local_time_format}%
 \begin{itemdecl}
 template<class Duration>
   @\placeholder{local-time-format-t}@<Duration>
@@ -10178,7 +10571,8 @@ template<class Duration>
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{\{time, abbrev, offset_sec\}}.
+\returns
+\tcode{\{time, abbrev, offset_sec\}}.
 \end{itemdescr}
 
 \indexlibrary{\idxcode{formatter}!specializations!chrono::local-time-format-t@\tcode{chrono::\exposid{local-time-format-t}}}%
@@ -10220,7 +10614,7 @@ struct formatter<chrono::zoned_time<Duration, TimeZonePtr>, charT>
 \end{codeblock}
 
 % FIXME: Decide how to index this. This template-id is a lie.
-\indexlibrary{\idxcode{format}!\idxcode{formatter<chrono::zoned_time>}}%
+\indexlibrarymember{format}{formatter<chrono::zoned_time>}%
 \begin{itemdecl}
 template<class FormatContext>
   typename FormatContext::iterator
@@ -10248,6 +10642,9 @@ return formatter<chrono::@\placeholder{local-time-format-t}@<Duration>, charT>::
 Each \tcode{parse} overload specified in this subclause
 calls \tcode{from_stream} unqualified,
 so as to enable argument dependent lookup\iref{basic.lookup.argdep}.
+In the following paragraphs,
+let \tcode{is} denote an object of type \tcode{basic_istream<charT, traits>},
+where \tcode{charT} and \tcode{traits} are template parameters in that context.
 
 \begin{itemdecl}
 template<class charT, class traits, class Alloc, class Parsable>
@@ -10257,8 +10654,7 @@ template<class charT, class traits, class Alloc, class Parsable>
 
 \begin{itemdescr}
 \pnum
-\remarks
-This function shall not participate in overload resolution unless
+\constraints
 \begin{codeblock}
 from_stream(declval<basic_istream<charT, traits>&>(), fmt.c_str(), tp)
 \end{codeblock}
@@ -10280,8 +10676,7 @@ template<class charT, class traits, class Alloc, class Parsable>
 
 \begin{itemdescr}
 \pnum
-\remarks
-This function shall not participate in overload resolution unless
+\constraints
 \begin{codeblock}
 from_stream(declval<basic_istream<charT, traits>&>(), fmt.c_str(), tp, addressof(abbrev))
 \end{codeblock}
@@ -10303,18 +10698,27 @@ template<class charT, class traits, class Alloc, class Parsable>
 
 \begin{itemdescr}
 \pnum
-\remarks
-This function shall not participate in overload resolution unless
+\constraints
+The expression
 \begin{codeblock}
-from_stream(declval<basic_istream<charT, traits>&>(), fmt.c_str(), tp, nullptr, &offset)
+from_stream(declval<basic_istream<charT, traits>&>(),
+            fmt.c_str(), tp,
+            declval<basic_string<charT, traits, Alloc>*>(),
+            &offset)
 \end{codeblock}
-is a valid expression.
+is well-formed when treated as an unevaluated operand.
 
 \pnum
 \returns
 A manipulator that, when extracted from a
 \tcode{basic_istream<charT, traits>} \tcode{is},
-calls \tcode{from_stream(is, fmt.c_str(), tp, nullptr, \&offset)}.
+calls:
+\begin{codeblock}
+from_stream(is,
+            fmt.c_str(), tp,
+            static_cast<basic_string<charT, traits, Alloc>*>(nullptr),
+            &offset)
+\end{codeblock}
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -10326,8 +10730,7 @@ template<class charT, class traits, class Alloc, class Parsable>
 
 \begin{itemdescr}
 \pnum
-\remarks
-This function shall not participate in overload resolution unless
+\constraints
 \begin{codeblock}
 from_stream(declval<basic_istream<charT, traits>&>(),
             fmt.c_str(), tp, addressof(abbrev), &offset)
@@ -10357,6 +10760,18 @@ which governs how many characters are parsed from the stream in interpreting the
 All characters in the format string that are not represented in~\tref{time.parse.spec},
 except for white space, are parsed unchanged from the stream.
 A white space character matches zero or more white space characters in the input stream.
+
+\pnum
+If the type being parsed cannot represent
+the information that the format flag refers to,
+\tcode{is.setstate(ios_base::failbit)} is called.
+\begin{example}
+A \tcode{duration} cannot represent a \tcode{weekday}.
+\end{example}
+However, if a flag refers to a ``time of day''
+(e.g. \tcode{\%H}, \tcode{\%I}, \tcode{\%p}, etc.),
+then a specialization of \tcode{duration} is parsed as
+the time of day elapsed since midnight.
 
 \pnum
 If the \tcode{from_stream} overload fails to parse
@@ -10406,7 +10821,7 @@ The modified command \tcode{\%\placeholder{N}d} specifies
 the maximum number of characters to read.
 If \tcode{\placeholder{N}} is not specified, the default is 2.
 Leading zeroes are permitted but not required.
-The modified command \tcode{\%Ed} interprets
+The modified command \tcode{\%Od} interprets
 the locale's alternative representation of the day of the month.
 \\ \rowsep
 \tcode{\%D} &
@@ -10492,7 +10907,6 @@ For example,
 \\ \rowsep
 \tcode{\%p} &
 The locale's equivalent of the AM/PM designations associated with a 12-hour clock.
-The command \tcode{\%I} must precede \tcode{\%p} in the format string.
 \\ \rowsep
 \tcode{\%r} &
 The locale's 12-hour clock time.
@@ -10623,25 +11037,25 @@ A \tcode{\%} character is extracted.
 
 \rSec1[ctime.syn]{Header \tcode{<ctime>} synopsis}
 
-\indexhdr{ctime}%
-\indexlibrary{\idxcode{CLOCKS_PER_SEC}}%
-\indexlibrary{\idxcode{NULL}}%
-\indexlibrary{\idxcode{TIME_UTC}}%
-\indexlibrary{\idxcode{asctime}}%
-\indexlibrary{\idxcode{clock_t}}%
-\indexlibrary{\idxcode{clock}}%
-\indexlibrary{\idxcode{ctime}}%
-\indexlibrary{\idxcode{difftime}}%
-\indexlibrary{\idxcode{gmtime}}%
-\indexlibrary{\idxcode{localtime}}%
-\indexlibrary{\idxcode{mktime}}%
-\indexlibrary{\idxcode{size_t}}%
-\indexlibrary{\idxcode{strftime}}%
-\indexlibrary{\idxcode{time_t}}%
-\indexlibrary{\idxcode{timespec_get}}%
-\indexlibrary{\idxcode{timespec}}%
-\indexlibrary{\idxcode{time}}%
-\indexlibrary{\idxcode{tm}}%
+\indexheader{ctime}%
+\indexlibraryglobal{CLOCKS_PER_SEC}%
+\indexlibraryglobal{NULL}%
+\indexlibraryglobal{TIME_UTC}%
+\indexlibraryglobal{asctime}%
+\indexlibraryglobal{clock_t}%
+\indexlibraryglobal{clock}%
+\indexlibraryglobal{ctime}%
+\indexlibraryglobal{difftime}%
+\indexlibraryglobal{gmtime}%
+\indexlibraryglobal{localtime}%
+\indexlibraryglobal{mktime}%
+\indexlibraryglobal{size_t}%
+\indexlibraryglobal{strftime}%
+\indexlibraryglobal{time_t}%
+\indexlibraryglobal{timespec_get}%
+\indexlibraryglobal{timespec}%
+\indexlibraryglobal{time}%
+\indexlibraryglobal{tm}%
 \begin{codeblock}
 #define NULL @\textit{see \ref{support.types.nullptr}}@
 #define CLOCKS_PER_SEC @\seebelow@
@@ -10669,9 +11083,7 @@ namespace std {
 \end{codeblock}
 
 \pnum
-\indexhdr{time.h}%
-\indexhdr{ctime}%
-The contents of the header \tcode{<ctime>} are the same as the C standard library header \tcode{<time.h>}.%
+The contents of the header \libheader{ctime} are the same as the C standard library header \libheader{time.h}.%
 \footnote{\tcode{strftime} supports the C conversion specifiers
 \tcode{C}, \tcode{D}, \tcode{e}, \tcode{F}, \tcode{g}, \tcode{G}, \tcode{h},
 \tcode{r}, \tcode{R}, \tcode{t}, \tcode{T}, \tcode{u}, \tcode{V}, and

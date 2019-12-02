@@ -4,7 +4,9 @@
 
 \gramSec[gram.stmt]{Statements}
 
-\indextext{block statement|see{statement, compound}}
+\indextext{block (statement)|see{statement, compound}}
+
+\rSec1[stmt.pre]{Preamble}
 
 \pnum
 Except as indicated, statements are executed in sequence.
@@ -166,7 +168,6 @@ Case labels and default labels shall occur only in \tcode{switch} statements.
 
 \pnum
 Expression statements have the form
-
 \begin{bnf}
 \nontermdef{expression-statement}\br
     \opt{expression} \terminal{;}
@@ -245,14 +246,11 @@ a block scope\iref{basic.scope}. If the substatement in a
 \grammarterm{compound-statement}, it is as if it was rewritten to be a
 \grammarterm{compound-statement} containing the original substatement.
 \begin{example}
-
 \begin{codeblock}
 if (x)
   int i;
 \end{codeblock}
-
 can be equivalently rewritten as
-
 \begin{codeblock}
 if (x) {
   int i;
@@ -285,7 +283,7 @@ form is called a \defn{constexpr if} statement. If the value of the
 converted condition is \tcode{false}, the first substatement is a
 \defn{discarded statement}, otherwise the second substatement, if
 present, is a discarded statement. During the instantiation of an
-enclosing templated entity\iref{temp}, if the condition is
+enclosing templated entity\iref{temp.pre}, if the condition is
 not value-dependent after its instantiation, the discarded substatement
 (if any) is not instantiated.
 \begin{note}
@@ -365,12 +363,10 @@ to the promoted type.
 Any
 statement within the \tcode{switch} statement can be labeled with one or
 more case labels as follows:
-
 \begin{ncbnf}
 \indextext{label!\idxcode{case}}%
 \keyword{case} constant-expression \terminal{:}
 \end{ncbnf}
-
 where the \grammarterm{constant-expression} shall be
 a converted constant expression\iref{expr.const} of the
 adjusted type of the switch condition. No two of the case constants in
@@ -379,11 +375,9 @@ the same switch shall have the same value after conversion.
 \pnum
 \indextext{label!\idxcode{default}}%
 There shall be at most one label of the form
-
 \begin{codeblock}
 default :
 \end{codeblock}
-
 within a \tcode{switch} statement.
 
 \pnum
@@ -478,14 +472,11 @@ a single statement and not a \grammarterm{compound-statement},
 it is as if it was rewritten to be
 a \grammarterm{compound-statement} containing the original statement.
 \begin{example}
-
 \begin{codeblock}
 while (--x >= 0)
   int i;
 \end{codeblock}
-
 can be equivalently rewritten as
-
 \begin{codeblock}
 while (--x >= 0) {
   int i;
@@ -615,7 +606,6 @@ equivalent to \tcode{while(true)}.
 If the \grammarterm{init-statement} is a declaration, the scope of the
 name(s) declared extends to the end of the \tcode{for} statement.
 \begin{example}
-
 \begin{codeblock}
 int i = 42;
 int a[10];
@@ -681,8 +671,10 @@ respectively;
 \tcode{begin(\exposid{range})} and \tcode{end(\exposid{range})}, respectively,
 where \tcode{begin} and \tcode{end} are looked
 up in the associated namespaces\iref{basic.lookup.argdep}.
-\begin{note} Ordinary unqualified lookup\iref{basic.lookup.unqual} is not
-performed. \end{note}
+\begin{note}
+Ordinary unqualified lookup\iref{basic.lookup.unqual} is not
+performed.
+\end{note}
 \end{itemize}
 \end{itemize}
 
@@ -716,8 +708,8 @@ Jump statements unconditionally transfer control.
 %
 \begin{bnf}
 \nontermdef{jump-statement}\br
-    \keyword{break ;}\br
-    \keyword{continue ;}\br
+    \keyword{break} \terminal{;}\br
+    \keyword{continue} \terminal{;}\br
     \keyword{return} \opt{expr-or-braced-init-list} \terminal{;}\br
     coroutine-return-statement\br
     \keyword{goto} identifier \terminal{;}
@@ -728,8 +720,12 @@ Jump statements unconditionally transfer control.
 \indextext{scope!destructor and exit from}%
 On exit from a scope (however accomplished), objects with automatic storage
 duration\iref{basic.stc.auto} that have been constructed in that scope are destroyed
-in the reverse order of their construction. \begin{note} For temporaries,
-see~\ref{class.temporary}. \end{note} Transfer out of a loop, out of a block, or back
+in the reverse order of their construction.
+\begin{note}
+For temporaries,
+see~\ref{class.temporary}.
+\end{note}
+Transfer out of a loop, out of a block, or back
 past
 an initialized variable with automatic storage duration involves the
 destruction of objects with automatic storage duration that are in
@@ -738,10 +734,10 @@ scope at the point transferred from but not at the point transferred to.
 \begin{note}
 However, the program can be terminated (by calling
 \indextext{\idxcode{exit}}%
-\indexlibrary{\idxcode{exit}}%
+\indexlibraryglobal{exit}%
 \tcode{std::exit()} or
 \indextext{\idxcode{abort}}%
-\indexlibrary{\idxcode{abort}}%
+\indexlibraryglobal{abort}%
 \tcode{std::abort()}\iref{support.start.term}, for example) without
 destroying objects with automatic storage duration.
 \end{note}
@@ -773,7 +769,6 @@ statement shall occur only in an
 and causes control to pass to the loop-continuation portion of the
 smallest enclosing \grammarterm{iteration-statement}, that is, to the end
 of the loop. More precisely, in each of the statements
-
 \begin{minipage}{.30\hsize}
 \begin{codeblock}
 while (foo) {
@@ -845,6 +840,16 @@ std::pair<std::string,int> f(const char* p, int x) {
 }
 \end{codeblock}
 \end{example}
+The destructor for the returned object
+is potentially invoked~(\ref{class.dtor}, \ref{except.ctor}).
+\begin{example}
+\begin{codeblock}
+class A {
+  ~A() {}
+};
+A f() { return A(); }   // error: destructor of \tcode{A} is private (even though it is never invoked)
+\end{codeblock}
+\end{example}
 Flowing off the end of
 a constructor,
 a destructor, or
@@ -873,8 +878,12 @@ enclosing the \tcode{return} statement.
 \pnum
 A coroutine returns to its caller or resumer\iref{dcl.fct.def.coroutine}
 by the \tcode{co_return} statement or when suspended\iref{expr.await}.
-A coroutine shall not return to its caller or resumer
-by a \tcode{return} statement\iref{stmt.return}.
+A coroutine shall not contain
+a \tcode{return} statement\iref{stmt.return}.
+\begin{note}
+For this determination, it is irrelevant whether the \tcode{return} statement
+is enclosed by a discarded statement\iref{stmt.if}.
+\end{note}
 
 \pnum
 The \grammarterm{expr-or-braced-init-list} of a \tcode{co_return} statement is
@@ -885,21 +894,21 @@ A \tcode{co_return} statement is equivalent to:
 \begin{ncsimplebnf}
 \terminal{\{} S\terminal{;} \terminal{goto} \exposid{final-suspend}\terminal{;} \terminal{\}}
 \end{ncsimplebnf}
-
 where \exposid{final-suspend} is the exposition-only label
 defined in \ref{dcl.fct.def.coroutine}
 and \placeholder{S} is defined as follows:
-
 \begin{itemize}
 \item
-\placeholder{S} is \placeholder{p}\tcode{.return_value(}\grammarterm{expr-or-braced-init-list}{}\tcode{)},
-if the operand is a \grammarterm{braced-init-list} or an expression of non-\tcode{void} type;
+If the operand is a \grammarterm{braced-init-list} or an expression of non-\tcode{void} type,
+\placeholder{S} is \placeholder{p}\tcode{.return_value(}\grammarterm{expr-or-braced-init-list}{}\tcode{)}.
+The expression \placeholder{S} shall be a prvalue of type \tcode{void}.
 
 \item
-\placeholder{S} is \tcode{\{}{ }\opt{\grammarterm{expression}} \tcode{;} \placeholder{p}\tcode{.return_void()}\tcode{;{ }\}}, otherwise;
+Otherwise,
+\placeholder{S} is the \grammarterm{compound-statement} \tcode{\{}{ }\opt{\grammarterm{expression}} \tcode{;} \placeholder{p}\tcode{.return_void()}\tcode{;{ }\}}.
+The expression \placeholder{p}\tcode{.return_void()}
+shall be a prvalue of type \tcode{void}.
 \end{itemize}
-
-\placeholder{S} shall be a prvalue of type \tcode{void}.
 
 \pnum
 If \placeholder{p}\tcode{.return_void()} is a valid expression,
@@ -921,7 +930,6 @@ label\iref{stmt.label} located in the current function.
 \pnum
 A declaration statement introduces one or more new identifiers into a
 block; it has the form
-
 \begin{bnf}
 \nontermdef{declaration-statement}\br
     block-declaration
@@ -931,12 +939,12 @@ If an identifier introduced by a declaration was previously declared in
 an outer block,
 \indextext{declaration hiding|see{name hiding}}%
 \indextext{name hiding}%
-\indextext{block structure}%
+\indextext{block (statement)!structure}%
 the outer declaration is hidden for the remainder of the block, after
 which it resumes its force.
 
 \pnum
-\indextext{block!initialization in}%
+\indextext{block (statement)!initialization in}%
 \indextext{initialization!automatic}%
 Variables with automatic storage duration\iref{basic.stc.auto} are
 initialized each time their \grammarterm{declaration-statement} is executed.
@@ -954,11 +962,10 @@ A program that jumps\footnote{The transfer from the condition of a \tcode{switch
 \tcode{case} label is considered a jump in this respect.}
 from a point where a variable with automatic storage duration is
 not in scope to a point where it is in scope is ill-formed unless
-the variable has vacuous initialization\iref{dcl.init}.
+the variable has vacuous initialization\iref{basic.life}.
 In such a case, the variables with vacuous initialization
 are constructed in the order of their declaration.
 \begin{example}
-
 \begin{codeblock}
 void f() {
   // ...
@@ -996,7 +1003,6 @@ avoid deadlocks due to its own synchronization operations.} If control
 re-enters the declaration recursively while
 the variable is being initialized, the behavior is undefined.
 \begin{example}
-
 \begin{codeblock}
 int foo(int i) {
   static int s = foo(2*i);      // recursive call - undefined
@@ -1056,7 +1062,6 @@ semantic reasons, but that does not affect the syntactic analysis.
 
 The remaining cases are \grammarterm{declaration}{s}.
 \begin{example}
-
 \begin{codeblock}
 class T {
   // ...
@@ -1090,7 +1095,6 @@ This can occur only when the name is declared earlier in the
 declaration.
 \end{note}
 \begin{example}
-
 \begin{codeblock}
 struct T1 {
   T1 operator()(int x) { return T1(x); }
@@ -1108,5 +1112,5 @@ void f() {
                                 // since it depends on \tcode{T2} being a type-name
 }
 \end{codeblock}
-\end{example}%
+\end{example}
 \indextext{statement|)}

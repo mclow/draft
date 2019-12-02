@@ -62,7 +62,9 @@ and destroyed using the function
 where \tcode{U} is either \tcode{allocator_type::value_type} or
 an internal type used by the container.
 These functions are called only for the
-container's element type, not for internal types used by the container. \begin{note} This
+container's element type, not for internal types used by the container.
+\begin{note}
+This
 means, for example, that a node-based container might need to construct nodes containing
 aligned buffers and call \tcode{construct} to place the element into the buffer.
 \end{note}
@@ -311,11 +313,13 @@ type, either or both may be replaced by an object of the container's
 \pnum
 Unless otherwise specified, all containers defined in this clause obtain memory
 using an allocator (see~\ref{allocator.requirements}).
-\begin{note} In particular, containers and iterators do not store references
+\begin{note}
+In particular, containers and iterators do not store references
 to allocated elements other than through the allocator's pointer type,
 i.e., as objects of type \tcode{P} or
 \tcode{pointer_traits<P>::template re\-bind<\unspec>},
-where \tcode{P} is \tcode{allocator_traits<allocator_type>::pointer}. \end{note}
+where \tcode{P} is \tcode{allocator_traits<allocator_type>::pointer}.
+\end{note}
 Copy constructors for these container types obtain an allocator by calling
 \tcode{allocator_traits<allocator_type>::select_on_container_copy_construction}
 on the allocator belonging to the container being copied.
@@ -324,7 +328,8 @@ the container being moved. Such move construction of the allocator shall not exi
 exception.
 All other constructors for these container types take a
 \tcode{const allocator_type\&} argument.
-\begin{note} If an invocation of a constructor uses the default value of an optional
+\begin{note}
+If an invocation of a constructor uses the default value of an optional
 allocator argument, then the allocator type must support value-initialization.
 \end{note}
 A copy of this allocator is used for any memory allocation and element construction
@@ -448,7 +453,10 @@ no
 \tcode{swap()}
 function invalidates any references,
 pointers, or iterators referring to the elements
-of the containers being swapped. \begin{note} The \tcode{end()} iterator does not refer to any element, so it may be invalidated. \end{note}
+of the containers being swapped.
+\begin{note}
+The \tcode{end()} iterator does not refer to any element, so it may be invalidated.
+\end{note}
 \end{itemize}
 
 \pnum
@@ -553,7 +561,9 @@ allocator_traits<A>::construct(m, p, rv)
 \end{codeblock}
 and its evaluation causes the following postcondition to hold: The value
 of \tcode{*p} is equivalent to the value of \tcode{rv} before the evaluation.
-\begin{note} \tcode{rv} remains a valid object. Its state is unspecified \end{note}
+\begin{note}
+\tcode{rv} remains a valid object. Its state is unspecified
+\end{note}
 
 \item
 \tcode{T} is \defnx{\oldconcept{CopyInsertable} into \tcode{X}}
@@ -639,7 +649,8 @@ non-const rvalue of type \tcode{X}, and \tcode{m} is a value of type \tcode{A}.
 
 \tcode{X(m)}							&
 																				&
-\ensures \tcode{u.empty()} returns \tcode{true}, &
+\ensures
+\tcode{u.empty()} returns \tcode{true}, &
 constant												\\
 \tcode{X u(m);}					&
 																				&
@@ -649,8 +660,10 @@ constant												\\
 \tcode{X(t, m)}\br
 \tcode{X u(t, m);}				&
                           &
-\expects \tcode{T} is \oldconcept{CopyInsertable} into \tcode{X}.\br
-\ensures \tcode{u == t}, \tcode{u.get_allocator() == m} &
+\expects
+\tcode{T} is \oldconcept{CopyInsertable} into \tcode{X}.\br
+\ensures
+\tcode{u == t}, \tcode{u.get_allocator() == m} &
 linear													\\ \rowsep
 
 \tcode{X(rv)}\br
@@ -735,7 +748,8 @@ races when the contents of the contained object in different elements in the sam
 container, excepting \tcode{vector<bool>}, are modified concurrently.
 
 \pnum
-\begin{note} For a \tcode{vector<int> x} with a size greater than one, \tcode{x[1] = 5}
+\begin{note}
+For a \tcode{vector<int> x} with a size greater than one, \tcode{x[1] = 5}
 and \tcode{*x.begin() = 10} can be executed concurrently without a data race, but
 \tcode{x[0] = 5} and \tcode{*x.begin() = 10} executed concurrently may result in a data
 race.
@@ -862,8 +876,10 @@ The complexities of the expressions are sequence dependent.
  \oldconcept{MoveInsertable} into \tcode{X} and \oldconcept{MoveAssignable}.\br
  \effects Inserts an object of type \tcode{T} constructed with
  \tcode{std::forward<\brk{}Args\brk{}>(\brk{}args)...} before \tcode{p}.
- \begin{note} \tcode{args} may directly or indirectly refer to
- a value in \tcode{a}. \end{note}
+ \begin{note}
+\tcode{args} may directly or indirectly refer to
+ a value in \tcode{a}.
+\end{note}
  \\ \rowsep
 
 \tcode{a.insert(p,t)}   &
@@ -1301,7 +1317,8 @@ public:
 
 \begin{itemdescr}
 \pnum
-\effects Constructs a \tcode{\placeholder{node-handle}} object initializing
+\effects
+Constructs a \tcode{\placeholder{node-handle}} object initializing
 \tcode{ptr_} with \tcode{nh.ptr_}.  Move constructs \tcode{alloc_} with
 \tcode{nh.alloc_}.  Assigns \tcode{nullptr} to \tcode{nh.ptr_} and assigns
 \tcode{nullopt} to \tcode{nh.alloc_}.
@@ -1313,8 +1330,9 @@ public:
 
 \begin{itemdescr}
 \pnum
-\expects Either \tcode{!alloc_}, or
-\tcode{ator_traits::propagate_on_container_move_assignment::value}
+\expects
+Either \tcode{!alloc_}, or
+\tcode{ator_traits::propagate_on_container_move_assignment::\-value}
 is \tcode{true}, or \tcode{alloc_ ==  nh.alloc_}.
 
 \pnum
@@ -1337,9 +1355,13 @@ Assigns
 \tcode{nh.alloc_}.
 \end{itemize}
 
-\pnum \returns \tcode{*this}.
+\pnum
+\returns
+\tcode{*this}.
 
-\pnum \throws Nothing.
+\pnum
+\throws
+Nothing.
 \end{itemdescr}
 
 \rSec3[container.node.dtor]{Destructor}
@@ -1350,7 +1372,8 @@ Assigns
 
 \begin{itemdescr}
 \pnum
-\effects If \tcode{ptr_ != nullptr}, destroys the \tcode{value_type} subobject
+\effects
+If \tcode{ptr_ != nullptr}, destroys the \tcode{value_type} subobject
 in the \tcode{container_node_type} object pointed to by \tcode{ptr_} by calling
 \tcode{ator_traits::destroy}, then deallocates \tcode{ptr_} by calling
 \tcode{ator_traits::template rebind_traits<container_node_type>::deallocate}.
@@ -1364,14 +1387,17 @@ value_type& value() const;
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{empty() == false}.
+\expects
+\tcode{empty() == false}.
 
 \pnum
-\returns A reference to the \tcode{value_type} subobject in the
+\returns
+A reference to the \tcode{value_type} subobject in the
 \tcode{container_node_type} object pointed to by \tcode{ptr_}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -1380,18 +1406,22 @@ key_type& key() const;
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{empty() == false}.
+\expects
+\tcode{empty() == false}.
 
 \pnum
-\returns A non-const reference to the \tcode{key_type} member of the
+\returns
+A non-const reference to the \tcode{key_type} member of the
 \tcode{value_type} subobject in the \tcode{contain\-er_node_type} object
 pointed to by \tcode{ptr_}.
 
 \pnum
-\throws  Nothing.
+\throws
+Nothing.
 
 \pnum
-\remarks Modifying the key through the returned reference is permitted.
+\remarks
+Modifying the key through the returned reference is permitted.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -1400,15 +1430,18 @@ mapped_type& mapped() const;
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{empty() == false}.
+\expects
+\tcode{empty() == false}.
 
 \pnum
-\returns A reference to the \tcode{mapped_type} member of the
+\returns
+A reference to the \tcode{mapped_type} member of the
 \tcode{value_type} subobject in the \tcode{container_node_type} object
 pointed to by \tcode{ptr_}.
 
 \pnum
-\throws  Nothing.
+\throws
+Nothing.
 \end{itemdescr}
 
 
@@ -1418,13 +1451,16 @@ allocator_type get_allocator() const;
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{empty() == false}.
+\expects
+\tcode{empty() == false}.
 
 \pnum
-\returns \tcode{*alloc_}.
+\returns
+\tcode{*alloc_}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -1433,7 +1469,8 @@ explicit operator bool() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ptr_ != nullptr}.
+\returns
+\tcode{ptr_ != nullptr}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -1442,7 +1479,8 @@ explicit operator bool() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{ptr_ == nullptr}.
+\returns
+\tcode{ptr_ == nullptr}.
 \end{itemdescr}
 
 \rSec3[container.node.modifiers]{Modifiers}
@@ -1455,12 +1493,14 @@ void swap(@\placeholdernc{node-handle}@& nh)
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{!alloc_}, or \tcode{!nh.alloc_}, or
+\expects
+\tcode{!alloc_}, or \tcode{!nh.alloc_}, or
 \tcode{ator_traits::propagate_on_container_swap::value} is \tcode{true},
 or \tcode{alloc_ == nh.alloc_}.
 
 \pnum
-\effects Calls \tcode{swap(ptr_, nh.ptr_)}. If \tcode{!alloc_}, or
+\effects
+Calls \tcode{swap(ptr_, nh.ptr_)}. If \tcode{!alloc_}, or
 \tcode{!nh.alloc_}, or \tcode{ator_traits::propagate_on_container_swap::value}
 is \tcode{true} calls \tcode{swap(alloc_, nh.alloc_)}.
 \end{itemdescr}
@@ -1568,17 +1608,22 @@ are constant iterators. It is unspecified whether or not
 and
 \tcode{const_iterator}
 are the same type.
-\begin{note} \tcode{iterator} and \tcode{const_iterator} have identical semantics in this case, and \tcode{iterator} is convertible to \tcode{const_iterator}. Users can avoid violating the one-definition rule by always using \tcode{const_iterator} in their function parameter lists. \end{note}
+\begin{note}
+\tcode{iterator} and \tcode{const_iterator} have identical semantics in this case, and \tcode{iterator} is convertible to \tcode{const_iterator}. Users can avoid violating the one-definition rule by always using \tcode{const_iterator} in their function parameter lists.
+\end{note}
 
 \pnum
 The associative containers meet all the requirements of Allocator-aware
 containers\iref{container.requirements.general}, except that for
 \tcode{map} and \tcode{multimap}, the requirements placed on \tcode{value_type}
 in \tref{container.alloc.req} apply instead to \tcode{key_type}
-and \tcode{mapped_type}. \begin{note} For example, in some cases \tcode{key_type} and \tcode{mapped_type}
+and \tcode{mapped_type}.
+\begin{note}
+For example, in some cases \tcode{key_type} and \tcode{mapped_type}
 are required to be \oldconcept{CopyAssignable} even though the associated
 \tcode{value_type}, \tcode{pair<const key_type, mapped_type>}, is not
-\oldconcept{CopyAssignable}. \end{note}
+\oldconcept{CopyAssignable}.
+\end{note}
 
 \pnum
 In \tref{container.assoc.req},
@@ -1688,10 +1733,10 @@ and \tcode{nh} denotes a non-const rvalue of type \tcode{X::node_type}.
  see~\ref{container.node} &
  compile time \\ \rowsep
 
-\indexlibrary{\idxcode{set}!constructor}%
-\indexlibrary{\idxcode{map}!constructor}%
-\indexlibrary{\idxcode{multiset}!constructor}%
-\indexlibrary{\idxcode{multimap}!constructor}%
+\indexlibraryctor{set}%
+\indexlibraryctor{map}%
+\indexlibraryctor{multiset}%
+\indexlibraryctor{multimap}%
 \tcode{X(c)}\br
 \tcode{X u(c);}                         &
                                         &
@@ -2185,9 +2230,11 @@ key equality predicate
 \tcode{true} when passed those values.  If \tcode{k1} and
 \tcode{k2} are equivalent, the container's hash function shall
 return the same value for both.
-\begin{note} Thus, when an unordered associative container is instantiated with
+\begin{note}
+Thus, when an unordered associative container is instantiated with
 a non-default \tcode{Pred} parameter it usually needs a non-default \tcode{Hash}
-parameter as well. \end{note}
+parameter as well.
+\end{note}
 For any two keys \tcode{k1} and \tcode{k2} in the same container,
 calling \tcode{pred(k1, k2)} shall always return the same value.
 For any key \tcode{k} in a container, calling \tcode{hash(k)}
@@ -2220,7 +2267,8 @@ For unordered containers where the value type is the same as the key
 type, both \tcode{iterator} and \tcode{const_iterator} are constant
 iterators. It is unspecified whether or not \tcode{iterator} and
 \tcode{const_iterator} are the same type.
-\begin{note} \tcode{iterator} and \tcode{const_iterator} have identical
+\begin{note}
+\tcode{iterator} and \tcode{const_iterator} have identical
 semantics in this case, and \tcode{iterator} is convertible to
 \tcode{const_iterator}. Users can avoid violating the one-definition rule
 by always using \tcode{const_iterator} in their function parameter lists.
@@ -2245,10 +2293,13 @@ The unordered associative containers meet all the requirements of Allocator-awar
 containers\iref{container.requirements.general}, except that for
 \tcode{unordered_map} and \tcode{unordered_multimap}, the requirements placed on \tcode{value_type}
 in \tref{container.alloc.req} apply instead to \tcode{key_type}
-and \tcode{mapped_type}. \begin{note} For example, \tcode{key_type} and \tcode{mapped_type}
+and \tcode{mapped_type}.
+\begin{note}
+For example, \tcode{key_type} and \tcode{mapped_type}
 are sometimes required to be \oldconcept{CopyAssignable} even though the associated
 \tcode{value_type}, \tcode{pair<const key_type, mapped_type>}, is not
-\oldconcept{CopyAssignable}. \end{note}
+\oldconcept{CopyAssignable}.
+\end{note}
 
 \pnum
 \indextext{unordered associative containers}%
@@ -2269,8 +2320,10 @@ In \tref{container.hash.req}:
 \item \tcode{a_eq} denotes a value of type \tcode{X}
   when \tcode{X} supports equivalent keys,
 \item \tcode{a_tran} denotes a possibly const value of type \tcode{X}
-  when the \grammarterm{qualified-id} \tcode{X::hasher::transparent_key_equal}
-  is valid and denotes a type\iref{temp.deduct},
+  when the \grammarterm{qualified-id}s
+  \tcode{X::key_equal::is_transparent} and
+  \tcode{X::hasher::is_transparent}
+  are both valid and denote types\iref{temp.deduct},
 \item \tcode{i} and \tcode{j} denote input iterators
   that refer to \tcode{value_type},
 \item \tcode{[i, j)} denotes a valid range,
@@ -2351,9 +2404,7 @@ In \tref{container.hash.req}:
 %
 \indexunordmem{key_equal}%
 \tcode{X::key_equal}
-&   \tcode{Hash::transparent_key_equal} if such a \grammarterm{qualified-id}
-    is valid and denotes a type\iref{temp.deduct};
-    otherwise, \tcode{Pred}.
+&   \tcode{Pred}
 &   \expects \tcode{Pred} meets the \oldconcept{CopyConstructible} requirements.\br
     \tcode{Pred} is a binary predicate that takes two arguments
     of type \tcode{Key}.  \tcode{Pred} is an equivalence relation.%
@@ -2390,10 +2441,10 @@ In \tref{container.hash.req}:
  see~\ref{container.node} &
  compile time \\ \rowsep
 %
-\indexlibrary{\idxcode{unordered_set}!constructor}%
-\indexlibrary{\idxcode{unordered_map}!constructor}%
-\indexlibrary{\idxcode{unordered_multiset}!constructor}%
-\indexlibrary{\idxcode{unordered_multimap}!constructor}%
+\indexlibraryctor{unordered_set}%
+\indexlibraryctor{unordered_map}%
+\indexlibraryctor{unordered_multiset}%
+\indexlibraryctor{unordered_multimap}%
 \tcode{X(n, hf, eq)}\br \tcode{X a(n, hf, eq);}
 &   \tcode{X}
 &   \effects\ Constructs an empty container with at least \tcode{n} buckets,
@@ -2985,22 +3036,13 @@ obtained while it is owned by a \tcode{node_type} are invalidated if the
 element is successfully inserted.
 
 \pnum
-If the \grammarterm{qualified-id} \tcode{Hash::transparent_key_equal}
-is valid and denotes a type\iref{temp.deduct},
-then the program is ill-formed if either:
-\begin{itemize}
-\item
-  \grammarterm{qualified-id} \tcode{Hash::transparent_key_equal::is_transparent}
-  is not valid or does not denote a type, or
-\item
-  \tcode{Pred} is a different type than \tcode{equal_to<Key>} or
-  \tcode{Hash::transparent_key_equal}.
-\end{itemize}
 The member function templates
 \tcode{find}, \tcode{count}, \tcode{equal_range}, and \tcode{contains}
 shall not participate in overload resolution unless
-the \grammarterm{qualified-id} \tcode{Hash::transparent_key_equal}
-is valid and denotes a type\iref{temp.deduct}.
+the \grammarterm{qualified-id}s
+\tcode{Pred::is_transparent} and
+\tcode{Hash::is_transparent}
+are both valid and denote types\iref{temp.deduct}.
 
 \pnum
 A deduction guide for an unordered associative container shall not participate in overload resolution
@@ -3052,9 +3094,13 @@ function or comparison function, the \tcode{rehash()} function has no effect.
 \rSec2[sequences.general]{In general}
 
 \pnum
-The headers \tcode{<array>}, \tcode{<deque>}, \tcode{<forward_list>},
-\tcode{<list>}, and \tcode{<vector>} define class templates that meet the
-requirements for sequence containers.
+The headers
+\libheaderref{array},
+\libheaderref{deque},
+\libheaderrefx{forward_list}{forward.list.syn},
+\libheaderref{list}, and
+\libheaderref{vector}
+define class templates that meet the requirements for sequence containers.
 
 \pnum
 The following exposition-only alias template may appear in deduction guides for sequence containers:
@@ -3066,7 +3112,7 @@ template<class InputIterator>
 
 \rSec2[array.syn]{Header \tcode{<array>} synopsis}
 
-\indexhdr{array}%
+\indexheader{array}%
 \begin{codeblock}
 #include <initializer_list>
 
@@ -3103,8 +3149,7 @@ namespace std {
 
 \rSec2[deque.syn]{Header \tcode{<deque>} synopsis}
 
-\indexhdr{deque}%
-
+\indexheader{deque}%
 \begin{codeblock}
 #include <initializer_list>
 
@@ -3136,8 +3181,7 @@ namespace std {
 
 \rSec2[forward.list.syn]{Header \tcode{<forward_list>} synopsis}
 
-\indexhdr{forward_list}%
-
+\indexheader{forward_list}%
 \begin{codeblock}
 #include <initializer_list>
 
@@ -3169,8 +3213,7 @@ namespace std {
 
 \rSec2[list.syn]{Header \tcode{<list>} synopsis}
 
-\indexhdr{list}%
-
+\indexheader{list}%
 \begin{codeblock}
 #include <initializer_list>
 
@@ -3202,8 +3245,7 @@ namespace std {
 
 \rSec2[vector.syn]{Header \tcode{<vector>} synopsis}
 
-\indexhdr{vector}%
-
+\indexheader{vector}%
 \begin{codeblock}
 #include <initializer_list>
 
@@ -3241,13 +3283,13 @@ namespace std {
 \end{codeblock}
 
 \rSec2[array]{Class template \tcode{array}}
-\indexlibrary{\idxcode{array}}%
+\indexlibraryglobal{array}%
 
 \rSec3[array.overview]{Overview}
 
 \pnum
 \indextext{\idxcode{array}!contiguous storage}%
-The header \tcode{<array>} defines a class template for storing fixed-size
+The header \libheader{array} defines a class template for storing fixed-size
 sequences of objects.
 An \tcode{array} is a contiguous container\iref{container.requirements.general}.
 An instance of \tcode{array<T, N>} stores \tcode{N} elements of type \tcode{T},
@@ -3276,7 +3318,7 @@ for operations where there is additional semantic information.
 The types \tcode{iterator} and \tcode{const_iterator} meet
 the constexpr iterator requirements\iref{iterator.requirements.general}.
 
-\indexlibrary{\idxcode{array}}%
+\indexlibraryglobal{array}%
 \indexlibrarymember{array}{begin}%
 \indexlibrarymember{array}{end}%
 \indexlibrarymember{array}{size}%
@@ -3367,7 +3409,8 @@ template<class T, class... U>
 \end{itemdecl}
 \begin{itemdescr}
 \pnum
-\mandates \tcode{(is_same_v<T, U> \&\& ...)} is \tcode{true}.
+\mandates
+\tcode{(is_same_v<T, U> \&\& ...)} is \tcode{true}.
 \end{itemdescr}
 
 \rSec3[array.members]{Member functions}
@@ -3378,7 +3421,9 @@ constexpr size_type size() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns \tcode{N}.
+\pnum
+\returns
+\tcode{N}.
 \end{itemdescr}
 
 \indexlibrarymember{array}{data}%
@@ -3388,7 +3433,8 @@ constexpr const T* data() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum \returns
+\pnum
+\returns
 A pointer such that \range{data()}{data() + size()} is a valid range. For a
 non-empty array, \tcode{data()} \tcode{==} \tcode{addressof(front())}.
 \end{itemdescr}
@@ -3400,7 +3446,8 @@ constexpr void fill(const T& u);
 
 \begin{itemdescr}
 \pnum
-\effects As if by \tcode{fill_n(begin(), N, u)}.
+\effects
+As if by \tcode{fill_n(begin(), N, u)}.
 \end{itemdescr}
 
 \indexlibrarymember{array}{swap}%
@@ -3410,7 +3457,8 @@ constexpr void swap(array& y) noexcept(is_nothrow_swappable_v<T>);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to \tcode{swap_ranges(begin(), end(), y.begin())}.
+\effects
+Equivalent to \tcode{swap_ranges(begin(), end(), y.begin())}.
 
 \pnum
 \begin{note}
@@ -3432,19 +3480,23 @@ template<class T, size_t N>
 \pnum
 \constraints \tcode{N == 0} or \tcode{is_swappable_v<T>} is \tcode{true}.
 
-\pnum\effects
+\pnum
+\effects
 As if by \tcode{x.swap(y)}.
 
 \pnum
-\complexity Linear in \tcode{N}.
+\complexity
+Linear in \tcode{N}.
 \end{itemdescr}
 
 \rSec3[array.zero]{Zero-sized arrays}
 
 \indextext{\idxcode{array}!zero sized}%
-\pnum\tcode{array} shall provide support for the special case \tcode{N == 0}.
+\pnum
+\tcode{array} shall provide support for the special case \tcode{N == 0}.
 
-\pnum In the case that \tcode{N == 0}, \tcode{begin() == end() ==} unique value.
+\pnum
+In the case that \tcode{N == 0}, \tcode{begin() == end() ==} unique value.
 The return value of \tcode{data()} is unspecified.
 
 \pnum
@@ -3458,7 +3510,7 @@ non-throwing exception specification.
 \rSec3[array.creation]{Array creation functions}
 \indextext{\idxcode{array}!creation}%
 
-\indexlibrary{\idxcode{to_array}}%
+\indexlibraryglobal{to_array}%
 \begin{itemdecl}
 template<class T, size_t N>
   constexpr array<remove_cv_t<T>, N> to_array(T (&a)[N]);
@@ -3475,10 +3527,11 @@ template<class T, size_t N>
 \tcode{T} meets the \oldconcept{CopyConstructible} requirements.
 
 \pnum
-\returns \tcode{\{\{ a[0], $\dotsc$, a[N - 1] \}\}}.
+\returns
+\tcode{\{\{ a[0], $\dotsc$, a[N - 1] \}\}}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{to_array}}%
+\indexlibraryglobal{to_array}%
 \begin{itemdecl}
 template<class T, size_t N>
   constexpr array<remove_cv_t<T>, N> to_array(T (&&a)[N]);
@@ -3495,20 +3548,21 @@ template<class T, size_t N>
 \tcode{T} meets the \oldconcept{MoveConstructible} requirements.
 
 \pnum
-\returns \tcode{\{\{ std::move(a[0]), $\dotsc$, std::move(a[N - 1]) \}\}}.
+\returns
+\tcode{\{\{ std::move(a[0]), $\dotsc$, std::move(a[N - 1]) \}\}}.
 \end{itemdescr}
 
 \rSec3[array.tuple]{Tuple interface}
-\indexlibrary{\idxcode{array}}%
-\indexlibrary{\idxcode{tuple}}%
+\indexlibraryglobal{array}%
+\indexlibraryglobal{tuple}%
 \indextext{\idxcode{array}!tuple interface to}%
-\indexlibrary{\idxcode{tuple_size}}%
+\indexlibraryglobal{tuple_size}%
 \begin{itemdecl}
 template<class T, size_t N>
   struct tuple_size<array<T, N>> : integral_constant<size_t, N> { };
 \end{itemdecl}
 
-\indexlibrary{\idxcode{tuple_element}}%
+\indexlibraryglobal{tuple_element}%
 \begin{itemdecl}
 template<size_t I, class T, size_t N>
   struct tuple_element<I, array<T, N>> {
@@ -3540,7 +3594,8 @@ template<size_t I, class T, size_t N>
 \tcode{I < N} is \tcode{true}.
 
 \pnum
-\returns A reference to the $\tcode{I}^\text{th}$ element of \tcode{a},
+\returns
+A reference to the $\tcode{I}^\text{th}$ element of \tcode{a},
 where indexing is zero-based.
 \end{itemdescr}
 
@@ -3550,7 +3605,7 @@ where indexing is zero-based.
 
 \pnum
 A
-\indexlibrary{\idxcode{deque}}%
+\indexlibraryglobal{deque}%
 \tcode{deque}
 is a sequence container that supports random access iterators\iref{random.access.iterators}.
 In addition, it supports constant time insert and erase operations at the beginning or the end;
@@ -3685,7 +3740,7 @@ namespace std {
 
 \rSec3[deque.cons]{Constructors, copy, and assignment}
 
-\indexlibrary{\idxcode{deque}!constructor}%
+\indexlibraryctor{deque}%
 \begin{itemdecl}
 explicit deque(const Allocator&);
 \end{itemdecl}
@@ -3702,14 +3757,15 @@ using the specified allocator.
 Constant.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{deque}!constructor}%
+\indexlibraryctor{deque}%
 \begin{itemdecl}
 explicit deque(size_type n, const Allocator& = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects Constructs a \tcode{deque} with
+\effects
+Constructs a \tcode{deque} with
 \tcode{n} default-inserted elements using the specified allocator.
 
 \pnum
@@ -3717,10 +3773,11 @@ explicit deque(size_type n, const Allocator& = Allocator());
 \tcode{T} is \oldconcept{DefaultInsertable} into \tcode{*this}.
 
 \pnum
-\complexity Linear in \tcode{n}.
+\complexity
+Linear in \tcode{n}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{deque}!constructor}%
+\indexlibraryctor{deque}%
 \begin{itemdecl}
 deque(size_type n, const T& value, const Allocator& = Allocator());
 \end{itemdecl}
@@ -3742,7 +3799,7 @@ using the specified allocator.
 Linear in \tcode{n}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{deque}!constructor}%
+\indexlibraryctor{deque}%
 \begin{itemdecl}
 template<class InputIterator>
   deque(InputIterator first, InputIterator last, const Allocator& = Allocator());
@@ -3758,12 +3815,13 @@ equal to the range
 using the specified allocator.
 
 \pnum
-\complexity Linear in \tcode{distance(first, last)}.
+\complexity
+Linear in \tcode{distance(first, last)}.
 \end{itemdescr}
 
 \rSec3[deque.capacity]{Capacity}
 
-\indexlibrary{\idxcode{resize}!\idxcode{deque}}%
+\indexlibrarymember{resize}{deque}%
 \begin{itemdecl}
 void resize(size_type sz);
 \end{itemdecl}
@@ -3774,12 +3832,13 @@ void resize(size_type sz);
 \tcode{T} is \oldconcept{MoveInsertable} and \oldconcept{DefaultInsertable} into \tcode{*this}.
 
 \pnum
-\effects If \tcode{sz < size()}, erases the last \tcode{size() - sz} elements
+\effects
+If \tcode{sz < size()}, erases the last \tcode{size() - sz} elements
 from the sequence. Otherwise,
 appends \tcode{sz - size()} default-inserted elements to the sequence.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{resize}!\idxcode{deque}}%
+\indexlibrarymember{resize}{deque}%
 \begin{itemdecl}
 void resize(size_type sz, const T& c);
 \end{itemdecl}
@@ -3790,7 +3849,8 @@ void resize(size_type sz, const T& c);
 \tcode{T} is \oldconcept{CopyInsertable} into \tcode{*this}.
 
 \pnum
-\effects If \tcode{sz < size()}, erases the last \tcode{size() - sz} elements
+\effects
+If \tcode{sz < size()}, erases the last \tcode{size() - sz} elements
 from the sequence. Otherwise,
 appends \tcode{sz - size()} copies of \tcode{c} to the sequence.
 \end{itemdescr}
@@ -3806,10 +3866,13 @@ void shrink_to_fit();
 \tcode{T} is \oldconcept{MoveInsertable} into \tcode{*this}.
 
 \pnum
-\effects \tcode{shrink_to_fit} is a non-binding request to reduce memory use
+\effects
+\tcode{shrink_to_fit} is a non-binding request to reduce memory use
 but does not change the size of the sequence.
-\begin{note} The request is non-binding to allow latitude for
-implementation-specific optimizations. \end{note}
+\begin{note}
+The request is non-binding to allow latitude for
+implementation-specific optimizations.
+\end{note}
 If the size is equal to the old capacity, or
 if an exception is thrown other than by the move constructor
 of a non-\oldconcept{CopyInsertable} \tcode{T},
@@ -3831,10 +3894,10 @@ as well as the past-the-end iterator.
 
 \rSec3[deque.modifiers]{Modifiers}
 
-\indexlibrary{\idxcode{insert}!\idxcode{deque}}%
-\indexlibrary{\idxcode{push_front}!\idxcode{deque}}%
-\indexlibrary{\idxcode{push_back}!\idxcode{deque}}%
-\indexlibrary{\idxcode{emplace}!\idxcode{deque}}%
+\indexlibrarymember{insert}{deque}%
+\indexlibrarymember{push_front}{deque}%
+\indexlibrarymember{push_back}{deque}%
+\indexlibrarymember{emplace}{deque}%
 \begin{itemdecl}
 iterator insert(const_iterator position, const T& x);
 iterator insert(const_iterator position, T&& x);
@@ -3884,7 +3947,7 @@ and causes a single call to a constructor of
 \tcode{T}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{erase}!\idxcode{deque}}%
+\indexlibrarymember{erase}{deque}%
 \begin{itemdecl}
 iterator erase(const_iterator position);
 iterator erase(const_iterator first, const_iterator last);
@@ -3901,7 +3964,9 @@ element of a deque but not the last element invalidates only iterators
 and references to the erased elements. An erase operation
 that erases neither the first element nor the last element of a deque invalidates the past-the-end
 iterator and all iterators and references to all the elements of the deque.
-\begin{note} \tcode{pop_front} and \tcode{pop_back} are erase operations. \end{note}
+\begin{note}
+\tcode{pop_front} and \tcode{pop_back} are erase operations.
+\end{note}
 
 \pnum
 \complexity
@@ -3917,7 +3982,7 @@ Nothing unless an exception is thrown by the assignment operator of
 
 \rSec3[deque.erasure]{Erasure}
 
-\indexlibrary{\idxcode{erase}!\idxcode{deque}}%
+\indexlibrarymember{erase}{deque}%
 \begin{itemdecl}
 template<class T, class Allocator, class U>
   void erase(deque<T, Allocator>& c, const U& value);
@@ -3929,7 +3994,7 @@ template<class T, class Allocator, class U>
 Equivalent to: \tcode{c.erase(remove(c.begin(), c.end(), value), c.end());}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{erase_if}!\idxcode{deque}}%
+\indexlibrarymember{erase_if}{deque}%
 \begin{itemdecl}
 template<class T, class Allocator, class Predicate>
   void erase_if(deque<T, Allocator>& c, Predicate pred);
@@ -3949,9 +4014,11 @@ Equivalent to: \tcode{c.erase(remove_if(c.begin(), c.end(), pred), c.end());}
 A \tcode{forward_list} is a container that supports forward iterators and allows
 constant time insert and erase operations anywhere within the sequence, with storage
 management handled automatically. Fast random access to list elements is not supported.
-\begin{note} It is intended that \tcode{forward_list} have zero space or time overhead
+\begin{note}
+It is intended that \tcode{forward_list} have zero space or time overhead
 relative to a hand-written C-style singly linked list. Features that would conflict with
-that goal have been omitted.\end{note}
+that goal have been omitted.
+\end{note}
 
 \pnum
 A \tcode{forward_list} meets all of the requirements of a container
@@ -3967,10 +4034,12 @@ Descriptions are provided here only for operations on
 is additional semantic information.
 
 \pnum
-\begin{note} Modifying any list requires access to the element preceding the first element
+\begin{note}
+Modifying any list requires access to the element preceding the first element
 of interest, but in a \tcode{forward_list} there is no constant-time way to access a
 preceding element. For this reason, ranges that are modified, such as those supplied to
-\tcode{erase} and \tcode{splice}, must be open at the beginning. \end{note}
+\tcode{erase} and \tcode{splice}, must be open at the beginning.
+\end{note}
 
 \begin{codeblock}
 namespace std {
@@ -4103,53 +4172,61 @@ of \tcode{forward_list} is referenced.
 
 \rSec3[forwardlist.cons]{Constructors, copy, and assignment}
 
-\indexlibrary{\idxcode{forward_list}!constructor}%
+\indexlibraryctor{forward_list}%
 \begin{itemdecl}
 explicit forward_list(const Allocator&);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects Constructs an empty \tcode{forward_list} object using the specified allocator.
+\effects
+Constructs an empty \tcode{forward_list} object using the specified allocator.
 
 \pnum
-\complexity Constant.
+\complexity
+Constant.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{forward_list}!constructor}%
+\indexlibraryctor{forward_list}%
 \begin{itemdecl}
 explicit forward_list(size_type n, const Allocator& = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{T} is \oldconcept{DefaultInsertable} into \tcode{*this}.
+\expects
+\tcode{T} is \oldconcept{DefaultInsertable} into \tcode{*this}.
 
 \pnum
-\effects Constructs a \tcode{forward_list} object with \tcode{n}
+\effects
+Constructs a \tcode{forward_list} object with \tcode{n}
 default-inserted elements using the specified allocator.
 
 \pnum
-\complexity Linear in \tcode{n}.
+\complexity
+Linear in \tcode{n}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{forward_list}!constructor}%
+\indexlibraryctor{forward_list}%
 \begin{itemdecl}
 forward_list(size_type n, const T& value, const Allocator& = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{T} is \oldconcept{CopyInsertable} into \tcode{*this}.
+\expects
+\tcode{T} is \oldconcept{CopyInsertable} into \tcode{*this}.
 
 \pnum
-\effects Constructs a \tcode{forward_list} object with \tcode{n} copies of \tcode{value} using the specified allocator.
+\effects
+Constructs a \tcode{forward_list} object with \tcode{n} copies of \tcode{value} using the specified allocator.
 
 \pnum
-\complexity Linear in \tcode{n}.
+\complexity
+Linear in \tcode{n}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{forward_list}!constructor}%
+\indexlibraryctor{forward_list}%
 \begin{itemdecl}
 template<class InputIterator>
   forward_list(InputIterator first, InputIterator last, const Allocator& = Allocator());
@@ -4157,10 +4234,12 @@ template<class InputIterator>
 
 \begin{itemdescr}
 \pnum
-\effects Constructs a \tcode{forward_list} object equal to the range \range{first}{last}.
+\effects
+Constructs a \tcode{forward_list} object equal to the range \range{first}{last}.
 
 \pnum
-\complexity Linear in \tcode{distance(first, last)}.
+\complexity
+Linear in \tcode{distance(first, last)}.
 \end{itemdescr}
 
 \rSec3[forwardlist.iter]{Iterators}
@@ -4175,15 +4254,18 @@ const_iterator cbefore_begin() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns A non-dereferenceable iterator that, when incremented, is equal to the iterator
+\returns
+A non-dereferenceable iterator that, when incremented, is equal to the iterator
 returned by \tcode{begin()}.
 
 \pnum
-\effects \tcode{cbefore_begin()} is equivalent to
+\effects
+\tcode{cbefore_begin()} is equivalent to
 \tcode{const_cast<forward_list const\&>(*this).before_begin()}.
 
 \pnum
-\remarks \tcode{before_begin() == end()} shall equal \tcode{false}.
+\remarks
+\tcode{before_begin() == end()} shall equal \tcode{false}.
 \end{itemdescr}
 
 \rSec3[forwardlist.access]{Element access}
@@ -4196,7 +4278,8 @@ const_reference front() const;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{*begin()}
+\returns
+\tcode{*begin()}
 \end{itemdescr}
 
 \rSec3[forwardlist.modifiers]{Modifiers}
@@ -4218,7 +4301,8 @@ template<class... Args> reference emplace_front(Args&&... args);
 
 \begin{itemdescr}
 \pnum
-\effects Inserts an object of type \tcode{value_type} constructed with
+\effects
+Inserts an object of type \tcode{value_type} constructed with
 \tcode{value_type(std::forward<Args>(\brk{}args)...)} at the beginning of the list.
 \end{itemdescr}
 
@@ -4230,7 +4314,8 @@ void push_front(T&& x);
 
 \begin{itemdescr}
 \pnum
-\effects Inserts a copy of \tcode{x} at the beginning of the list.
+\effects
+Inserts a copy of \tcode{x} at the beginning of the list.
 \end{itemdescr}
 
 
@@ -4241,7 +4326,8 @@ void pop_front();
 
 \begin{itemdescr}
 \pnum
-\effects As if by \tcode{erase_after(before_begin())}.
+\effects
+As if by \tcode{erase_after(before_begin())}.
 \end{itemdescr}
 
 \indexlibrarymember{insert_after}{forward_list}%
@@ -4252,14 +4338,17 @@ iterator insert_after(const_iterator position, T&& x);
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{position} is \tcode{before_begin()} or is a dereferenceable
+\expects
+\tcode{position} is \tcode{before_begin()} or is a dereferenceable
 iterator in the range \range{begin()}{end()}.
 
 \pnum
-\effects Inserts a copy of \tcode{x} after \tcode{position}.
+\effects
+Inserts a copy of \tcode{x} after \tcode{position}.
 
 \pnum
-\returns An iterator pointing to the copy of \tcode{x}.
+\returns
+An iterator pointing to the copy of \tcode{x}.
 \end{itemdescr}
 
 \indexlibrarymember{insert_after}{forward_list}%
@@ -4269,11 +4358,13 @@ iterator insert_after(const_iterator position, size_type n, const T& x);
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{position} is \tcode{before_begin()} or is a dereferenceable
+\expects
+\tcode{position} is \tcode{before_begin()} or is a dereferenceable
 iterator in the range \range{begin()}{end()}.
 
 \pnum
-\effects Inserts \tcode{n} copies of \tcode{x} after \tcode{position}.
+\effects
+Inserts \tcode{n} copies of \tcode{x} after \tcode{position}.
 
 \pnum
 \returns
@@ -4288,12 +4379,14 @@ template<class InputIterator>
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{position} is \tcode{before_begin()} or is a dereferenceable
+\expects
+\tcode{position} is \tcode{before_begin()} or is a dereferenceable
 iterator in the range \range{begin()}{end()}.
 Neither \tcode{first} nor \tcode{last} are iterators in \tcode{*this}.
 
 \pnum
-\effects Inserts copies of elements in \range{first}{last} after \tcode{position}.
+\effects
+Inserts copies of elements in \range{first}{last} after \tcode{position}.
 
 \pnum
 \returns
@@ -4307,7 +4400,8 @@ iterator insert_after(const_iterator position, initializer_list<T> il);
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{insert_after(p, il.begin(), il.end())}.
+\effects
+\tcode{insert_after(p, il.begin(), il.end())}.
 
 \pnum
 \returns
@@ -4323,15 +4417,18 @@ template<class... Args>
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{position} is \tcode{before_begin()} or is a dereferenceable
+\expects
+\tcode{position} is \tcode{before_begin()} or is a dereferenceable
 iterator in the range \range{begin()}{end()}.
 
 \pnum
-\effects Inserts an object of type \tcode{value_type} constructed with
+\effects
+Inserts an object of type \tcode{value_type} constructed with
 \tcode{value_type(std::forward<Args>(\brk{}args)...)} after \tcode{position}.
 
 \pnum
-\returns An iterator pointing to the new object.
+\returns
+An iterator pointing to the new object.
 \end{itemdescr}
 
 \indexlibrarymember{erase_after}{forward_list}%
@@ -4341,17 +4438,21 @@ iterator erase_after(const_iterator position);
 
 \begin{itemdescr}
 \pnum
-\expects The iterator following \tcode{position} is dereferenceable.
+\expects
+The iterator following \tcode{position} is dereferenceable.
 
 \pnum
-\effects Erases the element pointed to by the iterator following \tcode{position}.
+\effects
+Erases the element pointed to by the iterator following \tcode{position}.
 
 \pnum
-\returns An iterator pointing to the element following the one that was
+\returns
+An iterator pointing to the element following the one that was
 erased, or \tcode{end()} if no such element exists.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -4360,16 +4461,20 @@ iterator erase_after(const_iterator position, const_iterator last);
 
 \begin{itemdescr}
 \pnum
-\expects All iterators in the range \orange{position}{last} are dereferenceable.
+\expects
+All iterators in the range \orange{position}{last} are dereferenceable.
 
 \pnum
-\effects Erases the elements in the range \orange{position}{last}.
+\effects
+Erases the elements in the range \orange{position}{last}.
 
 \pnum
-\returns \tcode{last}.
+\returns
+\tcode{last}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 \end{itemdescr}
 
 \indexlibrarymember{resize}{forward_list}%
@@ -4379,10 +4484,12 @@ void resize(size_type sz);
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{T} is \oldconcept{DefaultInsertable} into \tcode{*this}.
+\expects
+\tcode{T} is \oldconcept{DefaultInsertable} into \tcode{*this}.
 
 \pnum
-\effects If \tcode{sz < distance(begin(), end())}, erases the last \tcode{distance(begin(),
+\effects
+If \tcode{sz < distance(begin(), end())}, erases the last \tcode{distance(begin(),
 end()) - sz} elements from the list. Otherwise, inserts \tcode{sz - distance(begin(), end())} default-inserted
 elements at the end of the list.
 \end{itemdescr}
@@ -4393,10 +4500,12 @@ void resize(size_type sz, const value_type& c);
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{T} is \oldconcept{CopyInsertable} into \tcode{*this}.
+\expects
+\tcode{T} is \oldconcept{CopyInsertable} into \tcode{*this}.
 
 \pnum
-\effects If \tcode{sz < distance(begin(), end())}, erases the last \tcode{distance(begin(),
+\effects
+If \tcode{sz < distance(begin(), end())}, erases the last \tcode{distance(begin(),
 end()) - sz} elements from the list. Otherwise, inserts \tcode{sz - distance(begin(), end())}
 copies of \tcode{c} at the end of the list.
 \end{itemdescr}
@@ -4409,10 +4518,12 @@ void clear() noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects Erases all elements in the range \range{begin()}{end()}.
+\effects
+Erases all elements in the range \range{begin()}{end()}.
 
 \pnum
-\remarks Does not invalidate past-the-end iterators.
+\remarks
+Does not invalidate past-the-end iterators.
 \end{itemdescr}
 
 \rSec3[forwardlist.ops]{Operations}
@@ -4433,23 +4544,27 @@ void splice_after(const_iterator position, forward_list&& x);
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{position} is \tcode{before_begin()} or is a dereferenceable
+\expects
+\tcode{position} is \tcode{before_begin()} or is a dereferenceable
 iterator in the range \range{begin()}{end()}.
 \tcode{get_allocator() == x.get_allocator()} is \tcode{true}.
 \tcode{addressof(x) != this} is \tcode{true}.
 
 \pnum
-\effects Inserts the contents of \tcode{x} after
+\effects
+Inserts the contents of \tcode{x} after
 \tcode{position}, and \tcode{x} becomes empty. Pointers and references to the moved
 elements of \tcode{x} now refer to those same elements but as members of \tcode{*this}.
 Iterators referring to the moved elements will continue to refer to their elements, but
 they now behave as iterators into \tcode{*this}, not into \tcode{x}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 
 \pnum
-\complexity \bigoh{\tcode{distance(x.begin(), x.end())}}
+\complexity
+\bigoh{\tcode{distance(x.begin(), x.end())}}
 \end{itemdescr}
 
 \indexlibrarymember{splice_after}{forward_list}%
@@ -4460,13 +4575,15 @@ void splice_after(const_iterator position, forward_list&& x, const_iterator i);
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{position} is \tcode{before_begin()} or is a dereferenceable
+\expects
+\tcode{position} is \tcode{before_begin()} or is a dereferenceable
 iterator in the range \range{begin()}{end()}.
 The iterator following \tcode{i} is a dereferenceable iterator in \tcode{x}.
 \tcode{get_allocator() == x.get_allocator()} is \tcode{true}.
 
 \pnum
-\effects Inserts the element following \tcode{i} into \tcode{*this}, following
+\effects
+Inserts the element following \tcode{i} into \tcode{*this}, following
 \tcode{position}, and removes it from \tcode{x}.
 The result is unchanged if \tcode{position == i} or \tcode{position == ++i}. Pointers
 and references to \tcode{*++i} continue to refer to the same element but as a member of
@@ -4474,10 +4591,12 @@ and references to \tcode{*++i} continue to refer to the same element but as a me
 the same element, but now behave as iterators into \tcode{*this}, not into \tcode{x}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 
 \pnum
-\complexity \bigoh{1}
+\complexity
+\bigoh{1}
 \end{itemdescr}
 
 \indexlibrarymember{splice_after}{forward_list}%
@@ -4490,21 +4609,24 @@ void splice_after(const_iterator position, forward_list&& x,
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{position} is \tcode{before_begin()} or is a
+\expects
+\tcode{position} is \tcode{before_begin()} or is a
 dereferenceable iterator in the range \range{begin()}{end()}. \orange{first}{last} is a
 valid range in \tcode{x}, and all iterators in the range \orange{first}{last} are
 dereferenceable. \tcode{position} is not an iterator in the range \orange{first}{last}.
 \tcode{get_allocator() == x.get_allocator()} is \tcode{true}.
 
 \pnum
-\effects Inserts elements in the range \orange{first}{last} after \tcode{position} and
+\effects
+Inserts elements in the range \orange{first}{last} after \tcode{position} and
 removes the elements from \tcode{x}. Pointers and references to the moved elements of
 \tcode{x} now refer to those same elements but as members of \tcode{*this}. Iterators
 referring to the moved elements will continue to refer to their elements, but they now
 behave as iterators into \tcode{*this}, not into \tcode{x}.
 
 \pnum
-\complexity \bigoh{\tcode{distance(first, last)}}
+\complexity
+\bigoh{\tcode{distance(first, last)}}
 \end{itemdescr}
 
 \indexlibrarymember{remove}{forward_list}%
@@ -4516,23 +4638,28 @@ template<class Predicate> size_type remove_if(Predicate pred);
 
 \begin{itemdescr}
 \pnum
-\effects Erases all the elements in the list referred to by a list iterator \tcode{i} for
+\effects
+Erases all the elements in the list referred to by a list iterator \tcode{i} for
 which the following conditions hold: \tcode{*i == value} (for \tcode{remove()}),
 \tcode{pred(*i)} is \tcode{true} (for \tcode{remove_if()}).
 Invalidates only the iterators and references to the erased elements.
 
 \pnum
-\returns The number of elements erased.
+\returns
+The number of elements erased.
 
 \pnum
-\throws Nothing unless an exception is thrown by the equality comparison or the
+\throws
+Nothing unless an exception is thrown by the equality comparison or the
 predicate.
 
 \pnum
-\remarks Stable\iref{algorithm.stable}.
+\remarks
+Stable\iref{algorithm.stable}.
 
 \pnum
-\complexity Exactly \tcode{distance(begin(), end())} applications of the corresponding
+\complexity
+Exactly \tcode{distance(begin(), end())} applications of the corresponding
 predicate.
 \end{itemdescr}
 
@@ -4544,20 +4671,24 @@ template<class BinaryPredicate> size_type unique(BinaryPredicate pred);
 
 \begin{itemdescr}
 \pnum
-\effects Erases all but the first element from every consecutive
+\effects
+Erases all but the first element from every consecutive
 group of equal elements referred to by the iterator \tcode{i} in the range \range{first +
 1}{last} for which \tcode{*i == *(i-1)} (for the version with no arguments) or \tcode{pred(*i,
 *(i - 1))} (for the version with a predicate argument) holds.
 Invalidates only the iterators and references to the erased elements.
 
 \pnum
-\returns The number of elements erased.
+\returns
+The number of elements erased.
 
 \pnum
-\throws Nothing unless an exception is thrown by the equality comparison or the predicate.
+\throws
+Nothing unless an exception is thrown by the equality comparison or the predicate.
 
 \pnum
-\complexity If the range \range{first}{last} is not empty, exactly \tcode{(last - first) - 1} applications of the corresponding predicate, otherwise no applications of the predicate.
+\complexity
+If the range \range{first}{last} is not empty, exactly \tcode{(last - first) - 1} applications of the corresponding predicate, otherwise no applications of the predicate.
 \end{itemdescr}
 
 \indexlibrarymember{merge}{forward_list}%
@@ -4570,13 +4701,15 @@ template<class Compare> void merge(forward_list&& x, Compare comp);
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{*this} and \tcode{x} are both sorted with respect to
+\expects
+\tcode{*this} and \tcode{x} are both sorted with respect to
 the comparator \tcode{operator<} (for the first two overloads) or
 \tcode{comp} (for the last two overloads), and
 \tcode{get_allocator() == x.get_allocator()} is \tcode{true}.
 
 \pnum
-\effects Merges the two sorted ranges \tcode{[begin(), end())} and
+\effects
+Merges the two sorted ranges \tcode{[begin(), end())} and
 \tcode{[x.begin(), x.end())}. \tcode{x} is empty after the merge. If an
 exception is thrown other than by a comparison there are no effects.
 Pointers and references to the moved elements of \tcode{x} now refer to those same elements
@@ -4585,10 +4718,12 @@ refer to their elements, but they now behave as iterators into \tcode{*this}, no
 \tcode{x}.
 
 \pnum
-\remarks Stable\iref{algorithm.stable}.
+\remarks
+Stable\iref{algorithm.stable}.
 
 \pnum
-\complexity At most \tcode{distance(begin(),
+\complexity
+At most \tcode{distance(begin(),
 end()) + distance(x.begin(), x.end()) - 1} comparisons.
 \end{itemdescr}
 
@@ -4600,15 +4735,18 @@ template<class Compare> void sort(Compare comp);
 
 \begin{itemdescr}
 \pnum
-\effects Sorts the list according to the \tcode{operator<} or the \tcode{comp} function object.
+\effects
+Sorts the list according to the \tcode{operator<} or the \tcode{comp} function object.
 If an exception is thrown, the order of the elements in \tcode{*this} is unspecified.
 Does not affect the validity of iterators and references.
 
 \pnum
-\remarks Stable\iref{algorithm.stable}.
+\remarks
+Stable\iref{algorithm.stable}.
 
 \pnum
-\complexity Approximately $N \log N$ comparisons, where $N$ is \tcode{distance(begin(), end())}.
+\complexity
+Approximately $N \log N$ comparisons, where $N$ is \tcode{distance(begin(), end())}.
 \end{itemdescr}
 
 \indexlibrarymember{reverse}{forward_list}%
@@ -4618,16 +4756,18 @@ void reverse() noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects Reverses the order of the elements in the list.
+\effects
+Reverses the order of the elements in the list.
 Does not affect the validity of iterators and references.
 
 \pnum
-\complexity Linear time.
+\complexity
+Linear time.
 \end{itemdescr}
 
 \rSec3[forward.list.erasure]{Erasure}
 
-\indexlibrary{\idxcode{erase}!\idxcode{forward_list}}%
+\indexlibrarymember{erase}{forward_list}%
 \begin{itemdecl}
 template<class T, class Allocator, class U>
   void erase(forward_list<T, Allocator>& c, const U& value);
@@ -4639,7 +4779,7 @@ template<class T, class Allocator, class U>
 Equivalent to: \tcode{erase_if(c, [\&](auto\& elem) \{ return elem == value; \});}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{erase_if}!\idxcode{forward_list}}%
+\indexlibrarymember{erase_if}{forward_list}%
 \begin{itemdecl}
 template<class T, class Allocator, class Predicate>
   void erase_if(forward_list<T, Allocator>& c, Predicate pred);
@@ -4656,7 +4796,7 @@ Equivalent to: \tcode{c.remove_if(pred);}
 \rSec3[list.overview]{Overview}
 
 \pnum
-\indexlibrary{\idxcode{list}}%
+\indexlibraryglobal{list}%
 A
 \tcode{list}
 is a sequence container that supports
@@ -4825,7 +4965,7 @@ of \tcode{list} is referenced.
 
 \rSec3[list.cons]{Constructors, copy, and assignment}
 
-\indexlibrary{\idxcode{list}!constructor}%
+\indexlibraryctor{list}%
 \begin{itemdecl}
 explicit list(const Allocator&);
 \end{itemdecl}
@@ -4840,17 +4980,19 @@ Constructs an empty list, using the specified allocator.
 Constant.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{list}!constructor}%
+\indexlibraryctor{list}%
 \begin{itemdecl}
 explicit list(size_type n, const Allocator& = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{T} is \oldconcept{DefaultInsertable} into \tcode{*this}.
+\expects
+\tcode{T} is \oldconcept{DefaultInsertable} into \tcode{*this}.
 
 \pnum
-\effects Constructs a \tcode{list} with
+\effects
+Constructs a \tcode{list} with
 \tcode{n} default-inserted elements using the specified allocator.
 
 \pnum
@@ -4859,14 +5001,15 @@ Linear in
 \tcode{n}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{list}!constructor}%
+\indexlibraryctor{list}%
 \begin{itemdecl}
 list(size_type n, const T& value, const Allocator& = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{T} is \oldconcept{CopyInsertable} into \tcode{*this}.
+\expects
+\tcode{T} is \oldconcept{CopyInsertable} into \tcode{*this}.
 
 \pnum
 \effects
@@ -4884,7 +5027,7 @@ Linear in
 \tcode{n}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{list}!constructor}%
+\indexlibraryctor{list}%
 \begin{itemdecl}
 template<class InputIterator>
   list(InputIterator first, InputIterator last, const Allocator& = Allocator());
@@ -4906,14 +5049,15 @@ Linear in
 
 \rSec3[list.capacity]{Capacity}
 
-\indexlibrary{\idxcode{resize}!\idxcode{list}}%
+\indexlibrarymember{resize}{list}%
 \begin{itemdecl}
 void resize(size_type sz);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{T} is \oldconcept{DefaultInsertable} into \tcode{*this}.
+\expects
+\tcode{T} is \oldconcept{DefaultInsertable} into \tcode{*this}.
 
 \pnum
 \effects
@@ -4929,14 +5073,15 @@ erase(it, end());
 \end{codeblock}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{resize}!\idxcode{list}}%
+\indexlibrarymember{resize}{list}%
 \begin{itemdecl}
 void resize(size_type sz, const T& c);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{T} is \oldconcept{CopyInsertable} into \tcode{*this}.
+\expects
+\tcode{T} is \oldconcept{CopyInsertable} into \tcode{*this}.
 
 \pnum
 \effects
@@ -4956,7 +5101,7 @@ else
 
 \rSec3[list.modifiers]{Modifiers}
 
-\indexlibrary{\idxcode{insert}!\idxcode{list}}%
+\indexlibrarymember{insert}{list}%
 \begin{itemdecl}
 iterator insert(const_iterator position, const T& x);
 iterator insert(const_iterator position, T&& x);
@@ -4991,7 +5136,7 @@ constructor or move constructor of \tcode{T} is exactly equal
 to the number of elements inserted.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{erase}!\idxcode{list}}%
+\indexlibrarymember{erase}{list}%
 \begin{itemdecl}
 iterator erase(const_iterator position);
 iterator erase(const_iterator first, const_iterator last);
@@ -5007,7 +5152,8 @@ void clear() noexcept;
 Invalidates only the iterators and references to the erased elements.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 
 \pnum
 \complexity
@@ -5038,7 +5184,7 @@ the definitions and requirements in \ref{alg.sorting} apply.
 another. The behavior of splice operations is undefined if \tcode{get_allocator() !=
 x.get_allocator()}.
 
-\indexlibrary{\idxcode{splice}!\idxcode{list}}%
+\indexlibrarymember{splice}{list}%
 \begin{itemdecl}
 void splice(const_iterator position, list& x);
 void splice(const_iterator position, list&& x);
@@ -5069,7 +5215,8 @@ not into
 \tcode{x}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 
 \pnum
 \complexity
@@ -5114,7 +5261,8 @@ not into
 \tcode{x}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 
 \pnum
 \complexity
@@ -5154,7 +5302,8 @@ not into
 \tcode{x}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 
 \pnum
 \complexity
@@ -5163,7 +5312,7 @@ Constant time if
 otherwise, linear time.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{remove}!\idxcode{list}}%
+\indexlibrarymember{remove}{list}%
 \begin{itemdecl}
 size_type remove(const T& value);
 template<class Predicate> size_type remove_if(Predicate pred);
@@ -5177,7 +5326,8 @@ following conditions hold: \tcode{*i == value}, \tcode{pred(*i) != false}.
 Invalidates only the iterators and references to the erased elements.
 
 \pnum
-\returns The number of elements erased.
+\returns
+The number of elements erased.
 
 \pnum
 \throws
@@ -5187,7 +5337,8 @@ or
 \tcode{pred(*i) != false}.
 
 \pnum
-\remarks Stable\iref{algorithm.stable}.
+\remarks
+Stable\iref{algorithm.stable}.
 
 \pnum
 \complexity
@@ -5196,7 +5347,7 @@ Exactly
 applications of the corresponding predicate.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{unique}!\idxcode{list}}%
+\indexlibrarymember{unique}{list}%
 \begin{itemdecl}
 size_type unique();
 template<class BinaryPredicate> size_type unique(BinaryPredicate binary_pred);
@@ -5213,7 +5364,8 @@ consecutive group of equal elements referred to by the iterator \tcode{i} in the
 Invalidates only the iterators and references to the erased elements.
 
 \pnum
-\returns The number of elements erased.
+\returns
+The number of elements erased.
 
 \pnum
 \throws
@@ -5232,7 +5384,7 @@ applications of the corresponding predicate,
 otherwise no applications of the predicate.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{merge}!\idxcode{list}}%
+\indexlibrarymember{merge}{list}%
 \begin{itemdecl}
 void merge(list& x);
 void merge(list&& x);
@@ -5246,8 +5398,8 @@ template<class Compare> void merge(list&& x, Compare comp);
 Both the list and the argument list
 shall be sorted with respect to
 the comparator \tcode{operator<} (for the first two overloads) or
-\tcode{comp} (for the last two overloads).
-\tcode{get_allocator() != x.get_allocator()} is \tcode{true}.
+\tcode{comp} (for the last two overloads), and
+\tcode{get_allocator() == x.get_allocator()} is \tcode{true}.
 
 \pnum
 \effects
@@ -5262,7 +5414,8 @@ refer to their elements, but they now behave as iterators into \tcode{*this}, no
 \tcode{x}.
 
 \pnum
-\remarks Stable\iref{algorithm.stable}. If \tcode{addressof(x) != this}, the range \tcode{[x.begin(), x.end())}
+\remarks
+Stable\iref{algorithm.stable}. If \tcode{addressof(x) != this}, the range \tcode{[x.begin(), x.end())}
 is empty after the merge.
 No elements are copied by this operation.
 
@@ -5276,7 +5429,7 @@ otherwise, no applications of \tcode{comp} are performed.
 If an exception is thrown other than by a comparison there are no effects.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{reverse}!\idxcode{list}}%
+\indexlibrarymember{reverse}{list}%
 \begin{itemdecl}
 void reverse() noexcept;
 \end{itemdecl}
@@ -5292,7 +5445,7 @@ Does not affect the validity of iterators and references.
 Linear time.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{sort}!\idxcode{list}}%
+\indexlibrarymember{sort}{list}%
 \begin{itemdecl}
 void sort();
 template<class Compare> void sort(Compare comp);
@@ -5307,7 +5460,8 @@ the order of the elements in \tcode{*this} is unspecified.
 Does not affect the validity of iterators and references.
 
 \pnum
-\remarks Stable\iref{algorithm.stable}.
+\remarks
+Stable\iref{algorithm.stable}.
 
 \pnum
 \complexity
@@ -5319,7 +5473,7 @@ comparisons, where
 
 \rSec3[list.erasure]{Erasure}
 
-\indexlibrary{\idxcode{erase}!\idxcode{list}}%
+\indexlibrarymember{erase}{list}%
 \begin{itemdecl}
 template<class T, class Allocator, class U>
   void erase(list<T, Allocator>& c, const U& value);
@@ -5331,7 +5485,7 @@ template<class T, class Allocator, class U>
 Equivalent to: \tcode{erase_if(c, [\&](auto\& elem) \{ return elem == value; \});}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{erase_if}!\idxcode{list}}%
+\indexlibrarymember{erase_if}{list}%
 \begin{itemdecl}
 template<class T, class Allocator, class Predicate>
   void erase_if(list<T, Allocator>& c, Predicate pred);
@@ -5348,7 +5502,7 @@ Equivalent to: \tcode{c.remove_if(pred);}
 \rSec3[vector.overview]{Overview}
 
 \pnum
-\indexlibrary{\idxcode{vector}}%
+\indexlibraryglobal{vector}%
 A
 \tcode{vector}
 is a sequence container that supports
@@ -5489,8 +5643,8 @@ namespace std {
       noexcept(noexcept(x.swap(y)));
 }
 \end{codeblock}%
-\indexlibrary{\idxcode{vector}!\idxcode{operator==}}%
-\indexlibrary{\idxcode{vector}!\idxcode{operator<}}
+\indexlibrarymember{vector}{operator==}%
+\indexlibrarymember{vector}{operator<}
 
 \pnum
 An incomplete type \tcode{T} may be used when instantiating \tcode{vector}
@@ -5501,38 +5655,43 @@ of \tcode{vector} is referenced.
 
 \rSec3[vector.cons]{Constructors, copy, and assignment}
 
-\indexlibrary{\idxcode{vector}!constructor}
+\indexlibraryctor{vector}
 \begin{itemdecl}
 constexpr explicit vector(const Allocator&) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects Constructs an empty \tcode{vector}, using the
+\effects
+Constructs an empty \tcode{vector}, using the
 specified allocator.
 
 \pnum
-\complexity Constant.
+\complexity
+Constant.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{vector}!constructor}
+\indexlibraryctor{vector}
 \begin{itemdecl}
 constexpr explicit vector(size_type n, const Allocator& = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{T} is \oldconcept{DefaultInsertable} into \tcode{*this}.
+\expects
+\tcode{T} is \oldconcept{DefaultInsertable} into \tcode{*this}.
 
 \pnum
-\effects Constructs a \tcode{vector} with \tcode{n}
+\effects
+Constructs a \tcode{vector} with \tcode{n}
 default-inserted elements using the specified allocator.
 
 \pnum
-\complexity Linear in \tcode{n}.
+\complexity
+Linear in \tcode{n}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{vector}!constructor}
+\indexlibraryctor{vector}
 \begin{itemdecl}
 constexpr vector(size_type n, const T& value,
                  const Allocator& = Allocator());
@@ -5540,18 +5699,21 @@ constexpr vector(size_type n, const T& value,
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{T} is
+\expects
+\tcode{T} is
 \oldconcept{CopyInsertable} into \tcode{*this}.
 
 \pnum
-\effects Constructs a \tcode{vector} with \tcode{n}
+\effects
+Constructs a \tcode{vector} with \tcode{n}
 copies of \tcode{value}, using the specified allocator.
 
 \pnum
-\complexity Linear in \tcode{n}.
+\complexity
+Linear in \tcode{n}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{vector}!constructor}
+\indexlibraryctor{vector}
 \begin{itemdecl}
 template<class InputIterator>
   constexpr vector(InputIterator first, InputIterator last,
@@ -5561,7 +5723,8 @@ template<class InputIterator>
 \begin{itemdescr}
 
 \pnum
-\effects Constructs a \tcode{vector} equal to the
+\effects
+Constructs a \tcode{vector} equal to the
 range \range{first}{last}, using the specified allocator.
 
 \pnum
@@ -5586,7 +5749,7 @@ reallocations if they are just input iterators.
 
 \rSec3[vector.capacity]{Capacity}
 
-\indexlibrary{\idxcode{capacity}!\idxcode{vector}}%
+\indexlibrarymember{capacity}{vector}%
 \begin{itemdecl}
 constexpr size_type capacity() const noexcept;
 \end{itemdecl}
@@ -5598,17 +5761,19 @@ The total number of elements that the vector can hold
 without requiring reallocation.
 
 \pnum
-\complexity Constant time.
+\complexity
+Constant time.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{reserve}!\idxcode{vector}}%
+\indexlibrarymember{reserve}{vector}%
 \begin{itemdecl}
 constexpr void reserve(size_type n);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{T} is \oldconcept{MoveInsertable} into \tcode{*this}.
+\expects
+\tcode{T} is \oldconcept{MoveInsertable} into \tcode{*this}.
 
 \pnum
 \effects
@@ -5653,20 +5818,24 @@ until an insertion would make the size of the vector
 greater than the value of \tcode{capacity()}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{shrink_to_fit}!\idxcode{vector}}%
+\indexlibrarymember{shrink_to_fit}{vector}%
 \begin{itemdecl}
 constexpr void shrink_to_fit();
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{T} is \oldconcept{MoveInsertable} into \tcode{*this}.
+\expects
+\tcode{T} is \oldconcept{MoveInsertable} into \tcode{*this}.
 
 \pnum
-\effects \tcode{shrink_to_fit} is a non-binding request to reduce
+\effects
+\tcode{shrink_to_fit} is a non-binding request to reduce
 \tcode{capacity()} to \tcode{size()}.
-\begin{note} The request is non-binding to allow latitude for
-implementation-specific optimizations. \end{note}
+\begin{note}
+The request is non-binding to allow latitude for
+implementation-specific optimizations.
+\end{note}
 It does not increase \tcode{capacity()}, but may reduce \tcode{capacity()}
 by causing reallocation.
 If an exception is thrown other than by the move constructor
@@ -5678,14 +5847,15 @@ If reallocation happens,
 linear in the size of the sequence.
 
 \pnum
-\remarks Reallocation invalidates all the references, pointers, and iterators
+\remarks
+Reallocation invalidates all the references, pointers, and iterators
 referring to the elements in the sequence as well as the past-the-end iterator.
 \begin{note}
 If no reallocation happens, they remain valid.
 \end{note}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{swap}!\idxcode{vector}}%
+\indexlibrarymember{swap}{vector}%
 \begin{itemdecl}
 constexpr void swap(vector& x)
   noexcept(allocator_traits<Allocator>::propagate_on_container_swap::value ||
@@ -5706,27 +5876,30 @@ with that of \tcode{x}.
 Constant time.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{resize}!\idxcode{vector}}%
+\indexlibrarymember{resize}{vector}%
 \begin{itemdecl}
 constexpr void resize(size_type sz);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{T} is
+\expects
+\tcode{T} is
 \oldconcept{MoveInsertable} and \oldconcept{DefaultInsertable} into \tcode{*this}.
 
 \pnum
-\effects If \tcode{sz < size()}, erases the last \tcode{size() - sz} elements
+\effects
+If \tcode{sz < size()}, erases the last \tcode{size() - sz} elements
 from the sequence. Otherwise,
 appends \tcode{sz - size()} default-inserted elements to the sequence.
 
 \pnum
-\remarks If an exception is thrown other than by the move constructor of a non-\oldconcept{CopyInsertable}
+\remarks
+If an exception is thrown other than by the move constructor of a non-\oldconcept{CopyInsertable}
 \tcode{T} there are no effects.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{resize}!\idxcode{vector}}%
+\indexlibrarymember{resize}{vector}%
 \begin{itemdecl}
 constexpr void resize(size_type sz, const T& c);
 \end{itemdecl}
@@ -5734,20 +5907,23 @@ constexpr void resize(size_type sz, const T& c);
 \begin{itemdescr}
 \pnum
 \pnum
-\expects \tcode{T} is
+\expects
+\tcode{T} is
 \oldconcept{CopyInsertable} into \tcode{*this}.
 
-\effects If \tcode{sz < size()}, erases the last \tcode{size() - sz} elements
+\effects
+If \tcode{sz < size()}, erases the last \tcode{size() - sz} elements
 from the sequence. Otherwise,
 appends \tcode{sz - size()} copies of \tcode{c} to the sequence.
 
 \pnum
-\remarks If an exception is thrown there are no effects.
+\remarks
+If an exception is thrown there are no effects.
 \end{itemdescr}
 
 \rSec3[vector.data]{Data}
 
-\indexlibrary{\idxcode{data}!\idxcode{vector}}%
+\indexlibrarymember{data}{vector}%
 \begin{itemdecl}
 constexpr T*         data() noexcept;
 constexpr const T*   data() const noexcept;
@@ -5766,7 +5942,7 @@ Constant time.
 
 \rSec3[vector.modifiers]{Modifiers}
 
-\indexlibrary{\idxcode{insert}!\idxcode{vector}}%
+\indexlibrarymember{insert}{vector}%
 \begin{itemdecl}
 constexpr iterator insert(const_iterator position, const T& x);
 constexpr iterator insert(const_iterator position, T&& x);
@@ -5813,7 +5989,7 @@ linear in the number of elements inserted plus the distance
 to the end of the vector.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{erase}!\idxcode{vector}}%
+\indexlibrarymember{erase}{vector}%
 \begin{itemdecl}
 constexpr iterator erase(const_iterator position);
 constexpr iterator erase(const_iterator first, const_iterator last);
@@ -5841,7 +6017,7 @@ assignment operator or move assignment operator of
 
 \rSec3[vector.erasure]{Erasure}
 
-\indexlibrary{\idxcode{erase}!\idxcode{vector}}%
+\indexlibrarymember{erase}{vector}%
 \begin{itemdecl}
 template<class T, class Allocator, class U>
   constexpr void erase(vector<T, Allocator>& c, const U& value);
@@ -5853,7 +6029,7 @@ template<class T, class Allocator, class U>
 Equivalent to: \tcode{c.erase(remove(c.begin(), c.end(), value), c.end());}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{erase_if}!\idxcode{vector}}%
+\indexlibrarymember{erase_if}{vector}%
 \begin{itemdecl}
 template<class T, class Allocator, class Predicate>
   constexpr void erase_if(vector<T, Allocator>& c, Predicate pred);
@@ -5868,7 +6044,7 @@ Equivalent to: \tcode{c.erase(remove_if(c.begin(), c.end(), pred), c.end());}
 \rSec2[vector.bool]{Class \tcode{vector<bool>}}
 
 \pnum
-\indexlibrary{\idxcode{vector<bool>}}%
+\indexlibraryglobal{vector<bool>}%
 To optimize space allocation, a specialization of vector for
 \tcode{bool}
 elements is provided:
@@ -5901,7 +6077,7 @@ namespace std {
       constexpr operator bool() const noexcept;
       constexpr reference& operator=(const bool x) noexcept;
       constexpr reference& operator=(const reference& x) noexcept;
-      constexpr void flip() noexcept;     // flips the bit
+      constexpr void flip() noexcept;   // flips the bit
     };
 
     // construct/copy/destroy
@@ -5976,7 +6152,7 @@ namespace std {
     constexpr iterator erase(const_iterator first, const_iterator last);
     constexpr void swap(vector&);
     constexpr static void swap(reference x, reference y) noexcept;
-    constexpr void flip() noexcept;       // flips all bits
+    constexpr void flip() noexcept;     // flips all bits
     constexpr void clear() noexcept;
   };
 }
@@ -6010,7 +6186,8 @@ constexpr void flip() noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects Replaces each element in the container with its complement.
+\effects
+Replaces each element in the container with its complement.
 \end{itemdescr}
 
 \indexlibrarymember{swap}{vector<bool>}%
@@ -6020,7 +6197,8 @@ constexpr static void swap(reference x, reference y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects Exchanges the contents of \tcode{x} and \tcode{y} as if by:
+\effects
+Exchanges the contents of \tcode{x} and \tcode{y} as if by:
 
 \begin{codeblock}
 bool b = x;
@@ -6044,8 +6222,8 @@ The specialization is enabled\iref{unord.hash}.
 \rSec2[associative.general]{In general}
 
 \pnum
-The header \tcode{<map>} defines the class templates \tcode{map} and
-\tcode{multimap}; the header \tcode{<set>} defines the class templates
+The header \libheader{map} defines the class templates \tcode{map} and
+\tcode{multimap}; the header \libheader{set} defines the class templates
 \tcode{set} and \tcode{multiset}.
 
 \pnum
@@ -6068,7 +6246,7 @@ template<class InputIterator>
 
 \rSec2[associative.map.syn]{Header \tcode{<map>} synopsis}
 
-\indexhdr{map}%
+\indexheader{map}%
 \begin{codeblock}
 #include <initializer_list>
 
@@ -6129,8 +6307,7 @@ namespace std {
 
 \rSec2[associative.set.syn]{Header \tcode{<set>} synopsis}%
 
-\indexhdr{set}%
-
+\indexheader{set}%
 \begin{codeblock}
 #include <initializer_list>
 
@@ -6187,7 +6364,7 @@ namespace std {
 
 \rSec3[map.overview]{Overview}
 
-\indexlibrary{\idxcode{map}}%
+\indexlibraryglobal{map}%
 \pnum
 A \tcode{map} is an associative container that
 supports unique keys (contains at most one of each key value) and
@@ -6434,10 +6611,10 @@ namespace std {
 
 
 \rSec3[map.cons]{Constructors, copy, and assignment}%
-\indexlibrary{\idxcode{map}!\idxcode{operator==}}%
-\indexlibrary{\idxcode{map}!\idxcode{operator<}}
+\indexlibrarymember{map}{operator==}%
+\indexlibrarymember{map}{operator<}
 
-\indexlibrary{\idxcode{map}!constructor}%
+\indexlibraryctor{map}%
 \begin{itemdecl}
 explicit map(const Compare& comp, const Allocator& = Allocator());
 \end{itemdecl}
@@ -6454,7 +6631,7 @@ using the specified comparison object and allocator.
 Constant.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{map}!constructor}%
+\indexlibraryctor{map}%
 \begin{itemdecl}
 template<class InputIterator>
   map(InputIterator first, InputIterator last,
@@ -6503,7 +6680,7 @@ mapped_type& operator[](key_type&& x);
 Equivalent to: \tcode{return try_emplace(move(x)).first->second;}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{at}!\idxcode{map}}%
+\indexlibrarymember{at}{map}%
 \begin{itemdecl}
 mapped_type&       at(const key_type& x);
 const mapped_type& at(const key_type& x) const;
@@ -6520,7 +6697,8 @@ An exception object of type \tcode{out_of_range} if
 no such element is present.
 
 \pnum
-\complexity Logarithmic.
+\complexity
+Logarithmic.
 \end{itemdescr}
 
 \rSec3[map.modifiers]{Modifiers}
@@ -6703,7 +6881,7 @@ respectively.
 
 \rSec3[map.erasure]{Erasure}
 
-\indexlibrary{\idxcode{erase_if}!\idxcode{map}}%
+\indexlibrarymember{erase_if}{map}%
 \begin{itemdecl}
 template<class Key, class T, class Compare, class Allocator, class Predicate>
   void erase_if(map<Key, T, Compare, Allocator>& c, Predicate pred);
@@ -6729,7 +6907,7 @@ for (auto i = c.begin(), last = c.end(); i != last; ) {
 \rSec3[multimap.overview]{Overview}
 
 \pnum
-\indexlibrary{\idxcode{multimap}}%
+\indexlibraryglobal{multimap}%
 A
 \tcode{multimap}
 is an associative container that supports equivalent keys (possibly containing multiple copies of
@@ -6957,12 +7135,12 @@ namespace std {
       noexcept(noexcept(x.swap(y)));
 }
 \end{codeblock}%
-\indexlibrary{\idxcode{multimap}!\idxcode{operator==}}%
-\indexlibrary{\idxcode{multimap}!\idxcode{operator<}}
+\indexlibrarymember{multimap}{operator==}%
+\indexlibrarymember{multimap}{operator<}
 
 \rSec3[multimap.cons]{Constructors}
 
-\indexlibrary{\idxcode{multimap}!constructor}%
+\indexlibraryctor{multimap}%
 \begin{itemdecl}
 explicit multimap(const Compare& comp, const Allocator& = Allocator());
 \end{itemdecl}
@@ -6979,7 +7157,7 @@ using the specified comparison object and allocator.
 Constant.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{multimap}!constructor}%
+\indexlibraryctor{multimap}%
 \begin{itemdecl}
 template<class InputIterator>
   multimap(InputIterator first, InputIterator last,
@@ -7016,7 +7194,7 @@ template<class P> iterator insert(const_iterator position, P&& x);
 
 \begin{itemdescr}
 \pnum
-\mandates
+\constraints
 \tcode{is_constructible_v<value_type, P\&\&>} is \tcode{true}.
 
 \pnum
@@ -7028,7 +7206,7 @@ equivalent to \tcode{return emplace_hint(position, std::forward<P>(x))}.
 
 \rSec3[multimap.erasure]{Erasure}
 
-\indexlibrary{\idxcode{erase_if}!\idxcode{multimap}}%
+\indexlibrarymember{erase_if}{multimap}%
 \begin{itemdecl}
 template<class Key, class T, class Compare, class Allocator, class Predicate>
   void erase_if(multimap<Key, T, Compare, Allocator>& c, Predicate pred);
@@ -7054,7 +7232,7 @@ for (auto i = c.begin(), last = c.end(); i != last; ) {
 \rSec3[set.overview]{Overview}
 
 \pnum
-\indexlibrary{\idxcode{set}}%
+\indexlibraryglobal{set}%
 A
 \tcode{set}
 is an associative container that supports unique keys (contains at most one of each key value) and
@@ -7259,12 +7437,12 @@ namespace std {
       noexcept(noexcept(x.swap(y)));
 }
 \end{codeblock}%
-\indexlibrary{\idxcode{set}!\idxcode{operator==}}%
-\indexlibrary{\idxcode{set}!\idxcode{operator<}}
+\indexlibrarymember{set}{operator==}%
+\indexlibrarymember{set}{operator<}
 
 \rSec3[set.cons]{Constructors, copy, and assignment}
 
-\indexlibrary{\idxcode{set}!constructor}%
+\indexlibraryctor{set}%
 \begin{itemdecl}
 explicit set(const Compare& comp, const Allocator& = Allocator());
 \end{itemdecl}
@@ -7279,7 +7457,7 @@ Constructs an empty \tcode{set} using the specified comparison objects and alloc
 Constant.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{set}!constructor}%
+\indexlibraryctor{set}%
 \begin{itemdecl}
 template<class InputIterator>
   set(InputIterator first, InputIterator last,
@@ -7307,7 +7485,7 @@ where $N$ is
 
 \rSec3[set.erasure]{Erasure}
 
-\indexlibrary{\idxcode{erase_if}!\idxcode{set}}%
+\indexlibrarymember{erase_if}{set}%
 \begin{itemdecl}
 template<class Key, class Compare, class Allocator, class Predicate>
   void erase_if(set<Key, Compare, Allocator>& c, Predicate pred);
@@ -7333,7 +7511,7 @@ for (auto i = c.begin(), last = c.end(); i != last; ) {
 \rSec3[multiset.overview]{Overview}
 
 \pnum
-\indexlibrary{\idxcode{multiset}}%
+\indexlibraryglobal{multiset}%
 A
 \tcode{multiset}
 is an associative container that supports equivalent keys (possibly contains multiple copies of
@@ -7536,12 +7714,12 @@ namespace std {
       noexcept(noexcept(x.swap(y)));
 }
 \end{codeblock}%
-\indexlibrary{\idxcode{multiset}!\idxcode{operator==}}%
-\indexlibrary{\idxcode{multiset}!\idxcode{operator<}}
+\indexlibrarymember{multiset}{operator==}%
+\indexlibrarymember{multiset}{operator<}
 
 \rSec3[multiset.cons]{Constructors}
 
-\indexlibrary{\idxcode{multiset}!constructor}%
+\indexlibraryctor{multiset}%
 \begin{itemdecl}
 explicit multiset(const Compare& comp, const Allocator& = Allocator());
 \end{itemdecl}
@@ -7556,7 +7734,7 @@ Constructs an empty \tcode{multiset} using the specified comparison object and a
 Constant.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{multiset}!constructor}%
+\indexlibraryctor{multiset}%
 \begin{itemdecl}
 template<class InputIterator>
   multiset(InputIterator first, InputIterator last,
@@ -7584,7 +7762,7 @@ where $N$ is
 
 \rSec3[multiset.erasure]{Erasure}
 
-\indexlibrary{\idxcode{erase_if}!\idxcode{multiset}}%
+\indexlibrarymember{erase_if}{multiset}%
 \begin{itemdecl}
 template<class Key, class Compare, class Allocator, class Predicate>
   void erase_if(multiset<Key, Compare, Allocator>& c, Predicate pred);
@@ -7610,9 +7788,9 @@ for (auto i = c.begin(), last = c.end(); i != last; ) {
 \rSec2[unord.general]{In general}
 
 \pnum
-The header \tcode{<unordered_map>} defines the class templates
+The header \libheader{unordered_map} defines the class templates
 \tcode{unordered_map} and
-\tcode{unordered_multimap}; the header \tcode{<unordered_set>} defines the class templates
+\tcode{unordered_multimap}; the header \libheader{unordered_set} defines the class templates
 \tcode{unordered_set} and \tcode{unordered_multiset}.
 
 \pnum
@@ -7620,10 +7798,11 @@ The exposition-only alias templates \placeholder{iter-value-type},
 \placeholder{iter-key-type}, \placeholder{iter-mapped-type}, and \placeholder{iter-to-alloc-type}
 defined in \ref{associative.general} may appear in deduction guides for unordered containers.
 
-\rSec2[unord.map.syn]{Header \tcode{<unordered_map>} synopsis}%
-\indexhdr{unordered_map}%
-\indexlibrary{\idxcode{unordered_map}}%
-\indexlibrary{\idxcode{unordered_multimap}}%
+\rSec2[unord.map.syn]{Header \tcode{<unordered_map>} synopsis}
+
+\indexheader{unordered_map}%
+\indexlibraryglobal{unordered_map}%
+\indexlibraryglobal{unordered_multimap}%
 \begin{codeblock}
 #include <initializer_list>
 
@@ -7688,10 +7867,11 @@ namespace std {
 }
 \end{codeblock}
 
-\rSec2[unord.set.syn]{Header \tcode{<unordered_set>} synopsis}%
-\indexhdr{unordered_set}%
-\indexlibrary{\idxcode{unordered_set}}%
-\indexlibrary{\idxcode{unordered_multiset}}%
+\rSec2[unord.set.syn]{Header \tcode{<unordered_set>} synopsis}
+
+\indexheader{unordered_set}%
+\indexlibraryglobal{unordered_set}%
+\indexlibraryglobal{unordered_multiset}%
 \begin{codeblock}
 #include <initializer_list>
 
@@ -7751,7 +7931,7 @@ namespace std {
 \end{codeblock}
 
 \rSec2[unord.map]{Class template \tcode{unordered_map}}%
-\indexlibrary{\idxcode{unordered_map}}
+\indexlibraryglobal{unordered_map}
 
 \rSec3[unord.map.overview]{Overview}
 
@@ -7769,11 +7949,11 @@ supports forward iterators.
 An \tcode{unordered_map} meets all of the requirements of a container, of an unordered associative container, and of an allocator-aware container (\tref{container.alloc.req}). It provides the operations described in the preceding requirements table for unique keys; that is, an \tcode{unordered_map} supports the \tcode{a_uniq} operations in that table, not the \tcode{a_eq} operations. For an \tcode{unordered_map<Key, T>} the \tcode{key type} is \tcode{Key}, the mapped type is \tcode{T}, and the value type is \tcode{pair<const Key, T>}.
 
 \pnum
-This subclause only describes operations on \tcode{unordered_map} that
+Subclause~\ref{unord.map} only describes operations on \tcode{unordered_map} that
 are not described in one of the requirement tables, or for which there
 is additional semantic information.
 
-\indexlibrary{\idxcode{unordered_map}}%
+\indexlibraryglobal{unordered_map}%
 \begin{codeblock}
 namespace std {
   template<class Key,
@@ -7788,7 +7968,7 @@ namespace std {
     using mapped_type          = T;
     using value_type           = pair<const Key, T>;
     using hasher               = Hash;
-    using key_equal            = @\seeref{unord.req}@;
+    using key_equal            = Pred;
     using allocator_type       = Allocator;
     using pointer              = typename allocator_traits<Allocator>::pointer;
     using const_pointer        = typename allocator_traits<Allocator>::const_pointer;
@@ -8029,7 +8209,7 @@ refers to the \tcode{size_type} member type of the type deduced by the deduction
 
 \rSec3[unord.map.cnstr]{Constructors}
 
-\indexlibrary{\idxcode{unordered_map}!constructor}%
+\indexlibraryctor{unordered_map}%
 \begin{itemdecl}
 unordered_map() : unordered_map(size_type(@\seebelow@)) { }
 explicit unordered_map(size_type n,
@@ -8040,7 +8220,8 @@ explicit unordered_map(size_type n,
 
 \begin{itemdescr}
 \pnum
-\effects Constructs an empty \tcode{unordered_map} using the
+\effects
+Constructs an empty \tcode{unordered_map} using the
 specified hash function, key equality predicate, and allocator, and
 using at least \tcode{n} buckets.  For the default constructor,
 the number of buckets is \impldef{default number of buckets in
@@ -8048,10 +8229,11 @@ the number of buckets is \impldef{default number of buckets in
 \tcode{max_load_factor()} returns \tcode{1.0}.
 
 \pnum
-\complexity Constant.
+\complexity
+Constant.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{unordered_map}!constructor}%
+\indexlibraryctor{unordered_map}%
 \begin{itemdecl}
 template<class InputIterator>
   unordered_map(InputIterator f, InputIterator l,
@@ -8068,7 +8250,8 @@ unordered_map(initializer_list<value_type> il,
 
 \begin{itemdescr}
 \pnum
-\effects Constructs an empty \tcode{unordered_map} using the
+\effects
+Constructs an empty \tcode{unordered_map} using the
 specified hash function, key equality predicate, and allocator, and
 using at least \tcode{n} buckets. If \tcode{n} is not
 provided, the number of buckets is \impldef{default number of buckets in
@@ -8079,7 +8262,8 @@ for the first form, or from the range
 \tcode{max_load_factor()} returns \tcode{1.0}.
 
 \pnum
-\complexity Average case linear, worst case quadratic.
+\complexity
+Average case linear, worst case quadratic.
 \end{itemdescr}
 
 \rSec3[unord.map.elem]{Element access}
@@ -8092,7 +8276,8 @@ mapped_type& operator[](const key_type& k);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return try_emplace(k).first->second;}
+\effects
+Equivalent to: \tcode{return try_emplace(k).first->second;}
 \end{itemdescr}
 
 \indexlibrarymember{unordered_map}{operator[]}%
@@ -8103,7 +8288,8 @@ mapped_type& operator[](key_type&& k);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return try_emplace(move(k)).first->second;}
+\effects
+Equivalent to: \tcode{return try_emplace(move(k)).first->second;}
 \end{itemdescr}
 
 \indexlibrarymember{unordered_map}{at}%
@@ -8115,10 +8301,12 @@ const mapped_type& at(const key_type& k) const;
 
 \begin{itemdescr}
 \pnum
-\returns A reference to \tcode{x.second}, where \tcode{x} is the (unique) element whose key is equivalent to \tcode{k}.
+\returns
+A reference to \tcode{x.second}, where \tcode{x} is the (unique) element whose key is equivalent to \tcode{k}.
 
 \pnum
-\throws An exception object of type \tcode{out_of_range} if no such element is present.
+\throws
+An exception object of type \tcode{out_of_range} if no such element is present.
 \end{itemdescr}
 
 \rSec3[unord.map.modifiers]{Modifiers}
@@ -8136,7 +8324,8 @@ template<class P>
 \tcode{is_constructible_v<value_type, P\&\&>} is \tcode{true}.
 
 \pnum
-\effects Equivalent to: \tcode{return emplace(std::forward<P>(obj));}
+\effects
+Equivalent to: \tcode{return emplace(std::forward<P>(obj));}
 \end{itemdescr}
 
 \indexlibrarymember{unordered_map}{insert}%
@@ -8151,7 +8340,8 @@ template<class P>
 \tcode{is_constructible_v<value_type, P\&\&>} is \tcode{true}.
 
 \pnum
-\effects Equivalent to:
+\effects
+Equivalent to:
 \tcode{return emplace_hint(hint, std::forward<P>(obj));}
 \end{itemdescr}
 
@@ -8247,7 +8437,7 @@ template<class M>
 \pnum
 \expects
 \tcode{value_type} is \oldconcept{EmplaceConstructible} into \tcode{unordered_map}
-from \tcode{k}, \tcode{std::forward<M>\brk{}(obj)}.
+from \tcode{k}, \tcode{std::for\-ward<M>(obj)}.
 
 \pnum
 \effects
@@ -8312,7 +8502,7 @@ respectively.
 
 \rSec3[unord.map.erasure]{Erasure}
 
-\indexlibrary{\idxcode{erase_if}!\idxcode{unordered_map}}%
+\indexlibrarymember{erase_if}{unordered_map}%
 \begin{itemdecl}
 template<class K, class T, class H, class P, class A, class Predicate>
   void erase_if(unordered_map<K, T, H, P, A>& c, Predicate pred);
@@ -8334,7 +8524,7 @@ for (auto i = c.begin(), last = c.end(); i != last; ) {
 \end{itemdescr}
 
 \rSec2[unord.multimap]{Class template \tcode{unordered_multimap}}%
-\indexlibrary{\idxcode{unordered_multimap}}
+\indexlibraryglobal{unordered_multimap}
 
 \rSec3[unord.multimap.overview]{Overview}
 
@@ -8358,11 +8548,11 @@ For an \tcode{unordered_multimap<Key, T>} the \tcode{key type} is \tcode{Key}, t
 mapped type is \tcode{T}, and the value type is \tcode{pair<const Key, T>}.
 
 \pnum
-This subclause only describes operations on \tcode{unordered_multimap}
+Subclause~\ref{unord.multimap} only describes operations on \tcode{unordered_multimap}
 that are not described in one of the requirement tables, or for which
 there is additional semantic information.
 
-\indexlibrary{\idxcode{unordered_multimap}}%
+\indexlibraryglobal{unordered_multimap}%
 \begin{codeblock}
 namespace std {
   template<class Key,
@@ -8377,7 +8567,7 @@ namespace std {
     using mapped_type          = T;
     using value_type           = pair<const Key, T>;
     using hasher               = Hash;
-    using key_equal            = @\seeref{unord.req}@;
+    using key_equal            = Pred;
     using allocator_type       = Allocator;
     using pointer              = typename allocator_traits<Allocator>::pointer;
     using const_pointer        = typename allocator_traits<Allocator>::const_pointer;
@@ -8595,7 +8785,7 @@ refers to the \tcode{size_type} member type of the type deduced by the deduction
 
 \rSec3[unord.multimap.cnstr]{Constructors}
 
-\indexlibrary{\idxcode{unordered_multimap}!constructor}%
+\indexlibraryctor{unordered_multimap}%
 \begin{itemdecl}
 unordered_multimap() : unordered_multimap(size_type(@\seebelow@)) { }
 explicit unordered_multimap(size_type n,
@@ -8606,7 +8796,8 @@ explicit unordered_multimap(size_type n,
 
 \begin{itemdescr}
 \pnum
-\effects Constructs an empty \tcode{unordered_multimap} using the
+\effects
+Constructs an empty \tcode{unordered_multimap} using the
 specified hash function, key equality predicate, and allocator, and
 using at least \tcode{n} buckets.  For the default constructor,
 the number of buckets is \impldef{default number of buckets in
@@ -8614,10 +8805,11 @@ the number of buckets is \impldef{default number of buckets in
 \tcode{max_load_factor()} returns \tcode{1.0}.
 
 \pnum
-\complexity Constant.
+\complexity
+Constant.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{unordered_multimap}!constructor}%
+\indexlibraryctor{unordered_multimap}%
 \begin{itemdecl}
 template<class InputIterator>
   unordered_multimap(InputIterator f, InputIterator l,
@@ -8634,7 +8826,8 @@ unordered_multimap(initializer_list<value_type> il,
 
 \begin{itemdescr}
 \pnum
-\effects Constructs an empty \tcode{unordered_multimap} using the
+\effects
+Constructs an empty \tcode{unordered_multimap} using the
 specified hash function, key equality predicate, and allocator, and
 using at least \tcode{n} buckets. If \tcode{n} is not
 provided, the number of buckets is \impldef{default number of buckets in
@@ -8645,7 +8838,8 @@ for the first form, or from the range
 \tcode{max_load_factor()} returns \tcode{1.0}.
 
 \pnum
-\complexity Average case linear, worst case quadratic.
+\complexity
+Average case linear, worst case quadratic.
 \end{itemdescr}
 
 \rSec3[unord.multimap.modifiers]{Modifiers}
@@ -8662,7 +8856,8 @@ template<class P>
 \tcode{is_constructible_v<value_type, P\&\&>} is \tcode{true}.
 
 \pnum
-\effects Equivalent to: \tcode{return emplace(std::forward<P>(obj));}
+\effects
+Equivalent to: \tcode{return emplace(std::forward<P>(obj));}
 \end{itemdescr}
 
 \indexlibrarymember{unordered_multimap}{insert}%
@@ -8677,13 +8872,14 @@ template<class P>
 \tcode{is_constructible_v<value_type, P\&\&>} is \tcode{true}.
 
 \pnum
-\effects Equivalent to:
+\effects
+Equivalent to:
 \tcode{return emplace_hint(hint, std::forward<P>(obj));}
 \end{itemdescr}
 
 \rSec3[unord.multimap.erasure]{Erasure}
 
-\indexlibrary{\idxcode{erase_if}!\idxcode{unordered_multimap}}%
+\indexlibrarymember{erase_if}{unordered_multimap}%
 \begin{itemdecl}
 template<class K, class T, class H, class P, class A, class Predicate>
   void erase_if(unordered_multimap<K, T, H, P, A>& c, Predicate pred);
@@ -8705,7 +8901,7 @@ for (auto i = c.begin(), last = c.end(); i != last; ) {
 \end{itemdescr}
 
 \rSec2[unord.set]{Class template \tcode{unordered_set}}%
-\indexlibrary{\idxcode{unordered_set}}
+\indexlibraryglobal{unordered_set}
 
 \rSec3[unord.set.overview]{Overview}
 
@@ -8723,11 +8919,11 @@ supports forward iterators.
 An \tcode{unordered_set} meets all of the requirements of a container, of an unordered associative container, and of an allocator-aware container (\tref{container.alloc.req}). It provides the operations described in the preceding requirements table for unique keys; that is, an \tcode{unordered_set} supports the \tcode{a_uniq} operations in that table, not the \tcode{a_eq} operations. For an \tcode{unordered_set<Key>} the \tcode{key type} and the value type are both \tcode{Key}. The \tcode{iterator} and \tcode{const_iterator} types are both constant iterator types. It is unspecified whether they are the same type.
 
 \pnum
-This subclause only describes operations on \tcode{unordered_set} that
+Subclause~\ref{unord.set} only describes operations on \tcode{unordered_set} that
 are not described in one of the requirement tables, or for which there
 is additional semantic information.
 
-\indexlibrary{\idxcode{unordered_set}}%
+\indexlibraryglobal{unordered_set}%
 \begin{codeblock}
 namespace std {
   template<class Key,
@@ -8740,7 +8936,7 @@ namespace std {
     using key_type             = Key;
     using value_type           = Key;
     using hasher               = Hash;
-    using key_equal            = @\seeref{unord.req}@;
+    using key_equal            = Pred;
     using allocator_type       = Allocator;
     using pointer              = typename allocator_traits<Allocator>::pointer;
     using const_pointer        = typename allocator_traits<Allocator>::const_pointer;
@@ -8946,7 +9142,7 @@ the type deduced by the deduction guide.
 
 \rSec3[unord.set.cnstr]{Constructors}
 
-\indexlibrary{\idxcode{unordered_set}!constructor}%
+\indexlibraryctor{unordered_set}%
 \begin{itemdecl}
 unordered_set() : unordered_set(size_type(@\seebelow@)) { }
 explicit unordered_set(size_type n,
@@ -8957,7 +9153,8 @@ explicit unordered_set(size_type n,
 
 \begin{itemdescr}
 \pnum
-\effects Constructs an empty \tcode{unordered_set} using the
+\effects
+Constructs an empty \tcode{unordered_set} using the
 specified hash function, key equality predicate, and allocator, and
 using at least \tcode{n} buckets.  For the default constructor,
 the number of buckets is \impldef{default number of buckets in
@@ -8965,10 +9162,11 @@ the number of buckets is \impldef{default number of buckets in
 \tcode{max_load_factor()} returns \tcode{1.0}.
 
 \pnum
-\complexity Constant.
+\complexity
+Constant.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{unordered_set}!constructor}%
+\indexlibraryctor{unordered_set}%
 \begin{itemdecl}
 template<class InputIterator>
   unordered_set(InputIterator f, InputIterator l,
@@ -8985,7 +9183,8 @@ unordered_set(initializer_list<value_type> il,
 
 \begin{itemdescr}
 \pnum
-\effects Constructs an empty \tcode{unordered_set} using the
+\effects
+Constructs an empty \tcode{unordered_set} using the
 specified hash function, key equality predicate, and allocator, and
 using at least \tcode{n} buckets. If \tcode{n} is not
 provided, the number of buckets is \impldef{default number of buckets in
@@ -8996,12 +9195,13 @@ for the first form, or from the range
 \tcode{max_load_factor()} returns \tcode{1.0}.
 
 \pnum
-\complexity Average case linear, worst case quadratic.
+\complexity
+Average case linear, worst case quadratic.
 \end{itemdescr}
 
 \rSec3[unord.set.erasure]{Erasure}
 
-\indexlibrary{\idxcode{erase_if}!\idxcode{unordered_set}}%
+\indexlibrarymember{erase_if}{unordered_set}%
 \begin{itemdecl}
 template<class K, class H, class P, class A, class Predicate>
   void erase_if(unordered_set<K, H, P, A>& c, Predicate pred);
@@ -9023,7 +9223,7 @@ for (auto i = c.begin(), last = c.end(); i != last; ) {
 \end{itemdescr}
 
 \rSec2[unord.multiset]{Class template \tcode{unordered_multiset}}%
-\indexlibrary{\idxcode{unordered_multiset}}
+\indexlibraryglobal{unordered_multiset}
 
 \rSec3[unord.multiset.overview]{Overview}
 
@@ -9048,11 +9248,11 @@ both \tcode{Key}. The \tcode{iterator} and \tcode{const_iterator} types are both
 constant iterator types. It is unspecified whether they are the same type.
 
 \pnum
-This subclause only describes operations on \tcode{unordered_multiset} that
+Subclause~\ref{unord.multiset} only describes operations on \tcode{unordered_multiset} that
 are not described in one of the requirement tables, or for which there
 is additional semantic information.
 
-\indexlibrary{\idxcode{unordered_multiset}}%
+\indexlibraryglobal{unordered_multiset}%
 \begin{codeblock}
 namespace std {
   template<class Key,
@@ -9065,7 +9265,7 @@ namespace std {
     using key_type             = Key;
     using value_type           = Key;
     using hasher               = Hash;
-    using key_equal            = @\seeref{unord.req}@;
+    using key_equal            = Pred;
     using allocator_type       = Allocator;
     using pointer              = typename allocator_traits<Allocator>::pointer;
     using const_pointer        = typename allocator_traits<Allocator>::const_pointer;
@@ -9270,7 +9470,7 @@ the type deduced by the deduction guide.
 
 \rSec3[unord.multiset.cnstr]{Constructors}
 
-\indexlibrary{\idxcode{unordered_multiset}!constructor}%
+\indexlibraryctor{unordered_multiset}%
 \begin{itemdecl}
 unordered_multiset() : unordered_multiset(size_type(@\seebelow@)) { }
 explicit unordered_multiset(size_type n,
@@ -9281,7 +9481,8 @@ explicit unordered_multiset(size_type n,
 
 \begin{itemdescr}
 \pnum
-\effects Constructs an empty \tcode{unordered_multiset} using the
+\effects
+Constructs an empty \tcode{unordered_multiset} using the
 specified hash function, key equality predicate, and allocator, and
 using at least \tcode{n} buckets.  For the default constructor,
 the number of buckets is \impldef{default number of buckets in
@@ -9289,10 +9490,11 @@ the number of buckets is \impldef{default number of buckets in
 \tcode{max_load_factor()} returns \tcode{1.0}.
 
 \pnum
-\complexity Constant.
+\complexity
+Constant.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{unordered_multiset}!constructor}%
+\indexlibraryctor{unordered_multiset}%
 \begin{itemdecl}
 template<class InputIterator>
   unordered_multiset(InputIterator f, InputIterator l,
@@ -9308,7 +9510,8 @@ unordered_multiset(initializer_list<value_type> il,
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects
+\pnum
+\effects
 Constructs an empty \tcode{unordered_multiset} using the
 specified hash function, key equality predicate, and allocator, and
 using at least \tcode{n} buckets. If \tcode{n} is not
@@ -9319,12 +9522,14 @@ for the first form, or from the range
 \range{il.begin()}{il.end()} for the second form.
 \tcode{max_load_factor()} returns \tcode{1.0}.
 
-\pnum\complexity Average case linear, worst case quadratic.
+\pnum
+\complexity
+Average case linear, worst case quadratic.
 \end{itemdescr}
 
 \rSec3[unord.multiset.erasure]{Erasure}
 
-\indexlibrary{\idxcode{erase_if}!\idxcode{unordered_multiset}}%
+\indexlibrarymember{erase_if}{unordered_multiset}%
 \begin{itemdecl}
 template<class K, class H, class P, class A, class Predicate>
   void erase_if(unordered_multiset<K, H, P, A>& c, Predicate pred);
@@ -9350,7 +9555,7 @@ for (auto i = c.begin(), last = c.end(); i != last; ) {
 \rSec2[container.adaptors.general]{In general}
 
 \pnum
-The headers \tcode{<queue>} and \tcode{<stack>} define the container adaptors
+The headers \libheader{queue} and \libheader{stack} define the container adaptors
 \tcode{queue}, \tcode{priority_queue}, and \tcode{stack}.
 
 \pnum
@@ -9377,9 +9582,9 @@ A deduction guide for a container adaptor shall not participate in overload reso
 \item It has both \tcode{Container} and \tcode{Allocator} template parameters, and \tcode{uses_allocator_v<Container, Allocator>} is \tcode{false}.
 \end{itemize}
 
-\rSec2[queue.syn]{Header \tcode{<queue>} synopsis}%
-\indexhdr{queue}%
+\rSec2[queue.syn]{Header \tcode{<queue>} synopsis}
 
+\indexheader{queue}
 \begin{codeblock}
 #include <initializer_list>
 
@@ -9419,9 +9624,9 @@ namespace std {
 }
 \end{codeblock}
 
-\rSec2[stack.syn]{Header \tcode{<stack>} synopsis}%
-\indexhdr{stack}%
+\rSec2[stack.syn]{Header \tcode{<stack>} synopsis}
 
+\indexheader{stack}%
 \begin{codeblock}
 #include <initializer_list>
 
@@ -9456,7 +9661,7 @@ namespace std {
 \rSec3[queue.defn]{Definition}
 
 \pnum
-\indexlibrary{\idxcode{queue}}%
+\indexlibraryglobal{queue}%
 Any sequence container supporting operations
 \tcode{front()},
 \tcode{back()},
@@ -9534,7 +9739,8 @@ explicit queue(const Container& cont);
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{cont}.
+\effects
+Initializes \tcode{c} with \tcode{cont}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -9543,7 +9749,8 @@ explicit queue(Container&& cont);
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{std::move(cont)}.
+\effects
+Initializes \tcode{c} with \tcode{std::move(cont)}.
 \end{itemdescr}
 
 \rSec3[queue.cons.alloc]{Constructors with allocators}
@@ -9558,7 +9765,8 @@ template<class Alloc> explicit queue(const Alloc& a);
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{a}.
+\effects
+Initializes \tcode{c} with \tcode{a}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -9567,7 +9775,8 @@ template<class Alloc> queue(const container_type& cont, const Alloc& a);
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{cont} as the first argument and \tcode{a}
+\effects
+Initializes \tcode{c} with \tcode{cont} as the first argument and \tcode{a}
 as the second argument.
 \end{itemdescr}
 
@@ -9577,7 +9786,8 @@ template<class Alloc> queue(container_type&& cont, const Alloc& a);
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{std::move(cont)} as the first argument and \tcode{a}
+\effects
+Initializes \tcode{c} with \tcode{std::move(cont)} as the first argument and \tcode{a}
 as the second argument.
 \end{itemdescr}
 
@@ -9587,7 +9797,8 @@ template<class Alloc> queue(const queue& q, const Alloc& a);
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{q.c} as the first argument and \tcode{a} as the
+\effects
+Initializes \tcode{c} with \tcode{q.c} as the first argument and \tcode{a} as the
 second argument.
 \end{itemdescr}
 
@@ -9597,13 +9808,14 @@ template<class Alloc> queue(queue&& q, const Alloc& a);
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{std::move(q.c)} as the first argument and \tcode{a}
+\effects
+Initializes \tcode{c} with \tcode{std::move(q.c)} as the first argument and \tcode{a}
 as the second argument.
 \end{itemdescr}
 
 \rSec3[queue.ops]{Operators}
 
-\indexlibrary{\idxcode{operator==}!\idxcode{queue}}%
+\indexlibrarymember{operator==}{queue}%
 \begin{itemdecl}
 template<class T, class Container>
   bool operator==(const queue<T, Container>& x, const queue<T, Container>& y);
@@ -9627,7 +9839,7 @@ template<class T, class Container>
 \tcode{x.c != y.c}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{operator<}!\idxcode{queue}}%
+\indexlibrarymember{operator<}{queue}%
 \begin{itemdecl}
 template<class T, class Container>
   bool operator< (const queue<T, Container>& x, const queue<T, Container>& y);
@@ -9639,7 +9851,7 @@ template<class T, class Container>
 \tcode{x.c < y.c}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{operator>}!\idxcode{queue}}%
+\indexlibrarymember{operator>}{queue}%
 \begin{itemdecl}
 template<class T, class Container>
   bool operator> (const queue<T, Container>& x, const queue<T, Container>& y);
@@ -9651,7 +9863,7 @@ template<class T, class Container>
 \tcode{x.c > y.c}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{operator<=}!\idxcode{queue}}%
+\indexlibrarymember{operator<=}{queue}%
 \begin{itemdecl}
 template<class T, class Container>
   bool operator<=(const queue<T, Container>& x, const queue<T, Container>& y);
@@ -9663,7 +9875,7 @@ template<class T, class Container>
 \tcode{x.c <= y.c}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{operator>=}!\idxcode{queue}}%
+\indexlibrarymember{operator>=}{queue}%
 \begin{itemdecl}
 template<class T, class Container>
     bool operator>=(const queue<T, Container>& x,
@@ -9676,7 +9888,7 @@ template<class T, class Container>
 \tcode{x.c >= y.c}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{operator<=>}!\idxcode{queue}}%
+\indexlibrarymember{operator<=>}{queue}%
 \begin{itemdecl}
 template<class T, three_way_comparable Container>
   compare_three_way_result_t<Container>
@@ -9703,7 +9915,8 @@ template<class T, class Container>
 \tcode{is_swappable_v<Container>} is \tcode{true}.
 
 \pnum
-\effects As if by \tcode{x.swap(y)}.
+\effects
+As if by \tcode{x.swap(y)}.
 \end{itemdescr}
 
 \rSec2[priority.queue]{Class template \tcode{priority_queue}}
@@ -9711,7 +9924,7 @@ template<class T, class Container>
 \rSec3[priqueue.overview]{Overview}
 
 \pnum
-\indexlibrary{\idxcode{priority_queue}}%
+\indexlibraryglobal{priority_queue}%
 Any sequence container with random access iterator and supporting operations
 \tcode{front()},
 \tcode{push_back()}
@@ -9805,7 +10018,7 @@ namespace std {
 
 \rSec3[priqueue.cons]{Constructors}
 
-\indexlibrary{\idxcode{priority_queue}!constructor}%
+\indexlibraryctor{priority_queue}%
 \begin{itemdecl}
 priority_queue(const Compare& x, const Container& y);
 priority_queue(const Compare& x, Container&& y);
@@ -9827,7 +10040,7 @@ calls
 \tcode{make_heap(c.begin(), c.end(), comp)}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{priority_queue}!constructor}%
+\indexlibraryctor{priority_queue}%
 \begin{itemdecl}
 template<class InputIterator>
   priority_queue(InputIterator first, InputIterator last, const Compare& x, const Container& y);
@@ -9860,27 +10073,29 @@ and finally calls
 If \tcode{uses_allocator_v<container_type, Alloc>} is \tcode{false}
 the constructors in this subclause shall not participate in overload resolution.
 
-\indexlibrary{\idxcode{priority_queue}!constructor}%
+\indexlibraryctor{priority_queue}%
 \begin{itemdecl}
 template<class Alloc> explicit priority_queue(const Alloc& a);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{a} and value-initializes \tcode{comp}.
+\effects
+Initializes \tcode{c} with \tcode{a} and value-initializes \tcode{comp}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{priority_queue}!constructor}%
+\indexlibraryctor{priority_queue}%
 \begin{itemdecl}
 template<class Alloc> priority_queue(const Compare& compare, const Alloc& a);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{a} and initializes \tcode{comp} with \tcode{compare}.
+\effects
+Initializes \tcode{c} with \tcode{a} and initializes \tcode{comp} with \tcode{compare}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{priority_queue}!constructor}%
+\indexlibraryctor{priority_queue}%
 \begin{itemdecl}
 template<class Alloc>
   priority_queue(const Compare& compare, const Container& cont, const Alloc& a);
@@ -9888,12 +10103,13 @@ template<class Alloc>
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{cont} as the first argument and \tcode{a} as the second
+\effects
+Initializes \tcode{c} with \tcode{cont} as the first argument and \tcode{a} as the second
 argument, and initializes \tcode{comp} with \tcode{compare};
 calls \tcode{make_heap(c.begin(), c.end(), comp)}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{priority_queue}!constructor}%
+\indexlibraryctor{priority_queue}%
 \begin{itemdecl}
 template<class Alloc>
   priority_queue(const Compare& compare, Container&& cont, const Alloc& a);
@@ -9901,36 +10117,39 @@ template<class Alloc>
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{std::move(cont)} as the first argument and \tcode{a}
+\effects
+Initializes \tcode{c} with \tcode{std::move(cont)} as the first argument and \tcode{a}
 as the second argument, and initializes \tcode{comp} with \tcode{compare};
 calls \tcode{make_heap(c.begin(), c.end(), comp)}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{priority_queue}!constructor}%
+\indexlibraryctor{priority_queue}%
 \begin{itemdecl}
 template<class Alloc> priority_queue(const priority_queue& q, const Alloc& a);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{q.c} as the first argument and \tcode{a} as
+\effects
+Initializes \tcode{c} with \tcode{q.c} as the first argument and \tcode{a} as
 the second argument, and initializes \tcode{comp} with \tcode{q.comp}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{priority_queue}!constructor}%
+\indexlibraryctor{priority_queue}%
 \begin{itemdecl}
 template<class Alloc> priority_queue(priority_queue&& q, const Alloc& a);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{std::move(q.c)} as the first argument and \tcode{a}
+\effects
+Initializes \tcode{c} with \tcode{std::move(q.c)} as the first argument and \tcode{a}
 as the second argument, and initializes \tcode{comp} with \tcode{std::move(q.comp)}.
 \end{itemdescr}
 
 \rSec3[priqueue.members]{Members}
 
-\indexlibrary{\idxcode{push}!\idxcode{priority_queue}}%
+\indexlibrarymember{push}{priority_queue}%
 \begin{itemdecl}
 void push(const value_type& x);
 \end{itemdecl}
@@ -9945,7 +10164,7 @@ push_heap(c.begin(), c.end(), comp);
 \end{codeblock}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{push}!\idxcode{priority_queue}}%
+\indexlibrarymember{push}{priority_queue}%
 \begin{itemdecl}
 void push(value_type&& x);
 \end{itemdecl}
@@ -9976,7 +10195,7 @@ push_heap(c.begin(), c.end(), comp);
 \end{itemdescr}
 
 
-\indexlibrary{\idxcode{pop}!\idxcode{priority_queue}}%
+\indexlibrarymember{pop}{priority_queue}%
 \begin{itemdecl}
 void pop();
 \end{itemdecl}
@@ -10007,13 +10226,14 @@ template<class T, class Container, class Compare>
 \tcode{is_swappable_v<Compare>} is \tcode{true}.
 
 \pnum
-\effects As if by \tcode{x.swap(y)}.
+\effects
+As if by \tcode{x.swap(y)}.
 \end{itemdescr}
 
 \rSec2[stack]{Class template \tcode{stack}}
 
 \pnum
-\indexlibrary{\idxcode{stack}}%
+\indexlibraryglobal{stack}%
 Any sequence container supporting operations
 \tcode{back()},
 \tcode{push_back()}
@@ -10082,24 +10302,26 @@ namespace std {
 
 \rSec3[stack.cons]{Constructors}
 
-\indexlibrary{\idxcode{stack}!constructor}%
+\indexlibraryctor{stack}%
 \begin{itemdecl}
 explicit stack(const Container& cont);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects Initializes \tcode{c} with \tcode{cont}.
+\effects
+Initializes \tcode{c} with \tcode{cont}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{stack}!constructor}%
+\indexlibraryctor{stack}%
 \begin{itemdecl}
 explicit stack(Container&& cont);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects Initializes \tcode{c} with \tcode{std::move(cont)}.
+\effects
+Initializes \tcode{c} with \tcode{std::move(cont)}.
 \end{itemdescr}
 
 \rSec3[stack.cons.alloc]{Constructors with allocators}
@@ -10108,63 +10330,68 @@ explicit stack(Container&& cont);
 If \tcode{uses_allocator_v<container_type, Alloc>} is \tcode{false}
 the constructors in this subclause shall not participate in overload resolution.
 
-\indexlibrary{\idxcode{stack}!constructor}%
+\indexlibraryctor{stack}%
 \begin{itemdecl}
 template<class Alloc> explicit stack(const Alloc& a);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{a}.
+\effects
+Initializes \tcode{c} with \tcode{a}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{stack}!constructor}%
+\indexlibraryctor{stack}%
 \begin{itemdecl}
 template<class Alloc> stack(const container_type& cont, const Alloc& a);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{cont} as the first argument and \tcode{a} as the
+\effects
+Initializes \tcode{c} with \tcode{cont} as the first argument and \tcode{a} as the
 second argument.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{stack}!constructor}%
+\indexlibraryctor{stack}%
 \begin{itemdecl}
 template<class Alloc> stack(container_type&& cont, const Alloc& a);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{std::move(cont)} as the first argument and \tcode{a}
+\effects
+Initializes \tcode{c} with \tcode{std::move(cont)} as the first argument and \tcode{a}
 as the second argument.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{stack}!constructor}%
+\indexlibraryctor{stack}%
 \begin{itemdecl}
 template<class Alloc> stack(const stack& s, const Alloc& a);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{s.c} as the first argument and \tcode{a}
+\effects
+Initializes \tcode{c} with \tcode{s.c} as the first argument and \tcode{a}
 as the second argument.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{stack}!constructor}%
+\indexlibraryctor{stack}%
 \begin{itemdecl}
 template<class Alloc> stack(stack&& s, const Alloc& a);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects\ Initializes \tcode{c} with \tcode{std::move(s.c)} as the first argument and \tcode{a}
+\effects
+Initializes \tcode{c} with \tcode{std::move(s.c)} as the first argument and \tcode{a}
 as the second argument.
 \end{itemdescr}
 
 \rSec3[stack.ops]{Operators}
 
-\indexlibrary{\idxcode{operator==}!\idxcode{stack}}%
+\indexlibrarymember{operator==}{stack}%
 \begin{itemdecl}
 template<class T, class Container>
   bool operator==(const stack<T, Container>& x, const stack<T, Container>& y);
@@ -10188,7 +10415,7 @@ template<class T, class Container>
 \tcode{x.c != y.c}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{operator<}!\idxcode{stack}}%
+\indexlibrarymember{operator<}{stack}%
 \begin{itemdecl}
 template<class T, class Container>
   bool operator< (const stack<T, Container>& x, const stack<T, Container>& y);
@@ -10200,7 +10427,7 @@ template<class T, class Container>
 \tcode{x.c < y.c}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{operator>}!\idxcode{stack}}%
+\indexlibrarymember{operator>}{stack}%
 \begin{itemdecl}
 template<class T, class Container>
   bool operator> (const stack<T, Container>& x, const stack<T, Container>& y);
@@ -10212,7 +10439,7 @@ template<class T, class Container>
 \tcode{x.c > y.c}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{operator<=}!\idxcode{stack}}%
+\indexlibrarymember{operator<=}{stack}%
 \begin{itemdecl}
 template<class T, class Container>
   bool operator<=(const stack<T, Container>& x, const stack<T, Container>& y);
@@ -10224,7 +10451,7 @@ template<class T, class Container>
 \tcode{x.c <= y.c}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{operator>=}!\idxcode{stack}}%
+\indexlibrarymember{operator>=}{stack}%
 \begin{itemdecl}
 template<class T, class Container>
     bool operator>=(const stack<T, Container>& x, const stack<T, Container>& y);
@@ -10236,7 +10463,7 @@ template<class T, class Container>
 \tcode{x.c >= y.c}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{operator<=>}!\idxcode{stack}}%
+\indexlibrarymember{operator<=>}{stack}%
 \begin{itemdecl}
 template<class T, three_way_comparable Container>
   compare_three_way_result_t<Container>
@@ -10263,7 +10490,8 @@ template<class T, class Container>
 \tcode{is_swappable_v<Container>} is \tcode{true}.
 
 \pnum
-\effects As if by \tcode{x.swap(y)}.
+\effects
+As if by \tcode{x.swap(y)}.
 \end{itemdescr}
 
 \rSec1[views]{Views}
@@ -10271,11 +10499,11 @@ template<class T, class Container>
 \rSec2[views.general]{General}
 
 \pnum
-The header \tcode{<span>} defines the view \tcode{span}.
+The header \libheader{span} defines the view \tcode{span}.
 
 \rSec2[span.syn]{Header \tcode{<span>} synopsis}%
-\indexhdr{span}%
 
+\indexheader{span}%
 \begin{codeblock}
 namespace std {
   // constants
@@ -10284,6 +10512,9 @@ namespace std {
   // \ref{views.span}, class template span
   template<class ElementType, size_t Extent = dynamic_extent>
     class span;
+
+  template<class ElementType, size_t Extent>
+    inline constexpr bool enable_safe_range<span<ElementType, Extent>> = true;
 
   // \ref{span.objectrep}, views of object representation
   template<class ElementType, size_t Extent>
@@ -10295,12 +10526,12 @@ namespace std {
       as_writable_bytes(span<ElementType, Extent> s) noexcept;
 
   // \ref{span.tuple}, tuple interface
-  template<class T> class tuple_size;
-  template<size_t I, class T> class tuple_element;
+  template<class T> struct tuple_size;
+  template<size_t I, class T> struct tuple_element;
   template<class ElementType, size_t Extent>
     struct tuple_size<span<ElementType, Extent>>;
   template<class ElementType>
-    struct tuple_size<span<ElementType, dynamic_extent>>;       // not defined
+    struct tuple_size<span<ElementType, dynamic_extent>>;       // \notdef
   template<size_t I, class ElementType, size_t Extent>
     struct tuple_element<I, span<ElementType, Extent>>;
   template<size_t I, class ElementType, size_t Extent>
@@ -10313,14 +10544,14 @@ namespace std {
 \rSec3[span.overview]{Overview}
 
 \pnum
-\indexlibrary{\idxcode{span}}%
+\indexlibraryglobal{span}%
 A \tcode{span} is a view over a contiguous sequence of objects,
 the storage of which is owned by some other object.
 
 \pnum
 All member functions of \tcode{span} have constant time complexity.
 
-\indexlibrary{\idxcode{span}}%
+\indexlibraryglobal{span}%
 \begin{codeblock}
 namespace std {
   template<class ElementType, size_t Extent = dynamic_extent>
@@ -10329,7 +10560,7 @@ namespace std {
     // constants and types
     using element_type = ElementType;
     using value_type = remove_cv_t<ElementType>;
-    using index_type = size_t;
+    using size_type = size_t;
     using difference_type = ptrdiff_t;
     using pointer = element_type*;
     using const_pointer = const element_type*;
@@ -10339,22 +10570,22 @@ namespace std {
     using const_iterator = @\impdefx{type of \tcode{span::const_iterator}}@;
     using reverse_iterator = std::reverse_iterator<iterator>;
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
-    static constexpr index_type extent = Extent;
+    static constexpr size_type extent = Extent;
 
     // \ref{span.cons}, constructors, copy, and assignment
     constexpr span() noexcept;
-    constexpr span(pointer ptr, index_type count);
-    constexpr span(pointer first, pointer last);
+    template<class It>
+      constexpr span(It first, size_type count);
+    tmeplate<class It, class End>
+      constexpr span(It first, End last);
     template<size_t N>
       constexpr span(element_type (&arr)[N]) noexcept;
     template<size_t N>
       constexpr span(array<value_type, N>& arr) noexcept;
     template<size_t N>
       constexpr span(const array<value_type, N>& arr) noexcept;
-    template<class Container>
-      constexpr span(Container& cont);
-    template<class Container>
-      constexpr span(const Container& cont);
+    template<class R>
+      constexpr span(R&& r);
     constexpr span(const span& other) noexcept = default;
     template<class OtherElementType, size_t OtherExtent>
       constexpr span(const span<OtherElementType, OtherExtent>& s) noexcept;
@@ -10371,18 +10602,18 @@ namespace std {
     template<size_t Offset, size_t Count = dynamic_extent>
       constexpr span<element_type, @\seebelow@> subspan() const;
 
-    constexpr span<element_type, dynamic_extent> first(index_type count) const;
-    constexpr span<element_type, dynamic_extent> last(index_type count) const;
+    constexpr span<element_type, dynamic_extent> first(size_type count) const;
+    constexpr span<element_type, dynamic_extent> last(size_type count) const;
     constexpr span<element_type, dynamic_extent> subspan(
-      index_type offset, index_type count = dynamic_extent) const;
+      size_type offset, size_type count = dynamic_extent) const;
 
     // \ref{span.obs}, observers
-    constexpr index_type size() const noexcept;
-    constexpr index_type size_bytes() const noexcept;
+    constexpr size_type size() const noexcept;
+    constexpr size_type size_bytes() const noexcept;
     [[nodiscard]] constexpr bool empty() const noexcept;
 
     // \ref{span.elem}, element access
-    constexpr reference operator[](index_type idx) const;
+    constexpr reference operator[](size_type idx) const;
     constexpr reference front() const;
     constexpr reference back() const;
     constexpr pointer data() const noexcept;
@@ -10397,24 +10628,21 @@ namespace std {
     constexpr const_reverse_iterator crbegin() const noexcept;
     constexpr const_reverse_iterator crend() const noexcept;
 
-    friend constexpr iterator begin(span s) noexcept { return s.begin(); }
-    friend constexpr iterator end(span s) noexcept { return s.end(); }
-
   private:
-    pointer data_;    // \expos
-    index_type size_; // \expos
+    pointer data_;              // \expos
+    size_type size_;            // \expos
   };
 
+  template<class It, class End>
+    span(It, End) -> span<remove_reference_t<iter_reference_t<It>>>;
   template<class T, size_t N>
     span(T (&)[N]) -> span<T, N>;
   template<class T, size_t N>
     span(array<T, N>&) -> span<T, N>;
   template<class T, size_t N>
     span(const array<T, N>&) -> span<const T, N>;
-  template<class Container>
-    span(Container&) -> span<typename Container::value_type>;
-  template<class Container>
-    span(const Container&) -> span<const typename Container::value_type>;
+  template<class R>
+    span(R&&) -> span<remove_reference_t<ranges::range_reference_t<R>>>;
 }
 \end{codeblock}
 
@@ -10424,7 +10652,7 @@ a complete object type that is not an abstract class type.
 
 \rSec3[span.cons]{Constructors, copy, and assignment}
 
-\indexlibrary{\idxcode{span}!constructor}%
+\indexlibraryctor{span}%
 \begin{itemdecl}
 constexpr span() noexcept;
 \end{itemdecl}
@@ -10439,56 +10667,89 @@ constexpr span() noexcept;
 \tcode{size() == 0 \&\& data() == nullptr}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{span}!constructor}%
+\indexlibraryctor{span}%
 \begin{itemdecl}
-constexpr span(pointer ptr, index_type count);
+template<class It>
+  constexpr span(It first, size_type count);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\expects \range{ptr}{ptr + count} is a valid range.
-If \tcode{extent} is not equal to \tcode{dynamic_extent},
-then \tcode{count} is equal to \tcode{extent}.
+\constraints
+Let \tcode{U} be \tcode{remove_reference_t<iter_reference_t<It>>}.
+\begin{itemize}
+\item \tcode{It} satisfies \libconcept{contiguous_iterator}.
+\item
+\tcode{is_convertible_v<U(*)[], element_type(*)[]>} is \tcode{true}.
+\begin{note}
+The intent is to allow only qualification conversions
+of the iterator reference type to \tcode{element_type}.
+\end{note}
+\end{itemize}
 
-\pnum
-\effects
-Constructs a \tcode{span} that is a view over the range \range{ptr}{ptr + count}.
-
-\pnum
-\ensures
-\tcode{size() == count \&\& data() == ptr}.
-
-\pnum
-\throws
-Nothing.
-\end{itemdescr}
-
-\indexlibrary{\idxcode{span}!constructor}%
-\begin{itemdecl}
-constexpr span(pointer first, pointer last);
-\end{itemdecl}
-
-\begin{itemdescr}
 \pnum
 \expects
-\range{first}{last} is a valid range.
+\begin{itemize}
+\item \range{first}{first + count} is a valid range.
+\item \tcode{It} models \libconcept{contiguous_iterator}.
+\item
 If \tcode{extent} is not equal to \tcode{dynamic_extent},
-then \tcode{last - first} is equal to \tcode{extent}.
+then \tcode{count} is equal to \tcode{extent}.
+\end{itemize}
 
 \pnum
 \effects
-Constructs a span that is a view over the range \range{first}{last}.
-
-\pnum
-\ensures
-\tcode{size() == last - first \&\& data() == first}.
+Initializes \tcode{data_} with \tcode{to_address(first)} and
+\tcode{size_} with \tcode{count}.
 
 \pnum
 \throws
-Nothing.
+When and what \tcode{to_address(first)} throws.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{span}!constructor}%
+\indexlibraryctor{span}%
+\begin{itemdecl}
+template<class It, class End>
+  constexpr span(It first, End last);
+\end{itemdecl}
+
+\begin{itemdescr}
+\pnum
+\constraints
+Let \tcode{U} be \tcode{remove_reference_t<iter_reference_t<It>>}.
+\begin{itemize}
+\item
+\tcode{is_convertible_v<U(*)[], element_type(*)[]>} is \tcode{true}.
+\begin{note}
+The intent is to allow only qualification conversions
+of the iterator reference type to \tcode{element_type}.
+\end{note}
+\item \tcode{It} satisfies \libconcept{contiguous_iterator}.
+\item \tcode{End} satisfies \tcode{\libconcept{sized_sentinel_for}<It>}.
+\item \tcode{is_convertible_v<End, size_t>} is \tcode{false}.
+\end{itemize}
+
+\expects
+\begin{itemize}
+\item
+If \tcode{extent} is not equal to \tcode{dynamic_extent},
+then \tcode{last - first} is equal to \tcode{extent}.
+\item \range{first}{last} is a valid range.
+\item \tcode{It} models \libconcept{contiguous_iterator}.
+\item \tcode{End} models \tcode{\libconcept{sized_sentinel_for}<It>}.
+\end{itemize}
+
+\pnum
+\effects
+Initializes \tcode{data_} with \tcode{to_address(first)} and
+\tcode{size_} with \tcode{last - first}.
+
+\pnum
+\throws
+When and what \tcode{to_address(first)} throws.
+\end{itemdescr}
+
+\indexlibraryctor{span}%
 \begin{itemdecl}
 template<size_t N> constexpr span(element_type (&arr)[N]) noexcept;
 template<size_t N> constexpr span(array<value_type, N>& arr) noexcept;
@@ -10512,42 +10773,52 @@ Constructs a \tcode{span} that is a view over the supplied array.
 \tcode{size() == N \&\& data() == data(arr)}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{span}!constructor}%
+\indexlibraryctor{span}%
 \begin{itemdecl}
-template<class Container> constexpr span(Container& cont);
-template<class Container> constexpr span(const Container& cont);
+template<class R> constexpr span(R&& r);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
 \constraints
+Let \tcode{U} be \tcode{remove_reference_t<ranges::range_reference_t<R>>}.
 \begin{itemize}
-\item \tcode{extent == dynamic_extent} is \tcode{true},
-\item \tcode{Container} is not a specialization of \tcode{span},
-\item \tcode{Container} is not a specialization of \tcode{array},
-\item \tcode{is_array_v<Container>} is \tcode{false},
-\item \tcode{data(cont)} and \tcode{size(cont)} are both well-formed, and
-\item \tcode{remove_pointer_t<decltype(data(cont))>(*)[]} is convertible to \tcode{ElementType(*)[]}.
+\item \tcode{extent == dynamic_extent} is \tcode{true}.
+\item \tcode{R} satisfies \tcode{ranges::\libconcept{contiguous_range}} and
+  \tcode{ranges::\libconcept{sized_range}}.
+\item Either \tcode{R} satisfies \libconcept{safe_range} or
+\tcode{is_const_v<element_type>} is \tcode{true}.
+\item \tcode{remove_cvref_t<R>} is not a specialization of \tcode{span}.
+\item \tcode{remove_cvref_t<R>} is not a specialization of \tcode{array}.
+\item \tcode{is_array_v<remove_cvref_t<R>>} is \tcode{false}.
+\item
+\tcode{is_convertible_v<U(*)[], element_type(*)[]>} is \tcode{true}.
+\begin{note}
+The intent is to allow only qualification conversions
+of the iterator reference type to \tcode{element_type}.
+\end{note}
 \end{itemize}
 
 \pnum
 \expects
-\range{data(cont)}{data(cont) + size(cont)} is a valid range.
+\begin{itemize}
+\item \tcode{R} models \tcode{ranges::\libconcept{contiguous_range}} and
+\tcode{ranges::\libconcept{sized_range}}.
+\item If \tcode{is_const_v<element_type>} is \tcode{false},
+\tcode{R} models \libconcept{safe_range}.
+\end{itemize}
 
 \pnum
 \effects
-Constructs a \tcode{span} that is a view over the range \range{data(cont)}{data(cont) + size(cont)}.
-
-\pnum
-\ensures
-\tcode{size() == size(cont) \&\& data() == data(cont)}.
+Initializes \tcode{data_} with \tcode{ranges::data(r)} and
+\tcode{size_} with \tcode{ranges::size(r)}.
 
 \pnum
 \throws
-What and when \tcode{data(cont)} and \tcode{size(cont)} throw.
+What and when \tcode{ranges::data(r)} and \tcode{ranges::size(r)} throw.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{span}!constructor}%
+\indexlibraryctor{span}%
 \begin{itemdecl}
 constexpr span(const span& other) noexcept = default;
 \end{itemdecl}
@@ -10558,7 +10829,7 @@ constexpr span(const span& other) noexcept = default;
 \tcode{other.size() == size() \&\& other.data() == data()}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{span}!constructor}%
+\indexlibraryctor{span}%
 \begin{itemdecl}
 template<class OtherElementType, size_t OtherExtent>
   constexpr span(const span<OtherElementType, OtherExtent>& s) noexcept;
@@ -10582,7 +10853,7 @@ Constructs a \tcode{span} that is a view over the range
 \tcode{size() == s.size() \&\& data() == s.data()}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{operator=}!\idxcode{span}}%
+\indexlibrarymember{operator=}{span}%
 \begin{itemdecl}
 constexpr span& operator=(const span& other) noexcept = default;
 \end{itemdecl}
@@ -10593,6 +10864,32 @@ constexpr span& operator=(const span& other) noexcept = default;
 \tcode{size() == other.size() \&\& data() == other.data()}.
 \end{itemdescr}
 
+\rSec3[span.deduct]{Deduction guides}
+
+\indexlibrary{\idxcode{span}!deduction guide}%
+\begin{itemdecl}
+template<class It, class End>
+  span(It, End) -> span<remove_reference_t<iter_reference_t<It>>>;
+\end{itemdecl}
+
+\begin{itemdescr}
+\pnum
+\constraints
+\tcode{It} satisfies \libconcept{contiguous_iterator}.
+\end{itemdescr}
+
+\indexlibrary{\idxcode{span}!deduction guide}%
+\begin{itemdecl}
+template<class R>
+  span(R&&) -> span<remove_reference_t<ranges::range_reference_t<R>>>;
+\end{itemdecl}
+
+\begin{itemdescr}
+\pnum
+\constraints
+\tcode{R} satisfies \tcode{ranges::\libconcept{contiguous_range}}.
+\end{itemdescr}
+
 \rSec3[span.sub]{Subviews}
 
 \indexlibrarymember{span}{first}%
@@ -10601,6 +10898,10 @@ template<size_t Count> constexpr span<element_type, Count> first() const;
 \end{itemdecl}
 
 \begin{itemdescr}
+\pnum
+\mandates
+\tcode{Count <= Extent} is \tcode{true}.
+
 \pnum
 \expects
 \tcode{Count <= size()} is \tcode{true}.
@@ -10616,6 +10917,10 @@ template<size_t Count> constexpr span<element_type, Count> last() const;
 \end{itemdecl}
 
 \begin{itemdescr}
+\pnum
+\mandates
+\tcode{Count <= Extent} is \tcode{true}.
+
 \pnum
 \expects
 \tcode{Count <= size()} is \tcode{true}.
@@ -10633,9 +10938,16 @@ template<size_t Offset, size_t Count = dynamic_extent>
 
 \begin{itemdescr}
 \pnum
+\mandates
+\begin{codeblock}
+Offset <= Extent && (Count == dynamic_extent || Count <= Extent - Offset)
+\end{codeblock}
+is \tcode{true}.
+
+\pnum
 \expects
 \begin{codeblock}
-Offset <= size() && (Count == dynamic_extent || Offset + Count <= size())
+Offset <= size() && (Count == dynamic_extent || Count <= size() - Offset)
 \end{codeblock}
 is \tcode{true}.
 
@@ -10659,7 +10971,7 @@ Count != dynamic_extent ? Count
 
 \indexlibrarymember{span}{first}%
 \begin{itemdecl}
-constexpr span<element_type, dynamic_extent> first(index_type count) const;
+constexpr span<element_type, dynamic_extent> first(size_type count) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -10674,7 +10986,7 @@ Equivalent to: \tcode{return \{data(), count\};}
 
 \indexlibrarymember{span}{last}%
 \begin{itemdecl}
-constexpr span<element_type, dynamic_extent> last(index_type count) const;
+constexpr span<element_type, dynamic_extent> last(size_type count) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -10690,14 +11002,14 @@ Equivalent to: \tcode{return \{data() + (size() - count), count\};}
 \indexlibrarymember{span}{subspan}%
 \begin{itemdecl}
 constexpr span<element_type, dynamic_extent> subspan(
-  index_type offset, index_type count = dynamic_extent) const;
+  size_type offset, size_type count = dynamic_extent) const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
 \expects
 \begin{codeblock}
-offset <= size() && (count == dynamic_extent || offset + count <= size())
+offset <= size() && (count == dynamic_extent || count <= size() - offset)
 \end{codeblock}
 is \tcode{true}.
 
@@ -10713,7 +11025,7 @@ return {data() + offset, count == dynamic_extent ? size() - offset : count};
 
 \indexlibrarymember{span}{size}%
 \begin{itemdecl}
-constexpr index_type size() const noexcept;
+constexpr size_type size() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -10724,7 +11036,7 @@ Equivalent to: \tcode{return size_;}
 
 \indexlibrarymember{span}{size_bytes}%
 \begin{itemdecl}
-constexpr index_type size_bytes() const noexcept;
+constexpr size_type size_bytes() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -10748,7 +11060,7 @@ Equivalent to: \tcode{return size() == 0;}
 
 \indexlibrary{\idxcode{operator[]}!\idxcode{span}}%
 \begin{itemdecl}
-constexpr reference operator[](index_type idx) const;
+constexpr reference operator[](size_type idx) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -10866,7 +11178,7 @@ constexpr reverse_iterator rend() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns
+\effects
 Equivalent to: \tcode{return reverse_iterator(begin());}
 \end{itemdescr}
 
@@ -10919,7 +11231,7 @@ Equivalent to: \tcode{return const_reverse_iterator(cbegin());}
 
 \rSec3[span.objectrep]{Views of object representation}
 
-\indexlibrary{\idxcode{as_bytes}}%
+\indexlibraryglobal{as_bytes}%
 \begin{itemdecl}
 template<class ElementType, size_t Extent>
   span<const byte, Extent == dynamic_extent ? dynamic_extent : sizeof(ElementType) * Extent>
@@ -10932,7 +11244,7 @@ template<class ElementType, size_t Extent>
 Equivalent to: \tcode{return \{reinterpret_cast<const byte*>(s.data()), s.size_bytes()\};}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{as_writable_bytes}}%
+\indexlibraryglobal{as_writable_bytes}%
 \begin{itemdecl}
 template<class ElementType, size_t Extent>
   span<byte, Extent == dynamic_extent ? dynamic_extent : sizeof(ElementType) * Extent>
@@ -10951,14 +11263,14 @@ Equivalent to: \tcode{return \{reinterpret_cast<byte*>(s.data()), s.size_bytes()
 
 \rSec3[span.tuple]{Tuple interface}
 
-\indexlibrary{\idxcode{tuple_size}}%
+\indexlibraryglobal{tuple_size}%
 \begin{itemdecl}
 template<class ElementType, size_t Extent>
   struct tuple_size<span<ElementType, Extent>>
     : integral_constant<size_t, Extent> { };
 \end{itemdecl}
 
-\indexlibrary{\idxcode{tuple_element}}%
+\indexlibraryglobal{tuple_element}%
 \begin{itemdecl}
 template<size_t I, class ElementType, size_t Extent>
   struct tuple_element<I, span<ElementType, Extent>> {
@@ -10972,7 +11284,7 @@ template<size_t I, class ElementType, size_t Extent>
 \tcode{Extent != dynamic_extent \&\& I < Extent} is \tcode{true}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{get}}%
+\indexlibraryglobal{get}%
 \begin{itemdecl}
 template<size_t I, class ElementType, size_t Extent>
   constexpr ElementType& get(span<ElementType, Extent> s) noexcept;
@@ -10985,6 +11297,5 @@ template<size_t I, class ElementType, size_t Extent>
 
 \pnum
 \returns
-A reference to the $\tcode{I}^\text{th}$ element of \tcode{s},
-where indexing is zero-based.
+\tcode{s[I]}.
 \end{itemdescr}

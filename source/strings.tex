@@ -130,25 +130,32 @@ Operations on \tcode{X} shall not throw exceptions.
 \tcode{X::state_type}   &                       &
 (described in~\ref{char.traits.typedefs})   &   compile-time    \\ \rowsep
 \tcode{X::eq(c,d)}      &   \tcode{bool}        &
-\returns whether \tcode{c} is to be treated as equal to \tcode{d}.   &   constant    \\ \rowsep
+\returns
+whether \tcode{c} is to be treated as equal to \tcode{d}.   &   constant    \\ \rowsep
 \tcode{X::lt(c,d)}      &   \tcode{bool}        &
-\returns whether \tcode{c} is to be treated as less than \tcode{d}.  &   constant    \\ \rowsep
+\returns
+whether \tcode{c} is to be treated as less than \tcode{d}.  &   constant    \\ \rowsep
 \tcode{X::compare(p,q,n)}   &   \tcode{int}     &
-\returns \tcode{0} if for each \tcode{i} in \tcode{[0,n)}, \tcode{X::eq(p[i],q[i])}
+\returns
+\tcode{0} if for each \tcode{i} in \tcode{[0,n)}, \tcode{X::eq(p[i],q[i])}
 is \tcode{true}; else, a negative value if, for some \tcode{j} in \tcode{[0,n)},
 \tcode{X::lt(p[j],q[j])} is \tcode{true} and for each \tcode{i} in \tcode{[0,j)}
 \tcode{X::eq(p[i],q[i])} is \tcode{true}; else a positive value.            &   linear      \\ \rowsep
 \tcode{X::length(p)}    &   \tcode{size_t}     &
-\returns the smallest \tcode{i} such that \tcode{X::eq(p[i],charT())} is \tcode{true}.  &   linear  \\ \rowsep
+\returns
+the smallest \tcode{i} such that \tcode{X::eq(p[i],charT())} is \tcode{true}.  &   linear  \\ \rowsep
 \tcode{X::find(p,n,c)}  &   \tcode{const X::char_type*} &
-\returns the smallest \tcode{q} in \tcode{[p,p+n)} such that
+\returns
+the smallest \tcode{q} in \tcode{[p,p+n)} such that
 \tcode{X::eq(*q,c)} is \tcode{true}, zero otherwise.                        &   linear      \\ \rowsep
 \tcode{X::move(s,p,n)}  &   \tcode{X::char_type*}   &
 for each \tcode{i} in \tcode{[0,n)}, performs \tcode{X::assign(s[i],p[i])}.
 Copies correctly even where the ranges \tcode{[p,p+n)} and \tcode{[s,s+n)} overlap.\br \returns \tcode{s}.    &   linear  \\ \rowsep
 \tcode{X::copy(s,p,n)}  &   \tcode{X::char_type*}   &
-\expects \tcode{p} not in \tcode{[s,s+n)}. \br
-\returns \tcode{s}.\br
+\expects
+\tcode{p} not in \tcode{[s,s+n)}. \br
+\returns
+\tcode{s}.\br
 for each \tcode{i} in
 \tcode{[0,n)}, performs \tcode{X::assign(s[i],p[i])}.               &   linear      \\ \rowsep
 \tcode{X::assign(r,d)}  &   (not used)          &
@@ -156,38 +163,41 @@ assigns \tcode{r=d}.                            &   constant        \\ \rowsep
 \tcode{X::assign\-(s,n,c)}  &   \tcode{X::char_type*}   &
 for each \tcode{i} in \tcode{[0,n)}, performs
 \tcode{X::assign(s[i],c)}.\br
-\returns \tcode{s}.                       &   linear      \\ \rowsep
+\returns
+\tcode{s}.                       &   linear      \\ \rowsep
 \tcode{X::not_eof(e)}   &   \tcode{int_type}        &
-\returns \tcode{e} if \tcode{X::eq_int_type(e,X::eof())} is \tcode{false},
+\returns
+\tcode{e} if \tcode{X::eq_int_type(e,X::eof())} is \tcode{false},
 otherwise a value \tcode{f} such that
 \tcode{X::eq_int_type(f,X::eof())} is \tcode{false}.                       &   constant    \\ \rowsep
 \tcode{X::to_char_type\-(e)}    &   \tcode{X::char_type}    &
-\returns if for some \tcode{c}, \tcode{X::eq_int_type(e,X::to_int_type(c))}
+\returns
+if for some \tcode{c}, \tcode{X::eq_int_type(e,X::to_int_type(c))}
 is \tcode{true}, \tcode{c}; else some unspecified value.                    &   constant    \\ \rowsep
 \tcode{X::to_int_type\-(c)} &   \tcode{X::int_type} &
-\returns some value \tcode{e}, constrained by the definitions of
+\returns
+some value \tcode{e}, constrained by the definitions of
 \tcode{to_char_type} and \tcode{eq_int_type}.                  &   constant    \\ \rowsep
 \tcode{X::eq_int_type\-(e,f)}   &   \tcode{bool}            &
-\returns for all \tcode{c} and \tcode{d}, \tcode{X::eq(c,d)} is equal to
+\returns
+for all \tcode{c} and \tcode{d}, \tcode{X::eq(c,d)} is equal to
 \tcode{X::eq_int_type(X::to_int_type(c), X::to_int_type(d))}; otherwise, yields \tcode{true}
 if \tcode{e} and \tcode{f} are both copies of \tcode{X::eof()}; otherwise, yields \tcode{false} if
 one of \tcode{e} and \tcode{f} is a copy of \tcode{X::eof()} and the other is not; otherwise
 the value is unspecified.                                           &   constant    \\ \rowsep
 \tcode{X::eof()}                &   \tcode{X::int_type} &
-\returns a value \tcode{e} such that \tcode{X::eq_int_type(e,X::to_int_type(c))}
+\returns
+a value \tcode{e} such that \tcode{X::eq_int_type(e,X::to_int_type(c))}
 is \tcode{false} for all values \tcode{c}.                                  &   constant    \\
 \end{libreqtab4d}
 
 \pnum
 The class template
-
-\indexlibrary{\idxcode{char_traits}}%
+\indexlibraryglobal{char_traits}%
 \begin{codeblock}
 template<class charT> struct char_traits;
 \end{codeblock}
-
-is provided in the header
-\tcode{<string>}
+is provided in the header \libheader{string}
 as a basis for explicit specializations.
 
 \rSec2[char.traits.typedefs]{Traits typedefs}
@@ -231,7 +241,7 @@ using state_type = @\seebelow@;
 
 \rSec2[char.traits.specializations]{\tcode{char_traits} specializations}
 
-\indexlibrary{\idxcode{char_traits}}%
+\indexlibraryglobal{char_traits}%
 \begin{codeblock}
 namespace std {
   template<> struct char_traits<char>;
@@ -243,10 +253,8 @@ namespace std {
 \end{codeblock}
 
 \pnum
-The header
-\tcode{<string>}
-defines five
-specializations of the class template
+The header \libheader{string}
+defines five specializations of the class template
 \tcode{char_traits}:
 \tcode{char_traits<\brk{}char>},
 \tcode{char_traits<char8_t>},
@@ -258,7 +266,7 @@ and
 
 \rSec3[char.traits.specializations.char]{\tcode{struct char_traits<char>}}
 
-\indexlibrary{\idxcode{char_traits}}%
+\indexlibraryglobal{char_traits}%
 \begin{codeblock}
 namespace std {
   template<> struct char_traits<char> {
@@ -291,10 +299,7 @@ namespace std {
 \end{codeblock}
 
 \pnum
-The type
-\tcode{mbstate_t}
-is defined in
-\tcode{<cwchar>}
+The type \tcode{mbstate_t} is defined in \libheader{cwchar}
 and can represent any of the conversion states that can occur in an
 \impldef{supported multibyte character encoding rules} set of supported multibyte
 character encoding rules.
@@ -313,7 +318,7 @@ returns
 
 \rSec3[char.traits.specializations.char8.t]{\tcode{struct char_traits<char8_t>}}
 
-\indexlibrary{\idxcode{char_traits}}%
+\indexlibraryglobal{char_traits}%
 \begin{codeblock}
 namespace std {
   template<> struct char_traits<char8_t> {
@@ -355,7 +360,7 @@ that cannot appear as a valid UTF-8 code unit.
 
 \rSec3[char.traits.specializations.char16.t]{\tcode{struct char_traits<char16_t>}}
 
-\indexlibrary{\idxcode{char_traits}}%
+\indexlibraryglobal{char_traits}%
 \begin{codeblock}
 namespace std {
   template<> struct char_traits<char16_t> {
@@ -401,7 +406,7 @@ as a valid UTF-16 code unit.
 
 \rSec3[char.traits.specializations.char32.t]{\tcode{struct char_traits<char32_t>}}
 
-\indexlibrary{\idxcode{char_traits}}%
+\indexlibraryglobal{char_traits}%
 \begin{codeblock}
 namespace std {
   template<> struct char_traits<char32_t> {
@@ -447,7 +452,7 @@ code point.
 
 \rSec3[char.traits.specializations.wchar.t]{\tcode{struct char_traits<wchar_t>}}
 
-\indexlibrary{\idxcode{char_traits}}%
+\indexlibraryglobal{char_traits}%
 \begin{codeblock}
 namespace std {
   template<> struct char_traits<wchar_t> {
@@ -520,7 +525,7 @@ and
 \tcode{basic_string<\brk{}wchar_t>}, respectively.
 
 \rSec2[string.syn]{Header \tcode{<string>} synopsis}
-\indexhdr{string}%
+\indexheader{string}%
 
 \begin{codeblock}
 #include <initializer_list>
@@ -727,7 +732,7 @@ namespace std {
 \rSec2[basic.string]{Class template \tcode{basic_string}}
 
 \pnum
-\indexlibrary{\idxcode{basic_string}}%
+\indexlibraryglobal{basic_string}%
 The
 class template
 \tcode{basic_string}
@@ -751,7 +756,7 @@ In all cases,
 and \tcode{size() <= capacity()} is \tcode{true}.
 
 
-\indexlibrary{\idxcode{basic_string}}%
+\indexlibraryglobal{basic_string}%
 \indexlibrarymember{traits_type}{basic_string}%
 \indexlibrarymember{value_type}{basic_string}%
 \indexlibrarymember{allocator_type}{basic_string}%
@@ -1113,7 +1118,7 @@ and
 
 \rSec3[string.cons]{Constructors and assignment operators}
 
-\indexlibrary{\idxcode{basic_string}!constructor}%
+\indexlibraryctor{basic_string}%
 \begin{itemdecl}
 constexpr explicit basic_string(const Allocator& a) noexcept;
 \end{itemdecl}
@@ -1125,7 +1130,7 @@ constexpr explicit basic_string(const Allocator& a) noexcept;
 \tcode{size()} is equal to \tcode{0}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{basic_string}!constructor}%
+\indexlibraryctor{basic_string}%
 \begin{itemdecl}
 constexpr basic_string(const basic_string& str);
 constexpr basic_string(basic_string&& str) noexcept;
@@ -1142,7 +1147,7 @@ value is that of \tcode{str} prior to this call.
 In the second form, \tcode{str} is left in a valid but unspecified state.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{basic_string}!constructor}%
+\indexlibraryctor{basic_string}%
 \begin{itemdecl}
 constexpr basic_string(const basic_string& str, size_type pos,
                        const Allocator& a = Allocator());
@@ -1159,7 +1164,7 @@ basic_string(basic_string_view<charT, traits>(str).substr(pos, n), a)
 \end{codeblock}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{basic_string}!constructor}%
+\indexlibraryctor{basic_string}%
 \begin{itemdecl}
 template<class T>
   constexpr basic_string(const T& t, size_type pos, size_type n, const Allocator& a = Allocator());
@@ -1172,7 +1177,8 @@ template<class T>
 is \tcode{true}.
 
 \pnum
-\effects Creates a variable, \tcode{sv},
+\effects
+Creates a variable, \tcode{sv},
 as if by \tcode{basic_string_view<charT, traits> sv = t;}
 and then behaves the same as:
 \begin{codeblock}
@@ -1180,7 +1186,7 @@ basic_string(sv.substr(pos, n), a);
 \end{codeblock}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{basic_string}!constructor}%
+\indexlibraryctor{basic_string}%
 \begin{itemdecl}
 template<class T>
   constexpr explicit basic_string(const T& t, const Allocator& a = Allocator());
@@ -1199,19 +1205,21 @@ template<class T>
 \end{itemize}
 
 \pnum
-\effects Creates a variable, \tcode{sv}, as if by
+\effects
+Creates a variable, \tcode{sv}, as if by
 \tcode{basic_string_view<charT, traits> sv = t;} and
 then behaves the same as \tcode{basic_string(sv.data(), sv.size(), a)}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{basic_string}!constructor}%
+\indexlibraryctor{basic_string}%
 \begin{itemdecl}
 constexpr basic_string(const charT* s, size_type n, const Allocator& a = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\expects \range{s}{s + n} is a valid range.
+\expects
+\range{s}{s + n} is a valid range.
 
 \pnum
 \effects
@@ -1223,7 +1231,7 @@ Constructs an object whose initial value is the range \range{s}{s + n}.
 \tcode{traits::compare(data(), s, n)} is equal to \tcode{0}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{basic_string}!constructor}%
+\indexlibraryctor{basic_string}%
 \begin{itemdecl}
 constexpr basic_string(const charT* s, const Allocator& a = Allocator());
 \end{itemdecl}
@@ -1238,10 +1246,11 @@ This affects class template argument deduction.
 \end{note}
 
 \pnum
-\effects Equivalent to: \tcode{basic_string(s, traits::length(s), a)}.
+\effects
+Equivalent to: \tcode{basic_string(s, traits::length(s), a)}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{basic_string}!constructor}%
+\indexlibraryctor{basic_string}%
 \begin{itemdecl}
 constexpr basic_string(size_type n, charT c, const Allocator& a = Allocator());
 \end{itemdecl}
@@ -1260,7 +1269,7 @@ This affects class template argument deduction.
 Constructs an object whose value consists of \tcode{n} copies of \tcode{c}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{basic_string}!constructor}%
+\indexlibraryctor{basic_string}%
 \begin{itemdecl}
 template<class InputIterator>
   constexpr basic_string(InputIterator begin, InputIterator end, const Allocator& a = Allocator());
@@ -1278,17 +1287,18 @@ Constructs a string from the values in the range \range{begin}{end},
 as indicated in \tref{container.seq.req}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{basic_string}!constructor}%
+\indexlibraryctor{basic_string}%
 \begin{itemdecl}
 constexpr basic_string(initializer_list<charT> il, const Allocator& a = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to \tcode{basic_string(il.begin(), il.end(), a)}.
+\effects
+Equivalent to \tcode{basic_string(il.begin(), il.end(), a)}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{basic_string}!constructor}%
+\indexlibraryctor{basic_string}%
 \begin{itemdecl}
 constexpr basic_string(const basic_string& str, const Allocator& alloc);
 constexpr basic_string(basic_string&& str, const Allocator& alloc);
@@ -1296,13 +1306,15 @@ constexpr basic_string(basic_string&& str, const Allocator& alloc);
 
 \begin{itemdescr}
 \pnum
-\effects Constructs an object whose value is
+\effects
+Constructs an object whose value is
 that of \tcode{str} prior to this call.
 The stored allocator is constructed from \tcode{alloc}.
 In the second form, \tcode{str} is left in a valid but unspecified state.
 
 \pnum
-\throws The second form throws nothing if \tcode{alloc == str.get_allocator()}.
+\throws
+The second form throws nothing if \tcode{alloc == str.get_allocator()}.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -1395,7 +1407,8 @@ is \tcode{false}.
 \end{itemize}
 
 \pnum
-\effects Equivalent to:
+\effects
+Equivalent to:
 \begin{codeblock}
 basic_string_view<charT, traits> sv = t;
 return assign(sv);
@@ -1409,7 +1422,8 @@ constexpr basic_string& operator=(const charT* s);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to:
+\effects
+Equivalent to:
 \tcode{return *this = basic_string_view<charT, traits>(s);}
 \end{itemdescr}
 
@@ -1420,7 +1434,8 @@ constexpr basic_string& operator=(charT c);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to:
+\effects
+Equivalent to:
 \begin{codeblock}
 return *this = basic_string_view<charT, traits>(addressof(c), 1);
 \end{codeblock}
@@ -1433,7 +1448,8 @@ constexpr basic_string& operator=(initializer_list<charT> il);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to:
+\effects
+Equivalent to:
 \begin{codeblock}
 return *this = basic_string_view<charT, traits>(il.begin(), il.size());
 \end{codeblock}
@@ -1514,7 +1530,8 @@ constexpr size_type length() const noexcept;
 A count of the number of char-like objects currently in the string.
 
 \pnum
-\complexity Constant time.
+\complexity
+Constant time.
 \end{itemdescr}
 
 \indexlibrarymember{max_size}{basic_string}%
@@ -1529,7 +1546,8 @@ The largest possible number of char-like objects that can be stored in a
 \tcode{basic_string}.
 
 \pnum
-\complexity Constant time.
+\complexity
+Constant time.
 \end{itemdescr}
 
 \indexlibrarymember{resize}{basic_string}%
@@ -1543,7 +1561,6 @@ constexpr void resize(size_type n, charT c);
 Alters the value of
 \tcode{*this}
 as follows:
-
 \begin{itemize}
 \item
 If
@@ -1578,7 +1595,8 @@ constexpr size_type capacity() const noexcept;
 The size of the allocated storage in the string.
 
 \pnum
-\complexity Constant time.
+\complexity
+Constant time.
 \end{itemdescr}
 
 \indexlibrarymember{reserve}{basic_string}%
@@ -1618,21 +1636,29 @@ constexpr void shrink_to_fit();
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{shrink_to_fit} is a non-binding request to reduce
-\tcode{capacity()} to \tcode{size()}. \begin{note} The request is non-binding to
-allow latitude for implementation-specific optimizations. \end{note}
+\effects
+\tcode{shrink_to_fit} is a non-binding request to reduce
+\tcode{capacity()} to \tcode{size()}.
+\begin{note}
+The request is non-binding to
+allow latitude for implementation-specific optimizations.
+\end{note}
 It does not increase \tcode{capacity()}, but may reduce \tcode{capacity()}
 by causing reallocation.
 
 \pnum
-\complexity If the size is not equal to the old capacity,
+\complexity
+If the size is not equal to the old capacity,
 linear in the size of the sequence;
 otherwise constant.
 
 \pnum
-\remarks Reallocation invalidates all the references, pointers, and iterators
+\remarks
+Reallocation invalidates all the references, pointers, and iterators
 referring to the elements in the sequence, as well as the past-the-end iterator.
-\begin{note} If no reallocation happens, they remain valid. \end{note}
+\begin{note}
+If no reallocation happens, they remain valid.
+\end{note}
 \end{itemdescr}
 
 \indexlibrarymember{clear}{basic_string}%
@@ -1653,7 +1679,8 @@ Equivalent to: \tcode{erase(begin(), end());}
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to:
+\effects
+Equivalent to:
 \tcode{return size() == 0;}
 \end{itemdescr}
 
@@ -1667,19 +1694,23 @@ constexpr reference       operator[](size_type pos);
 
 \begin{itemdescr}
 \pnum
-\expects \tcode{pos <= size()}.
+\expects
+\tcode{pos <= size()}.
 
 \pnum
-\returns \tcode{*(begin() + pos)} if \tcode{pos < size()}. Otherwise,
+\returns
+\tcode{*(begin() + pos)} if \tcode{pos < size()}. Otherwise,
 returns a reference to an object of type \tcode{charT} with value
 \tcode{charT()}, where modifying the object to any value other than
 \tcode{charT()} leads to undefined behavior.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 
 \pnum
-\complexity Constant time.
+\complexity
+Constant time.
 \end{itemdescr}
 
 \indexlibrarymember{at}{basic_string}%
@@ -1743,7 +1774,8 @@ constexpr basic_string& operator+=(const basic_string& str);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return append(str);}
+\effects
+Equivalent to: \tcode{return append(str);}
 
 
 \end{itemdescr}
@@ -1782,7 +1814,8 @@ constexpr basic_string& operator+=(const charT* s);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return append(s);}
+\effects
+Equivalent to: \tcode{return append(s);}
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{basic_string}%
@@ -1792,7 +1825,8 @@ constexpr basic_string& operator+=(charT c);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return append(size_type\{1\}, c);}
+\effects
+Equivalent to: \tcode{return append(size_type\{1\}, c);}
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{basic_string}%
@@ -1802,7 +1836,8 @@ constexpr basic_string& operator+=(initializer_list<charT> il);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return append(il);}
+\effects
+Equivalent to: \tcode{return append(il);}
 \end{itemdescr}
 
 
@@ -1815,7 +1850,8 @@ constexpr basic_string& append(const basic_string& str);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return append(str.data(), str.size());}
+\effects
+Equivalent to: \tcode{return append(str.data(), str.size());}
 \end{itemdescr}
 
 \indexlibrarymember{append}{basic_string}%
@@ -1893,10 +1929,12 @@ constexpr basic_string& append(const charT* s, size_type n);
 
 \begin{itemdescr}
 \pnum
-\expects \range{s}{s + n} is a valid range.
+\expects
+\range{s}{s + n} is a valid range.
 
 \pnum
-\effects Appends a copy of the range \range{s}{s + n} to the string.
+\effects
+Appends a copy of the range \range{s}{s + n} to the string.
 
 \pnum
 \returns
@@ -1910,7 +1948,8 @@ constexpr basic_string& append(const charT* s);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return append(s, traits::length(s));}
+\effects
+Equivalent to: \tcode{return append(s, traits::length(s));}
 \end{itemdescr}
 
 \indexlibrarymember{append}{basic_string}%
@@ -1920,10 +1959,12 @@ constexpr basic_string& append(size_type n, charT c);
 
 \begin{itemdescr}
 \pnum
-\effects Appends \tcode{n} copies of \tcode{c} to the string.
+\effects
+Appends \tcode{n} copies of \tcode{c} to the string.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{append}{basic_string}%
@@ -1939,7 +1980,8 @@ template<class InputIterator>
 iterator\iref{container.requirements.general}.
 
 \pnum
-\effects Equivalent to: \tcode{return append(basic_string(first, last, get_allocator()));}
+\effects
+Equivalent to: \tcode{return append(basic_string(first, last, get_allocator()));}
 \end{itemdescr}
 
 \indexlibrarymember{append}{basic_string}%
@@ -1949,7 +1991,8 @@ constexpr basic_string& append(initializer_list<charT> il);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return append(il.begin(), il.size());}
+\effects
+Equivalent to: \tcode{return append(il.begin(), il.size());}
 \end{itemdescr}
 
 \indexlibrarymember{push_back}{basic_string}%
@@ -1973,7 +2016,8 @@ constexpr basic_string& assign(const basic_string& str);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return *this = str;}
+\effects
+Equivalent to: \tcode{return *this = str;}
 \end{itemdescr}
 
 \indexlibrarymember{assign}{basic_string}%
@@ -1985,7 +2029,8 @@ constexpr basic_string& assign(basic_string&& str)
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return *this = std::move(str);}
+\effects
+Equivalent to: \tcode{return *this = std::move(str);}
 \end{itemdescr}
 
 
@@ -2049,7 +2094,8 @@ template<class T>
 \end{itemize}
 
 \pnum
-\effects Equivalent to:
+\effects
+Equivalent to:
 \begin{codeblock}
 basic_string_view<charT, traits> sv = t;
 return assign(sv.substr(pos, n));
@@ -2063,7 +2109,8 @@ constexpr basic_string& assign(const charT* s, size_type n);
 
 \begin{itemdescr}
 \pnum
-\expects \range{s}{s + n} is a valid range.
+\expects
+\range{s}{s + n} is a valid range.
 
 \pnum
 \effects
@@ -2082,7 +2129,8 @@ constexpr basic_string& assign(const charT* s);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return assign(s, traits::length(s));}
+\effects
+Equivalent to: \tcode{return assign(s, traits::length(s));}
 \end{itemdescr}
 
 \indexlibrarymember{assign}{basic_string}%
@@ -2092,7 +2140,8 @@ constexpr basic_string& assign(initializer_list<charT> il);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return assign(il.begin(), il.size());}
+\effects
+Equivalent to: \tcode{return assign(il.begin(), il.size());}
 \end{itemdescr}
 
 \indexlibrarymember{assign}{basic_string}%
@@ -2102,7 +2151,8 @@ constexpr basic_string& assign(size_type n, charT c);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to:
+\effects
+Equivalent to:
 \begin{codeblock}
 clear();
 resize(n, c);
@@ -2123,7 +2173,8 @@ template<class InputIterator>
 iterator\iref{container.requirements.general}.
 
 \pnum
-\effects Equivalent to: \tcode{return assign(basic_string(first, last, get_allocator()));}
+\effects
+Equivalent to: \tcode{return assign(basic_string(first, last, get_allocator()));}
 \end{itemdescr}
 
 \rSec4[string.insert]{\tcode{basic_string::insert}}
@@ -2135,7 +2186,8 @@ constexpr basic_string& insert(size_type pos, const basic_string& str);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return insert(pos, str.data(), str.size());}
+\effects
+Equivalent to: \tcode{return insert(pos, str.data(), str.size());}
 \end{itemdescr}
 
 \indexlibrarymember{insert}{basic_string}%
@@ -2200,7 +2252,8 @@ template<class T>
 \end{itemize}
 
 \pnum
-\effects Equivalent to:
+\effects
+Equivalent to:
 \begin{codeblock}
 basic_string_view<charT, traits> sv = t;
 return insert(pos1, sv.substr(pos2, n));
@@ -2214,7 +2267,8 @@ constexpr basic_string& insert(size_type pos, const charT* s, size_type n);
 
 \begin{itemdescr}
 \pnum
-\expects \range{s}{s + n} is a valid range.
+\expects
+\range{s}{s + n} is a valid range.
 
 \pnum
 \throws
@@ -2225,7 +2279,8 @@ constexpr basic_string& insert(size_type pos, const charT* s, size_type n);
 \end{itemize}
 
 \pnum
-\effects Inserts a copy of the range \range{s}{s + n}
+\effects
+Inserts a copy of the range \range{s}{s + n}
 immediately before the character at position \tcode{pos} if \tcode{pos < size()},
 or otherwise at the end of the string.
 
@@ -2241,7 +2296,8 @@ constexpr basic_string& insert(size_type pos, const charT* s);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return insert(pos, s, traits::length(s));}
+\effects
+Equivalent to: \tcode{return insert(pos, s, traits::length(s));}
 \end{itemdescr}
 
 \indexlibrarymember{insert}{basic_string}%
@@ -2305,7 +2361,8 @@ constexpr iterator insert(const_iterator p, size_type n, charT c);
 Inserts \tcode{n} copies of \tcode{c} at the position \tcode{p}.
 
 \pnum
-\returns An iterator which refers to  the first inserted character, or
+\returns
+An iterator which refers to  the first inserted character, or
 \tcode{p} if \tcode{n == 0}.
 \end{itemdescr}
 
@@ -2332,7 +2389,8 @@ Equivalent to
 \tcode{insert(p - begin(), basic_string(first, last, get_allocator()))}.
 
 \pnum
-\returns An iterator which refers to the first inserted character, or
+\returns
+An iterator which refers to the first inserted character, or
 \tcode{p} if \tcode{first == last}.
 \end{itemdescr}
 
@@ -2343,7 +2401,8 @@ constexpr iterator insert(const_iterator p, initializer_list<charT> il);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return insert(p, il.begin(), il.end());}
+\effects
+Equivalent to: \tcode{return insert(p, il.begin(), il.end());}
 \end{itemdescr}
 
 \rSec4[string.erase]{\tcode{basic_string::erase}}
@@ -2383,7 +2442,8 @@ constexpr iterator erase(const_iterator p);
 \tcode{p} is a valid dereferenceable iterator on \tcode{*this}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 
 \pnum
 \effects
@@ -2410,7 +2470,8 @@ constexpr iterator erase(const_iterator first, const_iterator last);
 \tcode{*this}. \range{first}{last} is a valid range.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 
 \pnum
 \effects
@@ -2437,7 +2498,8 @@ constexpr void pop_back();
 \tcode{!empty()}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 
 \pnum
 \effects
@@ -2453,7 +2515,8 @@ constexpr basic_string& replace(size_type pos1, size_type n1, const basic_string
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return replace(pos1, n1, str.data(), str.size());}
+\effects
+Equivalent to: \tcode{return replace(pos1, n1, str.data(), str.size());}
 \end{itemdescr}
 
 \indexlibrarymember{replace}{basic_string}%
@@ -2533,7 +2596,8 @@ constexpr basic_string& replace(size_type pos1, size_type n1, const charT* s, si
 
 \begin{itemdescr}
 \pnum
-\expects \range{s}{s + n2} is a valid range.
+\expects
+\range{s}{s + n2} is a valid range.
 
 \pnum
 \throws
@@ -2545,7 +2609,8 @@ would exceed \tcode{max_size()} (see below), or
 \end{itemize}
 
 \pnum
-\effects Determines the effective length \tcode{xlen} of the string to be
+\effects
+Determines the effective length \tcode{xlen} of the string to be
 removed as the smaller of \tcode{n1} and \tcode{size() - pos1}. If
 \tcode{size() - xlen >= max_size() - n2} throws \tcode{length_error}. Otherwise,
 the function replaces the characters in the range
@@ -2564,7 +2629,8 @@ constexpr basic_string& replace(size_type pos, size_type n, const charT* s);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return replace(pos, n, s, traits::length(s));}
+\effects
+Equivalent to: \tcode{return replace(pos, n, s, traits::length(s));}
 \end{itemdescr}
 
 \indexlibrarymember{replace}{basic_string}%
@@ -2583,7 +2649,8 @@ would exceed \tcode{max_size()} (see below), or
 \end{itemize}
 
 \pnum
-\effects Determines the effective length \tcode{xlen} of the string to be
+\effects
+Determines the effective length \tcode{xlen} of the string to be
 removed as the smaller of \tcode{n1} and \tcode{size() - pos1}. If
 \tcode{size() - xlen >=} \tcode{max_size() - n2} throws \tcode{length_error}. Otherwise,
 the function replaces the characters in the range
@@ -2591,7 +2658,8 @@ the function replaces the characters in the range
 with \tcode{n2} copies of \tcode{c}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{replace}{basic_string}%
@@ -2665,7 +2733,8 @@ constexpr basic_string& replace(const_iterator i1, const_iterator i2, size_type 
 
 \begin{itemdescr}
 \pnum
-\expects \range{begin()}{i1} and \range{i1}{i2} are valid ranges.
+\expects
+\range{begin()}{i1} and \range{i1}{i2} are valid ranges.
 
 \pnum
 \effects
@@ -2713,7 +2782,9 @@ constexpr size_type copy(charT* s, size_type n, size_type pos = 0) const;
 \effects
 Equivalent to:
 \tcode{return basic_string_view<charT, traits>(*this).copy(s, n, pos);}
-\begin{note} This does not terminate \tcode{s} with a null object. \end{note}
+\begin{note}
+This does not terminate \tcode{s} with a null object.
+\end{note}
 \end{itemdescr}
 
 \rSec4[string.swap]{\tcode{basic_string::swap}}
@@ -2740,10 +2811,12 @@ contains the same sequence of characters that was in \tcode{s},
 \tcode{*this}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 
 \pnum
-\complexity Constant time.
+\complexity
+Constant time.
 \end{itemdescr}
 
 \rSec3[string.ops]{String operations}
@@ -2759,11 +2832,13 @@ constexpr const charT* data() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns A pointer \tcode{p} such that \tcode{p + i == addressof(operator[](i))} for each
+\returns
+A pointer \tcode{p} such that \tcode{p + i == addressof(operator[](i))} for each
 \tcode{i} in \crange{0}{size()}.
 
 \pnum
-\complexity Constant time.
+\complexity
+Constant time.
 
 \pnum
 \remarks
@@ -2777,11 +2852,13 @@ constexpr charT* data() noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns A pointer \tcode{p} such that \tcode{p + i == addressof(operator[](i))} for each
+\returns
+A pointer \tcode{p} such that \tcode{p + i == addressof(operator[](i))} for each
 \tcode{i} in \crange{0}{size()}.
 
 \pnum
-\complexity Constant time.
+\complexity
+Constant time.
 
 \pnum
 \remarks
@@ -2796,7 +2873,8 @@ constexpr operator basic_string_view<charT, traits>() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to:
+\effects
+Equivalent to:
 \tcode{return basic_string_view<charT, traits>(data(), size());}
 \end{itemdescr}
 
@@ -3051,7 +3129,8 @@ constexpr int compare(size_type pos1, size_type n1, const basic_string& str,
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to:
+\effects
+Equivalent to:
 \begin{codeblock}
 return compare(pos1, n1, basic_string_view<charT, traits>(str), pos2, n2);
 \end{codeblock}
@@ -3064,7 +3143,8 @@ constexpr int compare(const charT* s) const;
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to:
+\effects
+Equivalent to:
 \tcode{return compare(basic_string_view<charT, traits>(s));}
 \end{itemdescr}
 
@@ -3128,7 +3208,7 @@ return basic_string_view<charT, traits>(data(), size()).ends_with(x);
 
 \rSec2[string.nonmembers]{Non-member functions}
 
-\indexlibrary{\idxcode{basic_string}}
+\indexlibraryglobal{basic_string}
 
 \rSec3[string.op.plus]{\tcode{operator+}}
 
@@ -3327,7 +3407,8 @@ template<class charT, class traits, class Allocator>
 \end{itemdecl}
 \begin{itemdescr}
 \pnum
-\effects Let \tcode{\placeholder{op}} be the operator.
+\effects
+Let \tcode{\placeholder{op}} be the operator.
 Equivalent to:
 \begin{codeblock}
 return basic_string_view<charT, traits>(lhs) @\placeholder{op}@ basic_string_view<charT, traits>(rhs);
@@ -3380,7 +3461,6 @@ otherwise \tcode{n} is
 \tcode{str.max_size()}.
 Characters are extracted and appended until any of the following
 occurs:
-
 \begin{itemize}
 \item
 \textit{n}
@@ -3453,7 +3533,6 @@ and then extracts characters from \tcode{is} and appends them
 to \tcode{str} as if by calling
 \tcode{str.append(1, c)}
 until any of the following occurs:
-
 \begin{itemize}
 \item
 end-of-file occurs on the input sequence
@@ -3514,7 +3593,7 @@ template<class charT, class traits, class Allocator>
 
 \rSec3[string.erasure]{Erasure}
 
-\indexlibrary{\idxcode{erase}!\idxcode{basic_string}}%
+\indexlibrarymember{erase}{basic_string}%
 \begin{itemdecl}
 template<class charT, class traits, class Allocator, class U>
   constexpr void erase(basic_string<charT, traits, Allocator>& c, const U& value);
@@ -3526,7 +3605,7 @@ template<class charT, class traits, class Allocator, class U>
 Equivalent to: \tcode{c.erase(remove(c.begin(), c.end(), value), c.end());}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{erase_if}!\idxcode{basic_string}}%
+\indexlibrarymember{erase_if}{basic_string}%
 \begin{itemdecl}
 template<class charT, class traits, class Allocator, class Predicate>
   constexpr void erase_if(basic_string<charT, traits, Allocator>& c, Predicate pred);
@@ -3540,11 +3619,11 @@ Equivalent to: \tcode{c.erase(remove_if(c.begin(), c.end(), pred), c.end());}
 
 \rSec2[string.conversions]{Numeric conversions}
 
-\indexlibrary{\idxcode{stoi}}%
-\indexlibrary{\idxcode{stol}}%
-\indexlibrary{\idxcode{stoul}}%
-\indexlibrary{\idxcode{stoll}}%
-\indexlibrary{\idxcode{stoull}}%
+\indexlibraryglobal{stoi}%
+\indexlibraryglobal{stol}%
+\indexlibraryglobal{stoul}%
+\indexlibraryglobal{stoll}%
+\indexlibraryglobal{stoull}%
 \begin{itemdecl}
 int stoi(const string& str, size_t* idx = nullptr, int base = 10);
 long stol(const string& str, size_t* idx = nullptr, int base = 10);
@@ -3555,7 +3634,8 @@ unsigned long long stoull(const string& str, size_t* idx = nullptr, int base = 1
 
 \begin{itemdescr}
 \pnum
-\effects The first two functions call \tcode{strtol(str.c_str(), ptr, base)},
+\effects
+The first two functions call \tcode{strtol(str.c_str(), ptr, base)},
 and the last three functions call \tcode{strtoul(str.c_str(), ptr, base)},
 \tcode{strtoll(str.c_str(), ptr, base)}, and \tcode{strtoull(\brk{}str.c_str(), ptr,
 base)}, respectively. Each function returns the converted result, if any. The
@@ -3565,10 +3645,12 @@ not throw an exception and \tcode{idx != 0}, the function stores in \tcode{*idx}
 the index of the first unconverted element of \tcode{str}.
 
 \pnum
-\returns The converted result.
+\returns
+The converted result.
 
 \pnum
-\throws \tcode{invalid_argument} if \tcode{strtol}, \tcode{strtoul},
+\throws
+\tcode{invalid_argument} if \tcode{strtol}, \tcode{strtoul},
 \tcode{strtoll}, or \tcode{strtoull} reports that no conversion could be
 performed. Throws \tcode{out_of_range} if \tcode{strtol}, \tcode{strtoul},
 \tcode{strtoll} or \tcode{strtoull} sets \tcode{errno} to \tcode{ERANGE},
@@ -3576,9 +3658,9 @@ or if the converted value is outside the range of representable values
 for the return type.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{stof}}%
-\indexlibrary{\idxcode{stod}}%
-\indexlibrary{\idxcode{stold}}%
+\indexlibraryglobal{stof}%
+\indexlibraryglobal{stod}%
+\indexlibraryglobal{stold}%
 \begin{itemdecl}
 float stof(const string& str, size_t* idx = nullptr);
 double stod(const string& str, size_t* idx = nullptr);
@@ -3587,7 +3669,8 @@ long double stold(const string& str, size_t* idx = nullptr);
 
 \begin{itemdescr}
 \pnum
-\effects These functions call
+\effects
+These functions call
 \tcode{strtof(str.c_str(), ptr)}, \tcode{strtod(str.c_str(), ptr)}, and
 \tcode{strtold(\brk{}str.c_str(), ptr)}, respectively. Each function returns
 the converted result, if any. The argument \tcode{ptr} designates a pointer to
@@ -3597,10 +3680,12 @@ the function stores in \tcode{*idx} the index of the first unconverted element
 of \tcode{str}.
 
 \pnum
-\returns The converted result.
+\returns
+The converted result.
 
 \pnum
-\throws \tcode{invalid_argument} if \tcode{strtof}, \tcode{strtod}, or
+\throws
+\tcode{invalid_argument} if \tcode{strtof}, \tcode{strtod}, or
 \tcode{strtold} reports that no conversion could be performed. Throws
 \tcode{out_of_range} if \tcode{strtof}, \tcode{strtod}, or
 \tcode{strtold} sets \tcode{errno} to \tcode{ERANGE}
@@ -3608,7 +3693,7 @@ or if the converted value is outside the range of representable
 values for the return type.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{to_string}}%
+\indexlibraryglobal{to_string}%
 \begin{itemdecl}
 string to_string(int val);
 string to_string(unsigned val);
@@ -3623,7 +3708,8 @@ string to_string(long double val);
 
 \begin{itemdescr}
 \pnum
-\returns Each function returns a \tcode{string} object holding the character
+\returns
+Each function returns a \tcode{string} object holding the character
 representation of the value of its argument that would be generated by calling
 \tcode{sprintf(buf, fmt, val)} with a format specifier of
 \tcode{"\%d"},
@@ -3637,11 +3723,11 @@ or \tcode{"\%Lf"}, respectively, where \tcode{buf} designates an internal
 character buffer of sufficient size.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{stoi}}%
-\indexlibrary{\idxcode{stol}}%
-\indexlibrary{\idxcode{stoul}}%
-\indexlibrary{\idxcode{stoll}}%
-\indexlibrary{\idxcode{stoull}}%
+\indexlibraryglobal{stoi}%
+\indexlibraryglobal{stol}%
+\indexlibraryglobal{stoul}%
+\indexlibraryglobal{stoll}%
+\indexlibraryglobal{stoull}%
 \begin{itemdecl}
 int stoi(const wstring& str, size_t* idx = nullptr, int base = 10);
 long stol(const wstring& str, size_t* idx = nullptr, int base = 10);
@@ -3652,7 +3738,8 @@ unsigned long long stoull(const wstring& str, size_t* idx = nullptr, int base = 
 
 \begin{itemdescr}
 \pnum
-\effects The first two functions call \tcode{wcstol(str.c_str(), ptr, base)},
+\effects
+The first two functions call \tcode{wcstol(str.c_str(), ptr, base)},
 and the last three functions call \tcode{wcstoul(str.c_str(), ptr, base)},
 \tcode{wcstoll(str.c_str(), ptr, base)}, and \tcode{wcstoull(\brk{}str.c_str(), ptr,
 base)}, respectively. Each function returns the converted result, if any. The
@@ -3662,18 +3749,20 @@ not throw an exception and \tcode{idx != 0}, the function stores in \tcode{*idx}
 the index of the first unconverted element of \tcode{str}.
 
 \pnum
-\returns The converted result.
+\returns
+The converted result.
 
 \pnum
-\throws \tcode{invalid_argument} if \tcode{wcstol}, \tcode{wcstoul}, \tcode{wcstoll}, or
+\throws
+\tcode{invalid_argument} if \tcode{wcstol}, \tcode{wcstoul}, \tcode{wcstoll}, or
 \tcode{wcstoull} reports that no conversion could be performed. Throws
 \tcode{out_of_range} if the converted value is outside the range of representable values
 for the return type.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{stof}}%
-\indexlibrary{\idxcode{stod}}%
-\indexlibrary{\idxcode{stold}}%
+\indexlibraryglobal{stof}%
+\indexlibraryglobal{stod}%
+\indexlibraryglobal{stold}%
 \begin{itemdecl}
 float stof(const wstring& str, size_t* idx = nullptr);
 double stod(const wstring& str, size_t* idx = nullptr);
@@ -3682,7 +3771,8 @@ long double stold(const wstring& str, size_t* idx = nullptr);
 
 \begin{itemdescr}
 \pnum
-\effects These functions call \tcode{wcstof(str.c_str(), ptr)},
+\effects
+These functions call \tcode{wcstof(str.c_str(), ptr)},
 \tcode{wcstod(str.c_str(), ptr)}, and \tcode{wcstold(\brk{}str.c_str(), ptr)},
 respectively. Each function returns the converted
 result, if any. The argument \tcode{ptr} designates a pointer to an object internal to
@@ -3691,15 +3781,17 @@ does not throw an exception and \tcode{idx != 0}, the function stores in \tcode{
 the index of the first unconverted element of \tcode{str}.
 
 \pnum
-\returns The converted result.
+\returns
+The converted result.
 
 \pnum
-\throws \tcode{invalid_argument} if \tcode{wcstof}, \tcode{wcstod}, or \tcode{wcstold} reports that no
+\throws
+\tcode{invalid_argument} if \tcode{wcstof}, \tcode{wcstod}, or \tcode{wcstold} reports that no
 conversion could be performed. Throws \tcode{out_of_range} if \tcode{wcstof}, \tcode{wcstod}, or
 \tcode{wcstold} sets \tcode{errno} to \tcode{ERANGE}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{to_wstring}}%
+\indexlibraryglobal{to_wstring}%
 \begin{itemdecl}
 wstring to_wstring(int val);
 wstring to_wstring(unsigned val);
@@ -3714,7 +3806,8 @@ wstring to_wstring(long double val);
 
 \begin{itemdescr}
 \pnum
-\returns Each function returns a \tcode{wstring} object holding the character
+\returns
+Each function returns a \tcode{wstring} object holding the character
 representation of the value of its argument that would be generated by calling
 \tcode{swprintf(buf, buffsz, fmt, val)} with a format specifier of
 \tcode{L"\%d"},
@@ -3731,14 +3824,14 @@ internal character buffer of sufficient size \tcode{buffsz}.
 
 \rSec2[basic.string.hash]{Hash support}
 
-\indexlibrary{\idxcode{hash}!\idxcode{string}}%
-\indexlibrary{\idxcode{hash}!\idxcode{u16string}}%
-\indexlibrary{\idxcode{hash}!\idxcode{u32string}}%
-\indexlibrary{\idxcode{hash}!\idxcode{wstring}}%
-\indexlibrary{\idxcode{hash}!\idxcode{pmr::string}}%
-\indexlibrary{\idxcode{hash}!\idxcode{pmr::u16string}}%
-\indexlibrary{\idxcode{hash}!\idxcode{pmr::u32string}}%
-\indexlibrary{\idxcode{hash}!\idxcode{pmr::wstring}}%
+\indexlibrarymember{hash}{string}%
+\indexlibrarymember{hash}{u16string}%
+\indexlibrarymember{hash}{u32string}%
+\indexlibrarymember{hash}{wstring}%
+\indexlibrarymember{hash}{pmr::string}%
+\indexlibrarymember{hash}{pmr::u16string}%
+\indexlibrarymember{hash}{pmr::u32string}%
+\indexlibrarymember{hash}{pmr::wstring}%
 \begin{itemdecl}
 template<> struct hash<string>;
 template<> struct hash<u8string>;
@@ -3813,7 +3906,8 @@ constexpr wstring operator""s(const wchar_t* str, size_t len);
 \tcode{wstring\{str, len\}}.
 \end{itemdescr}
 
-\pnum \begin{note}
+\pnum
+\begin{note}
 The same suffix \tcode{s} is used for \tcode{chrono::duration} literals denoting seconds but there is no conflict, since duration suffixes apply to numbers and string literal suffixes apply to character array literals.
 \end{note}
 
@@ -3831,12 +3925,15 @@ User-defined types should define their own implicit conversions to \tcode{std::b
 
 \rSec2[string.view.synop]{Header \tcode{<string_view>} synopsis}
 
-\indexhdr{string_view}%
+\indexheader{string_view}%
 \begin{codeblock}
 namespace std {
   // \ref{string.view.template}, class template \tcode{basic_string_view}
   template<class charT, class traits = char_traits<charT>>
   class basic_string_view;
+
+  template<class charT, class traits>
+    inline constexpr bool enable_safe_range<basic_string_view<charT, traits>> = true;
 
   // \ref{string.view.comparison}, non-member comparison functions
   template<class charT, class traits>
@@ -3888,7 +3985,7 @@ are available when \tcode{<string_view>} is included.
 
 \rSec2[string.view.template]{Class template \tcode{basic_string_view}}
 
-\indexlibrary{\idxcode{basic_string_view}}%
+\indexlibraryglobal{basic_string_view}%
 \indexlibrarymember{traits_type}{basic_string_view}%
 \indexlibrarymember{value_type}{basic_string_view}%
 \indexlibrarymember{pointer}{basic_string_view}%
@@ -3926,6 +4023,8 @@ public:
   constexpr basic_string_view& operator=(const basic_string_view&) noexcept = default;
   constexpr basic_string_view(const charT* str);
   constexpr basic_string_view(const charT* str, size_type len);
+  template<class It, class End>
+    constexpr basic_string_view(It begin, End end);
 
   // \ref{string.view.iterators}, iterator support
   constexpr const_iterator begin() const noexcept;
@@ -3936,9 +4035,6 @@ public:
   constexpr const_reverse_iterator rend() const noexcept;
   constexpr const_reverse_iterator crbegin() const noexcept;
   constexpr const_reverse_iterator crend() const noexcept;
-
-  friend constexpr const_iterator begin(basic_string_view sv) noexcept { return sv.begin(); }
-  friend constexpr const_iterator end(basic_string_view sv) noexcept { return sv.end(); }
 
   // \ref{string.view.capacity}, capacity
   constexpr size_type size() const noexcept;
@@ -4009,9 +4105,13 @@ public:
   constexpr size_type find_last_not_of(const charT* s, size_type pos = npos) const;
 
 private:
-  const_pointer data_; // \expos
-  size_type size_;     // \expos
+  const_pointer data_;          // \expos
+  size_type size_;              // \expos
 };
+
+// \ref{string.view.deduct}, deduction guide
+template<class It, class End>
+  basic_string_view(It, End) -> basic_string_view<iter_value_t<It>>;
 \end{codeblock}
 
 \pnum
@@ -4033,7 +4133,7 @@ unless otherwise specified.
 
 \rSec3[string.view.cons]{Construction and assignment}
 
-\indexlibrary{\idxcode{basic_string_view}!constructor}%
+\indexlibraryctor{basic_string_view}%
 \begin{itemdecl}
 constexpr basic_string_view() noexcept;
 \end{itemdecl}
@@ -4044,7 +4144,7 @@ constexpr basic_string_view() noexcept;
 \tcode{size_ == 0} and \tcode{data_ == nullptr}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{basic_string_view}!constructor}%
+\indexlibraryctor{basic_string_view}%
 \begin{itemdecl}
 constexpr basic_string_view(const charT* str);
 \end{itemdecl}
@@ -4064,7 +4164,7 @@ and initializing \tcode{size_} with \tcode{traits::length(str)}.
 \bigoh{\tcode{traits::length(str)}}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{basic_string_view}!constructor}%
+\indexlibraryctor{basic_string_view}%
 \begin{itemdecl}
 constexpr basic_string_view(const charT* str, size_type len);
 \end{itemdecl}
@@ -4078,6 +4178,36 @@ constexpr basic_string_view(const charT* str, size_type len);
 \effects
 Constructs a \tcode{basic_string_view}, initializing \tcode{data_} with \tcode{str}
 and initializing \tcode{size_} with \tcode{len}.
+\end{itemdescr}
+
+\indexlibraryctor{basic_string_view}%
+\begin{itemdecl}
+template<class It, class End>
+  constexpr basic_string_view(It begin, End end);
+\end{itemdecl}
+
+\begin{itemdescr}
+\pnum
+\constraints
+\begin{itemize}
+\item \tcode{It} satisfies \libconcept{contiguous_iterator}.
+\item \tcode{End} satisfies \tcode{\libconcept{sized_sentinel_for}<It>}.
+\item \tcode{is_same_v<iter_value_t<It>, charT>} is \tcode{true}.
+\item \tcode{is_convertible_v<End, size_type>} is \tcode{false}.
+\end{itemize}
+
+\pnum
+\expects
+\begin{itemize}
+\item \range{begin}{end} is a valid range.
+\item \tcode{It} models \libconcept{contiguous_iterator}.
+\item \tcode{End} models \tcode{\libconcept{sized_sentinel_for}<It>}.
+\end{itemize}
+
+\pnum
+\effects
+Initializes \tcode{data_} with \tcode{to_address(begin)} and
+initializes \tcode{size_} with \tcode{end - begin}.
 \end{itemdescr}
 
 \rSec3[string.view.iterators]{Iterator support}
@@ -4742,6 +4872,22 @@ Determines \tcode{xpos}.
 Otherwise, returns \tcode{npos}.
 \end{itemdescr}
 
+\rSec2[string.view.deduct]{Deduction guide}
+
+\begin{itemdecl}
+template<class It, class End>
+  basic_string_view(It, End) -> basic_string_view<iter_value_t<It>>;
+\end{itemdecl}
+
+\begin{itemdescr}
+\pnum
+\constraints
+\begin{itemize}
+\item \tcode{It} satisfies \libconcept{contiguous_iterator}.
+\item \tcode{End} satisfies \tcode{\libconcept{sized_sentinel_for}<It>}.
+\end{itemize}
+\end{itemdescr}
+
 \rSec2[string.view.comparison]{Non-member comparison functions}
 
 \pnum
@@ -4839,11 +4985,11 @@ then calls \tcode{os.\brk{}width(0)}.
 
 \rSec2[string.view.hash]{Hash support}
 
-\indexlibrary{\idxcode{hash}!\idxcode{string_view}}%
-\indexlibrary{\idxcode{hash}!\idxcode{u8string_view}}%
-\indexlibrary{\idxcode{hash}!\idxcode{u16string_view}}%
-\indexlibrary{\idxcode{hash}!\idxcode{u32string_view}}%
-\indexlibrary{\idxcode{hash}!\idxcode{wstring_view}}%
+\indexlibrarymember{hash}{string_view}%
+\indexlibrarymember{hash}{u8string_view}%
+\indexlibrarymember{hash}{u16string_view}%
+\indexlibrarymember{hash}{u32string_view}%
+\indexlibrarymember{hash}{wstring_view}%
 \begin{itemdecl}
 template<> struct hash<string_view>;
 template<> struct hash<u8string_view>;
@@ -4919,21 +5065,20 @@ constexpr wstring_view operator""sv(const wchar_t* str, size_t len) noexcept;
 
 \rSec2[cctype.syn]{Header \tcode{<cctype>} synopsis}
 
-\indexhdr{cctype}%
-\indexlibrary{\idxcode{isalnum}}%
-\indexlibrary{\idxcode{isalpha}}%
-\indexlibrary{\idxcode{isblank}}%
-\indexlibrary{\idxcode{iscntrl}}%
-\indexlibrary{\idxcode{isdigit}}%
-\indexlibrary{\idxcode{isgraph}}%
-\indexlibrary{\idxcode{islower}}%
-\indexlibrary{\idxcode{isprint}}%
-\indexlibrary{\idxcode{ispunct}}%
-\indexlibrary{\idxcode{isspace}}%
-\indexlibrary{\idxcode{isupper}}%
-\indexlibrary{\idxcode{isxdigit}}%
-\indexlibrary{\idxcode{tolower}}%
-\indexlibrary{\idxcode{toupper}}%
+\indexlibraryglobal{isalnum}%
+\indexlibraryglobal{isalpha}%
+\indexlibraryglobal{isblank}%
+\indexlibraryglobal{iscntrl}%
+\indexlibraryglobal{isdigit}%
+\indexlibraryglobal{isgraph}%
+\indexlibraryglobal{islower}%
+\indexlibraryglobal{isprint}%
+\indexlibraryglobal{ispunct}%
+\indexlibraryglobal{isspace}%
+\indexlibraryglobal{isupper}%
+\indexlibraryglobal{isxdigit}%
+\indexlibraryglobal{tolower}%
+\indexlibraryglobal{toupper}%
 \begin{codeblock}
 namespace std {
   int isalnum(int c);
@@ -4954,37 +5099,35 @@ namespace std {
 \end{codeblock}
 
 \pnum
-\indexhdr{ctype.h}%
-The contents and meaning of the header \tcode{<cctype>}
-are the same as the C standard library header \tcode{<ctype.h>}.
+The contents and meaning of the header \libheaderdef{cctype}
+are the same as the C standard library header \libheader{ctype.h}.
 
 \xrefc{7.4}
 
 \rSec2[cwctype.syn]{Header \tcode{<cwctype>} synopsis}
 
-\indexhdr{cwctype}%
-\indexlibrary{\idxcode{wint_t}}%
-\indexlibrary{\idxcode{wctrans_t}}%
-\indexlibrary{\idxcode{wctype_t}}%
-\indexlibrary{\idxcode{iswalnum}}%
-\indexlibrary{\idxcode{iswalpha}}%
-\indexlibrary{\idxcode{iswblank}}%
-\indexlibrary{\idxcode{iswcntrl}}%
-\indexlibrary{\idxcode{iswdigit}}%
-\indexlibrary{\idxcode{iswgraph}}%
-\indexlibrary{\idxcode{iswlower}}%
-\indexlibrary{\idxcode{iswprint}}%
-\indexlibrary{\idxcode{iswpunct}}%
-\indexlibrary{\idxcode{iswspace}}%
-\indexlibrary{\idxcode{iswupper}}%
-\indexlibrary{\idxcode{iswxdigit}}%
-\indexlibrary{\idxcode{iswctype}}%
-\indexlibrary{\idxcode{wctype}}%
-\indexlibrary{\idxcode{towlower}}%
-\indexlibrary{\idxcode{towupper}}%
-\indexlibrary{\idxcode{towctrans}}%
-\indexlibrary{\idxcode{wctrans}}%
-\indexlibrary{\idxcode{WEOF}}%
+\indexlibraryglobal{wint_t}%
+\indexlibraryglobal{wctrans_t}%
+\indexlibraryglobal{wctype_t}%
+\indexlibraryglobal{iswalnum}%
+\indexlibraryglobal{iswalpha}%
+\indexlibraryglobal{iswblank}%
+\indexlibraryglobal{iswcntrl}%
+\indexlibraryglobal{iswdigit}%
+\indexlibraryglobal{iswgraph}%
+\indexlibraryglobal{iswlower}%
+\indexlibraryglobal{iswprint}%
+\indexlibraryglobal{iswpunct}%
+\indexlibraryglobal{iswspace}%
+\indexlibraryglobal{iswupper}%
+\indexlibraryglobal{iswxdigit}%
+\indexlibraryglobal{iswctype}%
+\indexlibraryglobal{wctype}%
+\indexlibraryglobal{towlower}%
+\indexlibraryglobal{towupper}%
+\indexlibraryglobal{towctrans}%
+\indexlibraryglobal{wctrans}%
+\indexlibraryglobal{WEOF}%
 \begin{codeblock}
 namespace std {
   using wint_t = @\seebelow@;
@@ -5015,38 +5158,36 @@ namespace std {
 \end{codeblock}
 
 \pnum
-\indexhdr{wctype.h}%
-The contents and meaning of the header \tcode{<cwctype>}
-are the same as the C standard library header \tcode{<wctype.h>}.
+The contents and meaning of the header \libheaderdef{cwctype}
+are the same as the C standard library header \libheader{wctype.h}.
 
 \xrefc{7.30}
 
 \rSec2[cstring.syn]{Header \tcode{<cstring>} synopsis}
 
-\indexhdr{cstring}%
-\indexlibrary{\idxcode{memchr}}%
-\indexlibrary{\idxcode{memcmp}}%
-\indexlibrary{\idxcode{memcpy}}%
-\indexlibrary{\idxcode{memmove}}%
-\indexlibrary{\idxcode{memset}}%
-\indexlibrary{\idxcode{size_t}}%
-\indexlibrary{\idxcode{strcat}}%
-\indexlibrary{\idxcode{strchr}}%
-\indexlibrary{\idxcode{strcmp}}%
-\indexlibrary{\idxcode{strcoll}}%
-\indexlibrary{\idxcode{strcpy}}%
-\indexlibrary{\idxcode{strcspn}}%
-\indexlibrary{\idxcode{strerror}}%
-\indexlibrary{\idxcode{strlen}}%
-\indexlibrary{\idxcode{strncat}}%
-\indexlibrary{\idxcode{strncmp}}%
-\indexlibrary{\idxcode{strncpy}}%
-\indexlibrary{\idxcode{strpbrk}}%
-\indexlibrary{\idxcode{strrchr}}%
-\indexlibrary{\idxcode{strspn}}%
-\indexlibrary{\idxcode{strstr}}%
-\indexlibrary{\idxcode{strtok}}%
-\indexlibrary{\idxcode{strxfrm}}%
+\indexlibraryglobal{memchr}%
+\indexlibraryglobal{memcmp}%
+\indexlibraryglobal{memcpy}%
+\indexlibraryglobal{memmove}%
+\indexlibraryglobal{memset}%
+\indexlibraryglobal{size_t}%
+\indexlibraryglobal{strcat}%
+\indexlibraryglobal{strchr}%
+\indexlibraryglobal{strcmp}%
+\indexlibraryglobal{strcoll}%
+\indexlibraryglobal{strcpy}%
+\indexlibraryglobal{strcspn}%
+\indexlibraryglobal{strerror}%
+\indexlibraryglobal{strlen}%
+\indexlibraryglobal{strncat}%
+\indexlibraryglobal{strncmp}%
+\indexlibraryglobal{strncpy}%
+\indexlibraryglobal{strpbrk}%
+\indexlibraryglobal{strrchr}%
+\indexlibraryglobal{strspn}%
+\indexlibraryglobal{strstr}%
+\indexlibraryglobal{strtok}%
+\indexlibraryglobal{strxfrm}%
 \begin{codeblock}
 namespace std {
   using size_t = @\textit{see \ref{support.types.layout}}@;
@@ -5062,18 +5203,18 @@ namespace std {
   int strcoll(const char* s1, const char* s2);
   int strncmp(const char* s1, const char* s2, size_t n);
   size_t strxfrm(char* s1, const char* s2, size_t n);
-  const void* memchr(const void* s, int c, size_t n);  // see \ref{library.c}
-  void* memchr(void* s, int c, size_t n);  // see \ref{library.c}
-  const char* strchr(const char* s, int c);  // see \ref{library.c}
-  char* strchr(char* s, int c);  // see \ref{library.c}
+  const void* memchr(const void* s, int c, size_t n);           // see \ref{library.c}
+  void* memchr(void* s, int c, size_t n);                       // see \ref{library.c}
+  const char* strchr(const char* s, int c);                     // see \ref{library.c}
+  char* strchr(char* s, int c);                                 // see \ref{library.c}
   size_t strcspn(const char* s1, const char* s2);
-  const char* strpbrk(const char* s1, const char* s2);  // see \ref{library.c}
-  char* strpbrk(char* s1, const char* s2);  // see \ref{library.c}
-  const char* strrchr(const char* s, int c);  // see \ref{library.c}
-  char* strrchr(char* s, int c);  // see \ref{library.c}
+  const char* strpbrk(const char* s1, const char* s2);          // see \ref{library.c}
+  char* strpbrk(char* s1, const char* s2);                      // see \ref{library.c}
+  const char* strrchr(const char* s, int c);                    // see \ref{library.c}
+  char* strrchr(char* s, int c);                                // see \ref{library.c}
   size_t strspn(const char* s1, const char* s2);
-  const char* strstr(const char* s1, const char* s2);  // see \ref{library.c}
-  char* strstr(char* s1, const char* s2);  // see \ref{library.c}
+  const char* strstr(const char* s1, const char* s2);           // see \ref{library.c}
+  char* strstr(char* s1, const char* s2);                       // see \ref{library.c}
   char* strtok(char* s1, const char* s2);
   void* memset(void* s, int c, size_t n);
   char* strerror(int errnum);
@@ -5084,9 +5225,8 @@ namespace std {
 \end{codeblock}
 
 \pnum
-\indexhdr{string.h}%
-The contents and meaning of the header \tcode{<cstring>}
-are the same as the C standard library header \tcode{<string.h>}.
+The contents and meaning of the header \libheaderdef{cstring}
+are the same as the C standard library header \libheader{string.h}.
 
 \pnum
 The functions \tcode{strerror} and \tcode{strtok} are not required to avoid data
@@ -5109,74 +5249,74 @@ but they have the same behavior as in the C standard library\iref{library.c}.
 
 \rSec2[cwchar.syn]{Header \tcode{<cwchar>} synopsis}
 
-\indexhdr{cwchar}%
-\indexlibrary{\idxcode{NULL}}%
-\indexlibrary{\idxcode{WCHAR_MAX}}%
-\indexlibrary{\idxcode{WCHAR_MIN}}%
-\indexlibrary{\idxcode{WEOF}}%
-\indexlibrary{\idxcode{btowc}}%
-\indexlibrary{\idxcode{fgetwc}}%
-\indexlibrary{\idxcode{fgetws}}%
-\indexlibrary{\idxcode{fputwc}}%
-\indexlibrary{\idxcode{fputws}}%
-\indexlibrary{\idxcode{fwide}}%
-\indexlibrary{\idxcode{fwprintf}}%
-\indexlibrary{\idxcode{fwscanf}}%
-\indexlibrary{\idxcode{getwchar}}%
-\indexlibrary{\idxcode{getwc}}%
-\indexlibrary{\idxcode{mbrlen}}%
-\indexlibrary{\idxcode{mbrtowc}}%
-\indexlibrary{\idxcode{mbsinit}}%
-\indexlibrary{\idxcode{mbsrtowcs}}%
-\indexlibrary{\idxcode{mbstate_t}}%
-\indexlibrary{\idxcode{putwchar}}%
-\indexlibrary{\idxcode{putwc}}%
-\indexlibrary{\idxcode{size_t}}%
-\indexlibrary{\idxcode{swprintf}}%
-\indexlibrary{\idxcode{swscanf}}%
-\indexlibrary{\idxcode{tm}}%
-\indexlibrary{\idxcode{ungetwc}}%
-\indexlibrary{\idxcode{vfwprintf}}%
-\indexlibrary{\idxcode{vfwscanf}}%
-\indexlibrary{\idxcode{vswprintf}}%
-\indexlibrary{\idxcode{vswscanf}}%
-\indexlibrary{\idxcode{vwprintf}}%
-\indexlibrary{\idxcode{vwscanf}}%
-\indexlibrary{\idxcode{wcrtomb}}%
-\indexlibrary{\idxcode{wcscat}}%
-\indexlibrary{\idxcode{wcschr}}%
-\indexlibrary{\idxcode{wcscmp}}%
-\indexlibrary{\idxcode{wcscoll}}%
-\indexlibrary{\idxcode{wcscpy}}%
-\indexlibrary{\idxcode{wcscspn}}%
-\indexlibrary{\idxcode{wcsftime}}%
-\indexlibrary{\idxcode{wcslen}}%
-\indexlibrary{\idxcode{wcsncat}}%
-\indexlibrary{\idxcode{wcsncmp}}%
-\indexlibrary{\idxcode{wcsncpy}}%
-\indexlibrary{\idxcode{wcspbrk}}%
-\indexlibrary{\idxcode{wcsrchr}}%
-\indexlibrary{\idxcode{wcsrtombs}}%
-\indexlibrary{\idxcode{wcsspn}}%
-\indexlibrary{\idxcode{wcsstr}}%
-\indexlibrary{\idxcode{wcstod}}%
-\indexlibrary{\idxcode{wcstof}}%
-\indexlibrary{\idxcode{wcstok}}%
-\indexlibrary{\idxcode{wcstold}}%
-\indexlibrary{\idxcode{wcstoll}}%
-\indexlibrary{\idxcode{wcstol}}%
-\indexlibrary{\idxcode{wcstoull}}%
-\indexlibrary{\idxcode{wcstoul}}%
-\indexlibrary{\idxcode{wcsxfrm}}%
-\indexlibrary{\idxcode{wctob}}%
-\indexlibrary{\idxcode{wint_t}}%
-\indexlibrary{\idxcode{wmemchr}}%
-\indexlibrary{\idxcode{wmemcmp}}%
-\indexlibrary{\idxcode{wmemcpy}}%
-\indexlibrary{\idxcode{wmemmove}}%
-\indexlibrary{\idxcode{wmemset}}%
-\indexlibrary{\idxcode{wprintf}}%
-\indexlibrary{\idxcode{wscanf}}%
+\indexheader{cwchar}%
+\indexlibraryglobal{NULL}%
+\indexlibraryglobal{WCHAR_MAX}%
+\indexlibraryglobal{WCHAR_MIN}%
+\indexlibraryglobal{WEOF}%
+\indexlibraryglobal{btowc}%
+\indexlibraryglobal{fgetwc}%
+\indexlibraryglobal{fgetws}%
+\indexlibraryglobal{fputwc}%
+\indexlibraryglobal{fputws}%
+\indexlibraryglobal{fwide}%
+\indexlibraryglobal{fwprintf}%
+\indexlibraryglobal{fwscanf}%
+\indexlibraryglobal{getwchar}%
+\indexlibraryglobal{getwc}%
+\indexlibraryglobal{mbrlen}%
+\indexlibraryglobal{mbrtowc}%
+\indexlibraryglobal{mbsinit}%
+\indexlibraryglobal{mbsrtowcs}%
+\indexlibraryglobal{mbstate_t}%
+\indexlibraryglobal{putwchar}%
+\indexlibraryglobal{putwc}%
+\indexlibraryglobal{size_t}%
+\indexlibraryglobal{swprintf}%
+\indexlibraryglobal{swscanf}%
+\indexlibraryglobal{tm}%
+\indexlibraryglobal{ungetwc}%
+\indexlibraryglobal{vfwprintf}%
+\indexlibraryglobal{vfwscanf}%
+\indexlibraryglobal{vswprintf}%
+\indexlibraryglobal{vswscanf}%
+\indexlibraryglobal{vwprintf}%
+\indexlibraryglobal{vwscanf}%
+\indexlibraryglobal{wcrtomb}%
+\indexlibraryglobal{wcscat}%
+\indexlibraryglobal{wcschr}%
+\indexlibraryglobal{wcscmp}%
+\indexlibraryglobal{wcscoll}%
+\indexlibraryglobal{wcscpy}%
+\indexlibraryglobal{wcscspn}%
+\indexlibraryglobal{wcsftime}%
+\indexlibraryglobal{wcslen}%
+\indexlibraryglobal{wcsncat}%
+\indexlibraryglobal{wcsncmp}%
+\indexlibraryglobal{wcsncpy}%
+\indexlibraryglobal{wcspbrk}%
+\indexlibraryglobal{wcsrchr}%
+\indexlibraryglobal{wcsrtombs}%
+\indexlibraryglobal{wcsspn}%
+\indexlibraryglobal{wcsstr}%
+\indexlibraryglobal{wcstod}%
+\indexlibraryglobal{wcstof}%
+\indexlibraryglobal{wcstok}%
+\indexlibraryglobal{wcstold}%
+\indexlibraryglobal{wcstoll}%
+\indexlibraryglobal{wcstol}%
+\indexlibraryglobal{wcstoull}%
+\indexlibraryglobal{wcstoul}%
+\indexlibraryglobal{wcsxfrm}%
+\indexlibraryglobal{wctob}%
+\indexlibraryglobal{wint_t}%
+\indexlibraryglobal{wmemchr}%
+\indexlibraryglobal{wmemcmp}%
+\indexlibraryglobal{wmemcpy}%
+\indexlibraryglobal{wmemmove}%
+\indexlibraryglobal{wmemset}%
+\indexlibraryglobal{wprintf}%
+\indexlibraryglobal{wscanf}%
 \begin{codeblock}
 namespace std {
   using size_t = @\textit{see \ref{support.types.layout}}@;
@@ -5225,19 +5365,19 @@ namespace std {
   int wcsncmp(const wchar_t* s1, const wchar_t* s2, size_t n);
   size_t wcsxfrm(wchar_t* s1, const wchar_t* s2, size_t n);
   int wmemcmp(const wchar_t* s1, const wchar_t* s2, size_t n);
-  const wchar_t* wcschr(const wchar_t* s, wchar_t c);  // see \ref{library.c}
-  wchar_t* wcschr(wchar_t* s, wchar_t c);  // see \ref{library.c}
+  const wchar_t* wcschr(const wchar_t* s, wchar_t c);           // see \ref{library.c}
+  wchar_t* wcschr(wchar_t* s, wchar_t c);                       // see \ref{library.c}
   size_t wcscspn(const wchar_t* s1, const wchar_t* s2);
-  const wchar_t* wcspbrk(const wchar_t* s1, const wchar_t* s2);  // see \ref{library.c}
-  wchar_t* wcspbrk(wchar_t* s1, const wchar_t* s2);  // see \ref{library.c}
-  const wchar_t* wcsrchr(const wchar_t* s, wchar_t c);  // see \ref{library.c}
-  wchar_t* wcsrchr(wchar_t* s, wchar_t c);  // see \ref{library.c}
+  const wchar_t* wcspbrk(const wchar_t* s1, const wchar_t* s2); // see \ref{library.c}
+  wchar_t* wcspbrk(wchar_t* s1, const wchar_t* s2);             // see \ref{library.c}
+  const wchar_t* wcsrchr(const wchar_t* s, wchar_t c);          // see \ref{library.c}
+  wchar_t* wcsrchr(wchar_t* s, wchar_t c);                      // see \ref{library.c}
   size_t wcsspn(const wchar_t* s1, const wchar_t* s2);
   const wchar_t* wcsstr(const wchar_t* s1, const wchar_t* s2);  // see \ref{library.c}
-  wchar_t* wcsstr(wchar_t* s1, const wchar_t* s2);  // see \ref{library.c}
+  wchar_t* wcsstr(wchar_t* s1, const wchar_t* s2);              // see \ref{library.c}
   wchar_t* wcstok(wchar_t* s1, const wchar_t* s2, wchar_t** ptr);
-  const wchar_t* wmemchr(const wchar_t* s, wchar_t c, size_t n);  // see \ref{library.c}
-  wchar_t* wmemchr(wchar_t* s, wchar_t c, size_t n);  // see \ref{library.c}
+  const wchar_t* wmemchr(const wchar_t* s, wchar_t c, size_t n);    // see \ref{library.c}
+  wchar_t* wmemchr(wchar_t* s, wchar_t c, size_t n);            // see \ref{library.c}
   size_t wcslen(const wchar_t* s);
   wchar_t* wmemset(wchar_t* s, wchar_t c, size_t n);
   size_t wcsftime(wchar_t* s, size_t maxsize, const wchar_t* format, const struct tm* timeptr);
@@ -5260,10 +5400,9 @@ namespace std {
 \end{codeblock}
 
 \pnum
-\indexhdr{wchar.h}%
-The contents and meaning of the header \tcode{<cwchar>}
+The contents and meaning of the header \libheader{cwchar}
 are the same as the C standard library header
-\tcode{<wchar.h>}, except that it does not declare a type \tcode{wchar_t}.
+\libheader{wchar.h}, except that it does not declare a type \tcode{wchar_t}.
 
 \pnum
 \begin{note}
@@ -5277,15 +5416,14 @@ but they have the same behavior as in the C standard library\iref{library.c}.
 
 \rSec2[cuchar.syn]{Header \tcode{<cuchar>} synopsis}
 
-\indexhdr{cuchar}%
-\indexlibrary{\idxcode{mbstate_t}}%
-\indexlibrary{\idxcode{size_t}}%
-\indexlibrary{\idxcode{mbrtoc8}}%
-\indexlibrary{\idxcode{c8rtomb}}%
-\indexlibrary{\idxcode{mbrtoc16}}%
-\indexlibrary{\idxcode{c16rtomb}}%
-\indexlibrary{\idxcode{mbrtoc32}}%
-\indexlibrary{\idxcode{c32rtomb}}%
+\indexlibraryglobal{mbstate_t}%
+\indexlibraryglobal{size_t}%
+\indexlibraryglobal{mbrtoc8}%
+\indexlibraryglobal{c8rtomb}%
+\indexlibraryglobal{mbrtoc16}%
+\indexlibraryglobal{c16rtomb}%
+\indexlibraryglobal{mbrtoc32}%
+\indexlibraryglobal{c32rtomb}%
 \begin{codeblock}
 namespace std {
   using mbstate_t = @\seebelow@;
@@ -5301,10 +5439,9 @@ namespace std {
 \end{codeblock}
 
 \pnum
-\indexhdr{uchar.h}%
-The contents and meaning of the header \tcode{<cuchar>}
+The contents and meaning of the header \libheaderdef{cuchar}
 are the same as the C standard library header
-\tcode{<uchar.h>}, except that it
+\libheader{uchar.h}, except that it
 declares the additional \tcode{mbrtoc8} and \tcode{c8rtomb} functions
 and does not declare types \tcode{char16_t} nor \tcode{char32_t}.
 
@@ -5313,19 +5450,17 @@ and does not declare types \tcode{char16_t} nor \tcode{char32_t}.
 \rSec2[c.mb.wcs]{Multibyte / wide string and character conversion functions}
 
 \pnum
-\indexhdr{cstdlib}%
-\indexhdr{cwchar}%
 \begin{note}
-The headers \tcode{<cstdlib>}\iref{cstdlib.syn},
-\tcode{<cuchar>}\iref{cuchar.syn},
-and \tcode{<cwchar>}\iref{cwchar.syn}
+The headers \libheaderref{cstdlib},
+\libheaderref{cuchar},
+and \libheaderref{cwchar}
 declare the functions described in this subclause.
 \end{note}
 
-\indexlibrary{\idxcode{mbsinit}}%
-\indexlibrary{\idxcode{mblen}}%
-\indexlibrary{\idxcode{mbstowcs}}%
-\indexlibrary{\idxcode{wcstombs}}%
+\indexlibraryglobal{mbsinit}%
+\indexlibraryglobal{mblen}%
+\indexlibraryglobal{mbstowcs}%
+\indexlibraryglobal{wcstombs}%
 \begin{itemdecl}
 int mbsinit(const mbstate_t* ps);
 int mblen(const char* s, size_t n);
@@ -5341,8 +5476,8 @@ These functions have the semantics specified in the C standard library.
 
 \xrefc{7.22.7.1, 7.22.8, 7.29.6.2.1}
 
-\indexlibrary{\idxcode{mbtowc}}%
-\indexlibrary{\idxcode{wctomb}}%
+\indexlibraryglobal{mbtowc}%
+\indexlibraryglobal{wctomb}%
 \begin{itemdecl}
 int mbtowc(wchar_t* pwc, const char* s, size_t n);
 int wctomb(char* s, wchar_t wchar);
@@ -5362,11 +5497,11 @@ with other calls to the same function.
 
 \xrefc{7.22.7}
 
-\indexlibrary{\idxcode{mbrlen}}%
-\indexlibrary{\idxcode{mbrstowcs}}%
-\indexlibrary{\idxcode{wcrstombs}}%
-\indexlibrary{\idxcode{mbrtowc}}%
-\indexlibrary{\idxcode{wcrtomb}}%
+\indexlibraryglobal{mbrlen}%
+\indexlibraryglobal{mbrstowcs}%
+\indexlibraryglobal{wcrstombs}%
+\indexlibraryglobal{mbrtowc}%
+\indexlibraryglobal{wcrtomb}%
 \begin{itemdecl}
 size_t mbrlen(const char* s, size_t n, mbstate_t* ps);
 size_t mbrtowc(wchar_t* pwc, const char* s, size_t n, mbstate_t* ps);
@@ -5391,7 +5526,7 @@ with an \tcode{mbstate_t*} argument that is a null pointer value.
 
 \xrefc{7.29.6.3}
 
-\indexlibrary{\idxcode{mbrtoc8}}%
+\indexlibraryglobal{mbrtoc8}%
 \begin{itemdecl}
 size_t mbrtoc8(char8_t* pc8, const char* s, size_t n, mbstate_t* ps);
 \end{itemdecl}
@@ -5443,7 +5578,7 @@ the conversion state is unspecified.
 \end{itemize}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{c8rtomb}}%
+\indexlibraryglobal{c8rtomb}%
 \begin{itemdecl}
 size_t c8rtomb(char* s, char8_t c8, mbstate_t* ps);
 \end{itemdecl}

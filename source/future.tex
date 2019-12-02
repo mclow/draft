@@ -121,10 +121,10 @@ This usage is deprecated.
 \begin{example}
 \begin{codeblock}
 struct A {
-  static constexpr int n = 5;  // definition (declaration in \CppXIV{})
+  static constexpr int n = 5;   // definition (declaration in \CppXIV{})
 };
 
-constexpr int A::n;  // redundant declaration (definition in \CppXIV{})
+constexpr int A::n;             // redundant declaration (definition in \CppXIV{})
 \end{codeblock}
 \end{example}
 
@@ -140,7 +140,7 @@ as defaulted is deprecated if the class has
 a user-declared copy constructor or
 a user-declared destructor.
 In a future revision of this International Standard, these implicit definitions
-could become deleted\iref{dcl.fct.def}.
+could become deleted\iref{dcl.fct.def.delete}.
 
 \rSec1[depr.c.headers]{C standard library headers}
 
@@ -152,61 +152,61 @@ the \defnx{C headers}{headers!C library} shown in \tref{depr.c.headers}.
 
 \begin{multicolfloattable}{C headers}{depr.c.headers}
 {lllll}
-\tcode{<assert.h>} \\
-\tcode{<complex.h>} \\
-\tcode{<ctype.h>} \\
-\tcode{<errno.h>} \\
-\tcode{<fenv.h>} \\
-\tcode{<float.h>} \\
+\libheaderdef{assert.h} \\
+\libheader{complex.h} \\
+\libheaderdef{ctype.h} \\
+\libheaderdef{errno.h} \\
+\libheaderdef{fenv.h} \\
+\libheaderdef{float.h} \\
 \columnbreak
-\tcode{<inttypes.h>} \\
-\tcode{<iso646.h>} \\
-\tcode{<limits.h>} \\
-\tcode{<locale.h>} \\
-\tcode{<math.h>} \\
-\tcode{<setjmp.h>} \\
+\libheaderdef{inttypes.h} \\
+\libheader{iso646.h} \\
+\libheaderdef{limits.h} \\
+\libheaderdef{locale.h} \\
+\libheaderdef{math.h} \\
+\libheaderdef{setjmp.h} \\
 \columnbreak
-\tcode{<signal.h>} \\
-\tcode{<stdalign.h>} \\
-\tcode{<stdarg.h>} \\
-\tcode{<stdbool.h>} \\
-\tcode{<stddef.h>} \\
-\tcode{<stdint.h>} \\
+\libheaderdef{signal.h} \\
+\libheader{stdalign.h} \\
+\libheaderdef{stdarg.h} \\
+\libheader{stdbool.h} \\
+\libheaderdef{stddef.h} \\
+\libheaderdef{stdint.h} \\
 \columnbreak
-\tcode{<stdio.h>} \\
-\tcode{<stdlib.h>} \\
-\tcode{<string.h>} \\
-\tcode{<tgmath.h>} \\
-\tcode{<time.h>} \\
-\tcode{<uchar.h>} \\
+\libheaderdef{stdio.h} \\
+\libheaderdef{stdlib.h} \\
+\libheaderdef{string.h} \\
+\libheader{tgmath.h} \\
+\libheaderdef{time.h} \\
+\libheaderdef{uchar.h} \\
 \columnbreak
-\tcode{<wchar.h>} \\
-\tcode{<wctype.h>} \\
+\libheaderdef{wchar.h} \\
+\libheaderdef{wctype.h} \\
 \end{multicolfloattable}
 
 \rSec2[depr.complex.h.syn]{Header \tcode{<complex.h>} synopsis}
 
-\indexhdr{complex.h}%
+\indexheader{complex.h}%
 \begin{codeblock}
 #include <complex>
 \end{codeblock}
 
 \pnum
-The header \tcode{<complex.h>}
+The header \libheader{complex.h}
 behaves as if it simply includes the header
-\tcode{<complex>}\iref{complex.syn}.
+\libheaderref{complex}.
 
 \pnum
 \begin{note}
-Names introduced by \tcode{<complex>} in namespace \tcode{std}
-are not placed into the global namespace scope by \tcode{<complex.h>}.
+Names introduced by \libheader{complex} in namespace \tcode{std}
+are not placed into the global namespace scope by \libheader{complex.h}.
 \end{note}
 
 \rSec2[depr.iso646.h.syn]{Header \tcode{<iso646.h>} synopsis}
 
-\indexhdr{iso646.h}%
+\indexheader{iso646.h}%
 \pnum
-The \Cpp{} header \tcode{<iso646.h>} is empty.
+The \Cpp{} header \libheader{iso646.h} is empty.
 \begin{note}
 \tcode{and},
 \tcode{and_eq},
@@ -224,62 +224,63 @@ are keywords in this International Standard\iref{lex.key}.
 
 \rSec2[depr.stdalign.h.syn]{Header \tcode{<stdalign.h>} synopsis}
 
-\indexlibrary{\idxcode{__alignas_is_defined}}%
-\indexhdr{stdalign.h}%
+\indexheader{stdalign.h}%
+\indexlibraryglobal{__alignas_is_defined}%
 \begin{codeblock}
 #define @\xname{alignas_is_defined}@ 1
 \end{codeblock}
 
 \pnum
-\indexhdr{stdalign.h}%
-The contents of the \Cpp{} header \tcode{<stdalign.h>} are the same as the C
-standard library header \tcode{<stdalign.h>}, with the following changes:
-The header \tcode{<stdalign.h>} does not
+The contents of the \Cpp{} header \libheader{stdalign.h} are the same as the C
+standard library header \libheader{stdalign.h}, with the following changes:
+The header \libheader{stdalign.h} does not
 define a macro named \tcode{alignas}.
 
 \xrefc{7.15}
 
 \rSec2[depr.stdbool.h.syn]{Header \tcode{<stdbool.h>} synopsis}
 
+\indexheader{stdbool.h}%
 \indexhdr{stdbool.h}%
-\indexlibrary{\idxcode{__bool_true_false_are_defined}}%
+\indexlibraryglobal{__bool_true_false_are_defined}%
 \begin{codeblock}
 #define @\xname{bool_true_false_are_defined}@ 1
 \end{codeblock}
 
 \pnum
-\indexhdr{stdbool.h}%
-The contents of the \Cpp{} header \tcode{<stdbool.h>} are the same as the C
-standard library header \tcode{<stdbool.h>}, with the following changes:
-The header \tcode{<stdbool.h>} does not
+The contents of the \Cpp{} header \libheader{stdbool.h} are the same as the C
+standard library header \libheader{stdbool.h}, with the following changes:
+The header \libheader{stdbool.h} does not
 define macros named \tcode{bool}, \tcode{true}, or \tcode{false}.
 
 \xrefc{7.18}
 
 \rSec2[depr.tgmath.h.syn]{Header \tcode{<tgmath.h>} synopsis}
 
-\indexhdr{tgmath.h}%
+\indexheader{tgmath.h}%
 \begin{codeblock}
 #include <cmath>
 #include <complex>
 \end{codeblock}
 
 \pnum
-The header \tcode{<tgmath.h>}
+The header \libheader{tgmath.h}
 behaves as if it simply includes the headers
-\tcode{<cmath>}\iref{cmath.syn} and
-\tcode{<complex>}\iref{complex.syn}.
-
-\pnum
-\begin{note} The overloads provided in C by type-generic macros are already
-provided in \tcode{<complex>} and \tcode{<cmath>} by ``sufficient'' additional
-overloads.\end{note}
+\libheaderref{cmath} and
+\libheaderref{complex}.
 
 \pnum
 \begin{note}
-Names introduced by \tcode{<cmath>} or \tcode{<complex>}
+The overloads provided in C by type-generic macros
+are already provided in \libheader{complex} and \libheader{cmath}
+by ``sufficient'' additional overloads.
+\end{note}
+
+\pnum
+\begin{note}
+Names introduced by \libheader{cmath} or \libheader{complex}
 in namespace \tcode{std}
-are not placed into the global namespace scope by \tcode{<tgmath.h>}.
+are not placed into the global namespace scope by \libheader{tgmath.h}.
 \end{note}
 
 \rSec2[depr.c.headers.other]{Other C headers}
@@ -287,11 +288,11 @@ are not placed into the global namespace scope by \tcode{<tgmath.h>}.
 \pnum
 Every C header
 other than
-\tcode{<complex.h>},
-\tcode{<iso646.h>},
-\tcode{<stdalign.h>},
-\tcode{<stdbool.h>}, and
-\tcode{<tgmath.h>},
+\libdeprheaderref{complex.h},
+\libdeprheaderref{iso646.h},
+\libdeprheaderref{stdalign.h},
+\libdeprheaderref{stdbool.h}, and
+\libdeprheaderref{tgmath.h},
 each of
 which has a name of the form
 \indextext{header!C}%
@@ -311,26 +312,22 @@ explicit \grammarterm{using-declaration}{s}\iref{namespace.udecl}.
 
 \pnum
 \begin{example}
-The header
-\indexhdr{cstdlib}%
-\indexhdr{stdlib.h}%
-\tcode{<cstdlib>} assuredly
+The header \libheader{cstdlib} assuredly
 provides its declarations and definitions within the namespace
 \tcode{std}. It may also provide these names within the
 global namespace.
-The header
-\tcode{<stdlib.h>}
+The header \libheader{stdlib.h}
 assuredly provides the same declarations and definitions within
 the global namespace,
 much as in the C Standard. It may also provide these names within
 the namespace \tcode{std}.
 \end{example}
+
+\indexlibraryglobal{rel_ops}%
 \rSec1[depr.relops]{Relational operators}
 
 \pnum
-The header \tcode{<utility>}
-\indexhdr{utility}%
-has the following additions:
+The header \libheaderref{utility} has the following additions:
 
 \begin{codeblock}
 namespace std::rel_ops {
@@ -361,7 +358,7 @@ Type \tcode{T} is \oldconcept{EqualityComparable} (\tref{cpp17.equalitycomparabl
 \tcode{!(x == y)}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{operator>}}%
+\indexlibraryglobal{operator>}%
 \begin{itemdecl}
 template<class T> bool operator>(const T& x, const T& y);
 \end{itemdecl}
@@ -411,9 +408,7 @@ Type \tcode{T} is \oldconcept{LessThanComparable} (\tref{cpp17.lessthancomparabl
 \rSec2[depr.strstream.syn]{Header \tcode{<strstream>} synopsis}
 
 \pnum
-The header
-\indexhdr{strstream}%
-\tcode{<strstream>}
+The header \libheaderdef{strstream}
 defines types that associate stream buffers with
 character array objects and assist reading and writing such objects.
 
@@ -428,7 +423,7 @@ namespace std {
 
 \rSec2[depr.strstreambuf]{Class \tcode{strstreambuf}}
 
-\indexlibrary{\idxcode{strstreambuf}}%
+\indexlibraryglobal{strstreambuf}%
 \begin{codeblock}
 namespace std {
   class strstreambuf : public basic_streambuf<char> {
@@ -465,15 +460,15 @@ namespace std {
     streambuf* setbuf(char* s, streamsize n) override;
 
   private:
-    using strstate = T1;              // \expos
-    static const strstate allocated;  // \expos
-    static const strstate constant;   // \expos
-    static const strstate dynamic;    // \expos
-    static const strstate frozen;     // \expos
-    strstate strmode;                 // \expos
-    streamsize alsize;                // \expos
-    void* (*palloc)(size_t);          // \expos
-    void (*pfree)(void*);             // \expos
+    using strstate = T1;                // \expos
+    static const strstate allocated;    // \expos
+    static const strstate constant;     // \expos
+    static const strstate dynamic;      // \expos
+    static const strstate frozen;       // \expos
+    strstate strmode;                   // \expos
+    streamsize alsize;                  // \expos
+    void* (*palloc)(size_t);            // \expos
+    void (*pfree)(void*);               // \expos
   };
 }
 \end{codeblock}
@@ -541,7 +536,7 @@ if \tcode{pend} is not a null pointer, or \tcode{gend}.
 
 \rSec3[depr.strstreambuf.cons]{\tcode{strstreambuf} constructors}
 
-\indexlibrary{\idxcode{strstreambuf}!constructor}%
+\indexlibraryctor{strstreambuf}%
 \begin{itemdecl}
 explicit strstreambuf(streamsize alsize_arg);
 \end{itemdecl}
@@ -549,10 +544,7 @@ explicit strstreambuf(streamsize alsize_arg);
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
-\tcode{strstreambuf},
-initializing the base class with
-\tcode{streambuf()}.
+Initializes the base class with \tcode{streambuf()}.
 The postconditions of this function are indicated in \tref{depr.strstreambuf.cons.sz}.
 \end{itemdescr}
 
@@ -565,7 +557,7 @@ The postconditions of this function are indicated in \tref{depr.strstreambuf.con
 \tcode{pfree}	&	a null pointer		\\
 \end{libtab2}
 
-\indexlibrary{\idxcode{strstreambuf}!constructor}%
+\indexlibraryctor{strstreambuf}%
 \begin{itemdecl}
 strstreambuf(void* (*palloc_arg)(size_t), void (*pfree_arg)(void*));
 \end{itemdecl}
@@ -573,10 +565,7 @@ strstreambuf(void* (*palloc_arg)(size_t), void (*pfree_arg)(void*));
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
-\tcode{strstreambuf},
-initializing the base class with
-\tcode{streambuf()}.
+Initializes the base class with \tcode{streambuf()}.
 The postconditions of this function are indicated in \tref{depr.strstreambuf.cons.alloc}.
 
 \begin{libtab2}{\tcode{strstreambuf(void* (*)(size_t), void (*)(void*))} effects}
@@ -591,7 +580,7 @@ The postconditions of this function are indicated in \tref{depr.strstreambuf.con
 \end{itemdescr}
 
 \indextext{unspecified}%
-\indexlibrary{\idxcode{strstreambuf}!constructor}%
+\indexlibraryctor{strstreambuf}%
 \begin{itemdecl}
 strstreambuf(char* gnext_arg, streamsize n, char* pbeg_arg = nullptr);
 strstreambuf(signed char* gnext_arg, streamsize n,
@@ -603,10 +592,7 @@ strstreambuf(unsigned char* gnext_arg, streamsize n,
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
-\tcode{strstreambuf},
-initializing the base class with
-\tcode{streambuf()}.
+Initializes the base class with \tcode{streambuf()}.
 The postconditions of this function are indicated in \tref{depr.strstreambuf.cons.ptr}.
 
 \begin{libtab2}{\tcode{strstreambuf(charT*, streamsize, charT*)} effects}
@@ -632,22 +618,16 @@ If
 \tcode{n == 0},
 \tcode{N} is
 \tcode{std::strlen(gnext_arg)}.
-\indexlibrary{\idxcode{strlen}}%
+\indexlibraryglobal{strlen}%
 \item
 If
 \tcode{n < 0},
 \tcode{N} is
 \tcode{INT_MAX}.\footnote{The function signature
-\indexlibrary{\idxcode{strlen}}%
+\indexlibraryglobal{strlen}%
 \tcode{strlen(const char*)}
-is declared in
-\indexhdr{cstring}%
-\tcode{<cstring>}\iref{cstring.syn}.
-The macro
-\tcode{INT_MAX}
-is defined in
-\indexhdr{climits}%
-\tcode{<climits>}\iref{climits.syn}.}
+is declared in \libheaderref{cstring}.
+The macro \tcode{INT_MAX} is defined in \libheaderref{climits}.}
 \end{itemize}
 
 \pnum
@@ -667,7 +647,7 @@ setp(pbeg_arg,  pbeg_arg + N);
 \end{itemdescr}
 
 
-\indexlibrary{\idxcode{strstreambuf}!constructor}%
+\indexlibraryctor{strstreambuf}%
 \begin{itemdecl}
 strstreambuf(const char* gnext_arg, streamsize n);
 strstreambuf(const signed char* gnext_arg, streamsize n);
@@ -682,7 +662,7 @@ Behaves the same as
 except that the constructor also sets \tcode{constant} in \tcode{strmode}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{strstreambuf}!destructor}%
+\indexlibrarydtor{strstreambuf}%
 \begin{itemdecl}
 virtual ~strstreambuf();
 \end{itemdecl}
@@ -1063,7 +1043,7 @@ has no effect.%
 
 \rSec2[depr.istrstream]{Class \tcode{istrstream}}
 
-\indexlibrary{\idxcode{istrstream}}%
+\indexlibraryglobal{istrstream}%
 \begin{codeblock}
 namespace std {
   class istrstream : public basic_istream<char> {
@@ -1077,7 +1057,7 @@ namespace std {
     strstreambuf* rdbuf() const;
     char* str();
   private:
-    strstreambuf sb;  // \expos
+    strstreambuf sb;            // \expos
   };
 }
 \end{codeblock}
@@ -1099,7 +1079,7 @@ For the sake of exposition, the maintained data is presented here as:
 
 \rSec3[depr.istrstream.cons]{\tcode{istrstream} constructors}
 
-\indexlibrary{\idxcode{istrstream}!constructor}%
+\indexlibraryctor{istrstream}%
 \begin{itemdecl}
 explicit istrstream(const char* s);
 explicit istrstream(char* s);
@@ -1108,17 +1088,13 @@ explicit istrstream(char* s);
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
-\tcode{istrstream},
-initializing the base class with
-\tcode{istream(\&sb)}
-and initializing \tcode{sb} with
-\tcode{strstreambuf(s,0)}.
+Initializes the base class with \tcode{istream(\&sb)} and
+\tcode{sb} with \tcode{strstreambuf(s, 0)}.
 \tcode{s} shall designate the first element of an \ntbs{}.%
 \indextext{NTBS}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{istrstream}!constructor}%
+\indexlibraryctor{istrstream}%
 \begin{itemdecl}
 istrstream(const char* s, streamsize n);
 istrstream(char* s, streamsize n);
@@ -1127,12 +1103,8 @@ istrstream(char* s, streamsize n);
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
-\tcode{istrstream},
-initializing the base class with
-\tcode{istream(\&sb)}
-and initializing \tcode{sb} with
-\tcode{strstreambuf(s,n)}.
+Initializes the base class with \tcode{istream(\&sb)}
+and \tcode{sb} with \tcode{strstreambuf(s, n)}.
 \tcode{s} shall designate the first element of an array whose length is
 \tcode{n} elements, and \tcode{n} shall be greater than zero.
 \end{itemdescr}
@@ -1163,7 +1135,7 @@ char* str();
 
 \rSec2[depr.ostrstream]{Class \tcode{ostrstream}}
 
-\indexlibrary{\idxcode{ostrstream}}%
+\indexlibraryglobal{ostrstream}%
 \begin{codeblock}
 namespace std {
   class ostrstream : public basic_ostream<char> {
@@ -1177,7 +1149,7 @@ namespace std {
     char* str();
     int pcount() const;
   private:
-    strstreambuf sb;  // \expos
+    strstreambuf sb;            // \expos
   };
 }
 \end{codeblock}
@@ -1199,7 +1171,7 @@ For the sake of exposition, the maintained data is presented here as:
 
 \rSec3[depr.ostrstream.cons]{\tcode{ostrstream} constructors}
 
-\indexlibrary{\idxcode{ostrstream}!constructor}%
+\indexlibraryctor{ostrstream}%
 \begin{itemdecl}
 ostrstream();
 \end{itemdecl}
@@ -1207,15 +1179,11 @@ ostrstream();
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
-\tcode{ostrstream},
-initializing the base class with
-\tcode{ostream(\&sb)}
-and initializing \tcode{sb} with
-\tcode{strstreambuf()}.
+Initializes the base class with \tcode{ostream(\&sb)} and
+\tcode{sb} with \tcode{strstreambuf()}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{ostrstream}!constructor}%
+\indexlibraryctor{ostrstream}%
 \begin{itemdecl}
 ostrstream(char* s, int n, ios_base::openmode mode = ios_base::out);
 \end{itemdecl}
@@ -1223,11 +1191,8 @@ ostrstream(char* s, int n, ios_base::openmode mode = ios_base::out);
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
-\tcode{ostrstream},
-initializing the base class with
-\tcode{ostream(\&sb)},
-and initializing \tcode{sb} with one of two constructors:
+Initializes the base class with \tcode{ostream(\&sb)},
+and \tcode{sb} with one of two constructors:
 
 \begin{itemize}
 \item
@@ -1245,11 +1210,9 @@ contains an \ntbs{} whose first element is designated by \tcode{s}.
 \indextext{NTBS}%
 The constructor is
 \tcode{strstreambuf(s, n, s + std::strlen(s))}.\footnote{The function signature
-\indexlibrary{\idxcode{strlen}}%
+\indexlibraryglobal{strlen}%
 \tcode{strlen(const char*)}
-is declared in
-\indexhdr{cstring}%
-\tcode{<cstring>}\iref{cstring.syn}.}
+is declared in \libheaderref{cstring}.}
 \end{itemize}
 \end{itemdescr}
 
@@ -1302,7 +1265,7 @@ int pcount() const;
 
 \rSec2[depr.strstream]{Class \tcode{strstream}}
 
-\indexlibrary{\idxcode{strstream}}%
+\indexlibraryglobal{strstream}%
 \begin{codeblock}
 namespace std {
   class strstream
@@ -1327,7 +1290,7 @@ namespace std {
     char* str();
 
   private:
-    strstreambuf sb;  // \expos
+    strstreambuf sb;            // \expos
   };
 }
 \end{codeblock}
@@ -1349,7 +1312,7 @@ For the sake of exposition, the maintained data is presented here as:
 
 \rSec3[depr.strstream.cons]{\tcode{strstream} constructors}
 
-\indexlibrary{\idxcode{strstream}!constructor}%
+\indexlibraryctor{strstream}%
 \begin{itemdecl}
 strstream();
 \end{itemdecl}
@@ -1357,13 +1320,10 @@ strstream();
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
-\tcode{strstream},
-initializing the base class with
-\tcode{iostream(\&sb)}.
+Initializes the base class with \tcode{iostream(\&sb)}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{strstream}!constructor}%
+\indexlibraryctor{strstream}%
 \begin{itemdecl}
 strstream(char* s, int n,
           ios_base::openmode mode = ios_base::in|ios_base::out);
@@ -1372,11 +1332,8 @@ strstream(char* s, int n,
 \begin{itemdescr}
 \pnum
 \effects
-Constructs an object of class
-\tcode{strstream},
-initializing the base class with
-\tcode{iostream(\&sb)}
-and initializing \tcode{sb} with one of the two constructors:
+Initializes the base class with \tcode{iostream(\&sb)},
+and \tcode{sb} with one of the two constructors:
 \begin{itemize}
 \item
 If
@@ -1392,13 +1349,13 @@ designate the first element of an array of \tcode{n} elements that contains
 an \ntbs{} whose first element is designated by \tcode{s}.
 The constructor is
 \tcode{strstreambuf(s,n,s + std::strlen(s))}.
-\indexlibrary{\idxcode{strstream}!destructor}%
+\indexlibrarydtor{strstream}%
 \end{itemize}
 \end{itemdescr}
 
 \rSec3[depr.strstream.dest]{\tcode{strstream} destructor}
 
-\indexlibrary{\idxcode{strstream}!destructor}%
+\indexlibrarydtor{strstream}%
 \begin{itemdecl}
 virtual ~strstream();
 \end{itemdecl}
@@ -1460,11 +1417,10 @@ int pcount() const;
 \rSec1[depr.meta.types]{Deprecated type traits}
 
 \pnum
-The header
-\indexhdr{type_traits}%
-\tcode{<type_traits>} has the following addition:
+The header \libheaderrefx{type_traits}{meta.type.synop}
+has the following addition:
 
-\indexlibrary{\idxcode{is_literal_type}}%
+\indexlibraryglobal{is_literal_type}%
 \begin{codeblock}
 namespace std {
   template<class T> struct is_pod;
@@ -1508,11 +1464,9 @@ It is unspecified whether a closure type\iref{expr.prim.lambda.closure} is a POD
 \rSec2[depr.iterator.basic]{Basic iterator}
 
 \pnum
-The header
-\indexhdr{iterator}%
-\tcode{<iterator>} has the following addition:
+The header \libheaderrefx{iterator}{iterator.synopsis} has the following addition:
 
-\indexlibrary{\idxcode{iterator}}%
+\indexlibraryglobal{iterator}%
 \begin{codeblock}
 namespace std {
   template<class Category, class T, class Distance = ptrdiff_t,
@@ -1534,9 +1488,11 @@ template may be used as a base class to ease the definition of required types
 for new iterators.
 
 \pnum
-\begin{note} If the new iterator type is a class template, then these aliases
+\begin{note}
+If the new iterator type is a class template, then these aliases
 will not be visible from within the iterator class's template definition, but
-only to callers of that class.\end{note}
+only to callers of that class.
+\end{note}
 
 \pnum
 \begin{example}
@@ -1575,15 +1531,16 @@ constexpr pointer operator->() const;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{current}.
+\returns
+\tcode{current}.
 \end{itemdescr}
 
 \rSec1[depr.util.smartptr.shared.atomic]{Deprecated \tcode{shared_ptr} atomic access}
 
 \pnum
-The header \tcode{<memory>} has the following additions:
+The header \libheaderref{memory} has the following additions:
 
-\indexlibrary{\idxcode{shared_ptr}}%
+\indexlibraryglobal{shared_ptr}%
 \begin{codeblock}
 namespace std {
   template<class T>
@@ -1637,10 +1594,12 @@ template<class T> bool atomic_is_lock_free(const shared_ptr<T>* p);
 \requires \tcode{p} shall not be null.
 
 \pnum
-\returns \tcode{true} if atomic access to \tcode{*p} is lock-free, \tcode{false} otherwise.
+\returns
+\tcode{true} if atomic access to \tcode{*p} is lock-free, \tcode{false} otherwise.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 \end{itemdescr}
 
 \indexlibrarymember{atomic_load}{shared_ptr}%
@@ -1653,10 +1612,12 @@ template<class T> shared_ptr<T> atomic_load(const shared_ptr<T>* p);
 \requires \tcode{p} shall not be null.
 
 \pnum
-\returns \tcode{atomic_load_explicit(p, memory_order_seq_cst)}.
+\returns
+\tcode{atomic_load_explicit(p, memory_order_seq_cst)}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 \end{itemdescr}
 
 \indexlibrarymember{atomic_load_explicit}{shared_ptr}%
@@ -1672,10 +1633,12 @@ template<class T> shared_ptr<T> atomic_load_explicit(const shared_ptr<T>* p, mem
 \requires \tcode{mo} shall not be \tcode{memory_order_release} or \tcode{memory_order_acq_rel}.
 
 \pnum
-\returns \tcode{*p}.
+\returns
+\tcode{*p}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 \end{itemdescr}
 
 \indexlibrarymember{atomic_store}{shared_ptr}%
@@ -1688,10 +1651,12 @@ template<class T> void atomic_store(shared_ptr<T>* p, shared_ptr<T> r);
 \requires \tcode{p} shall not be null.
 
 \pnum
-\effects As if by \tcode{atomic_store_explicit(p, r, memory_order_seq_cst)}.
+\effects
+As if by \tcode{atomic_store_explicit(p, r, memory_order_seq_cst)}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 \end{itemdescr}
 
 \indexlibrarymember{atomic_store_explicit}{shared_ptr}%
@@ -1707,10 +1672,12 @@ template<class T> void atomic_store_explicit(shared_ptr<T>* p, shared_ptr<T> r, 
 \requires \tcode{mo} shall not be \tcode{memory_order_acquire} or \tcode{memory_order_acq_rel}.
 
 \pnum
-\effects As if by \tcode{p->swap(r)}.
+\effects
+As if by \tcode{p->swap(r)}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 \end{itemdescr}
 
 \indexlibrarymember{atomic_exchange}{shared_ptr}%
@@ -1723,10 +1690,12 @@ template<class T> shared_ptr<T> atomic_exchange(shared_ptr<T>* p, shared_ptr<T> 
 \requires \tcode{p} shall not be null.
 
 \pnum
-\returns \tcode{atomic_exchange_explicit(p, r, memory_order_seq_cst)}.
+\returns
+\tcode{atomic_exchange_explicit(p, r, memory_order_seq_cst)}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 \end{itemdescr}
 
 \indexlibrarymember{atomic_exchange_explicit}{shared_ptr}%
@@ -1740,13 +1709,16 @@ template<class T>
 \requires \tcode{p} shall not be null.
 
 \pnum
-\effects As if by \tcode{p->swap(r)}.
+\effects
+As if by \tcode{p->swap(r)}.
 
 \pnum
-\returns The previous value of \tcode{*p}.
+\returns
+The previous value of \tcode{*p}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 \end{itemdescr}
 
 \indexlibrarymember{atomic_compare_exchange_weak}{shared_ptr}%
@@ -1766,7 +1738,8 @@ atomic_compare_exchange_weak_explicit(p, v, w, memory_order_seq_cst, memory_orde
 \end{codeblock}
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 \end{itemdescr}
 
 \indexlibrarymember{atomic_compare_exchange_strong}{shared_ptr}%
@@ -1803,19 +1776,23 @@ The \tcode{failure} argument shall not be \tcode{memory_order_release} nor
 \tcode{memory_order_acq_rel}.
 
 \pnum
-\effects If \tcode{*p} is equivalent to \tcode{*v}, assigns \tcode{w} to
+\effects
+If \tcode{*p} is equivalent to \tcode{*v}, assigns \tcode{w} to
 \tcode{*p} and has synchronization semantics corresponding to the value of
 \tcode{success}, otherwise assigns \tcode{*p} to \tcode{*v} and has
 synchronization semantics corresponding to the value of \tcode{failure}.
 
 \pnum
-\returns \tcode{true} if \tcode{*p} was equivalent to \tcode{*v}, \tcode{false} otherwise.
+\returns
+\tcode{true} if \tcode{*p} was equivalent to \tcode{*v}, \tcode{false} otherwise.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 
 \pnum
-\remarks Two \tcode{shared_ptr} objects are equivalent if they store the same
+\remarks
+Two \tcode{shared_ptr} objects are equivalent if they store the same
 pointer value and share ownership.
 The weak form may fail spuriously. See~\ref{atomics.types.operations}.
 \end{itemdescr}
@@ -1826,7 +1803,7 @@ The weak form may fail spuriously. See~\ref{atomics.types.operations}.
 The following member is declared in addition to those members specified
 in \ref{string.capacity}:
 
-\indexlibrary{\idxcode{basic_string}}%
+\indexlibraryglobal{basic_string}%
 \begin{codeblock}
 namespace std {
   template<class charT, class traits = char_traits<charT>,
@@ -1844,24 +1821,27 @@ void reserve();
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects
+\pnum
+\effects
 After this call, \tcode{capacity()} has an unspecified value
 greater than or equal to \tcode{size()}.
-\begin{note} This is a non-binding shrink to fit request. \end{note}
+\begin{note}
+This is a non-binding shrink to fit request.
+\end{note}
 \end{itemdescr}
 
 \rSec1[depr.locale.stdcvt]{Deprecated standard code conversion facets}
 
 \pnum
-\indexhdr{codecvt}%
-The header \tcode{<codecvt>} provides code conversion facets for various character encodings.
+The header \libheaderdef{codecvt} provides
+code conversion facets for various character encodings.
 
 \rSec2[depr.codecvt.syn]{Header \tcode{<codecvt>} synopsis}
 
-\indexlibrary{\idxcode{codecvt_mode}}%
-\indexlibrary{\idxcode{codecvt_utf8}}%
-\indexlibrary{\idxcode{codecvt_utf16}}%
-\indexlibrary{\idxcode{codecvt_utf8_utf16}}%
+\indexlibraryglobal{codecvt_mode}%
+\indexlibraryglobal{codecvt_utf8}%
+\indexlibraryglobal{codecvt_utf16}%
+\indexlibraryglobal{codecvt_utf8_utf16}%
 \begin{codeblock}
 namespace std {
   enum codecvt_mode {
@@ -1920,7 +1900,7 @@ For each of the three code conversion facets \tcode{codecvt_utf8},
 \end{itemize}
 
 \pnum
-For the facet \tcode{codecvt_utf8}\indexlibrary{\idxcode{codecvt_utf8}}:
+For the facet \tcode{codecvt_utf8}\indexlibraryglobal{codecvt_utf8}:
 \begin{itemize}
 \item
   The facet shall convert between UTF-8 multibyte sequences
@@ -1933,7 +1913,7 @@ For the facet \tcode{codecvt_utf8}\indexlibrary{\idxcode{codecvt_utf8}}:
 \end{itemize}
 
 \pnum
-For the facet \tcode{codecvt_utf16}\indexlibrary{\idxcode{codecvt_utf16}}:
+For the facet \tcode{codecvt_utf16}\indexlibraryglobal{codecvt_utf16}:
 \begin{itemize}
 \item
   The facet shall convert between UTF-16 multibyte sequences
@@ -1948,7 +1928,7 @@ For the facet \tcode{codecvt_utf16}\indexlibrary{\idxcode{codecvt_utf16}}:
 \end{itemize}
 
 \pnum
-For the facet \tcode{codecvt_utf8_utf16}\indexlibrary{\idxcode{codecvt_utf8_utf16}}:
+For the facet \tcode{codecvt_utf8_utf16}\indexlibraryglobal{codecvt_utf8_utf16}:
 \begin{itemize}
 \item
   The facet shall convert between UTF-8 multibyte sequences
@@ -1966,7 +1946,7 @@ The encoding form UCS-2 is specified in ISO/IEC 10646-1:1993.
 \rSec1[depr.conversions]{Deprecated convenience conversion interfaces}
 
 \pnum
-The header \tcode{<locale>} has the following additions:
+The header \libheaderref{locale} has the following additions:
 
 \begin{codeblock}
 namespace std {
@@ -1987,7 +1967,9 @@ namespace std {
 Class template \tcode{wstring_convert} performs conversions between a wide
 string and a byte string. It lets you specify a code conversion facet
 (like class template \tcode{codecvt}) to perform the conversions, without
-affecting any streams or locales. \begin{example} If you want to use the code
+affecting any streams or locales.
+\begin{example}
+If you want to use the code
 conversion facet \tcode{codecvt_utf8} to output to \tcode{cout} a UTF-8
 multibyte sequence corresponding to a wide string, but you don't want to
 alter the locale for \tcode{cout}, you can write something like:
@@ -1998,7 +1980,7 @@ std::cout << mbstring;
 \end{codeblock}
 \end{example}
 
-\indexlibrary{\idxcode{wstring_convert}}%
+\indexlibraryglobal{wstring_convert}%
 \begin{codeblock}
 namespace std {
   template<class Codecvt, class Elem = wchar_t,
@@ -2086,7 +2068,8 @@ size_t converted() const noexcept;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{cvtcount}.
+\returns
+\tcode{cvtcount}.
 \end{itemdescr}
 
 \indexlibrarymember{from_bytes}{wstring_convert}%
@@ -2204,7 +2187,7 @@ The type shall be a synonym for \tcode{basic_string<Elem,
 char_traits<Elem>, Wide_alloc>}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{wstring_convert}!constructor}%
+\indexlibraryctor{wstring_convert}%
 \begin{itemdecl}
 explicit wstring_convert(Codecvt* pcvt);
 wstring_convert(Codecvt* pcvt, state_type state);
@@ -2233,14 +2216,15 @@ in \tcode{byte_err_string}, and \tcode{wide_err} in
 \tcode{wide_err_string}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{wstring_convert}!destructor}%
+\indexlibrarydtor{wstring_convert}%
 \begin{itemdecl}
 ~wstring_convert();
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects The destructor shall delete \tcode{cvtptr}.
+\effects
+The destructor shall delete \tcode{cvtptr}.
 \end{itemdescr}
 
 \rSec2[depr.conversions.buffer]{Class template \tcode{wbuffer_convert}}
@@ -2252,7 +2236,7 @@ specify when you construct it. Like class template \tcode{wstring_convert}, it
 lets you specify a code conversion facet to perform the conversions,
 without affecting any streams or locales.
 
-\indexlibrary{\idxcode{wbuffer_convert}}%
+\indexlibraryglobal{wbuffer_convert}%
 \begin{codeblock}
 namespace std {
   template<class Codecvt, class Elem = wchar_t, class Tr = char_traits<Elem>>
@@ -2309,7 +2293,8 @@ state_type state() const;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{cvtstate}.
+\returns
+\tcode{cvtstate}.
 \end{itemdescr}
 
 \indexlibrarymember{rdbuf}{wbuffer_convert}%
@@ -2319,7 +2304,8 @@ streambuf* rdbuf() const;
 
 \begin{itemdescr}
 \pnum
-\returns \tcode{bufptr}.
+\returns
+\tcode{bufptr}.
 \end{itemdescr}
 
 \indexlibrarymember{rdbuf}{wbuffer_convert}%
@@ -2329,10 +2315,12 @@ streambuf* rdbuf(streambuf* bytebuf);
 
 \begin{itemdescr}
 \pnum
-\effects Stores \tcode{bytebuf} in \tcode{bufptr}.
+\effects
+Stores \tcode{bytebuf} in \tcode{bufptr}.
 
 \pnum
-\returns The previous value of \tcode{bufptr}.
+\returns
+The previous value of \tcode{bufptr}.
 \end{itemdescr}
 
 \indexlibrarymember{state_type}{wbuffer_convert}%
@@ -2345,7 +2333,7 @@ using state_type = typename Codecvt::state_type;
 The type shall be a synonym for \tcode{Codecvt::state_type}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{wbuffer_convert}!constructor}%
+\indexlibraryctor{wbuffer_convert}%
 \begin{itemdecl}
 explicit wbuffer_convert(
     streambuf* bytebuf,
@@ -2359,19 +2347,21 @@ explicit wbuffer_convert(
 \tcode{pcvt != nullptr}.
 
 \pnum
-\effects The constructor constructs a stream buffer object, initializes
+\effects
+The constructor constructs a stream buffer object, initializes
 \tcode{bufptr} to \tcode{bytebuf}, initializes \tcode{cvtptr}
 to \tcode{pcvt}, and initializes \tcode{cvtstate} to \tcode{state}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{wbuffer_convert}!destructor}%
+\indexlibrarydtor{wbuffer_convert}%
 \begin{itemdecl}
 ~wbuffer_convert();
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects The destructor shall delete \tcode{cvtptr}.
+\effects
+The destructor shall delete \tcode{cvtptr}.
 \end{itemdescr}
 
 \rSec1[depr.locale.category]{Deprecated locale category facets}
@@ -2406,7 +2396,7 @@ converts between the UTF-32 and UTF-8 encoding forms.
 
 \rSec1[depr.fs.path.factory]{Deprecated filesystem path factory functions}
 
-\indexlibrary{\idxcode{u8path}}%
+\indexlibraryglobal{u8path}%
 \begin{itemdecl}
 template<class Source>
   path u8path(const Source& source);
@@ -2441,7 +2431,8 @@ template<class InputIterator>
 \end{itemize}
 
 \pnum
-\remarks Argument format conversion\iref{fs.path.fmt.cvt} applies to the
+\remarks
+Argument format conversion\iref{fs.path.fmt.cvt} applies to the
   arguments for these functions. How Unicode encoding conversions are performed is
   unspecified.
 
@@ -2466,4 +2457,85 @@ For POSIX-based operating systems with the native narrow encoding not
 For Windows-based operating systems a conversion from UTF-8 to
     UTF-16 occurs.
 \end{example}
+\end{itemdescr}
+
+\rSec1[depr.atomics]{Deprecated atomic initialization}
+
+\pnum
+The header \libheaderref{atomics} has the following additions.
+
+\begin{codeblock}
+namespace std {
+  template<class T>
+    void atomic_init(volatile atomic<T>*, typename atomic<T>::value_type) noexcept;
+  template<class T>
+    void atomic_init(atomic<T>*, typename atomic<T>::value_type) noexcept;
+
+  #define ATOMIC_VAR_INIT(value) @\seebelow@
+
+  #define ATOMIC_FLAG_INIT @\seebelow@
+}
+\end{codeblock}
+
+\rSec2[depr.atomics.nonmembers]{Non-member functions}
+
+\indexlibraryglobal{atomic_init}%
+\begin{itemdecl}
+template<class T>
+  void atomic_init(volatile atomic<T>* object, typename atomic<T>::value_type desired) noexcept;
+template<class T>
+  void atomic_init(atomic<T>* object, typename atomic<T>::value_type desired) noexcept;
+\end{itemdecl}
+
+\begin{itemdescr}
+\pnum
+\effects
+Equivalent to: \tcode{atomic_store_explicit(object, desired, memory_order_relaxed);}
+\end{itemdescr}
+
+\rSec2[depr.atomics.types.operations]{Operations on atomic types}
+
+\indexlibraryglobal{ATOMIC_VAR_INIT}%
+\begin{itemdecl}
+#define ATOMIC_VAR_INIT(value) @\seebelow@
+\end{itemdecl}
+
+\begin{itemdescr}
+\pnum
+The macro expands to a token sequence suitable for constant initialization of
+an atomic variable of static storage duration of a type that
+is initialization-compatible with \tcode{value}.
+\begin{note}
+This operation may need to initialize locks.
+\end{note}
+Concurrent access to the variable being initialized,
+even via an atomic operation,
+constitutes a data race.
+\begin{example}
+\begin{codeblock}
+atomic<int> v = ATOMIC_VAR_INIT(5);
+\end{codeblock}
+\end{example}
+\end{itemdescr}
+
+\rSec2[depr.atomics.flag]{Flag type and operations}
+
+\indexlibraryglobal{ATOMIC_FLAG_INIT}%
+\begin{itemdecl}
+#define ATOMIC_FLAG_INIT @\seebelow@
+\end{itemdecl}
+
+\begin{itemdescr}
+\pnum
+\remarks
+The macro \tcode{ATOMIC_FLAG_INIT} is defined in such a way that
+it can be used to initialize an object of type \tcode{atomic_flag}
+to the clear state.
+The macro can be used in the form:
+\begin{codeblock}
+atomic_flag guard = ATOMIC_FLAG_INIT;
+\end{codeblock}
+It is unspecified whether the macro can be used
+in other initialization contexts.
+For a complete static-duration object, that initialization shall be static.
 \end{itemdescr}

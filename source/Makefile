@@ -26,11 +26,12 @@ reindex:
 	$(STDPDF)
 	$(STDPDF)
 	$(STDPDF)
-	makeindex generalindex
+	makeindex -s generalindex.ist generalindex
 	makeindex headerindex
-	makeindex libraryindex
+	makeindex -s libraryindex.ist libraryindex
 	makeindex grammarindex
 	makeindex impldefindex
+	makeindex conceptindex
 	$(STDPDF)
 	makeindex -s basic.gst -o xrefindex.gls xrefindex.glo
 	makeindex -s basic.gst -o xrefdelta.gls xrefdelta.glo

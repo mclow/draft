@@ -12,7 +12,7 @@ requirement appear at various places within this document.
 
 \pnum
 \Cpp{} is a general purpose programming language based on the C
-programming language as described in ISO/IEC 9899:2011
+programming language as described in ISO/IEC 9899:2018
 \doccite{Programming languages --- C} (hereinafter referred to as the
 \defnx{C standard}{C!standard}). \Cpp{} provides many facilities
 beyond those provided by C, including additional data types,
@@ -47,7 +47,7 @@ Available at
 Vocabulary}
 \item ISO 8601:2004, \doccite{Data elements and interchange formats ---
 Information interchange --- Representation of dates and times}
-\item ISO/IEC 9899:2011, \doccite{Programming languages --- C}
+\item ISO/IEC 9899:2018, \doccite{Programming languages --- C}
 \item ISO/IEC 9945:2003, \doccite{Information Technology --- Portable
 Operating System Interface (POSIX)}
 \item ISO/IEC 10646, \doccite{Information technology ---
@@ -63,7 +63,7 @@ to be used in the natural sciences and technology}
 \end{itemize}
 
 \pnum
-The library described in Clause 7 of ISO/IEC 9899:2011
+The library described in Clause 7 of ISO/IEC 9899:2018
 is hereinafter called the
 \defnx{C standard library}{C!standard library}.%
 \footnote{With the qualifications noted in \ref{\firstlibchapter}
@@ -117,7 +117,19 @@ defined.
 
 \indexdefn{access}%
 \definition{access}{defns.access}
-\defncontext{execution-time action} read or modify the value of an object
+\defncontext{execution-time action}
+read\iref{conv.lval} or
+modify (\ref{expr.ass}, \ref{expr.post.incr}, \ref{expr.pre.incr})
+the value of an object
+
+\begin{defnote}
+Only objects of scalar type can be accessed.
+Attempts to read or modify an object of class type
+typically invoke a constructor\iref{class.ctor}
+or assignment operator\iref{class.copy.assign};
+such invocations do not themselves constitute accesses,
+although they may involve accesses of scalar subobjects.
+\end{defnote}
 
 \indexdefn{argument}%
 \indexdefn{argument!function call expression}
@@ -145,11 +157,17 @@ comma-separated list bounded by the parentheses\iref{cpp.replace}
 \grammarterm{id-expression} in the comma-separated
 list bounded by the angle brackets\iref{temp.arg}
 
-\indexdefn{block}%
+\indexdefn{block (execution)}%
 \definition{block}{defns.block}
+\defncontext{execution}
 wait for some condition (other than for the implementation to execute
 the execution steps of the thread of execution) to be satisfied before
 continuing execution past the blocking operation
+
+\indexdefn{block (statement)}%
+\definition{block}{defns.block.stmt}
+\defncontext{statement}
+compound statement\iref{stmt.block}
 
 \indexdefn{behavior!conditionally-supported}%
 \definition{conditionally-supported}{defns.cond.supp}
@@ -234,7 +252,7 @@ following the macro name
 \definition{signature}{defns.signature}
 \defncontext{function}
 name,
-parameter type list\iref{dcl.fct},
+parameter-type-list\iref{dcl.fct},
 enclosing namespace (if any),
 and
 trailing \grammarterm{requires-clause}\iref{dcl.decl} (if any)
@@ -248,7 +266,7 @@ name mangling and linking.
 \definition{signature}{defns.signature.templ}
 \defncontext{function template}
 name,
-parameter type list\iref{dcl.fct},
+parameter-type-list\iref{dcl.fct},
 enclosing namespace (if any),
 return type,
 \grammarterm{template-head},
@@ -264,7 +282,7 @@ and its template arguments (whether explicitly specified or deduced)
 \definition{signature}{defns.signature.member}
 \defncontext{class member function}
 name,
-parameter type list\iref{dcl.fct},
+parameter-type-list\iref{dcl.fct},
 class of which the function is a member,
 \cv-qualifiers (if any),
 \grammarterm{ref-qualifier} (if any),
@@ -275,7 +293,7 @@ trailing \grammarterm{requires-clause}\iref{dcl.decl} (if any)
 \definition{signature}{defns.signature.member.templ}
 \defncontext{class member function template}
 name,
-parameter type list\iref{dcl.fct},
+parameter-type-list\iref{dcl.fct},
 class of which the function is a member,
 \cv-qualifiers (if any),
 \grammarterm{ref-qualifier} (if any),
@@ -363,7 +381,6 @@ semantic rules, and the one-definition rule\iref{basic.def.odr}%
 \indextext{observable behavior|see{behavior, observable}}%
 \indextext{precedence of operator|see{operator, precedence of}}%
 \indextext{order of evaluation in expression|see{expression, order of evaluation of}}%
-\indextext{atomic operations|see{operation, atomic}}%
 \indextext{multiple threads|see{threads, multiple}}%
 \rSec1[intro.compliance]{Implementation compliance}
 
@@ -427,7 +444,8 @@ consistent with the descriptions in the library Clauses.
 The names defined in the library have namespace
 scope\iref{basic.namespace}. A \Cpp{}  translation
 unit\iref{lex.phases} obtains access to these names by including the
-appropriate standard library header\iref{cpp.include}.
+appropriate standard library header or importing
+the appropriate standard library named header unit\iref{using.headers}.
 
 \pnum
 The templates, classes, functions, and objects in the library have
@@ -457,7 +475,7 @@ Having done so, however, they can compile and execute such programs.
 Each implementation shall include documentation that identifies all
 conditionally-supported constructs\indextext{behavior!conditionally-supported}
 that it does not support and defines all locale-specific characteristics.\footnote{This documentation also defines implementation-defined behavior;
-see~\ref{intro.execution}.}%
+see~\ref{intro.abstract}.}%
 \indextext{conformance requirements!general|)}%
 \indextext{conformance requirements|)}%
 
@@ -513,8 +531,10 @@ for a given program and a given input.
 Certain other operations are described in this document as
 undefined (for example, the effect of
 attempting to modify a const object).
-\begin{note} This document imposes no requirements on the
-behavior of programs that contain undefined behavior. \end{note}
+\begin{note}
+This document imposes no requirements on the
+behavior of programs that contain undefined behavior.
+\end{note}
 
 \pnum
 \indextext{program!well-formed}%
@@ -548,8 +568,10 @@ place in such a fashion that prompting output is actually delivered before a pro
 
 These collectively are referred to as the
 \defnx{observable behavior}{behavior!observable} of the program.
-\begin{note} More stringent correspondences between abstract and actual
-semantics may be defined by each implementation. \end{note}
+\begin{note}
+More stringent correspondences between abstract and actual
+semantics may be defined by each implementation.
+\end{note}
 
 \rSec1[intro.structure]{Structure of this document}
 
@@ -581,7 +603,8 @@ purposes; \ref{depr} describes those features.
 \pnum
 Throughout this document, each example is introduced by
 ``\noteintro{Example}'' and terminated by ``\noteoutro{example}''. Each note is
-introduced by ``\noteintro{Note}'' and terminated by ``\noteoutro{note}''. Examples
+introduced by ``\noteintro{Note}'' or ``\noteintro{Note $n$ to entry}'' and
+terminated by ``\noteoutro{note}''. Examples
 and notes may be nested.%
 \indextext{standard!structure of|)}
 
@@ -596,11 +619,9 @@ listed on separate lines except in a few cases where a long set of
 alternatives is marked by the phrase ``one of''. If the text of an alternative is too long to fit on a line, the text is continued on subsequent lines indented from the first one.
 An optional terminal or non-terminal symbol is indicated by the subscript
 ``\opt{\relax}'', so
-
 \begin{ncbnf}
 \terminal{\{} \opt{expression} \terminal{\}}
 \end{ncbnf}
-
 indicates an optional expression enclosed in braces.%
 
 \pnum

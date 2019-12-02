@@ -80,32 +80,32 @@ does not have any ordering operators.
 
 \rSec1[cfenv]{The floating-point environment}
 \rSec2[cfenv.syn]{Header \tcode{<cfenv>} synopsis}
-\indexhdr{cfenv}%
 
-\indexlibrary{\idxcode{fenv_t}}%
-\indexlibrary{\idxcode{fexcept_t}}%
-\indexlibrary{\idxcode{feclearexcept}}%
-\indexlibrary{\idxcode{fegetexceptflag}}%
-\indexlibrary{\idxcode{feraiseexcept}}%
-\indexlibrary{\idxcode{fesetexceptflag}}%
-\indexlibrary{\idxcode{fetestexcept}}%
-\indexlibrary{\idxcode{fegetround}}%
-\indexlibrary{\idxcode{fesetround}}%
-\indexlibrary{\idxcode{fegetenv}}%
-\indexlibrary{\idxcode{feholdexcept}}%
-\indexlibrary{\idxcode{fesetenv}}%
-\indexlibrary{\idxcode{feupdateenv}}%
-\indexlibrary{\idxcode{FE_ALL_EXCEPT}}%
-\indexlibrary{\idxcode{FE_DIVBYZERO}}%
-\indexlibrary{\idxcode{FE_INEXACT}}%
-\indexlibrary{\idxcode{FE_INVALID}}%
-\indexlibrary{\idxcode{FE_OVERFLOW}}%
-\indexlibrary{\idxcode{FE_UNDERFLOW}}%
-\indexlibrary{\idxcode{FE_DOWNWARD}}%
-\indexlibrary{\idxcode{FE_TONEAREST}}%
-\indexlibrary{\idxcode{FE_TOWARDZERO}}%
-\indexlibrary{\idxcode{FE_UPWARD}}%
-\indexlibrary{\idxcode{FE_DFL_ENV}}%
+\indexheader{cfenv}%
+\indexlibraryglobal{fenv_t}%
+\indexlibraryglobal{fexcept_t}%
+\indexlibraryglobal{feclearexcept}%
+\indexlibraryglobal{fegetexceptflag}%
+\indexlibraryglobal{feraiseexcept}%
+\indexlibraryglobal{fesetexceptflag}%
+\indexlibraryglobal{fetestexcept}%
+\indexlibraryglobal{fegetround}%
+\indexlibraryglobal{fesetround}%
+\indexlibraryglobal{fegetenv}%
+\indexlibraryglobal{feholdexcept}%
+\indexlibraryglobal{fesetenv}%
+\indexlibraryglobal{feupdateenv}%
+\indexlibraryglobal{FE_ALL_EXCEPT}%
+\indexlibraryglobal{FE_DIVBYZERO}%
+\indexlibraryglobal{FE_INEXACT}%
+\indexlibraryglobal{FE_INVALID}%
+\indexlibraryglobal{FE_OVERFLOW}%
+\indexlibraryglobal{FE_UNDERFLOW}%
+\indexlibraryglobal{FE_DOWNWARD}%
+\indexlibraryglobal{FE_TONEAREST}%
+\indexlibraryglobal{FE_TOWARDZERO}%
+\indexlibraryglobal{FE_UPWARD}%
+\indexlibraryglobal{FE_DFL_ENV}%
 \begin{codeblock}
 #define FE_ALL_EXCEPT @\seebelow@
 #define FE_DIVBYZERO @\seebelow@    // optional
@@ -144,8 +144,8 @@ namespace std {
 \end{codeblock}
 
 \pnum
-The contents and meaning of the header \tcode{<cfenv>}
-are the same as the C standard library header \tcode{<fenv.h>}.
+The contents and meaning of the header \libheader{cfenv}
+are the same as the C standard library header \libheader{fenv.h}.
 \begin{note}
 This document does not require an implementation to support the
 \tcode{FENV_ACCESS} pragma;
@@ -166,11 +166,14 @@ environment is the state of the floating-point environment of the thread that co
 the corresponding \tcode{thread} object\iref{thread.thread.class}
 or \tcode{jthread} object\iref{thread.jthread.class}
 at the time it
-constructed the object. \begin{note} That is, the child thread gets the floating-point
-state of the parent thread at the time of the child's creation. \end{note}
+constructed the object.
+\begin{note}
+That is, the child thread gets the floating-point
+state of the parent thread at the time of the child's creation.
+\end{note}
 
 \pnum
-A separate floating-point environment shall be maintained for each thread. Each function
+A separate floating-point environment is maintained for each thread. Each function
 accesses the environment corresponding to its calling thread.
 
 \xrefc{7.6}
@@ -178,11 +181,7 @@ accesses the environment corresponding to its calling thread.
 \rSec1[complex.numbers]{Complex numbers}
 
 \pnum
-The header
-\indexhdr{complex}%
-\tcode{<complex>}
-defines a
-class template,
+The header \libheader{complex} defines a class template,
 and numerous functions for representing and manipulating complex numbers.
 
 \pnum
@@ -201,23 +200,21 @@ undefined.
 
 \pnum
 If \tcode{z} is an lvalue of type \cv{} \tcode{complex<T>} then:
-
 \begin{itemize}
-\item the expression \tcode{reinterpret_cast<\cv{} T(\&)[2]>(z)} shall be well-formed,
-\item \tcode{reinterpret_cast<\cv{} T(\&)[2]>(z)[0]} shall designate the real part of \tcode{z}, and
-\item \tcode{reinterpret_cast<\cv{} T(\&)[2]>(z)[1]} shall designate the imaginary part of \tcode{z}.
+\item the expression \tcode{reinterpret_cast<\cv{} T(\&)[2]>(z)} is well-formed,
+\item \tcode{reinterpret_cast<\cv{} T(\&)[2]>(z)[0]} designates the real part of \tcode{z}, and
+\item \tcode{reinterpret_cast<\cv{} T(\&)[2]>(z)[1]} designates the imaginary part of \tcode{z}.
 \end{itemize}
 
 Moreover, if \tcode{a} is an expression of type \cv{}~\tcode{complex<T>*} and the expression \tcode{a[i]} is well-defined for an integer expression \tcode{i}, then:
-
 \begin{itemize}
-\item \tcode{reinterpret_cast<\cv{} T*>(a)[2*i]} shall designate the real part of \tcode{a[i]}, and
-\item \tcode{reinterpret_cast<\cv{} T*>(a)[2*i + 1]} shall designate the imaginary part of \tcode{a[i]}.
+\item \tcode{reinterpret_cast<\cv{} T*>(a)[2*i]} designates the real part of \tcode{a[i]}, and
+\item \tcode{reinterpret_cast<\cv{} T*>(a)[2*i + 1]} designates the imaginary part of \tcode{a[i]}.
 \end{itemize}
 
 \rSec2[complex.syn]{Header \tcode{<complex>} synopsis}
 
-\indexhdr{complex}%
+\indexheader{complex}%
 \begin{codeblock}
 namespace std {
   // \ref{complex}, class template \tcode{complex}
@@ -310,7 +307,7 @@ namespace std {
 
 \rSec2[complex]{Class template \tcode{complex}}
 
-\indexlibrary{\idxcode{complex}}%
+\indexlibraryglobal{complex}%
 \indexlibrarymember{value_type}{complex}%
 \begin{codeblock}
 namespace std {
@@ -446,20 +443,15 @@ namespace std {
 
 \rSec2[complex.members]{Member functions}
 
-\indexlibrary{\idxcode{complex}!constructor}%
+\indexlibraryctor{complex}%
 \begin{itemdecl}
 template<class T> constexpr complex(const T& re = T(), const T& im = T());
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects
-Constructs an object of class
-\tcode{complex}.
-
-\pnum
 \ensures
-\tcode{real() == re \&\& imag() == im}.
+\tcode{real() == re \&\& imag() == im} is \tcode{true}.
 \end{itemdescr}
 
 \indexlibrarymember{real}{complex}%
@@ -469,7 +461,8 @@ constexpr T real() const;
 
 \begin{itemdescr}
 \pnum
-\returns The value of the real component.
+\returns
+The value of the real component.
 \end{itemdescr}
 
 \indexlibrarymember{real}{complex}%
@@ -479,7 +472,8 @@ constexpr void real(T val);
 
 \begin{itemdescr}
 \pnum
-\effects Assigns \tcode{val} to the real component.
+\effects
+Assigns \tcode{val} to the real component.
 \end{itemdescr}
 
 \indexlibrarymember{imag}{complex}%
@@ -489,7 +483,8 @@ constexpr T imag() const;
 
 \begin{itemdescr}
 \pnum
-\returns The value of the imaginary component.
+\returns
+The value of the imaginary component.
 \end{itemdescr}
 
 \indexlibrarymember{imag}{complex}%
@@ -499,7 +494,8 @@ constexpr void imag(T val);
 
 \begin{itemdescr}
 \pnum
-\effects Assigns \tcode{val} to the imaginary component.
+\effects
+Assigns \tcode{val} to the imaginary component.
 \end{itemdescr}
 
 \rSec2[complex.member.ops]{Member operators}
@@ -662,9 +658,6 @@ template<class T> constexpr complex<T> operator+(const complex<T>& lhs);
 \returns
 \tcode{complex<T>(lhs)}.
 
-\pnum
-\remarks
-unary operator.
 \end{itemdescr}
 
 \begin{itemdecl}
@@ -688,10 +681,6 @@ template<class T> constexpr complex<T> operator-(const complex<T>& lhs);
 \pnum
 \returns
 \tcode{complex<T>(-lhs.real(),-lhs.imag())}.
-
-\pnum
-\remarks
-unary operator.
 \end{itemdescr}
 
 \indexlibrarymember{operator-}{complex}%
@@ -761,8 +750,8 @@ template<class T, class charT, class traits>
 
 \begin{itemdescr}
 \pnum
-\requires
-The input values shall be convertible to
+\expects
+The input values are convertible to
 \tcode{T}.
 
 \pnum
@@ -782,7 +771,7 @@ is the imaginary part\iref{istream.formatted}.
 If bad input is encountered, calls
 \tcode{is.setstate(ios_base::failbit)}
 (which may throw
-\tcode{ios::failure}\iref{iostate.flags}).
+\tcode{ios_base::\brk{}failure}\iref{iostate.flags}).
 
 \pnum
 \returns
@@ -829,7 +818,7 @@ complex numbers can be extracted unambiguously.
 
 \rSec2[complex.value.ops]{Value operations}
 
-\indexlibrary{\idxcode{real}!\idxcode{complex}}%
+\indexlibrarymember{real}{complex}%
 \begin{itemdecl}
 template<class T> constexpr T real(const complex<T>& x);
 \end{itemdecl}
@@ -840,7 +829,7 @@ template<class T> constexpr T real(const complex<T>& x);
 \tcode{x.real()}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{imag}!\idxcode{complex}}%
+\indexlibrarymember{imag}{complex}%
 \begin{itemdecl}
 template<class T> constexpr T imag(const complex<T>& x);
 \end{itemdecl}
@@ -851,7 +840,7 @@ template<class T> constexpr T imag(const complex<T>& x);
 \tcode{x.imag()}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{abs}!\idxcode{complex}}%
+\indexlibrarymember{abs}{complex}%
 \begin{itemdecl}
 template<class T> T abs(const complex<T>& x);
 \end{itemdecl}
@@ -862,7 +851,7 @@ template<class T> T abs(const complex<T>& x);
 The magnitude of \tcode{x}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{arg}!\idxcode{complex}}%
+\indexlibrarymember{arg}{complex}%
 \begin{itemdecl}
 template<class T> T arg(const complex<T>& x);
 \end{itemdecl}
@@ -873,7 +862,7 @@ template<class T> T arg(const complex<T>& x);
 The phase angle of \tcode{x}, or \tcode{atan2(imag(x), real(x))}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{norm}!\idxcode{complex}}%
+\indexlibrarymember{norm}{complex}%
 \begin{itemdecl}
 template<class T> constexpr T norm(const complex<T>& x);
 \end{itemdecl}
@@ -884,7 +873,7 @@ template<class T> constexpr T norm(const complex<T>& x);
 The squared magnitude of \tcode{x}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{conj}!\idxcode{complex}}%
+\indexlibrarymember{conj}{complex}%
 \begin{itemdecl}
 template<class T> constexpr complex<T> conj(const complex<T>& x);
 \end{itemdecl}
@@ -895,14 +884,15 @@ template<class T> constexpr complex<T> conj(const complex<T>& x);
 The complex conjugate of \tcode{x}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{proj}!\idxcode{complex}}%
+\indexlibrarymember{proj}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> proj(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns The projection of \tcode{x} onto the Riemann sphere.
+\returns
+The projection of \tcode{x} onto the Riemann sphere.
 
 \pnum
 \remarks
@@ -910,15 +900,15 @@ Behaves the same as the C function \tcode{cproj}.
 \xrefc{7.3.9.5}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{polar}!\idxcode{complex}}%
+\indexlibrarymember{polar}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> polar(const T& rho, const T& theta = T());
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{rho} shall be non-negative and non-NaN\@. \tcode{theta} shall be finite.
+\expects
+\tcode{rho} is non-negative and non-NaN\@. \tcode{theta} is finite.
 
 \pnum
 \returns
@@ -931,15 +921,16 @@ is \tcode{theta}.
 
 \rSec2[complex.transcendentals]{Transcendentals}
 
-\indexlibrary{\idxcode{acos}!\idxcode{complex}}%
-\indexlibrary{\idxcode{cacos}!\idxcode{complex}}%
+\indexlibrarymember{acos}{complex}%
+\indexlibrarymember{cacos}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> acos(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns The complex arc cosine of \tcode{x}.
+\returns
+The complex arc cosine of \tcode{x}.
 
 \pnum
 \remarks
@@ -947,15 +938,16 @@ Behaves the same as the C function \tcode{cacos}.
 \xrefc{7.3.5.1}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{asin}!\idxcode{complex}}%
-\indexlibrary{\idxcode{casin}!\idxcode{complex}}%
+\indexlibrarymember{asin}{complex}%
+\indexlibrarymember{casin}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> asin(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns The complex arc sine of \tcode{x}.
+\returns
+The complex arc sine of \tcode{x}.
 
 \pnum
 \remarks
@@ -963,15 +955,16 @@ Behaves the same as the C function \tcode{casin}.
 \xrefc{7.3.5.2}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{atan}!\idxcode{complex}}%
-\indexlibrary{\idxcode{catan}!\idxcode{complex}}%
+\indexlibrarymember{atan}{complex}%
+\indexlibrarymember{catan}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> atan(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns The complex arc tangent of \tcode{x}.
+\returns
+The complex arc tangent of \tcode{x}.
 
 \pnum
 \remarks
@@ -979,15 +972,16 @@ Behaves the same as the C function \tcode{catan}.
 \xrefc{7.3.5.3}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{acosh}!\idxcode{complex}}%
-\indexlibrary{\idxcode{cacosh}!\idxcode{complex}}%
+\indexlibrarymember{acosh}{complex}%
+\indexlibrarymember{cacosh}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> acosh(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns The complex arc hyperbolic cosine of \tcode{x}.
+\returns
+The complex arc hyperbolic cosine of \tcode{x}.
 
 \pnum
 \remarks
@@ -995,15 +989,16 @@ Behaves the same as the C function \tcode{cacosh}.
 \xrefc{7.3.6.1}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{asinh}!\idxcode{complex}}%
-\indexlibrary{\idxcode{casinh}!\idxcode{complex}}%
+\indexlibrarymember{asinh}{complex}%
+\indexlibrarymember{casinh}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> asinh(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns The complex arc hyperbolic sine of \tcode{x}.
+\returns
+The complex arc hyperbolic sine of \tcode{x}.
 
 \pnum
 \remarks
@@ -1011,15 +1006,16 @@ Behaves the same as the C function \tcode{casinh}.
 \xrefc{7.3.6.2}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{atanh}!\idxcode{complex}}%
-\indexlibrary{\idxcode{catanh}!\idxcode{complex}}%
+\indexlibrarymember{atanh}{complex}%
+\indexlibrarymember{catanh}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> atanh(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns The complex arc hyperbolic tangent of \tcode{x}.
+\returns
+The complex arc hyperbolic tangent of \tcode{x}.
 
 \pnum
 \remarks
@@ -1027,7 +1023,7 @@ Behaves the same as the C function \tcode{catanh}.
 \xrefc{7.3.6.3}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{cos}!\idxcode{complex}}%
+\indexlibrarymember{cos}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> cos(const complex<T>& x);
 \end{itemdecl}
@@ -1038,7 +1034,7 @@ template<class T> complex<T> cos(const complex<T>& x);
 The complex cosine of \tcode{x}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{cosh}!\idxcode{complex}}%
+\indexlibrarymember{cosh}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> cosh(const complex<T>& x);
 \end{itemdecl}
@@ -1049,7 +1045,7 @@ template<class T> complex<T> cosh(const complex<T>& x);
 The complex hyperbolic cosine of \tcode{x}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{exp}!\idxcode{complex}}%
+\indexlibrarymember{exp}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> exp(const complex<T>& x);
 \end{itemdecl}
@@ -1060,7 +1056,7 @@ template<class T> complex<T> exp(const complex<T>& x);
 The complex base-$e$ exponential of \tcode{x}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{log}!\idxcode{complex}}%
+\indexlibrarymember{log}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> log(const complex<T>& x);
 \end{itemdecl}
@@ -1080,7 +1076,7 @@ as they are for \tcode{clog} in C.
 The branch cuts are along the negative real axis.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{log10}!\idxcode{complex}}%
+\indexlibrarymember{log10}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> log10(const complex<T>& x);
 \end{itemdecl}
@@ -1096,7 +1092,7 @@ The complex common (base-$10$) logarithm of \tcode{x}, defined as
 The branch cuts are along the negative real axis.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{pow}!\idxcode{complex}}%
+\indexlibrarymember{pow}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> pow(const complex<T>& x, const complex<T>& y);
 template<class T> complex<T> pow(const complex<T>& x, const T& y);
@@ -1118,7 +1114,7 @@ is \impldef{value of \tcode{pow(0,0)}}.
 The branch cuts are along the negative real axis.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{sin}!\idxcode{complex}}%
+\indexlibrarymember{sin}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> sin(const complex<T>& x);
 \end{itemdecl}
@@ -1129,7 +1125,7 @@ template<class T> complex<T> sin(const complex<T>& x);
 The complex sine of \tcode{x}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{sinh}!\idxcode{complex}}%
+\indexlibrarymember{sinh}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> sinh(const complex<T>& x);
 \end{itemdecl}
@@ -1140,7 +1136,7 @@ template<class T> complex<T> sinh(const complex<T>& x);
 The complex hyperbolic sine of \tcode{x}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{sqrt}!\idxcode{complex}}%
+\indexlibrarymember{sqrt}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> sqrt(const complex<T>& x);
 \end{itemdecl}
@@ -1160,7 +1156,7 @@ as they are for \tcode{csqrt} in C.
 The branch cuts are along the negative real axis.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{tan}!\idxcode{complex}}%
+\indexlibrarymember{tan}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> tan(const complex<T>& x);
 \end{itemdecl}
@@ -1171,7 +1167,7 @@ template<class T> complex<T> tan(const complex<T>& x);
 The complex tangent of \tcode{x}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{tanh}!\idxcode{complex}}%
+\indexlibrarymember{tanh}{complex}%
 \begin{itemdecl}
 template<class T> complex<T> tanh(const complex<T>& x);
 \end{itemdecl}
@@ -1185,11 +1181,11 @@ The complex hyperbolic tangent of \tcode{x}.
 \rSec2[cmplx.over]{Additional overloads}
 
 \pnum
-\indexlibrary{\idxcode{arg}}%
-\indexlibrary{\idxcode{conj}}%
-\indexlibrary{\idxcode{imag}}%
-\indexlibrary{\idxcode{norm}}%
-\indexlibrary{\idxcode{real}}%
+\indexlibraryglobal{arg}%
+\indexlibraryglobal{conj}%
+\indexlibraryglobal{imag}%
+\indexlibraryglobal{norm}%
+\indexlibraryglobal{real}%
 The following function templates shall have additional overloads:
 \begin{codeblock}
 arg                   norm
@@ -1201,7 +1197,6 @@ where \tcode{norm}, \tcode{conj}, \tcode{imag}, and \tcode{real} are \tcode{cons
 \pnum
 \indextext{overloads!floating-point}%
 The additional overloads shall be sufficient to ensure:
-
 \begin{itemize}
         \item If the argument has type \tcode{long double}, then it is effectively
               cast to \tcode{complex<long double>}.
@@ -1212,12 +1207,10 @@ The additional overloads shall be sufficient to ensure:
 \end{itemize}
 
 \pnum
-\indexlibrary{\idxcode{pow}}%
+\indexlibraryglobal{pow}%
 Function template \tcode{pow} shall have additional overloads sufficient to
 ensure, for a call with at least one argument of type \tcode{complex<T>}:
-
 \begin{itemize}
-
   \item If either argument has type \tcode{complex<long double>} or type \tcode{long
         double}, then both arguments are effectively cast to
         \tcode{complex<long double>}.
@@ -1280,11 +1273,11 @@ constexpr complex<float> operator""if(unsigned long long d);
 \rSec2[bit.general]{General}
 
 \pnum
-The header \tcode{<bit>} provides components to access,
+The header \libheaderdef{bit} provides components to access,
 manipulate and process both individual bits and bit sequences.
 
 \rSec2[bit.syn]{Header \tcode{<bit>} synopsis}
-\indexhdr{bit}%
+
 \begin{codeblock}
 namespace std {
   // \ref{bit.cast}, \tcode{bit_cast}
@@ -1330,13 +1323,21 @@ namespace std {
 
 \rSec2[bit.cast]{Function template \tcode{bit_cast}}
 
-\indexlibrary{\idxcode{bit_cast}}%
+\indexlibraryglobal{bit_cast}%
 \begin{itemdecl}
 template<class To, class From>
   constexpr To bit_cast(const From& from) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
+\pnum
+\constraints
+\begin{itemize}
+\item \tcode{sizeof(To) == sizeof(From)} is \tcode{true};
+\item \tcode{is_trivially_copyable_v<To>} is \tcode{true}; and
+\item \tcode{is_trivially_copyable_v<From>} is \tcode{true}.
+\end{itemize}
+
 \pnum
 \returns
 An object of type \tcode{To}.
@@ -1349,13 +1350,7 @@ If there are multiple such values, which value is produced is unspecified.
 
 \pnum
 \remarks
-This function shall not participate in overload resolution unless:
-\begin{itemize}
-\item \tcode{sizeof(To) == sizeof(From)} is \tcode{true};
-\item \tcode{is_trivially_copyable_v<To>} is \tcode{true}; and
-\item \tcode{is_trivially_copyable_v<From>} is \tcode{true}.
-\end{itemize}
-This function shall be \tcode{constexpr} if and only if
+This function is \tcode{constexpr} if and only if
 \tcode{To}, \tcode{From}, and the types of all subobjects
 of \tcode{To} and \tcode{From} are types \tcode{T} such that:
 \begin{itemize}
@@ -1369,7 +1364,7 @@ of \tcode{To} and \tcode{From} are types \tcode{T} such that:
 
 \rSec2[bit.pow.two]{Integral powers of 2}
 
-\indexlibrary{\idxcode{ispow2}}%
+\indexlibraryglobal{ispow2}%
 \begin{itemdecl}
 template<class T>
   constexpr bool ispow2(T x) noexcept;
@@ -1377,17 +1372,17 @@ template<class T>
 
 \begin{itemdescr}
 \pnum
+\constraints
+\tcode{T} is an unsigned integer type\iref{basic.fundamental}.
+
+\pnum
 \returns
 \tcode{true} if \tcode{x} is an integral power of two;
 \tcode{false} otherwise.
 
-\pnum
-\remarks
-This function shall not participate in overload resolution
-unless \tcode{T} is an unsigned integer type\iref{basic.fundamental}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{ceil2}}%
+\indexlibraryglobal{ceil2}%
 \begin{itemdecl}
 template<class T>
   constexpr T ceil2(T x);
@@ -1420,7 +1415,7 @@ that violates the precondition in the \expects element
 is not a core constant expression\iref{expr.const}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{floor2}}%
+\indexlibraryglobal{floor2}%
 \begin{itemdecl}
 template<class T>
   constexpr T floor2(T x) noexcept;
@@ -1428,18 +1423,18 @@ template<class T>
 
 \begin{itemdescr}
 \pnum
+\constraints
+\tcode{T} is an unsigned integer type\iref{basic.fundamental}.
+
+\pnum
 \returns
 If \tcode{x == 0}, \tcode{0};
 otherwise the maximal value \tcode{y}
 such that \tcode{ispow2(y)} is \tcode{true} and \tcode{y <= x}.
 
-\pnum
-\remarks
-This function shall not participate in overload resolution
-unless \tcode{T} is an unsigned integer type\iref{basic.fundamental}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{log2p1}}%
+\indexlibraryglobal{log2p1}%
 \begin{itemdecl}
 template<class T>
   constexpr T log2p1(T x) noexcept;
@@ -1447,15 +1442,15 @@ template<class T>
 
 \begin{itemdescr}
 \pnum
+\constraints
+\tcode{T} is an unsigned integer type\iref{basic.fundamental}.
+
+\pnum
 \returns
 If \tcode{x == 0}, \tcode{0};
 otherwise one plus the base-2 logarithm of \tcode{x},
 with any fractional part discarded.
 
-\pnum
-\remarks
-This function shall not participate in overload resolution
-unless \tcode{T} is an unsigned integer type\iref{basic.fundamental}.
 \end{itemdescr}
 
 \rSec2[bit.rotate]{Rotating}
@@ -1468,7 +1463,7 @@ template<class T>
   [[nodiscard]] constexpr T rotl(T x, int s) noexcept;
 \end{itemdecl}
 
-\indexlibrary{\idxcode{rotl}}%
+\indexlibraryglobal{rotl}%
 \begin{itemdescr}
 \pnum
 \constraints
@@ -1489,7 +1484,7 @@ template<class T>
   [[nodiscard]] constexpr T rotr(T x, int s) noexcept;
 \end{itemdecl}
 
-\indexlibrary{\idxcode{rotr}}%
+\indexlibraryglobal{rotr}%
 \begin{itemdescr}
 \pnum
 \constraints
@@ -1515,7 +1510,7 @@ template<class T>
   constexpr int countl_zero(T x) noexcept;
 \end{itemdecl}
 
-\indexlibrary{\idxcode{countl_zero}}%
+\indexlibraryglobal{countl_zero}%
 \begin{itemdescr}
 \pnum
 \constraints
@@ -1535,7 +1530,7 @@ template<class T>
   constexpr int countl_one(T x) noexcept;
 \end{itemdecl}
 
-\indexlibrary{\idxcode{countl_one}}%
+\indexlibraryglobal{countl_one}%
 \begin{itemdescr}
 \pnum
 \constraints
@@ -1555,7 +1550,7 @@ template<class T>
   constexpr int countr_zero(T x) noexcept;
 \end{itemdecl}
 
-\indexlibrary{\idxcode{countr_zero}}%
+\indexlibraryglobal{countr_zero}%
 \begin{itemdescr}
 \pnum
 \constraints
@@ -1575,7 +1570,7 @@ template<class T>
   constexpr int countr_one(T x) noexcept;
 \end{itemdecl}
 
-\indexlibrary{\idxcode{countr_one}}%
+\indexlibraryglobal{countr_one}%
 \begin{itemdescr}
 \pnum
 \constraints
@@ -1595,7 +1590,7 @@ template<class T>
   constexpr int popcount(T x) noexcept;
 \end{itemdecl}
 
-\indexlibrary{\idxcode{popcount}}%
+\indexlibraryglobal{popcount}%
 \begin{itemdescr}
 \pnum
 \constraints
@@ -1617,7 +1612,7 @@ binary data in which the least significant byte is placed first, with the rest
 in ascending order. This subclause describes the endianness of the scalar types
 of the execution environment.
 
-\indexlibrary{\idxcode{endian}}%
+\indexlibraryglobal{endian}%
 \indexlibrarymember{little}{endian}%
 \indexlibrarymember{big}{endian}%
 \indexlibrarymember{native}{endian}%
@@ -1708,7 +1703,7 @@ that entity is characterized:
    if \tcode{numeric_limits<T>::is_integer} is \tcode{true};
  \item
    otherwise
-   as \term{floating} or equivalently as \term{real-valued}.
+   as \term{floating-point} or equivalently as \term{real-valued}.
 \end{itemize}
 \noindent
 If integer-valued,
@@ -1728,7 +1723,6 @@ the operators
 \bitand, \bitor, and \xor{}
 denote the respective conventional bitwise operations.
 Further:
-
 \begin{itemize}
  \item
    the operator \rightshift{} denotes a bitwise right shift
@@ -1749,8 +1743,9 @@ Further:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\rSec2[rand.synopsis]{Header \tcode{<random>} synopsis}%
-\indexhdr{random}
+\rSec2[rand.synopsis]{Header \tcode{<random>} synopsis}
+
+\indexheader{random}
 \indextext{random number generation!synopsis|(}
 
 \begin{codeblock}
@@ -2127,7 +2122,6 @@ In that Table and throughout this subclause:
 \indextext{seed sequence!requirements|)}%
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Uniform Random Number Generator requirements:
 
@@ -2163,7 +2157,6 @@ template<class G>
 \pnum
 Let \tcode{g} be an object of type \tcode{G}. \tcode{G} models
 \libconcept{uniform_random_bit_generator} only if
-
 \begin{itemize}
 \item both \tcode{G::min()} and \tcode{G::max()} are constant
   expressions\iref{expr.const},
@@ -2425,14 +2418,14 @@ according to \ref{strings} and \ref{input.output}.
     ensures that \tcode{v}'s state is unchanged by the operation
     and
     calls \tcode{is.setstate(ios::failbit)}
-    (which may throw \tcode{ios::failure}\iref{iostate.flags}).
+    (which may throw \tcode{ios_base::failure}\iref{iostate.flags}).
     If a textual representation written via \tcode{os << x}
     was subsequently read via \tcode{is >> v},
     then \tcode{x == v}
     provided that there have been no intervening invocations
     of \tcode{x} or of \tcode{v}.
 
-    \requires
+    \expects
     \tcode{is} provides a textual representation
     that was previously written
     using an output stream
@@ -2490,7 +2483,8 @@ A::A();
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects
+\pnum
+\effects
  The base engine is initialized
  as if by its default constructor.
 \end{itemdescr}
@@ -2500,29 +2494,30 @@ bool operator==(const A& a1, const A& a2);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns
+\pnum
+\returns
  \tcode{true} if \tcode{a1}'s base engine is equal to \tcode{a2}'s base engine.
  Otherwise returns \tcode{false}.
 \end{itemdescr}
-
 
 \begin{itemdecl}
 A::A(result_type s);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects
+\pnum
+\effects
  The base engine is initialized
  with \tcode{s}.
 \end{itemdescr}
-
 
 \begin{itemdecl}
 template<class Sseq> A::A(Sseq& q);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects
+\pnum
+\effects
  The base engine is initialized
  with \tcode{q}.
 \end{itemdescr}
@@ -2532,7 +2527,8 @@ void seed();
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects
+\pnum
+\effects
  With \tcode{b} as the base engine, invokes \tcode{b.seed()}.
 \end{itemdescr}
 
@@ -2541,7 +2537,8 @@ void seed(result_type s);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects
+\pnum
+\effects
  With \tcode{b} as the base engine, invokes \tcode{b.seed(s)}.
 \end{itemdescr}
 
@@ -2550,7 +2547,8 @@ template<class Sseq> void seed(Sseq& q);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects
+\pnum
+\effects
  With \tcode{b} as the base engine, invokes \tcode{b.seed(q)}.
 \end{itemdescr}
 
@@ -2812,9 +2810,10 @@ according to \ref{strings} and \ref{input.output}.
     ensures that \tcode{d} is unchanged by the operation
     and
     calls \tcode{is.setstate(ios::failbit)}
-    (which may throw \tcode{ios::failure}\iref{iostate.flags}).
+    (which may throw \tcode{ios_base::failure}\iref{iostate.flags}).
 
-    \requires \tcode{is} provides a textual representation
+    \expects
+    \tcode{is} provides a textual representation
     that was previously written
     using an \tcode{os} whose imbued locale
     and whose type's template specialization arguments
@@ -2947,7 +2946,6 @@ if any such required relationship fails to hold.
 \pnum
 For every random number engine and for every random number engine adaptor \tcode{X}
 defined in this subclause\iref{rand.eng} and in subclause~\ref{rand.adapt}:
-
 \begin{itemize}
 \item
 if the constructor
@@ -2974,7 +2972,7 @@ if it is implicitly convertible to \tcode{X::result_type}.
 % linear_congruential_engine engine:
 
 \rSec3[rand.eng.lcong]{Class template \tcode{linear_congruential_engine}}%
-\indexlibrary{\idxcode{linear_congruential_engine}}%
+\indexlibraryglobal{linear_congruential_engine}%
 \indextext{random number engine!\idxcode{linear_congruential_engine}}
 
 \pnum
@@ -2997,7 +2995,8 @@ the generation algorithm%
 \indextext{generation algorithm!\idxcode{linear_congruential_engine}}
 is $\mathsf{GA}(\state{x}{i}) = \state{x}{i+1}$.
 
-\indexlibrary{\idxcode{linear_congruential_engine}}%
+\indexlibraryglobal{linear_congruential_engine}%
+\indexlibrarymember{result_type}{linear_congruential_engine}%
 \begin{codeblock}
 template<class UIntType, UIntType a, UIntType c, UIntType m>
   class linear_congruential_engine {
@@ -3046,30 +3045,33 @@ the following relations shall hold:
 and
   \tcode{c < m}.
 
-\pnum The textual representation%
+\pnum
+The textual representation%
 \indextext{\idxcode{linear_congruential_engine}!textual representation}
 consists of
 the value of \state{x}{i}.
 
-\indexlibrary{\idxcode{linear_congruential_engine}!constructor}%
+\indexlibraryctor{linear_congruential_engine}%
 \begin{itemdecl}
 explicit linear_congruential_engine(result_type s);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{linear_congruential_engine} object.
+\pnum
+\effects
  If $c \bmod m$ is $0$ and $\tcode{s} \bmod m$ is $0$,
  sets the engine's state to $1$,
  otherwise sets the engine's state to $\tcode{s} \bmod m$.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{linear_congruential_engine}!constructor}%
+\indexlibraryctor{linear_congruential_engine}%
 \begin{itemdecl}
 template<class Sseq> explicit linear_congruential_engine(Sseq& q);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{linear_congruential_engine} object.
+\pnum
+\effects
  With
  $k = \left\lceil \frac{\log_2 m}{32} \right\rceil$
  and $a$ an array (or equivalent)
@@ -3087,7 +3089,7 @@ template<class Sseq> explicit linear_congruential_engine(Sseq& q);
 % mersenne_twister_engine engine:
 
 \rSec3[rand.eng.mers]{Class template \tcode{mersenne_twister_engine}}%
-\indexlibrary{\idxcode{mersenne_twister_engine}}%
+\indexlibraryglobal{mersenne_twister_engine}%
 \indextext{random number engine!\idxcode{mersenne_twister_engine}}
 
 \pnum
@@ -3153,7 +3155,8 @@ The generation algorithm%
    Let $z_4 = z_3 \xor ( z_3 \rightshift \ell )$.
 \end{itemize}
 
-\indexlibrary{\idxcode{mersenne_twister_engine}}%
+\indexlibraryglobal{mersenne_twister_engine}%
+\indexlibrarymember{result_type}{mersenne_twister_engine}%
 \begin{codeblock}
 template<class UIntType, size_t w, size_t n, size_t m, size_t r,
          UIntType a, size_t u, UIntType d, size_t s,
@@ -3220,13 +3223,14 @@ of \state{x}{i}
 consists of the values of $X_{i - n}, \dotsc, X_{i - 1}$,
 in that order.
 
-\indexlibrary{\idxcode{mersenne_twister_engine}!constructor}%
+\indexlibraryctor{mersenne_twister_engine}%
 \begin{itemdecl}
 explicit mersenne_twister_engine(result_type value);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{mersenne_twister_engine} object.
+\pnum
+\effects
 Sets $X_{-n}$ to $\tcode{value} \bmod 2^w$.
 Then, iteratively for $i = 1 - n, \dotsc, -1$, sets $X_i$ to
 \[%
@@ -3238,16 +3242,19 @@ Then, iteratively for $i = 1 - n, \dotsc, -1$, sets $X_i$ to
 \; \mbox{.}
 \]%
 
-\pnum\complexity \bigoh{n}.
+\pnum
+\complexity
+\bigoh{n}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{mersenne_twister_engine}!constructor}%
+\indexlibraryctor{mersenne_twister_engine}%
 \begin{itemdecl}
 template<class Sseq> explicit mersenne_twister_engine(Sseq& q);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{mersenne_twister_engine} object.
+\pnum
+\effects
  With
  $k = \left\lceil w / 32 \right\rceil$
  and $a$ an array (or equivalent)
@@ -3268,7 +3275,7 @@ template<class Sseq> explicit mersenne_twister_engine(Sseq& q);
 % subtract_with_carry_engine engine:
 
 \rSec3[rand.eng.sub]{Class template \tcode{subtract_with_carry_engine}}%
-\indexlibrary{\idxcode{subtract_with_carry_engine}}%
+\indexlibraryglobal{subtract_with_carry_engine}%
 \indextext{random number engine!\idxcode{subtract_with_carry_engine}}
 
 \pnum
@@ -3324,7 +3331,8 @@ is given by $\mathsf{GA}(\state{x}{i}) = y$,
 where $y$ is the value produced as a result
 of advancing the engine's state as described above.
 
-\indexlibrary{\idxcode{subtract_with_carry_engine}}%
+\indexlibraryglobal{subtract_with_carry_engine}%
+\indexlibrarymember{result_type}{subtract_with_carry_engine}%
 \begin{codeblock}
 template<class UIntType, size_t w, size_t s, size_t r>
   class subtract_with_carry_engine {
@@ -3369,14 +3377,14 @@ consists of the values of
  $X_{i-r}, \dotsc, X_{i-1}$,
 in that order, followed by $c$.
 
-
-\indexlibrary{\idxcode{subtract_with_carry_engine}!constructor}%
+\indexlibraryctor{subtract_with_carry_engine}%
 \begin{itemdecl}
 explicit subtract_with_carry_engine(result_type value);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{subtract_with_carry_engine} object.
+\pnum
+\effects
  Sets the values of
  $X_{-r}, \dotsc, X_{-1}$,
  in that order, as specified below.
@@ -3397,19 +3405,20 @@ linear_congruential_engine<result_type,
  of \tcode{e} taken modulo $2^{32}$.
  Set $X_k$ to $\left( \sum_{j=0}^{n-1} z_j \cdot 2^{32j}\right) \bmod m$.
 
-\pnum\complexity Exactly $n \cdot \tcode{r}$ invocations
+\pnum
+\complexity
+Exactly $n \cdot \tcode{r}$ invocations
  of \tcode{e}.
 \end{itemdescr}
 
-
-
-\indexlibrary{\idxcode{subtract_with_carry_engine}!constructor}%
+\indexlibraryctor{subtract_with_carry_engine}%
 \begin{itemdecl}
 template<class Sseq> explicit subtract_with_carry_engine(Sseq& q);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{subtract_with_carry_engine} object.
+\pnum
+\effects
  With
  $k = \left\lceil w / 32 \right\rceil$
  and $a$ an array (or equivalent)
@@ -3485,7 +3494,7 @@ if any such required relationship fails to hold.
 % discard_block_engine engine adaptor:
 
 \rSec3[rand.adapt.disc]{Class template \tcode{discard_block_engine}}%
-\indexlibrary{\idxcode{discard_block_engine}}%
+\indexlibraryglobal{discard_block_engine}%
 \indextext{random number engine adaptor!\idxcode{discard_block_engine}}
 
 \pnum
@@ -3524,7 +3533,8 @@ The generation algorithm%
 yields the value returned by the last invocation of \tcode{e()}
  while advancing \tcode{e}'s state as described above.
 
-\indexlibrary{\idxcode{discard_block_engine}}%
+\indexlibraryglobal{discard_block_engine}%
+\indexlibrarymember{result_type}{discard_block_engine}%
 \begin{codeblock}
 template<class Engine, size_t p, size_t r>
   class discard_block_engine {
@@ -3580,7 +3590,7 @@ followed by
 In addition to its behavior
 pursuant to subclause~\ref{rand.req.adapt},
 each constructor%
-\indexlibrary{\idxcode{discard_block_engine}!constructor}
+\indexlibraryctor{discard_block_engine}
 that is not a copy constructor
 sets \tcode{n} to $0$.
 
@@ -3588,7 +3598,7 @@ sets \tcode{n} to $0$.
 % independent_bits_engine engine adaptor:
 
 \rSec3[rand.adapt.ibits]{Class template \tcode{independent_bits_engine}}%
-\indexlibrary{\idxcode{independent_bits_engine}}%
+\indexlibraryglobal{independent_bits_engine}%
 \indextext{random number engine adaptor!\idxcode{independent_bits_engine}}
 
 \pnum
@@ -3671,7 +3681,8 @@ for (@$k$@ = @$n_0$@; @$k \neq n$@; @$k$@ += @$1$@)  {
 }
 \end{codeblock}
 
-\indexlibrary{\idxcode{independent_bits_engine}}%
+\indexlibraryglobal{independent_bits_engine}%
+\indexlibrarymember{result_type}{independent_bits_engine}%
 \begin{codeblock}
 template<class Engine, size_t w, class UIntType>
   class independent_bits_engine {
@@ -3715,15 +3726,14 @@ and
 The textual representation%
 \indextext{\idxcode{independent_bits_engine}!textual representation}%
 \indextext{textual representation!\idxcode{independent_bits_engine}}
-consists of
- the textual representation of \tcode{e}.
+consists of the textual representation of \tcode{e}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % shuffle_order_engine engine adaptor:
 
 \rSec3[rand.adapt.shuf]{Class template \tcode{shuffle_order_engine}}%
-\indexlibrary{\idxcode{shuffle_order_engine}}%
+\indexlibraryglobal{shuffle_order_engine}%
 \indextext{random number engine adaptor!\idxcode{shuffle_order_engine}}
 
 \pnum
@@ -3770,7 +3780,8 @@ The generation algorithm%
 yields the last value of \tcode{Y}
  produced while advancing \tcode{e}'s state as described above.
 
-\indexlibrary{\idxcode{shuffle_order_engine}}%
+\indexlibraryglobal{shuffle_order_engine}%
+\indexlibrarymember{result_type}{shuffle_order_engine}%
 \begin{codeblock}
 template<class Engine, size_t k>
   class shuffle_order_engine {
@@ -3826,7 +3837,7 @@ followed by
 In addition to its behavior
 pursuant to subclause~\ref{rand.req.adapt},
 each constructor%
-\indexlibrary{\idxcode{shuffle_order_engine}!constructor}
+\indexlibraryctor{shuffle_order_engine}
 that is not a copy constructor
 initializes $\tcode{V[0]}, \dotsc, \tcode{V[k-1]}$ and $Y$,
 in that order,
@@ -3848,73 +3859,74 @@ with values returned by successive invocations of \tcode{e()}.%
 \indextext{random number engine adaptor!with predefined parameters|(}%
 \indextext{random number generation!predefined engines and adaptors|(}
 
-\indexlibrary{\idxcode{minstd_rand0}}%
+\indexlibraryglobal{minstd_rand0}%
 \indextext{engines with predefined parameters!\idxcode{minstd_rand0}}%
 \begin{itemdecl}
 using minstd_rand0 =
-      linear_congruential_engine<uint_fast32_t, 16807, 0, 2147483647>;
+      linear_congruential_engine<uint_fast32_t, 16'807, 0, 2'147'483'647>;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\required
+\pnum
+\required
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{minstd_rand0}
- shall produce the value $1043618065$.
+ produces the value $1043618065$.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{minstd_rand}}%
+\indexlibraryglobal{minstd_rand}%
 \indextext{engines with predefined parameters!\idxcode{minstd_rand}}%
 \begin{itemdecl}
 using minstd_rand =
-      linear_congruential_engine<uint_fast32_t, 48271, 0, 2147483647>;
+      linear_congruential_engine<uint_fast32_t, 48'271, 0, 2'147'483'647>;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\required
+\pnum
+\required
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{minstd_rand}
- shall produce the value $399268537$.
+ produces the value $399268537$.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{mt19937}}%
+\indexlibraryglobal{mt19937}%
 \indextext{engines with predefined parameters!\idxcode{mt19937}}%
 \begin{itemdecl}
 using mt19937 =
-      mersenne_twister_engine<uint_fast32_t,
-       32,624,397,31,0x9908b0df,11,0xffffffff,7,0x9d2c5680,15,0xefc60000,18,1812433253>;
+      mersenne_twister_engine<uint_fast32_t, 32, 624, 397, 31,
+       0x9908'b0df, 11, 0xffff'ffff, 7, 0x9d2c'5680, 15, 0xefc6'0000, 18, 1'812'433'253>;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\required
+\pnum
+\required
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{mt19937}
- shall produce the value $4123659995$.
+ produces the value $4123659995$.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{mt19937_64}}%
+\indexlibraryglobal{mt19937_64}%
 \indextext{engines with predefined parameters!\idxcode{mt19937_64}}%
 \begin{itemdecl}
 using mt19937_64 =
-      mersenne_twister_engine<uint_fast64_t,
-       64,312,156,31,0xb5026f5aa96619e9,29,
-       0x5555555555555555,17,
-       0x71d67fffeda60000,37,
-       0xfff7eee000000000,43,
-       6364136223846793005>;
+      mersenne_twister_engine<uint_fast64_t, 64, 312, 156, 31,
+       0xb502'6f5a'a966'19e9, 29, 0x5555'5555'5555'5555, 17,
+       0x71d6'7fff'eda6'0000, 37, 0xfff7'eee0'0000'0000, 43, 6'364'136'223'846'793'005>;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\required
+\pnum
+\required
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{mt19937_64}
- shall produce the value $9981545732273789042$.
+ produces the value $9981545732273789042$.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{ranlux24_base}}%
+\indexlibraryglobal{ranlux24_base}%
 \indextext{engines with predefined parameters!\idxcode{ranlux24_base}}%
 \begin{itemdecl}
 using ranlux24_base =
@@ -3922,15 +3934,16 @@ using ranlux24_base =
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\required
+\pnum
+\required
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{ran\-lux24_base}
- shall produce the value
+ produces the value
  $7937952$.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{ranlux48_base}}%
+\indexlibraryglobal{ranlux48_base}%
 \indextext{engines with predefined parameters!\idxcode{ranlux48_base}}%
 \begin{itemdecl}
 using ranlux48_base =
@@ -3938,66 +3951,71 @@ using ranlux48_base =
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\required
+\pnum
+\required
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{ran\-lux48_base}
- shall produce the value
+ produces the value
  $61839128582725$.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{ranlux24}}%
+\indexlibraryglobal{ranlux24}%
 \indextext{engines with predefined parameters!\idxcode{ranlux24}}%
 \begin{itemdecl}
 using ranlux24 = discard_block_engine<ranlux24_base, 223, 23>;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\required
+\pnum
+\required
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{ranlux24}
- shall produce the value
+ produces the value
  $9901578$.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{ranlux48}}%
+\indexlibraryglobal{ranlux48}%
 \indextext{engines with predefined parameters!\idxcode{ranlux48}}%
 \begin{itemdecl}
 using ranlux48 = discard_block_engine<ranlux48_base, 389, 11>;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\required
+\pnum
+\required
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{ranlux48}
- shall produce the value
+ produces the value
  $249142670248501$.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{knuth_b}}%
+\indexlibraryglobal{knuth_b}%
 \indextext{engines with predefined parameters!\idxcode{knuth_b}}%
 \begin{itemdecl}
 using knuth_b = shuffle_order_engine<minstd_rand0,256>;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\required
+\pnum
+\required
  The $10000^\text{th}$ consecutive invocation
  of a default-constructed object
  of type \tcode{knuth_b}
- shall produce the value $1112339016$.
+ produces the value $1112339016$.
 \end{itemdescr}%
 
-\indexlibrary{\idxcode{default_random_engine}}%
+\indexlibraryglobal{default_random_engine}%
 \indextext{engines with predefined parameters!\idxcode{default_random_engine}}%
 \begin{itemdecl}
 using default_random_engine = @\textit{\impldef{type of \tcode{default_random_engine}}}@;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\remarks
+\pnum
+\remarks
 The choice of engine type
 named by this \tcode{typedef}
 is \impldef{type of \tcode{default_random_engine}}.
@@ -4031,7 +4049,7 @@ is \impldef{type of \tcode{default_random_engine}}.
 
 
 \rSec2[rand.device]{Class \tcode{random_device}}%
-\indexlibrary{\idxcode{random_device}}%
+\indexlibraryglobal{random_device}%
 
 \pnum
 A \tcode{random_device}
@@ -4044,7 +4062,8 @@ If implementation limitations%
 prevent generating nondeterministic random numbers,
 the implementation may employ a random number engine.
 
-\indexlibrary{\idxcode{random_device}}%
+\indexlibraryglobal{random_device}%
+\indexlibrarymember{result_type}{random_device}%
 \begin{codeblock}
 class random_device {
 public:
@@ -4072,24 +4091,24 @@ public:
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{random_device}!constructor}%
+\indexlibraryctor{random_device}%
 \begin{itemdecl}
 explicit random_device(const string& token);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{random_device}
- nondeterministic uniform random bit generator object.
+\pnum
+\remarks
  The semantics of the \tcode{token} parameter
  and the token value used by the default constructor are
  \impldef{semantics of \tcode{token} parameter and default token value used by \tcode{random_device} constructors}.%
 \footnote{The parameter is intended
    to allow an implementation to differentiate
-   between different sources of randomness.
- }
+   between different sources of randomness.}
 
 \pnum
-\throws A value of an \impldef{exception type when \tcode{random_device} constructor fails} type
+\throws
+A value of an \impldef{exception type when \tcode{random_device} constructor fails} type
  derived from \tcode{exception}
  if the \tcode{random_device} could not be initialized.
 \end{itemdescr}
@@ -4100,7 +4119,9 @@ double entropy() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns If the implementation employs a random number engine,
+\pnum
+\returns
+If the implementation employs a random number engine,
  returns $0.0$.
  Otherwise, returns an entropy estimate\footnote{If a device has $n$ states
    whose respective probabilities are
@@ -4120,14 +4141,17 @@ result_type operator()();
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns A nondeterministic random value,
+\pnum
+\returns
+A nondeterministic random value,
  uniformly distributed
  between \tcode{min()} and \tcode{max()} (inclusive).
  It is \impldef{how \tcode{random_device::operator()} generates values}
  how these values are generated.
 
 \pnum
-\throws A value of an \impldef{exception type when \tcode{random_device::operator()} fails}
+\throws
+A value of an \impldef{exception type when \tcode{random_device::operator()} fails}
  type derived from \tcode{exception}
  if a random number could not be obtained.
 \end{itemdescr}
@@ -4150,7 +4174,8 @@ result_type operator()();
 
 \rSec3[rand.util.seedseq]{Class \tcode{seed_seq}}%
 
-\indexlibrary{\idxcode{seed_seq}}%
+\indexlibraryglobal{seed_seq}%
+\indexlibrarymember{result_type}{seed_seq}%
 \begin{codeblock}
 class seed_seq {
 public:
@@ -4178,55 +4203,65 @@ public:
   void operator=(const seed_seq&) = delete;
 
 private:
-  vector<result_type> v;   // \expos
+  vector<result_type> v;        // \expos
 };
-\end{codeblock}%
+\end{codeblock}
 
 
-\indexlibrary{\idxcode{seed_seq}!constructor}%
+\indexlibraryctor{seed_seq}%
 \begin{itemdecl}
 seed_seq();
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{seed_seq} object
- as if by default-constructing its member \tcode{v}.
+\pnum
+\ensures
+\tcode{v.empty()} is \tcode{true}.
 
 \pnum
-\throws Nothing.
+\throws
+Nothing.
 \end{itemdescr}
 
 
-\indexlibrary{\idxcode{seed_seq}!constructor}%
+\indexlibraryctor{seed_seq}%
 \begin{itemdecl}
 template<class T>
  seed_seq(initializer_list<T> il);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires \tcode{T} shall be an integer type.
+\pnum
+\mandates
+\tcode{T} is an integer type.
 
-\pnum\effects
+\pnum
+\effects
  Same as \tcode{seed_seq(il.begin(), il.end())}.
 \end{itemdescr}
 
 
-\indexlibrary{\idxcode{seed_seq}!constructor}%
+\indexlibraryctor{seed_seq}%
 \begin{itemdecl}
 template<class InputIterator>
   seed_seq(InputIterator begin, InputIterator end);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
-  \tcode{InputIterator} shall meet the
-  \oldconcept{InputIterator} requirements\iref{input.iterators}.
-  Moreover,
+\pnum
+\mandates
   \tcode{iterator_traits<InputIterator>::value_type}
-  shall denote an integer type.
+  is an integer type.
 
-\pnum\effects Constructs a \tcode{seed_seq} object
- by the following algorithm:
+\pnum
+\expects
+  \tcode{InputIterator} meets the
+  \oldconcept{InputIterator} requirements\iref{input.iterators}.
+
+\pnum
+\effects
+Initializes \tcode{v}
+by the following algorithm:
 \begin{codeblock}
 for (InputIterator s = begin; s != end; ++s)
  v.push_back((*s)@$\bmod 2^{32}$@);
@@ -4240,16 +4275,19 @@ template<class RandomAccessIterator>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires \tcode{RandomAccessIterator}
-  shall meet the
+\pnum
+\mandates
+  \tcode{iterator_traits<RandomAccessIterator>::\brk{}value_type}
+  is an unsigned integer type capable of accommodating 32-bit quantities.
+
+\pnum
+\expects
+  \tcode{RandomAccessIterator} meets the
   \oldconcept{RandomAccessIterator} requirements\iref{random.access.iterators}
   and the requirements of a mutable iterator.
-  Moreover,
-  \tcode{iterator_traits<RandomAccessIterator>::\brk{}value_type}
-  shall denote an unsigned integer type
-  capable of accommodating 32-bit quantities.
 
-\pnum\effects
+\pnum
+\effects
  Does nothing if \tcode{begin == end}.
  Otherwise,
  with $s = \tcode{v.size()}$
@@ -4322,7 +4360,8 @@ template<class RandomAccessIterator>
    set \tcode{begin[$k$]} to $r_4$.
 \end{itemize}
 
-\pnum\throws
+\pnum
+\throws
 What and when \tcode{RandomAccessIterator} operations of \tcode{begin}
 and \tcode{end} throw.
 \end{itemdescr}
@@ -4333,11 +4372,15 @@ size_t size() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The number of 32-bit units
+\pnum
+\returns
+The number of 32-bit units
  that would be returned
  by a call to \tcode{param()}.
 
-\pnum\complexity Constant time.
+\pnum
+\complexity
+Constant time.
 \end{itemdescr}
 
 \indexlibrarymember{param}{seed_seq}%
@@ -4347,22 +4390,26 @@ template<class OutputIterator>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
-  \tcode{OutputIterator} shall meet the
-  \oldconcept{OutputIterator} requirements\iref{output.iterators}.
-  Moreover,
-  the expression
-  \tcode{*dest = rt}
-  shall be valid for a value \tcode{rt} of type \tcode{result_type}.
+\pnum
+\mandates
+  Values of type \tcode{result_type} are writable\iref{iterator.requirements.general} to \tcode{dest}.
 
-\pnum\effects Copies the sequence of prepared 32-bit units
+\pnum
+\expects
+  \tcode{OutputIterator} meets the
+  \oldconcept{OutputIterator} requirements\iref{output.iterators}.
+
+\pnum
+\effects
+Copies the sequence of prepared 32-bit units
  to the given destination,
  as if by executing the following statement:
 \begin{codeblock}
 copy(v.begin(), v.end(), dest);
 \end{codeblock}
 
-\pnum\throws
+\pnum
+\throws
 What and when \tcode{OutputIterator} operations of \tcode{dest} throw.
 \end{itemdescr}
 
@@ -4370,7 +4417,7 @@ What and when \tcode{OutputIterator} operations of \tcode{dest} throw.
 % generate_canonical function template:
 
 \rSec3[rand.util.canonical]{Function template \tcode{generate_canonical}}%
-\indexlibrary{\idxcode{generate_canonical}}%
+\indexlibraryglobal{generate_canonical}%
 
 \pnum
  Each function instantiated
@@ -4399,14 +4446,16 @@ What and when \tcode{OutputIterator} operations of \tcode{dest} throw.
  that can be delivered by a random number distribution.
 \end{note}
 
-\indexlibrary{\idxcode{generate_canonical}}%
+\indexlibraryglobal{generate_canonical}%
 \begin{itemdecl}
 template<class RealType, size_t bits, class URBG>
  RealType generate_canonical(URBG& g);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\complexity Exactly
+\pnum
+\complexity
+Exactly
  $k = \max(1, \left\lceil b / \log_2 R \right\rceil)$
  invocations
  of \tcode{g},
@@ -4419,7 +4468,8 @@ template<class RealType, size_t bits, class URBG>
  and
    $R$ is the value of $\tcode{g.max()} - \tcode{g.min()} + 1$.
 
-\pnum\effects
+\pnum
+\effects
  Invokes \tcode{g()} $k$ times
  to obtain values $g_0, \dotsc, g_{k-1}$, respectively.
  Calculates a quantity
@@ -4431,9 +4481,12 @@ template<class RealType, size_t bits, class URBG>
  \tcode{RealType}.
 
 \pnum
-\returns $S / R^k$.
+\returns
+$S / R^k$.
 
-\pnum\throws What and when \tcode{g} throws.
+\pnum
+\throws
+What and when \tcode{g} throws.
 \end{itemdescr}%
 \indextext{random number generation!utilities|)}
 
@@ -4496,7 +4549,7 @@ everywhere outside its stated domain.
 % uniform_int_distribution distribution:
 
 \rSec4[rand.dist.uni.int]{Class template \tcode{uniform_int_distribution}}%
-\indexlibrary{\idxcode{uniform_int_distribution}}%
+\indexlibraryglobal{uniform_int_distribution}%
 \indextext{random number distribution!\idxcode{uniform_int_distribution}}%
 
 \pnum
@@ -4509,7 +4562,8 @@ the constant discrete probability function%
 \indextext{\idxcode{uniform_int_distribution}!discrete probability function}%
 \[  P(i\,|\,a,b) = 1 / (b - a + 1) \text{ .} \]
 
-\indexlibrary{\idxcode{uniform_int_distribution}}%
+\indexlibraryglobal{uniform_int_distribution}%
+\indexlibrarymember{result_type}{uniform_int_distribution}%
 \begin{codeblock}
 template<class IntType = int>
   class uniform_int_distribution {
@@ -4541,16 +4595,18 @@ template<class IntType = int>
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{uniform_int_distribution}!constructor}%
+\indexlibraryctor{uniform_int_distribution}%
 \begin{itemdecl}
 explicit uniform_int_distribution(IntType a, IntType b = numeric_limits<IntType>::max());
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
- $\tcode{a} \leq \tcode{b}$.
+\pnum
+\expects
+$\tcode{a} \leq \tcode{b}$.
 
-\pnum\effects Constructs a \tcode{uniform_int_distribution} object;
+\pnum
+\remarks
  \tcode{a} and \tcode{b}
  correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -4561,7 +4617,9 @@ result_type a() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{a} parameter
+\pnum
+\returns
+The value of the \tcode{a} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -4571,7 +4629,9 @@ result_type b() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{b} parameter
+\pnum
+\returns
+The value of the \tcode{b} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -4579,7 +4639,7 @@ result_type b() const;
 % uniform_real distribution:
 
 \rSec4[rand.dist.uni.real]{Class template \tcode{uniform_real_distribution}}%
-\indexlibrary{\idxcode{uniform_real_distribution}}%
+\indexlibraryglobal{uniform_real_distribution}%
 \indextext{random number distribution!\idxcode{uniform_real_distribution}}%
 
 \pnum
@@ -4595,7 +4655,8 @@ the constant probability density function%
 This implies that $p(x\,|\,a,b)$ is undefined when \tcode{a == b}.
 \end{note}
 
-\indexlibrary{\idxcode{uniform_real_distribution}}%
+\indexlibraryglobal{uniform_real_distribution}%
+\indexlibrarymember{result_type}{uniform_real_distribution}%
 \begin{codeblock}
 template<class RealType = double>
   class uniform_real_distribution {
@@ -4627,18 +4688,20 @@ template<class RealType = double>
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{uniform_real_distribution}!constructor}%
+\indexlibraryctor{uniform_real_distribution}%
 \begin{itemdecl}
 explicit uniform_real_distribution(RealType a, RealType b = 1.0);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
- $\tcode{a} \leq \tcode{b}$
- and
- $\tcode{b} - \tcode{a} \leq \tcode{numeric_limits<RealType>::max()}$.
+\pnum
+\expects
+$\tcode{a} \leq \tcode{b}$
+and
+$\tcode{b} - \tcode{a} \leq \tcode{numeric_limits<RealType>::max()}$.
 
-\pnum\effects Constructs a \tcode{uniform_real_distribution} object;
+\pnum
+\remarks
  \tcode{a} and \tcode{b}
  correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -4649,7 +4712,9 @@ result_type a() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{a} parameter
+\pnum
+\returns
+The value of the \tcode{a} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -4659,7 +4724,9 @@ result_type b() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{b} parameter
+\pnum
+\returns
+The value of the \tcode{b} parameter
  with which the object was constructed.
 \end{itemdescr}%
 \indextext{random number distributions!uniform|)}%
@@ -4680,7 +4747,7 @@ result_type b() const;
 % bernoulli_distribution
 
 \rSec4[rand.dist.bern.bernoulli]{Class \tcode{bernoulli_distribution}}%
-\indexlibrary{\idxcode{bernoulli_distribution}}%
+\indexlibraryglobal{bernoulli_distribution}%
 \indextext{random number distribution!\idxcode{bernoulli_distribution}}%
 
 \pnum
@@ -4696,7 +4763,8 @@ the discrete probability function
                           \end{array}\right.
 \]
 
-\indexlibrary{\idxcode{bernoulli_distribution}}%
+\indexlibraryglobal{bernoulli_distribution}%
+\indexlibrarymember{result_type}{bernoulli_distribution}%
 \begin{codeblock}
 class bernoulli_distribution {
 public:
@@ -4726,16 +4794,18 @@ public:
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{bernoulli_distribution}!constructor}%
+\indexlibraryctor{bernoulli_distribution}%
 \begin{itemdecl}
 explicit bernoulli_distribution(double p);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
- $0 \leq \tcode{p} \leq 1$.
+\pnum
+\expects
+$0 \leq \tcode{p} \leq 1$.
 
-\pnum\effects Constructs a \tcode{bernoulli_distribution} object;
+\pnum
+\remarks
  \tcode{p}
  corresponds to the parameter of the distribution.
 \end{itemdescr}
@@ -4746,7 +4816,9 @@ double p() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{p} parameter
+\pnum
+\returns
+The value of the \tcode{p} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -4754,7 +4826,7 @@ double p() const;
 % binomial_distribution
 
 \rSec4[rand.dist.bern.bin]{Class template \tcode{binomial_distribution}}%
-\indexlibrary{\idxcode{binomial_distribution}}%
+\indexlibraryglobal{binomial_distribution}%
 \indextext{random number distribution!\idxcode{binomial_distribution}}%
 
 \pnum
@@ -4766,7 +4838,8 @@ the discrete probability function%
 \indextext{\idxcode{binomial_distribution}!discrete probability function}%
 \[ P(i\,|\,t,p) = \binom{t}{i} \cdot p^i \cdot (1-p)^{t-i} \text{ .} \]
 
-\indexlibrary{\idxcode{binomial_distribution}}%
+\indexlibraryglobal{binomial_distribution}%
+\indexlibrarymember{result_type}{binomial_distribution}%
 \begin{codeblock}
 template<class IntType = int>
   class binomial_distribution {
@@ -4798,16 +4871,18 @@ template<class IntType = int>
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{binomial_distribution}!constructor}%
+\indexlibraryctor{binomial_distribution}%
 \begin{itemdecl}
 explicit binomial_distribution(IntType t, double p = 0.5);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
- $0 \leq \tcode{p} \leq 1$ and $0 \leq \tcode{t} $.
+\pnum
+\expects
+$0 \leq \tcode{p} \leq 1$ and $0 \leq \tcode{t} $.
 
-\pnum\effects Constructs a \tcode{binomial_distribution} object;
+\pnum
+\remarks
  \tcode{t} and \tcode{p}
  correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -4817,7 +4892,9 @@ explicit binomial_distribution(IntType t, double p = 0.5);
 IntType t() const;
 \end{itemdecl}%
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{t} parameter
+\pnum
+\returns
+The value of the \tcode{t} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -4827,7 +4904,9 @@ double p() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{p} parameter
+\pnum
+\returns
+The value of the \tcode{p} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -4835,7 +4914,7 @@ double p() const;
 % geometric_distribution
 
 \rSec4[rand.dist.bern.geo]{Class template \tcode{geometric_distribution}}
-\indexlibrary{\idxcode{geometric_distribution}}%
+\indexlibraryglobal{geometric_distribution}%
 \indextext{random number distribution!\idxcode{geometric_distribution}}%
 
 \pnum
@@ -4847,7 +4926,8 @@ the discrete probability function
 \indextext{\idxcode{geometric_distribution}!discrete probability function}%
 \[ P(i\,|\,p) = p \cdot (1-p)^{i} \text{ .} \]
 
-\indexlibrary{\idxcode{geometric_distribution}}%
+\indexlibraryglobal{geometric_distribution}%
+\indexlibrarymember{result_type}{geometric_distribution}%
 \begin{codeblock}
 template<class IntType = int>
   class geometric_distribution {
@@ -4878,16 +4958,18 @@ template<class IntType = int>
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{geometric_distribution}!constructor}%
+\indexlibraryctor{geometric_distribution}%
 \begin{itemdecl}
 explicit geometric_distribution(double p);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
- $0 < \tcode{p} < 1$.
+\pnum
+\expects
+$0 < \tcode{p} < 1$.
 
-\pnum\effects Constructs a \tcode{geometric_distribution} object;
+\pnum
+\remarks
  \tcode{p}
  corresponds to the parameter of the distribution.
 \end{itemdescr}
@@ -4898,7 +4980,9 @@ double p() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{p} parameter
+\pnum
+\returns
+The value of the \tcode{p} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -4907,7 +4991,7 @@ double p() const;
 % ----------------------------------------------------------------------
 
 \rSec4[rand.dist.bern.negbin]{Class template \tcode{negative_binomial_distribution}}
-\indexlibrary{\idxcode{negative_binomial_distribution}}%
+\indexlibraryglobal{negative_binomial_distribution}%
 \indextext{random number distribution!\idxcode{negative_binomial_distribution}}%
 
 \pnum
@@ -4922,7 +5006,8 @@ the discrete probability function
 This implies that $P(i\,|\,k,p)$ is undefined when \tcode{p == 1}.
 \end{note}
 
-\indexlibrary{\idxcode{negative_binomial_distribution}}%
+\indexlibraryglobal{negative_binomial_distribution}%
+\indexlibrarymember{result_type}{negative_binomial_distribution}%
 \begin{codeblock}
 template<class IntType = int>
   class negative_binomial_distribution {
@@ -4954,17 +5039,19 @@ template<class IntType = int>
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{negative_binomial_distribution}!constructor}%
+\indexlibraryctor{negative_binomial_distribution}%
 \begin{itemdecl}
 explicit negative_binomial_distribution(IntType k, double p = 0.5);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
- $0 < \tcode{p} \leq 1$
- and $0 < \tcode{k} $.
+\pnum
+\expects
+$0 < \tcode{p} \leq 1$
+and $0 < \tcode{k} $.
 
-\pnum\effects Constructs a \tcode{negative_binomial_distribution} object;
+\pnum
+\remarks
  \tcode{k} and \tcode{p}
  correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -4975,7 +5062,9 @@ IntType k() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{k} parameter
+\pnum
+\returns
+The value of the \tcode{k} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -4985,7 +5074,9 @@ double p() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{p} parameter
+\pnum
+\returns
+The value of the \tcode{p} parameter
  with which the object was constructed.
 \end{itemdescr}%
 \indextext{random number distributions!Bernoulli|)}%
@@ -5006,7 +5097,7 @@ double p() const;
 % poisson_distribution
 
 \rSec4[rand.dist.pois.poisson]{Class template \tcode{poisson_distribution}}%
-\indexlibrary{\idxcode{poisson_distribution}}%
+\indexlibraryglobal{poisson_distribution}%
 \indextext{random number distribution!\idxcode{poisson_distribution}}%
 
 \pnum
@@ -5023,7 +5114,8 @@ is also known as this distribution's \term{mean}%
 \indextext{\idxcode{poisson_distribution}!mean}%
 .
 
-\indexlibrary{\idxcode{poisson_distribution}}%
+\indexlibraryglobal{poisson_distribution}%
+\indexlibrarymember{result_type}{poisson_distribution}%
 \begin{codeblock}
 template<class IntType = int>
   class poisson_distribution
@@ -5054,17 +5146,18 @@ template<class IntType = int>
   };
 \end{codeblock}
 
-\indexlibrary{\idxcode{poisson_distribution}!constructor}%
+\indexlibraryctor{poisson_distribution}%
 \begin{itemdecl}
 explicit poisson_distribution(double mean);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{mean}$.
+\expects
+$0 < \tcode{mean}$.
 
 \pnum
-\effects Constructs a \tcode{poisson_distribution} object;
+\remarks
 \tcode{mean} corresponds to the parameter of the distribution.
 \end{itemdescr}
 
@@ -5074,7 +5167,9 @@ double mean() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{mean} parameter
+\pnum
+\returns
+The value of the \tcode{mean} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5082,7 +5177,7 @@ double mean() const;
 % exponential_distribution
 
 \rSec4[rand.dist.pois.exp]{Class template \tcode{exponential_distribution}}%
-\indexlibrary{\idxcode{exponential_distribution}}%
+\indexlibraryglobal{exponential_distribution}%
 \indextext{random number distribution!\idxcode{exponential_distribution}}%
 
 \pnum
@@ -5094,7 +5189,8 @@ the probability density function%
 \indextext{\idxcode{exponential_distribution}!probability density function}%
 \[ p(x\,|\,\lambda) = \lambda e^{-\lambda x} \text{ .} \]
 
-\indexlibrary{\idxcode{exponential_distribution}}%
+\indexlibraryglobal{exponential_distribution}%
+\indexlibrarymember{result_type}{exponential_distribution}%
 \begin{codeblock}
 template<class RealType = double>
   class exponential_distribution {
@@ -5125,17 +5221,18 @@ template<class RealType = double>
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{exponential_distribution}!constructor}%
+\indexlibraryctor{exponential_distribution}%
 \begin{itemdecl}
 explicit exponential_distribution(RealType lambda);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{lambda}$.
+\expects
+$0 < \tcode{lambda}$.
 
 \pnum
-\effects Constructs an \tcode{exponential_distribution} object;
+\remarks
 \tcode{lambda} corresponds to the parameter of the distribution.
 \end{itemdescr}
 
@@ -5145,7 +5242,9 @@ RealType lambda() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{lambda} parameter
+\pnum
+\returns
+The value of the \tcode{lambda} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5153,7 +5252,7 @@ RealType lambda() const;
 % gamma_distribution
 
 \rSec4[rand.dist.pois.gamma]{Class template \tcode{gamma_distribution}}%
-\indexlibrary{\idxcode{gamma_distribution}}%
+\indexlibraryglobal{gamma_distribution}%
 \indextext{random number distribution!\idxcode{gamma_distribution}}%
 
 \pnum
@@ -5167,7 +5266,8 @@ the probability density function%
      \frac{e^{-x/\beta}}{\beta^{\alpha} \cdot \Gamma(\alpha)} \, \cdot \, x^{\, \alpha-1}
      \text{ .} \]
 
-\indexlibrary{\idxcode{gamma_distribution}}%
+\indexlibraryglobal{gamma_distribution}%
+\indexlibrarymember{result_type}{gamma_distribution}%
 \begin{codeblock}
 template<class RealType = double>
   class gamma_distribution {
@@ -5199,17 +5299,18 @@ template<class RealType = double>
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{gamma_distribution}!constructor}%
+\indexlibraryctor{gamma_distribution}%
 \begin{itemdecl}
 explicit gamma_distribution(RealType alpha, RealType beta = 1.0);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{alpha}$ and $0 < \tcode{beta}$.
+\expects
+$0 < \tcode{alpha}$ and $0 < \tcode{beta}$.
 
 \pnum
-\effects Constructs a \tcode{gamma_distribution} object;
+\remarks
 \tcode{alpha} and \tcode{beta}
 correspond to the parameters of the distribution.
 \end{itemdescr}
@@ -5220,7 +5321,9 @@ RealType alpha() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{alpha} parameter
+\pnum
+\returns
+The value of the \tcode{alpha} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5230,7 +5333,9 @@ RealType beta() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{beta} parameter
+\pnum
+\returns
+The value of the \tcode{beta} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5239,7 +5344,7 @@ RealType beta() const;
 % ----------------------------------------------------------------------
 
 \rSec4[rand.dist.pois.weibull]{Class template \tcode{weibull_distribution}}%
-\indexlibrary{\idxcode{weibull_distribution}}%
+\indexlibraryglobal{weibull_distribution}%
 \indextext{random number distribution!\idxcode{weibull_distribution}}%
 
 \pnum
@@ -5254,7 +5359,8 @@ the probability density function%
      \cdot \, \exp\left( -\left(\frac{x}{b}\right)^a\right)
      \text{ .} \]
 
-\indexlibrary{\idxcode{weibull_distribution}}%
+\indexlibraryglobal{weibull_distribution}%
+\indexlibrarymember{result_type}{weibull_distribution}%
 \begin{codeblock}
 template<class RealType = double>
   class weibull_distribution {
@@ -5285,17 +5391,18 @@ template<class RealType = double>
   };
 \end{codeblock}
 
-\indexlibrary{\idxcode{weibull_distribution}!constructor}%
+\indexlibraryctor{weibull_distribution}%
 \begin{itemdecl}
 explicit weibull_distribution(RealType a, RealType b = 1.0);
 \end{itemdecl}%
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{a}$ and $0 < \tcode{b}$.
+\expects
+$0 < \tcode{a}$ and $0 < \tcode{b}$.
 
 \pnum
-\effects Constructs a \tcode{weibull_distribution} object;
+\remarks
 \tcode{a} and \tcode{b}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5306,7 +5413,9 @@ RealType a() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{a} parameter
+\pnum
+\returns
+The value of the \tcode{a} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5316,7 +5425,9 @@ RealType b() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{b} parameter
+\pnum
+\returns
+The value of the \tcode{b} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5325,7 +5436,7 @@ RealType b() const;
 % ----------------------------------------------------------------------
 
 \rSec4[rand.dist.pois.extreme]{Class template \tcode{extreme_value_distribution}}
-\indexlibrary{\idxcode{extreme_value_distribution}}%
+\indexlibraryglobal{extreme_value_distribution}%
 \indextext{random number distribution!\idxcode{extreme_value_distribution}}%
 
 \pnum
@@ -5346,7 +5457,8 @@ the probability density function\footnote{The distribution corresponding to
      \cdot \exp\left(\frac{a-x}{b} - \exp\left(\frac{a-x}{b}\right)\right)
      \text{ .} \]
 
-\indexlibrary{\idxcode{extreme_value_distribution}}%
+\indexlibraryglobal{extreme_value_distribution}%
+\indexlibrarymember{result_type}{extreme_value_distribution}%
 \begin{codeblock}
 template<class RealType = double>
   class extreme_value_distribution {
@@ -5378,17 +5490,18 @@ template<class RealType = double>
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{extreme_value_distribution}!constructor}%
+\indexlibraryctor{extreme_value_distribution}%
 \begin{itemdecl}
 explicit extreme_value_distribution(RealType a, RealType b = 1.0);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{b}$.
+\expects
+$0 < \tcode{b}$.
 
 \pnum
-\effects Constructs an \tcode{extreme_value_distribution} object;
+\remarks
 \tcode{a} and \tcode{b}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5399,7 +5512,9 @@ RealType a() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{a} parameter
+\pnum
+\returns
+The value of the \tcode{a} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5409,7 +5524,9 @@ RealType b() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{b} parameter
+\pnum
+\returns
+The value of the \tcode{b} parameter
  with which the object was constructed.
 \end{itemdescr}%
 \indextext{random number distributions!Poisson|)}%
@@ -5430,7 +5547,7 @@ RealType b() const;
 % normal_distribution
 
 \rSec4[rand.dist.norm.normal]{Class template \tcode{normal_distribution}}%
-\indexlibrary{\idxcode{normal_distribution}}%
+\indexlibraryglobal{normal_distribution}%
 \indextext{random number distribution!\idxcode{normal_distribution}}%
 
 \pnum
@@ -5460,7 +5577,8 @@ and \term{standard deviation}%
 \indextext{\idxcode{normal_distribution}!standard deviation}%
 .
 
-\indexlibrary{\idxcode{normal_distribution}}%
+\indexlibraryglobal{normal_distribution}%
+\indexlibrarymember{result_type}{normal_distribution}%
 \begin{codeblock}
 template<class RealType = double>
   class normal_distribution {
@@ -5492,17 +5610,18 @@ template<class RealType = double>
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{normal_distribution}!constructor}%
+\indexlibraryctor{normal_distribution}%
 \begin{itemdecl}
 explicit normal_distribution(RealType mean, RealType stddev = 1.0);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{stddev}$.
+\expects
+$0 < \tcode{stddev}$.
 
 \pnum
-\effects Constructs a \tcode{normal_distribution} object;
+\remarks
 \tcode{mean} and \tcode{stddev}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5513,7 +5632,9 @@ RealType mean() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{mean} parameter
+\pnum
+\returns
+The value of the \tcode{mean} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5523,7 +5644,9 @@ RealType stddev() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{stddev} parameter
+\pnum
+\returns
+The value of the \tcode{stddev} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5532,7 +5655,7 @@ RealType stddev() const;
 % ----------------------------------------------------------------------
 
 \rSec4[rand.dist.norm.lognormal]{Class template \tcode{lognormal_distribution}}%
-\indexlibrary{\idxcode{lognormal_distribution}}%
+\indexlibraryglobal{lognormal_distribution}%
 \indextext{random number distribution!\idxcode{lognormal_distribution}}%
 
 \pnum
@@ -5546,7 +5669,8 @@ the probability density function%
      \cdot \exp{\left(-\frac{(\ln{x} - m)^2}{2 s^2}\right)}
      \text{ .} \]
 
-\indexlibrary{\idxcode{lognormal_distribution}}%
+\indexlibraryglobal{lognormal_distribution}%
+\indexlibrarymember{result_type}{lognormal_distribution}%
 \begin{codeblock}
 template<class RealType = double>
   class lognormal_distribution {
@@ -5578,17 +5702,18 @@ template<class RealType = double>
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{lognormal_distribution}!constructor}%
+\indexlibraryctor{lognormal_distribution}%
 \begin{itemdecl}
 explicit lognormal_distribution(RealType m, RealType s = 1.0);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{s}$.
+\expects
+$0 < \tcode{s}$.
 
 \pnum
-\effects Constructs a \tcode{lognormal_distribution} object;
+\remarks
 \tcode{m} and \tcode{s}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5599,7 +5724,9 @@ RealType m() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{m} parameter
+\pnum
+\returns
+The value of the \tcode{m} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5609,7 +5736,9 @@ RealType s() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{s} parameter
+\pnum
+\returns
+The value of the \tcode{s} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5618,7 +5747,7 @@ RealType s() const;
 % ----------------------------------------------------------------------
 
 \rSec4[rand.dist.norm.chisq]{Class template \tcode{chi_squared_distribution}}%
-\indexlibrary{\idxcode{chi_squared_distribution}}%
+\indexlibraryglobal{chi_squared_distribution}%
 \indextext{random number distribution!\idxcode{chi_squared_distribution}}%
 
 \pnum
@@ -5630,7 +5759,8 @@ the probability density function%
 \indextext{\idxcode{chi_squared_distribution}!probability density function}%
 \[ p(x\,|\,n) = \frac{x^{(n/2)-1} \cdot e^{-x/2}}{\Gamma(n/2) \cdot 2^{n/2}} \text{ .} \]
 
-\indexlibrary{\idxcode{chi_squared_distribution}}%
+\indexlibraryglobal{chi_squared_distribution}%
+\indexlibrarymember{result_type}{chi_squared_distribution}%
 \begin{codeblock}
 template<class RealType = double>
   class chi_squared_distribution {
@@ -5640,7 +5770,7 @@ template<class RealType = double>
     using param_type  = @\unspec@;
 
     // constructor and reset functions
-    chi_squared_distribution() : chi_squared_distribution(1) {}
+    chi_squared_distribution() : chi_squared_distribution(1.0) {}
     explicit chi_squared_distribution(RealType n);
     explicit chi_squared_distribution(const param_type& parm);
     void reset();
@@ -5661,17 +5791,18 @@ template<class RealType = double>
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{chi_squared_distribution}!constructor}%
+\indexlibraryctor{chi_squared_distribution}%
 \begin{itemdecl}
 explicit chi_squared_distribution(RealType n);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{n}$.
+\expects
+$0 < \tcode{n}$.
 
 \pnum
-\effects Constructs a \tcode{chi_squared_distribution} object;
+\remarks
 \tcode{n} corresponds to the parameter of the distribution.
 \end{itemdescr}
 
@@ -5681,7 +5812,9 @@ RealType n() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{n} parameter
+\pnum
+\returns
+The value of the \tcode{n} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5690,7 +5823,7 @@ RealType n() const;
 % ----------------------------------------------------------------------
 
 \rSec4[rand.dist.norm.cauchy]{Class template \tcode{cauchy_distribution}}%
-\indexlibrary{\idxcode{cauchy_distribution}}%
+\indexlibraryglobal{cauchy_distribution}%
 \indextext{random number distribution!\idxcode{cauchy_distribution}}%
 
 \pnum
@@ -5702,7 +5835,8 @@ the probability density function%
 \indextext{\idxcode{cauchy_distribution}!probability density function}%
 \[  p(x\,|\,a,b) = \left(\pi b \left(1 + \left(\frac{x-a}{b} \right)^2 \, \right)\right)^{-1} \text{ .} \]
 
-\indexlibrary{\idxcode{cauchy_distribution}}%
+\indexlibraryglobal{cauchy_distribution}%
+\indexlibrarymember{result_type}{cauchy_distribution}%
 \begin{codeblock}
 template<class RealType = double>
   class cauchy_distribution {
@@ -5734,17 +5868,18 @@ template<class RealType = double>
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{cauchy_distribution}!constructor}%
+\indexlibraryctor{cauchy_distribution}%
 \begin{itemdecl}
 explicit cauchy_distribution(RealType a, RealType b = 1.0);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{b}$.
+\expects
+$0 < \tcode{b}$.
 
 \pnum
-\effects Constructs a \tcode{cauchy_distribution} object;
+\remarks
 \tcode{a} and \tcode{b}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5755,7 +5890,9 @@ RealType a() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{a} parameter
+\pnum
+\returns
+The value of the \tcode{a} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5765,7 +5902,9 @@ RealType b() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{b} parameter
+\pnum
+\returns
+The value of the \tcode{b} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5774,7 +5913,7 @@ RealType b() const;
 % ----------------------------------------------------------------------
 
 \rSec4[rand.dist.norm.f]{Class template \tcode{fisher_f_distribution}}%
-\indexlibrary{\idxcode{fisher_f_distribution}}%
+\indexlibraryglobal{fisher_f_distribution}%
 \indextext{random number distribution!\idxcode{fisher_f_distribution}}%
 
 \pnum
@@ -5790,7 +5929,8 @@ the probability density function%
      \cdot \left(1 + \frac{m x}{n}\right)^{-(m + n)/2}
      \text{ .} \]
 
-\indexlibrary{\idxcode{fisher_f_distribution}}%
+\indexlibraryglobal{fisher_f_distribution}%
+\indexlibrarymember{result_type}{fisher_distribution}%
 \begin{codeblock}
 template<class RealType = double>
   class fisher_f_distribution {
@@ -5800,8 +5940,8 @@ template<class RealType = double>
     using param_type  = @\unspec@;
 
     // constructor and reset functions
-    fisher_f_distribution() : fisher_f_distribution(1) {}
-    explicit fisher_f_distribution(RealType m, RealType n = 1);
+    fisher_f_distribution() : fisher_f_distribution(1.0) {}
+    explicit fisher_f_distribution(RealType m, RealType n = 1.0);
     explicit fisher_f_distribution(const param_type& parm);
     void reset();
 
@@ -5822,17 +5962,18 @@ template<class RealType = double>
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{fisher_f_distribution}!constructor}%
+\indexlibraryctor{fisher_f_distribution}%
 \begin{itemdecl}
 explicit fisher_f_distribution(RealType m, RealType n = 1);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{m}$ and $0 < \tcode{n}$.
+\expects
+$0 < \tcode{m}$ and $0 < \tcode{n}$.
 
 \pnum
-\effects Constructs a \tcode{fisher_f_distribution} object;
+\remarks
 \tcode{m} and \tcode{n}
 correspond to the respective parameters of the distribution.
 \end{itemdescr}
@@ -5843,7 +5984,9 @@ RealType m() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{m} parameter
+\pnum
+\returns
+The value of the \tcode{m} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5853,7 +5996,9 @@ RealType n() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{n} parameter
+\pnum
+\returns
+The value of the \tcode{n} parameter
  with which the object was constructed.
 \end{itemdescr}
 
@@ -5862,7 +6007,7 @@ RealType n() const;
 % ----------------------------------------------------------------------
 
 \rSec4[rand.dist.norm.t]{Class template \tcode{student_t_distribution}}%
-\indexlibrary{\idxcode{student_t_distribution}}%
+\indexlibraryglobal{student_t_distribution}%
 \indextext{random number distribution!\idxcode{student_t_distribution}}%
 
 \pnum
@@ -5877,7 +6022,8 @@ the probability density function%
      \cdot \left(1 + \frac{x^2}{n} \right)^{-(n+1)/2}
      \text{ .} \]
 
-\indexlibrary{\idxcode{student_t_distribution}}%
+\indexlibraryglobal{student_t_distribution}%
+\indexlibrarymember{result_type}{student_t_distribution}%
 \begin{codeblock}
 template<class RealType = double>
   class student_t_distribution {
@@ -5887,7 +6033,7 @@ template<class RealType = double>
     using param_type  = @\unspec@;
 
     // constructor and reset functions
-    student_t_distribution() : student_t_distribution(1) {}
+    student_t_distribution() : student_t_distribution(1.0) {}
     explicit student_t_distribution(RealType n);
     explicit student_t_distribution(const param_type& parm);
     void reset();
@@ -5908,17 +6054,18 @@ template<class RealType = double>
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{student_t_distribution}!constructor}%
+\indexlibraryctor{student_t_distribution}%
 \begin{itemdecl}
 explicit student_t_distribution(RealType n);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\requires $0 < \tcode{n}$.
+\expects
+$0 < \tcode{n}$.
 
 \pnum
-\effects Constructs a \tcode{student_t_distribution} object;
+\remarks
 \tcode{n} corresponds to the parameter of the distribution.
 \end{itemdescr}
 
@@ -5928,7 +6075,9 @@ RealType n() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns The value of the \tcode{n} parameter
+\pnum
+\returns
+The value of the \tcode{n} parameter
  with which the object was constructed.
 \end{itemdescr}%
 \indextext{random number distributions!normal|)}%
@@ -5951,7 +6100,7 @@ RealType n() const;
 % ----------------------------------------------------------------------
 
 \rSec4[rand.dist.samp.discrete]{Class template \tcode{discrete_distribution}}%
-\indexlibrary{\idxcode{discrete_distribution}}%
+\indexlibraryglobal{discrete_distribution}%
 \indextext{random number distribution!\idxcode{discrete_distribution}}%
 
 \pnum
@@ -5975,7 +6124,8 @@ commonly known as the \term{weights}%
 Moreover, the following relation shall hold:
 $0 < S = w_0 + \dotsb + w_{n - 1}$.
 
-\indexlibrary{\idxcode{discrete_distribution}}%
+\indexlibraryglobal{discrete_distribution}%
+\indexlibrarymember{result_type}{discrete_distribution}%
 \begin{codeblock}
 template<class IntType = int>
   class discrete_distribution {
@@ -6009,13 +6159,15 @@ template<class IntType = int>
   };
 \end{codeblock}
 
-\indexlibrary{\idxcode{discrete_distribution}!constructor}
+\indexlibraryctor{discrete_distribution}
 \begin{itemdecl}
 discrete_distribution();
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{discrete_distribution} object
+\pnum
+\effects
+Constructs a \tcode{discrete_distribution} object
 with $n = 1$ and $p_0 = 1$.
 \begin{note}
 Such an object will always deliver the value $0$.
@@ -6023,7 +6175,7 @@ Such an object will always deliver the value $0$.
 \end{itemdescr}
 
 
-\indexlibrary{\idxcode{discrete_distribution}!constructor}%
+\indexlibraryctor{discrete_distribution}%
 \begin{itemdecl}
 template<class InputIterator>
   discrete_distribution(InputIterator firstW, InputIterator lastW);
@@ -6031,54 +6183,59 @@ template<class InputIterator>
 
 \begin{itemdescr}
 \pnum
-\requires
-  \tcode{InputIterator} shall meet the
+\mandates
+\tcode{is_convertible_v<iterator_traits<InputIterator>::value_type,
+double>} is \tcode{true}.
+
+\pnum
+\expects
+  \tcode{InputIterator} meets the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
-  Moreover,
-  \tcode{iterator_traits<InputIterator>::value_type}
-  shall denote a type that is convertible to \tcode{double}.
  If \tcode{firstW == lastW},
  let $n = 1$ and $w_0 = 1$.
  Otherwise,
  $\bigl[\tcode{firstW}, \tcode{lastW}\bigr)$
- shall form a sequence $w$ of length $n > 0$.
+ forms a sequence $w$ of length $n > 0$.
 
 \pnum
-\effects Constructs a \tcode{discrete_distribution} object
+\effects
+Constructs a \tcode{discrete_distribution} object
 with probabilities given by the formula above.
 \end{itemdescr}
 
 
-\indexlibrary{\idxcode{discrete_distribution}!constructor}%
+\indexlibraryctor{discrete_distribution}%
 \begin{itemdecl}
 discrete_distribution(initializer_list<double> wl);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects
+\pnum
+\effects
  Same as \tcode{discrete_distribution(wl.begin(), wl.end())}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{discrete_distribution}!constructor}
+\indexlibraryctor{discrete_distribution}
 \begin{itemdecl}
 template<class UnaryOperation>
   discrete_distribution(size_t nw, double xmin, double xmax, UnaryOperation fw);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
- Each instance of type \tcode{UnaryOperation}
- shall be a function object\iref{function.objects}
- whose return type shall be convertible to \tcode{double}.
- Moreover,
- \tcode{double} shall be convertible
- to the type of \tcode{UnaryOperation}'s sole parameter.
+\pnum
+\mandates
+\tcode{is_invocable_r_v<double, UnaryOperation\&, double>} is \tcode{true}.
+
+\pnum
+\expects
  If $\tcode{nw} = 0$, let $n = 1$, otherwise let $n = \tcode{nw}$.
  The relation
    $0 < \delta = (\tcode{xmax} - \tcode{xmin}) / n$
- shall hold.
+ holds.
 
-\pnum\effects Constructs a \tcode{discrete_distribution} object
+\pnum
+\effects
+Constructs a \tcode{discrete_distribution} object
  with probabilities given by the formula above,
  using the following values:
  If $\tcode{nw} = 0$,
@@ -6087,8 +6244,9 @@ template<class UnaryOperation>
  let $w_k = \tcode{fw}(\tcode{xmin} + k \cdot \delta + \delta / 2)$
  for $k = 0, \dotsc, n - 1$.
 
-\pnum\complexity
- The number of invocations of \tcode{fw} shall not exceed $n$.
+\pnum
+\complexity
+The number of invocations of \tcode{fw} does not exceed $n$.
 \end{itemdescr}
 
 \indexlibrarymember{probabilities}{discrete_distribution}%
@@ -6097,7 +6255,9 @@ vector<double> probabilities() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns A \tcode{vector<double>}
+\pnum
+\returns
+A \tcode{vector<double>}
  whose \tcode{size} member returns $n$
  and whose \tcode{operator[]} member returns $p_k$
  when invoked with argument $k$ for $k = 0, \dotsc, n - 1$.
@@ -6109,7 +6269,7 @@ vector<double> probabilities() const;
 % ----------------------------------------------------------------------
 
 \rSec4[rand.dist.samp.pconst]{Class template \tcode{piecewise_constant_distribution}}%
-\indexlibrary{\idxcode{piecewise_constant_distribution}}%
+\indexlibraryglobal{piecewise_constant_distribution}%
 \indextext{random number distribution!\idxcode{piecewise_constant_distribution}}%
 
 \pnum
@@ -6142,7 +6302,8 @@ commonly known as the \term{weights}%
 Moreover, the following relation shall hold:
  $0 < S = w_0 + \dotsb + w_{n-1}$.
 
-\indexlibrary{\idxcode{piecewise_constant_distribution}}%
+\indexlibraryglobal{piecewise_constant_distribution}%
+\indexlibrarymember{result_type}{piecewise_constant_distribution}%
 \begin{codeblock}
 template<class RealType = double>
   class piecewise_constant_distribution {
@@ -6181,13 +6342,15 @@ template<class RealType = double>
 \end{codeblock}
 
 
-\indexlibrary{\idxcode{piecewise_constant_distribution}!constructor}%
+\indexlibraryctor{piecewise_constant_distribution}%
 \begin{itemdecl}
 piecewise_constant_distribution();
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{piecewise_constant_distribution} object
+\pnum
+\effects
+Constructs a \tcode{piecewise_constant_distribution} object
  with $n = 1$,
  $\rho_0 = 1$,
  $b_0 = 0$,
@@ -6195,7 +6358,7 @@ piecewise_constant_distribution();
 \end{itemdescr}
 
 
-\indexlibrary{\idxcode{piecewise_constant_distribution}!constructor}%
+\indexlibraryctor{piecewise_constant_distribution}%
 \begin{itemdecl}
 template<class InputIteratorB, class InputIteratorW>
  piecewise_constant_distribution(InputIteratorB firstB, InputIteratorB lastB,
@@ -6203,15 +6366,20 @@ template<class InputIteratorB, class InputIteratorW>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum
+\mandates
+Both of
+\begin{itemize}
+\item{\tcode{is_convertible_v<iterator_traits<InputIteratorB>::value_type, double>}}
+\item{\tcode{is_convertible_v<iterator_traits<InputIteratorW>::value_type, double>}}
+\end{itemize}
+are \tcode{true}.
+
+\pnum
+\expects
   \tcode{InputIteratorB} and \tcode{InputIteratorW}
-  shall each meet the
+   each meet the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
-  Moreover,
-  the \grammarterm{id-expression}s
-  \tcode{iterator_traits<InputIteratorB>::value_type} and
-  \tcode{iterator_traits<Input\-IteratorW>::value_type}
-  shall each denote a type that is convertible to \tcode{double}.
  If \tcode{firstB == lastB}
  or \tcode{++firstB == lastB},
  let $n = 1$,
@@ -6220,32 +6388,32 @@ template<class InputIteratorB, class InputIteratorW>
  and $b_1 = 1$.
  Otherwise,
  $\bigl[\tcode{firstB}, \tcode{lastB}\bigr)$
- shall form a sequence $b$ of length $n+1$,
+ forms a sequence $b$ of length $n+1$,
  the length of the sequence $w$ starting from \tcode{firstW}
- shall be at least $n$,
- and any $w_k$ for  $k \geq n$ shall be ignored by the distribution.
+ is at least $n$,
+ and any $w_k$ for  $k \geq n$ are ignored by the distribution.
 
-\pnum\effects Constructs a \tcode{piecewise_constant_distribution} object
+\pnum
+\effects
+Constructs a \tcode{piecewise_constant_distribution} object
  with parameters as specified above.
 \end{itemdescr}
 
 
-\indexlibrary{\idxcode{piecewise_constant_distribution}!constructor}%
+\indexlibraryctor{piecewise_constant_distribution}%
 \begin{itemdecl}
 template<class UnaryOperation>
  piecewise_constant_distribution(initializer_list<RealType> bl, UnaryOperation fw);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
- Each instance of type \tcode{UnaryOperation}
- shall be a function object\iref{function.objects}
- whose return type shall be convertible to \tcode{double}.
- Moreover,
- \tcode{double} shall be convertible
- to the type of \tcode{UnaryOperation}'s sole parameter.
+\pnum
+\mandates
+\tcode{is_invocable_r_v<double, UnaryOperation\&, double>} is \tcode{true}.
 
-\pnum\effects Constructs a \tcode{piecewise_constant_distribution} object
+\pnum
+\effects
+Constructs a \tcode{piecewise_constant_distribution} object
  with parameters taken or calculated
  from the following values:
  If $\tcode{bl.size()} < 2$,
@@ -6260,37 +6428,40 @@ template<class UnaryOperation>
  let $w_k = \tcode{fw}\bigl(\bigl(b_{k+1} + b_k\bigr) / 2\bigr)$
  for $k = 0, \dotsc, n - 1$.
 
-\pnum\complexity
- The number of invocations of \tcode{fw} shall not exceed $n$.
+\pnum
+\complexity
+The number of invocations of \tcode{fw} does not exceed $n$.
 \end{itemdescr}
 
 
-\indexlibrary{\idxcode{piecewise_constant_distribution}!constructor}%
+\indexlibraryctor{piecewise_constant_distribution}%
 \begin{itemdecl}
 template<class UnaryOperation>
  piecewise_constant_distribution(size_t nw, RealType xmin, RealType xmax, UnaryOperation fw);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
- Each instance of type \tcode{UnaryOperation}
- shall be a function object\iref{function.objects}
- whose return type shall be convertible to \tcode{double}.
- Moreover,
- \tcode{double} shall be convertible
- to the type of \tcode{UnaryOperation}'s sole parameter.
+\pnum
+\mandates
+\tcode{is_invocable_r_v<double, UnaryOperation\&, double>} is \tcode{true}.
+
+\pnum
+\expects
  If $\tcode{nw} = 0$, let $n = 1$, otherwise let $n = \tcode{nw}$.
  The relation $0 < \delta = (\tcode{xmax} - \tcode{xmin}) / n$
- shall hold.
+ holds.
 
-\pnum\effects Constructs a \tcode{piecewise_constant_distribution} object
+\pnum
+\effects
+Constructs a \tcode{piecewise_constant_distribution} object
  with parameters taken or calculated
  from the following values:
  Let $b_k = \tcode{xmin} + k \cdot \delta $ for $ k = 0, \dotsc, n$,
  and $w_k = \tcode{fw}(b_k + \delta / 2) $ for $ k = 0, \dotsc, n - 1$.
 
-\pnum\complexity
- The number of invocations of \tcode{fw} shall not exceed $n$.
+\pnum
+\complexity
+The number of invocations of \tcode{fw} does not exceed $n$.
 \end{itemdescr}
 
 \indexlibrarymember{intervals}{piecewise_constant_distribution}%
@@ -6299,7 +6470,9 @@ vector<result_type> intervals() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns A \tcode{vector<result_type>}
+\pnum
+\returns
+A \tcode{vector<result_type>}
  whose \tcode{size} member returns $n + 1$
  and whose $ \tcode{operator[]} $ member returns $b_k$
  when invoked with argument $k$ for $k = 0, \dotsc, n $.
@@ -6311,7 +6484,9 @@ vector<result_type> densities() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns A \tcode{vector<result_type>}
+\pnum
+\returns
+A \tcode{vector<result_type>}
  whose \tcode{size} member returns $n$
  and whose $ \tcode{operator[]} $ member returns $\rho_k$
  when invoked with argument $k$ for $k = 0, \dotsc, n - 1$.
@@ -6323,7 +6498,7 @@ vector<result_type> densities() const;
 % ----------------------------------------------------------------------
 
 \rSec4[rand.dist.samp.plinear]{Class template \tcode{piecewise_linear_distribution}}%
-\indexlibrary{\idxcode{piecewise_linear_distribution}}%
+\indexlibraryglobal{piecewise_linear_distribution}%
 \indextext{random number distribution!\idxcode{piecewise_linear_distribution}}%
 
 \pnum
@@ -6356,7 +6531,8 @@ commonly known as the \term{weights at boundaries}%
 Moreover, the following relation shall hold:
 \[ 0 < S = \frac{1}{2} \cdot \sum_{k=0}^{n-1} (w_k + w_{k+1}) \cdot (b_{k+1} - b_k) \text{ .} \]
 
-\indexlibrary{\idxcode{piecewise_linear_distribution}}%
+\indexlibraryglobal{piecewise_linear_distribution}%
+\indexlibrarymember{result_type}{piecewise_linear_distribution}%
 \begin{codeblock}
 template<class RealType = double>
   class piecewise_linear_distribution {
@@ -6393,20 +6569,22 @@ template<class RealType = double>
   };
 \end{codeblock}
 
-\indexlibrary{\idxcode{piecewise_linear_distribution}!constructor}
+\indexlibraryctor{piecewise_linear_distribution}
 \begin{itemdecl}
 piecewise_linear_distribution();
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects Constructs a \tcode{piecewise_linear_distribution} object
+\pnum
+\effects
+Constructs a \tcode{piecewise_linear_distribution} object
  with $n = 1$,
  $\rho_0 = \rho_1 = 1$,
  $b_0 = 0$,
  and $b_1 = 1$.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{piecewise_linear_distribution}!constructor}
+\indexlibraryctor{piecewise_linear_distribution}
 \begin{itemdecl}
 template<class InputIteratorB, class InputIteratorW>
  piecewise_linear_distribution(InputIteratorB firstB, InputIteratorB lastB,
@@ -6414,15 +6592,15 @@ template<class InputIteratorB, class InputIteratorW>
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
+\pnum
+\mandates
+\tcode{is_invocable_r_v<double, UnaryOperation\&, double>} is \tcode{true}.
+
+\pnum
+\expects
   \tcode{InputIteratorB} and \tcode{InputIteratorW}
-  shall each meet the
+   each meet the
   \oldconcept{InputIterator} requirements\iref{input.iterators}.
-  Moreover,
-  the \grammarterm{id-expression}s
-  \tcode{iterator_traits<InputIteratorB>::value_type} and
-  \tcode{iterator_traits<Input\-IteratorW>::value_type}
-  shall each denote a type that is convertible to \tcode{double}.
  If \tcode{firstB == lastB}
  or \tcode{++firstB == lastB},
  let $n = 1$,
@@ -6431,32 +6609,32 @@ template<class InputIteratorB, class InputIteratorW>
  and $b_1 = 1$.
  Otherwise,
  $\bigl[\tcode{firstB}, \tcode{lastB}\bigr)$
- shall form a sequence $b$ of length $n+1$,
+ forms a sequence $b$ of length $n+1$,
  the length of the sequence $w$ starting from \tcode{firstW}
- shall be at least $n+1$,
- and any $w_k$ for $k \geq n + 1$ shall be ignored by the distribution.
+ is at least $n+1$,
+ and any $w_k$ for $k \geq n + 1$ are ignored by the distribution.
 
-\pnum\effects Constructs a \tcode{piecewise_linear_distribution} object
+\pnum
+\effects
+Constructs a \tcode{piecewise_linear_distribution} object
  with parameters as specified above.
 \end{itemdescr}
 
 
-\indexlibrary{\idxcode{piecewise_linear_distribution}!constructor}%
+\indexlibraryctor{piecewise_linear_distribution}%
 \begin{itemdecl}
 template<class UnaryOperation>
  piecewise_linear_distribution(initializer_list<RealType> bl, UnaryOperation fw);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
- Each instance of type \tcode{UnaryOperation}
- shall be a function object\iref{function.objects}
- whose return type shall be convertible to \tcode{double}.
- Moreover,
- \tcode{double} shall be convertible
- to the type of \tcode{UnaryOperation}'s sole parameter.
+\pnum
+\mandates
+\tcode{is_invocable_r_v<double, UnaryOperation\&, double>} is \tcode{true}.
 
-\pnum\effects Constructs a \tcode{piecewise_linear_distribution} object
+\pnum
+\effects
+Constructs a \tcode{piecewise_linear_distribution} object
  with parameters taken or calculated
  from the following values:
  If $\tcode{bl.size()} < 2$,
@@ -6471,37 +6649,40 @@ template<class UnaryOperation>
  let $w_k = \tcode{fw}(b_k)$
  for $k = 0, \dotsc, n$.
 
-\pnum\complexity
- The number of invocations of \tcode{fw} shall not exceed $n+1$.
+\pnum
+\complexity
+The number of invocations of \tcode{fw} does not exceed $n+1$.
 \end{itemdescr}
 
 
-\indexlibrary{\idxcode{piecewise_linear_distribution}!constructor}%
+\indexlibraryctor{piecewise_linear_distribution}%
 \begin{itemdecl}
 template<class UnaryOperation>
  piecewise_linear_distribution(size_t nw, RealType xmin, RealType xmax, UnaryOperation fw);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\requires
- Each instance of type \tcode{UnaryOperation}
- shall be a function object\iref{function.objects}
- whose return type shall be convertible to \tcode{double}.
- Moreover,
- \tcode{double} shall be convertible
- to the type of \tcode{UnaryOperation}'s sole parameter.
+\pnum
+\mandates
+\tcode{is_invocable_r_v<double, UnaryOperation\&, double>} is \tcode{true}.
+
+\pnum
+\expects
  If $\tcode{nw} = 0$, let $n = 1$, otherwise let $n = \tcode{nw}$.
  The relation $0 < \delta = (\tcode{xmax} - \tcode{xmin}) / n$
- shall hold.
+ holds.
 
-\pnum\effects Constructs a \tcode{piecewise_linear_distribution} object
+\pnum
+\effects
+Constructs a \tcode{piecewise_linear_distribution} object
  with parameters taken or calculated
  from the following values:
  Let $b_k = \tcode{xmin} + k \cdot \delta$ for $k = 0, \dotsc, n$,
  and $w_k = \tcode{fw}(b_k)$ for $k = 0, \dotsc, n$.
 
-\pnum\complexity
- The number of invocations of \tcode{fw} shall not exceed $n+1$.
+\pnum
+\complexity
+The number of invocations of \tcode{fw} does not exceed $n+1$.
 \end{itemdescr}
 
 \indexlibrarymember{intervals}{piecewise_linear_distribution}%
@@ -6510,7 +6691,9 @@ vector<result_type> intervals() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns A \tcode{vector<result_type>}
+\pnum
+\returns
+A \tcode{vector<result_type>}
  whose \tcode{size} member returns $n + 1$
  and whose $ \tcode{operator[]} $ member returns $b_k$
  when invoked with argument $k$ for $k = 0, \dotsc, n$.
@@ -6522,7 +6705,9 @@ vector<result_type> densities() const;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\returns A \tcode{vector<result_type>}
+\pnum
+\returns
+A \tcode{vector<result_type>}
  whose \tcode{size} member returns $n$
  and whose $ \tcode{operator[]} $ member returns $\rho_k$
  when invoked with argument $k$ for $k = 0, \dotsc, n$.
@@ -6535,14 +6720,13 @@ vector<result_type> densities() const;
 \rSec2[c.math.rand]{Low-quality random number generation}
 
 \pnum
-\indexhdr{cstdlib}%
 \begin{note}
-The header \tcode{<cstdlib>}\iref{cstdlib.syn}
+The header \libheaderref{cstdlib}
 declares the functions described in this subclause.
 \end{note}
 
-\indexlibrary{\idxcode{rand}}%
-\indexlibrary{\idxcode{srand}}%
+\indexlibraryglobal{rand}%
+\indexlibraryglobal{srand}%
 \begin{itemdecl}
 int rand();
 void srand(unsigned int seed);
@@ -6582,7 +6766,7 @@ and oft-questionable quality and performance.
 \rSec1[numarray]{Numeric arrays}
 
 \rSec2[valarray.syn]{Header \tcode{<valarray>} synopsis}
-\indexhdr{valarray}%
+\indexheader{valarray}%
 \begin{codeblock}
 #include <initializer_list>
 
@@ -6736,10 +6920,7 @@ namespace std {
 \end{codeblock}
 
 \pnum
-The header
-\tcode{<valarray>}
-defines five
-class templates
+The header \libheader{valarray} defines five class templates
 (\tcode{valarray},
 \tcode{slice_array},
 \tcode{gslice_array},
@@ -6816,7 +6997,7 @@ Note that the exception is not mandated.
 
 \rSec3[template.valarray.overview]{Overview}
 
-\indexlibrary{\idxcode{valarray}}%
+\indexlibraryglobal{valarray}%
 \begin{codeblock}
 namespace std {
   template<class T> class valarray {
@@ -6935,7 +7116,7 @@ However, it is a very useful building block for designing such classes.}
 
 \rSec3[valarray.cons]{Constructors}
 
-\indexlibrary{\idxcode{valarray}!constructor}%
+\indexlibraryctor{valarray}%
 \begin{itemdecl}
 valarray();
 \end{itemdecl}
@@ -6953,7 +7134,7 @@ After initialization, the length of an empty array can be increased with the
 member function.}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{valarray}!constructor}%
+\indexlibraryctor{valarray}%
 \begin{itemdecl}
 explicit valarray(size_t n);
 \end{itemdecl}
@@ -6965,7 +7146,7 @@ Constructs a \tcode{valarray} that has length \tcode{n}.
 Each element of the array is value-initialized\iref{dcl.init}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{valarray}!constructor}%
+\indexlibraryctor{valarray}%
 \begin{itemdecl}
 valarray(const T& v, size_t n);
 \end{itemdecl}
@@ -6977,16 +7158,16 @@ Constructs a \tcode{valarray} that has length \tcode{n}.
 Each element of the array is initialized with \tcode{v}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{valarray}!constructor}%
+\indexlibraryctor{valarray}%
 \begin{itemdecl}
 valarray(const T* p, size_t n);
 \end{itemdecl}
 
 \begin{itemdescr}
+
 \pnum
-\requires
-\tcode{p} points to an array\iref{dcl.array} of at least
-\tcode{n} elements.
+\expects
+\range{p}{p + n} is a valid range.
 
 \effects
 Constructs a \tcode{valarray} that has length \tcode{n}.
@@ -6999,7 +7180,7 @@ preferred method for converting a C array to a
 object.}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{valarray}!constructor}%
+\indexlibraryctor{valarray}%
 \begin{itemdecl}
 valarray(const valarray& v);
 \end{itemdecl}
@@ -7016,7 +7197,7 @@ would need to implement a copy-on-reference mechanism to ensure that arrays are
 conceptually distinct.}
 \end{itemdescr}
 
-\indexlibrary{\idxcode{valarray}!constructor}%
+\indexlibraryctor{valarray}%
 \begin{itemdecl}
 valarray(valarray&& v) noexcept;
 \end{itemdecl}
@@ -7029,20 +7210,22 @@ The elements are initialized with the values of the corresponding
 elements of \tcode{v}.
 
 \pnum
-\complexity Constant.
+\complexity
+Constant.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{valarray}!constructor}%
+\indexlibraryctor{valarray}%
 \begin{itemdecl}
 valarray(initializer_list<T> il);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to \tcode{valarray(il.begin(), il.size())}.
+\effects
+Equivalent to \tcode{valarray(il.begin(), il.size())}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{valarray}!constructor}%
+\indexlibraryctor{valarray}%
 \begin{itemdecl}
 valarray(const slice_array<T>&);
 valarray(const gslice_array<T>&);
@@ -7057,7 +7240,7 @@ to a
 \tcode{valarray}.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{valarray}!destructor}%
+\indexlibrarydtor{valarray}%
 \begin{itemdecl}
 ~valarray();
 \end{itemdecl}
@@ -7088,10 +7271,12 @@ resizes \tcode{*this} to make the two arrays the same length,
 as if by calling \tcode{resize(v.size())}, before performing the assignment.
 
 \pnum
-\ensures \tcode{size() == v.size()}.
+\ensures
+\tcode{size() == v.size()}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator=}{valarray}%
@@ -7101,14 +7286,17 @@ valarray& operator=(valarray&& v) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this} obtains the value of \tcode{v}.
+\effects
+\tcode{*this} obtains the value of \tcode{v}.
 The value of \tcode{v} after the assignment is not specified.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 
 \pnum
-\complexity Linear.
+\complexity
+Linear.
 \end{itemdescr}
 
 \indexlibrarymember{operator=}{valarray}%
@@ -7118,7 +7306,8 @@ valarray& operator=(initializer_list<T> il);
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to: \tcode{return *this = valarray(il);}
+\effects
+Equivalent to: \tcode{return *this = valarray(il);}
 \end{itemdescr}
 
 
@@ -7133,7 +7322,8 @@ valarray& operator=(const T& v);
 Assigns \tcode{v} to each element of \tcode{*this}.
 
 \pnum
-\returns \tcode{*this}.
+\returns
+\tcode{*this}.
 \end{itemdescr}
 
 \indexlibrarymember{operator=}{valarray}%
@@ -7146,7 +7336,8 @@ valarray& operator=(const indirect_array<T>&);
 
 \begin{itemdescr}
 \pnum
-\requires The length of the array to which the argument refers equals \tcode{size()}.
+\expects
+The length of the array to which the argument refers equals \tcode{size()}.
 The value of an element in the left-hand side of a \tcode{valarray} assignment
 operator does not depend on the value of another element in that left-hand side.
 
@@ -7166,8 +7357,8 @@ T& operator[](size_t n);
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{n < size()}.
+\expects
+\tcode{n < size()} is \tcode{true}.
 
 \pnum
 \returns
@@ -7192,7 +7383,8 @@ evaluates to \tcode{true} for any two arrays
 \tcode{size_t i} and \tcode{size_t j}
 such that \tcode{i < a.size()}
 and \tcode{j < b.size()}.
-\begin{note} This property indicates an absence of aliasing and may be used to
+\begin{note}
+This property indicates an absence of aliasing and may be used to
 advantage by optimizing compilers. Compilers may take advantage
 of inlining, constant propagation, loop fusion,
 tracking of pointers obtained from
@@ -7228,7 +7420,8 @@ valarray operator[](slice slicearr) const;
 
 \begin{itemdescr}
 \pnum
-\returns A \tcode{valarray} containing those
+\returns
+A \tcode{valarray} containing those
 elements of the controlled sequence designated by \tcode{slicearr}.
 \begin{example}
 \begin{codeblock}
@@ -7245,8 +7438,10 @@ slice_array<T> operator[](slice slicearr);
 
 \begin{itemdescr}
 \pnum
-\returns An object that holds references to elements of the controlled
-sequence selected by \tcode{slicearr}. \begin{example}
+\returns
+An object that holds references to elements of the controlled
+sequence selected by \tcode{slicearr}.
+\begin{example}
 \begin{codeblock}
 valarray<char> v0("abcdefghijklmnop", 16);
 valarray<char> v1("ABCDE", 5);
@@ -7263,7 +7458,8 @@ valarray operator[](const gslice& gslicearr) const;
 
 \begin{itemdescr}
 \pnum
-\returns A \tcode{valarray} containing those
+\returns
+A \tcode{valarray} containing those
 elements of the controlled sequence designated by \tcode{gslicearr}.
 \begin{example}
 \begin{codeblock}
@@ -7284,8 +7480,10 @@ gslice_array<T> operator[](const gslice& gslicearr);
 
 \begin{itemdescr}
 \pnum
-\returns An object that holds references to elements of the controlled
-sequence selected by \tcode{gslicearr}. \begin{example}
+\returns
+An object that holds references to elements of the controlled
+sequence selected by \tcode{gslicearr}.
+\begin{example}
 \begin{codeblock}
 valarray<char> v0("abcdefghijklmnop", 16);
 valarray<char> v1("ABCDEF", 6);
@@ -7305,7 +7503,8 @@ valarray operator[](const valarray<bool>& boolarr) const;
 
 \begin{itemdescr}
 \pnum
-\returns A \tcode{valarray} containing those
+\returns
+A \tcode{valarray} containing those
 elements of the controlled sequence designated by \tcode{boolarr}.
 \begin{example}
 \begin{codeblock}
@@ -7324,8 +7523,10 @@ mask_array<T> operator[](const valarray<bool>& boolarr);
 
 \begin{itemdescr}
 \pnum
-\returns An object that holds references to elements of the controlled
-sequence selected by \tcode{boolarr}. \begin{example}
+\returns
+An object that holds references to elements of the controlled
+sequence selected by \tcode{boolarr}.
+\begin{example}
 \begin{codeblock}
 valarray<char> v0("abcdefghijklmnop", 16);
 valarray<char> v1("ABC", 3);
@@ -7343,7 +7544,8 @@ valarray operator[](const valarray<size_t>& indarr) const;
 
 \begin{itemdescr}
 \pnum
-\returns A \tcode{valarray} containing those
+\returns
+A \tcode{valarray} containing those
 elements of the controlled sequence designated by \tcode{indarr}.
 \begin{example}
 \begin{codeblock}
@@ -7362,8 +7564,10 @@ indirect_array<T> operator[](const valarray<size_t>& indarr);
 
 \begin{itemdescr}
 \pnum
-\returns An object that holds references to elements of the controlled
-sequence selected by \tcode{indarr}. \begin{example}
+\returns
+An object that holds references to elements of the controlled
+sequence selected by \tcode{indarr}.
+\begin{example}
 \begin{codeblock}
 valarray<char> v0("abcdefghijklmnop", 16);
 valarray<char> v1("ABCDE", 5);
@@ -7389,15 +7593,15 @@ valarray<bool> operator!() const;
 
 \begin{itemdescr}
 \pnum
-\requires
-Each of these operators may only be instantiated for a type \tcode{T}
-to which the indicated operator can be applied and for which the indicated
-operator returns a value which is of type \tcode{T} (\tcode{bool} for
+\mandates
+The indicated operator can be applied to operands of type \tcode{T}
+and returns a value of type \tcode{T} (\tcode{bool} for
 \tcode{operator!}) or which may be unambiguously implicitly converted to type
 \tcode{T} (\tcode{bool} for \tcode{operator!}).
 
 \pnum
-\returns A \tcode{valarray} whose length is \tcode{size()}.
+\returns
+A \tcode{valarray} whose length is \tcode{size()}.
 Each element of the returned array is initialized with the result of
 applying the indicated operator to the corresponding element of the array.
 \end{itemdescr}
@@ -7429,10 +7633,13 @@ valarray& operator>>=(const valarray& v);
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{size() == v.size()}.
-Each of these operators may only be instantiated for a type \tcode{T}
-if the indicated operator can be applied to two operands of type \tcode{T}.
+\mandates
+The indicated operator can be applied to two operands of type \tcode{T}.
+
+\pnum
+\expects
+\tcode{size() == v.size()} is \tcode{true}.
+
 The value of an element in the left-hand side of a valarray compound
 assignment operator does not depend on the value of another element in that left
 hand side.
@@ -7478,9 +7685,8 @@ valarray& operator>>=(const T& v);
 
 \begin{itemdescr}
 \pnum
-\requires
-Each of these operators may only be instantiated for a type \tcode{T}
-if the indicated operator can be applied to two operands of type \tcode{T}.
+\mandates
+The indicated operator can be applied to two operands of type \tcode{T}.
 
 \pnum
 \effects
@@ -7507,11 +7713,13 @@ void swap(valarray& v) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects \tcode{*this} obtains the value of
+\effects
+\tcode{*this} obtains the value of
 \tcode{v}. \tcode{v} obtains the value of \tcode{*this}.
 
 \pnum
-\complexity Constant.
+\complexity
+Constant.
 \end{itemdescr}
 
 \indexlibrarymember{size}{valarray}%
@@ -7521,10 +7729,12 @@ size_t size() const;
 
 \begin{itemdescr}
 \pnum
-\returns The number of elements in the array.
+\returns
+The number of elements in the array.
 
 \pnum
-\complexity Constant time.
+\complexity
+Constant time.
 \end{itemdescr}
 
 \indexlibrarymember{sum}{valarray}%
@@ -7534,11 +7744,12 @@ T sum() const;
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{size() > 0}.
-This function may only be instantiated for a type \tcode{T} to which
-\tcode{operator+=}
-can be applied.
+\mandates
+\tcode{operator+=} can be applied to operands of type \tcode{T}.
+
+\pnum
+\expects
+\tcode{size() > 0} is \tcode{true}.
 
 \pnum
 \returns
@@ -7557,8 +7768,8 @@ T min() const;
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{size() > 0}
+\expects
+\tcode{size() > 0} is \tcode{true}.
 
 \pnum
 \returns
@@ -7576,8 +7787,8 @@ T max() const;
 
 \begin{itemdescr}
 \pnum
-\requires
-\tcode{size() > 0}.
+\expects
+\tcode{size() > 0} is \tcode{true}.
 
 \pnum
 \returns
@@ -7688,11 +7899,13 @@ template<class T> valarray<T> operator>>(const valarray<T>&, const valarray<T>&)
 
 \begin{itemdescr}
 \pnum
-\requires
-Each of these operators may only be instantiated for a type \tcode{T}
-to which the indicated operator can be applied and for which the indicated
-operator returns a value which is of type \tcode{T} or which
-can be unambiguously implicitly converted to type \tcode{T}.
+\mandates
+The indicated operator can be applied to operands of type \tcode{T} and returns
+a value of type \tcode{T} or which can be unambiguously
+implicitly converted to \tcode{T}.
+
+\pnum
+\expects
 The argument arrays have the same length.
 
 \pnum
@@ -7759,11 +7972,10 @@ template<class T> valarray<T> operator>>(const typename valarray<T>::value_type&
 
 \begin{itemdescr}
 \pnum
-\requires
-Each of these operators may only be instantiated for a type \tcode{T}
-to which the indicated operator can be applied and for which
-the indicated operator returns a value which is of type \tcode{T}
-or which can be unambiguously implicitly converted to type \tcode{T}.
+\mandates
+The indicated operator can be applied to operands of type \tcode{T} and returns
+a value of type \tcode{T} or which can be unambiguously
+implicitly converted to \tcode{T}.
 
 \pnum
 \returns
@@ -7797,11 +8009,13 @@ template<class T> valarray<bool> operator||(const valarray<T>&, const valarray<T
 
 \begin{itemdescr}
 \pnum
-\requires
-Each of these operators may only be instantiated for a type \tcode{T}
-to which the indicated operator can be applied and for which
-the indicated operator returns a value which is of type \tcode{bool}
-or which can be unambiguously implicitly converted to type \tcode{bool}.
+\mandates
+The indicated operator can be applied to operands of type \tcode{T} and returns
+a value of type \tcode{bool} or which can be unambiguously
+implicitly converted to \tcode{bool}.
+
+\pnum
+\expects
 The two array arguments have the same length.
 \indextext{undefined}
 
@@ -7859,11 +8073,10 @@ template<class T> valarray<bool> operator||(const typename valarray<T>::value_ty
 
 \begin{itemdescr}
 \pnum
-\requires
-Each of these operators may only be instantiated for a type \tcode{T}
-to which the indicated operator can be applied and for which
-the indicated operator returns a value which is of type \tcode{bool}
-or which can be unambiguously implicitly converted to type \tcode{bool}.
+\mandates
+The indicated operator can be applied to operands of type \tcode{T} and returns
+a value of type \tcode{bool} or which can be unambiguously
+implicitly converted to \tcode{bool}.
 
 \pnum
 \returns
@@ -7876,22 +8089,22 @@ indicated operator to the corresponding element of the array and the non-array a
 
 \rSec3[valarray.transcend]{Transcendentals}
 
-\indexlibrary{\idxcode{abs}!\idxcode{valarray}}%
-\indexlibrary{\idxcode{acos}!\idxcode{valarray}}%
-\indexlibrary{\idxcode{asin}!\idxcode{valarray}}%
-\indexlibrary{\idxcode{atan}!\idxcode{valarray}}%
-\indexlibrary{\idxcode{atan2}!\idxcode{valarray}}%
-\indexlibrary{\idxcode{cos}!\idxcode{valarray}}%
-\indexlibrary{\idxcode{cosh}!\idxcode{valarray}}%
-\indexlibrary{\idxcode{exp}!\idxcode{valarray}}%
-\indexlibrary{\idxcode{log}!\idxcode{valarray}}%
-\indexlibrary{\idxcode{log10}!\idxcode{valarray}}%
-\indexlibrary{\idxcode{pow}!\idxcode{valarray}}%
-\indexlibrary{\idxcode{sin}!\idxcode{valarray}}%
-\indexlibrary{\idxcode{sinh}!\idxcode{valarray}}%
-\indexlibrary{\idxcode{sqrt}!\idxcode{valarray}}%
-\indexlibrary{\idxcode{tan}!\idxcode{valarray}}%
-\indexlibrary{\idxcode{tanh}!\idxcode{valarray}}%
+\indexlibrarymember{abs}{valarray}%
+\indexlibrarymember{acos}{valarray}%
+\indexlibrarymember{asin}{valarray}%
+\indexlibrarymember{atan}{valarray}%
+\indexlibrarymember{atan2}{valarray}%
+\indexlibrarymember{cos}{valarray}%
+\indexlibrarymember{cosh}{valarray}%
+\indexlibrarymember{exp}{valarray}%
+\indexlibrarymember{log}{valarray}%
+\indexlibrarymember{log10}{valarray}%
+\indexlibrarymember{pow}{valarray}%
+\indexlibrarymember{sin}{valarray}%
+\indexlibrarymember{sinh}{valarray}%
+\indexlibrarymember{sqrt}{valarray}%
+\indexlibrarymember{tan}{valarray}%
+\indexlibrarymember{tanh}{valarray}%
 \begin{itemdecl}
 template<class T> valarray<T> abs  (const valarray<T>&);
 template<class T> valarray<T> acos (const valarray<T>&);
@@ -7917,11 +8130,12 @@ template<class T> valarray<T> tanh (const valarray<T>&);
 
 \begin{itemdescr}
 \pnum
-\requires
-Each of these functions may only be instantiated for a type \tcode{T}
-to which a unique function with the indicated name can be applied (unqualified).
-This function shall return a value which is of type \tcode{T}
+\mandates
+A unique function with the indicated name can be applied (unqualified)
+to an operand of type \tcode{T}.
+This function returns a value of type \tcode{T}
 or which can be unambiguously implicitly converted to type \tcode{T}.
+
 \end{itemdescr}
 
 \rSec3[valarray.special]{Specialized algorithms}
@@ -7933,7 +8147,8 @@ template<class T> void swap(valarray<T>& x, valarray<T>& y) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects Equivalent to \tcode{x.swap(y)}.
+\effects
+Equivalent to \tcode{x.swap(y)}.
 \end{itemdescr}
 
 
@@ -7941,7 +8156,7 @@ template<class T> void swap(valarray<T>& x, valarray<T>& y) noexcept;
 
 \rSec3[class.slice.overview]{Overview}
 
-\indexlibrary{\idxcode{slice}}%
+\indexlibraryglobal{slice}%
 \begin{codeblock}
 namespace std {
   class slice {
@@ -7975,7 +8190,7 @@ August, 1988.}
 
 \rSec3[cons.slice]{Constructors}
 
-\indexlibrary{\idxcode{slice}!constructor}%
+\indexlibraryctor{slice}%
 \begin{itemdecl}
 slice();
 slice(size_t start, size_t length, size_t stride);
@@ -8008,11 +8223,13 @@ size_t stride() const;
 
 \begin{itemdescr}
 \pnum
-\returns The start, length, or stride specified
+\returns
+The start, length, or stride specified
 by a \tcode{slice} object.
 
 \pnum
-\complexity Constant time.
+\complexity
+Constant time.
 \end{itemdescr}
 
 \rSec3[slice.ops]{Operators}
@@ -8035,7 +8252,7 @@ return x.start() == y.start() && x.size() == y.size() && x.stride() == y.stride(
 
 \rSec3[template.slice.array.overview]{Overview}
 
-\indexlibrary{\idxcode{slice_array}}%
+\indexlibraryglobal{slice_array}%
 \indexlibrarymember{value_type}{slice_array}%
 \begin{codeblock}
 namespace std {
@@ -8060,7 +8277,7 @@ namespace std {
     const slice_array& operator=(const slice_array&) const;
     void operator=(const T&) const;
 
-    slice_array() = delete;       // as implied by declaring copy constructor above
+    slice_array() = delete;     // as implied by declaring copy constructor above
   };
 }
 \end{codeblock}
@@ -8091,7 +8308,7 @@ are $1, 4, \dotsc, 13$.
 
 \rSec3[slice.arr.assign]{Assignment}
 
-\indexlibrary{\idxcode{operator=}!\idxcode{slice_array}}%
+\indexlibrarymember{operator=}{slice_array}%
 \begin{itemdecl}
 void operator=(const valarray<T>&) const;
 const slice_array& operator=(const slice_array&) const;
@@ -8165,7 +8382,7 @@ object refers.
 
 \rSec3[class.gslice.overview]{Overview}
 
-\indexlibrary{\idxcode{gslice}}%
+\indexlibraryglobal{gslice}%
 \begin{codeblock}
 namespace std {
   class gslice {
@@ -8273,7 +8490,7 @@ the behavior is undefined.
 
 \rSec3[gslice.cons]{Constructors}
 
-\indexlibrary{\idxcode{gslice}!constructor}%
+\indexlibraryctor{gslice}%
 \begin{itemdecl}
 gslice();
 gslice(size_t start, const valarray<size_t>& lengths,
@@ -8304,11 +8521,13 @@ valarray<size_t> stride() const;
 
 \begin{itemdescr}
 \pnum
-\returns The representation of the
+\returns
+The representation of the
 start, lengths, or strides specified for the \tcode{gslice}.
 
 \pnum
-\complexity \tcode{start()} is constant time. \tcode{size()} and \tcode{stride()}
+\complexity
+\tcode{start()} is constant time. \tcode{size()} and \tcode{stride()}
 are linear in the number of strides.
 \end{itemdescr}
 
@@ -8316,7 +8535,7 @@ are linear in the number of strides.
 
 \rSec3[template.gslice.array.overview]{Overview}
 
-\indexlibrary{\idxcode{gslice_array}}%
+\indexlibraryglobal{gslice_array}%
 \indexlibrarymember{value_type}{gslice_array}%
 \begin{codeblock}
 namespace std {
@@ -8341,7 +8560,7 @@ namespace std {
     const gslice_array& operator=(const gslice_array&) const;
     void operator=(const T&) const;
 
-    gslice_array() = delete;      // as implied by declaring copy constructor above
+    gslice_array() = delete;    // as implied by declaring copy constructor above
   };
 }
 \end{codeblock}
@@ -8351,8 +8570,8 @@ This template is a helper template used by the
 \tcode{gslice}
 subscript operator
 
-\indexlibrary{\idxcode{gslice_array}}%
-\indexlibrary{\idxcode{valarray}}%
+\indexlibraryglobal{gslice_array}%
+\indexlibraryglobal{valarray}%
 \begin{itemdecl}
 gslice_array<T> valarray<T>::operator[](const gslice&);
 \end{itemdecl}
@@ -8444,7 +8663,7 @@ object refers.
 
 \rSec3[template.mask.array.overview]{Overview}
 
-\indexlibrary{\idxcode{mask_array}}%
+\indexlibraryglobal{mask_array}%
 \indexlibrarymember{value_type}{mask_array}%
 \begin{codeblock}
 namespace std {
@@ -8469,7 +8688,7 @@ namespace std {
     const mask_array& operator=(const mask_array&) const;
     void operator=(const T&) const;
 
-    mask_array() = delete;        // as implied by declaring copy constructor above
+    mask_array() = delete;      // as implied by declaring copy constructor above
   };
 }
 \end{codeblock}
@@ -8561,7 +8780,7 @@ object refers.
 
 \rSec3[template.indirect.array.overview]{Overview}
 
-\indexlibrary{\idxcode{indirect_array}}%
+\indexlibraryglobal{indirect_array}%
 \indexlibrarymember{value_type}{indirect_array}%
 \begin{codeblock}
 namespace std {
@@ -8586,7 +8805,7 @@ namespace std {
     const indirect_array& operator=(const indirect_array&) const;
     void operator=(const T&) const;
 
-    indirect_array() = delete;        // as implied by declaring copy constructor above
+    indirect_array() = delete;  // as implied by declaring copy constructor above
   };
 }
 \end{codeblock}
@@ -8730,7 +8949,7 @@ are guaranteed to be valid until the member function
 array or until the lifetime of that array ends, whichever happens
 first.
 
-\indexlibrary{\idxcode{begin}!\idxcode{valarray}}%
+\indexlibrarymember{begin}{valarray}%
 \begin{itemdecl}
 template<class T> @\unspec{1}@ begin(valarray<T>& v);
 template<class T> @\unspec{2}@ begin(const valarray<T>& v);
@@ -8738,10 +8957,11 @@ template<class T> @\unspec{2}@ begin(const valarray<T>& v);
 
 \begin{itemdescr}
 \pnum
-\returns An iterator referencing the first value in the array.
+\returns
+An iterator referencing the first value in the array.
 \end{itemdescr}
 
-\indexlibrary{\idxcode{end}!\idxcode{valarray}}%
+\indexlibrarymember{end}{valarray}%
 \begin{itemdecl}
 template<class T> @\unspec{1}@ end(valarray<T>& v);
 template<class T> @\unspec{2}@ end(const valarray<T>& v);
@@ -8749,218 +8969,219 @@ template<class T> @\unspec{2}@ end(const valarray<T>& v);
 
 \begin{itemdescr}
 \pnum
-\returns An iterator referencing one past the last value in the array.
+\returns
+An iterator referencing one past the last value in the array.
 \end{itemdescr}
 
 \rSec1[c.math]{Mathematical functions for floating-point types}
 
 \rSec2[cmath.syn]{Header \tcode{<cmath>} synopsis}
 
-\indexhdr{cmath}%
-\indexlibrary{\idxcode{FP_FAST_FMA}}%
-\indexlibrary{\idxcode{FP_FAST_FMAF}}%
-\indexlibrary{\idxcode{FP_FAST_FMAL}}%
-\indexlibrary{\idxcode{FP_ILOGB0}}%
-\indexlibrary{\idxcode{FP_ILOGBNAN}}%
-\indexlibrary{\idxcode{FP_INFINITE}}%
-\indexlibrary{\idxcode{FP_NAN}}%
-\indexlibrary{\idxcode{FP_NORMAL}}%
-\indexlibrary{\idxcode{FP_SUBNORMAL}}%
-\indexlibrary{\idxcode{FP_ZERO}}%
-\indexlibrary{\idxcode{HUGE_VAL}}%
-\indexlibrary{\idxcode{HUGE_VALF}}%
-\indexlibrary{\idxcode{HUGE_VALL}}%
-\indexlibrary{\idxcode{INFINITY}}%
-\indexlibrary{\idxcode{MATH_ERREXCEPT}}%
-\indexlibrary{\idxcode{MATH_ERRNO}}%
-\indexlibrary{\idxcode{NAN}}%
-\indexlibrary{\idxcode{abs}}%
-\indexlibrary{\idxcode{acos}}%
-\indexlibrary{\idxcode{acosf}}%
-\indexlibrary{\idxcode{acosh}}%
-\indexlibrary{\idxcode{acoshf}}%
-\indexlibrary{\idxcode{acoshl}}%
-\indexlibrary{\idxcode{acosl}}%
-\indexlibrary{\idxcode{asin}}%
-\indexlibrary{\idxcode{asinf}}%
-\indexlibrary{\idxcode{asinh}}%
-\indexlibrary{\idxcode{asinhf}}%
-\indexlibrary{\idxcode{asinhl}}%
-\indexlibrary{\idxcode{asinl}}%
-\indexlibrary{\idxcode{atan}}%
-\indexlibrary{\idxcode{atan2}}%
-\indexlibrary{\idxcode{atan2f}}%
-\indexlibrary{\idxcode{atan2l}}%
-\indexlibrary{\idxcode{atanf}}%
-\indexlibrary{\idxcode{atanh}}%
-\indexlibrary{\idxcode{atanhf}}%
-\indexlibrary{\idxcode{atanhl}}%
-\indexlibrary{\idxcode{atanl}}%
-\indexlibrary{\idxcode{cbrt}}%
-\indexlibrary{\idxcode{cbrtf}}%
-\indexlibrary{\idxcode{cbrtl}}%
-\indexlibrary{\idxcode{ceil}}%
-\indexlibrary{\idxcode{ceilf}}%
-\indexlibrary{\idxcode{ceill}}%
-\indexlibrary{\idxcode{copysign}}%
-\indexlibrary{\idxcode{copysignf}}%
-\indexlibrary{\idxcode{copysignl}}%
-\indexlibrary{\idxcode{cos}}%
-\indexlibrary{\idxcode{cosf}}%
-\indexlibrary{\idxcode{cosh}}%
-\indexlibrary{\idxcode{coshf}}%
-\indexlibrary{\idxcode{coshl}}%
-\indexlibrary{\idxcode{cosl}}%
-\indexlibrary{\idxcode{double_t}}%
-\indexlibrary{\idxcode{erf}}%
-\indexlibrary{\idxcode{erfc}}%
-\indexlibrary{\idxcode{erfcf}}%
-\indexlibrary{\idxcode{erfcl}}%
-\indexlibrary{\idxcode{erff}}%
-\indexlibrary{\idxcode{erfl}}%
-\indexlibrary{\idxcode{exp}}%
-\indexlibrary{\idxcode{exp2}}%
-\indexlibrary{\idxcode{exp2f}}%
-\indexlibrary{\idxcode{exp2l}}%
-\indexlibrary{\idxcode{expf}}%
-\indexlibrary{\idxcode{expl}}%
-\indexlibrary{\idxcode{expm1}}%
-\indexlibrary{\idxcode{expm1f}}%
-\indexlibrary{\idxcode{expm1l}}%
-\indexlibrary{\idxcode{fabs}}%
-\indexlibrary{\idxcode{fabsf}}%
-\indexlibrary{\idxcode{fabsl}}%
-\indexlibrary{\idxcode{fdim}}%
-\indexlibrary{\idxcode{fdimf}}%
-\indexlibrary{\idxcode{fdiml}}%
-\indexlibrary{\idxcode{float_t}}%
-\indexlibrary{\idxcode{floor}}%
-\indexlibrary{\idxcode{floorf}}%
-\indexlibrary{\idxcode{floorl}}%
-\indexlibrary{\idxcode{fma}}%
-\indexlibrary{\idxcode{fmaf}}%
-\indexlibrary{\idxcode{fmal}}%
-\indexlibrary{\idxcode{fmax}}%
-\indexlibrary{\idxcode{fmaxf}}%
-\indexlibrary{\idxcode{fmaxl}}%
-\indexlibrary{\idxcode{fmin}}%
-\indexlibrary{\idxcode{fminf}}%
-\indexlibrary{\idxcode{fminl}}%
-\indexlibrary{\idxcode{fmod}}%
-\indexlibrary{\idxcode{fmodf}}%
-\indexlibrary{\idxcode{fmodl}}%
-\indexlibrary{\idxcode{fpclassify}}%
-\indexlibrary{\idxcode{frexp}}%
-\indexlibrary{\idxcode{frexpf}}%
-\indexlibrary{\idxcode{frexpl}}%
-\indexlibrary{\idxcode{hypot}}%
-\indexlibrary{\idxcode{hypotf}}%
-\indexlibrary{\idxcode{hypotl}}%
-\indexlibrary{\idxcode{ilogb}}%
-\indexlibrary{\idxcode{ilogbf}}%
-\indexlibrary{\idxcode{ilogbl}}%
-\indexlibrary{\idxcode{isfinite}}%
-\indexlibrary{\idxcode{isgreater}}%
-\indexlibrary{\idxcode{isgreaterequal}}%
-\indexlibrary{\idxcode{isinf}}%
-\indexlibrary{\idxcode{isless}}%
-\indexlibrary{\idxcode{islessequal}}%
-\indexlibrary{\idxcode{islessgreater}}%
-\indexlibrary{\idxcode{isnan}}%
-\indexlibrary{\idxcode{isnormal}}%
-\indexlibrary{\idxcode{isunordered}}%
-\indexlibrary{\idxcode{ldexp}}%
-\indexlibrary{\idxcode{ldexpf}}%
-\indexlibrary{\idxcode{ldexpl}}%
-\indexlibrary{\idxcode{lgamma}}%
-\indexlibrary{\idxcode{lgammaf}}%
-\indexlibrary{\idxcode{lgammal}}%
-\indexlibrary{\idxcode{llrint}}%
-\indexlibrary{\idxcode{llrintf}}%
-\indexlibrary{\idxcode{llrintl}}%
-\indexlibrary{\idxcode{llround}}%
-\indexlibrary{\idxcode{llroundf}}%
-\indexlibrary{\idxcode{llroundl}}%
-\indexlibrary{\idxcode{log}}%
-\indexlibrary{\idxcode{log10}}%
-\indexlibrary{\idxcode{log10f}}%
-\indexlibrary{\idxcode{log10l}}%
-\indexlibrary{\idxcode{log1p}}%
-\indexlibrary{\idxcode{log1pf}}%
-\indexlibrary{\idxcode{log1pl}}%
-\indexlibrary{\idxcode{log2}}%
-\indexlibrary{\idxcode{log2f}}%
-\indexlibrary{\idxcode{log2l}}%
-\indexlibrary{\idxcode{logb}}%
-\indexlibrary{\idxcode{logbf}}%
-\indexlibrary{\idxcode{logbl}}%
-\indexlibrary{\idxcode{logf}}%
-\indexlibrary{\idxcode{logl}}%
-\indexlibrary{\idxcode{lrint}}%
-\indexlibrary{\idxcode{lrintf}}%
-\indexlibrary{\idxcode{lrintl}}%
-\indexlibrary{\idxcode{lround}}%
-\indexlibrary{\idxcode{lroundf}}%
-\indexlibrary{\idxcode{lroundl}}%
-\indexlibrary{\idxcode{math_errhandling}}%
-\indexlibrary{\idxcode{modf}}%
-\indexlibrary{\idxcode{modff}}%
-\indexlibrary{\idxcode{modfl}}%
-\indexlibrary{\idxcode{nan}}%
-\indexlibrary{\idxcode{nanf}}%
-\indexlibrary{\idxcode{nanl}}%
-\indexlibrary{\idxcode{nearbyint}}%
-\indexlibrary{\idxcode{nearbyintf}}%
-\indexlibrary{\idxcode{nearbyintl}}%
-\indexlibrary{\idxcode{nextafter}}%
-\indexlibrary{\idxcode{nextafterf}}%
-\indexlibrary{\idxcode{nextafterl}}%
-\indexlibrary{\idxcode{nexttoward}}%
-\indexlibrary{\idxcode{nexttowardf}}%
-\indexlibrary{\idxcode{nexttowardl}}%
-\indexlibrary{\idxcode{pow}}%
-\indexlibrary{\idxcode{powf}}%
-\indexlibrary{\idxcode{powl}}%
-\indexlibrary{\idxcode{remainder}}%
-\indexlibrary{\idxcode{remainderf}}%
-\indexlibrary{\idxcode{remainderl}}%
-\indexlibrary{\idxcode{remquo}}%
-\indexlibrary{\idxcode{remquof}}%
-\indexlibrary{\idxcode{remquol}}%
-\indexlibrary{\idxcode{rint}}%
-\indexlibrary{\idxcode{rintf}}%
-\indexlibrary{\idxcode{rintl}}%
-\indexlibrary{\idxcode{round}}%
-\indexlibrary{\idxcode{roundf}}%
-\indexlibrary{\idxcode{roundl}}%
-\indexlibrary{\idxcode{scalbln}}%
-\indexlibrary{\idxcode{scalblnf}}%
-\indexlibrary{\idxcode{scalblnl}}%
-\indexlibrary{\idxcode{scalbn}}%
-\indexlibrary{\idxcode{scalbnf}}%
-\indexlibrary{\idxcode{scalbnl}}%
-\indexlibrary{\idxcode{signbit}}%
-\indexlibrary{\idxcode{sin}}%
-\indexlibrary{\idxcode{sinf}}%
-\indexlibrary{\idxcode{sinh}}%
-\indexlibrary{\idxcode{sinhf}}%
-\indexlibrary{\idxcode{sinhl}}%
-\indexlibrary{\idxcode{sinl}}%
-\indexlibrary{\idxcode{sqrt}}%
-\indexlibrary{\idxcode{sqrtf}}%
-\indexlibrary{\idxcode{sqrtl}}%
-\indexlibrary{\idxcode{tan}}%
-\indexlibrary{\idxcode{tanf}}%
-\indexlibrary{\idxcode{tanh}}%
-\indexlibrary{\idxcode{tanhf}}%
-\indexlibrary{\idxcode{tanhl}}%
-\indexlibrary{\idxcode{tanl}}%
-\indexlibrary{\idxcode{tgamma}}%
-\indexlibrary{\idxcode{tgammaf}}%
-\indexlibrary{\idxcode{tgammal}}%
-\indexlibrary{\idxcode{trunc}}%
-\indexlibrary{\idxcode{truncf}}%
-\indexlibrary{\idxcode{truncl}}%
+\indexheader{cmath}%
+\indexlibraryglobal{FP_FAST_FMA}%
+\indexlibraryglobal{FP_FAST_FMAF}%
+\indexlibraryglobal{FP_FAST_FMAL}%
+\indexlibraryglobal{FP_ILOGB0}%
+\indexlibraryglobal{FP_ILOGBNAN}%
+\indexlibraryglobal{FP_INFINITE}%
+\indexlibraryglobal{FP_NAN}%
+\indexlibraryglobal{FP_NORMAL}%
+\indexlibraryglobal{FP_SUBNORMAL}%
+\indexlibraryglobal{FP_ZERO}%
+\indexlibraryglobal{HUGE_VAL}%
+\indexlibraryglobal{HUGE_VALF}%
+\indexlibraryglobal{HUGE_VALL}%
+\indexlibraryglobal{INFINITY}%
+\indexlibraryglobal{MATH_ERREXCEPT}%
+\indexlibraryglobal{MATH_ERRNO}%
+\indexlibraryglobal{NAN}%
+\indexlibraryglobal{abs}%
+\indexlibraryglobal{acos}%
+\indexlibraryglobal{acosf}%
+\indexlibraryglobal{acosh}%
+\indexlibraryglobal{acoshf}%
+\indexlibraryglobal{acoshl}%
+\indexlibraryglobal{acosl}%
+\indexlibraryglobal{asin}%
+\indexlibraryglobal{asinf}%
+\indexlibraryglobal{asinh}%
+\indexlibraryglobal{asinhf}%
+\indexlibraryglobal{asinhl}%
+\indexlibraryglobal{asinl}%
+\indexlibraryglobal{atan}%
+\indexlibraryglobal{atan2}%
+\indexlibraryglobal{atan2f}%
+\indexlibraryglobal{atan2l}%
+\indexlibraryglobal{atanf}%
+\indexlibraryglobal{atanh}%
+\indexlibraryglobal{atanhf}%
+\indexlibraryglobal{atanhl}%
+\indexlibraryglobal{atanl}%
+\indexlibraryglobal{cbrt}%
+\indexlibraryglobal{cbrtf}%
+\indexlibraryglobal{cbrtl}%
+\indexlibraryglobal{ceil}%
+\indexlibraryglobal{ceilf}%
+\indexlibraryglobal{ceill}%
+\indexlibraryglobal{copysign}%
+\indexlibraryglobal{copysignf}%
+\indexlibraryglobal{copysignl}%
+\indexlibraryglobal{cos}%
+\indexlibraryglobal{cosf}%
+\indexlibraryglobal{cosh}%
+\indexlibraryglobal{coshf}%
+\indexlibraryglobal{coshl}%
+\indexlibraryglobal{cosl}%
+\indexlibraryglobal{double_t}%
+\indexlibraryglobal{erf}%
+\indexlibraryglobal{erfc}%
+\indexlibraryglobal{erfcf}%
+\indexlibraryglobal{erfcl}%
+\indexlibraryglobal{erff}%
+\indexlibraryglobal{erfl}%
+\indexlibraryglobal{exp}%
+\indexlibraryglobal{exp2}%
+\indexlibraryglobal{exp2f}%
+\indexlibraryglobal{exp2l}%
+\indexlibraryglobal{expf}%
+\indexlibraryglobal{expl}%
+\indexlibraryglobal{expm1}%
+\indexlibraryglobal{expm1f}%
+\indexlibraryglobal{expm1l}%
+\indexlibraryglobal{fabs}%
+\indexlibraryglobal{fabsf}%
+\indexlibraryglobal{fabsl}%
+\indexlibraryglobal{fdim}%
+\indexlibraryglobal{fdimf}%
+\indexlibraryglobal{fdiml}%
+\indexlibraryglobal{float_t}%
+\indexlibraryglobal{floor}%
+\indexlibraryglobal{floorf}%
+\indexlibraryglobal{floorl}%
+\indexlibraryglobal{fma}%
+\indexlibraryglobal{fmaf}%
+\indexlibraryglobal{fmal}%
+\indexlibraryglobal{fmax}%
+\indexlibraryglobal{fmaxf}%
+\indexlibraryglobal{fmaxl}%
+\indexlibraryglobal{fmin}%
+\indexlibraryglobal{fminf}%
+\indexlibraryglobal{fminl}%
+\indexlibraryglobal{fmod}%
+\indexlibraryglobal{fmodf}%
+\indexlibraryglobal{fmodl}%
+\indexlibraryglobal{fpclassify}%
+\indexlibraryglobal{frexp}%
+\indexlibraryglobal{frexpf}%
+\indexlibraryglobal{frexpl}%
+\indexlibraryglobal{hypot}%
+\indexlibraryglobal{hypotf}%
+\indexlibraryglobal{hypotl}%
+\indexlibraryglobal{ilogb}%
+\indexlibraryglobal{ilogbf}%
+\indexlibraryglobal{ilogbl}%
+\indexlibraryglobal{isfinite}%
+\indexlibraryglobal{isgreater}%
+\indexlibraryglobal{isgreaterequal}%
+\indexlibraryglobal{isinf}%
+\indexlibraryglobal{isless}%
+\indexlibraryglobal{islessequal}%
+\indexlibraryglobal{islessgreater}%
+\indexlibraryglobal{isnan}%
+\indexlibraryglobal{isnormal}%
+\indexlibraryglobal{isunordered}%
+\indexlibraryglobal{ldexp}%
+\indexlibraryglobal{ldexpf}%
+\indexlibraryglobal{ldexpl}%
+\indexlibraryglobal{lgamma}%
+\indexlibraryglobal{lgammaf}%
+\indexlibraryglobal{lgammal}%
+\indexlibraryglobal{llrint}%
+\indexlibraryglobal{llrintf}%
+\indexlibraryglobal{llrintl}%
+\indexlibraryglobal{llround}%
+\indexlibraryglobal{llroundf}%
+\indexlibraryglobal{llroundl}%
+\indexlibraryglobal{log}%
+\indexlibraryglobal{log10}%
+\indexlibraryglobal{log10f}%
+\indexlibraryglobal{log10l}%
+\indexlibraryglobal{log1p}%
+\indexlibraryglobal{log1pf}%
+\indexlibraryglobal{log1pl}%
+\indexlibraryglobal{log2}%
+\indexlibraryglobal{log2f}%
+\indexlibraryglobal{log2l}%
+\indexlibraryglobal{logb}%
+\indexlibraryglobal{logbf}%
+\indexlibraryglobal{logbl}%
+\indexlibraryglobal{logf}%
+\indexlibraryglobal{logl}%
+\indexlibraryglobal{lrint}%
+\indexlibraryglobal{lrintf}%
+\indexlibraryglobal{lrintl}%
+\indexlibraryglobal{lround}%
+\indexlibraryglobal{lroundf}%
+\indexlibraryglobal{lroundl}%
+\indexlibraryglobal{math_errhandling}%
+\indexlibraryglobal{modf}%
+\indexlibraryglobal{modff}%
+\indexlibraryglobal{modfl}%
+\indexlibraryglobal{nan}%
+\indexlibraryglobal{nanf}%
+\indexlibraryglobal{nanl}%
+\indexlibraryglobal{nearbyint}%
+\indexlibraryglobal{nearbyintf}%
+\indexlibraryglobal{nearbyintl}%
+\indexlibraryglobal{nextafter}%
+\indexlibraryglobal{nextafterf}%
+\indexlibraryglobal{nextafterl}%
+\indexlibraryglobal{nexttoward}%
+\indexlibraryglobal{nexttowardf}%
+\indexlibraryglobal{nexttowardl}%
+\indexlibraryglobal{pow}%
+\indexlibraryglobal{powf}%
+\indexlibraryglobal{powl}%
+\indexlibraryglobal{remainder}%
+\indexlibraryglobal{remainderf}%
+\indexlibraryglobal{remainderl}%
+\indexlibraryglobal{remquo}%
+\indexlibraryglobal{remquof}%
+\indexlibraryglobal{remquol}%
+\indexlibraryglobal{rint}%
+\indexlibraryglobal{rintf}%
+\indexlibraryglobal{rintl}%
+\indexlibraryglobal{round}%
+\indexlibraryglobal{roundf}%
+\indexlibraryglobal{roundl}%
+\indexlibraryglobal{scalbln}%
+\indexlibraryglobal{scalblnf}%
+\indexlibraryglobal{scalblnl}%
+\indexlibraryglobal{scalbn}%
+\indexlibraryglobal{scalbnf}%
+\indexlibraryglobal{scalbnl}%
+\indexlibraryglobal{signbit}%
+\indexlibraryglobal{sin}%
+\indexlibraryglobal{sinf}%
+\indexlibraryglobal{sinh}%
+\indexlibraryglobal{sinhf}%
+\indexlibraryglobal{sinhl}%
+\indexlibraryglobal{sinl}%
+\indexlibraryglobal{sqrt}%
+\indexlibraryglobal{sqrtf}%
+\indexlibraryglobal{sqrtl}%
+\indexlibraryglobal{tan}%
+\indexlibraryglobal{tanf}%
+\indexlibraryglobal{tanh}%
+\indexlibraryglobal{tanhf}%
+\indexlibraryglobal{tanhl}%
+\indexlibraryglobal{tanl}%
+\indexlibraryglobal{tgamma}%
+\indexlibraryglobal{tgammaf}%
+\indexlibraryglobal{tgammal}%
+\indexlibraryglobal{trunc}%
+\indexlibraryglobal{truncf}%
+\indexlibraryglobal{truncl}%
 \begin{codeblock}
 namespace std {
   using float_t = @\seebelow@;
@@ -9000,159 +9221,159 @@ namespace std {
   float asinf(float x);
   long double asinl(long double x);
 
-  float atan(float x);  // see \ref{library.c}
+  float atan(float x);                  // see \ref{library.c}
   double atan(double x);
-  long double atan(long double x);  // see \ref{library.c}
+  long double atan(long double x);      // see \ref{library.c}
   float atanf(float x);
   long double atanl(long double x);
 
-  float atan2(float y, float x);  // see \ref{library.c}
+  float atan2(float y, float x);        // see \ref{library.c}
   double atan2(double y, double x);
   long double atan2(long double y, long double x);  // see \ref{library.c}
   float atan2f(float y, float x);
   long double atan2l(long double y, long double x);
 
-  float cos(float x);  // see \ref{library.c}
+  float cos(float x);                   // see \ref{library.c}
   double cos(double x);
-  long double cos(long double x);  // see \ref{library.c}
+  long double cos(long double x);       // see \ref{library.c}
   float cosf(float x);
   long double cosl(long double x);
 
-  float sin(float x);  // see \ref{library.c}
+  float sin(float x);                   // see \ref{library.c}
   double sin(double x);
-  long double sin(long double x);  // see \ref{library.c}
+  long double sin(long double x);       // see \ref{library.c}
   float sinf(float x);
   long double sinl(long double x);
 
-  float tan(float x);  // see \ref{library.c}
+  float tan(float x);                   // see \ref{library.c}
   double tan(double x);
-  long double tan(long double x);  // see \ref{library.c}
+  long double tan(long double x);       // see \ref{library.c}
   float tanf(float x);
   long double tanl(long double x);
 
-  float acosh(float x);  // see \ref{library.c}
+  float acosh(float x);                 // see \ref{library.c}
   double acosh(double x);
-  long double acosh(long double x);  // see \ref{library.c}
+  long double acosh(long double x);     // see \ref{library.c}
   float acoshf(float x);
   long double acoshl(long double x);
 
-  float asinh(float x);  // see \ref{library.c}
+  float asinh(float x);                 // see \ref{library.c}
   double asinh(double x);
-  long double asinh(long double x);  // see \ref{library.c}
+  long double asinh(long double x);     // see \ref{library.c}
   float asinhf(float x);
   long double asinhl(long double x);
 
-  float atanh(float x);  // see \ref{library.c}
+  float atanh(float x);                 // see \ref{library.c}
   double atanh(double x);
-  long double atanh(long double x);  // see \ref{library.c}
+  long double atanh(long double x);     // see \ref{library.c}
   float atanhf(float x);
   long double atanhl(long double x);
 
-  float cosh(float x);  // see \ref{library.c}
+  float cosh(float x);                  // see \ref{library.c}
   double cosh(double x);
-  long double cosh(long double x);  // see \ref{library.c}
+  long double cosh(long double x);      // see \ref{library.c}
   float coshf(float x);
   long double coshl(long double x);
 
-  float sinh(float x);  // see \ref{library.c}
+  float sinh(float x);                  // see \ref{library.c}
   double sinh(double x);
-  long double sinh(long double x);  // see \ref{library.c}
+  long double sinh(long double x);      // see \ref{library.c}
   float sinhf(float x);
   long double sinhl(long double x);
 
-  float tanh(float x);  // see \ref{library.c}
+  float tanh(float x);                  // see \ref{library.c}
   double tanh(double x);
-  long double tanh(long double x);  // see \ref{library.c}
+  long double tanh(long double x);      // see \ref{library.c}
   float tanhf(float x);
   long double tanhl(long double x);
 
-  float exp(float x);  // see \ref{library.c}
+  float exp(float x);                   // see \ref{library.c}
   double exp(double x);
-  long double exp(long double x);  // see \ref{library.c}
+  long double exp(long double x);       // see \ref{library.c}
   float expf(float x);
   long double expl(long double x);
 
-  float exp2(float x);  // see \ref{library.c}
+  float exp2(float x);                  // see \ref{library.c}
   double exp2(double x);
-  long double exp2(long double x);  // see \ref{library.c}
+  long double exp2(long double x);      // see \ref{library.c}
   float exp2f(float x);
   long double exp2l(long double x);
 
-  float expm1(float x);  // see \ref{library.c}
+  float expm1(float x);                 // see \ref{library.c}
   double expm1(double x);
-  long double expm1(long double x);  // see \ref{library.c}
+  long double expm1(long double x);     // see \ref{library.c}
   float expm1f(float x);
   long double expm1l(long double x);
 
-  float frexp(float value, int* exp);  // see \ref{library.c}
+  float frexp(float value, int* exp);   // see \ref{library.c}
   double frexp(double value, int* exp);
-  long double frexp(long double value, int* exp);  // see \ref{library.c}
+  long double frexp(long double value, int* exp);   // see \ref{library.c}
   float frexpf(float value, int* exp);
   long double frexpl(long double value, int* exp);
 
-  int ilogb(float x);  // see \ref{library.c}
+  int ilogb(float x);                   // see \ref{library.c}
   int ilogb(double x);
-  int ilogb(long double x);  // see \ref{library.c}
+  int ilogb(long double x);             // see \ref{library.c}
   int ilogbf(float x);
   int ilogbl(long double x);
 
-  float ldexp(float x, int exp);  // see \ref{library.c}
+  float ldexp(float x, int exp);        // see \ref{library.c}
   double ldexp(double x, int exp);
-  long double ldexp(long double x, int exp);  // see \ref{library.c}
+  long double ldexp(long double x, int exp);    // see \ref{library.c}
   float ldexpf(float x, int exp);
   long double ldexpl(long double x, int exp);
 
-  float log(float x);  // see \ref{library.c}
+  float log(float x);                   // see \ref{library.c}
   double log(double x);
-  long double log(long double x);  // see \ref{library.c}
+  long double log(long double x);       // see \ref{library.c}
   float logf(float x);
   long double logl(long double x);
 
-  float log10(float x);  // see \ref{library.c}
+  float log10(float x);                 // see \ref{library.c}
   double log10(double x);
-  long double log10(long double x);  // see \ref{library.c}
+  long double log10(long double x);     // see \ref{library.c}
   float log10f(float x);
   long double log10l(long double x);
 
-  float log1p(float x);  // see \ref{library.c}
+  float log1p(float x);                 // see \ref{library.c}
   double log1p(double x);
-  long double log1p(long double x);  // see \ref{library.c}
+  long double log1p(long double x);     // see \ref{library.c}
   float log1pf(float x);
   long double log1pl(long double x);
 
-  float log2(float x);  // see \ref{library.c}
+  float log2(float x);                  // see \ref{library.c}
   double log2(double x);
-  long double log2(long double x);  // see \ref{library.c}
+  long double log2(long double x);      // see \ref{library.c}
   float log2f(float x);
   long double log2l(long double x);
 
-  float logb(float x);  // see \ref{library.c}
+  float logb(float x);                  // see \ref{library.c}
   double logb(double x);
-  long double logb(long double x);  // see \ref{library.c}
+  long double logb(long double x);      // see \ref{library.c}
   float logbf(float x);
   long double logbl(long double x);
 
-  float modf(float value, float* iptr);  // see \ref{library.c}
+  float modf(float value, float* iptr); // see \ref{library.c}
   double modf(double value, double* iptr);
-  long double modf(long double value, long double* iptr);  // see \ref{library.c}
+  long double modf(long double value, long double* iptr);   // see \ref{library.c}
   float modff(float value, float* iptr);
   long double modfl(long double value, long double* iptr);
 
-  float scalbn(float x, int n);  // see \ref{library.c}
+  float scalbn(float x, int n);         // see \ref{library.c}
   double scalbn(double x, int n);
-  long double scalbn(long double x, int n);  // see \ref{library.c}
+  long double scalbn(long double x, int n);     // see \ref{library.c}
   float scalbnf(float x, int n);
   long double scalbnl(long double x, int n);
 
-  float scalbln(float x, long int n);  // see \ref{library.c}
+  float scalbln(float x, long int n);   // see \ref{library.c}
   double scalbln(double x, long int n);
-  long double scalbln(long double x, long int n);  // see \ref{library.c}
+  long double scalbln(long double x, long int n);   // see \ref{library.c}
   float scalblnf(float x, long int n);
   long double scalblnl(long double x, long int n);
 
-  float cbrt(float x);  // see \ref{library.c}
+  float cbrt(float x);                  // see \ref{library.c}
   double cbrt(double x);
-  long double cbrt(long double x);  // see \ref{library.c}
+  long double cbrt(long double x);      // see \ref{library.c}
   float cbrtf(float x);
   long double cbrtl(long double x);
 
@@ -9164,13 +9385,13 @@ namespace std {
   double abs(double j);
   long double abs(long double j);
 
-  float fabs(float x);  // see \ref{library.c}
+  float fabs(float x);                  // see \ref{library.c}
   double fabs(double x);
-  long double fabs(long double x);  // see \ref{library.c}
+  long double fabs(long double x);      // see \ref{library.c}
   float fabsf(float x);
   long double fabsl(long double x);
 
-  float hypot(float x, float y);  // see \ref{library.c}
+  float hypot(float x, float y);        // see \ref{library.c}
   double hypot(double x, double y);
   long double hypot(long double x, long double y);  // see \ref{library.c}
   float hypotf(float x, float y);
@@ -9181,123 +9402,123 @@ namespace std {
   double hypot(double x, double y, double z);
   long double hypot(long double x, long double y, long double z);
 
-  float pow(float x, float y);  // see \ref{library.c}
+  float pow(float x, float y);          // see \ref{library.c}
   double pow(double x, double y);
-  long double pow(long double x, long double y);  // see \ref{library.c}
+  long double pow(long double x, long double y);    // see \ref{library.c}
   float powf(float x, float y);
   long double powl(long double x, long double y);
 
-  float sqrt(float x);  // see \ref{library.c}
+  float sqrt(float x);                  // see \ref{library.c}
   double sqrt(double x);
-  long double sqrt(long double x);  // see \ref{library.c}
+  long double sqrt(long double x);      // see \ref{library.c}
   float sqrtf(float x);
   long double sqrtl(long double x);
 
-  float erf(float x);  // see \ref{library.c}
+  float erf(float x);                   // see \ref{library.c}
   double erf(double x);
-  long double erf(long double x);  // see \ref{library.c}
+  long double erf(long double x);       // see \ref{library.c}
   float erff(float x);
   long double erfl(long double x);
 
-  float erfc(float x);  // see \ref{library.c}
+  float erfc(float x);                  // see \ref{library.c}
   double erfc(double x);
-  long double erfc(long double x);  // see \ref{library.c}
+  long double erfc(long double x);      // see \ref{library.c}
   float erfcf(float x);
   long double erfcl(long double x);
 
-  float lgamma(float x);  // see \ref{library.c}
+  float lgamma(float x);                // see \ref{library.c}
   double lgamma(double x);
-  long double lgamma(long double x);  // see \ref{library.c}
+  long double lgamma(long double x);    // see \ref{library.c}
   float lgammaf(float x);
   long double lgammal(long double x);
 
-  float tgamma(float x);  // see \ref{library.c}
+  float tgamma(float x);                // see \ref{library.c}
   double tgamma(double x);
-  long double tgamma(long double x);  // see \ref{library.c}
+  long double tgamma(long double x);    // see \ref{library.c}
   float tgammaf(float x);
   long double tgammal(long double x);
 
-  float ceil(float x);  // see \ref{library.c}
+  float ceil(float x);                  // see \ref{library.c}
   double ceil(double x);
-  long double ceil(long double x);  // see \ref{library.c}
+  long double ceil(long double x);      // see \ref{library.c}
   float ceilf(float x);
   long double ceill(long double x);
 
-  float floor(float x);  // see \ref{library.c}
+  float floor(float x);                 // see \ref{library.c}
   double floor(double x);
-  long double floor(long double x);  // see \ref{library.c}
+  long double floor(long double x);     // see \ref{library.c}
   float floorf(float x);
   long double floorl(long double x);
 
-  float nearbyint(float x);  // see \ref{library.c}
+  float nearbyint(float x);             // see \ref{library.c}
   double nearbyint(double x);
-  long double nearbyint(long double x);  // see \ref{library.c}
+  long double nearbyint(long double x); // see \ref{library.c}
   float nearbyintf(float x);
   long double nearbyintl(long double x);
 
-  float rint(float x);  // see \ref{library.c}
+  float rint(float x);                  // see \ref{library.c}
   double rint(double x);
-  long double rint(long double x);  // see \ref{library.c}
+  long double rint(long double x);      // see \ref{library.c}
   float rintf(float x);
   long double rintl(long double x);
 
-  long int lrint(float x);  // see \ref{library.c}
+  long int lrint(float x);              // see \ref{library.c}
   long int lrint(double x);
-  long int lrint(long double x);  // see \ref{library.c}
+  long int lrint(long double x);        // see \ref{library.c}
   long int lrintf(float x);
   long int lrintl(long double x);
 
-  long long int llrint(float x);  // see \ref{library.c}
+  long long int llrint(float x);        // see \ref{library.c}
   long long int llrint(double x);
   long long int llrint(long double x);  // see \ref{library.c}
   long long int llrintf(float x);
   long long int llrintl(long double x);
 
-  float round(float x);  // see \ref{library.c}
+  float round(float x);                 // see \ref{library.c}
   double round(double x);
-  long double round(long double x);  // see \ref{library.c}
+  long double round(long double x);     // see \ref{library.c}
   float roundf(float x);
   long double roundl(long double x);
 
-  long int lround(float x);  // see \ref{library.c}
+  long int lround(float x);             // see \ref{library.c}
   long int lround(double x);
-  long int lround(long double x);  // see \ref{library.c}
+  long int lround(long double x);       // see \ref{library.c}
   long int lroundf(float x);
   long int lroundl(long double x);
 
-  long long int llround(float x);  // see \ref{library.c}
+  long long int llround(float x);       // see \ref{library.c}
   long long int llround(double x);
-  long long int llround(long double x);  // see \ref{library.c}
+  long long int llround(long double x); // see \ref{library.c}
   long long int llroundf(float x);
   long long int llroundl(long double x);
 
-  float trunc(float x);  // see \ref{library.c}
+  float trunc(float x);                 // see \ref{library.c}
   double trunc(double x);
-  long double trunc(long double x);  // see \ref{library.c}
+  long double trunc(long double x);     // see \ref{library.c}
   float truncf(float x);
   long double truncl(long double x);
 
-  float fmod(float x, float y);  // see \ref{library.c}
+  float fmod(float x, float y);         // see \ref{library.c}
   double fmod(double x, double y);
-  long double fmod(long double x, long double y);  // see \ref{library.c}
+  long double fmod(long double x, long double y);   // see \ref{library.c}
   float fmodf(float x, float y);
   long double fmodl(long double x, long double y);
 
-  float remainder(float x, float y);  // see \ref{library.c}
+  float remainder(float x, float y);    // see \ref{library.c}
   double remainder(double x, double y);
   long double remainder(long double x, long double y);  // see \ref{library.c}
   float remainderf(float x, float y);
   long double remainderl(long double x, long double y);
 
-  float remquo(float x, float y, int* quo);  // see \ref{library.c}
+  float remquo(float x, float y, int* quo);     // see \ref{library.c}
   double remquo(double x, double y, int* quo);
-  long double remquo(long double x, long double y, int* quo);  // see \ref{library.c}
+  long double remquo(long double x, long double y, int* quo);   // see \ref{library.c}
   float remquof(float x, float y, int* quo);
   long double remquol(long double x, long double y, int* quo);
 
-  float copysign(float x, float y);  // see \ref{library.c}
+  float copysign(float x, float y);     // see \ref{library.c}
   double copysign(double x, double y);
-  long double copysign(long double x, long double y);  // see \ref{library.c}
+  long double copysign(long double x, long double y);   // see \ref{library.c}
   float copysignf(float x, float y);
   long double copysignl(long double x, long double y);
 
@@ -9305,39 +9526,39 @@ namespace std {
   float nanf(const char* tagp);
   long double nanl(const char* tagp);
 
-  float nextafter(float x, float y);  // see \ref{library.c}
+  float nextafter(float x, float y);    // see \ref{library.c}
   double nextafter(double x, double y);
   long double nextafter(long double x, long double y);  // see \ref{library.c}
   float nextafterf(float x, float y);
   long double nextafterl(long double x, long double y);
 
-  float nexttoward(float x, long double y);  // see \ref{library.c}
+  float nexttoward(float x, long double y);     // see \ref{library.c}
   double nexttoward(double x, long double y);
-  long double nexttoward(long double x, long double y);  // see \ref{library.c}
+  long double nexttoward(long double x, long double y);     // see \ref{library.c}
   float nexttowardf(float x, long double y);
   long double nexttowardl(long double x, long double y);
 
-  float fdim(float x, float y);  // see \ref{library.c}
+  float fdim(float x, float y);         // see \ref{library.c}
   double fdim(double x, double y);
-  long double fdim(long double x, long double y);  // see \ref{library.c}
+  long double fdim(long double x, long double y);   // see \ref{library.c}
   float fdimf(float x, float y);
   long double fdiml(long double x, long double y);
 
-  float fmax(float x, float y);  // see \ref{library.c}
+  float fmax(float x, float y);         // see \ref{library.c}
   double fmax(double x, double y);
-  long double fmax(long double x, long double y);  // see \ref{library.c}
+  long double fmax(long double x, long double y);   // see \ref{library.c}
   float fmaxf(float x, float y);
   long double fmaxl(long double x, long double y);
 
-  float fmin(float x, float y);  // see \ref{library.c}
+  float fmin(float x, float y);         // see \ref{library.c}
   double fmin(double x, double y);
-  long double fmin(long double x, long double y);  // see \ref{library.c}
+  long double fmin(long double x, long double y);   // see \ref{library.c}
   float fminf(float x, float y);
   long double fminl(long double x, long double y);
 
-  float fma(float x, float y, float z);  // see \ref{library.c}
+  float fma(float x, float y, float z); // see \ref{library.c}
   double fma(double x, double y, double z);
-  long double fma(long double x, long double y, long double z);  // see \ref{library.c}
+  long double fma(long double x, long double y, long double z); // see \ref{library.c}
   float fmaf(float x, float y, float z);
   long double fmal(long double x, long double y, long double z);
 
@@ -9507,8 +9728,8 @@ namespace std {
 \end{codeblock}
 
 \pnum
-The contents and meaning of the header \tcode{<cmath>}
-are the same as the C standard library header \tcode{<math.h>},
+The contents and meaning of the header \libheader{cmath}
+are the same as the C standard library header \libheader{math.h},
 with the addition of
 a three-dimensional hypotenuse function~(\ref{c.math.hypot3}) and
 the mathematical special functions described in \ref{sf.cmath}.
@@ -9518,7 +9739,7 @@ but they have the same behavior as in the C standard library\iref{library.c}.
 \end{note}
 
 \pnum
-For each set of overloaded functions within \tcode{<cmath>},
+For each set of overloaded functions within \libheader{cmath},
 with the exception of \tcode{abs},
 there shall be additional overloads sufficient to ensure:
 \begin{enumerate}
@@ -9549,15 +9770,13 @@ ISO C 7.12
 \rSec2[c.math.abs]{Absolute values}
 
 \pnum
-\indexhdr{cstdlib}%
-\indexhdr{cmath}%
 \begin{note}
-The headers \tcode{<cstdlib>}\iref{cstdlib.syn} and
-\tcode{<cmath>}\iref{cmath.syn}
+The headers \libheaderref{cstdlib} and
+\libheaderref{cmath}
 declare the functions described in this subclause.
 \end{note}
 
-\indexlibrary{\idxcode{abs}}%
+\indexlibraryglobal{abs}%
 \begin{itemdecl}
 int abs(int j);
 long int abs(long int j);
@@ -9599,12 +9818,13 @@ long double hypot(long double x, long double y, long double z);
 
 \begin{itemdescr}
 \pnum
-\returns $\sqrt{x^2+y^2+z^2}$.
+\returns
+$\sqrt{x^2+y^2+z^2}$.
 \end{itemdescr}
 
 \rSec2[c.math.lerp]{Linear interpolation}
 
-\indexlibrary{\idxcode{lerp}}%
+\indexlibraryglobal{lerp}%
 \begin{itemdecl}
 constexpr float lerp(float a, float b, float t);
 constexpr double lerp(double a, double b, double t);
@@ -9648,7 +9868,8 @@ ISO C 7.12.3, 7.12.4
 \rSec2[sf.cmath]{Mathematical special functions}%
 \indextext{mathematical special functions|(}%
 
-\pnum\indextext{NaN}\indextext{domain error}%
+\pnum
+\indextext{NaN}\indextext{domain error}%
 If any argument value
 to any of the functions specified in this subclause
 is a NaN (Not a Number),
@@ -9658,7 +9879,6 @@ Otherwise,
 the function shall report a domain error
 for just those argument values
 for which:
-
 \begin{itemize}
   \item
   the function description's \returns clause
@@ -9696,9 +9916,9 @@ for negative infinity,
 and for positive infinity.
 
 \rSec3[sf.cmath.assoc.laguerre]{Associated Laguerre polynomials}%
-\indexlibrary{\idxcode{assoc_laguerre}}%
-\indexlibrary{\idxcode{assoc_laguerref}}%
-\indexlibrary{\idxcode{assoc_laguerrel}}%
+\indexlibraryglobal{assoc_laguerre}%
+\indexlibraryglobal{assoc_laguerref}%
+\indexlibraryglobal{assoc_laguerrel}%
 \indextext{Laguerre polynomials!$\mathsf{L}_n^m$}%
 \indextext{L nm@$\mathsf{L}_n^m$ (associated Laguerre polynomials)}%
 \begin{itemdecl}
@@ -9733,9 +9953,9 @@ if \tcode{n >= 128} or if \tcode{m >= 128}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.assoc.legendre]{Associated Legendre functions}%
-\indexlibrary{\idxcode{assoc_legendre}}%
-\indexlibrary{\idxcode{assoc_legendref}}%
-\indexlibrary{\idxcode{assoc_legendrel}}%
+\indexlibraryglobal{assoc_legendre}%
+\indexlibraryglobal{assoc_legendref}%
+\indexlibraryglobal{assoc_legendrel}%
 \indextext{Legendre polynomials!$\mathsf{P}_\ell^m$}%
 \indextext{P lm@$\mathsf{P}_\ell^m$ (associated Legendre polynomials)}%
 \begin{itemdecl}
@@ -9746,7 +9966,8 @@ long double  assoc_legendrel(unsigned l, unsigned m, long double x);
 
 \begin{itemdescr}
 
-\pnum\effects
+\pnum
+\effects
 These functions compute
 the associated Legendre functions
 of their respective arguments
@@ -9770,9 +9991,9 @@ if \tcode{l >= 128}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.beta]{Beta function}%
-\indexlibrary{\idxcode{beta}}%
-\indexlibrary{\idxcode{betaf}}%
-\indexlibrary{\idxcode{betal}}%
+\indexlibraryglobal{beta}%
+\indexlibraryglobal{betaf}%
+\indexlibraryglobal{betal}%
 \indextext{Eulerian integral of the first kind|see{\tcode{beta}}}%
 \indextext{beta functions $\mathsf{B}$}%
 \begin{itemdecl}
@@ -9799,9 +10020,9 @@ $y$ is \tcode{y}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.comp.ellint.1]{Complete elliptic integral of the first kind}%
-\indexlibrary{\idxcode{comp_ellint_1}}%
-\indexlibrary{\idxcode{comp_ellint_1f}}%
-\indexlibrary{\idxcode{comp_ellint_1l}}%
+\indexlibraryglobal{comp_ellint_1}%
+\indexlibraryglobal{comp_ellint_1f}%
+\indexlibraryglobal{comp_ellint_1l}%
 \indextext{elliptic integrals!complete $\mathsf{K}$}%
 \indextext{K complete@$\mathsf{K}$ (complete elliptic integrals)}%
 \begin{itemdecl}
@@ -9829,9 +10050,9 @@ See also \ref{sf.cmath.ellint.1}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.comp.ellint.2]{Complete elliptic integral of the second kind}%
-\indexlibrary{\idxcode{comp_ellint_2}}%
-\indexlibrary{\idxcode{comp_ellint_2f}}%
-\indexlibrary{\idxcode{comp_ellint_2l}}%
+\indexlibraryglobal{comp_ellint_2}%
+\indexlibraryglobal{comp_ellint_2f}%
+\indexlibraryglobal{comp_ellint_2l}%
 \indextext{elliptic integrals!complete $\mathsf{E}$}%
 \indextext{E complete@$\mathsf{E}$ (complete elliptic integrals)}%
 \begin{itemdecl}
@@ -9859,9 +10080,9 @@ See also \ref{sf.cmath.ellint.2}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.comp.ellint.3]{Complete elliptic integral of the third kind}%
-\indexlibrary{\idxcode{comp_ellint_3}}%
-\indexlibrary{\idxcode{comp_ellint_3f}}%
-\indexlibrary{\idxcode{comp_ellint_3l}}%
+\indexlibraryglobal{comp_ellint_3}%
+\indexlibraryglobal{comp_ellint_3f}%
+\indexlibraryglobal{comp_ellint_3l}%
 \indextext{elliptic integrals!complete $\mathsf{\Pi}$}%
 \indextext{Pi complete@$\mathsf{\Pi}$ (complete elliptic integrals)}%
 \begin{itemdecl}
@@ -9890,9 +10111,9 @@ See also \ref{sf.cmath.ellint.3}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.cyl.bessel.i]{Regular modified cylindrical Bessel functions}%
-\indexlibrary{\idxcode{cyl_bessel_i}}%
-\indexlibrary{\idxcode{cyl_bessel_if}}%
-\indexlibrary{\idxcode{cyl_bessel_il}}%
+\indexlibraryglobal{cyl_bessel_i}%
+\indexlibraryglobal{cyl_bessel_if}%
+\indexlibraryglobal{cyl_bessel_il}%
 \indextext{Bessel functions!$\mathsf{I}_\nu$}%
 \indextext{I nu@$\mathsf{I}_\nu$ (Bessell functions)}%
 \begin{itemdecl}
@@ -9930,9 +10151,9 @@ See also \ref{sf.cmath.cyl.bessel.j}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.cyl.bessel.j]{Cylindrical Bessel functions of the first kind}%
-\indexlibrary{\idxcode{cyl_bessel_j}}%
-\indexlibrary{\idxcode{cyl_bessel_jf}}%
-\indexlibrary{\idxcode{cyl_bessel_jl}}%
+\indexlibraryglobal{cyl_bessel_j}%
+\indexlibraryglobal{cyl_bessel_jf}%
+\indexlibraryglobal{cyl_bessel_jl}%
 \indextext{Bessel functions!$\mathsf{J}_\nu$}%
 \indextext{J nu@$\mathsf{J}_\nu$ (Bessell functions)}%
 \begin{itemdecl}
@@ -9943,13 +10164,15 @@ long double  cyl_bessel_jl(long double nu, long double x);
 
 \begin{itemdescr}
 
-\pnum\effects
+\pnum
+\effects
 These functions compute
 the cylindrical Bessel functions of the first kind
 of their respective arguments
 \tcode{nu} and \tcode{x}.
 
-\pnum\returns
+\pnum
+\returns
 \[ \mathsf{J}_\nu(x) =
    \sum_{k=0}^\infty \frac{(-1)^k (x/2)^{\nu+2k}}{k! \: \Gamma(\nu+k+1)}
    \text{ ,\quad for $x \ge 0$,} \]
@@ -9957,16 +10180,17 @@ where
 $\nu$ is \tcode{nu} and
 $x$ is \tcode{x}.
 
-\pnum\remarks
+\pnum
+\remarks
 The effect of calling each of these functions
 is \impldef{effect of calling cylindrical Bessel functions of the first kind with \tcode{nu >= 128}}
 if \tcode{nu >= 128}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.cyl.bessel.k]{Irregular modified cylindrical Bessel functions}%
-\indexlibrary{\idxcode{cyl_bessel_k}}%
-\indexlibrary{\idxcode{cyl_bessel_kf}}%
-\indexlibrary{\idxcode{cyl_bessel_kl}}%
+\indexlibraryglobal{cyl_bessel_k}%
+\indexlibraryglobal{cyl_bessel_kf}%
+\indexlibraryglobal{cyl_bessel_kl}%
 \indextext{Bessel functions!$\mathsf{K}_\nu$}%
 \indextext{K nu@$\mathsf{K}_\nu$ (Bessell functions)}%
 \begin{itemdecl}
@@ -9977,13 +10201,15 @@ long double  cyl_bessel_kl(long double nu, long double x);
 
 \begin{itemdescr}
 
-\pnum\effects
+\pnum
+\effects
 These functions compute
 the irregular modified cylindrical Bessel functions
 of their respective arguments
 \tcode{nu} and \tcode{x}.
 
-\pnum\returns
+\pnum
+\returns
 \[%
   \mathsf{K}_\nu(x) =
   (\pi/2)\mathrm{i}^{\nu+1} (            \mathsf{J}_\nu(\mathrm{i}x)
@@ -10011,18 +10237,20 @@ where
 $\nu$ is \tcode{nu} and
 $x$ is \tcode{x}.
 
-\pnum\remarks
+\pnum
+\remarks
 The effect of calling each of these functions
 is \impldef{effect of calling irregular modified cylindrical Bessel functions with \tcode{nu >= 128}}
 if \tcode{nu >= 128}.
 
-\pnum See also \ref{sf.cmath.cyl.bessel.i}, \ref{sf.cmath.cyl.bessel.j}, \ref{sf.cmath.cyl.neumann}.
+\pnum
+See also \ref{sf.cmath.cyl.bessel.i}, \ref{sf.cmath.cyl.bessel.j}, \ref{sf.cmath.cyl.neumann}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.cyl.neumann]{Cylindrical Neumann functions}%
-\indexlibrary{\idxcode{cyl_neumann}}%
-\indexlibrary{\idxcode{cyl_neumannf}}%
-\indexlibrary{\idxcode{cyl_neumannl}}%
+\indexlibraryglobal{cyl_neumann}%
+\indexlibraryglobal{cyl_neumannf}%
+\indexlibraryglobal{cyl_neumannl}%
 \indextext{Bessel functions!$\mathsf{N}_\nu$}%
 \indextext{Neumann functions!$\mathsf{N}_\nu$}%
 \indextext{N nu@$\mathsf{N}_\nu$ (Neumann functions)}%
@@ -10034,13 +10262,15 @@ long double  cyl_neumannl(long double nu, long double x);
 
 \begin{itemdescr}
 
-\pnum\effects
+\pnum
+\effects
 These functions compute the cylindrical Neumann functions,
 also known as the cylindrical Bessel functions of the second kind,
 of their respective arguments
 \tcode{nu} and \tcode{x}.
 
-\pnum\returns
+\pnum
+\returns
 \[%
   \mathsf{N}_\nu(x) =
   \left\{
@@ -10062,18 +10292,20 @@ where
 $\nu$ is \tcode{nu} and
 $x$ is \tcode{x}.
 
-\pnum\remarks
+\pnum
+\remarks
 The effect of calling each of these functions
 is \impldef{effect of calling cylindrical Neumann functions with \tcode{nu >= 128}}
 if \tcode{nu >= 128}.
 
-\pnum See also \ref{sf.cmath.cyl.bessel.j}.
+\pnum
+See also \ref{sf.cmath.cyl.bessel.j}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.ellint.1]{Incomplete elliptic integral of the first kind}%
-\indexlibrary{\idxcode{ellint_1}}%
-\indexlibrary{\idxcode{ellint_1f}}%
-\indexlibrary{\idxcode{ellint_1l}}%
+\indexlibraryglobal{ellint_1}%
+\indexlibraryglobal{ellint_1f}%
+\indexlibraryglobal{ellint_1l}%
 \indextext{elliptic integrals!incomplete $\mathsf{F}$}%
 \indextext{F incomplete@$\mathsf{F}$ (incomplete elliptic integrals)}%
 \begin{itemdecl}
@@ -10101,9 +10333,9 @@ $\phi$ is \tcode{phi}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.ellint.2]{Incomplete elliptic integral of the second kind}%
-\indexlibrary{\idxcode{ellint_2}}%
-\indexlibrary{\idxcode{ellint_2f}}%
-\indexlibrary{\idxcode{ellint_2l}}%
+\indexlibraryglobal{ellint_2}%
+\indexlibraryglobal{ellint_2f}%
+\indexlibraryglobal{ellint_2l}%
 \indextext{elliptic integrals!incomplete $\mathsf{E}$}%
 \indextext{E incomplete@$\mathsf{E}$ (incomplete elliptic integrals)}%
 \begin{itemdecl}
@@ -10130,9 +10362,9 @@ $\phi$ is \tcode{phi}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.ellint.3]{Incomplete elliptic integral of the third kind}%
-\indexlibrary{\idxcode{ellint_3}}%
-\indexlibrary{\idxcode{ellint_3f}}%
-\indexlibrary{\idxcode{ellint_3l}}%
+\indexlibraryglobal{ellint_3}%
+\indexlibraryglobal{ellint_3f}%
+\indexlibraryglobal{ellint_3l}%
 \indextext{elliptic integrals!incomplete $\mathsf{\Pi}$}%
 \indextext{Pi incomplete@$\mathsf{\Pi}$ (incomplete elliptic integrals)}%
 \begin{itemdecl}
@@ -10143,7 +10375,8 @@ long double  ellint_3l(long double k, long double nu, long double phi);
 
 \begin{itemdescr}
 
-\pnum\effects
+\pnum
+\effects
 These functions compute
 the incomplete elliptic integral of the third kind
 of their respective arguments
@@ -10160,9 +10393,9 @@ $\phi$ is \tcode{phi}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.expint]{Exponential integral}%
-\indexlibrary{\idxcode{expint}}%
-\indexlibrary{\idxcode{expintf}}%
-\indexlibrary{\idxcode{expintl}}%
+\indexlibraryglobal{expint}%
+\indexlibraryglobal{expintf}%
+\indexlibraryglobal{expintl}%
 \indextext{exponential integrals $\mathsf{Ei}$}%
 \indextext{Ei@$\mathsf{Ei}$ (exponential integrals)}%
 \begin{itemdecl}
@@ -10173,12 +10406,14 @@ long double  expintl(long double x);
 
 \begin{itemdescr}
 
-\pnum\effects
+\pnum
+\effects
 These functions compute the exponential integral
 of their respective arguments
 \tcode{x}.
 
-\pnum\returns
+\pnum
+\returns
 \[%
   \mathsf{Ei}(x) =
   - \int_{-x}^\infty \frac{e^{-t}}
@@ -10191,9 +10426,9 @@ $x$ is \tcode{x}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.hermite]{Hermite polynomials}%
-\indexlibrary{\idxcode{hermite}}%
-\indexlibrary{\idxcode{hermitef}}%
-\indexlibrary{\idxcode{hermitel}}%
+\indexlibraryglobal{hermite}%
+\indexlibraryglobal{hermitef}%
+\indexlibraryglobal{hermitel}%
 \indextext{Hermite polynomials $\mathsf{H}_n$}%
 \indextext{H n@$\mathsf{H}_n$ (Hermite polynomials)}%
 \begin{itemdecl}
@@ -10203,12 +10438,14 @@ long double  hermitel(unsigned n, long double x);
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\effects
+\pnum
+\effects
 These functions compute the Hermite polynomials
 of their respective arguments
 \tcode{n} and \tcode{x}.
 
-\pnum\returns
+\pnum
+\returns
 \[%
   \mathsf{H}_n(x) =
   (-1)^n e^{x^2} \frac{ \mathsf{d} ^n}
@@ -10219,16 +10456,17 @@ where
 $n$ is \tcode{n} and
 $x$ is \tcode{x}.
 
-\pnum\remarks
+\pnum
+\remarks
 The effect of calling each of these functions
 is \impldef{effect of calling Hermite polynomials with \tcode{n >= 128}}
 if \tcode{n >= 128}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.laguerre]{Laguerre polynomials}%
-\indexlibrary{\idxcode{laguerre}}%
-\indexlibrary{\idxcode{laguerref}}%
-\indexlibrary{\idxcode{laguerrel}}%
+\indexlibraryglobal{laguerre}%
+\indexlibraryglobal{laguerref}%
+\indexlibraryglobal{laguerrel}%
 \indextext{Laguerre polynomials!$\mathsf{L}_n$}%
 \indextext{L n@$\mathsf{L}_n$ (Laguerre polynomials)}%
 \begin{itemdecl}
@@ -10261,9 +10499,9 @@ if \tcode{n >= 128}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.legendre]{Legendre polynomials}%
-\indexlibrary{\idxcode{legendre}}%
-\indexlibrary{\idxcode{legendref}}%
-\indexlibrary{\idxcode{legendrel}}%
+\indexlibraryglobal{legendre}%
+\indexlibraryglobal{legendref}%
+\indexlibraryglobal{legendrel}%
 \indextext{Legendre polynomials!$\mathsf{P}_\ell$}%
 \indextext{P l@$\mathsf{P}_\ell$ (Legendre polynomials)}%
 \begin{itemdecl}
@@ -10297,9 +10535,9 @@ if \tcode{l >= 128}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.riemann.zeta]{Riemann zeta function}%
-\indexlibrary{\idxcode{riemann_zeta}}%
-\indexlibrary{\idxcode{riemann_zetaf}}%
-\indexlibrary{\idxcode{riemann_zetal}}%
+\indexlibraryglobal{riemann_zeta}%
+\indexlibraryglobal{riemann_zetaf}%
+\indexlibraryglobal{riemann_zetal}%
 \indextext{zeta functions $\zeta$}%
 \begin{itemdecl}
 double       riemann_zeta(double x);
@@ -10309,12 +10547,14 @@ long double  riemann_zetal(long double x);
 
 \begin{itemdescr}
 
-\pnum\effects
+\pnum
+\effects
 These functions compute the Riemann zeta function
 of their respective arguments
 \tcode{x}.
 
-\pnum\returns
+\pnum
+\returns
 \[%
   \mathsf{\zeta}(x) =
   \left\{
@@ -10343,9 +10583,9 @@ $x$ is \tcode{x}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.sph.bessel]{Spherical Bessel functions of the first kind}%
-\indexlibrary{\idxcode{sph_bessel}}%
-\indexlibrary{\idxcode{sph_besself}}%
-\indexlibrary{\idxcode{sph_bessell}}%
+\indexlibraryglobal{sph_bessel}%
+\indexlibraryglobal{sph_besself}%
+\indexlibraryglobal{sph_bessell}%
 \indextext{Bessel functions!$\mathsf{j}_n$}%
 \indextext{j n@$\mathsf{j}_n$ (spherical Bessel functions)}%
 \begin{itemdecl}
@@ -10369,18 +10609,20 @@ where
 $n$ is \tcode{n} and
 $x$ is \tcode{x}.
 
-\pnum\remarks
+\pnum
+\remarks
 The effect of calling each of these functions
 is \impldef{effect of calling spherical Bessel functions with \tcode{n >= 128}}
 if \tcode{n >= 128}.
 
-\pnum See also \ref{sf.cmath.cyl.bessel.j}.
+\pnum
+See also \ref{sf.cmath.cyl.bessel.j}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.sph.legendre]{Spherical associated Legendre functions}%
-\indexlibrary{\idxcode{sph_legendre}}%
-\indexlibrary{\idxcode{sph_legendref}}%
-\indexlibrary{\idxcode{sph_legendrel}}%
+\indexlibraryglobal{sph_legendre}%
+\indexlibraryglobal{sph_legendref}%
+\indexlibraryglobal{sph_legendrel}%
 \indextext{spherical harmonics $\mathsf{Y}_\ell^m$}%
 \indextext{Legendre functions $\mathsf{Y}_\ell^m$}%
 \indextext{Y lm@$\mathsf{Y}_\ell^m$ (spherical associated Legendre functions)}%
@@ -10422,9 +10664,9 @@ See also \ref{sf.cmath.assoc.legendre}.
 \end{itemdescr}
 
 \rSec3[sf.cmath.sph.neumann]{Spherical Neumann functions}%
-\indexlibrary{\idxcode{sph_neumann}}%
-\indexlibrary{\idxcode{sph_neumannf}}%
-\indexlibrary{\idxcode{sph_neumannl}}%
+\indexlibraryglobal{sph_neumann}%
+\indexlibraryglobal{sph_neumannf}%
+\indexlibraryglobal{sph_neumannl}%
 \indextext{Bessel functions!$\mathsf{n}_n$}%
 \indextext{Neumann functions!$\mathsf{n}_n$}%
 \indextext{n n spherical@$\mathsf{n}_n$ (spherical Neumann functions)}%
@@ -10465,8 +10707,8 @@ See also \ref{sf.cmath.cyl.neumann}.
 \rSec1[numbers]{Numbers}
 
 \rSec2[numbers.syn]{Header \tcode{<numbers>} synopsis}
-\indexhdr{numbers}%
 
+\indexheader{numbers}%
 \begin{codeblock}
 namespace std::numbers {
   template<class T> inline constexpr T e_v          = @\unspec@;
