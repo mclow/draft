@@ -5,10 +5,9 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & D1462R0                     \\
+          \textbf{Document Number:} & P1460R0                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
-                                    & CppAlliance                 \\
                                     & mclow.lists@gmail.com       \\
                                     & Alberto Barbati             \\
                                     & ganesh@barbati.net          \\
@@ -35,14 +34,17 @@ paper P1369R0.
 The changes in this series of papers fall into three broad categories.
 \begin{itemize}
 \item{Change "participate in overload resolution" wording into "Constraints" elements}
-\item{Change "Requires" elements into either "Mandates" or "Expects", depending (mostly) on whether or not they can be checked at compile time.}
+\item{Change "Requires" elements into either "Mandates" or "Preconditions", depending (mostly) on whether or not they can be checked at compile time.}
 \item{Drive-by fixes (hopefully very few)}
 \end{itemize}
 
-This paper covers Clause 20 (Utilities), and is based on N4810.
+This paper covers Clause 20 (Utilities), and is based on N4842.
 
-\vspace{1.0cm}
-The entire clause is reproduced here, but the changes are confined to a few sections:
+Note: This is a different paper than P1462 (Mandating the Standard Library: Clause 20 - Strings library),
+because when I started this project, "Utilities" was in clause 19.
+
+%\vspace{1.0cm}
+%The entire clause is reproduced here, but the changes are confined to a few sections:
 
 %\begin{multicols}{2}
 %\begin{itemize}

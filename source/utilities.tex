@@ -10144,7 +10144,7 @@ unique_ptr& operator=(unique_ptr&& u) noexcept;
 \constraints \tcode{is_move_assignable_v<D>} is \tcode{true}.
 
 \pnum
-\requires If \tcode{D} is not a reference type, \tcode{D} \changed{shall meet}{meets} the
+\changed{\requires}{\expects} If \tcode{D} is not a reference type, \tcode{D} \changed{shall meet}{meets} the
 \oldconcept{MoveAssignable} requirements (\tref{cpp17.moveassignable}) and assignment
 of the deleter from an rvalue of type \tcode{D} \changed{shall}{does} not throw an exception.
 Otherwise, \tcode{D} is a reference type;
@@ -14147,8 +14147,7 @@ Initializes the \tcode{OuterAlloc} base class with
 allocator from the argument list).
 
 \pnum
-\remarks
-This constructor shall not participate in overload resolution unless
+\changed{\remarks This constructor shall not participate in overload resolution unless}{\constraints}
 \tcode{is_constructible_v<OuterAlloc, OuterA2>} is \tcode{true}.
 \end{itemdescr}
 
@@ -14190,8 +14189,7 @@ Initializes each allocator within the adaptor with the corresponding allocator
 from \tcode{other}.
 
 \pnum
-\remarks
-This constructor shall not participate in overload resolution unless
+\changed{\remarks This constructor shall not participate in overload resolution unless}{\constraints}
 \tcode{is_constructible_v<OuterAlloc, const OuterA2\&>} is \tcode{true}.
 \end{itemdescr}
 
@@ -14208,8 +14206,7 @@ Initializes each allocator within the adaptor with the corresponding allocator r
 from \tcode{other}.
 
 \pnum
-\remarks
-This constructor shall not participate in overload resolution unless
+\changed{\remarks This constructor shall not participate in overload resolution unless}{\constraints}
 \tcode{is_constructible_v<OuterAlloc, OuterA2>} is \tcode{true}.
 \end{itemdescr}
 
@@ -14780,6 +14777,20 @@ template<class U>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+Let \tcode{\placeholdernc{FUN}} denote the exposition-only functions
+\begin{codeblock}
+void @\placeholdernc{FUN}@(T&) noexcept;
+void @\placeholdernc{FUN}@(T&&) = delete;
+\end{codeblock}
+
+\pnum
+\constraints
+The expression \tcode{\placeholdernc{FUN}(declval<U>())} is well-formed and
+\tcode{is_same_v<remove_cvref_t<U>, reference_wrapper>} is \tcode{false}.
+\end{addedblock}
+
+\begin{removedblock}
 \pnum
 \remarks
 Let \tcode{\placeholdernc{FUN}} denote the exposition-only functions
@@ -14792,6 +14803,7 @@ the expression \tcode{\placeholdernc{FUN}(declval<U>())} is well-formed and
 \tcode{is_same_v<remove_cvref_t<U>, reference_wrapper>} is \tcode{false}.
 The expression inside \tcode{noexcept}
 is equivalent to \tcode{noexcept(\placeholdernc{FUN}(declval<U>()))}.
+\end{removedblock}
 
 \pnum
 \effects
@@ -14800,6 +14812,13 @@ as if by \tcode{T\& r = std::forward<U>(u)},
 then constructs a \tcode{reference_wrapper} object
 that stores a reference to \tcode{r}.
 \end{itemdescr}
+
+\begin{addedblock}
+\pnum
+\remarks
+The expression inside \tcode{noexcept}
+is equivalent to \tcode{noexcept(\placeholdernc{FUN}(declval<U>()))}.
+\end{addedblock}
 
 \indexlibraryctor{reference_wrapper}%
 \begin{itemdecl}
@@ -16499,8 +16518,7 @@ template<class F> function(F f);
 \changed{\requires}{\expects} \tcode{F} \changed{shall be}{meets the} \oldconcept{CopyConstructible} \added{requirements}.
 
 \pnum
-\remarks
-This constructor template shall not participate in overload resolution unless
+\changed{\remarks This constructor template shall not participate in overload resolution unless}{\constraints}
 \tcode{F} is Lvalue-Callable\iref{func.wrap.func} for argument types
 \tcode{ArgTypes...} and return type \tcode{R}.
 
@@ -16538,11 +16556,17 @@ template<class F> function(F) -> function<@\seebelow@>;
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\constraints
+\tcode{\&F::operator()} is well-formed when treated as an unevaluated operand.
+\end{addedblock}
+
 \pnum
 \remarks
-This deduction guide participates in overload resolution only if
+\changed{This deduction guide participates in overload resolution only if
 \tcode{\&F::operator()} is well-formed when treated as an unevaluated operand.
-In that case, if \tcode{decltype(\&F::operator())} is of the form
+In that case, if}{If} \tcode{decltype(\&F::operator())} is of the form
 \tcode{R(G::*)(A...)}~\cv{}~\tcode{\opt{\&}~\opt{noexcept}}
 for a class type \tcode{G}, then the deduced type is \tcode{function<R(A...)>}.
 
@@ -16623,8 +16647,8 @@ As if by: \tcode{function(std::forward<F>(f)).swap(*this);}
 
 \pnum
 \remarks
-This assignment operator shall not participate in overload
-resolution unless \tcode{decay_t<F>} is
+\changed{\remarks This assignment operator shall not participate in overload resolution unless}{\constraints}
+\tcode{decay_t<F>} is
 Lvalue-Callable\iref{func.wrap.func} for argument types \tcode{ArgTypes...} and
 return type \tcode{R}.
 \end{itemdescr}
