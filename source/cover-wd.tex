@@ -105,6 +105,8 @@ Changes since R0:
 \item{"Preconditions" --> "Mandates" in [variant.relops]}
 \item{Reworked [bitset.cons]/3 - /8. They were a mess before; hopefully less so now.}
 \item{Changed the "Preconditions" for \tcode{aligned_storage} in [tab:meta.trans.other] into "Mandates"}
+\item{Changed several \tcode{is_constructible_v<first_type, Args1\&\&...>} to \tcode{is_constructible_v<first_type, Args1...>} in [pairs.pair], [tuple.cnstr], [tuple.assign], [optional.ctor], [optional.assign].}
+\item{Changed [util.smartptr.shared.cast]/7 and /10 into Mandates (from Preconditions)}
 \end{itemize}
 
 Open questions:

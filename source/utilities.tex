@@ -615,8 +615,8 @@ template<class U1, class U2> constexpr explicit(@\seebelow@) pair(U1&& x, U2&& y
 
 \begin{itemdescr}
 \pnum
-\added{\constraints \tcode{is_constructible_v<first_type, U1\&\&>} is \tcode{true} and
-\tcode{is_constructible_v<second_type, U2\&\&>} is \tcode{true}.}
+\added{\constraints \tcode{is_constructible_v<first_type, U1>} is \tcode{true} and
+\tcode{is_constructible_v<second_type, U2>} is \tcode{true}.}
 
 \effects
 Initializes \tcode{first} with
@@ -665,8 +665,8 @@ template<class U1, class U2> constexpr explicit(@\seebelow@) pair(pair<U1, U2>&&
 
 \begin{itemdescr}
 \pnum
-\added{\constraints \tcode{is_constructible_v<first_type, U1\&\&>} is \tcode{true} and
-\tcode{is_constructible_v<second_type, U2\&\&>} is \tcode{true}.}
+\added{\constraints \tcode{is_constructible_v<first_type, U1>} is \tcode{true} and
+\tcode{is_constructible_v<second_type, U2>} is \tcode{true}.}
 
 \effects
 Initializes \tcode{first} with
@@ -693,9 +693,17 @@ template<class... Args1, class... Args2>
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
 \pnum
-\changed{\requires}{\mandates} \tcode{is_constructible_v<first_type, Args1\&\&...>} is \tcode{true}
+\mandates \tcode{is_constructible_v<first_type, Args1...>} is \tcode{true}
+and \tcode{is_constructible_v<sec\-ond_type, Args2...>} is \tcode{true}.
+\end{addedblock}
+
+\begin{removedblock}
+\pnum
+\requires \tcode{is_constructible_v<first_type, Args1\&\&...>} is \tcode{true}
 and \tcode{is_constructible_v<sec\-ond_type, Args2\&\&...>} is \tcode{true}.
+\end{removedblock}
 
 \pnum
 \effects
@@ -801,8 +809,8 @@ template<class U1, class U2> constexpr pair& operator=(pair<U1, U2>&& p);
 
 \begin{itemdescr}
 \pnum
-\added{\constraints \tcode{is_assignable_v<first_type\&, U1\&\&>} is \tcode{true}
-and \tcode{is_assignable_v<second_type\&, U2\&\&>} is \tcode{true}.}
+\added{\constraints \tcode{is_assignable_v<first_type\&, U1>} is \tcode{true}
+and \tcode{is_assignable_v<second_type\&, U2>} is \tcode{true}.}
 
 \effects
 Assigns to \tcode{first} with \tcode{std::forward<U1>(p.first)}
@@ -824,6 +832,11 @@ constexpr void swap(pair& p) noexcept(@\seebelow@);
 \end{itemdecl}
 
 \begin{itemdescr}
+\begin{addedblock}
+\pnum
+\mandates
+\end{addedblock}
+
 \pnum
 \changed{\requires}{\expects}
 \tcode{first} \changed{shall be}{is} swappable with\iref{swappable.requirements}
@@ -874,7 +887,7 @@ template<class T1, class T2>
 \tcode{is_swappable_v<T2>} is \tcode{true}.}
 
 \effects
-As if by \tcode{x.swap(y)}.
+\changed{As if by}{Equivalent to:} \tcode{x.swap(y)}.
 
 \pnum
 \removed{\remarks
@@ -1299,7 +1312,7 @@ template<class... UTypes> constexpr explicit(@\seebelow@) tuple(UTypes&&... u);
 \begin{addedblock}
 \pnum
 \constraints{\tcode{sizeof...(Types)} \tcode{==} \tcode{sizeof...(UTypes)} and
-\tcode{sizeof...(Types) >= 1} and \tcode{is_constructible_v<$\tcode{T}_i$, $\tcode{U}_i$\&\&>}
+\tcode{sizeof...(Types) >= 1} and \tcode{is_constructible_v<$\tcode{T}_i$, $\tcode{U}_i$>}
 is \tcode{true} for all $i$}
 \end{addedblock}
 
@@ -1412,7 +1425,7 @@ template<class... UTypes> constexpr explicit(@\seebelow@) tuple(tuple<UTypes...>
 \item
 \tcode{sizeof...(Types)} \tcode{==} \tcode{sizeof...(UTypes)}, and
 \item
-\tcode{is_constructible_v<$\tcode{T}_i$, $\tcode{U}_i$\&\&>} is \tcode{true} for all $i$, and
+\tcode{is_constructible_v<$\tcode{T}_i$, $\tcode{U}_i$>} is \tcode{true} for all $i$, and
 \item
 either
 \tcode{sizeof...(Types) != 1}, or
@@ -1496,8 +1509,8 @@ template<class U1, class U2> constexpr explicit(@\seebelow@) tuple(pair<U1, U2>&
 \begin{addedblock}
 \pnum
 \constraints \tcode{sizeof...(Types) == 2},
-\tcode{is_constructible_v<$\tcode{T}_0$, U1\&\&>} is \tcode{true} and
-\tcode{is_constructible_v<$\tcode{T}_1$, U2\&\&>} is \tcode{true}.
+\tcode{is_constructible_v<$\tcode{T}_0$, U1>} is \tcode{true} and
+\tcode{is_constructible_v<$\tcode{T}_1$, U2>} is \tcode{true}.
 \end{addedblock}
 
 \pnum
@@ -1672,7 +1685,7 @@ template<class... UTypes> constexpr tuple& operator=(tuple<UTypes...>&& u);
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints \tcode{is_assignable_v<$\tcode{T}_i$\&, $\tcode{U}_i$\&\&> == true}
+\constraints \tcode{is_assignable_v<$\tcode{T}_i$\&, $\tcode{U}_i$> == true}
 for all $i$ and \tcode{sizeof...(Types) == sizeof...(UTypes)}.
 \end{addedblock}
 
@@ -1739,9 +1752,8 @@ template<class U1, class U2> constexpr tuple& operator=(pair<U1, U2>&& u);
 \begin{addedblock}
 \pnum
 \constraints \tcode{sizeof...(Types) == 2} and
-\tcode{is_assignable_v<$\tcode{T}_0$\&, U1\&\&>} is \tcode{true} for the first type $\tcode{T}_0$ in
-\tcode{Types} and \tcode{is_assignable_v<$\tcode{T}_1$\&, U2\&\&>} is \tcode{true} for the second
-type $\tcode{T}_1$ in \tcode{Types}.
+\tcode{is_assignable_v<$\tcode{T}_0$\&, U1>} is \tcode{true}
+and \tcode{is_assignable_v<$\tcode{T}_1$\&, U2>} is \tcode{true}.
 \end{addedblock}
 
 \pnum
@@ -1895,7 +1907,7 @@ zero-based.
 $\cv_i$ \tcode{tuple<$\tcode{Args}_i$...>}, where $\cv_i$ is the (possibly empty) $i^\text{th}$
 \grammarterm{cv-qualifier-seq} and $\tcode{Args}_i$ is the template parameter pack representing the element
 types in $\tcode{U}_i$. Let $\tcode{A}_{ik}$ be the ${k}^\text{th}$ type in $\tcode{Args}_i$. For all
-$\tcode{A}_{ik}$ the following requirements shall be met:
+$\tcode{A}_{ik}$ the following requirements \changed{shall be}{are} met:
 \begin{itemize}
 \item If $\tcode{T}_i$ is deduced as an lvalue reference type, then
       \tcode{is_constructible_v<$\tcode{A}_{ik}$, $\cv{}_i\;\tcode{A}_{ik}$\&> == true}, otherwise
@@ -2604,7 +2616,7 @@ template<class U, class... Args>
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints \tcode{is_constructible_v<T, initializer_list<U>\&, Args\&\&...>} is \tcode{true}.
+\constraints \tcode{is_constructible_v<T, initializer_list<U>\&, Args...>} is \tcode{true}.
 \end{addedblock}
 
 \pnum
@@ -2633,7 +2645,7 @@ template<class U = T> explicit(@\seebelow@) constexpr optional(U&& v);
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints \tcode{is_constructible_v<T, U\&\&>} is \tcode{true},
+\constraints \tcode{is_constructible_v<T, U>} is \tcode{true},
 \tcode{is_same_v<remove_cvref_t<U>, in_place_t>} is \tcode{false}, and
 \tcode{is_same_v<remove_cvref_t<U>, optional>} is \tcode{false}.
 \end{addedblock}
@@ -2733,7 +2745,7 @@ template<class U> explicit(@\seebelow@) optional(optional<U>&& rhs);
 \pnum
 \constraints
 \begin{itemize}
-\item \tcode{is_constructible_v<T, U\&\&>} is true,
+\item \tcode{is_constructible_v<T, U>} is true,
 \item \tcode{is_constructible_v<T, optional<U>\&>} is \tcode{false},
 \item \tcode{is_constructible_v<T, optional<U>\&\&>} is \tcode{false},
 \item \tcode{is_constructible_v<T, const optional<U>\&>} is \tcode{false},
@@ -3225,7 +3237,7 @@ template<class U, class... Args> T& emplace(initializer_list<U> il, Args&&... ar
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints \tcode{is_constructible_v<T, initializer_list<U>\&, Args\&\&...>} is \tcode{true}.
+\constraints \tcode{is_constructible_v<T, initializer_list<U>\&, Args...>} is \tcode{true}.
 \end{addedblock}
 
 \pnum
@@ -6161,7 +6173,7 @@ void swap(any& x, any& y) noexcept;
 \begin{itemdescr}
 \pnum
 \effects
-As if by \tcode{x.swap(y)}.
+\changed{As if by}{Equivalent to:} \tcode{x.swap(y)}.
 \end{itemdescr}
 
 \indexlibraryglobal{make_any}%
@@ -9125,7 +9137,7 @@ template<class InputIterator, class ForwardIterator>
 \begin{itemdescr}
 \pnum
 \expects
-\range{result}{(last - first)} shall not overlap with \range{first}{last}.
+\range{result}{(last - first)} \changed{shall}{do} not overlap with \range{first}{last}.
 
 \pnum
 \effects
@@ -9159,7 +9171,7 @@ namespace ranges {
 \begin{itemdescr}
 \pnum
 \expects
-\range{ofirst}{olast} shall not overlap with \range{ifirst}{ilast}.
+\range{ofirst}{olast} \changed{shall}{do} not overlap with \range{ifirst}{ilast}.
 
 \pnum
 \effects
@@ -9181,7 +9193,7 @@ template<class InputIterator, class Size, class ForwardIterator>
 \begin{itemdescr}
 \pnum
 \expects
-\range{result}{n} shall not overlap with \range{first}{n}.
+\range{result}{n} \changed{shall}{do} not overlap with \range{first}{n}.
 
 \pnum
 \effects
@@ -9211,7 +9223,7 @@ namespace ranges {
 \begin{itemdescr}
 \pnum
 \expects
-\range{ofirst}{olast} shall not overlap with
+\range{ofirst}{olast} \changed{shall}{do} not overlap with
 \range{ifirst}{n}.
 
 \pnum
@@ -9236,7 +9248,7 @@ template<class InputIterator, class ForwardIterator>
 \begin{itemdescr}
 \pnum
 \expects
-\range{result}{(last - first)} shall not overlap with \range{first}{last}.
+\range{result}{(last - first)} \changed{shall}{do} not overlap with \range{first}{last}.
 
 \pnum
 \effects
@@ -9267,7 +9279,7 @@ namespace ranges {
 \begin{itemdescr}
 \pnum
 \expects
-\range{ofirst}{olast} shall not overlap with \range{ifirst}{ilast}.
+\range{ofirst}{olast} \changed{shall}{do} not overlap with \range{ifirst}{ilast}.
 
 \pnum
 \effects
@@ -9297,7 +9309,7 @@ template<class InputIterator, class Size, class ForwardIterator>
 \begin{itemdescr}
 \pnum
 \expects
-\range{result}{n} shall not overlap with \range{first}{n}.
+\range{result}{n} \changed{shall}{do} not overlap with \range{first}{n}.
 
 \pnum
 \effects
@@ -9323,7 +9335,7 @@ namespace ranges {
 \begin{itemdescr}
 \pnum
 \expects
-\range{ofirst}{olast} shall not overlap with
+\range{ofirst}{olast} \changed{shall}{do} not overlap with
 \range{ifirst}{n}.
 
 \pnum
@@ -9971,7 +9983,7 @@ unique_ptr(pointer p, remove_reference_t<D>&& d) noexcept;
 \begin{addedblock}
 \pnum
 \mandates These constructors
-are not be selected by class template argument deduction\iref{over.match.class.deduct}.
+are not selected by class template argument deduction\iref{over.match.class.deduct}.
 \end{addedblock}
 
 \pnum
@@ -10196,9 +10208,9 @@ of type \tcode{E} shall be well-formed and shall not throw an exception.
 \begin{addedblock}
 \pnum
 \expects If \tcode{E} is not a reference type, assignment of the deleter from
-an rvalue of type \tcode{E} shall be well-formed and shall not throw an exception.
+an rvalue of type \tcode{E} is well-formed and does not throw an exception.
 Otherwise, \tcode{E} is a reference type and assignment of the deleter from an lvalue
-of type \tcode{E} is be well-formed and does not throw an exception.
+of type \tcode{E} is well-formed and does not throw an exception.
 \end{addedblock}
 
 \pnum
@@ -12256,7 +12268,7 @@ template<class T, class U>
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} The expression \tcode{const_cast<T*>((U*)nullptr)} \changed{shall
+\changed{\requires}{\mandates} The expression \tcode{const_cast<T*>((U*)nullptr)} \changed{shall
 be}{is} well-formed.
 
 \pnum
@@ -12285,7 +12297,7 @@ template<class T, class U>
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} The expression \tcode{reinterpret_cast<T*>((U*)nullptr)}
+\changed{\requires}{\mandates} The expression \tcode{reinterpret_cast<T*>((U*)nullptr)}
 \changed{shall be}{is} well-formed.
 
 \pnum
@@ -16692,7 +16704,6 @@ As if by: \tcode{function(std::forward<F>(f)).swap(*this);}
 
 \begin{removedblock}
 \pnum
-\remarks
 \remarks This assignment operator shall not participate in overload resolution unless
 \tcode{decay_t<F>} is
 Lvalue-Callable\iref{func.wrap.func} for argument types \tcode{ArgTypes...} and
@@ -18959,7 +18970,7 @@ argument passing.
  \tcode{template<class... T>} \tcode{struct common_type;}
  &
  Unless this trait is specialized (as specified in Note B, below),
- the member \tcode{type} shall be defined or omitted as specified in Note A, below.
+ the member \tcode{type} \changed{shall be}{is} defined or omitted as specified in Note A, below.
  If it is omitted, there shall be no member \tcode{type}.
  Each type in the template parameter pack \tcode{T} shall be
  complete, \cv{}~\tcode{void}, or an array of unknown bound. \\ \rowsep
