@@ -5,7 +5,7 @@
 \thispagestyle{empty}
 \begingroup
 \def\hd{\begin{tabular}{ll}
-          \textbf{Document Number:} & P1460R0                     \\
+          \textbf{Document Number:} & D1460R1                     \\
           \textbf{Date:}            & \reldate                    \\
           \textbf{Reply to:}        & Marshall Clow               \\
                                     & mclow.lists@gmail.com       \\
@@ -39,6 +39,8 @@ The changes in this series of papers fall into three broad categories.
 \end{itemize}
 
 This paper covers Clause 20 (Utilities), and is based on N4842.
+
+Thank you to Daniel Krügler, Tim Song, and Jonathan Wakely for their detailed reviews of R0.
 
 Note: This is a different paper than P1462 (Mandating the Standard Library: Clause 20 - Strings library),
 because when I started this project, "Utilities" was in clause 19.
@@ -93,12 +95,24 @@ Drive-by fixes:
 \item{a couple of places that said "The constructor of Foo constructs an object of class Foo" have been removed}
 \end{itemize}
 
-%Open questions:
-%\begin{itemize}
-%\item{alg.unique \ref{alg.unique} P7.2.3 is kind of a mess. Not quite sure how to "de-shall" it.}
-%\item{alg.random.sample \ref{alg.random.sample} has a \tcode{Distance} parameter that looks like the \tcode{Size} parameter from \*_n. Should it be specified the same way?}
-%\item{Where should "XX is writeable to YY" and "the expression 'Foo/bar' is valid" go? Mandates? Expects? I put them in "Expects".}
-%\end{itemize}
+Changes since R0:
+\begin{itemize}
+\item{Lots of de-shalling.}
+\item{Undid the changes to [pair.pair]/16, [tuple.assign]/2, [optional.ctor]/3, 
+ [optional.assign]/10, [variant.ctor]/10, [variant.assign]/6 after review. "Mandates" is not the same as "defined as deleted".}
+\item{Changed [tuple.cnstr]/14 and [pairs.pair]/14 from "Preconditions" to "Mandates"}
+\item{In [optional.relops] and [optional.comp.with.t], changed all the "Preconditions" to "Mandates" (and de-shalled).}
+\item{"Preconditions" --> "Mandates" in [variant.relops]}
+\item{Reworked [bitset.cons]/3 - /8. They were a mess before; hopefully less so now.}
+\item{Changed the "Preconditions" for \tcode{aligned_storage} in [tab:meta.trans.other] into "Mandates"}
+\end{itemize}
+
+Open questions:
+\begin{itemize}
+\item{What should we do about [declval]/2? We don't want to use "shall", but all the alternatives sound worse.}
+\item{[intseq] - Mandates don't apply to types, etc.}
+\item{Do we want to keep [optional.observe] /4, /8/ /12, and /14 ?}
+\end{itemize}
 
 \vfill
 Help for the editors: The changes here can be viewed as latex sources with the following commands
