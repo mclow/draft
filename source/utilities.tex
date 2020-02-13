@@ -396,7 +396,7 @@ template<class T> add_rvalue_reference_t<T> declval() noexcept;    // as unevalu
 \pnum
 \removed{\remarks If this function is odr-used\iref{basic.def.odr}, the program is ill-formed.}
 
-\added{\mandates This function shall not be odr-used\iref{basic.def.odr}.}
+\added{\mandates This function is not odr-used\iref{basic.def.odr}.}
 
 \pnum
 \remarks
@@ -453,7 +453,7 @@ template<class T, T N>
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\mandates $N >= 0$
+\mandates $N >= 0$.
 \end{addedblock}
 
 \pnum
@@ -799,6 +799,7 @@ is_nothrow_move_assignable_v<T1> && is_nothrow_move_assignable_v<T2>
 \begin{codeblock}
 is_nothrow_move_assignable_v<T1> && is_nothrow_move_assignable_v<T2>
 \end{codeblock}
+.
 \end{addedblock}
 \end{itemdescr}
 
@@ -832,10 +833,6 @@ constexpr void swap(pair& p) noexcept(@\seebelow@);
 \end{itemdecl}
 
 \begin{itemdescr}
-\begin{addedblock}
-\pnum
-\mandates
-\end{addedblock}
 
 \pnum
 \changed{\requires}{\expects}
@@ -1311,9 +1308,10 @@ template<class... UTypes> constexpr explicit(@\seebelow@) tuple(UTypes&&... u);
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\constraints{\tcode{sizeof...(Types)} \tcode{==} \tcode{sizeof...(UTypes)} and
+\constraints
+\tcode{sizeof...(Types)} \tcode{==} \tcode{sizeof...(UTypes)} and
 \tcode{sizeof...(Types) >= 1} and \tcode{is_constructible_v<$\tcode{T}_i$, $\tcode{U}_i$>}
-is \tcode{true} for all $i$}
+is \tcode{true} for all $i$.
 \end{addedblock}
 
 \pnum
@@ -1355,7 +1353,7 @@ tuple(tuple&& u) = default;
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} \tcode{is_move_constructible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
+\changed{\requires}{\mandates} \tcode{is_move_constructible_v<$\tcode{T}_i$>} is \tcode{true} for all $i$.
 
 \pnum
 \effects
@@ -2212,7 +2210,7 @@ template<class... TTypes, class... UTypes>
 
 \begin{itemdescr}
 \pnum
-\changed{\requires}{\expects} For all \tcode{i},
+\changed{\requires}{\mandates} For all \tcode{i},
 where \tcode{0 <= i} and
 \tcode{i < sizeof...(TTypes)}, \tcode{get<i>(t) == get<i>(u)} is a valid expression
 returning a type that is convertible to \tcode{bool}.
@@ -3342,7 +3340,7 @@ Nothing.
 
 \pnum
 \remarks
-These functions shall be constexpr functions.
+These functions \changed{shall be}{are} constexpr functions.
 \end{itemdescr}
 
 \indexlibrarymember{operator*}{optional}%
@@ -3366,7 +3364,7 @@ Nothing.
 
 \pnum
 \remarks
-These functions shall be constexpr functions.
+These functions \changed{shall be}{are} constexpr functions.
 \end{itemdescr}
 
 \indexlibrarymember{operator*}{optional}%
@@ -4911,7 +4909,7 @@ Let $I$ be the zero-based index of \tcode{T} in \tcode{Types}.
 \begin{addedblock}
 \pnum
 \constraints \tcode{is_constructible_v<T, initializer_list<U>\&, Args...>} is
-\tcode{true}, and \tcode{T} occurs exactly once in \tcode{Types...}.
+\tcode{true}, and \tcode{T} occurs exactly once in \tcode{Types}.
 \end{addedblock}
 
 \pnum
@@ -5117,7 +5115,7 @@ template<class T> struct variant_size;
 \begin{itemdescr}
 \pnum
 \removed{\remarks}
-All specializations of \tcode{variant_size} shall meet the
+All specializations of \tcode{variant_size} \changed{shall meet}{meets} the
 \oldconcept{UnaryTypeTrait} requirements\iref{meta.rqmts}
 with a base characteristic of \tcode{integral_constant<size_t, N>} for some \tcode{N}.
 \end{itemdescr}
@@ -5132,7 +5130,7 @@ template<class T> class variant_size<const volatile T>;
 \begin{itemdescr}
 \pnum
 Let \tcode{VS} denote \tcode{variant_size<T>} of the cv-unqualified
-type \tcode{T}. Then each of the three templates shall meet the
+type \tcode{T}. Then each of the three templates \changed{shall meet}{meets} the
 \oldconcept{UnaryTypeTrait} requirements\iref{meta.rqmts} with a
 base characteristic of \tcode{integral_constant<size_t, VS::value>}.
 \end{itemdescr}
@@ -5154,8 +5152,8 @@ template<size_t I, class T> class variant_alternative<I, const volatile T>;
 \begin{itemdescr}
 \pnum
 Let \tcode{VA} denote \tcode{variant_alternative<I, T>} of the
-cv-unqualified type \tcode{T}. Then each of the three templates shall
-meet the \oldconcept{TransformationTrait} requirements\iref{meta.rqmts} with a
+cv-unqualified type \tcode{T}. Then each of the three templates \changed{shall
+meet}{meets} the \oldconcept{TransformationTrait} requirements\iref{meta.rqmts} with a
 member typedef \tcode{type} that names the following type:
 \begin{itemize}
 \item for the first specialization, \tcode{add_const_t<VA::type>},
@@ -6517,7 +6515,7 @@ to compare the character values.
 
 \removed{Otherwise, the function constructs an object of class
 \tcode{bitset<N>},}
-\changed{initializing}{initializes} the first \tcode{M} bit
+\changed{initializing}{Initializes} the first \tcode{M} bit
 positions to values determined from the corresponding characters in the string
 \tcode{str}.
 \tcode{M} is the smaller of \tcode{N} and \tcode{rlen}.
@@ -11149,7 +11147,7 @@ template<class Y> explicit shared_ptr(Y* p);
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\mandates \tcode{Y} is a complete type
+\mandates \tcode{Y} is a complete type.
 
 \pnum
 \constraints When \tcode{T} is an array type, the expression \tcode{delete[] p} is well-formed and either
@@ -16689,7 +16687,6 @@ template<class F> function& operator=(F&& f);
 \begin{itemdescr}
 \begin{addedblock}
 \pnum
-\remarks
 \constraints \tcode{decay_t<F>} is Lvalue-Callable\iref{func.wrap.func} 
 for argument types \tcode{ArgTypes...} and return type \tcode{R}.
 \end{addedblock}
@@ -19712,9 +19709,9 @@ template<class R1, class R2>
 \pnum
 For each of the \grammarterm{typedef-name}{s} \tcode{yocto}, \tcode{zepto},
 \tcode{zetta}, and \tcode{yotta}, if both of the constants used in its
-specification are representable by \tcode{intmax_t}, the typedef shall be
+specification are representable by \tcode{intmax_t}, the typedef \changed{shall be}{is}
 defined; if either of the constants is not representable by \tcode{intmax_t},
-the typedef shall not be defined.
+the typedef \changed{shall not be}{is not} defined.
 
 \rSec1[type.index]{Class \tcode{type_index}}
 
